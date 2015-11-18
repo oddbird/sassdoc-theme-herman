@@ -1,0 +1,15 @@
+{
+  "generator-sassdoc-theme": {
+    "themeName": "sassdoc-theme-oddbird",
+    "themeEngine": "nunjucks",
+    "author": {
+      "name": "Jonny Gerig Meyer"
+    },
+    "themeDesc": "An Odd SassDoc theme.",
+    "version": "0.1.0",
+    "useExtras": true,
+    "useSass": true,
+    "useSassUtils": false,
+    "useTaskRunner": "gulp"
+  }
+}

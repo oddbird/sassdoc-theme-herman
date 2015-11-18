@@ -1,0 +1,33 @@
+{
+  "name": "sassdoc-theme-oddbird",
+  "description": "An Odd SassDoc theme.",
+  "version": "0.1.0",
+  "keywords": [
+    "sassdoc-theme"
+  ],
+  "dependencies": {
+    "extend": "^1.0.0",
+    "nunjucks": "^2.1.0",
+    "sassdoc-extras": "^2.0.0",
+    "themeleon": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "devDependencies": {
+    "autoprefixer-core": "^6.0.1",
+    "bluebird": "^3.0.5",
+    "browser-sync": "^2.10.0",
+    "fs-extra": "^0.26.2",
+    "gulp": "^3.9.0",
+    "gulp-cached": "^1.1.0",
+    "gulp-imagemin": "^2.4.0",
+    "gulp-postcss": "^6.0.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.1.0",
+    "gulp-uglify": "^1.5.1",
+    "gulp-util": "^3.0.7",
+    "imagemin-pngcrush": "^4.1.0",
+    "sassdoc": "^2.1.15"
+  }
+}
