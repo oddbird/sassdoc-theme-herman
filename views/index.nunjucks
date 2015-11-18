@@ -2,12 +2,13 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>Your SassDoc Theme</title>
+        <title>OddBird SassDoc Theme</title>
         <link rel="stylesheet" href="assets/css/main.css" />
 
         {##
          # Feel free to add more meta or stylesheets. It's up to you.
          #}
+        <link href="{{ shortcutIcon }}" rel="shortcut icon">
     </head>
 
     <body>
