@@ -2,6 +2,8 @@
 <pre class="code-preview language-scss hljs"><code>
 {%- if (type == 'variable') -%}
   {{ scss_variable(item) }}
+{%- elif (type == 'css') -%}
+  {{ scss_css(item) }}
 {%- elif (type == 'function') or (type == 'mixin') -%}
   {{ scss_function_or_mixin(item) }}
 {%- endif -%}
@@ -19,3 +21,9 @@ ${{ item.context.name }}: {{ item.context.value }}{% if item.context.scope %} !{
 {%- endfor %}
 ) { /* ... */ }
 {%- endmacro %}
+
+{%- macro scss_css(item) -%}
+{{ item.context.name }} {
+  {{ item.context.value }}
+}
+{%- endmacro -%}
