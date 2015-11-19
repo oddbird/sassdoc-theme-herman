@@ -1,16 +1,11 @@
-/**
- * Themeleon template helper, using consolidate.js module.
- *
- * See <https://github.com/themeleon/themeleon>.
- * See <https://github.com/tj/consolidate.js>.
- */
-var themeleon = require('themeleon')().use('consolidate');
-
-/**
- * Utility function we will use to merge a default configuration
- * with the user object.
- */
 var extend = require('extend');
+var minify = require('html-minifier').minify;
+var nunjucks = require('nunjucks');
+var path = require('path');
+var Promise = require('bluebird');
+var rename = require('gulp-rename');
+var through = require('through2');
+var vfs = require('vinyl-fs');
 
 /**
  * SassDoc extras (providing Markdown and other filters, and different way to
@@ -21,46 +16,58 @@ var extend = require('extend');
 var extras = require('sassdoc-extras');
 
 /**
- * The theme function. You can directly export it like this:
- *
- *     module.exports = themeleon(__dirname, function (t) {});
- *
- * ... but here we want more control on the template variables, so there
- * is a little bit of preprocessing below.
- *
- * The theme function describes the steps to render the theme.
- */
-var path = require('path');
-var nunjucks = require('nunjucks');
-var loader = nunjucks.FileSystemLoader.bind(
-  undefined, path.join(__dirname, 'views'));
-var theme = themeleon(__dirname, function (t) {
-  /**
-   * Copy the assets folder from the theme's directory in the
-   * destination directory.
-   */
-  t.copy('assets');
-
-  /**
-   * Render `views/index.j2` with the theme's context (`ctx` below)
-   * as `index.html` in the destination directory.
-   */
-  t.nunjucks('views/index.j2', 'index.html', {
-    loader: loader,
-    cache: false,
-    noCache: true
-  });
-});
-
-/**
- * Actual theme function. It takes the destination directory `dest`
- * (that will be handled by Themeleon), and the context variables `ctx`.
- *
- * Here, we will modify the context to have a `view` key defaulting to
- * a literal object, but that can be overriden by the user's
- * configuration.
+ * Actual theme function. It takes the destination directory `dest`,
+ * and the context variables `ctx`.
  */
 module.exports = function (dest, ctx) {
+  var index = path.resolve(__dirname, './views/index.j2');
+  var base = path.resolve(__dirname, './views');
+  var assets = path.resolve(__dirname, './assets');
+  var dest = path.resolve(dest);
+  var env = nunjucks.configure(base, { noCache: true });
+  var renderStr = Promise.promisify(env.renderString, { context: env });
+
+  var render = function (context) {
+    var transform = function (file, enc, cb) {
+      if (!file.isBuffer()) {
+        return cb();
+      }
+
+      renderStr(file.contents.toString(enc), context)
+        .then(function (html) {
+          return minify(html, { collapseWhitespace: true });
+        })
+        .then(function (html) {
+          file.contents = new Buffer(html);
+          cb(null, file);
+        })
+        .catch(function (err) {
+          stream.emit('error', err);
+          cb(err);
+        });
+    };
+
+    var stream = through.obj(transform);
+
+    return new Promise(function (resolve, reject) {
+      vfs.src(index)
+        .pipe(stream)
+        .on('error', reject)
+        .pipe(rename('index.html'))
+        .pipe(vfs.dest(dest))
+        .on('end', resolve);
+    });
+  };
+
+  var copy = function (src, dest) {
+    return new Promise(function (resolve, reject) {
+      vfs.src(path.join(src, '/**/*.{css,js,svg,png,eot,woff,woff2,ttf}'))
+        .pipe(vfs.dest(path.join(dest, 'assets')))
+        .on('error', reject)
+        .on('end', resolve);
+    });
+  }
+
   var def = {
     display: {
       access: ['public', 'private'],
@@ -143,9 +150,8 @@ module.exports = function (dest, ctx) {
    */
   ctx.data.byGroupAndType = extras.byGroupAndType(ctx.data);
 
-  /**
-   * Now we have prepared the data, we can proxy to the Themeleon
-   * generated theme function.
-   */
-  return theme.apply(this, arguments);
+  return Promise.all([
+    render(ctx),
+    copy(assets, dest)
+  ]);
 };
