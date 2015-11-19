@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  {% set project_title = package.title or package.name or 'OddBird' %}
+  <title>{% block title %}{{ project_title }} Documentation{% endblock %}</title>
+  <link href="{{ shortcutIcon }}" rel="shortcut icon">
+  <link rel="stylesheet" href="assets/css/main.css" />
+</head>
+<body>
+
+  <header role='banner'>
+    <h1 class="doc-title">{{ project_title }}</h1>
+    {% if package.version %}
+      <p class="doc-version">{{ package.version }}</p>
+    {% endif %}
+  </header>
+
+  <nav role="navigation">
+    {% for group_name, group in data.byGroupAndType %}
+      <a href="#doc-group--{{ group_name }}" class="nav-group">{{ groups[group_name] }}</a>
+    {% endfor %}
+  </nav>
+
+  <main role="main">
+    {% block main %}{% endblock %}
+  </main>
+
+</body>
+</html>

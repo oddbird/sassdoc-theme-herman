@@ -38,10 +38,10 @@ var theme = themeleon(__dirname, function (t) {
   t.copy('assets');
 
   /**
-   * Render `views/index.nunjucks` with the theme's context (`ctx` below)
+   * Render `views/index.j2` with the theme's context (`ctx` below)
    * as `index.html` in the destination directory.
    */
-  t.nunjucks('views/index.nunjucks', 'index.html');
+  t.nunjucks('views/index.j2', 'index.html');
 });
 
 /**

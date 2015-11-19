@@ -1,0 +1,21 @@
+{% macro code_block(item, type) %}
+<pre class="code-preview language-scss hljs"><code>
+{%- if (type == 'variable') -%}
+  {{ scss_variable(item) }}
+{%- elif (type == 'function') or (type == 'mixin') -%}
+  {{ scss_function_or_mixin(item) }}
+{%- endif -%}
+</code></pre>
+{% endmacro %}
+
+{% macro scss_variable(item) -%}
+${{ item.context.name }}: {{ item.context.value }}{% if item.context.scope %} !{{ item.context.scope }}{% endif %};
+{%- endmacro %}
+
+{% macro scss_function_or_mixin(item) -%}
+@{{ item.context.type }} {{ item.context.name }}(
+{%- for parameter in item.parameter %}
+  ${{ parameter.name }}{% if parameter.type|lower == "arglist" %}...{% elif parameter.default %}: {{ parameter.default }}{% endif %}{% if not loop.last %},{% endif %}
+{%- endfor %}
+) { /* ... */ }
+{%- endmacro %}

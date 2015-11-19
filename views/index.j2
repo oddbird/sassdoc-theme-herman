@@ -1,0 +1,23 @@
+{% extends 'views/base.j2' %}
+
+{% block main %}
+  {# 1. Loop over the groups in `data.byGroupAndType` #}
+  {% for group_name, group in data.byGroupAndType %}
+  <section class="doc-group" id="doc-group--{{ group_name }}">
+    <h2 class="doc-group-title">
+      {{ groups[group_name] }}
+    </h2>
+
+    {# 2. Loop over the types in the current group #}
+    {% for type, items in group %}
+      {% if items.length > 0 %}
+        {# 3. Loop over the items in the current type #}
+        {% for item in items %}
+          {% include 'views/item/_item.j2' %}
+        {% endfor %}
+      {% endif %}
+    {% endfor %}
+
+  </section>
+  {% endfor %}
+{% endblock %}
