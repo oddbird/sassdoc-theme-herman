@@ -22,7 +22,7 @@ var sassdoc = require('sassdoc');
 
 // Set your Sass project (the one you're generating docs for) path.
 // Relative to this Gulpfile.
-var projectPath = '../';
+var projectPath = '.';
 
 // Project path helper.
 var project = function () {
