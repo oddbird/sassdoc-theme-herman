@@ -1,4 +1,4 @@
-{% extends 'views/base.j2' %}
+{% extends 'base.j2' %}
 
 {% block main %}
   {# 1. Loop over the groups in `data.byGroupAndType` #}
@@ -13,7 +13,7 @@
       {% if items.length > 0 %}
         {# 3. Loop over the items in the current type #}
         {% for item in items %}
-          {% include 'views/item/_item.j2' %}
+          {% include 'item/_item.j2' %}
         {% endfor %}
       {% endif %}
     {% endfor %}

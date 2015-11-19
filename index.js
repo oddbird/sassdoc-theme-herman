@@ -30,6 +30,10 @@ var extras = require('sassdoc-extras');
  *
  * The theme function describes the steps to render the theme.
  */
+var path = require('path');
+var nunjucks = require('nunjucks');
+var loader = nunjucks.FileSystemLoader.bind(
+  undefined, path.join(__dirname, 'views'));
 var theme = themeleon(__dirname, function (t) {
   /**
    * Copy the assets folder from the theme's directory in the
@@ -41,7 +45,11 @@ var theme = themeleon(__dirname, function (t) {
    * Render `views/index.j2` with the theme's context (`ctx` below)
    * as `index.html` in the destination directory.
    */
-  t.nunjucks('views/index.j2', 'index.html');
+  t.nunjucks('views/index.j2', 'index.html', {
+    loader: loader,
+    cache: false,
+    noCache: true
+  });
 });
 
 /**

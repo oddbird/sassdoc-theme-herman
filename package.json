@@ -9,7 +9,7 @@
     "extend": "^1.0.0",
     "nunjucks": "^2.1.0",
     "sassdoc-extras": "^2.0.0",
-    "themeleon": "^3.0.0"
+    "themeleon": "oddbird/themeleon"
   },
   "engines": {
     "node": ">=0.10.0"
