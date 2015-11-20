@@ -21,7 +21,7 @@ $brand-colors: (
 /// We have a set of secondary accent colors
 /// to help flesh out the palette.
 /// @group colors
-$accent-colors: {
+$accent-colors: (
   'lightest': #fff,
   'lighter': 'brand-blue' ('tint': 60%),
   'light': 'brand-blue' ('tint': 30%),
@@ -29,7 +29,7 @@ $accent-colors: {
   'go': hsl(75, 65%, 62%),
   'yield': hsl(45, 85%, 62%),
   'stop': hsl(0, 85%, 62%),
-};
+);
 
 
 // Base Colors

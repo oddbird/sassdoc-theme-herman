@@ -1,1 +1,36 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>sassdoc-theme-oddbird Documentation</title><link href="http://sass-lang.com/favicon.ico" rel="shortcut icon"><link rel="stylesheet" href="assets/css/main.css"></head><body><header role="banner"><h1 class="doc-title">sassdoc-theme-oddbird</h1><p class="doc-version">0.1.0</p></header><nav role="navigation"></nav><main role="main"></main></body></html>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>sassdoc-theme-oddbird Documentation</title><link href="http://sass-lang.com/favicon.ico" rel="shortcut icon"><link rel="stylesheet" href="assets/css/main.css"></head><body><header role="banner"><h1 class="doc-title">sassdoc-theme-oddbird</h1><p class="doc-version">0.1.0</p></header><nav role="navigation"><a href="#doc-group--colors" class="nav-group">colors</a> <a href="#doc-group--typography" class="nav-group">typography</a> <a href="#doc-group--undefined" class="nav-group">General</a></nav><main role="main"><section class="doc-group" id="doc-group--colors"><h2 class="doc-group-title">colors</h2><section class="doc-item" data-item-type="variable"><h4 class="doc-item-title">brand-colors</h4><pre class="code-preview language-scss hljs"><code>$brand-colors: (
+  &#39;brand-orange&#39;: hsl(24, 100%, 62%),
+  &#39;brand-blue&#39;: hsl(195, 85%, 62%),
+  &#39;brand-pink&#39;: hsl(330, 85%, 62%),
+) !private;</code></pre><div class="doc-item-description"><p>We use bright primary colors for the main brand, everything else is based on these colors.</p></div></section><section class="doc-item" data-item-type="variable"><h4 class="doc-item-title">accent-colors</h4><pre class="code-preview language-scss hljs"><code>$accent-colors: (
+  &#39;lightest&#39;: #fff,
+  &#39;lighter&#39;: &#39;brand-blue&#39; (&#39;tint&#39;: 60%),
+  &#39;light&#39;: &#39;brand-blue&#39; (&#39;tint&#39;: 30%),
+  &#39;dark&#39;: &#39;brand-blue&#39; (&#39;shade&#39;: 65%),
+  &#39;go&#39;: hsl(75, 65%, 62%),
+  &#39;yield&#39;: hsl(45, 85%, 62%),
+  &#39;stop&#39;: hsl(0, 85%, 62%),
+) !private;</code></pre><div class="doc-item-description"><p>We have a set of secondary accent colors to help flesh out the palette.</p></div></section></section><section class="doc-group" id="doc-group--typography"><h2 class="doc-group-title">typography</h2><section class="doc-item" data-item-type="variable"><h4 class="doc-item-title">fonts</h4><pre class="code-preview language-scss hljs"><code>$fonts: (
+  &#39;body&#39;: (
+    &#39;name&#39;: &#39;CenturyOldStyle&#39;,
+    &#39;styles&#39;: (&#39;regular&#39;, &#39;italic&#39;, &#39;bold&#39;),
+    &#39;stack&#39;: (&#39;Baskerville&#39;, &#39;Palatino&#39;, &#39;Cambria&#39;, &#39;Georgia&#39;, &#39;serif&#39;),
+  ),
+
+  &#39;sans&#39;: (
+    &#39;name&#39;: &#39;SourceSansPro&#39;,
+    &#39;styles&#39;: (&#39;regular&#39;, &#39;italic&#39;, &#39;bold&#39;, &#39;bold italic&#39;, &#39;light&#39;, &#39;light italic&#39;),
+    &#39;stack&#39;: (&#39;Helvetica Neue&#39;, &#39;Helvetica&#39;, &#39;Arial&#39;, &#39;sans-serif&#39;),
+  ),
+
+  &#39;code&#39;: (
+    &#39;name&#39;: &#39;SourceCodePro&#39;,
+    &#39;styles&#39;: (&#39;regular&#39;, &#39;bold&#39;),
+    &#39;stack&#39;: (&#39;Consolas&#39;, &#39;Menlo&#39;, &#39;Monaco&#39;, &#39;Lucida Console&#39;, &#39;Liberation Mono&#39;, &#39;DejaVu Sans Mono&#39;, &#39;Bitstream Vera Sans Mono&#39;, &#39;Courier New&#39;, &#39;monospace&#39;, &#39;serif&#39;),
+  ),
+) !private;</code></pre><div class="doc-item-description"><p>A map of the fonts we use, their variants, font-stacks, and webfont paths.</p></div></section></section><section class="doc-group" id="doc-group--undefined"><h2 class="doc-group-title">General</h2><section class="doc-item" data-item-type="variable"><h4 class="doc-item-title">base-colors</h4><pre class="code-preview language-scss hljs"><code>$base-colors: map-merge($brand-colors, $accent-colors) !private;</code></pre><div class="doc-item-description"><p>A merged map of the brand and accent colors.</p></div></section><section class="doc-item" data-item-type="variable"><h4 class="doc-item-title">colors</h4><pre class="code-preview language-scss hljs"><code>$colors: map-merge($base-colors, (
+  &#39;background&#39;: &#39;lightest&#39;,
+  &#39;text&#39;: &#39;dark&#39;,
+  &#39;action&#39;: &#39;brand-orange&#39;,
+  &#39;focus&#39;: &#39;brand-orange&#39; (&#39;shade&#39;: 15%),
+)) !private;</code></pre><div class="doc-item-description"><p>Specific uses of the color palette across the site.</p></div></section><section class="doc-item" data-item-type="variable"><h4 class="doc-item-title">font-formats</h4><pre class="code-preview language-scss hljs"><code>$font-formats: &#39;woff2&#39; &#39;woff&#39; &#39;ttf&#39; !private;</code></pre></section></section></main></body></html>

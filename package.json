@@ -22,16 +22,27 @@
     "test": "mocha test"
   },
   "devDependencies": {
+    "accoutrement-a11y": "^1.0.5",
+    "accoutrement-color": "^1.0.3",
+    "accoutrement-fonts": "^1.0.4",
+    "accoutrement-layout": "^1.1.0",
+    "accoutrement-pseudo": "^1.0.2",
+    "accoutrement-queries": "^1.1.0",
+    "accoutrement-scale": "^1.1.1",
+    "accoutrement-strings": "^1.0.1",
     "browser-sync": "^2.10.0",
     "chalk": "^1.1.1",
+    "eslint": "^1.9.0",
     "fs-extra": "^0.26.2",
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^3.1.0",
+    "gulp-eslint": "^1.1.0",
     "gulp-sass": "^2.1.0",
     "gulp-sass-lint": "^1.1.0",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-util": "^3.0.7",
     "mocha": "^2.3.4",
+    "sanitize.css": "^3.0.0",
     "sassdoc": "^2.1.15"
   }
 }

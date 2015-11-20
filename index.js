@@ -1,3 +1,5 @@
+'use strict';
+
 var extend = require('extend');
 var fs = require('fs');
 var minify = require('html-minifier').minify;
@@ -25,9 +27,9 @@ module.exports = function (dest, ctx) {
   var index = path.resolve(__dirname, './views/index.j2');
   var base = path.resolve(__dirname, './views');
   var assets = path.resolve(__dirname, './assets');
-  var dest = path.resolve(dest);
   var env = nunjucks.configure(base, { noCache: true });
   var renderStr = Promise.promisify(env.renderString, { context: env });
+  dest = path.resolve(dest);
 
   var render = function (context) {
     var transform = function (file, enc, cb) {
@@ -44,7 +46,6 @@ module.exports = function (dest, ctx) {
           cb(null, file);
         })
         .catch(function (err) {
-          stream.emit('error', err);
           cb(err);
         });
     };
@@ -61,25 +62,25 @@ module.exports = function (dest, ctx) {
     });
   };
 
-  var copy = function (src, dest) {
+  var copy = function (src, dst) {
     return new Promise(function (resolve, reject) {
       vfs.src(path.join(src, '/**/*.{css,js,svg,png,eot,woff,woff2,ttf}'))
-        .pipe(vfs.dest(path.join(dest, 'assets')))
+        .pipe(vfs.dest(path.join(dst, 'assets')))
         .on('error', reject)
         .on('end', resolve);
     });
-  }
+  };
 
   var def = {
     display: {
-      access: ['public', 'private'],
+      access: [ 'public', 'private' ],
       alias: false,
-      watermark: true,
+      watermark: true
     },
     groups: {
-      'undefined': 'General',
+      undefined: 'General'
     },
-    'shortcutIcon': 'http://sass-lang.com/favicon.ico',
+    shortcutIcon: 'http://sass-lang.com/favicon.ico'
   };
 
   // Apply default values for groups and display.
@@ -94,7 +95,9 @@ module.exports = function (dest, ctx) {
    * contents under the `sassyjson` key of the context.
    */
   if (ctx.sassyjsonfile) {
+    /* eslint-disable no-sync */
     ctx.sassyjson = parse.sassyJson(fs.readFileSync(ctx.sassyjsonfile));
+    /* eslint-enable no-sync */
   }
 
   /**

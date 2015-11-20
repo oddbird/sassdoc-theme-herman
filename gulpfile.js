@@ -4,10 +4,10 @@ var autoprefixer = require('gulp-autoprefixer');
 var browserSync = require('browser-sync').create();
 var chalk = require('chalk');
 var copy = require('bluebird').promisify(require('fs-extra').copy);
+var eslint = require('gulp-eslint');
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var path = require('path');
-var rename = require('gulp-rename');
 var sass = require('gulp-sass');
 var sassdoc = require('sassdoc');
 var sasslint = require('gulp-sass-lint');
@@ -34,7 +34,8 @@ var paths = {
   JS_DIR: 'assets/js/',
   SRC_SASS_DIR: project('scss'),
   DOCS_DIR: project('sassdoc'),
-  TEMPLATES: 'views/**/*.j2',
+  JS_TESTS_DIR: 'test/',
+  TEMPLATES_DIR: 'views/**/*.j2',
   IGNORE: [
     '!**/.#*',
     '!**/flycheck_*'
@@ -46,6 +47,13 @@ var paths = {
     this.JS = [
       this.JS_DIR + '**/*.js'
     ].concat(this.IGNORE);
+    this.ALL_JS = [
+      this.JS_DIR + '**/*.js',
+      'lib/**/*.js',
+      this.JS_TESTS_DIR + '**/*.js',
+      'gulpfile.js',
+      'index.js'
+    ].concat(this.IGNORE);
     return this;
   }
 }.init();
@@ -54,6 +62,20 @@ var onError = function (err) {
   gutil.log(chalk.red(err.message));
   gutil.beep();
   this.emit('end');
+};
+
+var eslintTask = function (src, failOnError, log) {
+  if (log) {
+    gutil.log('Running', '\'' + chalk.cyan('eslint ' + src) + '\'...');
+  }
+  var stream = gulp.src(src)
+    .pipe(eslint())
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError());
+  if (!failOnError) {
+    stream.on('error', onError);
+  }
+  return stream;
 };
 
 var sasslintTask = function (src, failOnError, log) {
@@ -70,6 +92,14 @@ var sasslintTask = function (src, failOnError, log) {
   return stream;
 };
 
+
+gulp.task('eslint', function () {
+  return eslintTask(paths.ALL_JS, true);
+});
+
+gulp.task('eslint-nofail', function () {
+  return eslintTask(paths.ALL_JS);
+});
 
 gulp.task('sasslint', function () {
   return sasslintTask(paths.SASS, true);
@@ -113,7 +143,7 @@ gulp.task('compile', function () {
     theme: './',
     // Disable cache to enable live-reloading.
     // Usefull for some template engines (e.g. Swig).
-    cache: false,
+    cache: false
   };
 
   return gulp.src(path.join(paths.SRC_SASS_DIR, '**/*.scss'))
@@ -142,21 +172,37 @@ gulp.task('dumpCSS', ['sass'], function () {
   });
 });
 
+gulp.task('default', [
+  'eslint',
+  'sasslint',
+  'sass',
+  'compile'
+]);
 
 // Development task.
 // While working on a theme.
-gulp.task('develop', ['compile', 'sass', 'browser-sync'], function () {
-
-  gulp.watch(paths.SASS, ['sass', 'dumpCSS'], function (ev) {
+gulp.task('develop', [
+  'compile',
+  'sass',
+  'eslint',
+  'sasslint',
+  'browser-sync'
+], function () {
+  gulp.watch(paths.SASS, [ 'sass', 'dumpCSS' ], function (ev) {
     if (ev.type === 'added' || ev.type === 'changed') {
       sasslintTask(ev.path, false, true);
     }
   });
   gulp.watch(paths.JS, ['dumpJS']);
-  gulp.watch(paths.TEMPLATES, ['compile']);
+  gulp.watch(paths.ALL_JS, function (ev) {
+    if (ev.type === 'added' || ev.type === 'changed') {
+      eslintTask(ev.path, false, true);
+    }
+  });
+  gulp.watch(paths.TEMPLATES_DIR, ['compile']);
   gulp.watch('**/.sass-lint.yml', ['sasslint-nofail']);
+  gulp.watch('**/.eslintrc', ['eslint-nofail']);
 });
-
 
 // gulp.task('svgmin', function () {
 //   return gulp.src('assets/svg/*.svg')
@@ -168,7 +214,6 @@ gulp.task('develop', ['compile', 'sass', 'browser-sync'], function () {
 //     .pipe(gulp.dest('assets/svg'));
 // });
 
-
 // gulp.task('imagemin', function () {
 //   return gulp.src('assets/img/{,*/}*.{gif,jpeg,jpg,png}')
 //     .pipe(cache(
@@ -179,7 +224,6 @@ gulp.task('develop', ['compile', 'sass', 'browser-sync'], function () {
 //     ))
 //     .pipe(gulp.dest('assets/img'));
 // });
-
 
 // // Pre release/deploy optimisation tasks.
 // gulp.task('dist', [
