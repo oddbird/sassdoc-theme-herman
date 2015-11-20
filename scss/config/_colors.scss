@@ -1,0 +1,51 @@
+// Color Settings
+// ==============
+
+@import '../../node_modules/accoutrement-color/sass/color';
+
+
+// Brand Colors
+// ------------
+/// We use bright primary colors for the main brand,
+/// everything else is based on these colors.
+/// @group colors
+$brand-colors: (
+  'brand-orange': hsl(24, 100%, 62%),
+  'brand-blue': hsl(195, 85%, 62%),
+  'brand-pink': hsl(330, 85%, 62%),
+);
+
+
+// Accent Colors
+// -------------
+/// We have a set of secondary accent colors
+/// to help flesh out the palette.
+/// @group colors
+$accent-colors: {
+  'lightest': #fff,
+  'lighter': 'brand-blue' ('tint': 60%),
+  'light': 'brand-blue' ('tint': 30%),
+  'dark': 'brand-blue' ('shade': 65%),
+  'go': hsl(75, 65%, 62%),
+  'yield': hsl(45, 85%, 62%),
+  'stop': hsl(0, 85%, 62%),
+};
+
+
+// Base Colors
+// -----------
+/// A merged map of the brand and accent colors.
+/// @access private
+$base-colors: map-merge($brand-colors, $accent-colors);
+
+
+// Colors
+// ------
+/// Specific uses of the color palette across the site.
+/// @access private
+$colors: map-merge($base-colors, (
+  'background': 'lightest',
+  'text': 'dark',
+  'action': 'brand-orange',
+  'focus': 'brand-orange' ('shade': 15%),
+));

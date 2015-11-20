@@ -1,22 +1,6 @@
-//
-// Sass utils
-//
-@import "utils/variables";
-@import "utils/functions";
-@import "utils/mixins";
-@import "utils/helpers";
+// OddBird SassDoc Theme
+// =====================
 
-//
-// Vendors
-//
-@import "vendors/vendors";
-
-//
-// Base
-//
-@import "base/base";
-
-//
-// Partials
-//
-@import "partials/main";
+@import 'config/manifest';
+@import 'initial/manifest';
+@import 'patterns/manifest';

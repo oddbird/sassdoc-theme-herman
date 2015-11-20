@@ -1,0 +1,10 @@
+// Z-Index
+// =======
+
+@import '../../node_modules/accoutrement-layout/sass/layout';
+
+$z-index: 'bump', 'banner', 'overlay', 'loader';
+
+@mixin z-index($layer, $list: $z-index) {
+  z-index: index($list, $layer) or $layer;
+}

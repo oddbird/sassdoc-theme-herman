@@ -1,0 +1,18 @@
+// Sanitize
+// ========
+// https://github.com/10up/sanitize.css
+
+
+$root-background-color: color('background');
+$root-color: color('text');
+$root-font-family: font('body');
+$root-font-size: percentage($base-size / $_browser-default-font-size);
+$root-line-height: size('rhythm', em);
+$root-text-rendering: auto;
+$anchor-text-decoration: underline;
+$selection-background-color: color('action');
+$selection-color: contrast('action');
+$small-font-size: size('small');
+
+
+@import '../node_modules/sanitize.css/sanitize';

@@ -1,0 +1,37 @@
+// Font Settings
+// =============
+
+@import '../../node_modules/accoutrement-strings/sass/strings';
+@import '../../node_modules/accoutrement-fonts/sass/fonts';
+
+
+// Font Formats
+// ------------
+/// @access private
+$font-formats: 'woff2' 'woff' 'ttf';
+
+
+// Fonts
+// -----
+/// A map of the fonts we use,
+/// their variants, font-stacks, and webfont paths.
+/// @group typography
+$fonts: (
+  'body': (
+    'name': 'CenturyOldStyle',
+    'styles': ('regular', 'italic', 'bold'),
+    'stack': ('Baskerville', 'Palatino', 'Cambria', 'Georgia', 'serif'),
+  ),
+
+  'sans': (
+    'name': 'SourceSansPro',
+    'styles': ('regular', 'italic', 'bold', 'bold italic', 'light', 'light italic'),
+    'stack': ('Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'),
+  ),
+
+  'code': (
+    'name': 'SourceCodePro',
+    'styles': ('regular', 'bold'),
+    'stack': ('Consolas', 'Menlo', 'Monaco', 'Lucida Console', 'Liberation Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', 'monospace', 'serif'),
+  ),
+);

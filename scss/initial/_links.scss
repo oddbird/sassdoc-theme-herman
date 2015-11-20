@@ -1,0 +1,16 @@
+// Links
+// =====
+
+$link: '&:link, &:visited';
+$focus: '&:hover, &:focus, &:active';
+
+
+[href] {
+  #{$link} {
+    color: color('action');
+  }
+
+  #{$focus} {
+    color: color('focus');
+  }
+}
