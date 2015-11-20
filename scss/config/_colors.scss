@@ -43,9 +43,11 @@ $base-colors: map-merge($brand-colors, $accent-colors);
 // ------
 /// Specific uses of the color palette across the site.
 /// @access private
-$colors: map-merge($base-colors, (
-  'background': 'lightest',
-  'text': 'dark',
-  'action': 'brand-orange',
-  'focus': 'brand-orange' ('shade': 15%),
-));
+$colors: map-merge(
+  $base-colors, (
+    'background': 'lightest',
+    'text': 'dark',
+    'action': 'brand-orange',
+    'focus': 'brand-orange' ('shade': 15%),
+  )
+);

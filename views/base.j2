@@ -10,7 +10,9 @@
 <body>
 
   <header role='banner'>
-    <h1 class="doc-title">{{ project_title }}</h1>
+    <h1 class="doc-title">
+      <a href="index.html" rel="home">{{ project_title }}</a>
+    </h1>
     {% if package.version %}
       <p class="doc-version">{{ package.version }}</p>
     {% endif %}
@@ -18,7 +20,7 @@
 
   <nav role="navigation">
     {% for group_name, group in data.byGroupAndType %}
-      <a href="#doc-group--{{ group_name }}" class="nav-group">{{ groups[group_name] }}</a>
+      <a href="{{ group_name }}.html" class="nav-group">{{ groups[group_name] }}</a>
     {% endfor %}
   </nav>
 

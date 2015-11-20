@@ -1,1 +1,20 @@
-I am {{ data.currentGroup }} and my data is {{ data.byGroupAndType[data.currentGroup] }}.
+{% extends 'base.j2' %}
+
+{% block main %}
+  <section class="doc-group" id="doc-group--{{ data.currentGroup }}">
+    <h2 class="doc-group-title">
+      {{ groups[data.currentGroup] }}
+    </h2>
+
+    {# 2. Loop over the types in the current group #}
+    {% for type, items in data.byGroupAndType[data.currentGroup] %}
+      {% if items.length > 0 %}
+        {# 3. Loop over the items in the current type #}
+        {% for item in items %}
+          {% include 'item/_item.j2' %}
+        {% endfor %}
+      {% endif %}
+    {% endfor %}
+
+  </section>
+{% endblock %}
