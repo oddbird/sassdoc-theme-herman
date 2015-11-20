@@ -47,6 +47,10 @@ module.exports = function (dest, ctx) {
   ctx.groups = extend(def.groups, ctx.groups);
   ctx.display = extend(def.display, ctx.display);
 
+  if (!ctx.description) {
+    def.descriptionPath = './README.md';
+  }
+
   // Extend top-level context keys.
   ctx = extend({}, def, ctx);
 

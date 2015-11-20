@@ -149,8 +149,7 @@ gulp.task('compile', function () {
     theme: './',
     // Disable cache to enable live-reloading.
     // Usefull for some template engines (e.g. Swig).
-    cache: false,
-    descriptionPath: './README.md'
+    cache: false
   };
 
   return gulp.src(path.join(paths.SRC_SASS_DIR, '**/*.scss'))
@@ -190,8 +189,8 @@ gulp.task('default', [
 // Development task.
 // While working on a theme.
 gulp.task('develop', [
-  'eslint',
-  'sasslint',
+  'eslint-nofail',
+  'sasslint-nofail',
   'sass',
   'compile',
   'jstest',
