@@ -1,28 +1,22 @@
 'use strict';
 
+var autoprefixer = require('gulp-autoprefixer');
+var browserSync = require('browser-sync').create();
+var chalk = require('chalk');
+var copy = require('bluebird').promisify(require('fs-extra').copy);
 var gulp = require('gulp');
-var sass = require('gulp-sass');
-var postcss = require('gulp-postcss');
-var uglify = require('gulp-uglify');
-var cache = require('gulp-cached');
-// var imagemin = require('gulp-imagemin');
-// var pngcrush = require('imagemin-pngcrush');
-var rename = require('gulp-rename');
 var gutil = require('gulp-util');
-var browserSync = require('browser-sync');
-var reload = browserSync.reload;
-
 var path = require('path');
-var fs = require('fs-extra');
-var Promise = require('bluebird');
-var copy = Promise.promisify(fs.copy);
-
+var rename = require('gulp-rename');
+var sass = require('gulp-sass');
 var sassdoc = require('sassdoc');
+var sasslint = require('gulp-sass-lint');
+var sourcemaps = require('gulp-sourcemaps');
 
 
 // Set your Sass project (the one you're generating docs for) path.
 // Relative to this Gulpfile.
-var projectPath = '.';
+var projectPath = './';
 
 // Project path helper.
 var project = function () {
@@ -32,84 +26,116 @@ var project = function () {
 };
 
 // Theme and project specific paths.
-var dirs = {
-  scss: 'scss',
-  css: 'assets/css',
-  img: 'assets/img',
-  svg: 'assets/svg',
-  js: 'assets/js',
-  tpl: 'views',
-  src: project('sass'),
-  docs: project('sassdoc')
+var paths = {
+  SASS_DIR: 'scss/',
+  CSS_DIR: 'assets/css/',
+  IMG_DIR: 'assets/img/',
+  SVG_DIR: 'assets/svg/',
+  JS_DIR: 'assets/js/',
+  SRC_SASS_DIR: project('scss'),
+  DOCS_DIR: project('sassdoc'),
+  TEMPLATES: 'views/**/*.j2',
+  IGNORE: [
+    '!**/.#*',
+    '!**/flycheck_*'
+  ],
+  init: function () {
+    this.SASS = [
+      this.SASS_DIR + '**/*.scss'
+    ].concat(this.IGNORE);
+    this.JS = [
+      this.JS_DIR + '**/*.js'
+    ].concat(this.IGNORE);
+    return this;
+  }
+}.init();
+
+var onError = function (err) {
+  gutil.log(chalk.red(err.message));
+  gutil.beep();
+  this.emit('end');
+};
+
+var sasslintTask = function (src, failOnError, log) {
+  if (log) {
+    gutil.log('Running', '\'' + chalk.cyan('sasslint ' + src) + '\'...');
+  }
+  var stream = gulp.src(src)
+    .pipe(sasslint())
+    .pipe(sasslint.format())
+    .pipe(sasslint.failOnError());
+  if (!failOnError) {
+    stream.on('error', onError);
+  }
+  return stream;
 };
 
 
-gulp.task('styles', function () {
-  var browsers = ['last 2 version', '> 1%', 'ie 9'];
-  var processors = [
-    require('autoprefixer-core')({ browsers: browsers }),
-  ];
+gulp.task('sasslint', function () {
+  return sasslintTask(paths.SASS, true);
+});
 
-  return gulp.src('./scss/**/*.scss')
+gulp.task('sasslint-nofail', function () {
+  return sasslintTask(paths.SASS);
+});
+
+gulp.task('sass', function () {
+  return gulp.src(paths.SASS_DIR + '*.scss')
+    .pipe(sourcemaps.init())
     .pipe(sass())
-    .pipe(postcss(processors))
-    .pipe(gulp.dest('assets/css'));
+    .on('error', onError)
+    .pipe(autoprefixer({
+      browsers: ['last 2 versions'],
+      cascade: false
+    }))
+    .pipe(sourcemaps.write('.'))
+    .pipe(gulp.dest(paths.CSS_DIR));
 });
 
-
-gulp.task('browser-sync', function () {
-  browserSync({
+gulp.task('browser-sync', function (cb) {
+  browserSync.init({
     server: {
-      baseDir: dirs.docs
+      baseDir: paths.DOCS_DIR
     },
-    files: [
-      path.join(dirs.docs, '/*.html'),
-      path.join(dirs.docs, '/assets/css/**/*.css'),
-      path.join(dirs.docs, '/assets/js/**/*.js')
-    ]
-  });
+    logLevel: 'info',
+    logPrefix: 'oddbird',
+    notify: false,
+    files: [paths.DOCS_DIR + '**/*']
+  }, cb);
 });
-
 
 // SassDoc compilation.
 // See: http://sassdoc.com/customising-the-view/
 gulp.task('compile', function () {
   var config = {
     verbose: true,
-    dest: dirs.docs,
+    dest: paths.DOCS_DIR,
     theme: './',
     // Disable cache to enable live-reloading.
     // Usefull for some template engines (e.g. Swig).
     cache: false,
   };
 
-  var sdStream = sassdoc(config);
-
-  gulp.src(path.join(dirs.src, '**/*.scss'))
-    .pipe(sdStream);
-
-  // Await for the full documentation process.
-  return sdStream.promise;
+  return gulp.src(path.join(paths.SRC_SASS_DIR, '**/*.scss'))
+    .pipe(sassdoc(config));
 });
-
 
 // Dump JS files from theme into `docs/assets` whenever they get modified.
 // Prevent requiring a full `compile`.
 gulp.task('dumpJS', function () {
-  var src = dirs.js;
-  var dest = path.join(dirs.docs, 'assets/js');
+  var src = paths.JS_DIR;
+  var dest = path.join(paths.DOCS_DIR, 'assets/js');
 
   return copy(src, dest).then(function () {
     gutil.log(src + ' copied to ' + path.relative(__dirname, dest));
   });
 });
 
-
 // Dump CSS files from theme into `docs/assets` whenever they get modified.
 // Prevent requiring a full `compile`.
-gulp.task('dumpCSS', ['styles'], function () {
-  var src = dirs.css;
-  var dest = path.join(dirs.docs, 'assets/css');
+gulp.task('dumpCSS', ['sass'], function () {
+  var src = paths.CSS_DIR;
+  var dest = path.join(paths.DOCS_DIR, 'assets/css');
 
   return copy(src, dest).then(function () {
     gutil.log(src + ' copied to ' + path.relative(__dirname, dest));
@@ -119,39 +145,45 @@ gulp.task('dumpCSS', ['styles'], function () {
 
 // Development task.
 // While working on a theme.
-gulp.task('develop', ['compile', 'styles', 'browser-sync'], function () {
-  gulp.watch('scss/**/*.scss', ['styles', 'dumpCSS']);
-  gulp.watch('assets/js/**/*.js', ['dumpJS']);
-  gulp.watch('views/**/*.j2', ['compile']);
+gulp.task('develop', ['compile', 'sass', 'browser-sync'], function () {
+
+  gulp.watch(paths.SASS, ['sass', 'dumpCSS'], function (ev) {
+    if (ev.type === 'added' || ev.type === 'changed') {
+      sasslintTask(ev.path, false, true);
+    }
+  });
+  gulp.watch(paths.JS, ['dumpJS']);
+  gulp.watch(paths.TEMPLATES, ['compile']);
+  gulp.watch('**/.sass-lint.yml', ['sasslint-nofail']);
 });
 
 
-gulp.task('svgmin', function () {
-  return gulp.src('assets/svg/*.svg')
-    .pipe(cache(
-      imagemin({
-        svgoPlugins: [{ removeViewBox: false }]
-      })
-    ))
-    .pipe(gulp.dest('assets/svg'));
-});
+// gulp.task('svgmin', function () {
+//   return gulp.src('assets/svg/*.svg')
+//     .pipe(cache(
+//       imagemin({
+//         svgoPlugins: [{ removeViewBox: false }]
+//       })
+//     ))
+//     .pipe(gulp.dest('assets/svg'));
+// });
 
 
-gulp.task('imagemin', function () {
-  return gulp.src('assets/img/{,*/}*.{gif,jpeg,jpg,png}')
-    .pipe(cache(
-      imagemin({
-        progressive: true,
-        use: [pngcrush()]
-      })
-    ))
-    .pipe(gulp.dest('assets/img'));
-});
+// gulp.task('imagemin', function () {
+//   return gulp.src('assets/img/{,*/}*.{gif,jpeg,jpg,png}')
+//     .pipe(cache(
+//       imagemin({
+//         progressive: true,
+//         use: [pngcrush()]
+//       })
+//     ))
+//     .pipe(gulp.dest('assets/img'));
+// });
 
 
-// Pre release/deploy optimisation tasks.
-gulp.task('dist', [
-  'jsmin',
-  'svgmin',
-  'imagemin',
-]);
+// // Pre release/deploy optimisation tasks.
+// gulp.task('dist', [
+//   'jsmin',
+//   'svgmin',
+//   'imagemin',
+// ]);

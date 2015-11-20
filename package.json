@@ -22,18 +22,15 @@
     "test": "mocha test"
   },
   "devDependencies": {
-    "autoprefixer-core": "^6.0.1",
     "browser-sync": "^2.10.0",
+    "chalk": "^1.1.1",
     "fs-extra": "^0.26.2",
     "gulp": "^3.9.0",
-    "gulp-cached": "^1.1.0",
-    "gulp-imagemin": "^2.4.0",
-    "gulp-postcss": "^6.0.1",
-    "gulp-rename": "^1.2.2",
+    "gulp-autoprefixer": "^3.1.0",
     "gulp-sass": "^2.1.0",
-    "gulp-uglify": "^1.5.1",
+    "gulp-sass-lint": "^1.1.0",
+    "gulp-sourcemaps": "^1.6.0",
     "gulp-util": "^3.0.7",
-    "imagemin-pngcrush": "^4.1.0",
     "mocha": "^2.3.4",
     "sassdoc": "^2.1.15"
   }
