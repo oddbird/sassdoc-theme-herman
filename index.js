@@ -146,18 +146,32 @@ module.exports.annotations = [
         return { file: bits[0], name: bits[1] };
       },
       resolve: function (data) {
-        if (!env.templatepath) {
-          env.logger.warn('Must pass in a templatepath if using @macro.');
-          return;
-        }
-        var nunjucksEnv = nunjucks.configure(env.templatepath);
-        nunjucksEnv.addFilter('joinArgs', function (args) {
-          return args.map(function (arg) {
-            return JSON.stringify(arg);
-          }).join(',');
-        });
+        var cachedNunjucksEnv;
+        var warned = false;
+        // get nunjucks env lazily so that we only throw an error on missing
+        // templatepath if @macro was actually used.
+        var getNunjucksEnv = function () {
+          if (!cachedNunjucksEnv) {
+            if (!env.templatepath) {
+              if (!warned) {
+                env.logger.warn('Must pass in a templatepath if using @macro.');
+                warned = true;
+              }
+              return null;
+            }
+            cachedNunjucksEnv = nunjucks.configure(env.templatepath);
+            cachedNunjucksEnv.addFilter('joinArgs', function (args) {
+              return args.map(function (arg) {
+                return JSON.stringify(arg);
+              }).join(',');
+            });
+          }
+          return cachedNunjucksEnv;
+        };
         data.forEach(function (item) {
           if (!item.macro) { return; }
+          var nunjucksEnv = getNunjucksEnv();
+          if (!nunjucksEnv) { return; }
           var prefix = '{% import "' + item.macro.file + '" as it %}';
           var docTpl = prefix + '{{ it.' + item.macro.name + '_doc }}';
           var argsTpl = prefix +

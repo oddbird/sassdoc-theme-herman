@@ -24,17 +24,38 @@ describe('macro annotation', function () {
 
   describe('resolve', function () {
 
-    it('warns and exits if no templatepath', function () {
+    it('warns and exits if no templatepath and @macro used', function () {
       var env = { logger: { warn: sinon.stub() }};
       var macro = theme.annotations[0](env);
-      var data = { foo: 'bar' };
+      var data = [{ macro: {}}];
 
       macro.resolve(data);
 
-      assert.deepEqual(data, { foo: 'bar' });
+      assert.deepEqual(data, [{ macro: {}}]);
       assert(
         env.logger.warn.calledWith(
           'Must pass in a templatepath if using @macro.'));
+    });
+
+    it('warns only once about missing templatepath', function () {
+      var env = { logger: { warn: sinon.stub() }};
+      var macro = theme.annotations[0](env);
+      var data = [{ macro: {}}, { macro: {}}];
+
+      macro.resolve(data);
+
+      sinon.assert.calledOnce(env.logger.warn);
+    });
+
+    it('does not warn on lack of templatepath if @macro not used', function () {
+      var env = { logger: { warn: sinon.stub() }};
+      var macro = theme.annotations[0](env);
+      var data = [{}];
+
+      macro.resolve(data);
+
+      assert.deepEqual(data, [{}]);
+      sinon.assert.notCalled(env.logger.warn);
     });
 
     it('renders macro and doc', function () {
