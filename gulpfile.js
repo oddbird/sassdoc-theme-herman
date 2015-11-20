@@ -7,6 +7,7 @@ var copy = require('bluebird').promisify(require('fs-extra').copy);
 var eslint = require('gulp-eslint');
 var gulp = require('gulp');
 var gutil = require('gulp-util');
+var mocha = require('gulp-mocha');
 var path = require('path');
 var sass = require('gulp-sass');
 var sassdoc = require('sassdoc');
@@ -122,6 +123,11 @@ gulp.task('sass', function () {
     .pipe(gulp.dest(paths.CSS_DIR));
 });
 
+gulp.task('jstest', function () {
+  return gulp.src(paths.JS_TESTS_DIR + '**/*.js', { read: false })
+    .pipe(mocha());
+});
+
 gulp.task('browser-sync', function (cb) {
   browserSync.init({
     server: {
@@ -176,16 +182,18 @@ gulp.task('default', [
   'eslint',
   'sasslint',
   'sass',
-  'compile'
+  'compile',
+  'jstest'
 ]);
 
 // Development task.
 // While working on a theme.
 gulp.task('develop', [
-  'compile',
-  'sass',
   'eslint',
   'sasslint',
+  'sass',
+  'compile',
+  'jstest',
   'browser-sync'
 ], function () {
   gulp.watch(paths.SASS, [ 'sass', 'dumpCSS' ], function (ev) {
