@@ -1,6 +1,8 @@
 var extend = require('extend');
+var fs = require('fs');
 var minify = require('html-minifier').minify;
 var nunjucks = require('nunjucks');
+var parse = require('./lib/parse.js');
 var path = require('path');
 var Promise = require('bluebird');
 var rename = require('gulp-rename');
@@ -86,6 +88,14 @@ module.exports = function (dest, ctx) {
 
   // Extend top-level context keys.
   ctx = extend({}, def, ctx);
+
+  /**
+   * Load a `sassyjsonfile` (if one is given in the context) and add its
+   * contents under the `sassyjson` key of the context.
+   */
+  if (ctx.sassyjsonfile) {
+    ctx.sassyjson = parse.sassyJson(fs.readFileSync(ctx.sassyjsonfile));
+  }
 
   /**
    * Parse text data (like descriptions) as Markdown, and put the
