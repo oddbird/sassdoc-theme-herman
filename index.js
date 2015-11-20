@@ -130,8 +130,8 @@ module.exports = function (dest, ctx) {
   ];
 
   // Render a template for each group, too. The group template is passed the
-  // main context with an added `groupName` key which contains the name of the
-  // current group.
+  // main context with an added `data.currentGroup` key which contains the name
+  // of the current group.
   Object.getOwnPropertyNames(ctx.data.byGroupAndType).forEach(
     function (groupName) {
       var groupDest = path.join(dest, groupName + '.html');
