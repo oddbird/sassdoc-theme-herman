@@ -1,0 +1,5 @@
+{% set mymacro_doc = "This is my macro." %}
+{% set mymacro_data = ["one", "two"] %}
+{% macro mymacro(first, second) %}
+  {{ first }} then {{ second }}.
+{% endmacro %}

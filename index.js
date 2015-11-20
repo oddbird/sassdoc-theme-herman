@@ -202,9 +202,12 @@ module.exports.annotations = [
           if (!item.macro) { return; }
           var prefix = '{% import "' + item.macro.file + '" as it %}';
           var docTpl = prefix + '{{ it.' + item.macro.name + '_doc }}';
+          var argsTpl = prefix +
+            '{{ it.' + item.macro.name + '_data|joinArgs|safe }}';
+          item.macro.args = nunjucksEnv.renderString(argsTpl);
           var renderTpl = prefix +
             '{{ it.' + item.macro.name +
-            '(it.' + item.macro.name + '_data|joinArgs|safe) }}';
+            '(' + item.macro.args + ') }}';
           item.macro.doc = nunjucksEnv.renderString(docTpl);
           item.macro.rendered = nunjucksEnv.renderString(renderTpl).trim();
         });

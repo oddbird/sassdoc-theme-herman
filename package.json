@@ -44,6 +44,7 @@
     "gulp-util": "^3.0.7",
     "mocha": "^2.3.4",
     "sanitize.css": "^3.0.0",
-    "sassdoc": "^2.1.15"
+    "sassdoc": "^2.1.15",
+    "sinon": "^1.17.2"
   }
 }
