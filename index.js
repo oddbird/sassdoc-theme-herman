@@ -168,3 +168,47 @@ module.exports = function (dest, ctx) {
     copy(assets, dest)
   ]);
 };
+
+module.exports.annotations = [
+  /**
+   * Custom `@macro` annotation. Expects macrofile:macroname.
+   *
+   * The referenced macro should have `macroname_doc` (a string containing
+   * documentation for the macro) and `macroname_data` (a list of "fake data"
+   * arguments for rendering the macro) vars defined in the same macro file.
+   */
+  function macro(env) {
+    return {
+      name: 'macro',
+      multiple: false,
+      parse: function (raw) {
+        // expects e.g. 'forms.macros.js.j2:label' and returns { file:
+        // 'forms.macros.js.j2', name: 'label' }
+        var bits = raw.split(':');
+        return { file: bits[0], name: bits[1] };
+      },
+      resolve: function (data) {
+        if (!env.templatepath) {
+          env.logger.warn("Must pass in a templatepath if using @macro.");
+          return;
+        }
+        var nunjucksEnv = nunjucks.configure(env.templatepath);
+        nunjucksEnv.addFilter('stringify', JSON.stringify);
+        data.forEach(function (item) {
+          if (!item.macro) { return; }
+          var prefix = '{% import "' + item.macro.file + '" as it %}';
+          var docTpl = prefix + '{{ it.' + item.macro.name + '_doc }}';
+          var argsTpl = prefix +
+            '{% for arg in it.' + item.macro.name + '_data %}' +
+            '{{ arg|stringify|safe }}{% if not loop.last %}, {% endif %}' +
+            '{% endfor %}';
+          item.macro.args = nunjucksEnv.renderString(argsTpl);
+          var renderTpl = prefix +
+            '{{ it.' + item.macro.name + '(' + item.macro.args + ') }}';
+          item.macro.doc = nunjucksEnv.renderString(docTpl);
+          item.macro.rendered = nunjucksEnv.renderString(renderTpl).trim();
+        });
+      }
+    }
+  }
+];
