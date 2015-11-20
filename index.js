@@ -2,14 +2,13 @@
 
 var extend = require('extend');
 var fs = require('fs');
-var minify = require('html-minifier').minify;
 var nunjucks = require('nunjucks');
-var parse = require('./lib/parse.js');
 var path = require('path');
 var Promise = require('bluebird');
-var rename = require('gulp-rename');
-var through = require('through2');
-var vfs = require('vinyl-fs');
+
+var copy = require('./lib/assets.js');
+var parse = require('./lib/parse.js');
+var render = require('./lib/render.js');
 
 /**
  * SassDoc extras (providing Markdown and other filters, and different way to
@@ -24,52 +23,11 @@ var extras = require('sassdoc-extras');
  * and the context variables `ctx`.
  */
 module.exports = function (dest, ctx) {
-  var index = path.resolve(__dirname, './views/index.j2');
+  var src = path.resolve(__dirname, './views/index.j2');
   var base = path.resolve(__dirname, './views');
   var assets = path.resolve(__dirname, './assets');
-  var env = nunjucks.configure(base, { noCache: true });
-  var renderStr = Promise.promisify(env.renderString, { context: env });
+  var nunjucksEnv = nunjucks.configure(base, { noCache: true });
   dest = path.resolve(dest);
-
-  var render = function (context) {
-    var transform = function (file, enc, cb) {
-      if (!file.isBuffer()) {
-        return cb();
-      }
-
-      renderStr(file.contents.toString(enc), context)
-        .then(function (html) {
-          return minify(html, { collapseWhitespace: true });
-        })
-        .then(function (html) {
-          file.contents = new Buffer(html);
-          cb(null, file);
-        })
-        .catch(function (err) {
-          cb(err);
-        });
-    };
-
-    var stream = through.obj(transform);
-
-    return new Promise(function (resolve, reject) {
-      vfs.src(index)
-        .pipe(stream)
-        .on('error', reject)
-        .pipe(rename('index.html'))
-        .pipe(vfs.dest(dest))
-        .on('end', resolve);
-    });
-  };
-
-  var copy = function (src, dst) {
-    return new Promise(function (resolve, reject) {
-      vfs.src(path.join(src, '/**/*.{css,js,svg,png,eot,woff,woff2,ttf}'))
-        .pipe(vfs.dest(path.join(dst, 'assets')))
-        .on('error', reject)
-        .on('end', resolve);
-    });
-  };
 
   var def = {
     display: {
@@ -164,7 +122,7 @@ module.exports = function (dest, ctx) {
   ctx.data.byGroupAndType = extras.byGroupAndType(ctx.data);
 
   return Promise.all([
-    render(ctx),
+    render(nunjucksEnv, src, dest, ctx),
     copy(assets, dest)
   ]);
 };
