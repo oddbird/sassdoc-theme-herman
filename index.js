@@ -38,8 +38,9 @@ module.exports = function (dest, ctx) {
       watermark: true
     },
     groups: {
-      undefined: 'General'
-    }
+      undefined: 'general'
+    },
+    sort: [ 'group', 'file', 'line', 'access' ]
   };
 
   // Apply default values for groups and display.
@@ -110,28 +111,6 @@ module.exports = function (dest, ctx) {
   extras.groupName(ctx);
 
   /**
-   * Use SassDoc indexer to index the data by group and type, so we
-   * have the following structure:
-   *
-   *     {
-   *       "group-slug": {
-   *         "function": [...],
-   *         "mixin": [...],
-   *         "variable": [...]
-   *       },
-   *       "another-group": {
-   *         "function": [...],
-   *         "mixin": [...],
-   *         "variable": [...]
-   *       }
-   *     }
-   *
-   * You can then use `data.byGroupAndType` instead of `data` in your
-   * templates to manipulate the indexed object.
-   */
-  ctx.data.byGroupAndType = extras.byGroupAndType(ctx.data);
-
-  /**
    * Converts `shortcutIcon` config option into an object:
    *
    *       {
@@ -184,6 +163,28 @@ module.exports = function (dest, ctx) {
    * See <http://sassdoc.com/extra-tools/#resolved-variables-resolvevariables>.
    */
   extras.resolveVariables(ctx);
+
+  /**
+   * Use SassDoc indexer to index the data by group and type, so we
+   * have the following structure:
+   *
+   *     {
+   *       "group-slug": {
+   *         "function": [...],
+   *         "mixin": [...],
+   *         "variable": [...]
+   *       },
+   *       "another-group": {
+   *         "function": [...],
+   *         "mixin": [...],
+   *         "variable": [...]
+   *       }
+   *     }
+   *
+   * You can then use `data.byGroupAndType` instead of `data` in your
+   * templates to manipulate the indexed object.
+   */
+  ctx.data.byGroupAndType = extras.byGroupAndType(ctx.data);
 
   // check if we need to copy a favicon file or use the default
   var copyShortcutIcon = false;
