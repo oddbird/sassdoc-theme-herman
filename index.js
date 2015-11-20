@@ -177,7 +177,7 @@ module.exports.annotations = [
    * documentation for the macro) and `macroname_data` (a list of "fake data"
    * arguments for rendering the macro) vars defined in the same macro file.
    */
-  function macro(env) {
+  function macro (env) {
     return {
       name: 'macro',
       multiple: false,
@@ -189,26 +189,26 @@ module.exports.annotations = [
       },
       resolve: function (data) {
         if (!env.templatepath) {
-          env.logger.warn("Must pass in a templatepath if using @macro.");
+          env.logger.warn('Must pass in a templatepath if using @macro.');
           return;
         }
         var nunjucksEnv = nunjucks.configure(env.templatepath);
-        nunjucksEnv.addFilter('stringify', JSON.stringify);
+        nunjucksEnv.addFilter('joinArgs', function (args) {
+          return args.map(function (arg) {
+            return JSON.stringify(arg);
+          }).join(',');
+        });
         data.forEach(function (item) {
           if (!item.macro) { return; }
           var prefix = '{% import "' + item.macro.file + '" as it %}';
           var docTpl = prefix + '{{ it.' + item.macro.name + '_doc }}';
-          var argsTpl = prefix +
-            '{% for arg in it.' + item.macro.name + '_data %}' +
-            '{{ arg|stringify|safe }}{% if not loop.last %}, {% endif %}' +
-            '{% endfor %}';
-          item.macro.args = nunjucksEnv.renderString(argsTpl);
           var renderTpl = prefix +
-            '{{ it.' + item.macro.name + '(' + item.macro.args + ') }}';
+            '{{ it.' + item.macro.name +
+            '(it.' + item.macro.name + '_data|joinArgs|safe) }}';
           item.macro.doc = nunjucksEnv.renderString(docTpl);
           item.macro.rendered = nunjucksEnv.renderString(renderTpl).trim();
         });
       }
-    }
+    };
   }
 ];
