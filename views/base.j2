@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   {% set project_title = package.title or package.name or 'OddBird' %}
   <title>{% block title %}{{ project_title }} Documentation{% endblock %}</title>
-  <link href="{{ shortcutIcon }}" rel="shortcut icon">
+  <link href="{{ shortcutIcon.url }}" rel="shortcut icon">
   <link rel="stylesheet" href="assets/css/main.css" />
 </head>
 <body>

@@ -39,8 +39,7 @@ module.exports = function (dest, ctx) {
     },
     groups: {
       undefined: 'General'
-    },
-    shortcutIcon: 'http://sass-lang.com/favicon.ico'
+    }
   };
 
   // Apply default values for groups and display.
@@ -61,13 +60,22 @@ module.exports = function (dest, ctx) {
   }
 
   /**
+   * Add `description` and `descriptionPath` from configuration.
+   * Note: `descriptionPath` will override `description`.
+   *
+   * See
+   * <http://sassdoc.com/extra-tools/#description-description-descriptionpath>.
+   */
+  extras.description(ctx);
+
+  /**
    * Parse text data (like descriptions) as Markdown, and put the
    * rendered HTML in `html*` variables.
    *
    * For example, `ctx.package.description` will be parsed as Markdown
    * in `ctx.package.htmlDescription`.
    *
-   * See <http://sassdoc.com/extra-tools/#markdown>.
+   * See <http://sassdoc.com/extra-tools/#markdown-markdown>.
    */
   extras.markdown(ctx);
 
@@ -85,7 +93,7 @@ module.exports = function (dest, ctx) {
    *       }
    *     }
    *
-   * See <http://sassdoc.com/extra-tools/#display-toggle>.
+   * See <http://sassdoc.com/extra-tools/#display-toggle-display>.
    */
   extras.display(ctx);
 
@@ -97,7 +105,7 @@ module.exports = function (dest, ctx) {
    *
    * **Note:** all items without a group are in the `undefined` group.
    *
-   * See <http://sassdoc.com/extra-tools/#groups-aliases>.
+   * See <http://sassdoc.com/extra-tools/#groups-aliases-groupname>.
    */
   extras.groupName(ctx);
 
@@ -123,10 +131,80 @@ module.exports = function (dest, ctx) {
    */
   ctx.data.byGroupAndType = extras.byGroupAndType(ctx.data);
 
+  /**
+   * Converts `shortcutIcon` config option into an object:
+   *
+   *       {
+   *         "type": "external",
+   *         "url": "http://absolute.path/to/icon.png"
+   *       }
+   *
+   *       {
+   *         "type": "internal",
+   *         "url": "icon.png",
+   *         "path": "/complete/relative/path/to/icon.png"
+   *       }
+   *
+   * See <http://sassdoc.com/extra-tools/#shortcut-icon-shortcuticon>.
+   */
+  extras.shortcutIcon(ctx);
+
+  /**
+   * Sorts items based on the `sort` config value.
+   * Sort order is determined by the last character: > (desc) or < (asc).
+   *
+   *       {
+   *         "sort": [
+   *            "access",
+   *            "line>",
+   *            "group",
+   *            "file"
+   *          ]
+   *       }
+   *
+   * See <http://sassdoc.com/extra-tools/#sort-sort>.
+   */
+  extras.sort(ctx);
+
+  /**
+   * Connects aliased variables to their original value.
+   * Adds `resolvedValue` key:
+   *
+   *       {
+   *         "description": "<p>Main color</p>\n",
+   *         "context": {
+   *           "type": "variable",
+   *           "name": "color-main",
+   *           "value": "$color-blue"
+   *         },
+   *         "type": "Color",
+   *         "resolvedValue": "#22b8dc"
+   *       }
+   *
+   * See <http://sassdoc.com/extra-tools/#resolved-variables-resolvevariables>.
+   */
+  extras.resolveVariables(ctx);
+
+  // check if we need to copy a favicon file or use the default
+  var copyShortcutIcon = false;
+  if (!ctx.shortcutIcon) {
+    ctx.shortcutIcon = { type: 'internal', url: 'assets/img/favicon.ico' };
+  } else if (ctx.shortcutIcon.type === 'internal') {
+    ctx.shortcutIcon.url = 'assets/img/' + ctx.shortcutIcon.url;
+    copyShortcutIcon = true;
+  }
+
   // render the index template and copy the static assets.
   var promises = [
     render(nunjucksEnv, indexTemplate, indexDest, ctx),
-    copy(assets, dest)
+    copy(
+      path.join(assets, '/**/*.{css,js,svg,png,eot,woff,woff2,ttf,ico}'),
+      path.join(dest, 'assets')
+    ).then(function () {
+      if (copyShortcutIcon) {
+        return copy(ctx.shortcutIcon.path, path.resolve(dest, 'assets/img/'));
+      }
+    })
   ];
 
   // Render a template for each group, too. The group template is passed the
