@@ -23,8 +23,10 @@ var extras = require('sassdoc-extras');
  * and the context variables `ctx`.
  */
 module.exports = function (dest, ctx) {
-  var src = path.resolve(__dirname, './views/index.j2');
   var base = path.resolve(__dirname, './views');
+  var indexTemplate = path.join(base, 'index.j2');
+  var indexDest = path.join(dest, 'index.html');
+  var groupTemplate = path.join(base, 'group.j2');
   var assets = path.resolve(__dirname, './assets');
   var nunjucksEnv = nunjucks.configure(base, { noCache: true });
   dest = path.resolve(dest);
@@ -121,10 +123,26 @@ module.exports = function (dest, ctx) {
    */
   ctx.data.byGroupAndType = extras.byGroupAndType(ctx.data);
 
-  return Promise.all([
-    render(nunjucksEnv, src, dest, ctx),
+  // render the index template and copy the static assets.
+  var promises = [
+    render(nunjucksEnv, indexTemplate, indexDest, ctx),
     copy(assets, dest)
-  ]);
+  ];
+
+  // Render a template for each group, too. The group template is passed the
+  // main context with an added `groupName` key which contains the name of the
+  // current group.
+  Object.getOwnPropertyNames(ctx.data.byGroupAndType).forEach(
+    function (groupName) {
+      var groupDest = path.join(dest, groupName + '.html');
+      var groupData = extend({ currentGroup: groupName }, ctx.data);
+      var groupCtx = extend({}, ctx);
+      groupCtx.data = groupData;
+      promises.push(render(nunjucksEnv, groupTemplate, groupDest, groupCtx));
+    }
+  );
+
+  return Promise.all(promises);
 };
 
 module.exports.annotations = [
