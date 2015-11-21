@@ -1,5 +1,5 @@
 {% macro code_block(item, type) %}
-<pre class="code-preview language-scss hljs"><code>
+<pre data-sassdoc-highlight="scss"><code>
 {%- if (type == 'variable') -%}
   {{ scss_variable(item) }}
 {%- elif (type == 'css') -%}
@@ -11,7 +11,7 @@
 {% endmacro %}
 
 {% macro scss_variable(item) -%}
-${{ item.context.name }}: {{ item.context.value }}{% if item.context.scope %} !{{ item.context.scope }}{% endif %};
+${{ item.context.name }}: {{ item.context.value }}{% if item.context.scope != 'private' %} !{{ item.context.scope }}{% endif %};
 {%- endmacro %}
 
 {% macro scss_function_or_mixin(item) -%}

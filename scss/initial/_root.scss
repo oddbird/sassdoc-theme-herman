@@ -1,11 +1,53 @@
 // Root
 // ====
 
+
 :root {
-  font-size: calc(112% + .25vw);
+  font-size: calc(115% + 0.25vw);
 }
 
-html,
-body {
-  overflow-x: hidden;
+
+// Links
+// -----
+
+$link: '&:link, &:visited';
+$focus: '&:hover, &:focus, &:active';
+
+[href] {
+  #{$link} {
+    color: color('action');
+    text-decoration: none;
+  }
+
+  #{$focus} {
+    color: color('focus');
+    text-decoration: underline;
+  }
+}
+
+
+// Media
+// -----
+
+img,
+object,
+video {
+  height: auto;
+  max-width: 100%;
+}
+
+
+// Code
+// ----
+
+pre {
+  background-color: color('callout');
+  border-radius: size('half-shim');
+  box-shadow: 0 0 size('half-shim') color('shadow') inset;
+  padding: size('shim');
+}
+
+pre,
+code {
+  @include font-size('smaller', 0.75);
 }

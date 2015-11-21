@@ -1,9 +1,7 @@
 {% import 'item/preview.macros.j2' as preview %}
 
-<section data-sassdoc-item='{{ type }}'>
+<section data-sassdoc-item='{{ type }}' id="{{ type }}--{{ item.context.name }}">
   <h4 data-sassdoc="item-title">{{ item.context.name }}</h4>
-
-  {{ preview.code_block(item, type) }}
 
   {% if item.description %}
     <div data-sassdoc="item-description">{{ item.description|safe }}</div>
@@ -19,4 +17,6 @@
       </div>
     {% endfor %}
   {% endif %}
+
+  {{ preview.code_block(item, type) }}
 </section>

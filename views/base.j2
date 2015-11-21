@@ -9,7 +9,7 @@
 </head>
 <body>
 
-  <header role="banner" data-sassdoc="banner">
+  <header role="banner" data-sassdoc-region="banner">
     <h1 data-sassdoc="project-title">
       <a href="index.html" rel="home">{{ project_title }}</a>
       {% if package.version %}
@@ -18,13 +18,17 @@
     </h1>
   </header>
 
-  <nav role="navigation" data-sassdoc="nav">
+  <nav role="navigation" data-sassdoc-region="nav">
+    <h2 data-sassdoc="nav-title">
+      <a href="index.html" rel="home">Pattern Library</a>
+    </h2>
     {% for group_name, group in data.byGroupAndType %}
-      <a href="{{ group_name }}.html" class="nav-group">{{ groups[group_name] }}</a>
+      {% set active_nav = 'is-active' if (group_name == data.currentGroup) else 'is-not-active' %}
+      <a href="{{ group_name }}.html" data-sassdoc-nav="{{ active_nav }}">{{ groups[group_name] }}</a>
     {% endfor %}
   </nav>
 
-  <main role="main" data-sassdoc-page="{% block page_slug %}index{% endblock %}">
+  <main role="main" data-sassdoc-region="main" data-sassdoc-page="{% block page_slug %}{{ data.currentGroup or 'index' }}{% endblock %}">
     {% block main %}{% endblock %}
   </main>
 

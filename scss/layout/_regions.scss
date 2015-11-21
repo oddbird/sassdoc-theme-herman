@@ -1,0 +1,58 @@
+// Layout Regions
+// ==============
+
+
+[data-sassdoc-region] {
+  padding: size('shim');
+}
+
+
+// Banner
+// ------
+[data-sassdoc-region='banner'] {
+  margin-bottom: size('gutter');
+  width: 100%;
+}
+
+[data-sassdoc='project-version'] {
+  @include font-family('sans');
+  @include font-size('normal');
+  color: color('light');
+  font-style: normal;
+  font-weight: normal;
+}
+
+
+// Navigation
+// ----------
+[data-sassdoc-region='nav'] {
+  flex: 1 1 10rem;
+}
+
+[data-sassdoc-nav] {
+  #{$link} {
+    color: color('text');
+    display: block;
+    font-style: italic;
+    text-transform: capitalize;
+  }
+
+  #{$focus} {
+    color: color('action');
+  }
+}
+
+[data-sassdoc-nav='is-active'] {
+  #{$link} {
+    color: color('active');
+    text-decoration: none;
+  }
+}
+
+
+// Page
+// ----
+[data-sassdoc-region='main'] {
+  flex: 15 1 24rem;
+  overflow: hidden;
+}

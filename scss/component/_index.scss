@@ -1,0 +1,23 @@
+// Index Styles
+// ============
+
+[data-sassdoc-page='index'] {
+  h1,
+  h2,
+  h3,
+  h4 {
+    margin-bottom: size('shim');
+  }
+
+  h1 {
+    @include font-size('h2');
+  }
+
+  h2 {
+    @include font-size('h3');
+  }
+
+  p {
+    margin-bottom: size('gutter');
+  }
+}

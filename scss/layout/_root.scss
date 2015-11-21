@@ -1,0 +1,14 @@
+// Root Layout
+// ===========
+
+html,
+body {
+  overflow-x: hidden;
+}
+
+
+body {
+  display: flex;
+  flex-wrap: wrap;
+  padding: size('shim');
+}

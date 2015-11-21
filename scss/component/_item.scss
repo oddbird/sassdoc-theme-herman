@@ -1,0 +1,10 @@
+// Item Styles
+// ===========
+
+[data-sassdoc-item] {
+  margin: size('spacer') 0;
+}
+
+[data-sassdoc='item-description'] {
+  margin-bottom: size('shim');
+}

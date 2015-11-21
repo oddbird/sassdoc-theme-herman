@@ -148,7 +148,7 @@ gulp.task('compile', function () {
     dest: paths.DOCS_DIR,
     theme: './',
     display: {
-      access: [ 'public' ]
+      access: ['public']
     },
     // Disable cache to enable live-reloading.
     // Usefull for some template engines (e.g. Swig).

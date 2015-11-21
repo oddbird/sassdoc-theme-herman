@@ -1,16 +1,12 @@
 {% extends 'base.j2' %}
 
-{% block page_slug %}{{ data.currentGroup }}{% endblock %}
-
 {% block main %}
   <h2 data-sassdoc="page-title">
     {{ groups[data.currentGroup] }}
   </h2>
 
-  {# 2. Loop over the types in the current group #}
   {% for type, items in data.byGroupAndType[data.currentGroup] %}
     {% if items.length > 0 %}
-      {# 3. Loop over the items in the current type #}
       {% for item in items %}
         {% include 'item/_item.j2' %}
       {% endfor %}

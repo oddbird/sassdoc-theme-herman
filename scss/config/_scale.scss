@@ -4,19 +4,20 @@
 @import '../../node_modules/accoutrement-scale/sass/scale';
 
 
-$base-size: 18px;
-$ratio: 1.375;
+$base-size: 22px;
+$ratio: 1.4;
 
 $sizes: (
-  'large': 24px,
-  'medium': 20px,
+  'large': 28px,
+  'medium': 24px,
   'normal': 0,
   'rhythm': 1,
-  'small': 16px,
-  'smaller': 13px,
+  'small': 18px,
+  'smaller': 16px,
 
-  'h1': 2,
-  'h2': 1,
+  'h1': 3,
+  'h2': 2,
+  'h3': 1,
 
   'gutter': 'rhythm',
   'page': 40rem,
@@ -26,8 +27,7 @@ $sizes: map-merge(
   $sizes,
   (
     'spacer': size('gutter')*2,
-    'shim': size('gutter') * .5,
-    'half-shim': size('gutter') * .25,
-    'hero': 75vh,
+    'shim': size('gutter') * 0.5,
+    'half-shim': size('gutter') * 0.25,
   )
 );

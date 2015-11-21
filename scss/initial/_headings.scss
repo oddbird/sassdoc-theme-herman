@@ -1,0 +1,44 @@
+// Headings
+// ========
+
+[data-sassdoc='project-title'] {
+  @include font-size('h1');
+  font-style: italic;
+  font-weight: normal;
+
+  [href] {
+    #{$link} {
+      color: inherit;
+    }
+
+    #{$focus} {
+      color: color('action');
+    }
+  }
+}
+
+[data-sassdoc='page-title'] {
+  @include font-size('h2');
+  margin-bottom: size('shim');
+  text-transform: capitalize;
+}
+
+[data-sassdoc='item-title'] {
+  @include font-size('h3');
+  font-weight: normal;
+  margin-bottom: size('shim');
+}
+
+[data-sassdoc='nav-title'] {
+  margin: size('shim') 0;
+
+  [href] {
+    #{$link} {
+      color: inherit;
+    }
+
+    #{$focus} {
+      color: color('action');
+    }
+  }
+}

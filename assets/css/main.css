@@ -1,3 +1,74 @@
+/*!
+ * Web Fonts from fontspring.com
+ *
+ * All OpenType features and all extended glyphs have been removed.
+ * Fully installable fonts can be purchased at http://www.fontspring.com
+ *
+ * The fonts included in this stylesheet are subject to the End User License you purchased
+ * from Fontspring. The fonts are protected under domestic and international trademark and
+ * copyright law. You are prohibited from modifying, reverse engineering, duplicating, or
+ * distributing this font software.
+ *
+ * (c) 2010-2015 Fontspring
+ *
+ *
+ *
+ *
+ * The fonts included are copyrighted by the vendor listed below.
+ *
+ * Vendor:      FontSite Inc.
+ * License URL: http://www.fontspring.com/licenses/fontsite/webfont
+ *
+ *
+ */
+@font-face {
+  font-family: "CenturyOldStyle";
+  font-style: normal;
+  font-weight: normal;
+  src: url("../fonts/serif/CenturyOldStyle-regular.woff") format("woff"), url("../fonts/serif/CenturyOldStyle-regular.ttf") format("truetype"); }
+
+@font-face {
+  font-family: "CenturyOldStyle";
+  font-style: italic;
+  font-weight: normal;
+  src: url("../fonts/serif/CenturyOldStyle-italic.woff") format("woff"), url("../fonts/serif/CenturyOldStyle-italic.ttf") format("truetype"); }
+
+@font-face {
+  font-family: "CenturyOldStyle";
+  font-style: normal;
+  font-weight: bold;
+  src: url("../fonts/serif/CenturyOldStyle-bold.woff") format("woff"), url("../fonts/serif/CenturyOldStyle-bold.ttf") format("truetype"); }
+
+@font-face {
+  font-family: "SourceSansPro";
+  font-style: normal;
+  font-weight: normal;
+  src: url("../fonts/sans/sourcesanspro-regular-webfont.woff") format("woff"), url("../fonts/sans/sourcesanspro-regular-webfont.ttf") format("truetype"); }
+
+@font-face {
+  font-family: "SourceSansPro";
+  font-style: italic;
+  font-weight: normal;
+  src: url("../fonts/sans/sourcesanspro-italic-webfont.woff") format("woff"), url("../fonts/sans/sourcesanspro-italic-webfont.ttf") format("truetype"); }
+
+@font-face {
+  font-family: "SourceSansPro";
+  font-style: normal;
+  font-weight: bold;
+  src: url("../fonts/sans/sourcesanspro-bold-webfont.woff") format("woff"), url("../fonts/sans/sourcesanspro-bold-webfont.ttf") format("truetype"); }
+
+@font-face {
+  font-family: "SourceCodePro";
+  font-style: normal;
+  font-weight: normal;
+  src: url("../fonts/code/sourcecodepro-regular-webfont.woff") format("woff"), url("../fonts/code/sourcecodepro-regular-webfont.ttf") format("truetype"); }
+
+@font-face {
+  font-family: "SourceCodePro";
+  font-style: normal;
+  font-weight: bold;
+  src: url("../fonts/code/sourcecodepro-bold-webfont.woff") format("woff"), url("../fonts/code/sourcecodepro-bold-webfont.ttf") format("truetype"); }
+
 /*! sanitize.css v3.0.0 | CC0 1.0 Public Domain | github.com/10up/sanitize.css */
 /*
  * Normalization
@@ -38,7 +109,7 @@ progress {
   display: inline-block; }
 
 small {
-  font-size: 0.88889rem; }
+  font-size: 0.81818rem; }
 
 summary {
   display: block; }
@@ -91,7 +162,7 @@ textarea {
   box-sizing: border-box;
   color: #1b4654;
   cursor: default;
-  font: 112.5% / 1.38889em font("body");
+  font: 137.5% / 1.40909em "CenturyOldStyle", "Baskerville", "Palatino", "Cambria", "Georgia", "serif";
   text-rendering: auto; }
 
 a {
@@ -139,13 +210,13 @@ button,
 [type="week"],
 select,
 textarea {
-  min-height: 1.38889em; }
+  min-height: 1.40909em; }
 
 code,
 kbd,
 pre,
 samp {
-  font-family: monospace, monospace; }
+  font-family: "SourceCodePro", "Consolas", "Menlo", "Monaco", "Lucida Console", "Liberation Mono", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Courier New", "monospace", "serif", monospace; }
 
 nav ol,
 nav ul {
@@ -167,13 +238,13 @@ textarea {
   resize: vertical; }
 
 ::-moz-selection {
-  background-color: #ff8b3d;
-  color: #000;
+  background-color: #c75000;
+  color: #fff;
   text-shadow: none; }
 
 ::selection {
-  background-color: #ff8b3d;
-  color: #000;
+  background-color: #c75000;
+  color: #fff;
   text-shadow: none; }
 
 [aria-busy="true"] {
@@ -193,17 +264,15 @@ textarea {
     clip: auto; }
 
 :root {
-  font-size: calc(112% + .25vw); }
-
-html,
-body {
-  overflow-x: hidden; }
+  font-size: calc(115% + 0.25vw); }
 
 [href]:link, [href]:visited {
-  color: #ff8b3d; }
+  color: #c75000;
+  text-decoration: none; }
 
 [href]:hover, [href]:focus, [href]:active {
-  color: #d97634; }
+  color: #b34800;
+  text-decoration: underline; }
 
 img,
 object,
@@ -211,28 +280,119 @@ video {
   height: auto;
   max-width: 100%; }
 
-/*!
- * Web Fonts from fontspring.com
- *
- * All OpenType features and all extended glyphs have been removed.
- * Fully installable fonts can be purchased at http://www.fontspring.com
- *
- * The fonts included in this stylesheet are subject to the End User License you purchased
- * from Fontspring. The fonts are protected under domestic and international trademark and
- * copyright law. You are prohibited from modifying, reverse engineering, duplicating, or
- * distributing this font software.
- *
- * (c) 2010-2015 Fontspring
- *
- *
- *
- *
- * The fonts included are copyrighted by the vendor listed below.
- *
- * Vendor:      FontSite Inc.
- * License URL: http://www.fontspring.com/licenses/fontsite/webfont
- *
- *
- */
+pre {
+  background-color: #ebecec;
+  border-radius: 0.35227rem;
+  box-shadow: 0 0 0.35227rem #b8bdbf inset;
+  padding: 0.70455rem; }
+
+pre,
+code {
+  font-size: 0.72727rem;
+  line-height: 1.05682rem; }
+
+[data-sassdoc='project-title'] {
+  font-size: 2.72727rem;
+  line-height: 2.81818rem;
+  font-style: italic;
+  font-weight: normal; }
+  [data-sassdoc='project-title'] [href]:link, [data-sassdoc='project-title'] [href]:visited {
+    color: inherit; }
+  [data-sassdoc='project-title'] [href]:hover, [data-sassdoc='project-title'] [href]:focus, [data-sassdoc='project-title'] [href]:active {
+    color: #c75000; }
+
+[data-sassdoc='page-title'] {
+  font-size: 1.95455rem;
+  line-height: 2.11364rem;
+  margin-bottom: 0.70455rem;
+  text-transform: capitalize; }
+
+[data-sassdoc='item-title'] {
+  font-size: 1.40909rem;
+  line-height: 1.40909rem;
+  font-weight: normal;
+  margin-bottom: 0.70455rem; }
+
+[data-sassdoc='nav-title'] {
+  margin: 0.70455rem 0; }
+  [data-sassdoc='nav-title'] [href]:link, [data-sassdoc='nav-title'] [href]:visited {
+    color: inherit; }
+  [data-sassdoc='nav-title'] [href]:hover, [data-sassdoc='nav-title'] [href]:focus, [data-sassdoc='nav-title'] [href]:active {
+    color: #c75000; }
+
+html,
+body {
+  overflow-x: hidden; }
+
+body {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  padding: 0.70455rem; }
+
+[data-sassdoc-region] {
+  padding: 0.70455rem; }
+
+[data-sassdoc-region='banner'] {
+  margin-bottom: 1.40909rem;
+  width: 100%; }
+
+[data-sassdoc='project-version'] {
+  font-family: "SourceSansPro", "Helvetica Neue", "Helvetica", "Arial", "sans-serif";
+  font-size: 1rem;
+  line-height: 1.40909rem;
+  color: #b8bdbf;
+  font-style: normal;
+  font-weight: normal; }
+
+[data-sassdoc-region='nav'] {
+  -webkit-flex: 1 1 10rem;
+  -ms-flex: 1 1 10rem;
+  flex: 1 1 10rem; }
+
+[data-sassdoc-nav]:link, [data-sassdoc-nav]:visited {
+  color: #1b4654;
+  display: block;
+  font-style: italic;
+  text-transform: capitalize; }
+
+[data-sassdoc-nav]:hover, [data-sassdoc-nav]:focus, [data-sassdoc-nav]:active {
+  color: #c75000; }
+
+[data-sassdoc-nav='is-active']:link, [data-sassdoc-nav='is-active']:visited {
+  color: #c75000;
+  text-decoration: none; }
+
+[data-sassdoc-region='main'] {
+  -webkit-flex: 15 1 24rem;
+  -ms-flex: 15 1 24rem;
+  flex: 15 1 24rem;
+  overflow: hidden; }
+
+[data-sassdoc-item] {
+  margin: 2.81818rem 0; }
+
+[data-sassdoc='item-description'] {
+  margin-bottom: 0.70455rem; }
+
+[data-sassdoc-page='index'] h1,
+[data-sassdoc-page='index'] h2,
+[data-sassdoc-page='index'] h3,
+[data-sassdoc-page='index'] h4 {
+  margin-bottom: 0.70455rem; }
+
+[data-sassdoc-page='index'] h1 {
+  font-size: 1.95455rem;
+  line-height: 2.11364rem; }
+
+[data-sassdoc-page='index'] h2 {
+  font-size: 1.40909rem;
+  line-height: 1.40909rem; }
+
+[data-sassdoc-page='index'] p {
+  margin-bottom: 1.40909rem; }
 
 /*# sourceMappingURL=main.css.map */

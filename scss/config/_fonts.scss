@@ -8,7 +8,7 @@
 // Font Formats
 // ------------
 /// @access private
-$font-formats: 'woff2' 'woff' 'ttf';
+$font-formats: 'woff' 'ttf';
 
 
 // Fonts
@@ -19,19 +19,25 @@ $font-formats: 'woff2' 'woff' 'ttf';
 $fonts: (
   'body': (
     'name': 'CenturyOldStyle',
-    'styles': ('regular', 'italic', 'bold'),
     'stack': ('Baskerville', 'Palatino', 'Cambria', 'Georgia', 'serif'),
+    'normal': 'serif/CenturyOldStyle-regular',
+    'italic': 'serif/CenturyOldStyle-italic',
+    'bold': 'serif/CenturyOldStyle-bold',
   ),
 
   'sans': (
     'name': 'SourceSansPro',
-    'styles': ('regular', 'italic', 'bold', 'bold italic', 'light', 'light italic'),
     'stack': ('Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'),
+    'regular': 'sans/sourcesanspro-regular-webfont',
+    'italic': 'sans/sourcesanspro-italic-webfont',
+    'bold': 'sans/sourcesanspro-bold-webfont',
+    'bold italic': 'sans/sourcesanspro-bolditalic-webfont',
   ),
 
   'code': (
     'name': 'SourceCodePro',
-    'styles': ('regular', 'bold'),
     'stack': ('Consolas', 'Menlo', 'Monaco', 'Lucida Console', 'Liberation Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', 'monospace', 'serif'),
+    'regular': 'code/sourcecodepro-regular-webfont',
+    'bold': 'code/sourcecodepro-bold-webfont',
   ),
 );

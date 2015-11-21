@@ -23,8 +23,8 @@ $brand-colors: (
 /// @group colors
 $accent-colors: (
   'lightest': #fff,
-  'lighter': 'brand-blue' ('tint': 60%),
-  'light': 'brand-blue' ('tint': 30%),
+  'lighter': 'brand-blue' ('tint': 80%, 'desaturate': 80%),
+  'light': 'brand-blue' ('tint': 30%, 'desaturate': 80%),
   'dark': 'brand-blue' ('shade': 65%),
   'go': hsl(75, 65%, 62%),
   'yield': hsl(45, 85%, 62%),
@@ -45,9 +45,15 @@ $base-colors: map-merge($brand-colors, $accent-colors);
 /// @access private
 $colors: map-merge(
   $base-colors, (
+    'contrast-light': 'lightest',
+    'contrast-dark': 'dark',
     'background': 'lightest',
     'text': 'dark',
-    'action': 'brand-orange',
-    'focus': 'brand-orange' ('shade': 15%),
+    'callout': 'lighter',
+    'shadow': 'light',
+    'action': 'brand-orange' ('darken': 23%),
+    'focus': 'action' ('shade': 10%),
+    'active': 'action',
+    'accent': 'brand-pink' ('darken': 14%),
   )
 );
