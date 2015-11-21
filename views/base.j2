@@ -9,22 +9,22 @@
 </head>
 <body>
 
-  <header role='banner'>
-    <h1 class="doc-title">
+  <header role="banner" data-sassdoc="banner">
+    <h1 data-sassdoc="project-title">
       <a href="index.html" rel="home">{{ project_title }}</a>
+      {% if package.version %}
+        <span data-sassdoc="project-version">{{ package.version }}</span>
+      {% endif %}
     </h1>
-    {% if package.version %}
-      <p class="doc-version">{{ package.version }}</p>
-    {% endif %}
   </header>
 
-  <nav role="navigation">
+  <nav role="navigation" data-sassdoc="nav">
     {% for group_name, group in data.byGroupAndType %}
       <a href="{{ group_name }}.html" class="nav-group">{{ groups[group_name] }}</a>
     {% endfor %}
   </nav>
 
-  <main role="main">
+  <main role="main" data-sassdoc-page="{% block page_slug %}index{% endblock %}">
     {% block main %}{% endblock %}
   </main>
 

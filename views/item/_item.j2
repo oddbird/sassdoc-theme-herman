@@ -1,23 +1,22 @@
 {% import 'item/preview.macros.j2' as preview %}
 
-<section class="doc-item" data-item-type='{{ type }}'>
-  <h4 class="doc-item-title">{{ item.context.name }}</h4>
+<section data-sassdoc-item='{{ type }}'>
+  <h4 data-sassdoc="item-title">{{ item.context.name }}</h4>
 
   {{ preview.code_block(item, type) }}
 
   {% if item.description %}
-    <div class="doc-item-description">{{ item.description|safe }}</div>
+    <div data-sassdoc="item-description">{{ item.description|safe }}</div>
   {% endif %}
 
   {% if item.example.length > 0 %}
     {% for example in item.example %}
-      <div class="doc-item-example">
+      <div data-sassdoc="example">
         {% if example.description %}
-          <div class="doc-example-description">{{ example.description|safe }}</div>
+          <div data-sassdoc="example-description">{{ example.description|safe }}</div>
         {% endif %}
-        <pre class="doc-example-code hlsj language-{{ example.type }}"><code>{{ example.code|escape|safe }}</code></pre>
+        <pre data-sassdoc-highlight="{{ example.type }}"><code>{{ example.code|escape|safe }}</code></pre>
       </div>
     {% endfor %}
   {% endif %}
-
 </section>
