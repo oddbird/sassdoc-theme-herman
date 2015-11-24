@@ -1,3 +1,3 @@
-# sassdoc-theme-oddbird
+# Herman
 
 > An Odd SassDoc theme.
