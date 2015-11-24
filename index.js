@@ -199,6 +199,18 @@ module.exports = function (dest, ctx) {
     copyShortcutIcon = true;
   }
 
+  // if needed, copy in a custom css file
+  var copyCustomCSS = false;
+  if (ctx.customCSS) {
+    var srcPath = path.resolve(ctx.dir, ctx.customCSS);
+    var cssUrl = 'assets/css/custom/' + path.basename(ctx.customCSS);
+    ctx.customCSS = {
+      path: srcPath,
+      url: cssUrl
+    };
+    copyCustomCSS = true;
+  }
+
   // render the index template and copy the static assets.
   var promises = [
     render(nunjucksEnv, indexTemplate, indexDest, ctx),
@@ -209,6 +221,15 @@ module.exports = function (dest, ctx) {
       if (copyShortcutIcon) {
         return copy(ctx.shortcutIcon.path, path.resolve(dest, 'assets/img/'));
       }
+      return Promise.resolve();
+    }).then(function () {
+      if (copyCustomCSS) {
+        return copy(
+          ctx.customCSS.path,
+          path.resolve(dest, 'assets/css/custom')
+        );
+      }
+      return Promise.resolve();
     })
   ];
 

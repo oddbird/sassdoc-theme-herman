@@ -3,7 +3,6 @@
 var autoprefixer = require('gulp-autoprefixer');
 var browserSync = require('browser-sync').create();
 var chalk = require('chalk');
-var copy = require('bluebird').promisify(require('fs-extra').copy);
 var eslint = require('gulp-eslint');
 var gulp = require('gulp');
 var gutil = require('gulp-util');
@@ -30,13 +29,14 @@ var project = function () {
 var paths = {
   SASS_DIR: 'scss/',
   CSS_DIR: 'assets/css/',
-  IMG_DIR: 'assets/img/',
-  SVG_DIR: 'assets/svg/',
+  IMG: 'assets/img/**/*',
+  SVG: 'assets/svg/**/*.svg',
   JS_DIR: 'assets/js/',
+  FONTS: 'assets/fonts/**/*',
   SRC_SASS_DIR: project('scss'),
   DOCS_DIR: project('sassdoc'),
   JS_TESTS_DIR: 'test/',
-  TEMPLATES_DIR: 'views/**/*.j2',
+  TEMPLATES: 'views/**/*.j2',
   IGNORE: [
     '!**/.#*',
     '!**/flycheck_*'
@@ -54,6 +54,10 @@ var paths = {
       this.JS_TESTS_DIR + '**/*.js',
       'gulpfile.js',
       'index.js'
+    ].concat(this.IGNORE);
+    this.JS_TESTS_FILES = [
+      this.JS_TESTS_DIR + '**/*.js',
+      this.JS_TESTS_DIR + '**/*.j2'
     ].concat(this.IGNORE);
     return this;
   }
@@ -123,7 +127,9 @@ gulp.task('sass', function () {
     .pipe(gulp.dest(paths.CSS_DIR));
 });
 
-gulp.task('jstest', function () {
+// Need to finish compile before running tests,
+// so that the processes do not conflict
+gulp.task('jstest', ['compile'], function () {
   return gulp.src(paths.JS_TESTS_DIR + '**/*.js', { read: false })
     .pipe(mocha());
 });
@@ -142,7 +148,7 @@ gulp.task('browser-sync', function (cb) {
 
 // SassDoc compilation.
 // See: http://sassdoc.com/customising-the-view/
-gulp.task('compile', function () {
+gulp.task('compile', ['sass'], function () {
   var config = {
     verbose: true,
     dest: paths.DOCS_DIR,
@@ -159,33 +165,10 @@ gulp.task('compile', function () {
     .pipe(sassdoc(config));
 });
 
-// Dump JS files from theme into `docs/assets` whenever they get modified.
-// Prevent requiring a full `compile`.
-gulp.task('dumpJS', function () {
-  var src = paths.JS_DIR;
-  var dest = path.join(paths.DOCS_DIR, 'assets/js');
-
-  return copy(src, dest).then(function () {
-    gutil.log(src + ' copied to ' + path.relative(__dirname, dest));
-  });
-});
-
-// Dump CSS files from theme into `docs/assets` whenever they get modified.
-// Prevent requiring a full `compile`.
-gulp.task('dumpCSS', ['sass'], function () {
-  var src = paths.CSS_DIR;
-  var dest = path.join(paths.DOCS_DIR, 'assets/css');
-
-  return copy(src, dest).then(function () {
-    gutil.log(src + ' copied to ' + path.relative(__dirname, dest));
-  });
-});
-
 gulp.task('default', [
+  'compile',
   'eslint',
   'sasslint',
-  'sass',
-  'compile',
   'jstest'
 ]);
 
@@ -194,25 +177,34 @@ gulp.task('default', [
 gulp.task('develop', [
   'eslint-nofail',
   'sasslint-nofail',
-  'sass',
   'compile',
   'jstest',
   'browser-sync'
 ], function () {
-  gulp.watch(paths.SASS, [ 'sass', 'dumpCSS' ], function (ev) {
+  gulp.watch([
+    paths.SASS,
+    paths.TEMPLATES,
+    paths.IMG,
+    paths.SVG,
+    paths.FONTS
+  ], ['compile']);
+
+  gulp.watch([ paths.JS, paths.JS_TESTS_FILES ], ['jstest']);
+
+  gulp.watch(paths.SASS, function (ev) {
     if (ev.type === 'added' || ev.type === 'changed') {
       sasslintTask(ev.path, false, true);
     }
   });
-  gulp.watch(paths.JS, ['dumpJS']);
+
   gulp.watch(paths.ALL_JS, function (ev) {
     if (ev.type === 'added' || ev.type === 'changed') {
       eslintTask(ev.path, false, true);
     }
   });
-  gulp.watch(paths.TEMPLATES_DIR, ['compile']);
+
   gulp.watch('**/.sass-lint.yml', ['sasslint-nofail']);
-  gulp.watch('**/.eslintrc', ['eslint-nofail']);
+  gulp.watch('**/.eslintrc.yml', ['eslint-nofail']);
 });
 
 // gulp.task('svgmin', function () {
