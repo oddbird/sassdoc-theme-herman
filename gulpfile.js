@@ -6,12 +6,14 @@ var chalk = require('chalk');
 var eslint = require('gulp-eslint');
 var gulp = require('gulp');
 var gutil = require('gulp-util');
+var imagemin = require('gulp-imagemin');
 var mocha = require('gulp-mocha');
 var path = require('path');
 var sass = require('gulp-sass');
 var sassdoc = require('sassdoc');
 var sasslint = require('gulp-sass-lint');
 var sourcemaps = require('gulp-sourcemaps');
+var uglify = require('gulp-uglify');
 
 
 // Set your Sass project (the one you're generating docs for) path.
@@ -27,8 +29,9 @@ var project = function () {
 
 // Theme and project specific paths.
 var paths = {
+  DIST_DIR: 'dist/',
   SASS_DIR: 'scss/',
-  CSS_DIR: 'assets/css/',
+  CSS_DIR: 'dist/css/',
   IMG: 'assets/img/**/*',
   SVG: 'assets/svg/**/*.svg',
   JS_DIR: 'assets/js/',
@@ -36,7 +39,7 @@ var paths = {
   SRC_SASS_DIR: project('scss'),
   DOCS_DIR: project('sassdoc'),
   JS_TESTS_DIR: 'test/',
-  TEMPLATES: 'views/**/*.j2',
+  TEMPLATES: 'templates/**/*.j2',
   IGNORE: [
     '!**/.#*',
     '!**/flycheck_*'
@@ -117,7 +120,7 @@ gulp.task('sasslint-nofail', function () {
 gulp.task('sass', function () {
   return gulp.src(paths.SASS_DIR + '*.scss')
     .pipe(sourcemaps.init())
-    .pipe(sass())
+    .pipe(sass({ outputStyle: 'compressed' }))
     .on('error', onError)
     .pipe(autoprefixer({
       browsers: ['last 2 versions'],
@@ -148,7 +151,7 @@ gulp.task('browser-sync', function (cb) {
 
 // SassDoc compilation.
 // See: http://sassdoc.com/customising-the-view/
-gulp.task('compile', ['sass'], function () {
+gulp.task('compile', [ 'sass', 'minify' ], function () {
   var config = {
     verbose: true,
     dest: paths.DOCS_DIR,
@@ -207,30 +210,44 @@ gulp.task('develop', [
   gulp.watch('**/.eslintrc.yml', ['eslint-nofail']);
 });
 
-// gulp.task('svgmin', function () {
-//   return gulp.src('assets/svg/*.svg')
-//     .pipe(cache(
-//       imagemin({
-//         svgoPlugins: [{ removeViewBox: false }]
-//       })
-//     ))
-//     .pipe(gulp.dest('assets/svg'));
-// });
+gulp.task('copy-fonts', function () {
+  var dest = paths.DIST_DIR + 'fonts/';
 
-// gulp.task('imagemin', function () {
-//   return gulp.src('assets/img/{,*/}*.{gif,jpeg,jpg,png}')
-//     .pipe(cache(
-//       imagemin({
-//         progressive: true,
-//         use: [pngcrush()]
-//       })
-//     ))
-//     .pipe(gulp.dest('assets/img'));
-// });
+  return gulp.src(paths.FONTS)
+    .pipe(gulp.dest(dest));
+});
 
-// // Pre release/deploy optimisation tasks.
-// gulp.task('dist', [
-//   'jsmin',
-//   'svgmin',
-//   'imagemin',
-// ]);
+gulp.task('jsmin', function () {
+  var dest = paths.DIST_DIR + 'js/';
+
+  return gulp.src(paths.JS_DIR + '**/*.js')
+    .pipe(uglify())
+    .pipe(gulp.dest(dest));
+});
+
+gulp.task('svgmin', function () {
+  var dest = paths.DIST_DIR + 'svg/';
+
+  return gulp.src(paths.SVG)
+    .pipe(imagemin({
+      svgoPlugins: [{ removeViewBox: false }]
+    }))
+    .pipe(gulp.dest(dest));
+});
+
+gulp.task('imagemin', function () {
+  var dest = paths.DIST_DIR + 'img/';
+
+  return gulp.src(paths.IMG)
+    .pipe(imagemin({
+      progressive: true
+    }))
+    .pipe(gulp.dest(dest));
+});
+
+gulp.task('minify', [
+  'jsmin',
+  'svgmin',
+  'imagemin',
+  'copy-fonts'
+]);
