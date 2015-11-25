@@ -1,5 +1,5 @@
 {
-  "name": "sassdoc-theme-oddbird",
+  "name": "sassdoc-theme-herman",
   "description": "An Odd SassDoc theme.",
   "version": "0.1.0",
   "keywords": [
@@ -47,5 +47,9 @@
     "sanitize.css": "^3.0.0",
     "sassdoc": "^2.1.15",
     "sinon": "^1.17.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/oddbird/sassdoc-theme-herman.git"
   }
 }

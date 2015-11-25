@@ -143,7 +143,7 @@ gulp.task('browser-sync', function (cb) {
       baseDir: paths.DOCS_DIR
     },
     logLevel: 'info',
-    logPrefix: 'oddbird',
+    logPrefix: 'herman',
     notify: false,
     files: [paths.DOCS_DIR + '**/*']
   }, cb);
