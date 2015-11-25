@@ -48,6 +48,9 @@
     "sassdoc": "^2.1.15",
     "sinon": "^1.17.2"
   },
+  "peerDependencies": {
+    "sassdoc": "^2.1.15"
+  },
   "repository": {
     "type": "git",
     "url": "http://github.com/oddbird/sassdoc-theme-herman.git"
