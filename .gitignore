@@ -1,2 +1,10 @@
-node_modules
-.sass-cache
+node_modules/
+npm-debug.log
+.sass-cache/
+.cache/
+*.DS_Store
+*~
+.livereload
+*.orig
+*.css.map
+*.js.map

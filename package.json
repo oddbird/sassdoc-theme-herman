@@ -11,7 +11,7 @@
     "gulp-rename": "^1.2.2",
     "html-minifier": "^1.0.0",
     "nunjucks": "^2.2.0",
-    "sassdoc-extras": "^2.0.0",
+    "sassdoc-extras": "^2.4.1",
     "through2": "^2.0.0",
     "vinyl-fs": "^2.2.1"
   },
@@ -51,6 +51,7 @@
   "peerDependencies": {
     "sassdoc": "^2.1.16"
   },
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "http://github.com/oddbird/sassdoc-theme-herman.git"
