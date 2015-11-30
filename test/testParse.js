@@ -4,21 +4,21 @@ var parse = require('../lib/parse.js');
 var assert = require('assert');
 
 describe('parse', function () {
-  describe('sassyJson', function () {
+  describe('sassJson', function () {
 
-    it('parses sassyJson', function () {
+    it('parses sassJson', function () {
       var contents = '/*! json-encode: {"a": 1} */';
       var expected = { a: 1 };
 
-      assert.deepEqual(parse.sassyJson(contents), expected);
+      assert.deepEqual(parse.sassJson(contents), expected);
     });
 
-    it('parses sassyJson with cruft after it', function () {
+    it('parses sassJson with cruft after it', function () {
       var contents = '/*! json-encode: {"a": 1} */\n\n' +
-        '/*# sourceMappingURL=sassy_json.bundle.css.map*/';
+        '/*# sourceMappingURL=sass_json.bundle.css.map*/';
       var expected = { a: 1 };
 
-      assert.deepEqual(parse.sassyJson(contents), expected);
+      assert.deepEqual(parse.sassJson(contents), expected);
     });
 
   });

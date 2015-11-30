@@ -55,12 +55,12 @@ module.exports = function (dest, ctx) {
   ctx = extend({}, def, ctx);
 
   /**
-   * Load a `sassyjsonfile` (if one is given in the context) and add its
-   * contents under the `sassyjson` key of the context.
+   * Load a `sass-json file` (if one is given in the context) and add its
+   * contents under the `sassjson` key of the context.
    */
-  if (ctx.sassyjsonfile) {
+  if (ctx.sassjsonfile) {
     /* eslint-disable no-sync */
-    ctx.sassyjson = parse.sassyJson(fs.readFileSync(ctx.sassyjsonfile));
+    ctx.sassjson = parse.sassJson(fs.readFileSync(ctx.sassjsonfile));
     /* eslint-enable no-sync */
   }
 
