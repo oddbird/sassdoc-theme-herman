@@ -8,6 +8,8 @@
   <link rel="stylesheet" href="assets/css/main.css" />
   {% if customCSS and customCSS.url %}
     <link rel="stylesheet" href="{{ customCSS.url }}" />
+  {% else %}
+    <link rel="stylesheet" href="assets/css/theme.css" />
   {% endif %}
 </head>
 <body>

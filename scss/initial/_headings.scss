@@ -5,16 +5,6 @@
   @include font-size('h1');
   font-style: italic;
   font-weight: normal;
-
-  [href] {
-    #{$link} {
-      color: inherit;
-    }
-
-    #{$focus} {
-      color: color('action');
-    }
-  }
 }
 
 [data-sassdoc='page-title'] {
@@ -31,14 +21,4 @@
 
 [data-sassdoc='nav-title'] {
   margin: size('shim') 0;
-
-  [href] {
-    #{$link} {
-      color: inherit;
-    }
-
-    #{$focus} {
-      color: color('action');
-    }
-  }
 }

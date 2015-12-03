@@ -1,39 +1,43 @@
 // Root
 // ====
 
+$root-font-size: percentage($base-size / $_browser-default-font-size);
 
 :root {
-  font-size: calc(115% + 0.25vw);
+  @include baseline;
+  @include font-family('body');
+  font-size: $root-font-size;
+  line-height: size('rhythm', 'em');
+}
+
+html {
+  font-size: calc($root-font-size + 0.25vw);
 }
 
 
 // Links
 // -----
 
-$link: '&:link, &:visited';
-$focus: '&:hover, &:focus, &:active';
-
 [href] {
   #{$link} {
     color: color('action');
     text-decoration: none;
+
+    [data-sassdoc-region='banner'] &,
+    [data-sassdoc-region='nav'] & {
+      color: inherit;
+    }
   }
 
   #{$focus} {
     color: color('focus');
     text-decoration: underline;
+
+    [data-sassdoc-region='banner'] &,
+    [data-sassdoc-region='nav'] & {
+      color: color('action');
+    }
   }
-}
-
-
-// Media
-// -----
-
-img,
-object,
-video {
-  height: auto;
-  max-width: 100%;
 }
 
 
@@ -49,5 +53,6 @@ pre {
 
 pre,
 code {
+  @include font-family('code');
   @include font-size('smaller', 0.75);
 }

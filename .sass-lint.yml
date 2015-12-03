@@ -9,7 +9,15 @@ rules:
   placeholder-in-extend: 2
 
   # Mixins
-  mixins-before-declarations: 2
+  mixins-before-declarations:
+    - 1
+    - 'exclude':
+      - 'before'
+      - 'after'
+      - 'above'
+      - 'below'
+      - 'between'
+      - 'wrap-content'
 
   # Line Spacing
   one-declaration-per-line: 2

@@ -24,7 +24,8 @@
   "devDependencies": {
     "accoutrement-a11y": "^1.0.5",
     "accoutrement-color": "^2.0.0-rc.1",
-    "accoutrement-fonts": "^2.0.0-alpha.3",
+    "accoutrement-fonts": "^2.0.0-alpha.4",
+    "accoutrement-init": "^1.0.1",
     "accoutrement-layout": "^1.1.0",
     "accoutrement-pseudo": "^1.0.2",
     "accoutrement-queries": "^1.1.0",
@@ -44,7 +45,6 @@
     "gulp-uglify": "^1.5.1",
     "gulp-util": "^3.0.7",
     "mocha": "^2.3.4",
-    "sanitize.css": "^3.0.0",
     "sassdoc": "^2.1.16",
     "sinon": "^1.17.2"
   },
