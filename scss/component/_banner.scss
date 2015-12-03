@@ -1,0 +1,10 @@
+// Banner Theme
+// ============
+
+[data-sassdoc='project-version'] {
+  @include font-family('sans');
+  @include font-size('normal');
+  color: color('light');
+  font-style: normal;
+  font-weight: normal;
+}

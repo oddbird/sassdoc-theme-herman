@@ -1,0 +1,17 @@
+// Navigation Styles
+// =================
+
+[data-sassdoc-nav] {
+  #{$link} {
+    font-style: italic;
+    text-transform: capitalize;
+  }
+
+  &[data-sassdoc-nav='is-active'] {
+    #{$link} {
+      color: color('active');
+      text-decoration: none;
+    }
+  }
+}
+

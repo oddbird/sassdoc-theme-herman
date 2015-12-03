@@ -1,0 +1,25 @@
+/*!
+ * Web Fonts from fontspring.com
+ *
+ * All OpenType features and all extended glyphs have been removed.
+ * Fully installable fonts can be purchased at http://www.fontspring.com
+ *
+ * The fonts included in this stylesheet are subject to the End User License you purchased
+ * from Fontspring. The fonts are protected under domestic and international trademark and
+ * copyright law. You are prohibited from modifying, reverse engineering, duplicating, or
+ * distributing this font software.
+ *
+ * (c) 2010-2015 Fontspring
+ *
+ *
+ *
+ *
+ * The fonts included are copyrighted by the vendor listed below.
+ *
+ * Vendor:      FontSite Inc.
+ * License URL: http://www.fontspring.com/licenses/fontsite/webfont
+ *
+ *
+ */@font-face{font-family:"CenturyOldStyle";font-style:normal;font-weight:normal;src:url("../fonts/serif/CenturyOldStyle-regular.woff") format("woff"),url("../fonts/serif/CenturyOldStyle-regular.ttf") format("truetype")}@font-face{font-family:"CenturyOldStyle";font-style:italic;font-weight:normal;src:url("../fonts/serif/CenturyOldStyle-italic.woff") format("woff"),url("../fonts/serif/CenturyOldStyle-italic.ttf") format("truetype")}@font-face{font-family:"CenturyOldStyle";font-style:normal;font-weight:bold;src:url("../fonts/serif/CenturyOldStyle-bold.woff") format("woff"),url("../fonts/serif/CenturyOldStyle-bold.ttf") format("truetype")}@font-face{font-family:"SourceSansPro";font-style:normal;font-weight:normal;src:url("../fonts/sans/sourcesanspro-regular-webfont.woff") format("woff"),url("../fonts/sans/sourcesanspro-regular-webfont.ttf") format("truetype")}@font-face{font-family:"SourceSansPro";font-style:italic;font-weight:normal;src:url("../fonts/sans/sourcesanspro-italic-webfont.woff") format("woff"),url("../fonts/sans/sourcesanspro-italic-webfont.ttf") format("truetype")}@font-face{font-family:"SourceSansPro";font-style:normal;font-weight:bold;src:url("../fonts/sans/sourcesanspro-bold-webfont.woff") format("woff"),url("../fonts/sans/sourcesanspro-bold-webfont.ttf") format("truetype")}@font-face{font-family:"SourceCodePro";font-style:normal;font-weight:normal;src:url("../fonts/code/sourcecodepro-regular-webfont.woff") format("woff"),url("../fonts/code/sourcecodepro-regular-webfont.ttf") format("truetype")}@font-face{font-family:"SourceCodePro";font-style:normal;font-weight:bold;src:url("../fonts/code/sourcecodepro-bold-webfont.woff") format("woff"),url("../fonts/code/sourcecodepro-bold-webfont.ttf") format("truetype")}:root{font-size:137.5%;line-height:1.40909em;font-family:"CenturyOldStyle","Baskerville","Palatino","Cambria","Georgia","serif";font-size:137.5%;line-height:1.40909em}html{font-size:calc($root-font-size + 0.25vw)}[href]:link,[href]:visited{color:#c75000;text-decoration:none}[data-sassdoc-region='banner'] [href]:link,[data-sassdoc-region='nav'] [href]:link,[data-sassdoc-region='banner'] [href]:visited,[data-sassdoc-region='nav'] [href]:visited{color:inherit}[href]:hover,[href]:focus,[href]:active{color:#b34800;text-decoration:underline}[data-sassdoc-region='banner'] [href]:hover,[data-sassdoc-region='nav'] [href]:hover,[data-sassdoc-region='banner'] [href]:focus,[data-sassdoc-region='nav'] [href]:focus,[data-sassdoc-region='banner'] [href]:active,[data-sassdoc-region='nav'] [href]:active{color:#c75000}pre{background-color:#ebecec;border-radius:0.35227rem;box-shadow:0 0 0.35227rem #b8bdbf inset;padding:0.70455rem}pre,code{font-family:"SourceCodePro","Consolas","Menlo","Monaco","Lucida Console","Liberation Mono","DejaVu Sans Mono","Bitstream Vera Sans Mono","Courier New","monospace","serif";font-size:0.72727rem;line-height:1.05682rem}[data-sassdoc='project-title']{font-size:2.72727rem;line-height:2.81818rem;font-style:italic;font-weight:normal}[data-sassdoc='page-title']{font-size:1.95455rem;line-height:2.11364rem;margin-bottom:0.70455rem;text-transform:capitalize}[data-sassdoc='item-title']{font-size:1.40909rem;line-height:1.40909rem;font-weight:normal;margin-bottom:0.70455rem}[data-sassdoc='nav-title']{margin:0.70455rem 0}[data-sassdoc='project-version']{font-family:"SourceSansPro","Helvetica Neue","Helvetica","Arial","sans-serif";font-size:1rem;line-height:1.40909rem;color:#b8bdbf;font-style:normal;font-weight:normal}[data-sassdoc-item]{margin:2.81818rem 0}[data-sassdoc='item-description']{margin-bottom:0.70455rem}[data-sassdoc-page='index'] h1,[data-sassdoc-page='index'] h2,[data-sassdoc-page='index'] h3,[data-sassdoc-page='index'] h4{margin-bottom:0.70455rem}[data-sassdoc-page='index'] h1{font-size:1.95455rem;line-height:2.11364rem}[data-sassdoc-page='index'] h2{font-size:1.40909rem;line-height:1.40909rem}[data-sassdoc-page='index'] p{margin-bottom:1.40909rem}[data-sassdoc-nav]:link,[data-sassdoc-nav]:visited{font-style:italic;text-transform:capitalize}[data-sassdoc-nav][data-sassdoc-nav='is-active']:link,[data-sassdoc-nav][data-sassdoc-nav='is-active']:visited{color:#c75000;text-decoration:none}
+
+/*# sourceMappingURL=theme.css.map */
