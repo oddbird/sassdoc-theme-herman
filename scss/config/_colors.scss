@@ -50,6 +50,7 @@ $colors: map-merge(
     'background': 'lightest',
     'text': 'dark',
     'callout': 'lighter',
+    'overlay': 'callout' ('rgba': 0.9),
     'shadow': 'light',
     'action': 'brand-orange' ('darken': 23%),
     'focus': 'action' ('shade': 10%),

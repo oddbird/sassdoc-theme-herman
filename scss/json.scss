@@ -1,0 +1,70 @@
+// Export Sass to JSON
+// ===================
+
+@import '../node_modules/sass-json-export/stylesheets/sass-json-export';
+@import 'config/manifest';
+
+// String Replace
+// --------------
+// Return a string, with a substring replaced
+@function str-replace(
+  $string,
+  $old,
+  $new: null,
+  $replace-all: false
+) {
+  $return: $string;
+  $i: str-index($string, $old);
+  $n: str-length($old);
+
+  @if $string == $old {
+    $return: $new;
+  } @else if $i {
+    $a: if($i > 1, str-slice($string, 1, $i - 1), '');
+    $z: str-slice($string, $i + $n);
+
+    @if $replace-all {
+      $z: str-replace($z, $old, $new, true);
+    }
+
+    $return: $a + if($new, $new, '') + $z;
+  }
+
+  @return $return;
+}
+
+
+// Map Compile
+// -----------
+// Get input and output values of a sass map.
+@function map-compile(
+  $map,
+  $function: null
+) {
+  $input: ();
+  $output: ();
+
+  @each $name, $value in $map {
+    $value: inspect($value);
+    $value: str-replace($value, '"', '\\"', true);
+    $compiled: $value;
+
+    @if $function and function-exists($function) {
+      $compiled: call($function, $name);
+    }
+
+    $input: map-merge($input, ($name: $value));
+    $output: map-merge($output, ($name: $compiled));
+  }
+
+  @return $output;
+}
+
+$config: (
+  'colors': (
+    'brand-colors': map-compile($brand-colors, 'color'),
+    'accent-colors': map-compile($accent-colors, 'color'),
+  ),
+);
+
+@include json-encode($config, comment);

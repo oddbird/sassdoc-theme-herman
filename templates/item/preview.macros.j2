@@ -27,3 +27,23 @@ ${{ item.context.name }}: {{ item.context.value }}{% if item.context.scope != 'p
   {{ item.context.value }}
 }
 {%- endmacro -%}
+
+{% macro show_data(item_data, data_type) %}
+  {% if data_type == 'colors' %}
+    {{ show_colors(item_data) }}
+  {% endif %}
+{% endmacro %}
+
+{% macro show_colors(item_data) %}
+<section data-sassdoc="color-palette">
+  {% for name, value in item_data %}
+    <div data-sassdoc="color">
+      <div data-sassdoc-color="{{ name }}"></div>
+      <div data-sassdoc="color-info">
+        <strong data-sassdoc="color-name">{{ name }}</strong>
+        <span data-sassdoc="color-value">{{ value }}</span>
+      </div>
+    </div>
+  {% endfor %}
+</section>
+{% endmacro %}

@@ -45,6 +45,7 @@
     "gulp-uglify": "^1.5.1",
     "gulp-util": "^3.0.7",
     "mocha": "^2.3.4",
+    "sass-json-export": "^2.0.0",
     "sassdoc": "^2.1.16",
     "sinon": "^1.17.2"
   },

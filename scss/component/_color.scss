@@ -1,0 +1,35 @@
+// Color Documentation
+// ===================
+
+[data-sassdoc='color-palette'] {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 0 negative('shim');
+}
+
+[data-sassdoc='color'] {
+  flex: 1 1 size('color-swatch');
+  margin: size('shim');
+}
+
+[data-sassdoc-color] {
+  height: size('spacer');
+}
+
+[data-sassdoc='color-info'] {
+  @include font-family('code');
+  @include font-size('smaller', 0.75);
+  padding: size('half-shim') 0;
+}
+
+[data-sassdoc='color-name'] {
+  display: block;
+  text-transform: uppercase;
+}
+
+@each $name, $value in $colors {
+  [data-sassdoc-color='#{$name}'] {
+    background: color($value);
+  }
+}

@@ -1,11 +1,15 @@
 {% import 'item/preview.macros.j2' as preview %}
 
+{% set item_data = sassjson[data.currentGroup][item.context.name] %}
+
 <section data-sassdoc-item='{{ type }}' id="{{ type }}--{{ item.context.name }}">
   <h4 data-sassdoc="item-title">{{ item.context.name }}</h4>
 
   {% if item.description %}
     <div data-sassdoc="item-description">{{ item.description|safe }}</div>
   {% endif %}
+
+  {{ preview.show_data(item_data, data.currentGroup) }}
 
   {% if item.example.length > 0 %}
     {% for example in item.example %}

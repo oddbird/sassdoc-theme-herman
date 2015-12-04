@@ -21,12 +21,13 @@ $sizes: (
 
   'gutter': 'rhythm',
   'page': 40rem,
+  'color-swatch': 12rem,
 );
 
 $sizes: map-merge(
   $sizes,
   (
-    'spacer': size('gutter')*2,
+    'spacer': size('gutter')*3,
     'shim': size('gutter') * 0.5,
     'half-shim': size('gutter') * 0.25,
   )
