@@ -8,6 +8,7 @@
 // ------------
 /// We use bright primary colors for the main brand,
 /// everything else is based on these colors.
+/// @preview color-palette
 /// @group colors
 $brand-colors: (
   'brand-orange': hsl(24, 100%, 62%),
@@ -20,6 +21,7 @@ $brand-colors: (
 // -------------
 /// We have a set of secondary accent colors
 /// to help flesh out the palette.
+/// @preview color-palette
 /// @group colors
 $accent-colors: (
   'lightest': #fff,

@@ -307,5 +307,25 @@ module.exports.annotations = [
         });
       }
     };
+  },
+
+  /**
+   * Custom `@preview` annotation. Expects the name of a preview type.
+   *
+   * Currently "color-palette" is the only preview type,
+   * but others are being developed.
+   */
+  function preview () {
+    return {
+      name: 'preview',
+      multiple: true,
+      parse: function (raw) {
+        // expects e.g. 'color-palette, font-specimen' and returns
+        // ['color-palette', 'font-specimen']
+        return raw.split(',').map(function (i) {
+          return i.trim();
+        });
+      }
+    };
   }
 ];
