@@ -64,6 +64,7 @@ $config: (
   'colors': (
     'brand-colors': map-compile($brand-colors, 'color'),
     'accent-colors': map-compile($accent-colors, 'color'),
+    'theme-colors': map-compile($theme-colors, 'color'),
   ),
 );
 

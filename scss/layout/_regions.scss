@@ -22,7 +22,9 @@
 // Navigation
 // ----------
 [data-sassdoc-region='nav'] {
-  flex: 1 1 10rem;
+  flex: 0 0 auto;
+  margin-bottom: size('spacer');
+  margin-right: size('gutter');
 }
 
 [data-sassdoc-nav] {
@@ -33,5 +35,5 @@
 // Page
 // ----
 [data-sassdoc-region='main'] {
-  flex: 15 1 24rem;
+  flex: 1 1 24rem;
 }

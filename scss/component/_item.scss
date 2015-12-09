@@ -2,7 +2,9 @@
 // ===========
 
 [data-sassdoc-item] {
-  margin: size('spacer') 0;
+  border-top: 2px dotted color('border');
+  margin: size('gutter') 0;
+  padding: size('gutter') 0;
 }
 
 [data-sassdoc='item-description'] {

@@ -34,29 +34,44 @@ $accent-colors: (
 );
 
 
-// Base Colors
-// -----------
-/// A merged map of the brand and accent colors.
-/// @access private
-$base-colors: map-merge($brand-colors, $accent-colors);
+// Theme Colors
+// ------------
+/// Applying the brand and accent colors
+/// to a sitewide theme.
+/// @preview color-palette
+/// @group colors
+$theme-colors: (
+  'contrast-light': 'lightest',
+  'contrast-dark': 'dark',
+  'background': 'lightest',
+  'text': 'dark',
+  'border': 'light',
+  'callout': 'lighter',
+  'overlay': 'callout' ('rgba': 0.9),
+  'shadow': 'light',
+  'action': 'brand-orange' ('darken': 23%),
+  'focus': 'action' ('shade': 10%),
+  'active': 'action',
+  'accent': 'brand-pink' ('darken': 14%),
+);
 
 
-// Colors
-// ------
-/// Specific uses of the color palette across the site.
-/// @access private
-$colors: map-merge(
-  $base-colors, (
-    'contrast-light': 'lightest',
-    'contrast-dark': 'dark',
-    'background': 'lightest',
-    'text': 'dark',
-    'callout': 'lighter',
-    'overlay': 'callout' ('rgba': 0.9),
-    'shadow': 'light',
-    'action': 'brand-orange' ('darken': 23%),
-    'focus': 'action' ('shade': 10%),
-    'active': 'action',
-    'accent': 'brand-pink' ('darken': 14%),
-  )
+// All Colors
+// ----------
+@function merge-colors(
+  $maps...
+) {
+  $new: $colors;
+
+  @each $map in $maps {
+    $new: map-merge($new, $map);
+  }
+
+  @return $new;
+}
+
+$colors: merge-colors(
+  $brand-colors,
+  $accent-colors,
+  $theme-colors
 );

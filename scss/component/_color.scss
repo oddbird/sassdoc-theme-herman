@@ -5,15 +5,16 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  margin: 0 negative('shim');
-}
-
-[data-sassdoc='color'] {
-  flex: 1 1 size('color-swatch');
-  margin: size('shim');
+  margin: size('gutter') negative('shim');
 }
 
 [data-sassdoc-color] {
+  flex: 1 1 15%;
+  margin: size('shim');
+  min-width: size('color-swatch');
+}
+
+[data-sassdoc='color-swatch'] {
   height: size('spacer');
 }
 
@@ -21,6 +22,7 @@
   @include font-family('code');
   @include font-size('smaller', 0.75);
   padding: size('half-shim') 0;
+  white-space: nowrap;
 }
 
 [data-sassdoc='color-name'] {
@@ -30,6 +32,18 @@
 
 @each $name, $value in $colors {
   [data-sassdoc-color='#{$name}'] {
-    background: color($value);
+    [data-sassdoc='color-swatch'] {
+      background: color($value);
+      box-shadow: 0 0 size('half-shim') rgba(contrast('background'), 0.5) inset;
+    }
+
+    @if map-has-key($colors, $value) {
+      [data-sassdoc='color-name'] {
+        @include after(' (#{$value})') {
+          color: color('text-light');
+          font-weight: normal;
+        }
+      }
+    }
   }
 }

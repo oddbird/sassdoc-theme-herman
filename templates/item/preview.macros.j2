@@ -39,8 +39,8 @@ ${{ item.context.name }}: {{ item.context.value }}{% if item.context.scope != 'p
 {% macro color_palette(data) %}
 <section data-sassdoc="color-palette">
   {% for name, value in data %}
-    <div data-sassdoc="color">
-      <div data-sassdoc-color="{{ name }}"></div>
+    <div data-sassdoc-color="{{ name }}">
+      <div data-sassdoc="color-swatch"></div>
       <div data-sassdoc="color-info">
         <strong data-sassdoc="color-name">{{ name }}</strong>
         <span data-sassdoc="color-value">{{ value }}</span>
