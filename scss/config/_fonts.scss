@@ -15,28 +15,32 @@ $font-formats: 'woff' 'ttf';
 // -----
 /// A map of the fonts we use,
 /// their variants, font-stacks, and webfont paths.
-/// @group typography
+/// @preview font-specimen
+/// @group webfonts
 $fonts: (
   'body': (
     'name': 'CenturyOldStyle',
-    'stack': ('Baskerville', 'Palatino', 'Cambria', 'Georgia', 'serif'),
-    'normal': 'serif/CenturyOldStyle-regular',
+    'source': 'http://www.fontspring.com/fonts/fontsite/century-old-style-fs',
+    'stack': ('Baskerville', 'Palatino', 'Cambria', 'Georgia', serif),
+    'regular': 'serif/CenturyOldStyle-regular',
     'italic': 'serif/CenturyOldStyle-italic',
     'bold': 'serif/CenturyOldStyle-bold',
   ),
 
   'sans': (
     'name': 'SourceSansPro',
-    'stack': ('Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'),
+    'source': 'http://www.fontsquirrel.com/fonts/source-sans-pro',
+    'stack': ('Helvetica Neue', 'Helvetica', 'Arial', sans-serif),
     'regular': 'sans/sourcesanspro-regular-webfont',
     'italic': 'sans/sourcesanspro-italic-webfont',
     'bold': 'sans/sourcesanspro-bold-webfont',
-    'bold italic': 'sans/sourcesanspro-bolditalic-webfont',
+    'bold' 'italic': 'sans/sourcesanspro-bolditalic-webfont',
   ),
 
   'code': (
     'name': 'SourceCodePro',
-    'stack': ('Consolas', 'Menlo', 'Monaco', 'Lucida Console', 'Liberation Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', 'monospace', 'serif'),
+    'source': 'http://www.fontsquirrel.com/fonts/source-code-pro',
+    'stack': ('Consolas', 'Menlo', 'Monaco', 'Lucida Console', 'Liberation Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace, sans-serif),
     'regular': 'code/sourcecodepro-regular-webfont',
     'bold': 'code/sourcecodepro-bold-webfont',
   ),

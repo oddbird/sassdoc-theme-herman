@@ -13,12 +13,16 @@
   text-transform: capitalize;
 }
 
-[data-sassdoc='item-title'] {
+[data-sassdoc='item-name'] {
+  @include font-family('code');
   @include font-size('h3');
-  font-weight: normal;
-  margin-bottom: size('shim');
 }
 
 [data-sassdoc='nav-title'] {
-  margin: size('shim') 0;
+  [href] {
+    #{$link} {
+      font-style: normal;
+      margin: size('shim') 0;
+    }
+  }
 }

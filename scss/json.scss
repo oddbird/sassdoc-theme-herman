@@ -60,11 +60,67 @@
   @return $output;
 }
 
+
+// Font Specimen
+// -------------
+@function font-specimen(
+  $fonts: $fonts,
+  $sizes: $sizes
+) {
+  $var-options: join($font-style-options, $font-weight-options);
+  $var-options: join($var-options, ('normal', 'regular'));
+  $return: ();
+
+  @if type-of($sizes) == 'map' {
+    $sizes: map-keys($sizes);
+  }
+
+  @each $type, $value in $fonts {
+    $name: map-get($value, 'name');
+    $stack: map-get($value, 'stack');
+    $source: map-get($value, 'source');
+    $faces: ();
+    $scale: ();
+
+    @each $face, $file in $value {
+      @if index($var-options, nth($face, 1)) {
+        $string: null;
+
+        @each $part in $face {
+          $string: if($string, '#{$string} #{$part}', $part);
+        }
+        $faces: append($faces, $string);
+      }
+    }
+
+    @each $size in $sizes {
+      $scale: map-merge($scale, ($size: size($size, 'px')));
+    }
+
+    $return: map-merge($return, (
+        $type: (
+          'name': $name,
+          'stack': $stack,
+          'source': $source,
+          'faces': $faces,
+          'scale': $scale,
+        )
+      )
+    );
+  }
+
+  @return $return;
+}
+
+
 $config: (
   'colors': (
     'brand-colors': map-compile($brand-colors, 'color'),
     'accent-colors': map-compile($accent-colors, 'color'),
     'theme-colors': map-compile($theme-colors, 'color'),
+  ),
+  'webfonts': (
+    'fonts': font-specimen($fonts, $text-sizes),
   ),
 );
 

@@ -7,6 +7,18 @@
   padding: size('gutter') 0;
 }
 
-[data-sassdoc='item-description'] {
+[data-sassdoc='item-title'] {
   margin-bottom: size('shim');
+}
+
+[data-sassdoc='item-type'] {
+  @include font-family('sans');
+  @include font-size('small');
+  @include wrap-content('[' ']');
+  color: color('light');
+  font-weight: normal;
+}
+
+[data-sassdoc='item-description'] {
+  margin-bottom: size('gutter');
 }

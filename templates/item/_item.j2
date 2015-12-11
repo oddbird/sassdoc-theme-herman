@@ -1,11 +1,18 @@
 {% import 'item/preview.macros.j2' as preview %}
 
 <section data-sassdoc-item='{{ type }}' id="{{ type }}--{{ item.context.name }}">
-  <h4 data-sassdoc="item-title">{{ item.context.name }}</h4>
+  {% set item_name = [item.context.name, '()']|join('') if (type == 'mixin' or type == 'function') else item.context.name %}
+  {% set item_name = ['$', item_name]|join('') if type == 'variable' else item_name %}
+  <h4 data-sassdoc="item-title">
+    <span data-sassdoc="item-name">{{ item_name }}</span>
+    <span data-sassdoc="item-type">{{ type }}</span>
+  </h4>
 
   {% if item.description %}
     <div data-sassdoc="item-description">{{ item.description|safe }}</div>
   {% endif %}
+
+  {{ preview.code_block(item, type) }}
 
   {% if item.preview %}
     {% set item_data = sassjson[data.currentGroup][item.context.name] %}
@@ -22,6 +29,4 @@
       </div>
     {% endfor %}
   {% endif %}
-
-  {{ preview.code_block(item, type) }}
 </section>

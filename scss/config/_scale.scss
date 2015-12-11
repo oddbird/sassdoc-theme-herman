@@ -7,22 +7,25 @@
 $base-size: 22px;
 $ratio: 1.4;
 
-$sizes: (
-  'large': 28px,
-  'medium': 24px,
-  'normal': 0,
-  'rhythm': 1,
-  'small': 18px,
-  'smaller': 16px,
-
+$text-sizes: (
   'h1': 3,
   'h2': 2,
   'h3': 1,
+  'large': 28px,
+  'medium': 24px,
+  'normal': 0,
+  'small': 18px,
+  'smaller': 16px,
+);
 
+$component-sizes: (
+  'rhythm': 1,
   'gutter': 'rhythm',
   'page': 40rem,
   'color-swatch': 12rem,
 );
+
+$sizes: map-merge($text-sizes, $component-sizes);
 
 $sizes: map-merge(
   $sizes,

@@ -11,9 +11,9 @@
 /// @preview color-palette
 /// @group colors
 $brand-colors: (
-  'brand-orange': hsl(24, 100%, 62%),
-  'brand-blue': hsl(195, 85%, 62%),
-  'brand-pink': hsl(330, 85%, 62%),
+  'brand-orange': hsl(24, 100%, 39%),
+  'brand-blue': hsl(195, 85%, 35%),
+  'brand-pink': hsl(330, 85%, 48%),
 );
 
 
@@ -26,11 +26,11 @@ $brand-colors: (
 $accent-colors: (
   'lightest': #fff,
   'lighter': 'brand-blue' ('tint': 80%, 'desaturate': 80%),
-  'light': 'brand-blue' ('tint': 30%, 'desaturate': 80%),
+  'light': 'brand-blue' ('desaturate': 80%),
   'dark': 'brand-blue' ('shade': 65%),
-  'go': hsl(75, 65%, 62%),
-  'yield': hsl(45, 85%, 62%),
-  'stop': hsl(0, 85%, 62%),
+  'go': hsl(75, 65%, 30%),
+  'yield': 'brand-orange',
+  'stop': hsl(0, 85%, 50%),
 );
 
 
@@ -49,10 +49,10 @@ $theme-colors: (
   'callout': 'lighter',
   'overlay': 'callout' ('rgba': 0.9),
   'shadow': 'light',
-  'action': 'brand-orange' ('darken': 23%),
+  'action': 'brand-orange',
   'focus': 'action' ('shade': 10%),
   'active': 'action',
-  'accent': 'brand-pink' ('darken': 14%),
+  'accent': 'brand-pink',
 );
 
 
