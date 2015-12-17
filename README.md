@@ -1,23 +1,21 @@
-# Herman
-
-> An Odd SassDoc Theme.
-
-At OddBird,
-we wanted to a tool to help us
-document the entire front end of a project:
-
-1. Brand Guidelines
-2. UX Elements
-3. Code Patterns
-
-We couldn't find a pattern-library tool
-that would let us document patterns using
-live Jinja/html along side live Sass/CSS,
-and give direct access to Sass configuration maps.
-Enter Herman.
-
+Herman [a SassDoc theme]
+========================
 
 ```
 npm install sassdoc-theme-herman
 ```
 
+At OddBird,
+we wanted to a tool to help us
+document the entire front end of a project,
+from brand guidelines to UX Elements and code patterns.
+Herman is our odd [SassDoc][SassDoc] theme,
+with a number of extra features for documenting pattern libraries:
+
+- Font specimens
+- Color palettes
+- SVG icon previews
+- Referencing & rendering Jinja/Nunjucks macros from the Sass docs
+- more on the way!
+
+[SassDoc]: http://sassdoc.com/

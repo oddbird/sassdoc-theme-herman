@@ -26,6 +26,7 @@ $colors: map-merge($colors, $hljs-colors);
   box-shadow: 0 0 size('half-shim') color('hljs-shadow') inset;
   color: color('hljs-text');
   display: block;
+  margin: size('gutter') 0;
   overflow-x: auto;
   padding: size('shim');
 }
