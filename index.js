@@ -10,6 +10,8 @@ var copy = require('./lib/assets.js');
 var parse = require('./lib/parse.js');
 var render = require('./lib/render.js');
 
+nunjucks.installJinjaCompat();
+
 /**
  * SassDoc extras (providing Markdown and other filters, and different way to
  * index SassDoc data).
