@@ -23,6 +23,7 @@ $component-sizes: (
   'gutter': 'rhythm',
   'page': 40rem,
   'color-swatch': 12rem,
+  'icon-preview': 'h1',
 );
 
 $sizes: map-merge($text-sizes, $component-sizes);

@@ -1,0 +1,36 @@
+// Icon Preview
+// ============
+
+[data-sassdoc='icon-preview'] {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: size('gutter') negative('shim');
+}
+
+[data-sassdoc-icon] {
+  color: color('text-light');
+  flex: 1 1 15%;
+  margin: size('gutter') size('shim');
+  min-width: size('color-swatch');
+
+  [data-icon] {
+    @include square('icon-preview');
+  }
+}
+
+[data-sassdoc='icon-info'] {
+  @include font-size('smaller', 0.75);
+  padding: size('half-shim') 0;
+  white-space: nowrap;
+}
+
+[data-sassdoc='icon-name'] {
+  color: color('text');
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+[data-sassdoc='icon-path'] {
+  @include font-family('code');
+}

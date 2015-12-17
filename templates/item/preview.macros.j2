@@ -39,7 +39,7 @@ ${{ item.context.name }}: {{ item.context.value }}{% if item.context.scope != 'p
 {% endmacro %}
 
 {% macro color_palette(data) %}
-<section data-sassdoc="color-palette">
+<div data-sassdoc="color-palette">
   {% for name, value in data %}
     <div data-sassdoc-color="{{ name }}">
       <div data-sassdoc="color-swatch"></div>
@@ -49,11 +49,11 @@ ${{ item.context.name }}: {{ item.context.value }}{% if item.context.scope != 'p
       </div>
     </div>
   {% endfor %}
-</section>
+</div>
 {% endmacro %}
 
 {% macro font_specimen(data) %}
-<section data-sassdoc="font-specimen">
+<div data-sassdoc="font-specimen">
   {% for name, value in data %}
     <div data-sassdoc-font="{{ name }}">
       <div data-sassdoc="font-family">
@@ -89,7 +89,7 @@ ${{ item.context.name }}: {{ item.context.value }}{% if item.context.scope != 'p
       {% endfor %}
     </div>
   {% endfor %}
-</section>
+</div>
 {% endmacro %}
 
 {% macro lorem(length) %}
@@ -98,4 +98,18 @@ ${{ item.context.name }}: {{ item.context.value }}{% if item.context.scope != 'p
   {% elif length == 'body' %}
     A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine. I am so happy, my dear friend, so absorbed in the exquisite sense of mere tranquil existence, that I neglect my talents. I should be incapable of drawing a single stroke at the present moment; and yet I feel that I never was a greater artist than now.
   {% endif %}
+{% endmacro %}
+
+{% macro icons(list) %}
+<div data-sassdoc="icon-preview">
+  {% for icon in list %}
+    <div data-sassdoc-icon="{{ icon.name }}">
+      {{ icon.rendered|safe }}
+      <div data-sassdoc="icon-info">
+        <div data-sassdoc="icon-name">{{ icon.name }}</div>
+        <div data-sassdoc="icon-path">{{ icon.path }}</div>
+      </div>
+    </div>
+  {% endfor %}
+</div>
 {% endmacro %}
