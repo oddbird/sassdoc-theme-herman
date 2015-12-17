@@ -312,10 +312,78 @@ module.exports.annotations = [
   },
 
   /**
-   * Custom `@preview` annotation. Expects the name of a preview type.
+   * Custom `@icons` annotation. Expects `iconspath macrofile:macroname`.
    *
-   * Currently "color-palette" is the only preview type,
-   * but others are being developed.
+   * First argument should be the template path to a directory of icon svg
+   * files. Will render given macroname (from given macrofile) with that icon's
+   * name as first argument. Sends to template context an `icons` item which is
+   * a list of icons, where each one is an object with properties `name`,
+   * `path`, and `rendered` (where the latter is the result of rendering the
+   * icon macro).
+   */
+  function icons (env) {
+    return {
+      name: 'icons',
+      multiple: false,
+      parse: function (raw) {
+        // expects e.g. 'icons/ utility.macros.js.j2:icon' and returns {
+        // iconsPath: 'icons/', macroFile: 'utility.macros.js.j2', macroName:
+        // 'icon' }
+        var bits = raw.split(' ');
+        var macrobits = bits[1].split(':');
+        return {
+          iconsPath: bits[0],
+          macroFile: macrobits[0],
+          macroName: macrobits[1]
+        };
+      },
+      resolve: function (data) {
+        var cachedNunjucksEnv;
+        var warned = false;
+        // get nunjucks env lazily so that we only throw an error on missing
+        // templatepath if @icons was actually used.
+        var getNunjucksEnv = function () {
+          if (!cachedNunjucksEnv) {
+            if (!env.templatepath) {
+              if (!warned) {
+                env.logger.warn('Must pass in a templatepath if using @icons.');
+                warned = true;
+              }
+              return null;
+            }
+            cachedNunjucksEnv = nunjucks.configure(env.templatepath);
+          }
+          return cachedNunjucksEnv;
+        };
+        data.forEach(function (item) {
+          if (!item.icons) { return; }
+          var nunjucksEnv = getNunjucksEnv();
+          if (!nunjucksEnv) { return; }
+          var inData = item.icons;
+          var iconsPath = path.join(env.templatepath, inData.iconsPath);
+          var iconFiles = fs.readdirSync(iconsPath);
+          var renderTpl = '{% import "' + inData.macroFile + '" as it %}' +
+            '{{ it.' + inData.macroName + '(iconName) }}';
+          item.icons = [];
+          iconFiles.forEach(function (iconFile) {
+            if (path.extname(iconFile) === '.svg') {
+              var iconName = path.basename(iconFile, '.svg');
+              item.icons.push({
+                name: iconName,
+                path: path.join(inData.iconsPath, iconFile),
+                rendered: nunjucksEnv.renderString(
+                  renderTpl, {iconName: iconName}).trim()
+              });
+            }
+          });
+        });
+      }
+    };
+  },
+
+  /**
+   * Custom `@preview` annotation. Expects comma-separated list of names of
+   * preview types.
    */
   function preview () {
     return {

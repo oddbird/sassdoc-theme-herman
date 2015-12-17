@@ -19,6 +19,14 @@
     {{ preview.display(item_data, item.preview) }}
   {% endif %}
 
+  {% if item.icons %}
+    {% for icon in item.icons %}
+      Name: {{ icon.name }}
+      Path: {{ icon.path }}
+      Rendered: {{ icon.rendered }}
+    {% endfor %}
+  {% endif %}
+
   {% if item.example.length > 0 %}
     {% for example in item.example %}
       <div data-sassdoc="example">

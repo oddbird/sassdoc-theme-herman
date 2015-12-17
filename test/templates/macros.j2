@@ -3,3 +3,7 @@
 {% macro mymacro(first, second) %}
   {{ first }} then {{ second }}.
 {% endmacro %}
+
+{% macro icon(name) -%}
+  rendered {{ name }}
+{%- endmacro %}
