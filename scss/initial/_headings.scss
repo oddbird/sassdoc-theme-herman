@@ -1,21 +1,52 @@
 // Headings
 // ========
 
-[data-sassdoc='project-title'] {
+
+// H1
+// --
+/// Styles for a top level heading.
+/// @group headings
+@mixin h1 {
   @include font-size('h1');
   font-style: italic;
   font-weight: normal;
 }
 
-[data-sassdoc='page-title'] {
+
+// H2
+// --
+/// Styles for a second level heading.
+/// @group headings
+@mixin h2 {
   @include font-size('h2');
   margin-bottom: size('shim');
   text-transform: capitalize;
 }
 
-[data-sassdoc='item-name'] {
-  @include font-family('code');
+
+// H3
+// --
+/// Styles for a third level heading.
+/// @group headings
+@mixin h3 {
   @include font-size('h3');
+}
+
+
+// Application
+// -----------
+
+[data-sassdoc='project-title'] {
+  @include h1;
+}
+
+[data-sassdoc='page-title'] {
+  @include h2;
+}
+
+[data-sassdoc='item-name'] {
+  @include h3;
+  @include font-family('code');
 }
 
 [data-sassdoc='nav-title'] {
