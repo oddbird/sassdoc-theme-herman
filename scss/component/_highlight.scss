@@ -1,0 +1,101 @@
+// Syntax Highlighting
+// ===================
+// Orginal Style from ethanschoonover.com/solarized
+// (c) Jeremy Hull <sourdrums@gmail.com>
+
+$hljs-colors: (
+  'hljs-background': #fdf6e3,
+  'hljs-text': #657b83,
+  'hljs-comment': #93a1a1,
+  'hljs-green': #859900,
+  'hljs-cyan': #2aa198,
+  'hljs-blue': #268bd2,
+  'hljs-yellow': #b58900,
+  'hljs-orange': #cb4b16,
+  'hljs-red': #dc322f,
+  'hljs-formula': #eee8d5,
+  'hljs-shadow': 'hljs-text' (rgba: 0.5),
+);
+
+$colors: map-merge($colors, $hljs-colors);
+
+.hljs {
+  background-color: color('hljs-background');
+  border-radius: size('half-shim');
+  box-shadow: 0 0 size('half-shim') color('hljs-shadow') inset;
+  color: color('hljs-text');
+  display: block;
+  overflow-x: auto;
+  padding: size('shim');
+}
+
+.hljs-comment,
+.hljs-quote {
+  color: color('hljs-comment');
+}
+
+// Solarized Green
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-addition {
+  color: color('hljs-green');
+}
+
+// Solarized Cyan
+.hljs-number,
+.hljs-string,
+.hljs-meta .hljs-meta-string,
+.hljs-literal,
+.hljs-doctag,
+.hljs-regexp {
+  color: color('hljs-cyan');
+}
+
+// Solarized Blue
+.hljs-title,
+.hljs-section,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class {
+  color: color('hljs-blue');
+}
+
+// Solarized Yellow
+.hljs-attribute,
+.hljs-attr,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-class .hljs-title,
+.hljs-type {
+  color: color('hljs-yellow');
+}
+
+// Solarized Orange
+.hljs-symbol,
+.hljs-bullet,
+.hljs-subst,
+.hljs-meta,
+.hljs-meta .hljs-keyword,
+.hljs-selector-attr,
+.hljs-selector-pseudo,
+.hljs-link {
+  color: color('hljs-orange');
+}
+
+// Solarized Red
+.hljs-built_in,
+.hljs-deletion {
+  color: color('hljs-red');
+}
+
+.hljs-formula {
+  background: color('hljs-formula');
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: bold;
+}

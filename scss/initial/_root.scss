@@ -44,13 +44,6 @@ html {
 // Code
 // ----
 
-pre {
-  background-color: color('callout');
-  border-radius: size('half-shim');
-  box-shadow: 0 0 size('half-shim') color('shadow') inset;
-  padding: size('shim');
-}
-
 pre,
 code {
   @include font-family('code');

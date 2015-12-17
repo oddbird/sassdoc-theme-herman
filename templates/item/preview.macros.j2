@@ -1,13 +1,18 @@
-{% macro code_block(item, type) %}
-<pre data-sassdoc-highlight="scss" class="lang-scss"><code>
-{%- if (type == 'variable') -%}
-  {{ scss_variable(item) }}
-{%- elif (type == 'css') -%}
-  {{ scss_css(item) }}
-{%- elif (type == 'function') or (type == 'mixin') -%}
-  {{ scss_function_or_mixin(item) }}
-{%- endif -%}
-</code></pre>
+{% macro code_block(language='scss', content=none) %}
+  {% set content = content if (content != none) else caller() %}
+  <pre><code class="lang-{{ language }}">{{ content }}</code></pre>
+{% endmacro %}
+
+{% macro source(item, type) %}
+{%- call code_block() -%}
+  {%- if (type == 'variable') -%}
+    {{ scss_variable(item) }}
+  {%- elif (type == 'css') -%}
+    {{ scss_css(item) }}
+  {%- elif (type == 'function') or (type == 'mixin') -%}
+    {{ scss_function_or_mixin(item) }}
+  {%- endif -%}
+{%- endcall -%}
 {% endmacro %}
 
 {% macro scss_variable(item) -%}

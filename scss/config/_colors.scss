@@ -49,7 +49,7 @@ $theme-colors: (
   'border': 'light',
   'callout': 'lighter',
   'overlay': 'callout' ('rgba': 0.9),
-  'shadow': 'light',
+  'shadow': 'light' ('rgba': 0.5),
   'action': 'brand-orange',
   'focus': 'action' ('shade': 10%),
   'active': 'action',

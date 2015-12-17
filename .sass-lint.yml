@@ -46,7 +46,7 @@ rules:
 
   # nesting
   force-attribute-nesting: 2
-  force-element-nesting: 2
+  force-element-nesting: 1
   force-pseudo-nesting: 2
 
   # Style Guide

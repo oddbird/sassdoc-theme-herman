@@ -12,7 +12,7 @@
     <div data-sassdoc="item-description">{{ item.description|safe }}</div>
   {% endif %}
 
-  {{ preview.code_block(item, type) }}
+  {{ preview.source(item, type) }}
 
   {% if item.example.length > 0 %}
     {% for example in item.example %}
@@ -20,7 +20,10 @@
         {% if example.description %}
           <div data-sassdoc="example-description">{{ example.description|safe }}</div>
         {% endif %}
-        <pre data-sassdoc-highlight="{{ example.type }}"><code>{{ example.code|escape|safe }}</code></pre>
+        {{ preview.code_block(
+          language=example.type,
+          content=example.code|escape|safe
+          ) }}
       </div>
     {% endfor %}
   {% endif %}
