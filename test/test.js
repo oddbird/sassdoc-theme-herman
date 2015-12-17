@@ -167,7 +167,7 @@ describe('preview annotation', function () {
     it('splits on comma and strips whitespace', function () {
       assert.deepEqual(
         this.preview.parse(' foo,bar,  baz'),
-        ['foo', 'bar', 'baz']
+        [ 'foo', 'bar', 'baz' ]
       );
     });
 
