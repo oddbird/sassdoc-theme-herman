@@ -1,10 +1,11 @@
-{% macro code_block(language='scss', content=none) %}
+{% macro code_block(language=none, content=none) %}
   {% set content = content if (content != none) else caller() %}
-  <pre><code class="lang-{{ language }}">{{ content }}</code></pre>
+  {% set language = ['lang', language]|join('-') if language != none %}
+  <pre data-sassdoc="hljs"><code{% if language %} class="{{ language }}"{% endif %}>{{ content }}</code></pre>
 {% endmacro %}
 
 {% macro source(item, type) %}
-{%- call code_block() -%}
+{%- call code_block(language='scss') -%}
   {%- if (type == 'variable') -%}
     {{ scss_variable(item) }}
   {%- elif (type == 'css') -%}
