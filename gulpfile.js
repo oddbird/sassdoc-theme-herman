@@ -56,7 +56,8 @@ var paths = {
       'lib/**/*.js',
       this.JS_TESTS_DIR + '**/*.js',
       'gulpfile.js',
-      'index.js'
+      'index.js',
+      '!assets/js/highlight.js'
     ].concat(this.IGNORE);
     this.JS_TESTS_FILES = [
       this.JS_TESTS_DIR + '**/*.js',
