@@ -61,9 +61,7 @@ module.exports = function (dest, ctx) {
    * contents under the `sassjson` key of the context.
    */
   if (ctx.sassjsonfile) {
-    /* eslint-disable no-sync */
     ctx.sassjson = parse.sassJson(fs.readFileSync(ctx.sassjsonfile));
-    /* eslint-enable no-sync */
   }
 
   /**
@@ -216,10 +214,8 @@ module.exports = function (dest, ctx) {
   // if needed, read in minified icons SVG
   ctx.iconsSvg = '';
   if (ctx.templatepath && ctx.minifiedIcons) {
-    /* eslint-disable no-sync */
     ctx.iconsSvg = fs.readFileSync(
       path.join(ctx.templatepath, ctx.minifiedIcons));
-    /* eslint-enable no-sync */
   }
 
   // render the index template and copy the static assets.
@@ -370,9 +366,7 @@ module.exports.annotations = [
           if (!nunjucksEnv) { return; }
           var inData = item.icons;
           var iconsPath = path.join(env.templatepath, inData.iconsPath);
-          /* eslint-disable no-sync */
           var iconFiles = fs.readdirSync(iconsPath);
-          /* eslint-enable no-sync */
           var renderTpl = '{% import "' + inData.macroFile + '" as it %}' +
             '{{ it.' + inData.macroName + '(iconName) }}';
           item.icons = [];
