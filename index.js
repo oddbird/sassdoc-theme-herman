@@ -213,6 +213,13 @@ module.exports = function (dest, ctx) {
     copyCustomCSS = true;
   }
 
+  // if needed, read in minified icons SVG
+  ctx.iconsSvg = '';
+  if (ctx.templatepath && ctx.minifiedIcons) {
+    ctx.iconsSvg = fs.readFileSync(
+      path.join(ctx.templatepath, ctx.minifiedIcons));
+  }
+
   // render the index template and copy the static assets.
   var promises = [
     render(nunjucksEnv, indexTemplate, indexDest, ctx),
