@@ -11,13 +11,13 @@ rules:
   # Mixins
   mixins-before-declarations:
     - 1
-    - 'exclude':
-      - 'before'
-      - 'after'
-      - 'above'
-      - 'below'
-      - 'between'
-      - 'wrap-content'
+    - exclude:
+      - before
+      - after
+      - above
+      - below
+      - between
+      - wrap-content
 
   # Line Spacing
   one-declaration-per-line: 2
