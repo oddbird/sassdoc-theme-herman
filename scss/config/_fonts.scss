@@ -1,8 +1,7 @@
 // Font Settings
 // =============
 
-@import '../../node_modules/accoutrement-strings/sass/strings';
-@import '../../node_modules/accoutrement-fonts/sass/fonts';
+@import '../../node_modules/accoutrement-type/sass/type';
 
 
 // Font Formats
@@ -11,13 +10,13 @@
 $font-formats: 'woff' 'ttf';
 
 
-// Fonts
-// -----
-/// A map of the fonts we use,
-/// their variants, font-stacks, and webfont paths.
+// Body Font
+// ---------
+/// The OddBird brand font,
+/// used for most body and headline text.
 /// @preview font-specimen
 /// @group webfonts
-$fonts: (
+$body-font: (
   'body': (
     'name': 'CenturyOldStyle',
     'source': 'http://www.fontspring.com/fonts/fontsite/century-old-style-fs',
@@ -25,8 +24,17 @@ $fonts: (
     'regular': 'serif/CenturyOldStyle-regular',
     'italic': 'serif/CenturyOldStyle-italic',
     'bold': 'serif/CenturyOldStyle-bold',
-  ),
+  )
+);
 
+
+// Sans Font
+// ---------
+/// A clean sans-serif option
+/// used for smaller text like captions and labels.
+/// @preview font-specimen
+/// @group webfonts
+$sans-font: (
   'sans': (
     'name': 'SourceSansPro',
     'source': 'http://www.fontsquirrel.com/fonts/source-sans-pro',
@@ -35,13 +43,25 @@ $fonts: (
     'italic': 'sans/sourcesanspro-italic-webfont',
     'bold': 'sans/sourcesanspro-bold-webfont',
     'bold' 'italic': 'sans/sourcesanspro-bolditalic-webfont',
-  ),
+  )
+);
 
+
+// Code Font
+// ---------
+/// A readable monospace font for code previews.
+/// @preview font-specimen
+/// @group webfonts
+$code-font: (
   'code': (
     'name': 'SourceCodePro',
     'source': 'http://www.fontsquirrel.com/fonts/source-code-pro',
     'stack': ('Consolas', 'Menlo', 'Monaco', 'Lucida Console', 'Liberation Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace, sans-serif),
     'regular': 'code/sourcecodepro-regular-webfont',
     'bold': 'code/sourcecodepro-bold-webfont',
-  ),
+  )
 );
+
+
+$fonts: map-merge($body-font, $sans-font);
+$fonts: map-merge($fonts, $code-font);

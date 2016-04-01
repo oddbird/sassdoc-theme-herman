@@ -1,6 +1,8 @@
 // Font Specimen
 // =============
 
+$_font-style-options: 'italic' 'oblique';
+$_font-weight-options: 100 200 300 400 500 600 700 800 900 'bold';
 
 [data-sassdoc-font] {
   margin: size('gutter') 0;
@@ -9,12 +11,6 @@
 
 // Family
 // ------
-
-@each $font, $details in $fonts {
-  [data-sassdoc-font='#{$font}'] {
-    @include font-family($font);
-  }
-}
 
 [data-sassdoc='font-family'] {
   @include font-size('small');
@@ -44,14 +40,14 @@
 // Face
 // ----
 
-@each $style in $font-style-options {
+@each $style in $_font-style-options {
   [data-specimen-face~='#{$style}'] {
     $style: '#{$style}';
     font-style: unquote($style);
   }
 }
 
-@each $weight in $font-weight-options {
+@each $weight in $_font-weight-options {
   [data-specimen-face~='#{$weight}'] {
     $weight: '#{$weight}';
     font-weight: unquote($weight);
@@ -74,12 +70,6 @@
 
 // Size
 // ----
-
-@each $size in map-keys($text-sizes) {
-  [data-specimen-size='#{$size}'] {
-    @include font-size($size);
-  }
-}
 
 [data-specimen-size] {
   margin: size('shim');

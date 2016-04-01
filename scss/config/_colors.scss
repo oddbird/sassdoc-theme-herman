@@ -1,6 +1,7 @@
 // Color Settings
 // ==============
 
+@import '../../node_modules/mathsass/dist/math';
 @import '../../node_modules/accoutrement-color/sass/color';
 
 
@@ -17,17 +18,26 @@ $brand-colors: (
 );
 
 
-// Accent Colors
-// -------------
-/// We have a set of secondary accent colors
-/// to help flesh out the palette.
+// Neutral Colors
+// --------------
+/// Use these neutral colors
+/// to create structure and hierarchy in the document.
 /// @preview color-palette
 /// @group colors
-$accent-colors: (
-  'lightest': #fff,
-  'lighter': 'brand-blue' ('tint': 80%, 'desaturate': 80%),
-  'light': 'brand-blue' ('desaturate': 80%),
-  'dark': 'brand-blue' ('shade': 65%),
+$neutral-colors: (
+  'light-gray': 'brand-blue' ('tint': 80%, 'desaturate': 80%),
+  'gray': 'brand-blue' ('desaturate': 80%),
+  'black': 'brand-blue' ('shade': 65%),
+);
+
+
+// Status Colors
+// -------------
+/// These status colors for UI elements
+/// give a quick sense of progress, warning, or errors.
+/// @preview color-palette
+/// @group colors
+$status-colors: (
   'go': hsl(75, 65%, 30%),
   'yield': 'brand-orange',
   'stop': hsl(0, 85%, 50%),
@@ -41,15 +51,16 @@ $accent-colors: (
 /// @preview color-palette
 /// @group colors
 $theme-colors: (
-  'contrast-light': 'lightest',
-  'contrast-dark': 'dark',
-  'background': 'lightest',
-  'text': 'dark',
-  'text-light': 'light',
-  'border': 'light',
-  'callout': 'lighter',
+  'white': #fff,
+  'contrast-light': 'white',
+  'contrast-dark': 'black',
+  'background': 'white',
+  'text': 'black',
+  'text-light': 'gray',
+  'border': 'gray',
+  'callout': 'light-gray',
   'overlay': 'callout' ('rgba': 0.9),
-  'shadow': 'light' ('rgba': 0.5),
+  'shadow': 'gray' ('rgba': 0.5),
   'action': 'brand-orange',
   'focus': 'action' ('shade': 10%),
   'active': 'action',
@@ -62,7 +73,7 @@ $theme-colors: (
 @function merge-colors(
   $maps...
 ) {
-  $new: $colors;
+  $new: ();
 
   @each $map in $maps {
     $new: map-merge($new, $map);
@@ -73,6 +84,7 @@ $theme-colors: (
 
 $colors: merge-colors(
   $brand-colors,
-  $accent-colors,
+  $neutral-colors,
+  $status-colors,
   $theme-colors
 );

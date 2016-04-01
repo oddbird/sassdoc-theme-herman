@@ -15,6 +15,7 @@
 }
 
 [data-sassdoc='color-swatch'] {
+  box-shadow: 0 0 size('half-shim') color('shadow') inset;
   height: size('spacer');
 }
 
@@ -28,22 +29,9 @@
 [data-sassdoc='color-name'] {
   display: block;
   text-transform: uppercase;
-}
 
-@each $name, $value in $colors {
-  [data-sassdoc-color='#{$name}'] {
-    [data-sassdoc='color-swatch'] {
-      background: color($value);
-      box-shadow: 0 0 size('half-shim') rgba(contrast('background'), 0.5) inset;
-    }
-
-    @if map-has-key($colors, $value) {
-      [data-sassdoc='color-name'] {
-        @include after(' (#{$value})') {
-          color: color('text-light');
-          font-weight: normal;
-        }
-      }
-    }
+  @include after('') {
+    color: color('text-light');
+    font-weight: normal;
   }
 }

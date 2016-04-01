@@ -4,18 +4,37 @@
 
 [data-sassdoc-region] {
   max-width: 100%;
-  padding: size('shim');
+}
 
-  @include above('page') {
-    padding: size('gutter');
-  }
+
+// App
+// ---
+[data-sassdoc-region='app'] {
+  margin: 0 auto;
+  max-width: size('page');
+  padding: size('shim');
 }
 
 
 // Banner
 // ------
 [data-sassdoc-region='banner'] {
+  padding: size('shim');
   width: 100%;
+}
+
+
+// Container
+// ---------
+[data-sassdoc-region='container'] {
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  padding: size('shim');
+
+  @include above(30em) {
+    flex-direction: row;
+  }
 }
 
 
@@ -23,8 +42,9 @@
 // ----------
 [data-sassdoc-region='nav'] {
   flex: 0 0 auto;
-  margin-bottom: size('spacer');
+  margin-bottom: size('gutter');
   margin-right: size('gutter');
+  padding: size('shim');
 }
 
 [data-sassdoc-nav] {
@@ -35,5 +55,6 @@
 // Page
 // ----
 [data-sassdoc-region='main'] {
-  flex: 1 1 24rem;
+  flex: 1 1 0;
+  padding: size('shim');
 }

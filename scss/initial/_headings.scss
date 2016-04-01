@@ -6,6 +6,7 @@
 // --
 /// Styles for a top level heading.
 /// @group headings
+/// @access private
 @mixin h1 {
   @include font-size('h1');
   font-style: italic;
@@ -17,6 +18,7 @@
 // --
 /// Styles for a second level heading.
 /// @group headings
+/// @access private
 @mixin h2 {
   @include font-size('h2');
   margin-bottom: size('shim');
@@ -28,6 +30,7 @@
 // --
 /// Styles for a third level heading.
 /// @group headings
+/// @access private
 @mixin h3 {
   @include font-size('h3');
 }
@@ -53,7 +56,7 @@
   [href] {
     #{$link} {
       font-style: normal;
-      margin: size('shim') 0;
+      margin: size('half-shim') 0;
     }
   }
 }

@@ -16,33 +16,37 @@
 
   {{ iconsSvg }}
 
-  <header role="banner" data-sassdoc-region="banner">
-    <h1 data-sassdoc="project-title">
-      <a href="{{ homepage or package.homepage or 'index.html' }}" rel="home" data-sassdoc="project-name">{{ project_title }}</a>
-      {% if package.version %}
-        <span data-sassdoc="project-version">{{ package.version }}</span>
-      {% endif %}
-    </h1>
-  </header>
+  <div data-sassdoc-region="app">
+    <header role="banner" data-sassdoc-region="banner">
+      <h1 data-sassdoc="project-title">
+        <a href="{{ homepage or package.homepage or 'index.html' }}" rel="home" data-sassdoc="project-name">{{ project_title }}</a>
+        {% if package.version %}
+          <span data-sassdoc="project-version">{{ package.version }}</span>
+        {% endif %}
+      </h1>
+    </header>
 
-  <nav role="navigation" data-sassdoc-region="nav">
-    <h2 data-sassdoc="nav-title">
-      {% set active_nav = 'is-not-active' if data.currentGroup else 'is-active' %}
-      <a href="index.html" rel="home" data-sassdoc-nav="{{ active_nav }}">
-        Pattern Library
-      </a>
-    </h2>
-    {% for group_name, group in data.byGroupAndType %}
-      {% set active_nav = 'is-active' if (group_name == data.currentGroup) else 'is-not-active' %}
-      <a href="{{ group_name }}.html" data-sassdoc-nav="{{ active_nav }}">
-        {{ groups[group_name] }}
-      </a>
-    {% endfor %}
-  </nav>
+    <div data-sassdoc-region="container">
+      <nav role="navigation" data-sassdoc-region="nav">
+        <h2 data-sassdoc="nav-title">
+          {% set active_nav = 'is-not-active' if data.currentGroup else 'is-active' %}
+          <a href="index.html" rel="home" data-sassdoc-nav="{{ active_nav }}">
+            StyleGuide
+          </a>
+        </h2>
+        {% for group_name, group in data.byGroupAndType %}
+          {% set active_nav = 'is-active' if (group_name == data.currentGroup) else 'is-not-active' %}
+          <a href="{{ group_name }}.html" data-sassdoc-nav="{{ active_nav }}">
+            {{ groups[group_name] }}
+          </a>
+        {% endfor %}
+      </nav>
 
-  <main role="main" data-sassdoc-region="main" data-sassdoc-page="{% block page_slug %}{{ data.currentGroup or 'index' }}{% endblock %}">
-    {% block main %}{% endblock %}
-  </main>
+      <main role="main" data-sassdoc-region="main" data-sassdoc-page="{% block page_slug %}{{ data.currentGroup or 'index' }}{% endblock %}">
+        {% block main %}{% endblock %}
+      </main>
+    </div>
+  </div>
 
   <script type="text/javascript" src="assets/js/highlight.js"></script>
   <script type="text/javascript">

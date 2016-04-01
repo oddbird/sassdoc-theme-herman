@@ -1,17 +1,10 @@
 // Root
 // ====
 
-$root-font-size: percentage($base-size / $_browser-default-font-size);
-
 :root {
   @include baseline;
   @include font-family('body');
-  font-size: $root-font-size;
-  line-height: size('rhythm', 'em');
-}
-
-html {
-  font-size: calc($root-font-size + 0.25vw);
+  font-size: calc(size('root') + 0.25vw);
 }
 
 
