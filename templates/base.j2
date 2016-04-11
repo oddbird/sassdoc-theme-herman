@@ -30,15 +30,11 @@
       <nav role="navigation" data-sassdoc-region="nav">
         <h2 data-sassdoc="nav-title">
           {% set active_nav = 'is-not-active' if data.currentGroup else 'is-active' %}
-          <a href="index.html" rel="home" data-sassdoc-nav="{{ active_nav }}">
-            StyleGuide
-          </a>
+          <a href="index.html" rel="home" data-sassdoc-nav="{{ active_nav }}">StyleGuide</a>
         </h2>
         {% for group_name, group in data.byGroupAndType %}
           {% set active_nav = 'is-active' if (group_name == data.currentGroup) else 'is-not-active' %}
-          <a href="{{ group_name }}.html" data-sassdoc-nav="{{ active_nav }}">
-            {{ groups[group_name] }}
-          </a>
+          <a href="{{ group_name }}.html" data-sassdoc-nav="{{ active_nav }}">{{ groups[group_name] }}</a>
         {% endfor %}
       </nav>
 

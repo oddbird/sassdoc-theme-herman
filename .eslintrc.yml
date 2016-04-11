@@ -11,8 +11,10 @@ rules:
     - singleValue: false
       objectsInArrays: false
       arraysInArrays: false
+  array-callback-return: 2
   arrow-body-style: 2
   arrow-parens: 2
+  arrow-spacing: 2
   block-scoped-var: 2
   block-spacing: 2
   brace-style:
@@ -30,6 +32,7 @@ rules:
     - 15
   computed-property-spacing: 2
   consistent-return: 2
+  constructor-super: 2
   curly: 2
   dot-location:
     - 2
@@ -40,10 +43,13 @@ rules:
   func-style:
     - 2
     - expression
+  generator-star-spacing: 2
   guard-for-in: 2
   handle-callback-err:
     - 1
     - ^.*(e|E)rr
+  id-blacklist:
+    - 2
   id-length:
     - 2
     - properties: never
@@ -56,13 +62,19 @@ rules:
     - 2
     - SwitchCase: 1
   key-spacing: 2
+  keyword-spacing: 2
   linebreak-style: 2
   max-depth: 1
   max-len: 2
-  max-nested-callbacks: 1
+  max-nested-callbacks:
+    - 1
+    - 3
   max-params:
     - 1
     - 6
+  max-statements-per-line:
+    - 2
+    - max: 2
   new-cap:
     - 2
     - capIsNewExceptions:
@@ -74,24 +86,32 @@ rules:
         - emptyView
         - model
   new-parens: 2
+  newline-per-chained-call: 0
   no-alert: 2
   no-array-constructor: 2
-  no-arrow-condition: 2
   no-bitwise: 2
   no-caller: 2
   no-case-declarations: 2
   no-catch-shadow: 2
+  no-class-assign: 2
+  no-confusing-arrow: 2
+  no-const-assign: 2
+  no-constant-condition: 2
   no-continue: 2
   no-div-regex: 2
+  no-dupe-class-members: 2
   no-else-return: 2
+  no-empty-function: 2
   no-empty-pattern: 2
   no-eq-null: 2
   no-eval: 2
   no-extend-native: 2
   no-extra-bind: 2
+  no-extra-label: 2
   no-extra-parens: 2
   no-floating-decimal: 2
   no-implicit-coercion: 2
+  no-implicit-globals: 2
   no-implied-eval: 2
   no-iterator: 2
   no-label-var: 2
@@ -111,6 +131,7 @@ rules:
   no-new-func: 2
   no-new-object: 2
   no-new-require: 2
+  no-new-symbol: 2
   no-new-wrappers: 2
   no-new: 2
   no-octal-escape: 2
@@ -120,28 +141,35 @@ rules:
   no-proto: 2
   no-return-assign: 2
   no-script-url: 2
+  no-self-assign: 2
   no-self-compare: 2
   no-sequences: 2
   no-shadow-restricted-names: 2
   no-shadow: 2
   no-spaced-func: 2
+  no-this-before-super: 2
   no-throw-literal: 2
   no-trailing-spaces: 2
   no-undef-init: 2
   no-underscore-dangle: 2
   no-unexpected-multiline: 2
+  no-unmodified-loop-condition: 2
   no-unneeded-ternary: 2
   no-unused-expressions: 2
+  no-unused-labels: 2
   no-use-before-define: 2
   no-useless-call: 2
   no-useless-concat: 2
+  no-useless-constructor: 2
+  no-useless-escape: 2
   no-void: 2
   no-warning-comments:
     - 1
     - terms:
-        - todo
-        - fixme
-        - '@@@'
+      - todo
+      - fixme
+      - '@@@'
+  no-whitespace-before-property: 2
   no-with: 2
   object-curly-spacing:
     - 2
@@ -151,6 +179,9 @@ rules:
     - 2
     - uninitialized: always
       initialized: never
+  one-var-declaration-per-line:
+    - 2
+    - initializations
   operator-assignment:
     - 2
     - never
@@ -166,22 +197,23 @@ rules:
     - single
     - avoid-escape
   radix: 2
+  require-yield: 2
   semi-spacing: 2
   semi: 2
-  space-after-keywords: 2
+  sort-imports: 0
   space-before-blocks: 2
   space-before-function-paren: 2
-  space-before-keywords: 2
   space-in-parens: 2
   space-infix-ops: 2
-  space-return-throw-case: 2
   space-unary-ops: 2
   spaced-comment: 2
   strict:
     - 2
     - global
+  template-curly-spacing: 2
   wrap-iife: 2
   wrap-regex: 2
+  yield-star-spacing: 2
   yoda:
     - 2
     - never
