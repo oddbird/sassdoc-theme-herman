@@ -24,6 +24,9 @@
           language=example.type,
           content=example.code|escape|safe
           ) }}
+        {% if example.rendered %}
+          <div data-sassdoc="example-preview">{{ example.rendered|safe }}</div>
+        {% endif %}
       </div>
     {% endfor %}
   {% endif %}

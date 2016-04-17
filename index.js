@@ -402,5 +402,52 @@ module.exports.annotations = [
         });
       }
     };
+  },
+
+  /**
+   * Custom `@example` annotation.
+   *
+   * Augments the normal sassdoc @example annotation.
+   * If example language is 'njk' (nunjucks), render the example
+   * and put the result in the `rendered` property of the parsed example.
+   */
+  function example (env) {
+    var baseExample = require('sassdoc/dist/annotation/annotations/example')();
+    return {
+      name: 'example',
+      parse: baseExample.parse,
+      resolve: function (data) {
+        var cachedNunjucksEnv;
+        var warned = false;
+        // get nunjucks env lazily so that we only throw an error on missing
+        // templatepath if a nunjucks @example was actually used.
+        var getNunjucksEnv = function () {
+          if (!cachedNunjucksEnv) {
+            if (!env.templatepath) {
+              if (!warned) {
+                env.logger.warn(
+                  'Must pass in a templatepath if using a Nunjucks @example.');
+                warned = true;
+              }
+              return null;
+            }
+            cachedNunjucksEnv = nunjucks.configure(env.templatepath);
+          }
+          return cachedNunjucksEnv;
+        };
+        data.forEach(function (item) {
+          if (!item.example) { return; }
+          var nunjucksEnv = null;
+          item.example.forEach(function (exampleItem) {
+            if (exampleItem.type !== 'njk') { return; }
+            if (!nunjucksEnv) { nunjucksEnv = getNunjucksEnv(); }
+            if (!nunjucksEnv) { return; }
+            exampleItem.rendered = nunjucksEnv.renderString(
+              exampleItem.code).trim();
+          });
+        });
+      }
+    };
   }
+
 ];
