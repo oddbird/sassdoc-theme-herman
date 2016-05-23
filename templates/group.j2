@@ -9,6 +9,7 @@
     {% if items.length > 0 %}
       {% for item in items %}
         {% include 'item/_item.j2' %}
+        {% include 'item/_parameter.j2' %}
       {% endfor %}
     {% endif %}
   {% endfor %}
