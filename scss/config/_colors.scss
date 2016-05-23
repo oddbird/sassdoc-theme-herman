@@ -9,8 +9,9 @@
 // ------------
 /// We use bright primary colors for the main brand,
 /// everything else is based on these colors.
-/// @preview color-palette
 /// @group colors
+/// @param {number} $number - the number to apply the modular scale
+/// @preview color-palette
 $brand-colors: (
   'brand-orange': hsl(24, 100%, 39%),
   'brand-blue': hsl(195, 85%, 35%),
@@ -22,8 +23,8 @@ $brand-colors: (
 // --------------
 /// Use these neutral colors
 /// to create structure and hierarchy in the document.
-/// @preview color-palette
 /// @group colors
+/// @preview color-palette
 $neutral-colors: (
   'light-gray': 'brand-blue' ('tint': 80%, 'desaturate': 80%),
   'gray': 'brand-blue' ('desaturate': 80%),
@@ -35,8 +36,8 @@ $neutral-colors: (
 // -------------
 /// These status colors for UI elements
 /// give a quick sense of progress, warning, or errors.
-/// @preview color-palette
 /// @group colors
+/// @preview color-palette
 $status-colors: (
   'go': hsl(75, 65%, 30%),
   'yield': 'brand-orange',
@@ -48,8 +49,8 @@ $status-colors: (
 // ------------
 /// Applying the brand and accent colors
 /// to a sitewide theme.
-/// @preview color-palette
 /// @group colors
+/// @preview color-palette
 $theme-colors: (
   'white': #fff,
   'contrast-light': 'white',
