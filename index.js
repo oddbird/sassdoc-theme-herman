@@ -256,13 +256,24 @@ module.exports = function (dest, ctx) {
   return Promise.all(promises);
 };
 
+// get nunjucks env lazily so that we only throw an error on missing
+// templatepath if annotation was actually used.
+var getNunjucksEnv = function (name, env, warned) {
+  if (!env.templatepath) {
+    if (!warned) {
+      env.logger.warn('Must pass in a templatepath if using ' + name + '.');
+    }
+    return null;
+  }
+  return nunjucks.configure(env.templatepath);
+};
+
 module.exports.annotations = [
   /**
    * Custom `@macro` annotation. Expects macrofile:macroname.
    *
-   * The referenced macro should have `macroname_doc` (a string containing
-   * documentation for the macro) and `macroname_data` (a list of "fake data"
-   * arguments for rendering the macro) vars defined in the same macro file.
+   * The referenced macro should have a `macroname_doc` (a string containing
+   * documentation for the macro) var defined in the same macro file.
    */
   function macro (env) {
     return {
@@ -275,42 +286,20 @@ module.exports.annotations = [
         return { file: bits[0], name: bits[1] };
       },
       resolve: function (data) {
-        var cachedNunjucksEnv;
+        var nunjucksEnv;
         var warned = false;
-        // get nunjucks env lazily so that we only throw an error on missing
-        // templatepath if @macro was actually used.
-        var getNunjucksEnv = function () {
-          if (!cachedNunjucksEnv) {
-            if (!env.templatepath) {
-              if (!warned) {
-                env.logger.warn('Must pass in a templatepath if using @macro.');
-                warned = true;
-              }
-              return null;
-            }
-            cachedNunjucksEnv = nunjucks.configure(env.templatepath);
-            cachedNunjucksEnv.addFilter('joinArgs', function (args) {
-              return args.map(function (arg) {
-                return JSON.stringify(arg);
-              }).join(',');
-            });
-          }
-          return cachedNunjucksEnv;
-        };
         data.forEach(function (item) {
           if (!item.macro) { return; }
-          var nunjucksEnv = getNunjucksEnv();
-          if (!nunjucksEnv) { return; }
+          if (!nunjucksEnv) {
+            nunjucksEnv = getNunjucksEnv('@macro', env, warned);
+          }
+          if (!nunjucksEnv) {
+            warned = true;
+            return;
+          }
           var prefix = '{% import "' + item.macro.file + '" as it %}';
           var docTpl = prefix + '{{ it.' + item.macro.name + '_doc }}';
-          var argsTpl = prefix +
-            '{{ it.' + item.macro.name + '_data|joinArgs|safe }}';
-          item.macro.args = nunjucksEnv.renderString(argsTpl);
-          var renderTpl = prefix +
-            '{{ it.' + item.macro.name +
-            '(' + item.macro.args + ') }}';
           item.macro.doc = nunjucksEnv.renderString(docTpl);
-          item.macro.rendered = nunjucksEnv.renderString(renderTpl).trim();
         });
       }
     };
@@ -343,27 +332,17 @@ module.exports.annotations = [
         };
       },
       resolve: function (data) {
-        var cachedNunjucksEnv;
+        var nunjucksEnv;
         var warned = false;
-        // get nunjucks env lazily so that we only throw an error on missing
-        // templatepath if @icons was actually used.
-        var getNunjucksEnv = function () {
-          if (!cachedNunjucksEnv) {
-            if (!env.templatepath) {
-              if (!warned) {
-                env.logger.warn('Must pass in a templatepath if using @icons.');
-                warned = true;
-              }
-              return null;
-            }
-            cachedNunjucksEnv = nunjucks.configure(env.templatepath);
-          }
-          return cachedNunjucksEnv;
-        };
         data.forEach(function (item) {
           if (!item.icons) { return; }
-          var nunjucksEnv = getNunjucksEnv();
-          if (!nunjucksEnv) { return; }
+          if (!nunjucksEnv) {
+            nunjucksEnv = getNunjucksEnv('@icons', env, warned);
+          }
+          if (!nunjucksEnv) {
+            warned = true;
+            return;
+          }
           var inData = item.icons;
           var iconsPath = path.join(env.templatepath, inData.iconsPath);
           var iconFiles = fs.readdirSync(iconsPath);
@@ -417,31 +396,19 @@ module.exports.annotations = [
       name: 'example',
       parse: baseExample.parse,
       resolve: function (data) {
-        var cachedNunjucksEnv;
+        var nunjucksEnv;
         var warned = false;
-        // get nunjucks env lazily so that we only throw an error on missing
-        // templatepath if a nunjucks @example was actually used.
-        var getNunjucksEnv = function () {
-          if (!cachedNunjucksEnv) {
-            if (!env.templatepath) {
-              if (!warned) {
-                env.logger.warn(
-                  'Must pass in a templatepath if using a Nunjucks @example.');
-                warned = true;
-              }
-              return null;
-            }
-            cachedNunjucksEnv = nunjucks.configure(env.templatepath);
-          }
-          return cachedNunjucksEnv;
-        };
         data.forEach(function (item) {
           if (!item.example) { return; }
-          var nunjucksEnv = null;
           item.example.forEach(function (exampleItem) {
             if (exampleItem.type !== 'njk') { return; }
-            if (!nunjucksEnv) { nunjucksEnv = getNunjucksEnv(); }
-            if (!nunjucksEnv) { return; }
+            if (!nunjucksEnv) {
+              nunjucksEnv = getNunjucksEnv('Nunjucks @example', env, warned);
+            }
+            if (!nunjucksEnv) {
+              warned = true;
+              return;
+            }
             exampleItem.rendered = nunjucksEnv.renderString(
               exampleItem.code).trim();
           });

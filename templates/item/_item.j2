@@ -31,10 +31,6 @@
     {% endfor %}
   {% endif %}
 
-  {% if item.macro %}
-    {{ item.macro.rendered|safe }}
-  {% endif %}
-
   {% if item.preview %}
     {% set item_data = sassjson[data.currentGroup][item.context.name] %}
     {{ preview.display(item_data, item.preview) }}

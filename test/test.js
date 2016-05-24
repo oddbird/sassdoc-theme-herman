@@ -67,9 +67,7 @@ describe('macro annotation', function () {
         macro: {
           file: 'macros.j2',
           name: 'mymacro',
-          args: '"one","two"',
-          doc: 'This is my macro.',
-          rendered: 'one then two.'
+          doc: 'This is my macro.'
         }
       }]);
     });
@@ -192,7 +190,7 @@ describe('example annotation', function () {
       assert.deepEqual(data, [{ example: [{ type: 'njk' }] }]);
       assert(
         env.logger.warn.calledWith(
-          'Must pass in a templatepath if using a Nunjucks @example.'));
+          'Must pass in a templatepath if using Nunjucks @example.'));
     });
 
     it('warns only once about missing templatepath', function () {
