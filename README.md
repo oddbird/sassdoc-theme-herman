@@ -22,3 +22,26 @@ user-experience and code patterns:
 
 [oddbird]: http://oddbird.net/
 [SassDoc]: http://sassdoc.com/
+
+
+Releases
+--------
+
+### 0.3.0: 2016-??-??
+
+- Added rendering of @example annotations using the njk (nunjucks) language.
+- Removed rendering of macro examples using `macroname_data`.
+
+### 0.2.1: 2015-12-23
+
+- Updated dependencies.
+
+### 0.2.0: 2015-12-17
+
+- Add `@icons` annotation.
+- Add `@preview` annotation for color palettes and font specimens.
+- Add syntax highlighting of code blocks.
+
+### 0.1.0: 2015-11-25
+
+- Initial release. `@macro` annotation and basic infrastructure.
