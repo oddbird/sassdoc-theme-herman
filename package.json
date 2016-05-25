@@ -23,7 +23,7 @@
   },
   "devDependencies": {
     "accoutrement-a11y": "^1.0.6",
-    "accoutrement-color": "^2.0.0",
+    "accoutrement-color": "^2.0.1",
     "accoutrement-fonts": "^2.0.0-alpha.4",
     "accoutrement-herman": "^1.0.0-alpha.4",
     "accoutrement-init": "^1.1.0",

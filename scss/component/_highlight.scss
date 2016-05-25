@@ -19,8 +19,17 @@ $hljs-colors: (
 
 $colors: map-merge($colors, $hljs-colors);
 
-[data-sassdoc='hljs'],
-[data-sassdoc-page='index'] pre {
+
+/// Style sassdoc code-blocks
+/// @group code-blocks
+/// @example njk - sample code block:
+///   {% import 'item/preview.macros.j2' as item %}
+///   {% call item.code_block(language='scss') %}
+///     .sample-code {
+///       color: red;
+///     }
+///   {% endcall %}
+@mixin code-block {
   background-color: color('hljs-background');
   border-radius: size('half-shim');
   box-shadow: 0 0 size('half-shim') color('hljs-shadow') inset;
@@ -29,6 +38,11 @@ $colors: map-merge($colors, $hljs-colors);
   margin: size('gutter') 0;
   overflow-x: auto;
   padding: size('shim');
+}
+
+[data-sassdoc='hljs'],
+[data-sassdoc-page='index'] pre {
+  @include code-block;
 }
 
 .hljs-comment,
