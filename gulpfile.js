@@ -158,6 +158,7 @@ gulp.task('compile', [ 'sass', 'minify' ], function () {
     dest: paths.DOCS_DIR,
     theme: './',
     sassjsonfile: './dist/css/json.css',
+    templatepath: path.join(__dirname, 'templates'),
     display: {
       access: ['public']
     },
