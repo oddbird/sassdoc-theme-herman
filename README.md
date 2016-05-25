@@ -1,10 +1,6 @@
 Herman [a SassDoc theme]
 ========================
 
-```
-npm install sassdoc-theme-herman
-```
-
 At [OddBird][oddbird],
 we wanted to a tool to help us
 document the entire front end of a project,
@@ -22,6 +18,50 @@ user-experience and code patterns:
 
 [oddbird]: http://oddbird.net/
 [SassDoc]: http://sassdoc.com/
+
+
+Getting Started
+---------------
+
+```
+npm install sassdoc-theme-herman
+```
+
+See the [SassDoc documentation](http://sassdoc.com/getting-started/)
+for how to install SassDoc and run it via various build tools.
+
+Herman is a theme for SassDoc,
+so you'll want to specify `sassdoc-theme-herman`
+as the theme in your `sassdoc` options.
+
+
+Rendering `nunjucks` examples
+-----------------------------
+
+If you use an `@example` annotation with the `njk` language,
+Herman will display both the source code of the example
+and its rendered output.
+
+This makes it possible to show examples of markup patterns
+that make use of styles in your Sass.
+
+For example, this:
+
+	// Test Macro
+	// ----------
+	// This is a test.
+	/// @example njk - Basic usage:
+	///  {% import 'macros.j2' as macros %}
+	///  {{ macros.mymacro(1, 2) }}
+	/// @group test
+	[data-mymacro] {}
+
+will render the `mymacro` macro from the file `macros.j2`
+(which happens to use the `[data-mymacro]` attribute).
+
+In order for this to work,
+you must also specify a `templatepath` in your `sassdoc` options
+(the path where nunjucks will look to import templates).
 
 
 Releases
