@@ -64,6 +64,29 @@ you must also specify a `templatepath` in your `sassdoc` options
 (the path where nunjucks will look to import templates).
 
 
+Development
+-----------
+
+To install the necessary Node dependencies, run ``npm install``.
+
+You can lint the project's JS with ``gulp eslint`` and run the JS unit tests
+with ``gulp jstest`` (or ``npm test``). You can lint Sass with
+``gulp sasslint``.
+
+To compile and minify the static assets--as well as generate the
+documentation--run ``gulp compile``.
+
+Just running ``gulp`` will perform all of the above tasks.
+
+You can start up a local development server with ``gulp develop``. This will
+also watch for changes to local files and automatically perform an appropriate
+selection of the above tasks whenever changes are detected to relevant files.
+
+Access the running server at http://localhost:3000.
+
+Refer to the ``gulpfile.js`` source and `gulp`_ documentation for more info.
+
+
 Releases
 --------
 
