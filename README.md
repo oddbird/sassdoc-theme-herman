@@ -31,7 +31,7 @@ See the [SassDoc documentation](http://sassdoc.com/getting-started/)
 for how to install SassDoc and run it via various build tools.
 
 Herman is a theme for SassDoc,
-so you'll want to specify `sassdoc-theme-herman`
+so you'll want to specify `herman`
 as the theme in your `sassdoc` options.
 
 
