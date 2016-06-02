@@ -67,9 +67,7 @@ describe('macro annotation', function () {
         macro: {
           file: 'macros.j2',
           name: 'mymacro',
-          args: '"one","two"',
-          doc: 'This is my macro.',
-          rendered: 'one then two.'
+          doc: 'This is my macro.'
         }
       }]);
     });
@@ -156,7 +154,6 @@ describe('icons annotation', function () {
 
 });
 
-
 describe('preview annotation', function () {
   before(function () {
     this.preview = theme.annotations[2]();
@@ -173,4 +170,61 @@ describe('preview annotation', function () {
 
   });
 
+});
+
+describe('example annotation', function () {
+  before(function () {
+    this.env = { templatepath: path.resolve(__dirname, 'templates') };
+    this.example = theme.annotations[3](this.env);
+  });
+
+  describe('resolve', function () {
+
+    it('warns and exits if no templatepath and njk @example used', function () {
+      var env = { logger: { warn: sinon.stub() }};
+      var example = theme.annotations[3](env);
+      var data = [{ example: [{ type: 'njk' }] }];
+
+      example.resolve(data);
+
+      assert.deepEqual(data, [{ example: [{ type: 'njk' }] }]);
+      assert(
+        env.logger.warn.calledWith(
+          'Must pass in a templatepath if using Nunjucks @example.'));
+    });
+
+    it('warns only once about missing templatepath', function () {
+      var env = { logger: { warn: sinon.stub() }};
+      var example = theme.annotations[3](env);
+      var data = [{ example: [{ type: 'njk' }] }, { example: [{ type: 'njk' }] }];
+
+      example.resolve(data);
+
+      sinon.assert.calledOnce(env.logger.warn);
+    });
+
+    it('does not warn on lack of templatepath if njk @example not used', function () {
+      var env = { logger: { warn: sinon.stub() }};
+      var example = theme.annotations[3](env);
+      var data = [{}];
+
+      example.resolve(data);
+
+      assert.deepEqual(data, [{}]);
+      sinon.assert.notCalled(env.logger.warn);
+    });
+
+    it('renders nunjucks example', function () {
+      var data = [{
+        example: [{
+          type: 'njk',
+          code: "{% import 'macros.j2' as macros %}\n{{ macros.mymacro(1, 2) }}"
+        }]
+      }];
+      this.example.resolve(data);
+      assert.equal(data[0].example[0].rendered,
+        '1 then 2.');
+    });
+
+  });
 });
