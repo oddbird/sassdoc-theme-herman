@@ -30,7 +30,12 @@ module.exports = function (dest, ctx) {
   var indexDest = path.join(dest, 'index.html');
   var groupTemplate = path.join(base, 'group.j2');
   var assets = path.resolve(__dirname, './dist');
+
   var nunjucksEnv = nunjucks.configure(base, { noCache: true });
+  nunjucksEnv.addFilter('split', function (str, separator) {
+    return str.split(separator);
+  });
+
   dest = path.resolve(dest);
 
   var def = {

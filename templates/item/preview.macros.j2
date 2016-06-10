@@ -79,14 +79,25 @@ ${{ item.context.name }}: {{ item.context.value }}{% if item.context.scope != 'p
       {% endif %}
     </div>
 
-    {% set font_options = [
-      'nor', 'reg',
-      'ita', 'obl',
-      '100', '200', '300', '400', '500', '600', '700', '800', '900', 'bol'
+    {% set weight_options = [
+      'reg', '100', '200', '300', '400', '500', '600', '700', '800', '900', 'bol'
+    ] %}
+    {% set style_options = [
+      'nor', 'ita', 'obl'
     ] %}
 
-    {% for type, value in data %}
-      {% set face = value if (type|truncate(3, False, '') in font_options) else none %}
+    {% for options, value in data %}
+      {% set first3 = options|truncate(3, False, '') %}
+      {% set face = value if (first3 in weight_options or first3 in style_options) else none %}
+      {% set weight = 'regular' %}
+      {% set style = 'normal' %}
+      {% set options = options|split(' ') %}
+      {% for value in options %}
+        {% set weight = value if (value|truncate(3, False, '') in weight_options) else weight %}
+      {% endfor %}
+      {% for value in options %}
+        {% set style = value if (value|truncate(3, False, '') in style_options) else style %}
+      {% endfor %}
 
       {% if face %}
         <div data-specimen-face="{{ face }}">
