@@ -17,14 +17,19 @@
   {% if item.example.length > 0 %}
     {% for example in item.example %}
       <div data-sassdoc="example">
+        <strong data-sassdoc="example-subtitle">code example [{{ example.type }}]:</strong>
+
         {% if example.description %}
-          <div data-sassdoc="example-description">{{ example.description|safe }}</div>
+          <p data-sassdoc="example-description">{{ example.description|safe }}</p>
         {% endif %}
+
         {{ preview.code_block(
           language=example.type,
           content=example.code|escape|safe
           ) }}
+
         {% if example.rendered %}
+          <strong data-sassdoc="example-subtitle">rendered output:</strong>
           <div data-sassdoc="example-preview">{{ example.rendered|safe }}</div>
         {% endif %}
       </div>
@@ -32,8 +37,11 @@
   {% endif %}
 
   {% if item.preview %}
-    {% set item_data = sassjson[data.currentGroup][item.context.name] %}
-    {{ preview.display(item_data, item.preview) }}
+    {{ preview.display(
+      data=sassjson,
+      name=item.context.name,
+      specs=item.preview
+      ) }}
   {% endif %}
 
   {% if item.icons %}

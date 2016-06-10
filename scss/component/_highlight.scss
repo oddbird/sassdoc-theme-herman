@@ -22,13 +22,13 @@ $colors: map-merge($colors, $hljs-colors);
 
 /// Style sassdoc code-blocks
 /// @group code-blocks
-/// @example njk - sample code block:
+/// @example njk -
 ///   {% import 'item/preview.macros.j2' as item %}
-///   {% call item.code_block(language='scss') %}
-///     .sample-code {
-///       color: red;
-///     }
-///   {% endcall %}
+///   {% call item.code_block(language='scss') -%}
+///   .sample-code {
+///     color: red;
+///   }
+///   {%- endcall %}
 @mixin code-block {
   background-color: color('hljs-background');
   border-radius: size('half-shim');

@@ -372,7 +372,7 @@ module.exports.annotations = [
   function preview () {
     return {
       name: 'preview',
-      multiple: true,
+      multiple: false,
       parse: function (raw) {
         // expects e.g. 'color-palette, font-specimen' and returns
         // ['color-palette', 'font-specimen']

@@ -1,9 +1,6 @@
 // Font Specimen
 // =============
 
-$_font-style-options: 'italic' 'oblique';
-$_font-weight-options: 100 200 300 400 500 600 700 800 900 'bold';
-
 [data-sassdoc-font] {
   margin: size('gutter') 0;
 }
@@ -40,20 +37,6 @@ $_font-weight-options: 100 200 300 400 500 600 700 800 900 'bold';
 // Face
 // ----
 
-@each $style in $_font-style-options {
-  [data-specimen-face~='#{$style}'] {
-    $style: '#{$style}';
-    font-style: unquote($style);
-  }
-}
-
-@each $weight in $_font-weight-options {
-  [data-specimen-face~='#{$weight}'] {
-    $weight: '#{$weight}';
-    font-weight: unquote($weight);
-  }
-}
-
 [data-specimen-face] {
   background-color: color('callout');
   margin: size('shim') 0;
@@ -86,7 +69,4 @@ $_font-weight-options: 100 200 300 400 500 600 700 800 900 'bold';
 
 [data-sassdoc='specimen-text'] {
   max-width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }

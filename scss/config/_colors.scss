@@ -68,23 +68,13 @@ $theme-colors: (
 );
 
 
-// All Colors
-// ----------
-@function merge-colors(
-  $maps...
-) {
-  $new: ();
-
-  @each $map in $maps {
-    $new: map-merge($new, $map);
-  }
-
-  @return $new;
-}
-
-$colors: merge-colors(
-  $brand-colors,
-  $neutral-colors,
-  $status-colors,
-  $theme-colors
+// Combine & Export Colors
+// -----------------------
+@include set-colors(
+  (
+    'brand-colors': $brand-colors,
+    'neutral-colors': $neutral-colors,
+    'status-colors': $status-colors,
+    'theme-colors': $theme-colors,
+  )
 );

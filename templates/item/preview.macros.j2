@@ -34,21 +34,22 @@ ${{ item.context.name }}: {{ item.context.value }}{% if item.context.scope != 'p
 }
 {%- endmacro -%}
 
-{% macro display(data, types) %}
-{% for type in types %}
+{% macro display(data, name, specs) %}
+  {% set type = specs[0] %}
+  {% set location = specs[1] or name %}
+
   {% if type == 'color-palette' %}
-    {{ color_palette(data) }}
+    {{ color_palette(data[location]) }}
   {% elif type == 'font-specimen' %}
-    {{ font_specimen(data) }}
+    {{ font_specimen(location, data[location]) }}
   {% endif %}
-{% endfor %}
 {% endmacro %}
 
 {% macro color_palette(data) %}
 <div data-sassdoc="color-palette">
   {% for name, value in data %}
     <div data-sassdoc-color="{{ name }}">
-      <div data-sassdoc="color-swatch"></div>
+      <div data-sassdoc="color-swatch" style="background-color: {{ value }};"></div>
       <div data-sassdoc="color-info">
         <strong data-sassdoc="color-name">{{ name }}</strong>
         <span data-sassdoc="color-value">{{ value }}</span>
@@ -58,44 +59,52 @@ ${{ item.context.name }}: {{ item.context.value }}{% if item.context.scope != 'p
 </div>
 {% endmacro %}
 
-{% macro font_specimen(data) %}
-<div data-sassdoc="font-specimen">
-  {% for name, value in data %}
-    <div data-sassdoc-font="{{ name }}">
-      <div data-sassdoc="font-family">
-        <h3 data-sassdoc="font-type">{{ name }}</h3>
-        {% if value.stack %}
-          <div data-sassdoc="font-stack">
-            {% if value.name %}
-              {% if value.source %}
-                <a href="http://www.fontsquirrel.com/fonts/source-code-pro" data-sassdoc="font-name">{{ value.name }}</a>,
-              {% else %}
-                <span data-sassdoc="font-name">{{ value.name }}</span>,
-              {% endif %}
+{% macro font_specimen(name, data) %}
+  <div data-sassdoc-font="{{ name }}">
+    <div data-sassdoc="font-family">
+      <h3 data-sassdoc="font-type">{{ name }}</h3>
+      {% if data.stack %}
+        <div data-sassdoc="font-stack">
+          {% if data.name %}
+            {% if data.source %}
+              <a href="{{ data.source }}" data-sassdoc="font-name">{{ data.name }}</a>,
+            {% else %}
+              <span data-sassdoc="font-name">{{ data.name }}</span>,
             {% endif %}
-            {% for item in value.stack %}
-              {{ item }}{% if not loop.last %},{% endif %}
-            {% endfor %}
-          </div>
-        {% endif %}
-      </div>
+          {% endif %}
+          {% for item in data.stack %}
+            {{ item }}{% if not loop.last %},{% endif %}
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
 
-      {% for face in value.faces %}
+    {% set font_options = [
+      'nor', 'reg',
+      'ita', 'obl',
+      '100', '200', '300', '400', '500', '600', '700', '800', '900', 'bol'
+    ] %}
+
+    {% for type, value in data %}
+      {% set face = value if (type|truncate(3, False, '') in font_options) else none %}
+
+      {% if face %}
         <div data-specimen-face="{{ face }}">
           <h4 data-sassdoc="specimen-title">{{ face }}</h4>
-          {% for size, length in value.scale %}
+          {% for size, length in data['preview-sizes'] %}
             <div data-specimen-size="{{ size }}">
               <div data-sassdoc="specimen-size">
-                {{ size }} · {{ length }}
+                {{ size }} · {{ ['0', length]|join('') if (length[0] == '.') else length }}
               </div>
-              <div data-sassdoc="specimen-text">{{ lorem('title') }}</div>
+              <div data-sassdoc="specimen-text" style="font-size: {{ length }};">
+                {{ lorem('body' if (size == 'root') else 'title') }}
+              </div>
             </div>
           {% endfor %}
         </div>
-      {% endfor %}
-    </div>
-  {% endfor %}
-</div>
+      {% endif %}
+    {% endfor %}
+  </div>
 {% endmacro %}
 
 {% macro lorem(length) %}
