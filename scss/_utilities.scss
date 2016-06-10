@@ -1,0 +1,108 @@
+// Herman Utilities
+// ================
+
+
+// Json
+// ----
+$json: ();
+
+
+// String Replace
+// --------------
+/// Return a string, with a substring replaced
+@function str-replace(
+  $string,
+  $old,
+  $new: null,
+  $replace-all: false
+) {
+  $return: $string;
+  $i: str-index($string, $old);
+  $n: str-length($old);
+
+  @if $string == $old {
+    $return: $new;
+  } @else if $i {
+    $a: if($i > 1, str-slice($string, 1, $i - 1), '');
+    $z: str-slice($string, $i + $n);
+
+    @if $replace-all {
+      $z: str-replace($z, $old, $new, true);
+    }
+
+    $return: $a + if($new, $new, '') + $z;
+  }
+
+  @return $return;
+}
+
+
+// Map Compile
+// -----------
+/// Get output values from a sass map,
+/// using any function for compilation.
+@function map-compile(
+  $map,
+  $function: null
+) {
+  $output: ();
+
+  @each $name, $value in $map {
+    @if $function and function-exists($function) {
+      $value: call($function, $name);
+    }
+
+    $value: inspect($value);
+
+    @if str-index($value, '"') {
+      $value: str-replace($value, '"', '\\"', true);
+    }
+
+    $output: map-merge($output, ($name: $value));
+  }
+
+  @return $output;
+}
+
+
+// Set Colors
+// ----------
+@mixin set-colors(
+  $maps
+) {
+  @each $name, $value in $maps {
+    $colors: map-merge($colors, $value) !global;
+    $json: map-merge($json, ($name: map-compile($value, 'color'))) !global;
+  }
+}
+
+
+// Set Fonts
+// ---------
+@mixin set-fonts(
+  $maps
+) {
+
+  @each $name, $value in $maps {
+    $preview-sizes: map-get($value, 'preview-sizes');
+    $compiled-sizes: ();
+
+    @each $size in ($preview-sizes or (16px)) {
+      $size-map: ();
+
+      @if function-exists('size') {
+        $size-map: ($size: size($size));
+      } @else {
+        $size-map: ($size: $size);
+      }
+
+      $compiled-sizes: map-merge($compiled-sizes, $size-map);
+    }
+
+    $value: map-merge($value, ('preview-sizes': $compiled-sizes));
+
+    $fonts: map-merge($fonts, ($name: $value)) !global;
+    $json: map-merge($json, ($name: $value)) !global;
+  }
+}
+
