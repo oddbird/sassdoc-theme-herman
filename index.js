@@ -379,11 +379,22 @@ module.exports.annotations = [
       name: 'preview',
       multiple: false,
       parse: function (raw) {
-        // expects e.g. 'color-palette, font-specimen' and returns
-        // ['color-palette', 'font-specimen']
-        return raw.split(',').map(function (i) {
-          return i.trim();
+        // expects e.g. 'color-palette; key: sans; sizes: text-sizes;'
+        // and returns object {
+        //   type: "color-palette", key: "sans", sizes: "text-sizes" }
+        var options = {};
+        var key, value;
+        raw.split(';').forEach(function (option) {
+          var parts = option.split(':');
+          key = parts[0].trim();
+          value = parts[1] ? parts[1].trim() : null;
+          if (options.type === undefined) {
+            options.type = key;
+          } else if (key) {
+            options[key] = value;
+          }
         });
+        return options;
       }
     };
   },

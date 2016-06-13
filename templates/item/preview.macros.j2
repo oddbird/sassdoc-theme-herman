@@ -1,12 +1,7 @@
 {% macro show_previews(data, name, args) %}
   {% if args %}
-    {% set type = args[0] %}
-    {% set key = name %}
-
-    {% for spec in args %}
-      {% set spec = spec|split(' ') %}
-      {% set key = spec[1] if (spec[0] == 'key') else key %}
-    {% endfor %}
+    {% set type = args.type %}
+    {% set key = args.key or name %}
 
     {% if type == 'color-palette' %}
       {{ color_palette(data[key]) }}
@@ -39,12 +34,7 @@
 
 {% macro font_specimen(name, data, args) %}
   {% set fonts_data = data[name] %}
-  {% set sizes_key = none %}
-
-  {% for pair in args %}
-    {% set pair = pair|split(' ') %}
-    {% set sizes_key = pair[1] if (pair[0] == 'sizes') else sizes_key %}
-  {% endfor %}
+  {% set sizes_key = args.sizes %}
 
   {% set sizes = data[sizes_key] or {'root': '16px'} %}
 
@@ -71,7 +61,7 @@
       '100', '200', '300', '400', '500', '600', '700', '800', '900', 'bold'
     ] %}
     {% set style_options = [
-      'italic', 'oblique'
+      'regular', 'italic', 'oblique'
     ] %}
 
     {% for options, value in fonts_data %}

@@ -14,7 +14,7 @@ $font-formats: 'woff' 'ttf';
 // ---------
 /// The OddBird brand font,
 /// used for most body and headline text.
-/// @preview font-specimen, key body, sizes text-sizes
+/// @preview font-specimen; key: body; sizes: text-sizes
 /// @group webfonts
 $body-font: (
   'name': 'CenturyOldStyle',
@@ -30,7 +30,7 @@ $body-font: (
 // ---------
 /// A clean sans-serif option
 /// used for smaller text like captions and labels.
-/// @preview font-specimen, key sans, sizes text-sizes
+/// @preview font-specimen; key: sans; sizes: text-sizes
 /// @group webfonts
 $sans-font: (
   'name': 'SourceSansPro',
@@ -46,7 +46,7 @@ $sans-font: (
 // Code Font
 // ---------
 /// A readable monospace font for code previews.
-/// @preview font-specimen, key code, sizes text-sizes
+/// @preview font-specimen; key: code; sizes: text-sizes
 /// @group webfonts
 $code-font: (
   'name': 'SourceCodePro',
