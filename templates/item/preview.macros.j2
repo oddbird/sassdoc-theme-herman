@@ -61,12 +61,13 @@
       '100', '200', '300', '400', '500', '600', '700', '800', '900', 'bold'
     ] %}
     {% set style_options = [
-      'regular', 'italic', 'oblique'
+      'italic', 'oblique'
     ] %}
 
     {% for options, value in fonts_data %}
       {% set options = options|split(' ') %}
-      {% set face = value if (options[0] in weight_options or options[0] in style_options) else none %}
+      {% set variant = options[0] %}
+      {% set face = value if (variant in weight_options or variant in style_options or variant == 'regular') else none %}
       {% set weight = 'normal' %}
       {% set style = 'normal' %}
 
