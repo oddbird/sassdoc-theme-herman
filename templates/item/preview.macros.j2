@@ -36,12 +36,17 @@ ${{ item.context.name }}: {{ item.context.value }}{% if item.context.scope != 'p
 
 {% macro display(data, name, specs) %}
   {% set type = specs[0] %}
-  {% set location = specs[1] or name %}
+  {% set key = name %}
+
+  {% for spec in specs %}
+    {% set spec = spec|split(' ') %}
+    {% set key = spec[1] if (spec[0] == 'key') else key %}
+  {% endfor %}
 
   {% if type == 'color-palette' %}
-    {{ color_palette(data[location]) }}
+    {{ color_palette(data[key]) }}
   {% elif type == 'font-specimen' %}
-    {{ font_specimen(location, data[location]) }}
+    {{ font_specimen(key, data, specs) }}
   {% endif %}
 {% endmacro %}
 
@@ -59,20 +64,30 @@ ${{ item.context.name }}: {{ item.context.value }}{% if item.context.scope != 'p
 </div>
 {% endmacro %}
 
-{% macro font_specimen(name, data) %}
+{% macro font_specimen(name, data, specs) %}
+  {% set fonts_data = data[name] %}
+  {% set sizes_key = none %}
+
+  {% for spec in specs %}
+    {% set spec = spec|split(' ') %}
+    {% set sizes_key = spec[1] if (spec[0] == 'sizes') else sizes_key %}
+  {% endfor %}
+
+  {% set sizes = data[sizes_key] or {'root': '16px'} %}
+
   <div data-sassdoc-font="{{ name }}">
     <div data-sassdoc="font-family">
       <h3 data-sassdoc="font-type">{{ name }}</h3>
-      {% if data.stack %}
+      {% if fonts_data.stack %}
         <div data-sassdoc="font-stack">
-          {% if data.name %}
-            {% if data.source %}
-              <a href="{{ data.source }}" data-sassdoc="font-name">{{ data.name }}</a>,
+          {% if fonts_data.name %}
+            {% if fonts_data.source %}
+              <a href="{{ fonts_data.source }}" data-sassdoc="font-name">{{ fonts_data.name }}</a>,
             {% else %}
-              <span data-sassdoc="font-name">{{ data.name }}</span>,
+              <span data-sassdoc="font-name">{{ fonts_data.name }}</span>,
             {% endif %}
           {% endif %}
-          {% for item in data.stack %}
+          {% for item in fonts_data.stack %}
             {{ item }}{% if not loop.last %},{% endif %}
           {% endfor %}
         </div>
@@ -86,7 +101,7 @@ ${{ item.context.name }}: {{ item.context.value }}{% if item.context.scope != 'p
       'italic', 'oblique'
     ] %}
 
-    {% for options, value in data %}
+    {% for options, value in fonts_data %}
       {% set options = options|split(' ') %}
       {% set face = value if (options[0] in weight_options or options[0] in style_options) else none %}
       {% set weight = 'normal' %}
@@ -100,7 +115,7 @@ ${{ item.context.name }}: {{ item.context.value }}{% if item.context.scope != 'p
       {% if face %}
         <div data-specimen-face="{{ face }}">
           <h4 data-sassdoc="specimen-title">{{ face }}</h4>
-          {% for size, length in data['preview-sizes'] %}
+          {% for size, length in sizes %}
             <div data-specimen-size="{{ size }}">
               <div data-sassdoc="specimen-size">
                 {% set format_length = ['0', length]|join('') if (length[0] == '.') else length %}

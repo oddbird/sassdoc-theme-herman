@@ -7,6 +7,10 @@
 $base-size: 22px;
 $ratios: ('herman': 1.4);
 
+
+// Text Sizes
+// ----------
+
 $text-sizes: (
   'root': $base-size,
 
@@ -32,5 +36,26 @@ $component-sizes: (
   'icon-preview': 'h1',
 );
 
-$sizes: map-merge($text-sizes, $spacing);
-$sizes: map-merge($sizes, $component-sizes);
+
+@include set-sizes(
+  (
+    'text-sizes': $text-sizes,
+    'spacing': $spacing,
+    'component-sizes': $component-sizes,
+  )
+);
+
+
+@function line-height(
+  $size,
+  $lines: false,
+  $rhythm: size('rhythm')
+) {
+  $height: ($lines or _get-lines($size)) * $rhythm;
+
+  @if not $lines and ($size == $height) {
+    $height: $height + ($rhythm / 2);
+  }
+
+  @return $height;
+}
