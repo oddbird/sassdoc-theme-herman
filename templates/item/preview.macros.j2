@@ -12,6 +12,10 @@
       {{ color_palette(data[key]) }}
     {% elif type == 'font-specimen' %}
       {{ font_specimen(key, data, args) }}
+    {% elif type == 'ratios' %}
+      {{ ratios(data[key]) }}
+    {% elif type == 'sizes' %}
+      {{ sizes(data[key]) }}
     {% endif %}
 
   {% endif %}
@@ -108,6 +112,35 @@
   {% elif length == 'body' %}
     A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine. I am so happy, my dear friend, so absorbed in the exquisite sense of mere tranquil existence, that I neglect my talents. I should be incapable of drawing a single stroke at the present moment; and yet I feel that I never was a greater artist than now.
   {% endif %}
+{% endmacro %}
+
+
+{% macro ratios(data) %}
+  {% for name, value in data %}
+    <div data-sassdoc="ratio-preview">
+      <div data-sassdoc="ratio-name">{{ name }} · {{ value }}</div>
+      <div data-sassdoc="size-demos">
+        {% for demo in range(6) %}
+          {% set demo = 1 * (value ** demo) + 'em' %}
+          {{ size_demo(demo) }}
+        {% endfor %}
+      </div>
+    </div>
+  {% endfor %}
+{% endmacro %}
+
+
+{% macro sizes(data) %}
+  <div data-sassdoc="size-demos">
+    {% for name, value in data %}
+      {{ size_demo(value) }}
+    {% endfor %}
+  </div>
+{% endmacro %}
+
+
+{% macro size_demo(size) %}
+  <div data-sassdoc="size-demo" style="width: {{ size }}; height: {{ size }}"></div>
 {% endmacro %}
 
 

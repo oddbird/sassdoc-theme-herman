@@ -4,15 +4,34 @@
 @import '../../node_modules/accoutrement-scale/sass/scale';
 
 
-$base-size: 22px;
-$ratios: ('herman': 1.4);
+// Text Ratios
+// -----------
+/// A set of standard ratios
+/// for creating text rhythm and modular-scales.
+///
+/// @group scale
+/// @preview ratios
+$text-ratios: (
+  'herman': 1.4
+);
+
+
+@include set-ratios(
+  (
+    'text-ratios': $text-ratios,
+  )
+);
 
 
 // Text Sizes
 // ----------
-
+/// A set of standard text sizes.
+///
+/// @group scale
+/// @preview sizes
+/// @see body-font
 $text-sizes: (
-  'root': $base-size,
+  'root': 22px,
 
   'h1': 'root' ('herman': 3),
   'h2': 'root' ('herman': 2),
@@ -22,7 +41,14 @@ $text-sizes: (
   'smaller': 16px,
 );
 
-$spacing: (
+
+// Spacing Sizes
+// -------------
+/// A set of standard spacing sizes.
+///
+/// @group scale
+/// @preview sizes
+$spacing-sizes: (
   'rhythm': 'root' ('herman': 1),
   'gutter': 'rhythm',
   'spacer': 'gutter' ('linear': 3),
@@ -30,18 +56,23 @@ $spacing: (
   'half-shim': 'gutter' ('linear': 0.25),
 );
 
-$component-sizes: (
+
+// Pattern Sizes
+// -------------
+/// A set of pattern-specific sizes,
+/// that can be applied to various components.
+///
+/// @group scale
+$pattern-sizes: (
   'page': 50rem,
-  'color-swatch': 8rem,
-  'icon-preview': 'h1',
 );
 
 
 @include set-sizes(
   (
     'text-sizes': $text-sizes,
-    'spacing': $spacing,
-    'component-sizes': $component-sizes,
+    'spacing-sizes': $spacing-sizes,
+    'pattern-sizes': $pattern-sizes,
   )
 );
 

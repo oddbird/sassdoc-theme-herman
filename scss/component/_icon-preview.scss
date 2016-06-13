@@ -12,10 +12,10 @@
   color: color('text-light');
   flex: 1 1 15%;
   margin: size('gutter') size('shim');
-  min-width: size('color-swatch');
+  min-width: size('rhythm') * 5;
 
   [data-icon] {
-    @include square('icon-preview');
+    @include square('h1');
   }
 }
 

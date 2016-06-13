@@ -11,7 +11,7 @@
 [data-sassdoc-color] {
   flex: 1 1 15%;
   margin: size('shim');
-  min-width: size('color-swatch');
+  min-width: size('rhythm') * 6;
 }
 
 [data-sassdoc='color-swatch'] {

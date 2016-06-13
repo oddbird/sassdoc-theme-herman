@@ -1,0 +1,13 @@
+// Ratio Preview
+// =============
+
+[data-sassdoc='size-demos'] {
+  align-items: flex-end;
+  display: flex;
+  justify-content: space-between;
+}
+
+[data-sassdoc='size-demo'] {
+  background: color('text');
+  flex: 0 0 auto;
+}

@@ -78,13 +78,25 @@ $json: ();
 
 
 // Set Sizes
-// ----------
+// ---------
 @mixin set-sizes(
   $maps
 ) {
   @each $name, $value in $maps {
     $sizes: map-merge($sizes, $value) !global;
     $json: map-merge($json, ($name: map-compile($value, 'size'))) !global;
+  }
+}
+
+
+// Add Ratios
+// ----------
+@mixin set-ratios(
+  $maps
+) {
+  @each $name, $value in $maps {
+    $ratios: map-merge($ratios, $value) !global;
+    $json: map-merge($json, ($name: $value)) !global;
   }
 }
 
