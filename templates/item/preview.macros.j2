@@ -80,23 +80,21 @@ ${{ item.context.name }}: {{ item.context.value }}{% if item.context.scope != 'p
     </div>
 
     {% set weight_options = [
-      'reg', '100', '200', '300', '400', '500', '600', '700', '800', '900', 'bol'
+      '100', '200', '300', '400', '500', '600', '700', '800', '900', 'bold'
     ] %}
     {% set style_options = [
-      'nor', 'ita', 'obl'
+      'italic', 'oblique'
     ] %}
 
     {% for options, value in data %}
-      {% set first3 = options|truncate(3, False, '') %}
-      {% set face = value if (first3 in weight_options or first3 in style_options) else none %}
-      {% set weight = 'regular' %}
-      {% set style = 'normal' %}
       {% set options = options|split(' ') %}
+      {% set face = value if (options[0] in weight_options or options[0] in style_options) else none %}
+      {% set weight = 'normal' %}
+      {% set style = 'normal' %}
+
       {% for value in options %}
-        {% set weight = value if (value|truncate(3, False, '') in weight_options) else weight %}
-      {% endfor %}
-      {% for value in options %}
-        {% set style = value if (value|truncate(3, False, '') in style_options) else style %}
+        {% set weight = value if (value in weight_options) else weight %}
+        {% set style = value if (value in style_options) else style %}
       {% endfor %}
 
       {% if face %}
@@ -105,9 +103,10 @@ ${{ item.context.name }}: {{ item.context.value }}{% if item.context.scope != 'p
           {% for size, length in data['preview-sizes'] %}
             <div data-specimen-size="{{ size }}">
               <div data-sassdoc="specimen-size">
-                {{ size }} · {{ ['0', length]|join('') if (length[0] == '.') else length }}
+                {% set format_length = ['0', length]|join('') if (length[0] == '.') else length %}
+                {{ size }} · {{ format_length }}
               </div>
-              <div data-sassdoc="specimen-text" style="font-size: {{ length }};">
+              <div data-sassdoc="specimen-text" style="font-size: {{ length }}; font-style: {{ style }}; font-weight: {{ weight }};">
                 {{ lorem('body' if (size == 'root') else 'title') }}
               </div>
             </div>
