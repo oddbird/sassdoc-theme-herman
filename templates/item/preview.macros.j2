@@ -1,54 +1,22 @@
-{% macro code_block(language=none, content=none) %}
-  {% set content = content if (content != none) else caller() %}
-  {% set language = ['lang', language]|join('-') if language != none %}
-  <pre data-sassdoc="hljs"><code{% if language %} class="{{ language }}"{% endif %}>{{ content }}</code></pre>
-{% endmacro %}
+{% macro show_previews(data, name, args) %}
+  {% if args %}
+    {% set type = args[0] %}
+    {% set key = name %}
 
-{% macro source(item, type) %}
-{%- call code_block(language='scss') -%}
-  {%- if (type == 'variable') -%}
-    {{ scss_variable(item) }}
-  {%- elif (type == 'css') -%}
-    {{ scss_css(item) }}
-  {%- elif (type == 'function') or (type == 'mixin') -%}
-    {{ scss_function_or_mixin(item) }}
-  {%- endif -%}
-{%- endcall -%}
-{% endmacro %}
+    {% for spec in args %}
+      {% set spec = spec|split(' ') %}
+      {% set key = spec[1] if (spec[0] == 'key') else key %}
+    {% endfor %}
 
-{% macro scss_variable(item) -%}
-${{ item.context.name }}: {{ item.context.value }}{% if item.context.scope != 'private' %} !{{ item.context.scope }}{% endif %};
-{%- endmacro %}
+    {% if type == 'color-palette' %}
+      {{ color_palette(data[key]) }}
+    {% elif type == 'font-specimen' %}
+      {{ font_specimen(key, data, args) }}
+    {% endif %}
 
-{% macro scss_function_or_mixin(item) -%}
-@{{ item.context.type }} {{ item.context.name }}{% if item.parameter %}(
-{%- for parameter in item.parameter %}
-  ${{ parameter.name }}{% if parameter.type|lower == "arglist" %}...{% elif parameter.default %}: {{ parameter.default }}{% endif %}{% if not loop.last %},{% endif %}
-{%- endfor %}
-){% endif %} { /* ... */ }
-{%- endmacro %}
-
-{%- macro scss_css(item) -%}
-{{ item.context.name }} {
-  {{ item.context.value }}
-}
-{%- endmacro -%}
-
-{% macro display(data, name, specs) %}
-  {% set type = specs[0] %}
-  {% set key = name %}
-
-  {% for spec in specs %}
-    {% set spec = spec|split(' ') %}
-    {% set key = spec[1] if (spec[0] == 'key') else key %}
-  {% endfor %}
-
-  {% if type == 'color-palette' %}
-    {{ color_palette(data[key]) }}
-  {% elif type == 'font-specimen' %}
-    {{ font_specimen(key, data, specs) }}
   {% endif %}
 {% endmacro %}
+
 
 {% macro color_palette(data) %}
 <div data-sassdoc="color-palette">
@@ -64,13 +32,14 @@ ${{ item.context.name }}: {{ item.context.value }}{% if item.context.scope != 'p
 </div>
 {% endmacro %}
 
-{% macro font_specimen(name, data, specs) %}
+
+{% macro font_specimen(name, data, args) %}
   {% set fonts_data = data[name] %}
   {% set sizes_key = none %}
 
-  {% for spec in specs %}
-    {% set spec = spec|split(' ') %}
-    {% set sizes_key = spec[1] if (spec[0] == 'sizes') else sizes_key %}
+  {% for pair in args %}
+    {% set pair = pair|split(' ') %}
+    {% set sizes_key = pair[1] if (pair[0] == 'sizes') else sizes_key %}
   {% endfor %}
 
   {% set sizes = data[sizes_key] or {'root': '16px'} %}
@@ -132,6 +101,7 @@ ${{ item.context.name }}: {{ item.context.value }}{% if item.context.scope != 'p
   </div>
 {% endmacro %}
 
+
 {% macro lorem(length) %}
   {% if length == 'title' %}
     Pack my box with five dozen liquor jugs.
@@ -140,16 +110,19 @@ ${{ item.context.name }}: {{ item.context.value }}{% if item.context.scope != 'p
   {% endif %}
 {% endmacro %}
 
+
 {% macro icons(list) %}
-<div data-sassdoc="icon-preview">
-  {% for icon in list %}
-    <div data-sassdoc-icon="{{ icon.name }}">
-      {{ icon.rendered|safe }}
-      <div data-sassdoc="icon-info">
-        <div data-sassdoc="icon-name">{{ icon.name }}</div>
-        <div data-sassdoc="icon-path">{{ icon.path }}</div>
-      </div>
+  {% if item.icons %}
+    <div data-sassdoc="icon-preview">
+      {% for icon in list %}
+        <div data-sassdoc-icon="{{ icon.name }}">
+          {{ icon.rendered|safe }}
+          <div data-sassdoc="icon-info">
+            <div data-sassdoc="icon-name">{{ icon.name }}</div>
+            <div data-sassdoc="icon-path">{{ icon.path }}</div>
+          </div>
+        </div>
+      {% endfor %}
     </div>
-  {% endfor %}
-</div>
+  {% endif %}
 {% endmacro %}

@@ -1,3 +1,4 @@
+{% import 'item/macros.j2' as code %}
 {% import 'item/preview.macros.j2' as preview %}
 
 <section data-sassdoc-item='{{ type }}' id="{{ type }}--{{ item.context.name }}">
@@ -12,39 +13,15 @@
     <div data-sassdoc="item-description">{{ item.description|safe }}</div>
   {% endif %}
 
-  {{ preview.source(item, type) }}
+  {{ code.source(item, type) }}
 
-  {% if item.example.length > 0 %}
-    {% for example in item.example %}
-      <div data-sassdoc="example">
-        <strong data-sassdoc="example-subtitle">code example [{{ example.type }}]:</strong>
+  {{ code.examples(item.example) }}
 
-        {% if example.description %}
-          <p data-sassdoc="example-description">{{ example.description|safe }}</p>
-        {% endif %}
+  {{ preview.show_previews(
+    data=sassjson,
+    name=item.context.name,
+    args=item.preview
+    ) }}
 
-        {{ preview.code_block(
-          language=example.type,
-          content=example.code|escape|safe
-          ) }}
-
-        {% if example.rendered %}
-          <strong data-sassdoc="example-subtitle">rendered output:</strong>
-          <div data-sassdoc="example-preview">{{ example.rendered|safe }}</div>
-        {% endif %}
-      </div>
-    {% endfor %}
-  {% endif %}
-
-  {% if item.preview %}
-    {{ preview.display(
-      data=sassjson,
-      name=item.context.name,
-      specs=item.preview
-      ) }}
-  {% endif %}
-
-  {% if item.icons %}
-    {{ preview.icons(item.icons) }}
-  {% endif %}
+  {{ preview.icons(item.icons) }}
 </section>
