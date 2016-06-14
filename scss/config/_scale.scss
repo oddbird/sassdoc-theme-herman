@@ -67,7 +67,6 @@ $pattern-sizes: (
   'page': 50rem,
 );
 
-
 @include set-sizes(
   (
     'text-sizes': $text-sizes,
@@ -75,18 +74,3 @@ $pattern-sizes: (
     'pattern-sizes': $pattern-sizes,
   )
 );
-
-
-@function line-height(
-  $size,
-  $lines: false,
-  $rhythm: size('rhythm')
-) {
-  $height: ($lines or _get-lines($size)) * $rhythm;
-
-  @if not $lines and ($size == $height) {
-    $height: $height + ($rhythm / 2);
-  }
-
-  @return $height;
-}

@@ -35,8 +35,10 @@
 {% macro font_specimen(name, data, args) %}
   {% set fonts_data = data[name] %}
   {% set sizes_key = args.sizes %}
+  {% set lines_key = [sizes_key, 'line-heights']|join('--') %}
 
   {% set sizes = data[sizes_key] or {'root': '16px'} %}
+  {% set line_heights = data[lines_key] %}
 
   <div data-sassdoc-font="{{ name }}">
     <div data-sassdoc="font-family">
@@ -83,9 +85,9 @@
             <div data-specimen-size="{{ size }}">
               <div data-sassdoc="specimen-size">
                 {% set format_length = ['0', length]|join('') if (length[0] == '.') else length %}
-                {{ size }} · {{ format_length }}
+                {{ size }} · {{ format_length }}/{{ line_heights[size] }}
               </div>
-              <div data-sassdoc="specimen-text" style="font-size: {{ length }}; font-style: {{ style }}; font-weight: {{ weight }};">
+              <div data-sassdoc="specimen-text" style="font-size: {{ length }}; font-style: {{ style }}; font-weight: {{ weight }}; line-height: {{ line_heights[size] }};">
                 {{ lorem('body' if (size == 'root') else 'title') }}
               </div>
             </div>
@@ -99,9 +101,9 @@
 
 {% macro lorem(length) %}
   {% if length == 'title' %}
-    Pack my box with five dozen liquor jugs.
+    Pack my box with five dozen liquor&nbsp;jugs.
   {% elif length == 'body' %}
-    A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine. I am so happy, my dear friend, so absorbed in the exquisite sense of mere tranquil existence, that I neglect my talents. I should be incapable of drawing a single stroke at the present moment; and yet I feel that I never was a greater artist than now.
+    A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine. I am so happy, my dear friend, so absorbed in the exquisite sense of mere tranquil existence, that I neglect my talents. I should be incapable of drawing a single stroke at the present moment; and yet I feel that I never was a greater artist than&nbsp;now.
   {% endif %}
 {% endmacro %}
 

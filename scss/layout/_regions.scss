@@ -15,36 +15,20 @@
   padding: size('shim');
 }
 
-
-// Banner
-// ------
-[data-sassdoc-region='banner'] {
-  padding: size('shim');
-  width: 100%;
-}
-
-
-// Container
-// ---------
 [data-sassdoc-region='container'] {
-  align-items: stretch;
-  display: flex;
-  flex-direction: column;
-  padding: size('shim');
-
-  @include above(30em) {
-    flex-direction: row;
-  }
+  @include clearfix;
 }
 
 
 // Navigation
 // ----------
 [data-sassdoc-region='nav'] {
-  flex: 0 0 auto;
-  margin-bottom: size('gutter');
-  margin-right: size('gutter');
-  padding: size('shim');
+  margin: size('shim') size('gutter') size('gutter') 0;
+
+  @include above(35em) {
+    float: left;
+    width: 15%;
+  }
 }
 
 [data-sassdoc-nav] {
@@ -55,6 +39,9 @@
 // Page
 // ----
 [data-sassdoc-region='main'] {
-  flex: 1 1 0;
   padding: size('shim');
+
+  @include above(35em) {
+    overflow: hidden;
+  }
 }

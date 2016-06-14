@@ -43,13 +43,14 @@ $json: ();
 /// using any function for compilation.
 @function map-compile(
   $map,
-  $function: null
+  $function,
+  $args...
 ) {
   $output: ();
 
   @each $name, $value in $map {
-    @if $function and function-exists($function) {
-      $value: call($function, $name);
+    @if function-exists($function) {
+      $value: call($function, $name, $args...);
     }
 
     $value: inspect($value);
@@ -84,7 +85,22 @@ $json: ();
 ) {
   @each $name, $value in $maps {
     $sizes: map-merge($sizes, $value) !global;
-    $json: map-merge($json, ($name: map-compile($value, 'size'))) !global;
+    $compiled: map-compile($value, 'size', 'px');
+    $json: map-merge($json, ($name: $compiled)) !global;
+  }
+
+  $rhythm: size('rhythm', 'px');
+
+  @each $name, $value in $maps {
+    $name: '#{$name}--line-heights';
+    $line-heights: ();
+
+    @each $key, $size in $value {
+      $size: line-height($size, $rhythm: $rhythm);
+      $line-heights: map-merge($line-heights, ($key: $size));
+    }
+
+    $json: map-merge($json, ($name: $line-heights)) !global;
   }
 }
 
@@ -106,27 +122,25 @@ $json: ();
 @mixin set-fonts(
   $maps
 ) {
-
   @each $name, $value in $maps {
-    $preview-sizes: map-get($value, 'preview-sizes');
-    $compiled-sizes: ();
-
-    @each $size in ($preview-sizes or (16px)) {
-      $size-map: ();
-
-      @if function-exists('size') {
-        $size-map: ($size: size($size));
-      } @else {
-        $size-map: ($size: $size);
-      }
-
-      $compiled-sizes: map-merge($compiled-sizes, $size-map);
-    }
-
-    $value: map-merge($value, ('preview-sizes': $compiled-sizes));
-
     $fonts: map-merge($fonts, ($name: $value)) !global;
     $json: map-merge($json, ($name: $value)) !global;
   }
 }
 
+
+// @@@ TEMP
+// --------
+@function line-height(
+  $size,
+  $lines: false,
+  $rhythm: size('rhythm')
+) {
+  $height: ($lines or _get-lines($size)) * $rhythm;
+
+  @if not $lines and ($size == $height) {
+    $height: $height + ($rhythm / 2);
+  }
+
+  @return $height;
+}

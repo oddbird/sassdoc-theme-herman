@@ -55,16 +55,13 @@
 // ----
 
 [data-specimen-size] {
-  margin: size('shim');
+  margin: size('gutter') size('shim');
 }
 
 [data-sassdoc='specimen-size'] {
   @include font-family('code');
   @include font-size('smaller');
   color: color('light');
-  font-style: normal;
-  font-weight: normal;
-  text-transform: uppercase;
 }
 
 [data-sassdoc='specimen-text'] {
