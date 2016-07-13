@@ -5,3 +5,85 @@ html,
 body {
   overflow-x: hidden;
 }
+
+table {
+  border-collapse: collapse;
+  margin-bottom: size('gutter');
+  width: 100%;
+}
+
+thead {
+  color: color('gray');
+  font-weight: bold;
+
+  @include below(35em) {
+    @include is-hidden--clip;
+  }
+}
+
+tr {
+  border-left: 1px solid color('slight');
+  border-right: 1px solid color('slight');
+
+  @include above(35em) {
+    border: 0;
+  }
+
+  &:first-of-type {
+    border-top: 1px solid color('slight');
+
+    @include above(35em) {
+      border-top: 0;
+    }
+
+    & > td {
+      border-top: 0;
+    }
+  }
+
+  &:nth-of-type(even) {
+    background: color('slight');
+
+    @include above(35em) {
+      background: transparent;
+    }
+  }
+}
+
+th {
+  border-bottom: 2px solid color('light-gray');
+  border-top: 0;
+  color: color('gray');
+  text-align: left;
+}
+
+td {
+  border-top: 0;
+
+  @include above(35em) {
+    border-top: 1px solid color('light-gray');
+  }
+}
+
+th,
+td {
+  padding: size('half-shim') size('half-shim') size('half-shim') 0;
+  vertical-align: top;
+
+  @include below(35em) {
+    display: block;
+    padding: 0.1rem size('shim');
+
+    &::before {
+      @include font-size('root');
+      color: color('gray');
+      content: attr(data-label) ': ';
+      font-weight: bold;
+      text-transform: capitalize;
+    }
+
+    p {
+      display: inline;
+    }
+  }
+}

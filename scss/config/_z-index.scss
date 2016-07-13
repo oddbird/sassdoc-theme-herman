@@ -2,5 +2,28 @@
 // =======
 
 @import '../../node_modules/accoutrement-layout/sass/layout';
+/// @group Z-Index
+$fake: 10px;
 
+
+
+/// List of named z-index layers. The order they are defined will be the integer they are assigned.
+/// @group Z-Index
 $z-index: 'bump', 'banner', 'overlay', 'loader';
+
+
+
+/// @access public
+/// @group Z-Index
+/// @param {string} $colorname [#333] - The description
+/// @param {string} $other - The other description
+/// @param {string} $another - Another description
+/// @require {variable} $z-index - what am I doing here
+/// @require {variable} $fake
+/// @require SassCore::map-has-key <http://sass-lang.com/documentation/Sass/Script/Functions.html#map_has_key-instance_method>
+
+@mixin stacy($other, $colorname: #333) {
+  background-color: $other;
+  color: $colorname;
+  top: $fake;
+}
