@@ -73,11 +73,30 @@ ${{ item.context.name }}: {{ item.context.value }}{% if item.context.scope != 'p
 {% macro require(item) -%}
   {% if item.require.length > 0 %}
   <h5 class="item-subtitle">Requires</h5>
-  <ul class="sassdoc__item-requires">
-    {%- for require in item.require %}
-      <li><a href="#{{ require.type }}--{{ require.name }}"><code>{{ require.name }}</code></a></li>
-    {%- endfor %}
-  </ul>
+
+
+  {% for require in item.require %}
+    {% if require.external %}
+      <li class="item-description">[external]
+        {% if require.url %}
+          <a href="{{ require.url }}"><code>{{ require.name }}</code></a>  {{ require.description }}</li>
+        {% else %}
+          <code>{{ require.name }}</code>
+        {% endif %}
+        {% if require.description %}
+          &mdash; {{ require.description }}
+        {% endif %}
+      </li>
+    {% else %}
+      <li class="item-description">[{{ require.item.context.type }}]
+        <a href="#{{ require.item.group }}-{{ require.item.context.type }}--{{ require.item.context.name }}"><code>{{ require.item.context.name }}</code></a>
+        {% if require.description %}
+          &mdash; {{ require.description }}
+        {% endif %}
+      </li>
+    {% endif %}
+  {% endfor %}
+
   {% endif %}
 {%- endmacro %}
 
