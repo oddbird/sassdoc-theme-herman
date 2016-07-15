@@ -11,3 +11,17 @@
   background: color('text');
   flex: 0 0 auto;
 }
+
+
+/// Fake Mixin for testing SassDoc Require
+/// @group z-index
+/// @parameter {variable} $something - My description of something
+/// @require {variable} $fake
+/// @link http://www.google.com/ This link has a caption and the next doesnt
+/// @link http://www.google.com/
+/// @see {mixin} z-index
+/// @throws No value found for `$breakpoint`. Please make sure it is defined in `$breakpoints` map.
+@mixin something($something) {
+  content: $something;
+  margin: $fake;
+}
