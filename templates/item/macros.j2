@@ -38,10 +38,11 @@ ${{ item.context.name }}: {{ item.context.value }}{% if item.context.scope != 'p
 {%- endmacro -%}
 
 
+{# @param annotation #}
 {% macro parameter(item) -%}
   {% if item.parameter %}
     <h5 class="item-subtitle">Parameters</h5>
-    <table data-sassdoc="item-parameters">
+    <table data-sassdoc="parameters">
       <thead>
         <tr scope="row">
           <th scope="col">Name</th>
@@ -52,7 +53,7 @@ ${{ item.context.name }}: {{ item.context.value }}{% if item.context.scope != 'p
       </thead>
       <tbody>
         {%- for parameter in item.parameter %}
-        <tr class="item__parameter">
+        <tr data-sassdoc="parameter-item">
           <td scope="row" data-label="name"><code>${{ parameter.name }}</code></td>
           <td data-label="desc">{% if parameter.description %}{{ parameter.description|safe }}{% endif %}</td>
           <td data-label="type"><code>{% if parameter.type %}{{ parameter.type }}{% endif %}</code></td>
@@ -70,35 +71,75 @@ ${{ item.context.name }}: {{ item.context.value }}{% if item.context.scope != 'p
 {%- endmacro %}
 
 
+{# @require annotation #}
 {% macro require(item) -%}
   {% if item.require.length > 0 %}
-  <h5 class="item-subtitle">Requires</h5>
+    <h5 class="item-subtitle">Requires</h5>
 
+    <ul data-sassdoc="item-description">
+      {% for require in item.require %}
+        {# External links #}
+        {% if require.external %}
+          <li data-sassdoc="requires-item"><code>[external]</code>
+            {% if require.url %}
+              <a href="{{ require.url }}"><code>{{ require.name }}</code></a> {{ require.description }}</li>
+            {% else %}
+              <code>{{ require.name }}</code>
+            {% endif %}
+            {% if require.description %}
+              &mdash; {{ require.description }}
+            {% endif %}
+          </li>
 
-  {% for require in item.require %}
-    {% if require.external %}
-      <li class="item-description">[external]
-        {% if require.url %}
-          <a href="{{ require.url }}"><code>{{ require.name }}</code></a> {{ require.description }}</li>
+        {# Internal links #}
         {% else %}
-          <code>{{ require.name }}</code>
+          <li data-sassdoc="requires-item">
+            <code>[{{ require.item.context.type }}]</code>
+            <a href="{{ require.item.group }}.html#{{ require.item.context.type }}--{{ require.item.context.name }}"><code>{{ require.item.context.name }}</code></a>
+            {% if require.description %}
+              &mdash; {{ require.description }}
+            {% endif %}
+          </li>
         {% endif %}
-        {% if require.description %}
-          &mdash; {{ require.description }}
-        {% endif %}
-      </li>
-    {% else %}
-      <li class="item-description">
-        <code>[{{ require.item.context.type }}]</code>
-        <a href="{{ require.item.group }}.html#{{ require.item.context.type }}--{{ require.item.context.name }}">{{ require.item.context.name }}</a>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{%- endmacro %}
 
-        {% if require.description %}
-          &mdash; {{ require.description }}
-        {% endif %}
-      </li>
-    {% endif %}
-  {% endfor %}
 
+{# @link annotation #}
+{% macro link(item) -%}
+  {% if item.link.length > 0 %}
+    <h5 class="item-subtitle">Links</h5>
+
+    <ul data-sassdoc="item-description">
+      {% for link in item.link %}
+        <li data-sassdoc="link-item">
+          <a href="{{ link.url }}">
+            {% if link.caption %}
+              {{ link.caption }}
+            {% else %}
+              {{ link.url }}
+            {% endif %}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{%- endmacro %}
+
+{# @see annotation #}
+{% macro see(item) -%}
+  {% if item.see.length > 0 %}
+    <h5 class="item-subtitle">See</h5>
+
+    <ul data-sassdoc="item-description">
+      {% for see in item.see %}
+        <li data-sassdoc="see-item">
+          <a href="/{{ see.group }}.html#{{ see.context.type }}--{{ see.context.name }}">{{ see.context.name }}</a>
+        </li>
+      {% endfor %}
+    </ul>
   {% endif %}
 {%- endmacro %}
 
