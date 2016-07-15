@@ -79,7 +79,7 @@ ${{ item.context.name }}: {{ item.context.value }}{% if item.context.scope != 'p
     {% if require.external %}
       <li class="item-description">[external]
         {% if require.url %}
-          <a href="{{ require.url }}"><code>{{ require.name }}</code></a>  {{ require.description }}</li>
+          <a href="{{ require.url }}"><code>{{ require.name }}</code></a> {{ require.description }}</li>
         {% else %}
           <code>{{ require.name }}</code>
         {% endif %}
@@ -88,8 +88,10 @@ ${{ item.context.name }}: {{ item.context.value }}{% if item.context.scope != 'p
         {% endif %}
       </li>
     {% else %}
-      <li class="item-description">[{{ require.item.context.type }}]
-        <a href="#{{ require.item.group }}-{{ require.item.context.type }}--{{ require.item.context.name }}"><code>{{ require.item.context.name }}</code></a>
+      <li class="item-description">
+        <code>[{{ require.item.context.type }}]</code>
+        <a href="{{ require.item.group }}.html#{{ require.item.context.type }}--{{ require.item.context.name }}">{{ require.item.context.name }}</a>
+
         {% if require.description %}
           &mdash; {{ require.description }}
         {% endif %}
