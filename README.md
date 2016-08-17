@@ -90,7 +90,7 @@ Refer to the ``gulpfile.js`` source and `gulp`_ documentation for more info.
 Releases
 --------
 
-### 0.3.0: 2016-??-??
+### 0.3.0: 2016-08-17
 
 - Added rendering of @example annotations using the njk (nunjucks) language.
 - Removed rendering of macro examples using `macroname_data`.
