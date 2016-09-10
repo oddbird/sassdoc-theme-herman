@@ -53,7 +53,6 @@ For example, this:
 	/// @example njk - Basic usage:
 	///  {% import 'macros.j2' as macros %}
 	///  {{ macros.mymacro(1, 2) }}
-	/// @group test
 	[data-mymacro] {}
 
 will render the `mymacro` macro from the file `macros.j2`
