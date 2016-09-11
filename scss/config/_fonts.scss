@@ -58,7 +58,7 @@ $code-font: (
 );
 
 
-@include set-fonts(
+@include herman-fonts(
   (
     'body': $body-font,
     'sans': $sans-font,

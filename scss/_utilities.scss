@@ -10,6 +10,8 @@ $json: ();
 // String Replace
 // --------------
 /// Return a string, with a substring replaced
+/// @group utility
+/// @access private
 @function str-replace(
   $string,
   $old,
@@ -41,7 +43,8 @@ $json: ();
 // -----------
 /// Get output values from a sass map,
 /// using any function for compilation.
-@function map-compile(
+/// @access private
+@function herman-map-compile(
   $map,
   $function,
   $args...
@@ -66,26 +69,34 @@ $json: ();
 }
 
 
-// Set Colors
-// ----------
-@mixin set-colors(
+// Herman Colors
+// -------------
+/// Combine Accoutrement Color maps,
+/// adding them to both Accoutrement config
+/// and a `$json` map for exporting to Herman.
+/// @group utility
+@mixin herman-colors(
   $maps
 ) {
   @each $name, $value in $maps {
     $colors: map-merge($colors, $value) !global;
-    $json: map-merge($json, ($name: map-compile($value, 'color'))) !global;
+    $json: map-merge($json, ($name: herman-map-compile($value, 'color'))) !global;
   }
 }
 
 
-// Set Sizes
-// ---------
-@mixin set-sizes(
+// Herman Sizes
+// ------------
+/// Combine Accoutrement Size maps,
+/// adding them to both Accoutrement config
+/// and a `$json` map for exporting to Herman.
+/// @group utility
+@mixin herman-sizes(
   $maps
 ) {
   @each $name, $value in $maps {
     $sizes: map-merge($sizes, $value) !global;
-    $compiled: map-compile($value, 'size', 'px');
+    $compiled: herman-map-compile($value, 'size', 'px');
     $json: map-merge($json, ($name: $compiled)) !global;
   }
 
@@ -105,9 +116,13 @@ $json: ();
 }
 
 
-// Add Ratios
-// ----------
-@mixin set-ratios(
+// Herman Ratios
+// -------------
+/// Combine Accoutrement Ratio maps,
+/// adding them to both Accoutrement config
+/// and a `$json` map for exporting to Herman.
+/// @group utility
+@mixin herman-ratios(
   $maps
 ) {
   @each $name, $value in $maps {
@@ -117,9 +132,13 @@ $json: ();
 }
 
 
-// Set Fonts
-// ---------
-@mixin set-fonts(
+// Herman Fonts
+// ------------
+/// Combine Accoutrement Font maps,
+/// adding them to both Accoutrement config
+/// and a `$json` map for exporting to Herman.
+/// @group utility
+@mixin herman-fonts(
   $maps
 ) {
   @each $name, $value in $maps {
@@ -131,6 +150,8 @@ $json: ();
 
 // @@@ TEMP
 // --------
+/// @@@ This belongs in accoutrement or gone...
+/// @group utility
 @function line-height(
   $size,
   $lines: false,

@@ -71,7 +71,7 @@ $theme-colors: (
 
 // Combine & Export Colors
 // -----------------------
-@include set-colors(
+@include herman-colors(
   (
     'brand-colors': $brand-colors,
     'neutral-colors': $neutral-colors,

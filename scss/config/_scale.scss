@@ -16,7 +16,7 @@ $text-ratios: (
 );
 
 
-@include set-ratios(
+@include herman-ratios(
   (
     'text-ratios': $text-ratios,
   )
@@ -67,7 +67,7 @@ $pattern-sizes: (
   'page': 50rem,
 );
 
-@include set-sizes(
+@include herman-sizes(
   (
     'text-sizes': $text-sizes,
     'spacing-sizes': $spacing-sizes,
