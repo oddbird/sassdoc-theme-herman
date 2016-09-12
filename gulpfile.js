@@ -232,9 +232,9 @@ gulp.task('svgmin', function () {
   var dest = paths.DIST_DIR + 'svg/';
 
   return gulp.src(paths.SVG)
-    .pipe(imagemin({
-      svgoPlugins: [{ removeViewBox: false }]
-    }))
+    .pipe(imagemin([
+      imagemin.svgo({ plugins: [{ removeViewBox: false }] })
+    ]))
     .pipe(gulp.dest(dest));
 });
 
@@ -242,9 +242,12 @@ gulp.task('imagemin', function () {
   var dest = paths.DIST_DIR + 'img/';
 
   return gulp.src(paths.IMG)
-    .pipe(imagemin({
-      progressive: true
-    }))
+    .pipe(imagemin([
+      imagemin.gifsicle(),
+      imagemin.jpegtran(),
+      imagemin.optipng(),
+      imagemin.svgo()
+    ]))
     .pipe(gulp.dest(dest));
 });
 
