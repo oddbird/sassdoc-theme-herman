@@ -3,7 +3,6 @@
 env:
   mocha: true
 rules:
-  max-len: 0
   max-nested-callbacks: 0
   no-empty-function: 0
   no-underscore-dangle: 0

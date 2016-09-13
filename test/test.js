@@ -4,6 +4,7 @@ var assert = require('assert');
 var path = require('path');
 var sinon = require('sinon');
 var theme = require('../');
+var nunjucks = require('nunjucks');
 
 describe('macro annotation', function () {
   before(function () {
@@ -196,14 +197,17 @@ describe('example annotation', function () {
     it('warns only once about missing templatepath', function () {
       var env = { logger: { warn: sinon.stub() }};
       var example = theme.annotations[3](env);
-      var data = [{ example: [{ type: 'njk' }] }, { example: [{ type: 'njk' }] }];
+      var data = [
+        { example: [{ type: 'njk' }] },
+        { example: [{ type: 'njk' }] }
+      ];
 
       example.resolve(data);
 
       sinon.assert.calledOnce(env.logger.warn);
     });
 
-    it('does not warn on lack of templatepath if njk @example not used', function () {
+    it('does not warn if njk @example not used', function () {
       var env = { logger: { warn: sinon.stub() }};
       var example = theme.annotations[3](env);
       var data = [{}];
@@ -224,6 +228,27 @@ describe('example annotation', function () {
       this.example.resolve(data);
       assert.equal(data[0].example[0].rendered,
         '1 then 2.');
+    });
+
+    it('uses custom nunjucks env, if exists', function () {
+      var nunjucksEnv = nunjucks.configure(
+        path.resolve(__dirname, 'templates'));
+      nunjucksEnv.addFilter('plus_one', function (val) {
+        return val + 1;
+      });
+      var env = { nunjucksEnv: nunjucksEnv };
+      var example = theme.annotations[3](env);
+      var data = [{
+        example: [{
+          type: 'njk',
+          code: "{% import 'macros.j2' as macros %}\n" +
+            '{{ macros.macro_with_custom_filter(5) }}'
+        }]
+      }];
+
+      example.resolve(data);
+
+      assert.equal(data[0].example[0].rendered, '6');
     });
 
   });

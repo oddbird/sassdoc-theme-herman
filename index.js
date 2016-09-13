@@ -259,6 +259,7 @@ module.exports = function (dest, ctx) {
 // get nunjucks env lazily so that we only throw an error on missing
 // templatepath if annotation was actually used.
 var getNunjucksEnv = function (name, env, warned) {
+  if (env.nunjucksEnv) { return env.nunjucksEnv; }
   if (!env.templatepath) {
     if (!warned) {
       env.logger.warn('Must pass in a templatepath if using ' + name + '.');

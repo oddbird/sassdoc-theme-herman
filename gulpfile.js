@@ -15,7 +15,6 @@ var sasslint = require('gulp-sass-lint');
 var sourcemaps = require('gulp-sourcemaps');
 var uglify = require('gulp-uglify');
 
-
 // Set your Sass project (the one you're generating docs for) path.
 // Relative to this Gulpfile.
 var projectPath = './';
