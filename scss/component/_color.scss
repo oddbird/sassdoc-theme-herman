@@ -28,7 +28,6 @@
 
 [data-sassdoc='color-name'] {
   display: block;
-  text-transform: uppercase;
 
   @include after('') {
     color: color('text-light');
