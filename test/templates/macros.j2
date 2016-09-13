@@ -6,3 +6,7 @@
 {% macro icon(name) -%}
   rendered {{ name }}
 {%- endmacro %}
+
+{% macro macro_with_custom_filter(val) %}
+  {{ val|plus_one }}
+{% endmacro %}
