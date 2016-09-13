@@ -62,7 +62,7 @@ will render the `mymacro` macro from the file `macros.j2`
 In order for this to work,
 you must also either specify a `templatepath`
 (the path where nunjucks will look to import templates),
-or a `nunjucksEnv` (a custom nunjucks environment—
+or a `nunjucksEnv` (a custom nunjucks environment —
 this is particularly useful if your macros contain custom filters)
 in your `sassdoc` options.
 
