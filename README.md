@@ -60,8 +60,11 @@ will render the `mymacro` macro from the file `macros.j2`
 (which happens to use the `[data-mymacro]` attribute).
 
 In order for this to work,
-you must also specify a `templatepath` in your `sassdoc` options
-(the path where nunjucks will look to import templates).
+you must also either specify a `templatepath`
+(the path where nunjucks will look to import templates),
+or a `nunjucksEnv` (a custom nunjucks environment—
+this is particularly useful if your macros contain custom filters)
+in your `sassdoc` options.
 
 
 Development
@@ -89,6 +92,10 @@ Refer to the ``gulpfile.js`` source and `gulp`_ documentation for more info.
 
 Releases
 --------
+
+### 0.3.x: unreleased
+
+- Added `nunjucksEnv` option to use a custom nunjucks environment.
 
 ### 0.3.0: 2016-08-17
 
