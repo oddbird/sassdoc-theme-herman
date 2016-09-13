@@ -1,5 +1,6 @@
 {% macro code_block(language=none, content=none) %}
   {% set content = content if (content != none) else caller() %}
+  {% set language = 'jinja' if language == 'njk' else language %}
   {% set language = ['lang', language]|join('-') if language != none %}
   <pre data-sassdoc="hljs"><code{% if language %} class="{{ language }}"{% endif %}>{{ content }}</code></pre>
 {% endmacro %}

@@ -96,6 +96,7 @@ Releases
 ### 0.3.x: unreleased
 
 - Added `nunjucksEnv` option to use a custom nunjucks environment.
+- Added `jinja` syntax highlighting for `@example njk` code blocks.
 
 ### 0.3.0: 2016-08-17
 
