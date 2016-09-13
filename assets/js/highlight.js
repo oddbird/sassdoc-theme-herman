@@ -1,29 +1,65 @@
-/*! highlight.js v9.0.0 | BSD3 License | git.io/hljslicense */
+/*! highlight.js v9.6.0 | BSD3 License | git.io/hljslicense */
 (function(factory) {
+
+  // Find the global object for export to both the browser and web workers.
+  var globalObject = typeof window === 'object' && window ||
+                     typeof self === 'object' && self;
 
   // Setup highlight.js for different environments. First is Node.js or
   // CommonJS.
   if(typeof exports !== 'undefined') {
     factory(exports);
-  } else {
+  } else if(globalObject) {
     // Export hljs globally even when using AMD for cases when this script
     // is loaded with others that may still expect a global hljs.
-    self.hljs = factory({});
+    globalObject.hljs = factory({});
 
     // Finally register the global hljs with AMD.
     if(typeof define === 'function' && define.amd) {
-      define('hljs', [], function() {
-        return self.hljs;
+      define([], function() {
+        return globalObject.hljs;
       });
     }
   }
 
 }(function(hljs) {
+  // Convenience variables for build-in objects
+  var ArrayProto = [],
+      objectKeys = Object.keys;
+
+  // Global internal variables used within the highlight.js library.
+  var languages = {},
+      aliases   = {};
+
+  // Regular expressions used throughout the highlight.js library.
+  var noHighlightRe    = /^(no-?highlight|plain|text)$/i,
+      languagePrefixRe = /\blang(?:uage)?-([\w-]+)\b/i,
+      fixMarkupRe      = /((^(<[^>]+>|\t|)+|(?:\n)))/gm;
+
+  var spanEndTag = '</span>';
+
+  // Global options used when within external APIs. This is modified when
+  // calling the `hljs.configure` function.
+  var options = {
+    classPrefix: 'hljs-',
+    tabReplace: null,
+    useBR: false,
+    languages: undefined
+  };
+
+  // Object map that is used to escape some common HTML characters.
+  var escapeRegexMap = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;'
+  };
 
   /* Utility functions */
 
   function escape(value) {
-    return value.replace(/&/gm, '&amp;').replace(/</gm, '&lt;').replace(/>/gm, '&gt;');
+    return value.replace(/[&<>]/gm, function(character) {
+      return escapeRegexMap[character];
+    });
   }
 
   function tag(node) {
@@ -32,35 +68,40 @@
 
   function testRe(re, lexeme) {
     var match = re && re.exec(lexeme);
-    return match && match.index == 0;
+    return match && match.index === 0;
   }
 
   function isNotHighlighted(language) {
-    return (/^(no-?highlight|plain|text)$/i).test(language);
+    return noHighlightRe.test(language);
   }
 
   function blockLanguage(block) {
-    var i, match, length,
-        classes = block.className + ' ';
+    var i, match, length, _class;
+    var classes = block.className + ' ';
 
     classes += block.parentNode ? block.parentNode.className : '';
 
-    // language-* takes precedence over non-prefixed class names
-    match = (/\blang(?:uage)?-([\w-]+)\b/i).exec(classes);
+    // language-* takes precedence over non-prefixed class names.
+    match = languagePrefixRe.exec(classes);
     if (match) {
       return getLanguage(match[1]) ? match[1] : 'no-highlight';
     }
 
     classes = classes.split(/\s+/);
+
     for (i = 0, length = classes.length; i < length; i++) {
-      if (getLanguage(classes[i]) || isNotHighlighted(classes[i])) {
-        return classes[i];
+      _class = classes[i]
+
+      if (isNotHighlighted(_class) || getLanguage(_class)) {
+        return _class;
       }
     }
   }
 
   function inherit(parent, obj) {
-    var result = {}, key;
+    var key;
+    var result = {};
+
     for (key in parent)
       result[key] = parent[key];
     if (obj)
@@ -75,9 +116,9 @@
     var result = [];
     (function _nodeStream(node, offset) {
       for (var child = node.firstChild; child; child = child.nextSibling) {
-        if (child.nodeType == 3)
+        if (child.nodeType === 3)
           offset += child.nodeValue.length;
-        else if (child.nodeType == 1) {
+        else if (child.nodeType === 1) {
           result.push({
             event: 'start',
             offset: offset,
@@ -110,7 +151,7 @@
       if (!original.length || !highlighted.length) {
         return original.length ? original : highlighted;
       }
-      if (original[0].offset != highlighted[0].offset) {
+      if (original[0].offset !== highlighted[0].offset) {
         return (original[0].offset < highlighted[0].offset) ? original : highlighted;
       }
 
@@ -129,12 +170,12 @@
 
       ... which is collapsed to:
       */
-      return highlighted[0].event == 'start' ? original : highlighted;
+      return highlighted[0].event === 'start' ? original : highlighted;
     }
 
     function open(node) {
       function attr_str(a) {return ' ' + a.nodeName + '="' + escape(a.value) + '"';}
-      result += '<' + tag(node) + Array.prototype.map.call(node.attributes, attr_str).join('') + '>';
+      result += '<' + tag(node) + ArrayProto.map.call(node.attributes, attr_str).join('') + '>';
     }
 
     function close(node) {
@@ -142,14 +183,14 @@
     }
 
     function render(event) {
-      (event.event == 'start' ? open : close)(event.node);
+      (event.event === 'start' ? open : close)(event.node);
     }
 
     while (original.length || highlighted.length) {
       var stream = selectStream();
       result += escape(value.substr(processed, stream[0].offset - processed));
       processed = stream[0].offset;
-      if (stream == original) {
+      if (stream === original) {
         /*
         On any opening or closing tag of the original markup we first close
         the entire highlighted node stack, then render the original tag along
@@ -160,10 +201,10 @@
         do {
           render(stream.splice(0, 1)[0]);
           stream = selectStream();
-        } while (stream == original && stream.length && stream[0].offset == processed);
+        } while (stream === original && stream.length && stream[0].offset === processed);
         nodeStack.reverse().forEach(open);
       } else {
-        if (stream[0].event == 'start') {
+        if (stream[0].event === 'start') {
           nodeStack.push(stream[0].node);
         } else {
           nodeStack.pop();
@@ -208,16 +249,16 @@
           });
         };
 
-        if (typeof mode.keywords == 'string') { // string
+        if (typeof mode.keywords === 'string') { // string
           flatten('keyword', mode.keywords);
         } else {
-          Object.keys(mode.keywords).forEach(function (className) {
+          objectKeys(mode.keywords).forEach(function (className) {
             flatten(className, mode.keywords[className]);
           });
         }
         mode.keywords = compiled_keywords;
       }
-      mode.lexemesRe = langRe(mode.lexemes || /\b\w+\b/, true);
+      mode.lexemesRe = langRe(mode.lexemes || /\w+/, true);
 
       if (parent) {
         if (mode.beginKeywords) {
@@ -236,7 +277,7 @@
       }
       if (mode.illegal)
         mode.illegalRe = langRe(mode.illegal);
-      if (mode.relevance === undefined)
+      if (mode.relevance == null)
         mode.relevance = 1;
       if (!mode.contains) {
         mode.contains = [];
@@ -246,7 +287,7 @@
         if (c.variants) {
           c.variants.forEach(function(v) {expanded_contains.push(inherit(c, v));});
         } else {
-          expanded_contains.push(c == 'self' ? mode : c);
+          expanded_contains.push(c === 'self' ? mode : c);
         }
       });
       mode.contains = expanded_contains;
@@ -281,7 +322,9 @@
   function highlight(name, value, ignore_illegals, continuation) {
 
     function subMode(lexeme, mode) {
-      for (var i = 0; i < mode.contains.length; i++) {
+      var i, length;
+
+      for (i = 0, length = mode.contains.length; i < length; i++) {
         if (testRe(mode.contains[i].beginRe, lexeme)) {
           return mode.contains[i];
         }
@@ -312,7 +355,7 @@
     function buildSpan(classname, insideSpan, leaveOpen, noPrefix) {
       var classPrefix = noPrefix ? '' : options.classPrefix,
           openSpan    = '<span class="' + classPrefix,
-          closeSpan   = leaveOpen ? '' : '</span>';
+          closeSpan   = leaveOpen ? '' : spanEndTag
 
       openSpan += classname + '">';
 
@@ -320,15 +363,19 @@
     }
 
     function processKeywords() {
+      var keyword_match, last_index, match, result;
+
       if (!top.keywords)
         return escape(mode_buffer);
-      var result = '';
-      var last_index = 0;
+
+      result = '';
+      last_index = 0;
       top.lexemesRe.lastIndex = 0;
-      var match = top.lexemesRe.exec(mode_buffer);
+      match = top.lexemesRe.exec(mode_buffer);
+
       while (match) {
         result += escape(mode_buffer.substr(last_index, match.index - last_index));
-        var keyword_match = keywordMatch(top, match);
+        keyword_match = keywordMatch(top, match);
         if (keyword_match) {
           relevance += keyword_match[1];
           result += buildSpan(keyword_match[0], escape(match[0]));
@@ -342,7 +389,7 @@
     }
 
     function processSubLanguage() {
-      var explicit = typeof top.subLanguage == 'string';
+      var explicit = typeof top.subLanguage === 'string';
       if (explicit && !languages[top.subLanguage]) {
         return escape(mode_buffer);
       }
@@ -365,35 +412,37 @@
     }
 
     function processBuffer() {
-      return top.subLanguage !== undefined ? processSubLanguage() : processKeywords();
+      result += (top.subLanguage != null ? processSubLanguage() : processKeywords());
+      mode_buffer = '';
     }
 
-    function startNewMode(mode, lexeme) {
-      var markup = mode.className? buildSpan(mode.className, '', true): '';
-      if (mode.returnBegin) {
-        result += markup;
-        mode_buffer = '';
-      } else if (mode.excludeBegin) {
-        result += escape(lexeme) + markup;
-        mode_buffer = '';
-      } else {
-        result += markup;
-        mode_buffer = lexeme;
-      }
+    function startNewMode(mode) {
+      result += mode.className? buildSpan(mode.className, '', true): '';
       top = Object.create(mode, {parent: {value: top}});
     }
 
     function processLexeme(buffer, lexeme) {
 
       mode_buffer += buffer;
-      if (lexeme === undefined) {
-        result += processBuffer();
+
+      if (lexeme == null) {
+        processBuffer();
         return 0;
       }
 
       var new_mode = subMode(lexeme, top);
       if (new_mode) {
-        result += processBuffer();
+        if (new_mode.skip) {
+          mode_buffer += lexeme;
+        } else {
+          if (new_mode.excludeBegin) {
+            mode_buffer += lexeme;
+          }
+          processBuffer();
+          if (!new_mode.returnBegin && !new_mode.excludeBegin) {
+            mode_buffer = lexeme;
+          }
+        }
         startNewMode(new_mode, lexeme);
         return new_mode.returnBegin ? 0 : lexeme.length;
       }
@@ -401,21 +450,26 @@
       var end_mode = endOfMode(top, lexeme);
       if (end_mode) {
         var origin = top;
-        if (!(origin.returnEnd || origin.excludeEnd)) {
+        if (origin.skip) {
           mode_buffer += lexeme;
+        } else {
+          if (!(origin.returnEnd || origin.excludeEnd)) {
+            mode_buffer += lexeme;
+          }
+          processBuffer();
+          if (origin.excludeEnd) {
+            mode_buffer = lexeme;
+          }
         }
-        result += processBuffer();
         do {
           if (top.className) {
-            result += '</span>';
+            result += spanEndTag;
           }
-          relevance += top.relevance;
+          if (!top.skip) {
+            relevance += top.relevance;
+          }
           top = top.parent;
-        } while (top != end_mode.parent);
-        if (origin.excludeEnd) {
-          result += escape(lexeme);
-        }
-        mode_buffer = '';
+        } while (top !== end_mode.parent);
         if (end_mode.starts) {
           startNewMode(end_mode.starts, '');
         }
@@ -443,7 +497,7 @@
     var top = continuation || language;
     var continuations = {}; // keep continuations for sub-languages
     var result = '', current;
-    for(current = top; current != language; current = current.parent) {
+    for(current = top; current !== language; current = current.parent) {
       if (current.className) {
         result = buildSpan(current.className, '', true) + result;
       }
@@ -463,7 +517,7 @@
       processLexeme(value.substr(index));
       for(current = top; current.parent; current = current.parent) { // close dangling modes
         if (current.className) {
-          result += '</span>';
+          result += spanEndTag;
         }
       }
       return {
@@ -473,7 +527,7 @@
         top: top
       };
     } catch (e) {
-      if (e.message.indexOf('Illegal') != -1) {
+      if (e.message && e.message.indexOf('Illegal') !== -1) {
         return {
           relevance: 0,
           value: escape(value)
@@ -496,16 +550,13 @@
 
   */
   function highlightAuto(text, languageSubset) {
-    languageSubset = languageSubset || options.languages || Object.keys(languages);
+    languageSubset = languageSubset || options.languages || objectKeys(languages);
     var result = {
       relevance: 0,
       value: escape(text)
     };
     var second_best = result;
-    languageSubset.forEach(function(name) {
-      if (!getLanguage(name)) {
-        return;
-      }
+    languageSubset.filter(getLanguage).forEach(function(name) {
       var current = highlight(name, text, false);
       current.language = name;
       if (current.relevance > second_best.relevance) {
@@ -530,15 +581,15 @@
 
   */
   function fixMarkup(value) {
-    if (options.tabReplace) {
-      value = value.replace(/^((<[^>]+>|\t)+)/gm, function(match, p1 /*..., offset, s*/) {
-        return p1.replace(/\t/g, options.tabReplace);
+    return !(options.tabReplace || options.useBR)
+      ? value
+      : value.replace(fixMarkupRe, function(match, p1) {
+          if (options.useBR && match === '\n') {
+            return '<br>';
+          } else if (options.tabReplace) {
+            return p1.replace(/\t/g, options.tabReplace);
+          }
       });
-    }
-    if (options.useBR) {
-      value = value.replace(/\n/g, '<br>');
-    }
-    return value;
   }
 
   function buildClassName(prevClassName, currentLang, resultLang) {
@@ -561,23 +612,24 @@
   two optional parameters for fixMarkup.
   */
   function highlightBlock(block) {
+    var node, originalStream, result, resultNode, text;
     var language = blockLanguage(block);
+
     if (isNotHighlighted(language))
         return;
 
-    var node;
     if (options.useBR) {
       node = document.createElementNS('http://www.w3.org/1999/xhtml', 'div');
       node.innerHTML = block.innerHTML.replace(/\n/g, '').replace(/<br[ \/]*>/g, '\n');
     } else {
       node = block;
     }
-    var text = node.textContent;
-    var result = language ? highlight(language, text, true) : highlightAuto(text);
+    text = node.textContent;
+    result = language ? highlight(language, text, true) : highlightAuto(text);
 
-    var originalStream = nodeStream(node);
+    originalStream = nodeStream(node);
     if (originalStream.length) {
-      var resultNode = document.createElementNS('http://www.w3.org/1999/xhtml', 'div');
+      resultNode = document.createElementNS('http://www.w3.org/1999/xhtml', 'div');
       resultNode.innerHTML = result.value;
       result.value = mergeStreams(originalStream, nodeStream(resultNode), text);
     }
@@ -597,15 +649,8 @@
     }
   }
 
-  var options = {
-    classPrefix: 'hljs-',
-    tabReplace: null,
-    useBR: false,
-    languages: undefined
-  };
-
   /*
-  Updates highlight.js global options with values passed in the form of an object
+  Updates highlight.js global options with values passed in the form of an object.
   */
   function configure(user_options) {
     options = inherit(options, user_options);
@@ -620,7 +665,7 @@
     initHighlighting.called = true;
 
     var blocks = document.querySelectorAll('pre code');
-    Array.prototype.forEach.call(blocks, highlightBlock);
+    ArrayProto.forEach.call(blocks, highlightBlock);
   }
 
   /*
@@ -631,9 +676,6 @@
     addEventListener('load', initHighlighting, false);
   }
 
-  var languages = {};
-  var aliases = {};
-
   function registerLanguage(name, language) {
     var lang = languages[name] = language(hljs);
     if (lang.aliases) {
@@ -642,7 +684,7 @@
   }
 
   function listLanguages() {
-    return Object.keys(languages);
+    return objectKeys(languages);
   }
 
   function getLanguage(name) {
@@ -689,7 +731,7 @@
     contains: [hljs.BACKSLASH_ESCAPE]
   };
   hljs.PHRASAL_WORDS_MODE = {
-    begin: /\b(a|an|the|are|I|I'm|isn't|don't|doesn't|won't|but|just|should|pretty|simply|enough|gonna|going|wtf|so|such|will|you|your|like)\b/
+    begin: /\b(a|an|the|are|I'm|isn't|don't|doesn't|won't|but|just|should|pretty|simply|enough|gonna|going|wtf|so|such|will|you|your|like)\b/
   };
   hljs.COMMENT = function (begin, end, inherits) {
     var mode = hljs.inherit(
@@ -703,7 +745,7 @@
     mode.contains.push(hljs.PHRASAL_WORDS_MODE);
     mode.contains.push({
       className: 'doctag',
-      begin: "(?:TODO|FIXME|NOTE|BUG|XXX):",
+      begin: '(?:TODO|FIXME|NOTE|BUG|XXX):',
       relevance: 0
     });
     return mode;
@@ -762,6 +804,11 @@
     begin: hljs.UNDERSCORE_IDENT_RE,
     relevance: 0
   };
+  hljs.METHOD_GUARD = {
+    // excludes method names from keyword processing
+    begin: '\\.\\s*' + hljs.UNDERSCORE_IDENT_RE,
+    relevance: 0
+  };
 
 hljs.registerLanguage('css', function(hljs) {
   var IDENT_RE = '[a-zA-Z-][a-zA-Z0-9_-]*';
@@ -775,11 +822,18 @@ hljs.registerLanguage('css', function(hljs) {
           endsWithParent: true, excludeEnd: true,
           contains: [
             {
-              begin: /[\w-]+\s*\(/, returnBegin: true,
+              begin: /[\w-]+\(/, returnBegin: true,
               contains: [
                 {
                   className: 'built_in',
                   begin: /[\w-]+/
+                },
+                {
+                  begin: /\(/, end: /\)/,
+                  contains: [
+                    hljs.APOS_STRING_MODE,
+                    hljs.QUOTE_STRING_MODE
+                  ]
                 }
               ]
             },
@@ -817,7 +871,7 @@ hljs.registerLanguage('css', function(hljs) {
       },
       {
         className: 'selector-pseudo',
-        begin: /:(:)?[a-zA-Z0-9\_\-\+\(\)"']+/
+        begin: /:(:)?[a-zA-Z0-9\_\-\+\(\)"'.]+/
       },
       {
         begin: '@(font-face|page)',
@@ -829,10 +883,11 @@ hljs.registerLanguage('css', function(hljs) {
                                  // because it doesn’t let it to be parsed as
                                  // a rule set but instead drops parser into
                                  // the default mode which is how it should be.
+        illegal: /:/, // break on Less variables @var: ...
         contains: [
           {
             className: 'keyword',
-            begin: /\S+/
+            begin: /\w+/
           },
           {
             begin: /\s/, endsWithParent: true, excludeEnd: true,
@@ -862,32 +917,27 @@ hljs.registerLanguage('css', function(hljs) {
 
 hljs.registerLanguage('xml', function(hljs) {
   var XML_IDENT_RE = '[A-Za-z0-9\\._:-]+';
-  var PHP = {
-    begin: /<\?(php)?(?!\w)/, end: /\?>/,
-    subLanguage: 'php'
-  };
   var TAG_INTERNALS = {
     endsWithParent: true,
     illegal: /</,
     relevance: 0,
     contains: [
-      PHP,
       {
         className: 'attr',
         begin: XML_IDENT_RE,
         relevance: 0
       },
       {
-        begin: '=',
+        begin: /=\s*/,
         relevance: 0,
         contains: [
           {
             className: 'string',
-            contains: [PHP],
+            endsParent: true,
             variants: [
               {begin: /"/, end: /"/},
               {begin: /'/, end: /'/},
-              {begin: /[^\s\/>]+/}
+              {begin: /[^\s"'=<>`]+/}
             ]
           }
         ]
@@ -895,7 +945,7 @@ hljs.registerLanguage('xml', function(hljs) {
     ]
   };
   return {
-    aliases: ['html', 'xhtml', 'rss', 'atom', 'xsl', 'plist'],
+    aliases: ['html', 'xhtml', 'rss', 'atom', 'xjb', 'xsd', 'xsl', 'plist'],
     case_insensitive: true,
     contains: [
       {
@@ -914,6 +964,11 @@ hljs.registerLanguage('xml', function(hljs) {
       {
         begin: '<\\!\\[CDATA\\[', end: '\\]\\]>',
         relevance: 10
+      },
+      {
+        begin: /<\?(php)?/, end: /\?>/,
+        subLanguage: 'php',
+        contains: [{begin: '/\\*', end: '\\*/', skip: true}]
       },
       {
         className: 'tag',
@@ -942,11 +997,12 @@ hljs.registerLanguage('xml', function(hljs) {
           subLanguage: ['actionscript', 'javascript', 'handlebars', 'xml']
         }
       },
-      PHP,
       {
         className: 'meta',
-        begin: /<\?\w+/, end: /\?>/,
-        relevance: 10
+        variants: [
+          {begin: /<\?xml/, end: /\?>/, relevance: 10},
+          {begin: /<\?\w+/, end: /\?>/}
+        ]
       },
       {
         className: 'tag',
@@ -1028,12 +1084,12 @@ hljs.registerLanguage('django', function(hljs) {
 
 hljs.registerLanguage('javascript', function(hljs) {
   return {
-    aliases: ['js'],
+    aliases: ['js', 'jsx'],
     keywords: {
       keyword:
         'in of if for while finally var new function do return void else break catch ' +
         'instanceof with throw case default try this switch continue typeof delete ' +
-        'let yield const export super debugger as async await ' +
+        'let yield const export super debugger as async await static ' +
         // ECMAScript 6 modules import
         'import from as'
       ,
@@ -1054,6 +1110,10 @@ hljs.registerLanguage('javascript', function(hljs) {
         className: 'meta',
         relevance: 10,
         begin: /^\s*['"]use (strict|asm)['"]/
+      },
+      {
+        className: 'meta',
+        begin: /^#!/, end: /$/
       },
       hljs.APOS_STRING_MODE,
       hljs.QUOTE_STRING_MODE,
@@ -1087,9 +1147,12 @@ hljs.registerLanguage('javascript', function(hljs) {
           hljs.C_BLOCK_COMMENT_MODE,
           hljs.REGEXP_MODE,
           { // E4X / JSX
-            begin: /</, end: />\s*[);\]]/,
-            relevance: 0,
-            subLanguage: 'xml'
+            begin: /</, end: /(\/\w+|\w+\/)>/,
+            subLanguage: 'xml',
+            contains: [
+              {begin: /<\w+\s*\/>/, skip: true},
+              {begin: /<\w+/, end: /(\/\w+|\w+\/)>/, skip: true, contains: ['self']}
+            ]
           }
         ],
         relevance: 0
@@ -1115,9 +1178,7 @@ hljs.registerLanguage('javascript', function(hljs) {
       {
         begin: /\$[(.]/ // relevance booster for a pattern common to JS libs: `$(something)` and `$.something`
       },
-      {
-        begin: '\\.' + hljs.IDENT_RE, relevance: 0 // hack: prevents detection of keywords after dots
-      },
+      hljs.METHOD_GUARD,
       { // ES6 class
         className: 'class',
         beginKeywords: 'class', end: /[{;=]/, excludeEnd: true,
@@ -1131,7 +1192,7 @@ hljs.registerLanguage('javascript', function(hljs) {
         beginKeywords: 'constructor', end: /\{/, excludeEnd: true
       }
     ],
-    illegal: /#/
+    illegal: /#(?!!)/
   };
 });
 
@@ -1151,11 +1212,11 @@ hljs.registerLanguage('json', function(hljs) {
     contains: [
       {
         className: 'attr',
-        begin: '\\s*"', end: '"\\s*:\\s*', excludeBegin: true, excludeEnd: true,
+        begin: /"/, end: /"/,
         contains: [hljs.BACKSLASH_ESCAPE],
         illegal: '\\n',
-        starts: VALUE_CONTAINER
-      }
+      },
+      hljs.inherit(VALUE_CONTAINER, {begin: /:/})
     ],
     illegal: '\\S'
   };
@@ -1219,9 +1280,15 @@ hljs.registerLanguage('markdown', function(hljs) {
       {
         className: 'code',
         variants: [
-          { begin: '`.+?`' },
-          { begin: '^( {4}|\t)', end: '$'
-          , relevance: 0
+          {
+            begin: '^```\w*\s*$', end: '^```\s*$'
+          },
+          {
+            begin: '`.+?`'
+          },
+          {
+            begin: '^( {4}|\t)', end: '$',
+            relevance: 0
           }
         ]
       },
@@ -1255,17 +1322,18 @@ hljs.registerLanguage('markdown', function(hljs) {
         relevance: 10
       },
       {
-        begin: '^\\[\.+\\]:',
+        begin: /^\[[^\n]+\]:/,
         returnBegin: true,
         contains: [
           {
             className: 'symbol',
-            begin: '\\[', end: '\\]:',
-            excludeBegin: true, excludeEnd: true,
-            starts: {
-              className: 'link',
-              end: '$'
-            }
+            begin: /\[/, end: /\]/,
+            excludeBegin: true, excludeEnd: true
+          },
+          {
+            className: 'link',
+            begin: /:\s*/, end: /$/,
+            excludeBegin: true
           }
         ]
       }
