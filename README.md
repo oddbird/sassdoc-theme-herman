@@ -87,7 +87,8 @@ selection of the above tasks whenever changes are detected to relevant files.
 
 Access the running server at http://localhost:3000.
 
-Refer to the ``gulpfile.js`` source and `gulp`_ documentation for more info.
+Refer to the ``gulpfile.js`` source and [gulp](http://gulpjs.com/)
+documentation for more info.
 
 
 Releases
