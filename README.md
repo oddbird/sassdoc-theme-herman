@@ -93,7 +93,7 @@ Refer to the ``gulpfile.js`` source and `gulp`_ documentation for more info.
 Releases
 --------
 
-### 0.3.x: unreleased
+### 0.3.1: 2016-09-14
 
 - Added `nunjucksEnv` option to use a custom nunjucks environment.
 - Added `jinja` syntax highlighting for `@example njk` code blocks.
