@@ -1,3 +1,36 @@
+
+{### Code Block
+
+Generate a syntax-highlighted pre/code block.
+
+@access public
+@group code-blocks
+@link https://highlightjs.org/
+
+@author Miriam Suzanne
+@since 0.1.1
+
+@param {string} language [none] -
+  The language name or extension for the code contents
+@param {string} content [none] -
+  Optionally pass in content as a string
+@caller - Wrap a block of preformatted code to use
+  in place of the `content` string
+
+@require {macro} scss_css - Not actually required for this macro,
+  but a usefull annotation to have in other cases.
+
+@example njk - cowlick code block
+  {% call code_block('cowlick') %}
+    <p class="{{ classname }}">
+      {% if cowlick.content %}
+        {{ cowlick.content }}
+      {% else %}
+        No Cowlick Content
+      {% endif %}
+    </p>
+  {% endcall %}
+#}
 {% macro code_block(language=none, content=none) %}
   {% set content = content if (content != none) else caller() %}
   {% set language = 'jinja' if language == 'njk' else language %}
