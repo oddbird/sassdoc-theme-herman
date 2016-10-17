@@ -9,28 +9,13 @@
 // Family
 // ------
 
-[data-sassdoc='font-family'] {
-  @include font-size('small');
-  max-width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
 [data-sassdoc='font-type'] {
-  @include after(' · ');
-  display: inline;
-  text-transform: uppercase;
+  font-weight: bold;
 }
 
 [data-sassdoc='font-stack'] {
   @include font-family('code');
   @include font-size('smaller');
-  display: inline;
-}
-
-[data-sassdoc='font-name'] {
-  font-weight: bold;
 }
 
 
@@ -38,32 +23,30 @@
 // ----
 
 [data-specimen-face] {
-  background-color: color('callout');
   margin: size('shim') 0;
-  padding-bottom: size('shim');
 }
 
-[data-sassdoc='specimen-title'] {
-  @include contrasted('text');
-  @include font-size('small');
-  font-weight: inherit;
-  padding: size('half-shim') size('shim');
+[data-specimen='sample'] {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
-
-// Size
-// ----
-
-[data-specimen-size] {
-  margin: size('gutter') size('shim');
+[data-specimen='aa'],
+[data-specimen='lorem'] {
+  padding: 0 size('shim');
 }
 
-[data-sassdoc='specimen-size'] {
-  @include font-family('code');
-  @include font-size('smaller');
-  color: color('light');
+[data-specimen='aa'] {
+  @include font-size('specimen');
+  flex: 0 1 auto;
 }
 
-[data-sassdoc='specimen-text'] {
-  max-width: 100%;
+[data-specimen='lorem'] {
+  flex: 1 1 auto;
+
+  span {
+    display: block;
+  }
 }

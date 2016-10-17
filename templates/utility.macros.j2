@@ -1,0 +1,28 @@
+{# Utility Macros #}
+
+
+{% macro attr_if(attr, value) %}
+  {# @@@ Temp until nunjucks supports strict equality #}
+  {# https://github.com/mozilla/nunjucks/issues/750 #}
+  {%- if value == true and value|string == 'true' -%}
+    {{ attr }}
+  {%- elif value -%}
+    {{ attr }}="{{ value }}"
+  {%- endif -%}
+{% endmacro %}
+
+
+{% macro show_attrs(attrs) %}
+  {%- for name, value in attrs.items() %}{{ attr_if(value, name) }}{% endfor -%}
+{% endmacro %}
+
+
+{% macro link_if(content=none, url=none, attrs={}) -%}
+  {%- set content = content if content else caller() -%}
+
+  {%- if url -%}
+    <a href="{{ url }}" {{ show_attrs(attrs) }}>{{ content }}</a>
+  {%- else -%}
+    <span {{ show_attrs(attrs) }}>{{ content }}</span>
+  {%- endif -%}
+{%- endmacro %}

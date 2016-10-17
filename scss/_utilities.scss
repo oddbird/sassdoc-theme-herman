@@ -80,7 +80,8 @@ $json: ();
 ) {
   @each $name, $value in $maps {
     $colors: map-merge($colors, $value) !global;
-    $json: map-merge($json, ($name: herman-map-compile($value, 'color'))) !global;
+    $compiled: herman-map-compile($value, 'color');
+    $json: map-merge($json, ($name: $compiled)) !global;
   }
 }
 
@@ -98,20 +99,6 @@ $json: ();
     $sizes: map-merge($sizes, $value) !global;
     $compiled: herman-map-compile($value, 'size', 'px');
     $json: map-merge($json, ($name: $compiled)) !global;
-  }
-
-  $rhythm: size('rhythm', 'px');
-
-  @each $name, $value in $maps {
-    $name: '#{$name}--line-heights';
-    $line-heights: ();
-
-    @each $key, $size in $value {
-      $size: line-height($size, $rhythm: $rhythm);
-      $line-heights: map-merge($line-heights, ($key: $size));
-    }
-
-    $json: map-merge($json, ($name: $line-heights)) !global;
   }
 }
 
@@ -139,29 +126,12 @@ $json: ();
 /// and a `$json` map for exporting to Herman.
 /// @group utility
 @mixin herman-fonts(
-  $maps
+  $maps...
 ) {
-  @each $name, $value in $maps {
-    $fonts: map-merge($fonts, ($name: $value)) !global;
-    $json: map-merge($json, ($name: $value)) !global;
+  @each $font in $maps {
+    @each $name, $value in $font {
+      $fonts: map-merge($fonts, $font) !global;
+      $json: map-merge($json, $font) !global;
+    }
   }
-}
-
-
-// @@@ TEMP
-// --------
-/// @@@ This belongs in accoutrement or gone...
-/// @group utility
-@function line-height(
-  $size,
-  $lines: false,
-  $rhythm: size('rhythm')
-) {
-  $height: ($lines or _get-lines($size)) * $rhythm;
-
-  @if not $lines and ($size == $height) {
-    $height: $height + ($rhythm / 2);
-  }
-
-  @return $height;
 }

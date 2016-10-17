@@ -59,8 +59,11 @@ will render the `mymacro` macro from the file `macros.j2`
 (which happens to use the `[data-mymacro]` attribute).
 
 In order for this to work,
-you must also specify a `templatepath` in your `sassdoc` options
-(the path where nunjucks will look to import templates).
+you must also either specify a `templatepath`
+(the path where nunjucks will look to import templates),
+or a `nunjucksEnv` (a custom nunjucks environment —
+this is particularly useful if your macros contain custom filters)
+in your `sassdoc` options.
 
 
 Development
@@ -68,28 +71,43 @@ Development
 
 To install the necessary Node dependencies, run ``npm install``.
 
-You can lint the project's JS with ``gulp eslint`` and run the JS unit tests
-with ``gulp jstest`` (or ``npm test``). You can lint Sass with
+You can lint the project's JS with ``gulp eslint``
+and run the JS unit tests with ``gulp jstest``
+(or ``npm test``).
+You can lint Sass with
 ``gulp sasslint``.
 
-To compile and minify the static assets--as well as generate the
-documentation--run ``gulp compile``.
+To compile and minify the static assets —
+as well as generate the documentation —
+run ``gulp compile``.
 
 Just running ``gulp`` will perform all of the above tasks.
 
-You can start up a local development server with ``gulp develop``. This will
-also watch for changes to local files and automatically perform an appropriate
-selection of the above tasks whenever changes are detected to relevant files.
+You can start up a local development server with ``gulp develop``.
+This will also watch for changes to local files
+and automatically perform an appropriate selection of the above tasks
+whenever changes are detected to relevant files.
 
 Access the running server at http://localhost:3000.
 
-Refer to the ``gulpfile.js`` source and `gulp`_ documentation for more info.
+Refer to the ``gulpfile.js`` source
+and [gulp](http://gulpjs.com/) documentation
+for more info.
 
 
 Releases
 --------
 
-### 0.3.0: 2016-??-??
+### 0.3.2: 2016-09-29
+
+- Mark imported `minifiedIcons` file as `|safe`.
+
+### 0.3.1: 2016-09-14
+
+- Added `nunjucksEnv` option to use a custom nunjucks environment.
+- Added `jinja` syntax highlighting for `@example njk` code blocks.
+
+### 0.3.0: 2016-08-17
 
 - Added rendering of @example annotations using the njk (nunjucks) language.
 - Removed rendering of macro examples using `macroname_data`.

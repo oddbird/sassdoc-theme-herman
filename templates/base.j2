@@ -2,10 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
   {% set project_title = package.title or package.name or 'Herman' %}
   <title>{% block title %}{{ project_title }} Documentation{% endblock %}</title>
+
   <link href="{{ shortcutIcon.url }}" rel="shortcut icon">
   <link rel="stylesheet" href="assets/css/main.css" />
+
   {% if customCSS and customCSS.url %}
     <link rel="stylesheet" href="{{ customCSS.url }}" />
   {% else %}
@@ -14,7 +18,7 @@
 </head>
 <body>
 
-  {{ iconsSvg }}
+  {{ iconsSvg|safe }}
 
   <div data-sassdoc-region="app">
     <header role="banner" data-sassdoc-region="banner">

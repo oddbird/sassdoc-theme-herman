@@ -65,6 +65,7 @@ $spacing-sizes: (
 /// @group scale
 $pattern-sizes: (
   'page': 50rem,
+  'specimen': 'rhythm' ('linear': 3),
 );
 
 @include herman-sizes(

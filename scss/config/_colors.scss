@@ -51,10 +51,7 @@ $status-colors: (
 /// @preview color-palette
 /// @group colors
 $theme-colors: (
-  'white': #fff,
-  'contrast-light': 'white',
-  'contrast-dark': 'black',
-  'background': 'white',
+  'background': #fff,
   'text': 'black',
   'text-light': 'gray',
   'border': 'gray',
@@ -69,6 +66,13 @@ $theme-colors: (
 );
 
 
+// System Colors
+$system-colors: (
+  'contrast-light': 'background',
+  'contrast-dark': 'text',
+);
+
+
 // Combine & Export Colors
 // -----------------------
 @include herman-colors(
@@ -77,5 +81,6 @@ $theme-colors: (
     'neutral-colors': $neutral-colors,
     'status-colors': $status-colors,
     'theme-colors': $theme-colors,
+    'system-colors': $system-colors,
   )
 );

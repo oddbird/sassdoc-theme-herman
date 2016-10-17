@@ -14,15 +14,17 @@ $font-formats: 'woff' 'ttf';
 // ---------
 /// The OddBird brand font,
 /// used for most body and headline text.
-/// @preview font-specimen; key: body; sizes: text-sizes
+/// @preview font-specimen; key: body
 /// @group webfonts
 $body-font: (
-  'name': 'CenturyOldStyle',
-  'source': 'http://www.fontspring.com/fonts/fontsite/century-old-style-fs',
-  'stack': ('Baskerville', 'Palatino', 'Cambria', 'Georgia', serif),
-  'regular': 'serif/CenturyOldStyle-regular',
-  'italic': 'serif/CenturyOldStyle-italic',
-  'bold': 'serif/CenturyOldStyle-bold',
+  'body': (
+    'name': 'CenturyOldStyle',
+    'source': 'http://www.fontspring.com/fonts/fontsite/century-old-style-fs',
+    'stack': ('Baskerville', 'Palatino', 'Cambria', 'Georgia', serif),
+    'regular': 'serif/CenturyOldStyle-regular',
+    'italic': 'serif/CenturyOldStyle-italic',
+    'bold': 'serif/CenturyOldStyle-bold',
+  ),
 );
 
 
@@ -30,38 +32,35 @@ $body-font: (
 // ---------
 /// A clean sans-serif option
 /// used for smaller text like captions and labels.
-/// @preview font-specimen; key: sans; sizes: text-sizes
+/// @preview font-specimen; key: sans
 /// @group webfonts
 $sans-font: (
-  'name': 'SourceSansPro',
-  'source': 'http://www.fontsquirrel.com/fonts/source-sans-pro',
-  'stack': ('Helvetica Neue', 'Helvetica', 'Arial', sans-serif),
-  'regular': 'sans/sourcesanspro-regular-webfont',
-  'italic': 'sans/sourcesanspro-italic-webfont',
-  'bold': 'sans/sourcesanspro-bold-webfont',
-  'bold' 'italic': 'sans/sourcesanspro-bolditalic-webfont',
+  'sans': (
+    'name': 'SourceSansPro',
+    'source': 'http://www.fontsquirrel.com/fonts/source-sans-pro',
+    'stack': ('Helvetica Neue', 'Helvetica', 'Arial', sans-serif),
+    'regular': 'sans/sourcesanspro-regular-webfont',
+    'italic': 'sans/sourcesanspro-italic-webfont',
+    'bold': 'sans/sourcesanspro-bold-webfont',
+    'bold' 'italic': 'sans/sourcesanspro-bolditalic-webfont',
+  ),
 );
 
 
 // Code Font
 // ---------
 /// A readable monospace font for code previews.
-/// @preview font-specimen; key: code; sizes: text-sizes
+/// @preview font-specimen; key: code
 /// @group webfonts
 $code-font: (
-  'name': 'SourceCodePro',
-  'source': 'http://www.fontsquirrel.com/fonts/source-code-pro',
-  'stack': ('Consolas', 'Menlo', 'Monaco', 'Lucida Console', 'Liberation Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace, sans-serif),
-  'regular': 'code/sourcecodepro-regular-webfont',
-  'bold': 'code/sourcecodepro-bold-webfont',
-  'preview-sizes': map-keys($text-sizes),
+  'code': (
+    'name': 'SourceCodePro',
+    'source': 'http://www.fontsquirrel.com/fonts/source-code-pro',
+    'stack': ('Consolas', 'Menlo', 'Monaco', 'Lucida Console', 'Liberation Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace, sans-serif),
+    'regular': 'code/sourcecodepro-regular-webfont',
+    'bold': 'code/sourcecodepro-bold-webfont',
+  ),
 );
 
 
-@include herman-fonts(
-  (
-    'body': $body-font,
-    'sans': $sans-font,
-    'code': $code-font,
-  )
-);
+@include herman-fonts($body-font, $sans-font, $code-font);

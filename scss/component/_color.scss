@@ -9,14 +9,26 @@
 }
 
 [data-sassdoc-color] {
-  flex: 1 1 15%;
+  flex: 1 1 size('rhythm') * 8;
   margin: size('shim');
-  min-width: size('rhythm') * 6;
+  position: relative;
+
+  @include before(' ') {
+    background-image: linear-gradient(45deg, currentColor 25%, transparent 25%), linear-gradient(-45deg, currentColor 25%, transparent 25%), linear-gradient(45deg, transparent 75%, currentColor 75%), linear-gradient(-45deg, transparent 75%, currentColor 75%);
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0;
+    background-size: 20px 20px, 20px 20px, 20px 20px, 20px 20px;
+    height: size('spacer');
+    left: 50%;
+    position: absolute;
+    width: 50%;
+  }
 }
 
 [data-sassdoc='color-swatch'] {
-  box-shadow: 0 0 size('half-shim') color('shadow') inset;
+  border: 1px solid color('border');
   height: size('spacer');
+  position: relative;
+  z-index: 1;
 }
 
 [data-sassdoc='color-info'] {

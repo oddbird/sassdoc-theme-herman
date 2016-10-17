@@ -5,6 +5,7 @@
   @include baseline;
   @include font-family('body');
   font-size: calc(size('root') + 0.25vw);
+  line-height: map-get($ratios, 'herman');
 }
 
 
