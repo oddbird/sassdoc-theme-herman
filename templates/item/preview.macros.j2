@@ -132,11 +132,17 @@
 {% macro ratios(data) %}
   {% for name, value in data %}
     <div data-sassdoc="ratio-preview">
-      <div data-sassdoc="ratio-name">{{ name }} · {{ value }}</div>
-      <div data-sassdoc="size-demos">
-        {% for demo in range(6) %}
-          {% set demo = 1 * (value ** demo) + 'em' %}
-          {{ size_demo(demo) }}
+      <div data-sassdoc="ratio-name">
+        {{ name }}
+        (<code>{{ value }}</code>)
+      </div>
+
+      <div data-sassdoc="ratio-demos">
+        {% for demo in range(7) %}
+          {% set demo = 1 * (value ** demo) %}
+          <span data-sassdoc="ratio-demo" style="font-size: {{ demo + 'em' }};">
+            {{ demo|round(2) }}
+          </span>
         {% endfor %}
       </div>
     </div>
@@ -147,14 +153,18 @@
 {% macro sizes(data) %}
   <div data-sassdoc="size-demos">
     {% for name, value in data %}
-      {{ size_demo(value) }}
+      <div data-sassdoc="size-demo">
+        <div data-size-demo="details">
+          <b data-size-demo="name">{{ name }}</b>
+          <span data-size-demo="value">({{ value }})</span>
+        </div>
+
+        <div data-size-demo="sample" style="font-size: {{ value }};">
+          {{ lorem('title') }}
+        </div>
+      </div>
     {% endfor %}
   </div>
-{% endmacro %}
-
-
-{% macro size_demo(size) %}
-  <div data-sassdoc="size-demo" style="width: {{ size }}; height: {{ size }}"></div>
 {% endmacro %}
 
 

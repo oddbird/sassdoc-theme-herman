@@ -1,27 +1,28 @@
 // Ratio Preview
 // =============
 
-[data-sassdoc='size-demos'] {
-  align-items: flex-end;
-  display: flex;
-  justify-content: space-between;
+[data-sassdoc='ratio-demos'] {
+  overflow-x: auto;
+  padding: size('half-shim');
+  white-space: nowrap;
 }
 
 [data-sassdoc='size-demo'] {
-  background: color('text');
-  flex: 0 0 auto;
-}
+  margin: size('shim') 0;
 
+  [data-size-demo='sample'] {
+    overflow: hidden;
+    padding: size('half-shim');
+    white-space: nowrap;
+  }
 
-/// Fake Mixin for testing SassDoc Require
-/// @group z-index
-/// @parameter {variable} $something - My description of something
-/// @require {variable} $fake
-/// @link http://www.google.com/ This link has a caption and the next doesnt
-/// @link http://www.google.com/
-/// @see {mixin} z-index
-/// @throws No value found for `$breakpoint`. Please make sure it is defined in `$breakpoints` map.
-@mixin something($something) {
-  content: $something;
-  margin: $fake;
+  [data-size-demo='details'] {
+    @include font-family('code');
+    @include font-size('smaller');
+    flex: 1 1 auto;
+  }
+
+  [data-size-demo='value'] {
+    color: color('text-light');
+  }
 }
