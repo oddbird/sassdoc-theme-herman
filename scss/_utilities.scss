@@ -39,6 +39,25 @@ $json: ();
 }
 
 
+// Herman Inspect
+// --------------
+@function herman-inspect(
+  $value
+) {
+  $value: inspect($value);
+
+  @if str-index($value, '.') == 1 {
+    $value: '0' + $value;
+  }
+
+  @if str-index($value, '"') {
+    $value: str-replace($value, '"', '\\"', true);
+  }
+
+  @return $value;
+}
+
+
 // Map Compile
 // -----------
 /// Get output values from a sass map,
@@ -47,19 +66,17 @@ $json: ();
 @function herman-map-compile(
   $map,
   $function,
-  $args...
+  $inspect: true
 ) {
   $output: ();
 
   @each $name, $value in $map {
     @if function-exists($function) {
-      $value: call($function, $name, $args...);
+      $value: call($function, $name);
     }
 
-    $value: inspect($value);
-
-    @if str-index($value, '"') {
-      $value: str-replace($value, '"', '\\"', true);
+    @if $inspect {
+      $value: herman-inspect($value);
     }
 
     $output: map-merge($output, ($name: $value));
@@ -69,69 +86,77 @@ $json: ();
 }
 
 
-// Herman Colors
-// -------------
-/// Combine Accoutrement Color maps,
-/// adding them to both Accoutrement config
-/// and a `$json` map for exporting to Herman.
-/// @group utility
-@mixin herman-colors(
-  $maps
+// Herman Add Color
+// ----------------
+@mixin herman-add-color(
+  $name,
+  $map,
+  $function: 'color'
 ) {
-  @each $name, $value in $maps {
-    $colors: map-merge($colors, $value) !global;
-    $compiled: herman-map-compile($value, 'color');
-    $json: map-merge($json, ($name: $compiled)) !global;
+  $colors: map-merge($colors, $map) !global;
+  $expanded: ();
+
+  @if $function {
+    $map: herman-map-compile($map, $function, false);
   }
+
+  @each $key, $value in $map {
+    $r: herman-inspect(round(red($value)));
+    $g: herman-inspect(round(green($value)));
+    $b: herman-inspect(round(blue($value)));
+    $h: herman-inspect(round(hue($value)));
+    $s: herman-inspect(round(saturation($value)));
+    $l: herman-inspect(round(lightness($value)));
+    $a: herman-inspect(alpha($value));
+
+    $map: (
+      'output': herman-inspect($value),
+      'rgba': 'rgba(#{$r}, #{$g}, #{$b}, #{$a})',
+      'hsla': 'hsla(#{$h}, #{$s}, #{$l}, #{$a})',
+    );
+
+    $expanded: map-merge($expanded, ($key: $map));
+  }
+
+  $json: map-merge($json, ($name: $expanded)) !global;
 }
 
 
-// Herman Sizes
-// ------------
-/// Combine Accoutrement Size maps,
-/// adding them to both Accoutrement config
-/// and a `$json` map for exporting to Herman.
-/// @group utility
-@mixin herman-sizes(
-  $maps
+// Herman Add Sizes
+// ----------------
+@mixin herman-add-sizes(
+  $name,
+  $map,
+  $function: 'size'
 ) {
-  @each $name, $value in $maps {
-    $sizes: map-merge($sizes, $value) !global;
-    $compiled: herman-map-compile($value, 'size', 'px');
-    $json: map-merge($json, ($name: $compiled)) !global;
+  $sizes: map-merge($sizes, $map) !global;
+
+  @if $function {
+    $map: herman-map-compile($map, $function);
   }
+
+  $json: map-merge($json, ($name: $map)) !global;
 }
 
 
 // Herman Ratios
 // -------------
-/// Combine Accoutrement Ratio maps,
-/// adding them to both Accoutrement config
-/// and a `$json` map for exporting to Herman.
-/// @group utility
-@mixin herman-ratios(
-  $maps
+@mixin herman-add-ratios(
+  $name,
+  $map
 ) {
-  @each $name, $value in $maps {
-    $ratios: map-merge($ratios, $value) !global;
-    $json: map-merge($json, ($name: $value)) !global;
-  }
+  $ratios: map-merge($ratios, $map) !global;
+  $json: map-merge($json, ($name: $map)) !global;
 }
 
 
-// Herman Fonts
-// ------------
-/// Combine Accoutrement Font maps,
-/// adding them to both Accoutrement config
-/// and a `$json` map for exporting to Herman.
-/// @group utility
-@mixin herman-fonts(
-  $maps...
+// Herman Add Font
+// ---------------
+@mixin herman-add-font(
+  $name,
+  $map
 ) {
-  @each $font in $maps {
-    @each $name, $value in $font {
-      $fonts: map-merge($fonts, $font) !global;
-      $json: map-merge($json, $font) !global;
-    }
-  }
+  $new: ($name: $map);
+  $fonts: map-merge($fonts, $new) !global;
+  $json: map-merge($json, $new) !global;
 }

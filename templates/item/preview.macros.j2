@@ -32,10 +32,14 @@
 <div data-sassdoc="color-palette">
   {% for name, value in data %}
     <div data-sassdoc-color="{{ name }}">
-      <div data-sassdoc="color-swatch" style="background-color: {{ value }};"></div>
+      <div data-sassdoc="color-swatch" style="background-color: {{ value.output }};"></div>
       <div data-sassdoc="color-info">
         <strong data-sassdoc="color-name">{{ name }}</strong>
-        <span data-sassdoc="color-value">{{ value }}</span>
+        {% for type, color in value %}
+          <div data-sassdoc="color-value">
+            <b>{{ type }}:</b> {{ color }}
+          </div>
+        {% endfor %}
       </div>
     </div>
   {% endfor %}

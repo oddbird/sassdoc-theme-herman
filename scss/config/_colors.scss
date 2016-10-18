@@ -17,6 +17,8 @@ $brand-colors: (
   'brand-pink': hsl(330, 85%, 48%),
 );
 
+@include herman-add-color('brand-colors', $brand-colors);
+
 
 // Neutral Colors
 // --------------
@@ -30,6 +32,8 @@ $neutral-colors: (
   'black': 'brand-blue' ('shade': 65%),
 );
 
+@include herman-add-color('neutral-colors', $neutral-colors);
+
 
 // Status Colors
 // -------------
@@ -42,6 +46,8 @@ $status-colors: (
   'yield': 'brand-orange',
   'stop': hsl(0, 85%, 50%),
 );
+
+@include herman-add-color('status-colors', $status-colors);
 
 
 // Theme Colors
@@ -65,22 +71,16 @@ $theme-colors: (
   'slight': 'light-gray' ('rgba': 0.4),
 );
 
+@include herman-add-color('theme-colors', $theme-colors);
+
 
 // System Colors
+// -------------
+/// Colors used by accoutrement-color
+/// to calculate contrast ratios.
 $system-colors: (
   'contrast-light': 'background',
   'contrast-dark': 'text',
 );
 
-
-// Combine & Export Colors
-// -----------------------
-@include herman-colors(
-  (
-    'brand-colors': $brand-colors,
-    'neutral-colors': $neutral-colors,
-    'status-colors': $status-colors,
-    'theme-colors': $theme-colors,
-    'system-colors': $system-colors,
-  )
-);
+@include herman-add-color('system-colors', $system-colors);

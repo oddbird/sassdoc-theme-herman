@@ -15,12 +15,7 @@ $text-ratios: (
   'herman': 1.4
 );
 
-
-@include herman-ratios(
-  (
-    'text-ratios': $text-ratios,
-  )
-);
+@include herman-add-ratios('text-ratios', $text-ratios);
 
 
 // Text Sizes
@@ -41,6 +36,8 @@ $text-sizes: (
   'smaller': 16px,
 );
 
+@include herman-add-sizes('text-sizes', $text-sizes);
+
 
 // Spacing Sizes
 // -------------
@@ -56,6 +53,8 @@ $spacing-sizes: (
   'half-shim': 'gutter' ('linear': 0.25),
 );
 
+@include herman-add-sizes('spacing-sizes', $spacing-sizes);
+
 
 // Pattern Sizes
 // -------------
@@ -66,12 +65,7 @@ $spacing-sizes: (
 $pattern-sizes: (
   'page': 50rem,
   'specimen': 'rhythm' ('linear': 3),
+  'color-swatch': 'rhythm' ('linear': 4),
 );
 
-@include herman-sizes(
-  (
-    'text-sizes': $text-sizes,
-    'spacing-sizes': $spacing-sizes,
-    'pattern-sizes': $pattern-sizes,
-  )
-);
+@include herman-add-sizes('pattern-sizes', $pattern-sizes);
