@@ -2,6 +2,8 @@
 // ========
 
 [data-sassdoc-example] {
+  margin: size('gutter') 0;
+
   [aria-hidden='true'] {
     display: none;
   }
@@ -12,7 +14,6 @@
   @include font-size('smaller');
 
   [aria-controls] {
-    border-bottom: 0;
     display: inline-block;
     padding: 0 size('shim');
   }
@@ -22,10 +23,19 @@
   }
 }
 
-[data-sassdoc-example-panel='output'] {
+[data-sassdoc='example-tab-solo'] {
+  @include contrasted('text');
+  display: inline-block;
+  padding: 0 size('shim');
+}
+
+[data-sassdoc-example-panel] {
   border: 1px solid color('border');
   max-height: size('rhythm') * 6;
   max-width: 100%;
   overflow: auto;
+}
+
+[data-sassdoc-example-panel='output'] {
   padding: size('shim');
 }

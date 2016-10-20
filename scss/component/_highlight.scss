@@ -34,7 +34,6 @@ $colors: map-merge($colors, $hljs-colors);
   box-shadow: 0 0 size('half-shim') color('hljs-shadow') inset;
   color: color('hljs-text');
   display: block;
-  margin-bottom: size('gutter');
   overflow-x: auto;
   padding: size('shim');
 }

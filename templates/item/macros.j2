@@ -45,32 +45,34 @@ ${{ item.context.name }}: {{ item.context.value }}{% if item.context.scope != 'p
 {# @param annotation #}
 {% macro parameter(item) -%}
   {% if item.parameter %}
-    <h5 class="item-subtitle">Parameters</h5>
-    <table data-sassdoc="parameters">
-      <thead>
-        <tr scope="row">
-          <th scope="col">Name</th>
-          <th scope="col">Description</th>
-          <th scope="col">Type</th>
-          <th scope="col">Default</th>
-        </tr>
-      </thead>
-      <tbody>
-        {%- for parameter in item.parameter %}
-        <tr data-sassdoc="parameter-item">
-          <td scope="row" data-label="name"><code>${{ parameter.name }}</code></td>
-          <td data-label="desc">{% if parameter.description %}{{ parameter.description|safe }}{% endif %}</td>
-          <td data-label="type"><code>{% if parameter.type %}{{ parameter.type }}{% endif %}</code></td>
-          <td data-label="default">{% if not parameter.default %}
-              &mdash;<span class="visually-hidden"> none</span>
-            {% else %}
-              <code>{{ parameter.default }}</code>
-            {% endif %}
-          </td>
-        </tr>
-        {%- endfor %}
-      </tbody>
-    </table>
+    <div data-sassdoc="parameters">
+      <h5 class="item-subtitle">Parameters</h5>
+      <table data-sassdoc="parameters-table">
+        <thead>
+          <tr scope="row">
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Type</th>
+            <th scope="col">Default</th>
+          </tr>
+        </thead>
+        <tbody>
+          {%- for parameter in item.parameter %}
+          <tr data-sassdoc="parameter-item">
+            <td scope="row" data-label="name"><code>${{ parameter.name }}</code></td>
+            <td data-label="desc">{% if parameter.description %}{{ parameter.description|safe }}{% endif %}</td>
+            <td data-label="type"><code>{% if parameter.type %}{{ parameter.type }}{% endif %}</code></td>
+            <td data-label="default">{% if not parameter.default %}
+                &mdash;<span class="visually-hidden"> none</span>
+              {% else %}
+                <code>{{ parameter.default }}</code>
+              {% endif %}
+            </td>
+          </tr>
+          {%- endfor %}
+        </tbody>
+      </table>
+    </div>
   {% endif %}
 {%- endmacro %}
 
@@ -78,35 +80,36 @@ ${{ item.context.name }}: {{ item.context.value }}{% if item.context.scope != 'p
 {# @require annotation #}
 {% macro require(item) -%}
   {% if item.require.length > 0 %}
-    <h5 class="item-subtitle">Requires</h5>
+    <div data-sassdoc="item-description">
+      <h5 class="item-subtitle">Requires</h5>
+      <ul>
+        {% for require in item.require %}
+          {# External links #}
+          {% if require.external %}
+            <li data-sassdoc="requires-item"><code>[external]</code>
+              {% if require.url %}
+                <a href="{{ require.url }}"><code>{{ require.name }}</code></a> {{ require.description }}</li>
+              {% else %}
+                <code>{{ require.name }}</code>
+              {% endif %}
+              {% if require.description %}
+                &mdash; {{ require.description }}
+              {% endif %}
+            </li>
 
-    <ul data-sassdoc="item-description">
-      {% for require in item.require %}
-        {# External links #}
-        {% if require.external %}
-          <li data-sassdoc="requires-item"><code>[external]</code>
-            {% if require.url %}
-              <a href="{{ require.url }}"><code>{{ require.name }}</code></a> {{ require.description }}</li>
-            {% else %}
-              <code>{{ require.name }}</code>
-            {% endif %}
-            {% if require.description %}
-              &mdash; {{ require.description }}
-            {% endif %}
-          </li>
-
-        {# Internal links #}
-        {% else %}
-          <li data-sassdoc="requires-item">
-            <code>[{{ require.item.context.type }}]</code>
-            <a href="{{ require.item.group }}.html#{{ require.item.context.type }}--{{ require.item.context.name }}"><code>{{ require.item.context.name }}</code></a>
-            {% if require.description %}
-              &mdash; {{ require.description }}
-            {% endif %}
-          </li>
-        {% endif %}
-      {% endfor %}
-    </ul>
+          {# Internal links #}
+          {% else %}
+            <li data-sassdoc="requires-item">
+              <code>[{{ require.item.context.type }}]</code>
+              <a href="{{ require.item.group }}.html#{{ require.item.context.type }}--{{ require.item.context.name }}"><code>{{ require.item.context.name }}</code></a>
+              {% if require.description %}
+                &mdash; {{ require.description }}
+              {% endif %}
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
   {% endif %}
 {%- endmacro %}
 
@@ -114,36 +117,38 @@ ${{ item.context.name }}: {{ item.context.value }}{% if item.context.scope != 'p
 {# @link annotation #}
 {% macro link(item) -%}
   {% if item.link.length > 0 %}
-    <h5 class="item-subtitle">Links</h5>
-
-    <ul data-sassdoc="item-description">
-      {% for link in item.link %}
-        <li data-sassdoc="link-item">
-          <a href="{{ link.url }}">
-            {% if link.caption %}
-              {{ link.caption }}
-            {% else %}
-              {{ link.url }}
-            {% endif %}
-          </a>
-        </li>
-      {% endfor %}
-    </ul>
+    <div data-sassdoc="item-description">
+      <h5 class="item-subtitle">Links</h5>
+      <ul>
+        {% for link in item.link %}
+          <li data-sassdoc="link-item">
+            <a href="{{ link.url }}">
+              {% if link.caption %}
+                {{ link.caption }}
+              {% else %}
+                {{ link.url }}
+              {% endif %}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
   {% endif %}
 {%- endmacro %}
 
 {# @see annotation #}
 {% macro see(item) -%}
   {% if item.see.length > 0 %}
-    <h5 class="item-subtitle">See</h5>
-
-    <ul data-sassdoc="item-description">
-      {% for see in item.see %}
-        <li data-sassdoc="see-item">
-          <a href="/{{ see.group }}.html#{{ see.context.type }}--{{ see.context.name }}">{{ see.context.name }}</a>
-        </li>
-      {% endfor %}
-    </ul>
+    <div data-sassdoc="item-description">
+      <h5 class="item-subtitle">See</h5>
+      <ul>
+        {% for see in item.see %}
+          <li data-sassdoc="see-item">
+            <a href="/{{ see.group }}.html#{{ see.context.type }}--{{ see.context.name }}">{{ see.context.name }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
   {% endif %}
 {%- endmacro %}
 
@@ -190,10 +195,12 @@ ${{ item.context.name }}: {{ item.context.value }}{% if item.context.scope != 'p
           class='output'
           ) }}
       {% else %}
-        <strong data-sassdoc="example-subtitle">
-          example [{{ example.type }}]:
-        </strong>
-        {{ code|safe }}
+        <div data-sassdoc="example-tabs">
+          <span data-sassdoc="example-tab-solo">{{ example.type }}</span>
+        </div>
+        <div data-sassdoc-example-panel="{{ example.type }}">
+          {{ code|safe }}
+        </div>
       {% endif %}
 
       {% if example.description %}

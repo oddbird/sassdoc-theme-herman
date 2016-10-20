@@ -8,7 +8,7 @@ body {
 
 table {
   border-collapse: collapse;
-  margin-bottom: size('gutter');
+  margin: size('shim') 0;
   width: 100%;
 }
 

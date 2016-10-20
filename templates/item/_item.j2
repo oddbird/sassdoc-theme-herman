@@ -13,14 +13,19 @@
   </h4>
 
   {% if item.description %}
-    <div data-sassdoc="item-description">{{ item.description|safe }}</div>
+    <div data-sassdoc="item-description">
+      <p>{{ item.description|safe }}</p>
+    </div>
   {% endif %}
 
   {{ code.source(item, type) }}
+  {{ code.link(item) }}
+  {{ code.see(item) }}
+  {{ code.parameter(item) }}
+  {{ code.require(item) }}
 
   {{ code.examples(item.example, id) }}
 
-  {{ item.preview[type] }}
   {{ preview.show_previews(
     data=sassjson,
     name=item.context.name,
@@ -28,14 +33,4 @@
     ) }}
 
   {{ preview.icons(item.icons) }}
-
-  {{ code.parameter(item) }}
-
-  {{ code.require(item) }}
-
-  {{ code.link(item) }}
-
-  {{ code.see(item) }}
-
-
 </section>

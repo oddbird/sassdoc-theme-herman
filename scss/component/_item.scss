@@ -19,11 +19,12 @@
   font-weight: normal;
 }
 
-[data-sassdoc='item-description'] {
-  margin-bottom: size('gutter');
+[data-sassdoc='item-description'],
+[data-sassdoc='parameters'] {
+  margin: size('shim') 0;
 }
 
-[data-sassdoc='parameters'] {
+[data-sassdoc='parameters-table'] {
   @include font-size('small');
 
   td,
