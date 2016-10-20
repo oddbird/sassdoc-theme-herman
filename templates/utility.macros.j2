@@ -2,9 +2,7 @@
 
 
 {% macro attr_if(attr, value) %}
-  {# @@@ Temp until nunjucks supports strict equality #}
-  {# https://github.com/mozilla/nunjucks/issues/750 #}
-  {%- if value == true and value|string == 'true' -%}
+  {%- if value === true -%}
     {{ attr }}
   {%- elif value -%}
     {{ attr }}="{{ value }}"
