@@ -1,3 +1,6 @@
+{% import 'utility.macros.j2' as utility %}
+
+
 {% macro code_block(language=none, content=none) %}
   {% set content = content if (content != none) else caller() %}
   {% set language = ['lang', language]|join('-') if language != none %}
@@ -144,23 +147,56 @@ ${{ item.context.name }}: {{ item.context.value }}{% if item.context.scope != 'p
 {%- endmacro %}
 
 
-{% macro examples(examples_list) %}
+{% macro examples(examples_list, id) %}
   {% for example in examples_list %}
-    <div data-sassdoc="example">
-      <strong data-sassdoc="example-subtitle">code example [{{ example.type }}]:</strong>
+    {% set group = ['examples', id, loop.index]|join('_') if example.rendered else null %}
+    {% set code = code_block(
+      language=example.type,
+      content=example.code|escape|safe
+      ) %}
+
+    <div data-sassdoc-example="{{ group or 'simple' }}">
+      {% if example.rendered %}
+        {% set input_id = [group, example.type]|join('_') %}
+        {% set output_id = [group, 'output']|join('_') %}
+
+        <div data-sassdoc="example-tabs">
+          {{ utility.tab(
+            id=input_id,
+            group=group,
+            content=example.type
+            ) }}
+          {{ utility.tab(
+            id=output_id,
+            group=group,
+            content='output',
+            active=true
+            ) }}
+        </div>
+
+        {{ utility.tab_panel(
+          id=input_id,
+          group=group,
+          content=code|safe,
+          class='input'
+          ) }}
+
+        {{ utility.tab_panel(
+          id=output_id,
+          group=group,
+          content=example.rendered|safe,
+          active=true,
+          class='output'
+          ) }}
+      {% else %}
+        <strong data-sassdoc="example-subtitle">
+          example [{{ example.type }}]:
+        </strong>
+        {{ code|safe }}
+      {% endif %}
 
       {% if example.description %}
         <p data-sassdoc="example-description">{{ example.description|safe }}</p>
-      {% endif %}
-
-      {{ code_block(
-        language=example.type,
-        content=example.code|escape|safe
-        ) }}
-
-      {% if example.rendered %}
-        <strong data-sassdoc="example-subtitle">rendered output:</strong>
-        <div data-sassdoc="example-preview">{{ example.rendered|safe }}</div>
       {% endif %}
     </div>
   {% endfor %}

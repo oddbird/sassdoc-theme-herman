@@ -1,7 +1,10 @@
 {% import 'item/macros.j2' as code %}
 {% import 'item/preview.macros.j2' as preview %}
 
-<section data-sassdoc-item='{{ type }}' id="{{ type }}--{{ item.context.name }}">
+
+{% set id = [type, item.context.name]|join('--') %}
+
+<section data-sassdoc-item='{{ type }}' id="{{ id }}">
   {% set item_name = [item.context.name, '()']|join('') if (type == 'mixin' or type == 'function') else item.context.name %}
   {% set item_name = ['$', item_name]|join('') if type == 'variable' else item_name %}
   <h4 data-sassdoc="item-title">
@@ -15,7 +18,7 @@
 
   {{ code.source(item, type) }}
 
-  {{ code.examples(item.example) }}
+  {{ code.examples(item.example, id) }}
 
   {{ item.preview[type] }}
   {{ preview.show_previews(

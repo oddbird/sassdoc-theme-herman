@@ -17,11 +17,11 @@
     {% if type == 'color-palette' %}
       {{ color_palette(data[key]) }}
     {% elif type == 'font-specimen' %}
-      {{ font_specimen(key, data[key], args) }}
+      {{ font_specimen(key, data[key]) }}
     {% elif type == 'ratios' %}
-      {{ ratios(data[key]) }}
+      {{ ratios(data[key], args) }}
     {% elif type == 'sizes' %}
-      {{ sizes(data[key]) }}
+      {{ sizes(data[key], args) }}
     {% endif %}
 
   {% endif %}
@@ -32,12 +32,15 @@
 <div data-sassdoc="color-palette">
   {% for name, value in data %}
     <div data-sassdoc-color="{{ name }}">
-      <div data-sassdoc="color-swatch" style="background-color: {{ value.output }};"></div>
+      <div data-sassdoc="color-swatch">
+        <div data-sassdoc="transparency-grid"></div>
+        <div data-sassdoc="color-overlay" style="background-color: {{ value.output }};"></div>
+      </div>
       <div data-sassdoc="color-info">
         <strong data-sassdoc="color-name">{{ name }}</strong>
         {% for type, color in value %}
           <div data-sassdoc="color-value">
-            <b>{{ type }}:</b> {{ color }}
+            {{ color }}
           </div>
         {% endfor %}
       </div>
@@ -47,7 +50,7 @@
 {% endmacro %}
 
 
-{% macro font_specimen(name, data, args) %}
+{% macro font_specimen(name, data) %}
   <div data-sassdoc-font="{{ name }}">
     <h3 data-sassdoc="font-type">
       {{ utility.link_if(
@@ -58,8 +61,6 @@
 
       (<code>{{ name }}</code>)
     </h3>
-
-
 
     <div data-sassdoc="font-stack">
       <b>Stack:</b>
@@ -129,7 +130,7 @@
 {% endmacro %}
 
 
-{% macro ratios(data) %}
+{% macro ratios(data, args) %}
   {% for name, value in data %}
     <div data-sassdoc="ratio-preview">
       <div data-sassdoc="ratio-name">
@@ -137,8 +138,22 @@
         (<code>{{ value }}</code>)
       </div>
 
+      {% set counts = {
+        '1': 1,
+        '2': 2,
+        '3': 3,
+        '4': 4,
+        '5': 5,
+        '6': 6,
+        '7': 7,
+        '8': 8,
+        '9': 9,
+        '10': 10
+      } %}
+
       <div data-sassdoc="ratio-demos">
-        {% for demo in range(7) %}
+        {% set count = counts[args.count] or 6 %}
+        {% for demo in range(count) %}
           {% set demo = 1 * (value ** demo) %}
           <span data-sassdoc="ratio-demo" style="font-size: {{ demo + 'em' }};">
             {{ demo|round(2) }}
@@ -150,18 +165,23 @@
 {% endmacro %}
 
 
-{% macro sizes(data) %}
+{% macro sizes(data, args) %}
   <div data-sassdoc="size-demos">
     {% for name, value in data %}
       <div data-sassdoc="size-demo">
-        <div data-size-demo="details">
-          <b data-size-demo="name">{{ name }}</b>
-          <span data-size-demo="value">({{ value }})</span>
+        <div data-sassdoc="size-details">
+          <b data-sassdoc="size-name">{{ name }}:</b>
+          <span data-sassdoc="size-value">{{ value }}</span>
         </div>
 
-        <div data-size-demo="sample" style="font-size: {{ value }};">
-          {{ lorem('title') }}
-        </div>
+        {% set style = args.style or 'text' %}
+        {% if style != 'output-only' %}
+          <div data-size-demo="{{ style }}" style="font-size: {{ value }};">
+            {% if style == 'text' %}
+              {{ lorem('title') }}
+            {% endif %}
+          </div>
+        {% endif %}
       </div>
     {% endfor %}
   </div>

@@ -7,22 +7,31 @@
   white-space: nowrap;
 }
 
-[data-sassdoc='size-demo'] {
-  margin: size('shim') 0;
 
-  [data-size-demo='sample'] {
-    overflow: hidden;
-    padding: size('half-shim');
-    white-space: nowrap;
-  }
+// Size Preview
+// ------------
 
-  [data-size-demo='details'] {
-    @include font-family('code');
-    @include font-size('smaller');
-    flex: 1 1 auto;
-  }
+[data-sassdoc='size-details'] {
+  @include font-family('code');
+  @include font-size('smaller');
+}
 
-  [data-size-demo='value'] {
-    color: color('text-light');
-  }
+[data-sassdoc='size-value'] {
+  color: color('text-light');
+}
+
+[data-size-demo] {
+  margin-bottom: size('shim');
+}
+
+[data-size-demo='text'] {
+  overflow: hidden;
+  padding: size('half-shim');
+  white-space: nowrap;
+}
+
+[data-size-demo='ruler'] {
+  background: linear-gradient(to right, currentColor 50%, transparent 50%);
+  background-size: 2em auto;
+  height: 1em;
 }

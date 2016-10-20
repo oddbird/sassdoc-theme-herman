@@ -115,6 +115,10 @@ $json: ();
       'hsla': 'hsla(#{$h}, #{$s}, #{$l}, #{$a})',
     );
 
+    @if $a != '1' {
+      $map: map-remove($map, 'rgba');
+    }
+
     $expanded: map-merge($expanded, ($key: $map));
   }
 

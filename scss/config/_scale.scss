@@ -10,7 +10,7 @@
 /// for creating text rhythm and modular-scales.
 ///
 /// @group scale
-/// @preview ratios
+/// @preview ratios;
 $text-ratios: (
   'herman': 1.4
 );
@@ -44,7 +44,7 @@ $text-sizes: (
 /// A set of standard spacing sizes.
 ///
 /// @group scale
-/// @preview sizes
+/// @preview sizes; style: ruler
 $spacing-sizes: (
   'rhythm': 'root' ('herman': 1),
   'gutter': 'rhythm',
@@ -62,6 +62,7 @@ $spacing-sizes: (
 /// that can be applied to various components.
 ///
 /// @group scale
+/// @preview sizes; style: output-only
 $pattern-sizes: (
   'page': 50rem,
   'specimen': 'rhythm' ('linear': 3),

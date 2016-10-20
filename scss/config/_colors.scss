@@ -78,6 +78,7 @@ $theme-colors: (
 // -------------
 /// Colors used by accoutrement-color
 /// to calculate contrast ratios.
+/// @group colors
 $system-colors: (
   'contrast-light': 'background',
   'contrast-dark': 'text',

@@ -1,0 +1,31 @@
+// Examples
+// ========
+
+[data-sassdoc-example] {
+  [aria-hidden='true'] {
+    display: none;
+  }
+}
+
+[data-sassdoc='example-tabs'] {
+  @include font-family('code');
+  @include font-size('smaller');
+
+  [aria-controls] {
+    border-bottom: 0;
+    display: inline-block;
+    padding: 0 size('shim');
+  }
+
+  [aria-selected='true'] {
+    @include contrasted('text');
+  }
+}
+
+[data-sassdoc-example-panel='output'] {
+  border: 1px solid color('border');
+  max-height: size('rhythm') * 6;
+  max-width: 100%;
+  overflow: auto;
+  padding: size('shim');
+}
