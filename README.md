@@ -98,6 +98,24 @@ for more info.
 Releases
 --------
 
+### 0.4.0: UNRELEASED
+
+- Inject preview data directly into HTML,
+  so that previews don't have to be styled locally
+- Add [Sass Utilities](sass-utilities.html) file,
+  for help with setting/exporting Sass data
+- `herman-add-color` mixin now exports hex, rgba, and hsla colors.
+- Simplified font previews don't require size input
+- Color, font, ratio, and size previews accept `key` argument,
+  in case the JSON key doesn't match the variable name
+  (most common for fonts)
+- Ratio preview accets `count` argument [`1-10`],
+  determining how many instances of the ratio to display
+  (default is `6`)
+- Size preview accepts `style` argument [`text` | `ruler` | `output-only`],
+  determining the type of preview to display
+  (default is `text`, see [scale](scale.html) for examples)
+
 ### 0.3.2: 2016-09-29
 
 - Mark imported `minifiedIcons` file as `|safe`.

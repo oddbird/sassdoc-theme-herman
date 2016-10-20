@@ -22,3 +22,16 @@
 [data-sassdoc='item-description'] {
   margin-bottom: size('gutter');
 }
+
+[data-sassdoc='parameters'] {
+  @include font-size('small');
+
+  td,
+  th {
+    padding: size('half-shim') size('shim');
+  }
+
+  code {
+    white-space: nowrap;
+  }
+}

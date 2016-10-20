@@ -42,3 +42,7 @@ code {
   @include font-family('code');
   @include font-size('smaller', 0.75);
 }
+
+.visually-hidden {
+  @include is-hidden;
+}

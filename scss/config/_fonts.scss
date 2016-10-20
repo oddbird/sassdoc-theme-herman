@@ -6,7 +6,10 @@
 
 // Font Formats
 // ------------
-/// @access private
+/// The font-formats that we want to import
+/// @group webfonts
+/// @link http://oddbird.net/accoutrement-type/sassdoc/
+///   Accoutrement Type
 $font-formats: 'woff' 'ttf';
 
 
@@ -16,6 +19,11 @@ $font-formats: 'woff' 'ttf';
 /// used for most body and headline text.
 /// @preview font-specimen; key: body
 /// @group webfonts
+/// @link http://oddbird.net/accoutrement-type/sassdoc/
+///   Accoutrement Type
+/// @example
+///   // @preview font-specimen; key: body
+///   @include herman-add-font('body', $body-font);
 $body-font: (
   'name': 'CenturyOldStyle',
   'source': 'http://www.fontspring.com/fonts/fontsite/century-old-style-fs',
@@ -34,6 +42,11 @@ $body-font: (
 /// used for smaller text like captions and labels.
 /// @preview font-specimen; key: sans
 /// @group webfonts
+/// @link http://oddbird.net/accoutrement-type/sassdoc/
+///   Accoutrement Type
+/// @example
+///   // @preview font-specimen; key: sans
+///   @include herman-add-font('sans', $sans-font);
 $sans-font: (
   'name': 'SourceSansPro',
   'source': 'http://www.fontsquirrel.com/fonts/source-sans-pro',
@@ -52,6 +65,11 @@ $sans-font: (
 /// A readable monospace font for code previews.
 /// @preview font-specimen; key: code
 /// @group webfonts
+/// @link http://oddbird.net/accoutrement-type/sassdoc/
+///   Accoutrement Type
+/// @example
+///   // @preview font-specimen; key: code
+///   @include herman-add-font('code', $code-font);
 $code-font: (
   'name': 'SourceCodePro',
   'source': 'http://www.fontsquirrel.com/fonts/source-code-pro',
