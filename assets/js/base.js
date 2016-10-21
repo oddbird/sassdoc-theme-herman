@@ -131,7 +131,7 @@ window.Herman = (function (Herman, $) {
     var showPanel = function (tab) {
       var tabs = getAllTabsInGroup(tab);
       var panels = getAllPanelsInGroup(tab);
-      var panel = panels.filter(tab.attr('href'));
+      var panel = panels.filter('[aria-labelledby="' + tab.attr('id') + '"]');
       tab.attr({ 'tabindex': 0, 'aria-selected': true });
       tabs.not(tab).attr('tabindex', -1).removeAttr('aria-selected');
       panel.removeAttr('aria-hidden').trigger('visible');
