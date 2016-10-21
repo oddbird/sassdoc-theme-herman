@@ -181,7 +181,7 @@
 
 
 {% macro icons(list) %}
-  {% if item.icons %}
+  {% if list %}
     <div data-sassdoc="icon-preview">
       {% for icon in list %}
         <div data-sassdoc-icon="{{ icon.name }}">
