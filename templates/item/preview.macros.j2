@@ -126,8 +126,8 @@
   {% for name, value in data %}
     <div data-sassdoc="ratio-preview">
       <div data-sassdoc="ratio-name">
-        {{ name }}
-        (<code>{{ value }}</code>)
+        {{ name }}:
+        <code>{{ value }}</code>
       </div>
 
       {% set counts = {
@@ -146,7 +146,7 @@
       <div data-sassdoc="ratio-demos">
         {% set count = counts[args.count] or 6 %}
         {% for demo in range(count) %}
-          {% set demo = 1 * (value ** demo) %}
+          {% set demo = 1 * (value ** demo) if (value != 'linear') else (demo + 1) %}
           <span data-sassdoc="ratio-demo" style="font-size: {{ demo + 'em' }};">
             {{ demo|round(2) }}
           </span>
