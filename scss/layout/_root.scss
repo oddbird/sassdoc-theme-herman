@@ -7,6 +7,7 @@ body {
 }
 
 table {
+  border-bottom: 2px solid color('light-gray');
   border-collapse: collapse;
   margin: size('shim') 0;
   width: 100%;
