@@ -17,9 +17,7 @@
     @include font-size('h3');
   }
 
-  p,
-  ol,
-  ul {
+  p {
     margin: size('gutter') 0;
   }
 }

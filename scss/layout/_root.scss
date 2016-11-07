@@ -6,6 +6,11 @@ body {
   overflow-x: hidden;
 }
 
+ol,
+ul {
+  margin: size('shim') size('gutter') size('gutter');
+}
+
 table {
   border-bottom: 2px solid color('light-gray');
   border-collapse: collapse;
