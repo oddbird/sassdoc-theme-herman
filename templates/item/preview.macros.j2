@@ -1,122 +1,197 @@
-{% macro code_block(language=none, content=none) %}
-  {% set content = content if (content != none) else caller() %}
-  {% set language = 'jinja' if language == 'njk' else language %}
-  {% set language = ['lang', language]|join('-') if language != none %}
-  <pre data-sassdoc="hljs"><code{% if language %} class="{{ language }}"{% endif %}>{{ content }}</code></pre>
-{% endmacro %}
+{% import 'utility.macros.j2' as utility %}
 
-{% macro source(item, type) %}
-{%- call code_block(language='scss') -%}
-  {%- if (type == 'variable') -%}
-    {{ scss_variable(item) }}
-  {%- elif (type == 'css') -%}
-    {{ scss_css(item) }}
-  {%- elif (type == 'function') or (type == 'mixin') -%}
-    {{ scss_function_or_mixin(item) }}
-  {%- endif -%}
-{%- endcall -%}
-{% endmacro %}
 
-{% macro scss_variable(item) -%}
-${{ item.context.name }}: {{ item.context.value }}{% if item.context.scope != 'private' %} !{{ item.context.scope }}{% endif %};
-{%- endmacro %}
+{% macro show_previews(data, name, args) %}
+  {% if args %}
+    {% set type = args.type %}
+    {% set key = args.key or name %}
 
-{% macro scss_function_or_mixin(item) -%}
-@{{ item.context.type }} {{ item.context.name }}{% if item.parameter %}(
-{%- for parameter in item.parameter %}
-  ${{ parameter.name }}{% if parameter.type|lower == "arglist" %}...{% elif parameter.default %}: {{ parameter.default }}{% endif %}{% if not loop.last %},{% endif %}
-{%- endfor %}
-){% endif %} { /* ... */ }
-{%- endmacro %}
+    {% if type == 'color-palette' %}
+      {{ color_palette(data[key]) }}
+    {% elif type == 'font-specimen' %}
+      {{ font_specimen(key, data[key]) }}
+    {% elif type == 'ratios' %}
+      {{ ratios(data[key], args) }}
+    {% elif type == 'sizes' %}
+      {{ sizes(data[key], args) }}
+    {% endif %}
 
-{%- macro scss_css(item) -%}
-{{ item.context.name }} {
-  {{ item.context.value }}
-}
-{%- endmacro -%}
-
-{% macro display(data, types) %}
-{% for type in types %}
-  {% if type == 'color-palette' %}
-    {{ color_palette(data) }}
-  {% elif type == 'font-specimen' %}
-    {{ font_specimen(data) }}
   {% endif %}
-{% endfor %}
 {% endmacro %}
+
 
 {% macro color_palette(data) %}
 <div data-sassdoc="color-palette">
   {% for name, value in data %}
     <div data-sassdoc-color="{{ name }}">
-      <div data-sassdoc="color-swatch"></div>
+      <div data-sassdoc="color-swatch">
+        <div data-sassdoc="transparency-grid"></div>
+        <div data-sassdoc="color-overlay" style="background-color: {{ value.output }};"></div>
+      </div>
       <div data-sassdoc="color-info">
         <strong data-sassdoc="color-name">{{ name }}</strong>
-        <span data-sassdoc="color-value">{{ value }}</span>
+        {% for type, color in value %}
+          <div data-sassdoc="color-value">
+            {{ color }}
+          </div>
+        {% endfor %}
       </div>
     </div>
   {% endfor %}
 </div>
 {% endmacro %}
 
-{% macro font_specimen(data) %}
-<div data-sassdoc="font-specimen">
-  {% for name, value in data %}
-    <div data-sassdoc-font="{{ name }}">
-      <div data-sassdoc="font-family">
-        <h3 data-sassdoc="font-type">{{ name }}</h3>
-        {% if value.stack %}
-          <div data-sassdoc="font-stack">
-            {% if value.name %}
-              {% if value.source %}
-                <a href="http://www.fontsquirrel.com/fonts/source-code-pro" data-sassdoc="font-name">{{ value.name }}</a>,
-              {% else %}
-                <span data-sassdoc="font-name">{{ value.name }}</span>,
-              {% endif %}
-            {% endif %}
-            {% for item in value.stack %}
-              {{ item }}{% if not loop.last %},{% endif %}
-            {% endfor %}
-          </div>
-        {% endif %}
-      </div>
 
-      {% for face in value.faces %}
-        <div data-specimen-face="{{ face }}">
-          <h4 data-sassdoc="specimen-title">{{ face }}</h4>
-          {% for size, length in value.scale %}
-            <div data-specimen-size="{{ size }}">
-              <div data-sassdoc="specimen-size">
-                {{ size }} · {{ length }}
-              </div>
-              <div data-sassdoc="specimen-text">{{ lorem('title') }}</div>
-            </div>
-          {% endfor %}
-        </div>
+{% macro font_specimen(name, data) %}
+  <div data-sassdoc-font="{{ name }}">
+    <h3 data-sassdoc="font-type">
+      {{ utility.link_if(
+        content=data.name,
+        url=data.source,
+        attrs={'data-sassdoc': 'font-name'}
+      ) }}
+
+      (<code>{{ name }}</code>)
+    </h3>
+
+    <div data-sassdoc="font-stack">
+      <b>Stack:</b>
+      {% for item in data.stack %}
+        {{ item }}{% if not loop.last %},{% endif %}
       {% endfor %}
     </div>
-  {% endfor %}
-</div>
+
+    {% set weight_options = [
+      '100', '200', '300', '400', '500', '600', '700', '800', '900', 'bold'
+    ] %}
+    {% set style_options = [
+      'italic', 'oblique'
+    ] %}
+
+    {% for options, value in data %}
+      {% set options = options|split(' ') %}
+      {% set variant = options[0] %}
+      {% set file = value if (variant in weight_options or variant in style_options or variant == 'regular') else none %}
+      {% set weight = 'normal' %}
+      {% set style = 'normal' %}
+
+      {% for value in options %}
+        {% set weight = value if (value in weight_options) else weight %}
+        {% set style = value if (value in style_options) else style %}
+      {% endfor %}
+
+      {% if file %}
+        <div data-specimen-face="{{ options }}">
+          <h4 data-specimen="face-name">
+            {% for option in options %}
+              {{ option }}
+            {% endfor %}
+            (<code>{{ file }}</code>)
+          </h4>
+          <div data-specimen="sample" style="font-family: {{ data.name }}, {{ data.stack }}; font-weight: {{ weight }}; font-style: {{ style }};">
+            <div data-specimen="aa">Aa</div>
+            <div data-specimen="lorem">{{ lorem('alpha') }}</div>
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
 {% endmacro %}
+
 
 {% macro lorem(length) %}
   {% if length == 'title' %}
-    Pack my box with five dozen liquor jugs.
+    <span data-specimen-lorem="title">
+      Pack my box with five dozen liquor&nbsp;jugs.
+    </span>
   {% elif length == 'body' %}
-    A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine. I am so happy, my dear friend, so absorbed in the exquisite sense of mere tranquil existence, that I neglect my talents. I should be incapable of drawing a single stroke at the present moment; and yet I feel that I never was a greater artist than now.
+    <span data-specimen-lorem="body">
+      A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine. I am so happy, my dear friend, so absorbed in the exquisite sense of mere tranquil existence, that I neglect my talents. I should be incapable of drawing a single stroke at the present moment; and yet I feel that I never was a greater artist than&nbsp;now.
+    </span>
+  {% elif length == 'alpha' %}
+    <span data-specimen-lorem="uppercase">
+      ABCDEFGHIJKLMNOPQRSTUVWXYZ
+    </span>
+    <span data-specimen-lorem="lowercase">
+      abcdefghijklmnopqrstuvwxyz
+    </span>
+    <span data-specimen-lorem="symbols">
+      1234567890([{“‘,.;:?!$&*’”}])
+    </span>
   {% endif %}
 {% endmacro %}
 
-{% macro icons(list) %}
-<div data-sassdoc="icon-preview">
-  {% for icon in list %}
-    <div data-sassdoc-icon="{{ icon.name }}">
-      {{ icon.rendered|safe }}
-      <div data-sassdoc="icon-info">
-        <div data-sassdoc="icon-name">{{ icon.name }}</div>
-        <div data-sassdoc="icon-path">{{ icon.path }}</div>
+
+{% macro ratios(data, args) %}
+  {% for name, value in data %}
+    <div data-sassdoc="ratio-preview">
+      <div data-sassdoc="ratio-name">
+        {{ name }}:
+        <code>{{ value }}</code>
+      </div>
+
+      {% set counts = {
+        '1': 1,
+        '2': 2,
+        '3': 3,
+        '4': 4,
+        '5': 5,
+        '6': 6,
+        '7': 7,
+        '8': 8,
+        '9': 9,
+        '10': 10
+      } %}
+
+      <div data-sassdoc="ratio-demos">
+        {% set count = counts[args.count] or 6 %}
+        {% for demo in range(count) %}
+          {% set demo = 1 * (value ** demo) if (value != 'linear') else (demo + 1) %}
+          <span data-sassdoc="ratio-demo" style="font-size: {{ demo + 'em' }};">
+            {{ demo|round(2) }}
+          </span>
+        {% endfor %}
       </div>
     </div>
   {% endfor %}
-</div>
+{% endmacro %}
+
+
+{% macro sizes(data, args) %}
+  <div data-sassdoc="size-demos">
+    {% for name, value in data %}
+      <div data-sassdoc="size-demo">
+        <div data-sassdoc="size-details">
+          <b data-sassdoc="size-name">{{ name }}:</b>
+          <span data-sassdoc="size-value">{{ value }}</span>
+        </div>
+
+        {% set style = args.style or 'text' %}
+        {% if style != 'output-only' %}
+          <div data-size-demo="{{ style }}" style="font-size: {{ value }};">
+            {% if style == 'text' %}
+              {{ lorem('title') }}
+            {% endif %}
+          </div>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+{% endmacro %}
+
+
+{% macro icons(list) %}
+  {% if list %}
+    <div data-sassdoc="icon-preview">
+      {% for icon in list %}
+        <div data-sassdoc-icon="{{ icon.name }}">
+          {{ icon.rendered|safe }}
+          <div data-sassdoc="icon-info">
+            <div data-sassdoc="icon-name">{{ icon.name }}</div>
+            <div data-sassdoc="icon-path">{{ icon.path }}</div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
 {% endmacro %}

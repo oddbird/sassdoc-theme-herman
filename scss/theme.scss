@@ -1,10 +1,7 @@
 // Herman Theme
 // ============
 
-@import '../node_modules/accoutrement-herman/sass/herman';
+@import 'utilities';
 @import 'config/manifest';
 @import 'initial/manifest';
 @import 'component/manifest';
-
-@include color-palette;
-@include font-specimen;

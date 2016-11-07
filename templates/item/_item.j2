@@ -1,42 +1,36 @@
+{% import 'item/macros.j2' as code %}
 {% import 'item/preview.macros.j2' as preview %}
 
-<section data-sassdoc-item='{{ type }}' id="{{ type }}--{{ item.context.name }}">
+{% set slug = item.context.name|urlencode|replace("'", '') %}
+{% set id = [type, slug]|join('--') %}
+
+<section data-sassdoc-item='{{ type }}' id="{{ id }}">
   {% set item_name = [item.context.name, '()']|join('') if (type == 'mixin' or type == 'function') else item.context.name %}
   {% set item_name = ['$', item_name]|join('') if type == 'variable' else item_name %}
-  <h4 data-sassdoc="item-title">
+  <h3 data-sassdoc="item-title">
     <span data-sassdoc="item-name">{{ item_name }}</span>
     <span data-sassdoc="item-type">{{ type }}</span>
-  </h4>
+  </h3>
 
   {% if item.description %}
-    <div data-sassdoc="item-description">{{ item.description|safe }}</div>
+    <div data-sassdoc="item-description">
+      <p>{{ item.description|safe }}</p>
+    </div>
   {% endif %}
 
-  {{ preview.source(item, type) }}
+  {{ code.source(item, type) }}
+  {{ code.link(item) }}
+  {{ code.see(item) }}
+  {{ code.parameter(item) }}
+  {{ code.require(item) }}
 
-  {% if item.example.length > 0 %}
-    {% for example in item.example %}
-      <div data-sassdoc="example">
-        {% if example.description %}
-          <div data-sassdoc="example-description">{{ example.description|safe }}</div>
-        {% endif %}
-        {{ preview.code_block(
-          language=example.type,
-          content=example.code|escape|safe
-          ) }}
-        {% if example.rendered %}
-          <div data-sassdoc="example-preview">{{ example.rendered|safe }}</div>
-        {% endif %}
-      </div>
-    {% endfor %}
-  {% endif %}
+  {{ code.examples(item.example, id) }}
 
-  {% if item.preview %}
-    {% set item_data = sassjson[data.currentGroup][item.context.name] %}
-    {{ preview.display(item_data, item.preview) }}
-  {% endif %}
+  {{ preview.show_previews(
+    data=sassjson,
+    name=item.context.name,
+    args=item.preview
+    ) }}
 
-  {% if item.icons %}
-    {{ preview.icons(item.icons) }}
-  {% endif %}
+  {{ preview.icons(item.icons) }}
 </section>

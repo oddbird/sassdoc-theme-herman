@@ -2,10 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
   {% set project_title = package.title or package.name or 'Herman' %}
   <title>{% block title %}{{ project_title }} Documentation{% endblock %}</title>
+
   <link href="{{ shortcutIcon.url }}" rel="shortcut icon">
   <link rel="stylesheet" href="assets/css/main.css" />
+
   {% if customCSS and customCSS.url %}
     <link rel="stylesheet" href="{{ customCSS.url }}" />
   {% else %}
@@ -44,9 +48,9 @@
     </div>
   </div>
 
+  <script type="text/javascript" src="assets/js/jquery-3.1.1.slim.js"></script>
   <script type="text/javascript" src="assets/js/highlight.js"></script>
-  <script type="text/javascript">
-    hljs.initHighlightingOnLoad();
-  </script>
+  <script type="text/javascript" src="assets/js/base.js"></script>
+  <script type="text/javascript" src="assets/js/init.js"></script>
 </body>
 </html>

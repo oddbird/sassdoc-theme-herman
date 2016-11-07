@@ -162,10 +162,10 @@ describe('preview annotation', function () {
 
   describe('parse', function () {
 
-    it('splits on comma and strips whitespace', function () {
+    it('parses CSS-like options and returns object', function () {
       assert.deepEqual(
-        this.preview.parse(' foo,bar,  baz'),
-        [ 'foo', 'bar', 'baz' ]
+        this.preview.parse(' font-specimens; foo : bar ; baz ;'),
+        { type: 'font-specimens', foo: 'bar', baz: null }
       );
     });
 

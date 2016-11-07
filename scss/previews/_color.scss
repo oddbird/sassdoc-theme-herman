@@ -1,0 +1,59 @@
+// Preview Layouts
+// ===============
+
+
+// Color Preview
+// -------------
+
+[data-sassdoc='color-palette'] {
+  margin: size('gutter') 0;
+}
+
+[data-sassdoc-color] {
+  display: flex;
+  flex-wrap: wrap;
+  margin: size('shim') 0;
+  position: relative;
+}
+
+
+// Color Swatch
+// ------------
+
+[data-sassdoc='color-swatch'] {
+  border: 1px solid color('border');
+  flex: 1 1 size('color-swatch');
+  min-height: size('color-swatch');
+  min-width: size('color-swatch') / 2;
+  position: relative;
+}
+
+[data-sassdoc='transparency-grid'],
+[data-sassdoc='color-overlay'] {
+  @include stretch;
+}
+
+[data-sassdoc='transparency-grid'] {
+  background: url('data:image/svg+xml;utf8,<svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 20 20"><rect width="10" height="10"/><rect x="10" y="10" width="10" height="10"/></svg>') center repeat scroll;
+  background-size: 0.5em 0.5em;
+  left: 50%;
+}
+
+
+// Color Info
+// ----------
+
+[data-sassdoc='color-info'] {
+  flex: 100 0 auto;
+  padding: size('half-shim');
+}
+
+[data-sassdoc='color-name'] {
+  display: block;
+}
+
+[data-sassdoc='color-value'] {
+  @include font-family('code');
+  @include font-size('smaller');
+  color: color('text-light');
+}

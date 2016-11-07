@@ -1,0 +1,53 @@
+// Font Specimen
+// =============
+
+[data-sassdoc-font] {
+  margin: size('spacer') 0 size('gutter');
+}
+
+
+// Family
+// ------
+
+[data-sassdoc='font-type'] {
+  @include font-size('h3');
+  font-weight: bold;
+}
+
+[data-sassdoc='font-stack'] {
+  @include font-family('code');
+  @include font-size('smaller');
+}
+
+
+// Face
+// ----
+
+[data-specimen-face] {
+  margin: size('shim') 0;
+}
+
+[data-specimen='sample'] {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+[data-specimen='aa'],
+[data-specimen='lorem'] {
+  padding: 0 size('shim');
+}
+
+[data-specimen='aa'] {
+  @include font-size('specimen');
+  flex: 0 1 auto;
+}
+
+[data-specimen='lorem'] {
+  flex: 1 1 auto;
+
+  span {
+    display: block;
+  }
+}

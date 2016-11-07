@@ -2,21 +2,7 @@
 // ===================
 
 @import '../node_modules/sass-json-export/stylesheets/sass-json-export';
-@import '../node_modules/accoutrement-herman/sass/herman';
+@import 'utilities';
 @import 'config/manifest';
 
-$config: (
-  'colors': (
-    'brand-colors': map-compile($brand-colors, 'color'),
-    'neutral-colors': map-compile($neutral-colors, 'color'),
-    'status-colors': map-compile($status-colors, 'color'),
-    'theme-colors': map-compile($theme-colors, 'color'),
-  ),
-  'webfonts': (
-    'body-font': font-specimen($body-font, $text-sizes),
-    'sans-font': font-specimen($sans-font, $text-sizes),
-    'code-font': font-specimen($code-font, $text-sizes),
-  ),
-);
-
-@include json-encode($config, comment);
+@include json-encode($json, comment);

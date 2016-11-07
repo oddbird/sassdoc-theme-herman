@@ -3,4 +3,10 @@
 
 @import '../../node_modules/accoutrement-layout/sass/layout';
 
+/// List of named z-index layers.
+/// The order they are defined
+/// will be the integer they are assigned.
+/// @group z-index
+/// @link http://oddbird.net/accoutrement-layout/sassdoc/z-index.html
+///   Accoutrement Layout: Z-Index
 $z-index: 'bump', 'banner', 'overlay', 'loader';

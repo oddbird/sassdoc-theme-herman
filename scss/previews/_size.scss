@@ -1,0 +1,42 @@
+// Ratio Preview
+// =============
+
+[data-sassdoc='ratio-demos'] {
+  line-height: 1.2;
+  overflow-x: auto;
+  padding: size('half-shim');
+  white-space: nowrap;
+}
+
+
+// Size Preview
+// ------------
+
+[data-sassdoc='size-demos'] {
+  margin-bottom: size('gutter');
+}
+
+[data-sassdoc='size-details'] {
+  @include font-family('code');
+  @include font-size('smaller');
+}
+
+[data-sassdoc='size-value'] {
+  color: color('text-light');
+}
+
+[data-size-demo] {
+  margin-bottom: size('shim');
+}
+
+[data-size-demo='text'] {
+  overflow: hidden;
+  padding: size('half-shim');
+  white-space: nowrap;
+}
+
+[data-size-demo='ruler'] {
+  background: linear-gradient(to right, currentColor 50%, transparent 50%);
+  background-size: 2em auto;
+  height: 1em;
+}

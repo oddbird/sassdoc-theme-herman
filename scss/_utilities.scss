@@ -1,0 +1,257 @@
+// Herman Utilities
+// ================
+
+
+// Json
+// ----
+$json: ();
+
+
+// String Replace
+// --------------
+/// Return a string, with a substring replaced
+/// @group sass-utilities
+/// @param {String} $string -
+///   The base string to be manipulated
+/// @param {String} $old -
+///   A sub-string to look for, and replace,
+///   inside the base string
+/// @param {String} $new -
+///   A sub string to insert
+///   in place of the `$old` string
+/// @param {Boolean} $replace-all [false] -
+///   Replace all instances of the `$old` string
+///   or just the first instance?
+/// @return {String} -
+///   Return the base string,
+///   with one or more instances of a substring replaced
+@function _herman-str-replace(
+  $string,
+  $old,
+  $new: null,
+  $replace-all: false
+) {
+  $return: $string;
+  $i: str-index($string, $old);
+  $n: str-length($old);
+
+  @if $string == $old {
+    $return: $new;
+  } @else if $i {
+    $a: if($i > 1, str-slice($string, 1, $i - 1), '');
+    $z: str-slice($string, $i + $n);
+
+    @if $replace-all {
+      $z: _herman-str-replace($z, $old, $new, true);
+    }
+
+    $return: $a + if($new, $new, '') + $z;
+  }
+
+  @return $return;
+}
+
+
+// Herman Inspect
+// --------------
+/// Convert any value into a json-export-ready string
+/// @group sass-utilities
+/// @param $value -
+///   Any sass value to convert
+/// @return {String} -
+///   A string reprepesentation of the given value,
+///   with leading zeros on numbers,
+///   and quotes escaped for JSON
+@function herman-inspect(
+  $value
+) {
+  $value: inspect($value);
+
+  @if str-index($value, '.') == 1 {
+    $value: '0' + $value;
+  }
+
+  @if str-index($value, '"') {
+    $value: _herman-str-replace($value, '"', '\\"', true);
+  }
+
+  @return $value;
+}
+
+
+// Map Compile
+// -----------
+/// Get output values from a sass map,
+/// using any function for compilation
+/// @group sass-utilities
+/// @param {Map} $map -
+///   A sass map with values that need to be compiled,
+///   such as Accoutrement Colors or Sizes with adjustments
+/// @param {String} $function -
+///   The function name to use in compiling values,
+///   such as Accoutrement `color` and `size` functions
+/// @param {Boolean} $inspect [true] -
+///   Return the value directly,
+///   or convert it to an export-ready string?
+/// @return {String | Any} -
+///   An updated map,
+///   with values compiled by a third-party function
+@function herman-map-compile(
+  $map,
+  $function,
+  $inspect: true
+) {
+  $output: ();
+
+  @each $name, $value in $map {
+    @if function-exists($function) {
+      $value: call($function, $name);
+    }
+
+    @if $inspect {
+      $value: herman-inspect($value);
+    }
+
+    $output: map-merge($output, ($name: $value));
+  }
+
+  @return $output;
+}
+
+
+// Herman Add Color
+// ----------------
+/// Add a map of colors
+/// to both the Accoutrment `$colors` map,
+/// and the Herman `$json` export map
+/// @group sass-utilities
+/// @param {String} $json-key -
+///   A key name for accessing these colors in JSON —
+///   should match the variable name,
+///   unless otherwise set in the `@preview` annotation
+/// @param {Map} $map -
+///   A map of colors
+/// @param {String} $function ['color'] -
+///   The name of a color function to use
+///   for compiling JSON output values
+/// @output
+///   Updated global `$colors` and `$json` maps,
+///   with new colors added to both
+@mixin herman-add-colors(
+  $json-key,
+  $map,
+  $function: 'color'
+) {
+  $colors: map-merge($colors, $map) !global;
+  $expanded: ();
+
+  @if $function {
+    $map: herman-map-compile($map, $function, false);
+  }
+
+  @each $key, $value in $map {
+    $r: herman-inspect(round(red($value)));
+    $g: herman-inspect(round(green($value)));
+    $b: herman-inspect(round(blue($value)));
+    $h: herman-inspect(round(hue($value)));
+    $s: herman-inspect(round(saturation($value)));
+    $l: herman-inspect(round(lightness($value)));
+    $a: herman-inspect(alpha($value));
+
+    $map: (
+      'output': herman-inspect($value),
+      'rgba': 'rgba(#{$r}, #{$g}, #{$b}, #{$a})',
+      'hsla': 'hsla(#{$h}, #{$s}, #{$l}, #{$a})',
+    );
+
+    @if $a != '1' {
+      $map: map-remove($map, 'rgba');
+    }
+
+    $expanded: map-merge($expanded, ($key: $map));
+  }
+
+  $json: map-merge($json, ($json-key: $expanded)) !global;
+}
+
+
+// Herman Add Sizes
+// ----------------
+/// Add a map of sizes
+/// to both the Accoutrment `$sizes` map,
+/// and the Herman `$json` export map
+/// @group sass-utilities
+/// @param {String} $json-key -
+///   A key name for accessing these sizes in JSON —
+///   should match the variable name,
+///   unless otherwise set in the `@preview` annotation
+/// @param {Map} $map -
+///   A map of sizes
+/// @param {String} $function ['size'] -
+///   The name of a size function to use
+///   for compiling JSON output values
+/// @output
+///   Updated global `$sizes` and `$json` maps,
+///   with new sizes added to both
+@mixin herman-add-sizes(
+  $json-key,
+  $map,
+  $function: 'size'
+) {
+  $sizes: map-merge($sizes, $map) !global;
+
+  @if $function {
+    $map: herman-map-compile($map, $function);
+  }
+
+  $json: map-merge($json, ($json-key: $map)) !global;
+}
+
+
+// Herman Ratios
+// -------------
+/// Add a map of ratios
+/// to both the Accoutrment `$ratios` map,
+/// and the Herman `$json` export map
+/// @group sass-utilities
+/// @param {String} $json-key -
+///   A key name for accessing these ratios in JSON —
+///   should match the variable name,
+///   unless otherwise set in the `@preview` annotation
+/// @param {Map} $map -
+///   A map of ratios
+/// @output
+///   Updated global `$ratios` and `$json` maps,
+///   with new ratios added to both
+@mixin herman-add-ratios(
+  $json-key,
+  $map
+) {
+  $ratios: map-merge($ratios, $map) !global;
+  $json: map-merge($json, ($json-key: $map)) !global;
+}
+
+
+// Herman Add Font
+// ---------------
+/// Add a map of fonts
+/// to both the Accoutrment `$fonts` map,
+/// and the Herman `$json` export map
+/// @group sass-utilities
+/// @param {String} $json-key -
+///   A key name for accessing these fonts in JSON —
+///   should match the variable name,
+///   unless otherwise set in the `@preview` annotation
+/// @param {Map} $map -
+///   A map of fonts
+/// @output
+///   Updated global `$fonts` and `$json` maps,
+///   with new fonts added to both
+@mixin herman-add-font(
+  $name,
+  $map
+) {
+  $new: ($name: $map);
+  $fonts: map-merge($fonts, $new) !global;
+  $json: map-merge($json, $new) !global;
+}

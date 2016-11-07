@@ -1,0 +1,9 @@
+# http://eslint.org/docs/rules/
+
+env:
+  browser: true
+  node: false
+rules:
+  strict:
+    - 2
+    - function

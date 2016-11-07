@@ -53,7 +53,6 @@ For example, this:
 	/// @example njk - Basic usage:
 	///  {% import 'macros.j2' as macros %}
 	///  {{ macros.mymacro(1, 2) }}
-	/// @group test
 	[data-mymacro] {}
 
 will render the `mymacro` macro from the file `macros.j2`
@@ -72,27 +71,50 @@ Development
 
 To install the necessary Node dependencies, run ``npm install``.
 
-You can lint the project's JS with ``gulp eslint`` and run the JS unit tests
-with ``gulp jstest`` (or ``npm test``). You can lint Sass with
+You can lint the project's JS with ``gulp eslint``
+and run the JS unit tests with ``gulp jstest``
+(or ``npm test``).
+You can lint Sass with
 ``gulp sasslint``.
 
-To compile and minify the static assets--as well as generate the
-documentation--run ``gulp compile``.
+To compile and minify the static assets —
+as well as generate the documentation —
+run ``gulp compile``.
 
 Just running ``gulp`` will perform all of the above tasks.
 
-You can start up a local development server with ``gulp develop``. This will
-also watch for changes to local files and automatically perform an appropriate
-selection of the above tasks whenever changes are detected to relevant files.
+You can start up a local development server with ``gulp develop``.
+This will also watch for changes to local files
+and automatically perform an appropriate selection of the above tasks
+whenever changes are detected to relevant files.
 
 Access the running server at http://localhost:3000.
 
-Refer to the ``gulpfile.js`` source and [gulp](http://gulpjs.com/)
-documentation for more info.
+Refer to the ``gulpfile.js`` source
+and [gulp](http://gulpjs.com/) documentation
+for more info.
 
 
 Releases
 --------
+
+### 0.4.0: UNRELEASED
+
+- Inject preview data directly into HTML,
+  so that previews don't have to be styled locally
+- Add [Sass Utilities](sass-utilities.html) file,
+  for help with setting/exporting Sass data
+- `herman-add-color` mixin now exports hex, rgba, and hsla colors.
+- Simplified font previews don't require size input
+- Color, font, ratio, and size previews accept `key` argument,
+  in case the JSON key doesn't match the variable name
+  (most common for fonts)
+- Ratio preview accets `count` argument [`1-10`],
+  determining how many instances of the ratio to display
+  (default is `6`)
+- Size preview accepts `style` argument [`text` | `ruler` | `output-only`],
+  determining the type of preview to display
+  (default is `text`, see [scale](scale.html) for examples)
 
 ### 0.3.2: 2016-09-29
 

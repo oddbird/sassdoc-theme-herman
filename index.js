@@ -30,7 +30,12 @@ module.exports = function (dest, ctx) {
   var indexDest = path.join(dest, 'index.html');
   var groupTemplate = path.join(base, 'group.j2');
   var assets = path.resolve(__dirname, './dist');
+
   var nunjucksEnv = nunjucks.configure(base, { noCache: true });
+  nunjucksEnv.addFilter('split', function (str, separator) {
+    return str.split(separator);
+  });
+
   dest = path.resolve(dest);
 
   var def = {
@@ -373,13 +378,24 @@ module.exports.annotations = [
   function preview () {
     return {
       name: 'preview',
-      multiple: true,
+      multiple: false,
       parse: function (raw) {
-        // expects e.g. 'color-palette, font-specimen' and returns
-        // ['color-palette', 'font-specimen']
-        return raw.split(',').map(function (i) {
-          return i.trim();
+        // expects e.g. 'color-palette; key: sans; sizes: text-sizes;'
+        // and returns object {
+        //   type: "color-palette", key: "sans", sizes: "text-sizes" }
+        var options = {};
+        var key, value;
+        raw.split(';').forEach(function (option) {
+          var parts = option.split(':');
+          key = parts[0].trim();
+          value = parts[1] ? parts[1].trim() : null;
+          if (options.type === undefined) {
+            options.type = key;
+          } else if (key) {
+            options[key] = value;
+          }
         });
+        return options;
       }
     };
   },
