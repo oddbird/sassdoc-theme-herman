@@ -98,7 +98,7 @@ for more info.
 Releases
 --------
 
-### 0.4.0: UNRELEASED
+### 0.4.0: 2016-11-08
 
 - Inject preview data directly into HTML,
   so that previews don't have to be styled locally
