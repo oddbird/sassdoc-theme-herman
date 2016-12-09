@@ -98,6 +98,11 @@ for more info.
 Releases
 --------
 
+### 0.4.1: UNRELEASED
+
+- Add table output for `@property` annotation,
+  similar to `@parameter` table output.
+
 ### 0.4.0: 2016-11-08
 
 - Inject preview data directly into HTML,
