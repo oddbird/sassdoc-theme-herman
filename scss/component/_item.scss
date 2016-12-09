@@ -19,12 +19,11 @@
   font-weight: normal;
 }
 
-[data-sassdoc='item-description'],
-[data-sassdoc='parameters'] {
-  margin: size('shim') 0;
+[data-sassdoc-display] {
+  margin: size('gutter') 0;
 }
 
-[data-sassdoc='parameters-table'] {
+[data-sassdoc-table] {
   @include font-size('small');
 
   td,
