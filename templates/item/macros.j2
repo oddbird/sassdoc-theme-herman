@@ -44,30 +44,30 @@ ${{ item.context.name }}: {{ item.context.value }}{% if item.context.scope != 'p
 {%- endmacro -%}
 
 
-{# @param annotation #}
-{% macro parameter(item) -%}
-  {% if item.parameter %}
-    <div data-sassdoc="parameters">
-      <h5 class="item-subtitle">Parameters</h5>
-      <table data-sassdoc="parameters-table">
+{# Parameter & Property tables #}
+{% macro table(table, data, header=null, columns=['name', 'description', 'type', 'default']) %}
+  {% if data %}
+    <div data-sassdoc-display="{{ table }}">
+      <h5 class="item-subtitle">{{ header or table }}</h5>
+      <table data-sassdoc-table="{{ table }}">
         <thead>
           <tr scope="row">
-            <th scope="col">Name</th>
-            <th scope="col">Description</th>
-            <th scope="col">Type</th>
-            <th scope="col">Default</th>
+            {% for col in columns %}
+              <th scope="col">{{ col }}</th>
+            {% endfor %}
           </tr>
         </thead>
         <tbody>
-          {%- for parameter in item.parameter %}
-          <tr data-sassdoc="parameter-item">
-            <td scope="row" data-label="name"><code>${{ parameter.name }}</code></td>
-            <td data-label="desc">{% if parameter.description %}{{ parameter.description|safe }}{% endif %}</td>
-            <td data-label="type"><code>{% if parameter.type %}{{ parameter.type }}{% endif %}</code></td>
-            <td data-label="default">{% if not parameter.default %}
+          {%- for item in data %}
+          {% set name = ['$', item.name]|join('') if (table == 'parameter') else item.name %}
+          <tr data-sassdoc="{{ table }}-item">
+            <td scope="row" data-label="name"><code>{{ name }}</code></td>
+            <td data-label="desc">{% if item.description %}{{ item.description|safe }}{% endif %}</td>
+            <td data-label="type"><code>{% if item.type %}{{ item.type }}{% endif %}</code></td>
+            <td data-label="default">{% if not item.default %}
                 &mdash;<span class="visually-hidden"> none</span>
               {% else %}
-                <code>{{ parameter.default }}</code>
+                <code>{{ item.default }}</code>
               {% endif %}
             </td>
           </tr>
@@ -76,13 +76,25 @@ ${{ item.context.name }}: {{ item.context.value }}{% if item.context.scope != 'p
       </table>
     </div>
   {% endif %}
+{% endmacro %}
+
+
+{# @param annotation #}
+{% macro parameter(item) -%}
+  {{ table('parameter', item.parameter, 'Parameters') }}
+{%- endmacro %}
+
+
+{# @prop annotation #}
+{% macro property(item) -%}
+  {{ table('property', item.property, 'Properties') }}
 {%- endmacro %}
 
 
 {# @require annotation #}
 {% macro require(item) -%}
   {% if item.require.length > 0 %}
-    <div data-sassdoc="item-description">
+    <div data-sassdoc-display="require description">
       <h5 class="item-subtitle">Requires</h5>
       <ul>
         {% for require in item.require %}
@@ -119,7 +131,7 @@ ${{ item.context.name }}: {{ item.context.value }}{% if item.context.scope != 'p
 {# @link annotation #}
 {% macro link(item) -%}
   {% if item.link.length > 0 %}
-    <div data-sassdoc="item-description">
+    <div data-sassdoc-display="link description">
       <h5 class="item-subtitle">Links</h5>
       <ul>
         {% for link in item.link %}
@@ -141,7 +153,7 @@ ${{ item.context.name }}: {{ item.context.value }}{% if item.context.scope != 'p
 {# @see annotation #}
 {% macro see(item) -%}
   {% if item.see.length > 0 %}
-    <div data-sassdoc="item-description">
+    <div data-sassdoc-display="see description">
       <h5 class="item-subtitle">See</h5>
       <ul>
         {% for see in item.see %}

@@ -4,6 +4,12 @@
 
 // Json
 // ----
+/// A map of values to be exported to JSON.
+/// Use the `herman-add-` mixins to automatically populate
+/// fonts, colors, sizes, and ratios
+/// based on [Accoutrement](http://oddbird.net/accoutrement)
+/// configurations.
+/// @group sass-utilities
 $json: ();
 
 

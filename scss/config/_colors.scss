@@ -11,6 +11,12 @@
 /// everything else is based on these colors.
 /// @preview color-palette
 /// @group colors
+/// @prop {Color | String | List} '<color-name>' -
+///   Each `<color-name>` key can be assigned a color
+///   or previously-defined key,
+///   followed by an optional map of adjustments
+///   (as defined in
+///   [Accoutrement-Color](http://oddbird.net/accoutrement-color/sassdoc/)).
 /// @link http://oddbird.net/accoutrement-color/sassdoc/
 ///   Accoutrement Color
 /// @example

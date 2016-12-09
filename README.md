@@ -98,6 +98,17 @@ for more info.
 Releases
 --------
 
+### 0.4.1: UNRELEASED
+
+- Add table output for `@property` annotation,
+  similar to `@parameter` table output.
+- Standardize `data-sassdoc-display='<annotation>'`
+  for annotation display blocks
+  (previously a mix of `data-sassdoc` values),
+  and `data-sassdoc-table'<annotation>'` for tables
+  (previously `data-sassdoc='<annotation>-table'`).
+
+
 ### 0.4.0: 2016-11-08
 
 - Inject preview data directly into HTML,
