@@ -98,7 +98,7 @@ for more info.
 Releases
 --------
 
-### 0.4.1: UNRELEASED
+### 0.5.0: 2016-12-09
 
 - Add table output for `@property` annotation,
   similar to `@parameter` table output.
