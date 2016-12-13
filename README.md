@@ -98,6 +98,14 @@ for more info.
 Releases
 --------
 
+### 0.5.1: UNRELEASED
+
+- Add optional `show` argument for font-specimen previews —
+  `@preview font-specimen; show: regular, bold, bold italic` —
+  allowing you to override what variants are displayed
+  in the specimen.
+
+
 ### 0.5.0: 2016-12-09
 
 - Add table output for `@property` annotation,
