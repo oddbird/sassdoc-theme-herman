@@ -1,15 +1,11 @@
 {% import 'utility.macros.j2' as utility %}
 
 
-{% set weight_options = [
-  '100', '200', '300', '400', '500', '600', '700', '800', '900', 'bold'
-] %}
-
-{% set style_options = [
-  'italic', 'oblique'
-] %}
-
-
+{#
+  Show Previews
+  -------------
+  Call the requested previews with the appropriate JSON data.
+#}
 {% macro show_previews(data, name, args) %}
   {% if args %}
     {% set type = args.type %}
@@ -29,6 +25,11 @@
 {% endmacro %}
 
 
+{#
+  Color Palette
+  -------------
+  Display color palettes based on JSON map output.
+#}
 {% macro color_palette(data) %}
 <div data-sassdoc="color-palette">
   {% for name, value in data %}
@@ -51,6 +52,24 @@
 {% endmacro %}
 
 
+{#
+  Font Specimen
+  -------------
+  Display all font-family specimens,
+  including multiple variants.
+
+  @group font-specimen
+
+  @prop {String} name -
+    Title for the font-family being displayed.
+  @prop {Dict} data -
+    All the available data on a given font,
+    derived from the Sass JSON export.
+  @prop {Dict} args -
+    Arbitrary arguments passes along
+    in the font-specimen call
+    (currently only `show` and `key` are supported).
+#}
 {% macro font_specimen(name, data, args=none) %}
   <div data-sassdoc-font="{{ name }}">
     <h3 data-sassdoc="font-type">
@@ -73,56 +92,107 @@
     {% set family = [data.name, data.stack]|join(', ') %}
 
     {% if args.show %}
-      {% for options in args.show|split(', ') %}
+      {% for option in args.show|split(', ') %}
         {{ specimen_variant(
           family=family,
-          options=options|split(' ')
+          option=option,
+          data=data
         ) }}
       {% endfor %}
     {% else %}
-      {% for options, value in data %}
-        {% set options = options|split(' ') %}
-        {% set variant = options[0] %}
-        {% set file = value if (variant in weight_options or variant in style_options or variant == 'regular') else none %}
-        {% if file %}
-          {{ specimen_variant(
-            family=family,
-            options=options,
-            file=file
-          ) }}
-        {% endif %}
+      {% for option, path in data %}
+        {{ specimen_variant(
+          family=family,
+          option=option,
+          path=path
+        ) }}
       {% endfor %}
     {% endif %}
   </div>
 {% endmacro %}
 
 
-{% macro specimen_variant(family, options, file=none) %}
+{#
+  Specimen Variant
+  ----------------
+  Display a single specimen variant.
+
+  @group font-specimen
+
+  @prop {String} family -
+    A CSS-ready value for font-family,
+    combining both the font name, and fallback font-stack.
+  @prop {String} option -
+    The name of a font variant,
+    e.g. `bold` or `italic` or `700 italic`.
+  @prop {Dict} data [none] -
+    Optional font-data for file-path lookup.
+  @prop {String} path [none] -
+    Optional file-path data,
+    if it is already attached to the option.
+#}
+{% macro specimen_variant(family, option, data=none, path=none) %}
+  {# Local variables for parsing variants in the data #}
+  {% set weight_options = [
+    '100', '200', '300', '400', '500', '600', '700', '800', '900', 'bold'
+  ] %}
+
+  {% set style_options = [
+    'italic', 'oblique'
+  ] %}
+
+  {% set other_options = [
+    'normal', 'regular'
+  ] %}
+
+  {# Initialize variants #}
   {% set weight = 'normal' %}
   {% set style = 'normal' %}
 
-  {% for value in options %}
-    {% set weight = value if (value in weight_options) else weight %}
-    {% set style = value if (value in style_options) else style %}
-  {% endfor %}
+  {# Split the option into variants, and find files where available #}
+  {% set split_option = option|split(' ') %}
+  {% set variant_check = split_option[0] %}
+  {% set is_variant = true if (variant_check in weight_options or variant_check in style_options or variant_check in other_options) else false %}
 
-  <div data-specimen-face="{{ options }}">
-    <h4 data-specimen="face-name">
-      {% for option in options %}
+  {# If we have an actual variant, display specimen #}
+  {% if is_variant %}
+    {% set path = data.option if data.option else path %}
+
+    {% for value in split_option %}
+      {% set weight = value if (value in weight_options) else weight %}
+      {% set style = value if (value in style_options) else style %}
+    {% endfor %}
+
+    <div data-specimen-face="{{ option }}">
+      <h4 data-specimen="face-name">
         {{ option }}
-      {% endfor %}
-      {% if file %}
-        (<code>{{ file }}</code>)
-      {% endif %}
-    </h4>
-    <div data-specimen="sample" style="font-family: {{ family }}; font-weight: {{ weight }}; font-style: {{ style }};">
-      <div data-specimen="aa">Aa</div>
-      <div data-specimen="lorem">{{ lorem('alpha') }}</div>
+
+        {% if path %}
+          (<code>{{ path }}</code>)
+        {% endif %}
+      </h4>
+      <div data-specimen="sample" style="font-family: {{ family }}; font-weight: {{ weight }}; font-style: {{ style }};">
+        <div data-specimen="aa">Aa</div>
+        <div data-specimen="lorem">{{ lorem('alpha') }}</div>
+      </div>
     </div>
-  </div>
+  {% endif %}
 {% endmacro %}
 
 
+{#
+  Lorem
+  -----
+  Display Lorem Ipsum text for font specimens.
+
+  @group font-specimen
+
+  @prop {'title' | 'body' | 'alpha'} length -
+    They type of Lorem Ipsum to display:
+    either title-length, paragraph-length,
+    or a list of standard characters
+    (uppercase, lowercase, numbers, and punctuation).
+#}
 {% macro lorem(length) %}
   {% if length == 'title' %}
     <span data-specimen-lorem="title">
