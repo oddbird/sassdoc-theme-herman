@@ -98,7 +98,7 @@ for more info.
 Releases
 --------
 
-### 0.5.1: UNRELEASED
+### 0.5.1: 2016-12-13
 
 - Add optional `show` argument for font-specimen previews —
   `@preview font-specimen; show: regular, bold, bold italic` —
