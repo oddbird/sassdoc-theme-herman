@@ -98,7 +98,7 @@ for more info.
 Releases
 --------
 
-### 0.5.2: UNRELEASED
+### 0.5.2: 2016-12-15
 
 - Change absolute `@see` links to relative paths,
   so we're not assuming a root URL for the styleguide.
