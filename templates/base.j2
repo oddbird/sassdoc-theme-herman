@@ -8,8 +8,12 @@
   <title>{% block title %}{{ project_title }} Documentation{% endblock %}</title>
 
   <link href="{{ shortcutIcon.url }}" rel="shortcut icon">
-  <link rel="stylesheet" href="assets/css/main.css" />
 
+  {% if customHead %}
+    {{ customHead|safe }}
+  {% endif %}
+
+  <link rel="stylesheet" href="assets/css/main.css" />
   {% if customCSS and customCSS.url %}
     <link rel="stylesheet" href="{{ customCSS.url }}" />
   {% else %}
