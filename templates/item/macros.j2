@@ -158,7 +158,7 @@ ${{ item.context.name }}: {{ item.context.value }}{% if item.context.scope != 'p
       <ul>
         {% for see in item.see %}
           <li data-sassdoc="see-item">
-            <a href="/{{ see.group }}.html#{{ see.context.type }}--{{ see.context.name }}">{{ see.context.name }}</a>
+            <a href="{{ see.group }}.html#{{ see.context.type }}--{{ see.context.name }}">{{ see.context.name }}</a>
           </li>
         {% endfor %}
       </ul>

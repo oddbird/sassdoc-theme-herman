@@ -98,6 +98,12 @@ for more info.
 Releases
 --------
 
+### 0.5.2: UNRELEASED
+
+- Change absolute `@see` links to relative paths,
+  so we're not assuming a root URL for the styleguide.
+
+
 ### 0.5.1: 2016-12-13
 
 - Add optional `show` argument for font-specimen previews —
