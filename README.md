@@ -102,6 +102,7 @@ Releases
 
 - Change absolute `@see` links to relative paths,
   so we're not assuming a root URL for the styleguide.
+- Add `customHead` option to add custom HTML to the <head>.
 
 
 ### 0.5.1: 2016-12-13
