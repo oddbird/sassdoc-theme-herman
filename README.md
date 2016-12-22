@@ -98,6 +98,12 @@ for more info.
 Releases
 --------
 
+### 0.5.3: 2016-12-22
+
+- Prevent template render errors when data is missing. Fixes
+  [#44](https://github.com/oddbird/sassdoc-theme-herman/issues/44).
+
+
 ### 0.5.2: 2016-12-15
 
 - Change absolute `@see` links to relative paths,

@@ -16,7 +16,7 @@
 
 
 {% macro link_if(content=none, url=none, attrs={}) -%}
-  {%- set content = content if (content != none) else caller() -%}
+  {%- set content = caller() if caller else content -%}
 
   {%- if url -%}
     <a href="{{ url }}" {{ show_attrs(attrs) }}>{{ content }}</a>
@@ -42,14 +42,14 @@
 
 {# Tabbed elements (see `static/js/app/base.js`) #}
 {% macro tab(id, group, content=none, active=false) %}
-  {% set content = content if (content != none) else caller() %}
+  {%- set content = caller() if caller else content -%}
   <a href="#panel-{{ id }}" data-sassdoc="example-tab" id="tab-{{ id }}" role="tab" data-tab-group="{{ group }}" data-contents="{{ id }}" aria-controls="panel-{{ id }}"{% if active %} aria-selected="true" tabindex="0"{% else %} tabindex="-1"{% endif %}>
     {{ content }}
   </a>
 {% endmacro %}
 
 {% macro tab_panel(id, group, content=none, active=false, class=none) %}
-  {% set content = content if (content != none) else caller() %}
+  {%- set content = caller() if caller else content -%}
   <div data-sassdoc="example-panel" id="panel-{{ id }}" role="tabpanel" data-tab-group="{{ group }}" aria-labelledby="tab-{{ id }}" aria-hidden="{{ 'false' if active else 'true' }}" {{ attr_if('data-sassdoc-example-panel', class) }}>
     {{ content }}
   </div>
