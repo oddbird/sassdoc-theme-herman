@@ -1,8 +1,17 @@
 // Navigation Styles
 // =================
 
+
+// Nav Links
+// ---------
+/// Navigation items, with inactive and active states.
+/// @group layout
+/// @example html
+///   <a href="#" data-sassdoc-nav="is-not-active">not active</a>
+///   <a href="#" data-sassdoc-nav="is-active">active</a>
 [data-sassdoc-nav] {
   #{$link} {
+    color: inherit;
     font-style: italic;
     text-transform: capitalize;
   }
