@@ -98,6 +98,11 @@ for more info.
 Releases
 --------
 
+### 0.5.4: unreleased
+
+- Render type `html` examples to HTML.
+
+
 ### 0.5.3: 2016-12-22
 
 - Prevent template render errors when data is missing. Fixes
