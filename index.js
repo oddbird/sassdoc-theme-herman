@@ -418,16 +418,19 @@ module.exports.annotations = [
         data.forEach(function (item) {
           if (!item.example) { return; }
           item.example.forEach(function (exampleItem) {
-            if (exampleItem.type !== 'njk') { return; }
-            if (!nunjucksEnv) {
-              nunjucksEnv = getNunjucksEnv('Nunjucks @example', env, warned);
+            if (exampleItem.type === 'html') {
+              exampleItem.rendered = exampleItem.code;
+            } else if (exampleItem.type === 'njk') {
+              if (!nunjucksEnv) {
+                nunjucksEnv = getNunjucksEnv('Nunjucks @example', env, warned);
+              }
+              if (!nunjucksEnv) {
+                warned = true;
+                return;
+              }
+              exampleItem.rendered = nunjucksEnv.renderString(
+                exampleItem.code).trim();
             }
-            if (!nunjucksEnv) {
-              warned = true;
-              return;
-            }
-            exampleItem.rendered = nunjucksEnv.renderString(
-              exampleItem.code).trim();
           });
         });
       }
