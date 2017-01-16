@@ -98,9 +98,10 @@ for more info.
 Releases
 --------
 
-### 0.5.4: unreleased
+### 0.5.4: 2017-01-16
 
-- Render type `html` examples to HTML.
+- Render type `html` examples to HTML. Closes
+  [#45](https://github.com/oddbird/sassdoc-theme-herman/issues/45).
 
 
 ### 0.5.3: 2016-12-22
