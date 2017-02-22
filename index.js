@@ -408,7 +408,11 @@ module.exports.annotations = [
    * and put the result in the `rendered` property of the parsed example.
    */
   function example (env) {
-    var baseExample = require('sassdoc/dist/annotation/annotations/example')();
+    var baseExampleFn = require('sassdoc/dist/annotation/annotations/example');
+    if (typeof baseExampleFn !== 'function') {
+      baseExampleFn = baseExampleFn.default;
+    }
+    var baseExample = baseExampleFn();
     return {
       name: 'example',
       parse: baseExample.parse,

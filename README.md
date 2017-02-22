@@ -98,6 +98,11 @@ for more info.
 Releases
 --------
 
+### 0.5.5: 2017-02-22
+
+- Fix @example macro to work with sassdoc v2.2.0. See
+  [https://github.com/SassDoc/sassdoc/commit/842847493f9644e50f9e2ce783eacf886ccf69a0][].
+
 ### 0.5.4: 2017-01-16
 
 - Render type `html` examples to HTML. Closes
