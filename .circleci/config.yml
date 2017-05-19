@@ -1,13 +1,13 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/sassdoc-theme-herman
+    working_directory: ~/herman
     docker:
       - image: node:7.10.0
     steps:
       - checkout
       - restore_cache:
-          key: sassdoc-theme-herman-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          key: herman-{{ .Branch }}-{{ checksum "yarn.lock" }}
       - run:
           name: Install NVM
           command: wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
@@ -15,7 +15,7 @@ jobs:
           name: Install Dependencies
           command: yarn
       - save_cache:
-          key: sassdoc-theme-herman-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          key: herman-{{ .Branch }}-{{ checksum "yarn.lock" }}
           paths:
             - "~/.cache/yarn"
       - run:
@@ -38,5 +38,15 @@ jobs:
           name: Update yarn.lock [greenkeeper]
           command: |
             if [[ "${CIRCLE_BRANCH}" =~ greenkeeper\/.* ]]; then
-              yarn run update-yarn-lock-file
+              yarn check && { echo ">> yarn check passed, yarn.lock does not need to update"; exit 0; }
+              yarn && { echo ">> running yarn"; }
+              USER_EMAIL=${USER_EMAIL:-"circleci@users.noreply.github.com"}
+              USER_NAME=${USER_NAME:-"CircleCI"}
+              git config user.email $USER_EMAIL
+              git config user.name $USER_NAME
+              git config push.default simple
+              git --no-pager diff
+              git add yarn.lock
+              git commit -m "chore(yarn): update yarn.lock"
+              git push origin $CIRCLE_BRANCH
             fi
