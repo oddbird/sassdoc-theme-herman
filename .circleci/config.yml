@@ -10,10 +10,13 @@ jobs:
           key: herman-{{ .Branch }}-{{ checksum "yarn.lock" }}
       - run:
           name: Install NVM
+          command: wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
+      - run:
+          name: Run NVM
           command: |
-            wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
             export NVM_DIR="$HOME/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+            command -v nvm
       - run:
           name: Install Dependencies
           command: yarn
