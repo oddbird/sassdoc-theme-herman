@@ -12,12 +12,6 @@ jobs:
           name: Install NVM
           command: wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
       - run:
-          name: Run NVM
-          command: |
-            export NVM_DIR="$HOME/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-            command -v nvm
-      - run:
           name: Install Dependencies
           command: yarn
       - save_cache:
@@ -32,7 +26,12 @@ jobs:
           command: ./node_modules/.bin/gulp sasslint
       - run:
           name: Run Tests [node 4]
-          command: nvm install 4.0.0 && nvm use 4.0.0 && yarn test
+          command: |
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+            nvm install 4.0.0 && nvm use 4.0.0 && yarn test
       - run:
           name: Run Tests [node 7]
-          command: nvm use 7.10.0 && yarn test
+          command: |
+            node --version
+            yarn test
