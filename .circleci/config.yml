@@ -30,11 +30,7 @@ jobs:
             export NVM_DIR="$HOME/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
             nvm install 4.0.0
-            node --version
             yarn test
-
       - run:
           name: Run Tests [node 7]
-          command: |
-            node --version
-            yarn test
+          command: yarn test
