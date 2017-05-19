@@ -34,3 +34,9 @@ jobs:
       - run:
           name: Run Tests [node 7]
           command: yarn test
+      - deploy:
+          name: Update yarn.lock [greenkeeper]
+          command: |
+            if [ "${CIRCLE_BRANCH}" =~ /greenkeeper\/.*/ ]; then
+              yarn run update-yarn-lock-file
+            fi

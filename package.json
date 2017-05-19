@@ -19,7 +19,8 @@
     "node": ">=4"
   },
   "scripts": {
-    "test": "mocha test"
+    "test": "mocha test",
+    "update-yarn-lock-file": "update-yarn-lock-file"
   },
   "devDependencies": {
     "accoutrement-a11y": "^1.0.6",
@@ -35,6 +36,7 @@
     "accoutrement-type": "^2.0.0",
     "browser-sync": "^2.17.5",
     "chalk": "^1.1.3",
+    "circleci-update-yarn-lock": "^3.1.0",
     "eslint": "^3.8.1",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^4.0.0",
