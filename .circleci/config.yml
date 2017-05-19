@@ -4,7 +4,7 @@ jobs:
     working_directory: ~/herman
     docker:
       - image: node:7.10.0
-      - image: bdfoster/nvm
+      - image: tzenderman/docker-nvm
     steps:
       - checkout
       - restore_cache:
