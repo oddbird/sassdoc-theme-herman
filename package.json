@@ -10,7 +10,7 @@
     "extend": "^3.0.0",
     "gulp-rename": "^1.2.2",
     "html-minifier": "^3.1.0",
-    "nunjucks": "^2.5.2",
+    "nunjucks": "^3.0.0",
     "sassdoc-extras": "^2.4.1",
     "through2": "^2.0.1",
     "vinyl-fs": "^2.4.4"
@@ -30,7 +30,7 @@
     "accoutrement-layout": "^2.0.0",
     "accoutrement-pseudo": "^1.0.2",
     "accoutrement-queries": "^1.1.0",
-    "accoutrement-scale": "^2.0.0",
+    "accoutrement-scale": "^3.0.0",
     "accoutrement-strings": "^1.1.0",
     "accoutrement-type": "^2.0.0",
     "browser-sync": "^2.17.5",
