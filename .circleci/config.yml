@@ -37,6 +37,6 @@ jobs:
       - deploy:
           name: Update yarn.lock [greenkeeper]
           command: |
-            if [ "${CIRCLE_BRANCH}" =~ /greenkeeper\/.*/ ]; then
+            if [[ "${CIRCLE_BRANCH}" =~ greenkeeper\/.* ]]; then
               yarn run update-yarn-lock-file
             fi
