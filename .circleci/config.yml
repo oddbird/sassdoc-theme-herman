@@ -1,0 +1,36 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/herman
+    docker:
+      - image: node:7.10.0
+    steps:
+      - checkout
+      - restore_cache:
+          key: herman-{{ .Branch }}-{{ checksum "yarn.lock" }}
+      - run:
+          name: Install NVM
+          command: wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
+      - run:
+          name: Install Dependencies
+          command: yarn
+      - save_cache:
+          key: herman-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          paths:
+            - "~/.cache/yarn"
+      - run:
+          name: Lint JS
+          command: ./node_modules/.bin/gulp eslint
+      - run:
+          name: Lint Sass
+          command: ./node_modules/.bin/gulp sasslint
+      - run:
+          name: Run Tests [node 4]
+          command: |
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+            nvm install 4.0.0
+            yarn test
+      - run:
+          name: Run Tests [node 7]
+          command: yarn test

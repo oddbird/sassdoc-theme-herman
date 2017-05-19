@@ -24,7 +24,7 @@ Getting Started
 ---------------
 
 ```
-npm install sassdoc-theme-herman
+yarn add sassdoc-theme-herman
 ```
 
 See the [SassDoc documentation](http://sassdoc.com/getting-started/)
@@ -69,11 +69,11 @@ in your `sassdoc` options.
 Development
 -----------
 
-To install the necessary Node dependencies, run ``npm install``.
+To install the necessary Node dependencies, run ``yarn``.
 
 You can lint the project's JS with ``gulp eslint``
 and run the JS unit tests with ``gulp jstest``
-(or ``npm test``).
+(or ``yarn test``).
 You can lint Sass with
 ``gulp sasslint``.
 
