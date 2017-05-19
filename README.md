@@ -73,7 +73,7 @@ To install the necessary Node dependencies, run ``yarn``.
 
 You can lint the project's JS with ``gulp eslint``
 and run the JS unit tests with ``gulp jstest``
-(or ``npm test``).
+(or ``yarn test``).
 You can lint Sass with
 ``gulp sasslint``.
 

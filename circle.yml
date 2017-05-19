@@ -1,14 +1,14 @@
 machine:
   node:
-    version: 6.9.1
+    version: 7.10.0
 
 dependencies:
   override:
-    - npm install
+    - yarn
 
 test:
   override:
-    - nvm use 4.0.0 && npm test
-    - nvm use 6.9.1 && npm test
+    - nvm use 4.0.0 && yarn test
+    - nvm use 7.10.0 && yarn test
     - ./node_modules/.bin/gulp eslint
     - ./node_modules/.bin/gulp sasslint
