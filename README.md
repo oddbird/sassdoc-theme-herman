@@ -98,6 +98,14 @@ for more info.
 Releases
 --------
 
+### 0.6: unreleased
+
+- Render sassdoc comments that aren't attached to a Sass block
+  as Markdown prose.
+
+- Preserve the original order of sassdoc comments rather than
+  grouping by type.
+
 ### 0.5.5: 2017-02-22
 
 - Fix @example macro to work with sassdoc v2.2.0. See

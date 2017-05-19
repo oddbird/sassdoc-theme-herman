@@ -4,13 +4,15 @@
 {% set slug = item.context.name|urlencode|replace("'", '') %}
 {% set id = [type, slug]|join('--') %}
 
-<section data-sassdoc-item='{{ type }}' id="{{ id }}">
+<section data-sassdoc-item='{{ type }}' {% if id -%} id="{{ id }} {%- endif %}">
   {% set item_name = [item.context.name, '()']|join('') if (type == 'mixin' or type == 'function') else item.context.name %}
   {% set item_name = ['$', item_name]|join('') if type == 'variable' else item_name %}
-  <h3 data-sassdoc="item-title">
-    <span data-sassdoc="item-name">{{ item_name }}</span>
-    <span data-sassdoc="item-type">{{ type }}</span>
-  </h3>
+  {% if item_name %}
+    <h3 data-sassdoc="item-title">
+      <span data-sassdoc="item-name">{{ item_name }}</span>
+      <span data-sassdoc="item-type">{{ type }}</span>
+    </h3>
+  {% endif %}
 
   {% if item.description %}
     <div data-sassdoc="item-description">
@@ -18,7 +20,9 @@
     </div>
   {% endif %}
 
-  {{ code.source(item, type) }}
+  {% if type != 'prose' %}
+    {{ code.source(item, type) }}
+  {% endif %}
   {{ code.link(item) }}
   {{ code.see(item) }}
   {{ code.parameter(item) }}

@@ -5,11 +5,8 @@
     {{ groups[data.currentGroup] }}
   </h2>
 
-  {% for type, items in data.byGroupAndType[data.currentGroup] %}
-    {% if items.length > 0 %}
-      {% for item in items %}
-        {% include 'item/_item.j2' %}
-      {% endfor %}
-    {% endif %}
+  {% for item in data.byGroup[data.currentGroup] %}
+    {% set type = item.context.type %}
+    {% include 'item/_item.j2' %}
   {% endfor %}
 {% endblock %}

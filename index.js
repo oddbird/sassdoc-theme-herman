@@ -24,7 +24,7 @@ var extras = require('sassdoc-extras');
  * Actual theme function. It takes the destination directory `dest`,
  * and the context variables `ctx`.
  */
-module.exports = function (dest, ctx) {
+var herman = function (dest, ctx) {
   var base = path.resolve(__dirname, './templates');
   var indexTemplate = path.join(base, 'index.j2');
   var indexDest = path.join(dest, 'index.html');
@@ -68,6 +68,27 @@ module.exports = function (dest, ctx) {
   if (ctx.sassjsonfile) {
     ctx.sassjson = parse.sassJson(fs.readFileSync(ctx.sassjsonfile));
   }
+
+  /**
+   * Remove the bogus context from any standalone sassdoc comments.
+   * (We detect these if the context starts more than one line after the
+   * sassdoc comment ends.)
+   */
+  ctx.data.forEach(function (item) {
+    if (!item.context || !item.context.line) {
+      return;
+    }
+    if (item.context.type === 'unknown') {
+      item.context.type = 'prose';
+      item.context.line.end = item.context.line.start;
+    }
+    if (item.context.line.start > item.commentRange.end + 1) {
+      item.context = {
+        type: 'prose',
+        line: item.commentRange
+      };
+    }
+  });
 
   /**
    * Add `description` and `descriptionPath` from configuration.
@@ -174,26 +195,28 @@ module.exports = function (dest, ctx) {
   extras.resolveVariables(ctx);
 
   /**
-   * Use SassDoc indexer to index the data by group and type, so we
-   * have the following structure:
+   * Index the data by group and type, so we have the following structure:
    *
    *     {
-   *       "group-slug": {
-   *         "function": [...],
-   *         "mixin": [...],
-   *         "variable": [...]
-   *       },
-   *       "another-group": {
-   *         "function": [...],
-   *         "mixin": [...],
-   *         "variable": [...]
-   *       }
+   *       "group-slug": [...],
+   *       "another-group": [...]
    *     }
    *
-   * You can then use `data.byGroupAndType` instead of `data` in your
+   * You can then use `data.byGroup` instead of `data` in your
    * templates to manipulate the indexed object.
    */
-  ctx.data.byGroupAndType = extras.byGroupAndType(ctx.data);
+  var byGroup = function (data) {
+    var sorted = {};
+    data.forEach(function (item) {
+      var group = item.group[0];
+      if (!(group in sorted)) {
+        sorted[group] = [];
+      }
+      sorted[group].push(item);
+    });
+    return sorted;
+  };
+  ctx.data.byGroup = byGroup(ctx.data);
 
   // check if we need to copy a favicon file or use the default
   var copyShortcutIcon = false;
@@ -248,7 +271,7 @@ module.exports = function (dest, ctx) {
   // Render a template for each group, too. The group template is passed the
   // main context with an added `data.currentGroup` key which contains the name
   // of the current group.
-  Object.getOwnPropertyNames(ctx.data.byGroupAndType).forEach(
+  Object.getOwnPropertyNames(ctx.data.byGroup).forEach(
     function (groupName) {
       var groupDest = path.join(dest, groupName + '.html');
       var groupData = extend({ currentGroup: groupName }, ctx.data);
@@ -274,7 +297,7 @@ var getNunjucksEnv = function (name, env, warned) {
   return nunjucks.configure(env.templatepath);
 };
 
-module.exports.annotations = [
+herman.annotations = [
   /**
    * Custom `@macro` annotation. Expects macrofile:macroname.
    *
@@ -442,3 +465,8 @@ module.exports.annotations = [
   }
 
 ];
+
+// make sure sassdoc will preserve comments not attached to Sass
+herman.includeUnknownContexts = true;
+
+module.exports = herman;
