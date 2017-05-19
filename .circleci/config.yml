@@ -1,0 +1,29 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/herman
+    docker:
+      - image: node-yarn
+    steps:
+      - checkout
+      - restore_cache:
+          key: herman-{{ .Branch }}-{{ checksum "yarn.lock" }}
+      - run:
+          name: Install Dependencies
+          command: yarn
+      - save_cache:
+          key: herman-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          paths:
+            - "~/.cache/yarn"
+      - run:
+          name: Lint JS
+          command: ./node_modules/.bin/gulp eslint
+      - run:
+          name: Lint Sass
+          command: ./node_modules/.bin/gulp sasslint
+      - run:
+          name: Run Tests [node 4]
+          command: nvm use 4.0.0 && yarn test
+      - run:
+          name: Run Tests [node 7]
+          command: nvm use 7.10.0 && yarn test
