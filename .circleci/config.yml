@@ -4,6 +4,7 @@ jobs:
     working_directory: ~/herman
     docker:
       - image: node:7.10.0
+      - image: node:4
     steps:
       - checkout
       - restore_cache:
@@ -22,8 +23,5 @@ jobs:
           name: Lint Sass
           command: ./node_modules/.bin/gulp sasslint
       - run:
-          name: Run Tests [node 4]
-          command: nvm use 4.0.0 && yarn test
-      - run:
-          name: Run Tests [node 7]
-          command: nvm use 7.10.0 && yarn test
+          name: Run Tests
+          command: yarn test
