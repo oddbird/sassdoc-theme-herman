@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: ~/herman
     docker:
-      - image: node-yarn
+      - image: node:7.10.0
     steps:
       - checkout
       - restore_cache:
