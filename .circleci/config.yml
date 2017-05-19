@@ -4,11 +4,13 @@ jobs:
     working_directory: ~/herman
     docker:
       - image: node:7.10.0
-      - image: tzenderman/docker-nvm
     steps:
       - checkout
       - restore_cache:
           key: herman-{{ .Branch }}-{{ checksum "yarn.lock" }}
+      - run:
+          name: Install NVM
+          command: wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
       - run:
           name: Install Dependencies
           command: yarn
@@ -24,7 +26,7 @@ jobs:
           command: ./node_modules/.bin/gulp sasslint
       - run:
           name: Run Tests [node 4]
-          command: nvm use 4.0.0 && yarn test
+          command: nvm install 4.0.0 && nvm use 4.0.0 && yarn test
       - run:
           name: Run Tests [node 7]
           command: nvm use 7.10.0 && yarn test
