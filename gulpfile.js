@@ -159,7 +159,10 @@ gulp.task('compile', [ 'sass', 'minify' ], function () {
     theme: './',
     sassjsonfile: './dist/css/json.css',
     subprojects: {
-      'accoutrement-color': 'node_modules/accoutrement-color/sass/*.scss'
+      'accoutrement-color': {
+        descriptionPath: 'node_modules/accoutrement-color/README.md',
+        src: 'node_modules/accoutrement-color/sass/*.scss'
+      }
     },
     templatepath: path.join(__dirname, 'templates'),
     display: {

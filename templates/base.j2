@@ -13,11 +13,11 @@
     {{ customHead|safe }}
   {% endif %}
 
-  <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="stylesheet" href="{{ basePath }}assets/css/main.css" />
   {% if customCSS and customCSS.url %}
     <link rel="stylesheet" href="{{ customCSS.url }}" />
   {% else %}
-    <link rel="stylesheet" href="assets/css/theme.css" />
+    <link rel="stylesheet" href="{{ basePath }}assets/css/theme.css" />
   {% endif %}
 </head>
 <body>
@@ -40,7 +40,7 @@
           {% set active_nav = 'is-not-active' if data.currentGroup else 'is-active' %}
           <a href="index.html" rel="home" data-sassdoc-nav="{{ active_nav }}">StyleGuide</a>
         </h2>
-        {% for group_name, group in data.byGroupAndType %}
+        {% for group_name, group in data.byGroup %}
           {% set active_nav = 'is-active' if (group_name == data.currentGroup) else 'is-not-active' %}
           <a href="{{ group_name }}.html" data-sassdoc-nav="{{ active_nav }}">{{ groups[group_name] }}</a>
         {% endfor %}
@@ -52,9 +52,9 @@
     </div>
   </div>
 
-  <script type="text/javascript" src="assets/js/jquery-3.1.1.slim.js"></script>
-  <script type="text/javascript" src="assets/js/highlight.js"></script>
-  <script type="text/javascript" src="assets/js/base.js"></script>
-  <script type="text/javascript" src="assets/js/init.js"></script>
+  <script type="text/javascript" src="{{ basePath }}assets/js/jquery-3.1.1.slim.js"></script>
+  <script type="text/javascript" src="{{ basePath }}assets/js/highlight.js"></script>
+  <script type="text/javascript" src="{{ basePath }}assets/js/base.js"></script>
+  <script type="text/javascript" src="{{ basePath }}assets/js/init.js"></script>
 </body>
 </html>
