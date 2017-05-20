@@ -100,6 +100,11 @@ for more info.
 Releases
 --------
 
+### 1.0.0: unreleased
+
+- Display source and compiled code (njk and html; scss and css) side-by-side.
+  Closes [#65](https://github.com/oddbird/sassdoc-theme-herman/issues/65).
+
 ### 0.5.5: 2017-02-22
 
 - Fix @example macro to work with sassdoc v2.2.0. See
