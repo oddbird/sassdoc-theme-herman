@@ -35,12 +35,13 @@ $text-ratios: (
 ///   // @preview sizes;
 ///   @include herman-add-sizes('text-sizes', $text-sizes);
 $text-sizes: (
-  'root': 22px,
+  'root': 18px,
 
   'h1': 'root' ('herman': 3),
   'h2': 'root' ('herman': 2),
   'h3': 'root' ('herman': 1),
 
+  'medium': 20px,
   'small': 18px,
   'smaller': 16px,
   'smallest': 16px,

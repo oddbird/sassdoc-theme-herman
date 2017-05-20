@@ -2,6 +2,11 @@
 // =================
 
 
+[data-sassdoc='nav-item'] {
+  list-style: none;
+  margin-bottom: size('gutter');
+}
+
 // Nav Links
 // ---------
 /// Navigation items, with inactive and active states.
@@ -11,19 +16,41 @@
 ///   <a href="#" data-sassdoc-nav="is-active">active</a>
 [data-sassdoc-nav] {
   #{$link} {
-    border-bottom: 5px solid transparent;
-    color: inherit;
+    color: color('background');
+    line-height: 1.1;
+    padding-bottom: size('half-shim');
+    position: relative;
     text-decoration: none;
+    transition: color 0.4s;
 
-    #{$focus} {
-      border-color: color('background' (rgba: 0.75));
+    @include before('') {
+      background: color('theme-light');
+      bottom: 0;
+      height: 5px;
+      left: 0;
+      position: absolute;
+      transform: scale3d(0, 1, 1);
+      transform-origin: center left;
+      transition: transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+      transition-delay: 0.2s;
+      width: 100%;
+    }
+  }
+
+  #{$focus} {
+    @include before('') {
+      transform: scale3d(1, 1, 1);
+      transition-delay: 0s;
     }
   }
 
   &[data-sassdoc-nav='is-active'] {
-    #{$link} {
-      border-color: color('background' (rgba: 0.75));
+    #{$link},
+    #{$focus} {
+      @include before('') {
+        transform: scale3d(1, 1, 1);
+        transition-delay: 0s;
+      }
     }
   }
 }
-

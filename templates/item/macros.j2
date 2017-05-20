@@ -48,7 +48,7 @@ ${{ item.context.name }}: {{ item.context.value }}{% if item.context.scope != 'p
 {% macro table(table, data, header=null, columns=['name', 'description', 'type', 'default']) %}
   {% if data %}
     <div data-sassdoc-display="{{ table }}">
-      <h5 class="item-subtitle">{{ header or table }}</h5>
+      <h5 data-sassdoc="item-subtitle">{{ header or table }}</h5>
       <table data-sassdoc-table="{{ table }}">
         <thead>
           <tr scope="row">
@@ -95,7 +95,7 @@ ${{ item.context.name }}: {{ item.context.value }}{% if item.context.scope != 'p
 {% macro require(item) -%}
   {% if item.require.length > 0 %}
     <div data-sassdoc-display="require description">
-      <h5 class="item-subtitle">Requires</h5>
+      <h5 data-sassdoc="item-subtitle">Requires</h5>
       <ul>
         {% for require in item.require %}
           {# External links #}
@@ -132,7 +132,7 @@ ${{ item.context.name }}: {{ item.context.value }}{% if item.context.scope != 'p
 {% macro link(item) -%}
   {% if item.link.length > 0 %}
     <div data-sassdoc-display="link description">
-      <h5 class="item-subtitle">Links</h5>
+      <h5 data-sassdoc="item-subtitle">Links</h5>
       <ul>
         {% for link in item.link %}
           <li data-sassdoc="link-item">
@@ -154,7 +154,7 @@ ${{ item.context.name }}: {{ item.context.value }}{% if item.context.scope != 'p
 {% macro see(item) -%}
   {% if item.see.length > 0 %}
     <div data-sassdoc-display="see description">
-      <h5 class="item-subtitle">See</h5>
+      <h5 data-sassdoc="item-subtitle">See</h5>
       <ul>
         {% for see in item.see %}
           <li data-sassdoc="see-item">
@@ -172,7 +172,7 @@ ${{ item.context.name }}: {{ item.context.value }}{% if item.context.scope != 'p
 {% macro todo(item) -%}
   {% if item.todo.length > 0 %}
     <div data-sassdoc="todo">
-      <h5 class="item-subtitle">Todo List</h5>
+      <h5 data-sassdoc="item-subtitle">Todo List</h5>
       <ul>
         {% for todo in item.todo %}
           <li data-sassdoc="todo-item">

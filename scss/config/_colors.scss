@@ -45,7 +45,7 @@ $brand-colors: (
 $neutral-colors: (
   'light-gray': 'brand-blue' ('tint': 80%, 'desaturate': 80%),
   'gray': 'brand-blue' ('desaturate': 80%),
-  'black': 'brand-blue' ('shade': 65%),
+  'black': 'brand-blue' ('shade': 30%, 'desaturate': 80%),
 );
 
 @include herman-add-colors('neutral-colors', $neutral-colors);
