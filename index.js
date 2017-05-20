@@ -46,7 +46,8 @@ var prepareContext = function (ctx) {
     groups: {
       undefined: 'general'
     },
-    sort: [ 'group', 'file', 'line', 'access' ]
+    sort: [ 'group', 'file', 'line', 'access' ],
+    herman: {}
   };
 
   // Apply default values for groups and display.
@@ -64,8 +65,8 @@ var prepareContext = function (ctx) {
    * Load a `sass-json file` (if one is given in the context) and add its
    * contents under the `sassjson` key of the context.
    */
-  if (ctx.sassjsonfile) {
-    ctx.sassjson = parse.sassJson(fs.readFileSync(ctx.sassjsonfile));
+  if (ctx.herman.sassjsonfile) {
+    ctx.sassjson = parse.sassJson(fs.readFileSync(ctx.herman.sassjsonfile));
   }
 
   /**
@@ -191,14 +192,15 @@ var prepareContext = function (ctx) {
 
 var parseSubprojects = function (ctx) {
   var promises = [];
-  if (ctx.subprojects) {
-    Object.keys(ctx.subprojects).forEach(function (name) {
-      var prjCtx = extend({}, ctx.subprojects[name]);
+  if (ctx.herman.subprojects) {
+    ctx.subprojects = {};
+    Object.keys(ctx.herman.subprojects).forEach(function (name) {
+      var prjCtx = extend({}, ctx.herman.subprojects[name]);
       var promise = sassdoc.parse(prjCtx.src, prjCtx).then(function (data) {
         prjCtx.basePath = '../';
         prjCtx.activeProject = name;
         prjCtx.data = data;
-        prjCtx.subprojects = ctx.subprojects;
+        prjCtx.subprojects = ctx.herman.subprojects;
         prjCtx.topGroups = ctx.groups;
         prjCtx.topByGroup = ctx.byGroup;
         ctx.subprojects[name] = prepareContext(prjCtx);
@@ -245,9 +247,9 @@ var renderHerman = function (dest, ctx) {
 
   // if needed, copy in a custom css file
   var copyCustomCSS = false;
-  if (ctx.customCSS) {
-    var srcPath = path.resolve(ctx.dir, ctx.customCSS);
-    var cssUrl = 'assets/css/custom/' + path.basename(ctx.customCSS);
+  if (ctx.herman.customCSS) {
+    var srcPath = path.resolve(ctx.dir, ctx.herman.customCSS);
+    var cssUrl = 'assets/css/custom/' + path.basename(ctx.herman.customCSS);
     ctx.customCSS = {
       path: srcPath,
       url: cssUrl
@@ -257,9 +259,9 @@ var renderHerman = function (dest, ctx) {
 
   // if needed, read in minified icons SVG
   ctx.iconsSvg = '';
-  if (ctx.templatepath && ctx.minifiedIcons) {
+  if (ctx.herman.templatepath && ctx.herman.minifiedIcons) {
     ctx.iconsSvg = fs.readFileSync(
-      path.join(ctx.templatepath, ctx.minifiedIcons));
+      path.join(ctx.herman.templatepath, ctx.herman.minifiedIcons));
   }
 
   // render the index template and copy the static assets.
@@ -323,14 +325,14 @@ var renderHerman = function (dest, ctx) {
 // get nunjucks env lazily so that we only throw an error on missing
 // templatepath if annotation was actually used.
 var getNunjucksEnv = function (name, env, warned) {
-  if (env.nunjucksEnv) { return env.nunjucksEnv; }
-  if (!env.templatepath) {
+  if (env.herman.nunjucksEnv) { return env.herman.nunjucksEnv; }
+  if (!env.herman.templatepath) {
     if (!warned) {
       env.logger.warn('Must pass in a templatepath if using ' + name + '.');
     }
     return null;
   }
-  return nunjucks.configure(env.templatepath);
+  return nunjucks.configure(env.herman.templatepath);
 };
 
 
@@ -424,7 +426,7 @@ module.exports.annotations = [
             return;
           }
           var inData = item.icons;
-          var iconsPath = path.join(env.templatepath, inData.iconsPath);
+          var iconsPath = path.join(env.herman.templatepath, inData.iconsPath);
           var iconFiles = fs.readdirSync(iconsPath);
           var renderTpl = '{% import "' + inData.macroFile + '" as it %}' +
             '{{ it.' + inData.macroName + '(iconName) }}';
@@ -512,10 +514,10 @@ module.exports.annotations = [
               var sassData = exampleItem.code;
               exampleItem.rendered = undefined;
               try {
-                if (env.sassincludes) {
-                  for (var i = env.sassincludes.length - 1; i >= 0; i = i - 1) {
-                    sassData =
-                      "@import '" + env.sassincludes[i] + "';\n" + sassData;
+                if (env.herman.sassincludes) {
+                  var arr = env.herman.sassincludes;
+                  for (var i = arr.length - 1; i >= 0; i = i - 1) {
+                    sassData = "@import '" + arr[i] + "';\n" + sassData;
                   }
                 }
                 var rendered = sass.renderSync({
@@ -526,7 +528,7 @@ module.exports.annotations = [
                     }
                     return { file: url };
                   },
-                  includePaths: env.sassincludepaths || [],
+                  includePaths: env.herman.sassincludepaths || [],
                   outputStyle: 'expanded'
                 });
                 var encoded = rendered.css.toString('utf-8');

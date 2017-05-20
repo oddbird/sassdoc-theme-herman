@@ -60,23 +60,23 @@ For example, this:
 will render the `mymacro` macro from the file `macros.j2`
 (which happens to use the `[data-mymacro]` attribute).
 
-In order for this to work for scss,
-you must include a `sassincludepaths` key in your sassdoc configuration.
-It should be an array of places to look for Sass includes,
-like `sassincludepaths: [ path.join(__dirname, 'static/sass') ]`.
-Further, all of the Sass examples will have to be complete and valid.
-This may require including something like `@import 'config/manifest';`
-at the top of each. If you include a `sassincludes` array in your sassdoc
-configuration, those files (relative to the `sassincludepaths`) will always
-be `@import`-ed for `@example scss`. *Note: Included Sass files should not
-contain any CSS output; any output will be displayed along with the @example.*
+In order for this to work for scss, you must include a `sassincludepaths` key
+in your sassdoc configuration `herman` option object. It should be an array of
+places to look for Sass includes, like
+`sassincludepaths: [ path.join(__dirname, 'static/sass') ]`. Further, all of
+the Sass examples will have to be complete and valid. This may require
+including something like `@import 'config/manifest';` at the top of each. If
+you include a `sassincludes` array in your sassdoc configuration `herman`
+option object, those files (relative to the `sassincludepaths`) will always be
+`@import`-ed for `@example scss`. *Note: Included Sass files should not contain
+any CSS output; any output will be displayed along with the @example.*
 
 In order for this to work for nunjucks,
 you must also either specify a `templatepath`
 (the path where nunjucks will look to import templates),
 or a `nunjucksEnv` (a custom nunjucks environment —
 this is particularly useful if your macros contain custom filters)
-in your `sassdoc` options.
+in your sassdoc configuration `herman` option object.
 
 
 Development
@@ -119,6 +119,8 @@ Releases
   [#18](https://github.com/oddbird/sassdoc-theme-herman/issues/18).
 - Show compiled CSS for `@example scss` annotations. Closes
   [#37](https://github.com/oddbird/sassdoc-theme-herman/issues/37).
+- BREAKING: Nest Herman-specific options under `herman` object in sassdoc
+  configuration.
 - Add support for rendering documentation from dependency subprojects.
   Closes [#61](https://github.com/oddbird/sassdoc-theme-herman/issues/61).
 
