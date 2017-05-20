@@ -34,15 +34,16 @@ jobs:
           name: Lint Sass
           command: ./node_modules/.bin/gulp sasslint
       - run:
+          name: Run Tests [node 7]
+          command: yarn test
+      - run:
           name: Run Tests [node 4]
           command: |
             export NVM_DIR="$HOME/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
             nvm install 4.0.0
+            yarn install --force node-sass
             yarn test
-      - run:
-          name: Run Tests [node 7]
-          command: yarn test
       - deploy:
           name: Update yarn.lock [greenkeeper]
           command: |
