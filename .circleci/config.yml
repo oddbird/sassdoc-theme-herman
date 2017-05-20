@@ -9,9 +9,6 @@ jobs:
       - restore_cache:
           key: herman-{{ .Branch }}-{{ checksum "yarn.lock" }}
       - run:
-          name: Install NVM
-          command: wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
-      - run:
           name: Install Dependencies
           command: yarn
       - run:
@@ -20,10 +17,14 @@ jobs:
             if [[ ! "${CIRCLE_BRANCH}" =~ greenkeeper\/.* ]]; then
               [[ $(git diff --name-only yarn.lock) != "" ]] && { echo ">> yarn.lock is out of date; run \"yarn\""; exit 1; }
             fi
+      - run:
+          name: Install NVM
+          command: wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
       - save_cache:
           key: herman-{{ .Branch }}-{{ checksum "yarn.lock" }}
           paths:
             - "~/.cache/yarn"
+            - "~/.nvm"
       - run:
           name: Lint JS
           command: ./node_modules/.bin/gulp eslint
