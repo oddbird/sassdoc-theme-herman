@@ -15,9 +15,7 @@ jobs:
           name: Check that yarn.lock matches package.json
           command: |
             if [[ ! "${CIRCLE_BRANCH}" =~ greenkeeper\/.* ]]; then
-              if [[ $(git diff --name-only yarn.lock) != "" ]]; then
-                echo ">> yarn.lock is out of date, run \"yarn\"";
-                exit 1;
+              [[ $(git diff --name-only yarn.lock) != "" ]] && exit 1
             fi
       - run:
           name: Install NVM
