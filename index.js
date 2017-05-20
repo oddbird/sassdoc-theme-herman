@@ -5,6 +5,7 @@ var fs = require('fs');
 var nunjucks = require('nunjucks');
 var path = require('path');
 var Promise = require('bluebird');
+var sass = require('node-sass');
 var sassdoc = require('sassdoc');
 
 var copy = require('./lib/assets.js');
@@ -507,6 +508,35 @@ module.exports.annotations = [
               }
               exampleItem.rendered = nunjucksEnv.renderString(
                 exampleItem.code).trim();
+            } else if (exampleItem.type === 'scss') {
+              var sassData = exampleItem.code;
+              exampleItem.rendered = undefined;
+              try {
+                if (env.sassincludes) {
+                  for (var i = env.sassincludes.length - 1; i >= 0; i = i - 1) {
+                    sassData =
+                      "@import '" + env.sassincludes[i] + "';\n" + sassData;
+                  }
+                }
+                var rendered = sass.renderSync({
+                  data: sassData,
+                  importer: function (url) {
+                    if (url[0] === '~') {
+                      url = path.resolve('node_modules', url.substr(1));
+                    }
+                    return { file: url };
+                  },
+                  includePaths: env.sassincludepaths || [],
+                  outputStyle: 'expanded'
+                });
+                var encoded = rendered.css.toString('utf-8');
+                exampleItem.rendered = encoded;
+              } catch (err) {
+                env.logger.warn(
+                  'Error compiling @example scss: \n' +
+                  err.message + '\n' + sassData
+                );
+              }
             }
           });
         });

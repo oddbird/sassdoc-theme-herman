@@ -21,7 +21,7 @@ $font-formats: 'woff' 'ttf';
 /// @group webfonts
 /// @link http://oddbird.net/accoutrement-type/sassdoc/
 ///   Accoutrement Type
-/// @example
+/// @example scss
 ///   // @preview font-specimen; key: body
 ///   @include herman-add-font('body', $body-font);
 $body-font: (
@@ -44,7 +44,7 @@ $body-font: (
 /// @group webfonts
 /// @link http://oddbird.net/accoutrement-type/sassdoc/
 ///   Accoutrement Type
-/// @example
+/// @example scss
 ///   // @preview font-specimen; key: sans
 ///   @include herman-add-font('sans', $sans-font);
 $sans-font: (
@@ -67,7 +67,7 @@ $sans-font: (
 /// @group webfonts
 /// @link http://oddbird.net/accoutrement-type/sassdoc/
 ///   Accoutrement Type
-/// @example
+/// @example scss
 ///   // @preview font-specimen; key: code
 ///   @include herman-add-font('code', $code-font);
 $code-font: (

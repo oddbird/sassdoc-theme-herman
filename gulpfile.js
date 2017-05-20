@@ -165,6 +165,8 @@ gulp.task('compile', [ 'sass', 'minify' ], function () {
       }
     },
     templatepath: path.join(__dirname, 'templates'),
+    sassincludepaths: [path.join(__dirname, 'scss')],
+    sassincludes: [ 'utilities', 'config/manifest' ],
     display: {
       access: ['public']
     },
