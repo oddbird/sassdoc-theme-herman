@@ -42,7 +42,7 @@ jobs:
             export NVM_DIR="$HOME/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
             nvm install 4.0.0
-            yarn install --force node-sass
+            yarn install --force
             yarn test
       - deploy:
           name: Update yarn.lock [greenkeeper]
