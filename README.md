@@ -35,10 +35,10 @@ so you'll want to specify `herman`
 as the theme in your `sassdoc` options.
 
 
-Rendering `nunjucks` examples
------------------------------
+Rendering `scss` and `nunjucks` examples
+----------------------------------------
 
-If you use an `@example` annotation with the `njk` language,
+If you use an `@example` annotation with the `scss` or `njk` languages,
 Herman will display both the source code of the example
 and its rendered output.
 
@@ -58,7 +58,15 @@ For example, this:
 will render the `mymacro` macro from the file `macros.j2`
 (which happens to use the `[data-mymacro]` attribute).
 
-In order for this to work,
+In order for this to work for scss,
+you must include a `hermanIncludePaths` key in your sassdoc configuration.
+It should be an array of places to look for Sass includes,
+like `hermanIncludePaths: [ path.join(__dirname, 'static/sass') ]`.
+Further, all of the Sass examples will have to be complete and valid.
+This may require including something like `@import 'config/manifest';`
+at the top of each.
+
+In order for this to work for nunjucks,
 you must also either specify a `templatepath`
 (the path where nunjucks will look to import templates),
 or a `nunjucksEnv` (a custom nunjucks environment —
