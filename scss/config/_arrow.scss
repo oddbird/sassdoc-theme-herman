@@ -14,7 +14,7 @@
 ///     @include section-arrow;
 ///   }
 /// @example html
-///   <div data-styleguide="section-arrow">Section Arrow</div>
+///   <header data-sassdoc-region="banner"></header>
 @mixin section-arrow(
   $color: 'theme-dark',
   $background: 'background'
