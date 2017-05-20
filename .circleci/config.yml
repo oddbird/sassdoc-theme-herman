@@ -1,0 +1,60 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/herman
+    docker:
+      - image: node:7.10.0
+    steps:
+      - checkout
+      - restore_cache:
+          key: herman-{{ .Branch }}-{{ checksum "yarn.lock" }}
+      - run:
+          name: Install Dependencies
+          command: yarn
+      - run:
+          name: Check that yarn.lock matches package.json
+          command: |
+            if [[ ! "${CIRCLE_BRANCH}" =~ greenkeeper\/.* ]]; then
+              [[ $(git diff --name-only yarn.lock) == "" ]] && exit 0
+              echo ">> yarn.lock is out of date, run \"yarn\""
+              exit 1
+            fi
+      - run:
+          name: Install NVM
+          command: wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
+      - save_cache:
+          key: herman-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          paths:
+            - "~/.cache/yarn"
+            - "~/.nvm"
+      - run:
+          name: Lint JS
+          command: ./node_modules/.bin/gulp eslint
+      - run:
+          name: Lint Sass
+          command: ./node_modules/.bin/gulp sasslint
+      - run:
+          name: Run Tests [node 4]
+          command: |
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+            nvm install 4.0.0
+            yarn test
+      - run:
+          name: Run Tests [node 7]
+          command: yarn test
+      - deploy:
+          name: Update yarn.lock [greenkeeper]
+          command: |
+            if [[ "${CIRCLE_BRANCH}" =~ greenkeeper\/.* ]]; then
+              [[ $(git diff --name-only yarn.lock) == "" ]] && exit 0
+              USER_EMAIL=${USER_EMAIL:-"circleci@users.noreply.github.com"}
+              USER_NAME=${USER_NAME:-"CircleCI"}
+              git config user.email $USER_EMAIL
+              git config user.name $USER_NAME
+              git config push.default simple
+              git --no-pager diff
+              git add yarn.lock
+              git commit -m "chore(yarn): update yarn.lock"
+              git push origin $CIRCLE_BRANCH
+            fi

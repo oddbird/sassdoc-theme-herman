@@ -1,6 +1,8 @@
 Herman [a SassDoc theme]
 ========================
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/oddbird/sassdoc-theme-herman.svg)](https://greenkeeper.io/)
+
 At [OddBird][oddbird],
 we wanted to a tool to help us
 document the entire front end of a project,
@@ -24,7 +26,7 @@ Getting Started
 ---------------
 
 ```
-npm install sassdoc-theme-herman
+yarn add sassdoc-theme-herman
 ```
 
 See the [SassDoc documentation](http://sassdoc.com/getting-started/)
@@ -69,11 +71,11 @@ in your `sassdoc` options.
 Development
 -----------
 
-To install the necessary Node dependencies, run ``npm install``.
+To install the necessary Node dependencies, run ``yarn``.
 
 You can lint the project's JS with ``gulp eslint``
 and run the JS unit tests with ``gulp jstest``
-(or ``npm test``).
+(or ``yarn test``).
 You can lint Sass with
 ``gulp sasslint``.
 
@@ -98,9 +100,14 @@ for more info.
 Releases
 --------
 
-### 0.6: unreleased
+### 1.0.0: unreleased
 
+- Display source and compiled code (njk and html; scss and css) side-by-side.
+  Closes [#65](https://github.com/oddbird/sassdoc-theme-herman/issues/65).
+- Add support for @todo annotation. Closes
+  [#18](https://github.com/oddbird/sassdoc-theme-herman/issues/18).
 - Add support for rendering documentation from dependency subprojects.
+  Closes [#61](https://github.com/oddbird/sassdoc-theme-herman/issues/61).
 
 ### 0.5.5: 2017-02-22
 

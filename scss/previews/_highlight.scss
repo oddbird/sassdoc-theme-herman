@@ -22,7 +22,7 @@ $colors: map-merge($colors, $hljs-colors);
 
 /// Style sassdoc code-blocks
 /// @group code-blocks
-/// @example njk -
+/// @example njk
 ///   {% import 'item/macros.j2' as code %}
 ///   {% call code.code_block(language='scss') -%}
 ///   .sample-code {
