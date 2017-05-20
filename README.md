@@ -98,6 +98,10 @@ for more info.
 Releases
 --------
 
+### 0.6: unreleased
+
+- Add support for rendering documentation from dependency subprojects.
+
 ### 0.5.5: 2017-02-22
 
 - Fix @example macro to work with sassdoc v2.2.0. See
