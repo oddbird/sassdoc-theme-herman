@@ -167,6 +167,24 @@ ${{ item.context.name }}: {{ item.context.value }}{% if item.context.scope != 'p
 {%- endmacro %}
 
 
+
+{# @todo annotation #}
+{% macro todo(item) -%}
+  {% if item.todo.length > 0 %}
+    <div data-sassdoc="todo">
+      <h5 class="item-subtitle">Todo List</h5>
+      <ul>
+        {% for todo in item.todo %}
+          <li data-sassdoc="todo-item">
+            {{ todo|safe }}
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+{%- endmacro %}
+
+
 {% macro examples(examples_list, id) %}
   {% for example in examples_list %}
     {% set group = ['examples', id, loop.index]|join('_') if example.rendered else null %}
