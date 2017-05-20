@@ -30,21 +30,9 @@ accepts@1.3.3, accepts@~1.3.3:
     mime-types "~2.1.11"
     negotiator "0.6.1"
 
-accoutrement-a11y@^1.0.6:
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/accoutrement-a11y/-/accoutrement-a11y-1.0.6.tgz#a622869527bae2739a84e68ccb78741bf5475788"
-
 accoutrement-color@^2.0.1:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/accoutrement-color/-/accoutrement-color-2.1.0.tgz#ce91daf6f75107f4673b5925ed9615e0f351b9b5"
-
-accoutrement-fonts@^2.0.0-alpha.4:
-  version "2.0.0-rc.1"
-  resolved "https://registry.yarnpkg.com/accoutrement-fonts/-/accoutrement-fonts-2.0.0-rc.1.tgz#253db668887219044cde26cd1f135c6af9bbd90f"
-
-accoutrement-herman@^1.0.0-alpha.4:
-  version "1.0.0-alpha.4"
-  resolved "https://registry.yarnpkg.com/accoutrement-herman/-/accoutrement-herman-1.0.0-alpha.4.tgz#7c77d597b0ee9b1af18b9b62a8bcec52a6dee667"
 
 accoutrement-init@^1.1.0:
   version "1.1.0"
@@ -54,21 +42,9 @@ accoutrement-layout@^2.0.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/accoutrement-layout/-/accoutrement-layout-2.2.0.tgz#974d4cc75a6cad10f441ab51f2e68b093667d62c"
 
-accoutrement-pseudo@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/accoutrement-pseudo/-/accoutrement-pseudo-1.0.2.tgz#1aa31866c69031232441b8f3eb87766176e826d0"
-
-accoutrement-queries@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/accoutrement-queries/-/accoutrement-queries-1.1.0.tgz#670bfc57f34bc84de64056e41d61ae88529e53f5"
-
-accoutrement-scale@^2.0.0:
+accoutrement-scale@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/accoutrement-scale/-/accoutrement-scale-2.0.0.tgz#408331477b08143e0b2b1166c0057187dd7529e7"
-
-accoutrement-strings@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/accoutrement-strings/-/accoutrement-strings-1.1.0.tgz#3a8a1e84c0c986a160ec09158b6ff8d962f396ca"
 
 accoutrement-type@^2.0.0:
   version "2.1.0"

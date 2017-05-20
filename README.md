@@ -1,6 +1,8 @@
 Herman [a SassDoc theme]
 ========================
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/oddbird/sassdoc-theme-herman.svg)](https://greenkeeper.io/)
+
 At [OddBird][oddbird],
 we wanted to a tool to help us
 document the entire front end of a project,
