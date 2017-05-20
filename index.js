@@ -182,7 +182,7 @@ var prepareContext = function (ctx) {
    * You can then use `data.byGroup` instead of `data` in your
    * templates to manipulate the indexed object.
    */
-  ctx.data.byGroup = byGroup(ctx.data);
+  ctx.byGroup = byGroup(ctx.data);
 
   return ctx;
 };
@@ -195,7 +195,11 @@ var parseSubprojects = function (ctx) {
       var prjCtx = extend({}, ctx.subprojects[name]);
       var promise = sassdoc.parse(prjCtx.src, prjCtx).then(function (data) {
         prjCtx.basePath = '../';
+        prjCtx.activeProject = name;
         prjCtx.data = data;
+        prjCtx.subprojects = ctx.subprojects;
+        prjCtx.topGroups = ctx.groups;
+        prjCtx.topByGroup = ctx.byGroup;
         ctx.subprojects[name] = prepareContext(prjCtx);
       });
       promises.push(promise);
@@ -225,6 +229,9 @@ var renderHerman = function (dest, ctx) {
 
   // set (external) base path for links
   ctx.basePath = '';
+  ctx.activeProject = null;
+  ctx.topByGroup = ctx.byGroup;
+  ctx.topGroups = ctx.groups;
 
   // check if we need to copy a favicon file or use the default
   var copyShortcutIcon = false;
@@ -276,15 +283,15 @@ var renderHerman = function (dest, ctx) {
     })
   ];
 
-  // Render a page for each group, too. The group template is passed the
-  // main context with an added `data.currentGroup` key which contains the name
-  // of the current group.
-  Object.getOwnPropertyNames(ctx.data.byGroup).forEach(
+  // Render a page for each group, too.
+  Object.getOwnPropertyNames(ctx.byGroup).forEach(
     function (groupName) {
       var groupDest = path.join(dest, groupName + '.html');
-      var groupData = extend({ currentGroup: groupName }, ctx.data);
-      var groupCtx = extend({}, ctx);
-      groupCtx.data = groupData;
+      var groupCtx = extend({}, ctx, {
+        pageTitle: ctx.groups[groupName],
+        activeGroup: groupName,
+        items: ctx.byGroup[groupName]
+      });
       promises.push(render(nunjucksEnv, groupTemplate, groupDest, groupCtx));
     }
   );
@@ -296,11 +303,14 @@ var renderHerman = function (dest, ctx) {
     var pageDest = path.join(prjDest, 'index.html');
     promises.push(render(nunjucksEnv, indexTemplate, pageDest, prjCtx));
 
-    Object.getOwnPropertyNames(prjCtx.data.byGroup).forEach(
+    Object.getOwnPropertyNames(prjCtx.byGroup).forEach(
       function (groupName) {
         var groupDest = path.join(prjDest, groupName + '.html');
-        var groupData = extend({ currentGroup: groupName }, prjCtx.data);
-        var groupCtx = extend({}, prjCtx, { data: groupData });
+        var groupCtx = extend({}, prjCtx, {
+          pageTitle: prjCtx.groups[groupName],
+          activeGroup: groupName,
+          items: prjCtx.byGroup[groupName]
+        });
         promises.push(render(nunjucksEnv, groupTemplate, groupDest, groupCtx));
       }
     );

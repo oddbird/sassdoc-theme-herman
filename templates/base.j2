@@ -27,9 +27,12 @@
   <div data-sassdoc-region="app">
     <header role="banner" data-sassdoc-region="banner">
       <h1 data-sassdoc="project-title">
-        <a href="{{ homepage or package.homepage or 'index.html' }}" rel="home" data-sassdoc="project-name">{{ project_title }}</a>
+        <a href="{{ homepage or package.homepage or basePath + 'index.html' }}" rel="home" data-sassdoc="project-name">{{ project_title }}</a>
         {% if package.version %}
           <span data-sassdoc="project-version">{{ package.version }}</span>
+        {% endif %}
+        {% if activeProject %}
+          : <a href="{{ basePath }}{{ activeProject }}/index.html">{{ activeProject }}</a>
         {% endif %}
       </h1>
     </header>
@@ -37,16 +40,27 @@
     <div data-sassdoc-region="container">
       <nav role="navigation" data-sassdoc-region="nav">
         <h2 data-sassdoc="nav-title">
-          {% set active_nav = 'is-not-active' if data.currentGroup else 'is-active' %}
-          <a href="index.html" rel="home" data-sassdoc-nav="{{ active_nav }}">StyleGuide</a>
+          {% set activeNav = 'is-active' if activeProject == None and activeGroup == None else 'is-not-active' %}
+          <a href="{{ basePath }}index.html" rel="home" data-sassdoc-nav="{{ activeNav }}">StyleGuide</a>
         </h2>
-        {% for group_name, group in data.byGroup %}
-          {% set active_nav = 'is-active' if (group_name == data.currentGroup) else 'is-not-active' %}
-          <a href="{{ group_name }}.html" data-sassdoc-nav="{{ active_nav }}">{{ groups[group_name] }}</a>
+        {% for groupName, group in topByGroup %}
+          {% set activeNav = 'is-active' if activeProject == None and activeGroup == groupName else 'is-not-active' %}
+          <a href="{{ basePath }}{{ groupName }}.html" data-sassdoc-nav="{{ activeNav }}">{{ topGroups[groupName] }}</a>
+        {% endfor %}
+
+        {% for prjName, prjCtx in subprojects %}
+          <h3 data-sassdoc="nav-title">
+            {% set activeNav = 'is-active' if activeProject == prjName and activeGroup == None else 'is-not-active' %}
+            <a href="{{ basePath }}{{ prjName }}/index.html" data-sassdoc-nav="{{ activeNav }}">{{ prjName }}</a>
+          </h3>
+          {% for groupName, group in prjCtx.byGroup %}
+            {% set activeNav = 'is-active' if activeProject == prjName and activeGroup == groupName else 'is-not-active' %}
+            <a href="{{ basePath }}{{prjName}}/{{ groupName }}.html" data-sassdoc-nav="{{ activeNav }}">{{ prjCtx.groups[groupName] }}</a>
+          {% endfor %}
         {% endfor %}
       </nav>
 
-      <main role="main" data-sassdoc-region="main" data-sassdoc-page="{% block page_slug %}{{ data.currentGroup or 'index' }}{% endblock %}">
+      <main role="main" data-sassdoc-region="main" data-sassdoc-page="{% block page_slug %}{{ activeGroup or 'index' }}{% endblock %}">
         {% block main %}{% endblock %}
       </main>
     </div>
