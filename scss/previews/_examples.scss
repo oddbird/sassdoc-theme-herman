@@ -1,15 +1,6 @@
 // Examples
 // ========
 
-[data-sassdoc-example] {
-  flex: 1 1 auto;
-  margin: size('gutter') 0;
-
-  [aria-hidden='true'] {
-    display: none;
-  }
-}
-
 [data-sassdoc='example-tabs'] {
   @include font-family('code');
   @include font-size('smaller');
@@ -24,33 +15,44 @@
   }
 }
 
-[data-sassdoc='example-tab-solo'] {
-  @include contrasted('text');
-  display: inline-block;
-  padding: 0 size('shim');
-}
-
-[data-sassdoc-example-panel] {
+[data-sassdoc='example-panel'] {
+  align-items: stretch;
   border: 1px solid color('border');
-  max-height: size('rhythm') * 12;
-  max-width: 100%;
-  overflow: auto;
-}
-
-[data-sassdoc-example-panel='output'] {
-  padding: size('shim');
-}
-
-[data-sassdoc-examples='usage'] {
   display: flex;
   flex-wrap: wrap;
+
+  &[aria-hidden='true'] {
+    display: none;
+  }
 }
 
-[data-sassdoc-example='visual-output'] {
-  flex: 1 0 100%;
+[data-sassdoc-example] {
+  align-items: stretch;
+  display: flex;
+  flex: 1 1 40%;
+  flex-direction: column;
+  max-height: size('rhythm') * 12;
+  max-width: 100%;
+  min-width: 20em;
+  overflow: auto;
+
+  & + & {
+    border-left: 1px solid color('border');
+  }
 }
 
-// [data-sassdoc-example-lang='scss'],
-// [data-sassdoc-example-lang='css'] {
-//   width: 50%;
-// }
+[data-sassdoc-title] {
+  @include contrasted('light-gray');
+  @include font-family('code');
+  @include font-size('smaller');
+  flex: 0 0 auto;
+  padding: 0 size('shim');
+
+  + [data-sassdoc] {
+    flex: 1 1 auto;
+  }
+}
+
+[data-sassdoc-rendered] {
+  padding: size('shim');
+}

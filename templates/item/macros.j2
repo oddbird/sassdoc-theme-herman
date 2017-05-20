@@ -168,45 +168,84 @@ ${{ item.context.name }}: {{ item.context.value }}{% if item.context.scope != 'p
 
 
 {% macro examples(examples_list, id) %}
-  <div data-sassdoc-examples="usage">
-  {% for example in examples_list %}
-    {% set code = code_block(
-      language=example.type,
-      content=example.code|escape|safe
-      ) %}
+  {% set group = ['examples', id]|join('_') %}
+  {% set lang_types = {
+    'njk': 'markup',
+    'html': 'markup',
+    'j2': 'markup',
+    'css': 'style',
+    'scss': 'style',
+    'sass': 'style',
+    'js': 'interaction',
+    'javascript': 'interaction'
+  } %}
+  {% set render_types = {
+    'njk': 'html',
+    'scss': 'css',
+    'sass': 'css'
+  } %}
 
-    <div data-sassdoc-example="{{ group or 'simple' }}" data-sassdoc-example-lang="{{ example.type }}">
-
-      <div data-sassdoc="example-tabs">
-        <span data-sassdoc="example-tab-solo">{{ example.type }}</span>
-      </div>
-      <div data-sassdoc-example-panel="{{ example.type }}">
-        {{ code|safe }}
-      </div>
-
-      {% if example.type == 'njk' %}
-        <div data-sassdoc="example-tabs">
-          <span data-sassdoc="example-tab-solo">html</span>
-        </div>
-        <div data-sassdoc-example-panel="html">
-          {{ code_block(language='html', content=example.rendered) }}
-        </div>
-      {% endif %}
-
-      {% if example.description %}
-        <p data-sassdoc="example-description">{{ example.description|safe }}</p>
-      {% endif %}
+  <div data-sassdoc="examples">
+    <div data-sassdoc="example-tabs">
+      {% for example in examples_list %}
+        {% if not (example.description|striptags == 'compiled') %}
+          {{ utility.tab(
+            id=[group, example.type]|join('_'),
+            group=group,
+            content=lang_types[example.type],
+            active=true if loop.first else false
+            ) }}
+        {% endif %}
+      {% endfor %}
     </div>
 
-    {% if example.rendered %}
-      <div data-sassdoc-example="visual-output">
-        <div data-sassdoc="example-tabs">
-          <span data-sassdoc="example-tab-solo">Visual Output</span>
-        </div>
-        {{ example.rendered|safe }}
-      </div>
-    {% endif %}
+    {% for example in examples_list %}
+      {% if not (example.description|striptags == 'compiled') %}
+        {% call utility.tab_panel(
+          id=[group, example.type]|join('_'),
+          group=group,
+          active=true if loop.first else false
+          ) %}
 
-  {% endfor %}
+          <div data-sassdoc-example="{{ example.type }}">
+            <div data-sassdoc-title="example">
+              {{ example.type }}
+              {% if example.description %}
+                – <em>{{ example.description|striptags }}</em>
+              {% endif %}
+            </div>
+            {{ code_block(language=example.type, content=example.code|escape|safe) }}
+          </div>
+
+          {% if example.rendered %}
+            {% set render_type = render_types[example.type] %}
+            <div data-sassdoc-example="{{ render_type }}">
+              <div data-sassdoc-title="example">
+                {{ render_type }} – <em>compiled</em>
+              </div>
+              {{ code_block(language=render_type, content=example.rendered|escape|safe) }}
+            </div>
+          {% endif %}
+
+          {% set next = examples_list[loop.index] %}
+          {% if (next.description|striptags == 'compiled') %}
+            <div data-sassdoc-example="{{ next.type }}">
+              <div data-sassdoc-title="example">
+                {{ next.type }} – <em>compiled</em>
+              </div>
+              {{ code_block(language=next.type, content=next.code|escape|safe) }}
+            </div>
+          {% endif %}
+        {% endcall %}
+      {% endif %}
+    {% endfor %}
+
+    {% for example in examples_list %}
+      {% if example.rendered %}
+        <div data-sassdoc-rendered="{{ example.type }}">
+          {{ example.rendered|safe }}
+        </div>
+      {% endif %}
+    {% endfor %}
   </div>
 {% endmacro %}
