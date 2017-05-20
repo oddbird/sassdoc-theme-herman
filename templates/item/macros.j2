@@ -169,10 +169,15 @@ ${{ item.context.name }}: {{ item.context.value }}{% if item.context.scope != 'p
 
 {% macro example_code(language, code, description=false) %}
   <div data-sassdoc-example="{{ language }}">
-    <div data-sassdoc-title="example">
-      {{ language }}
+    <div data-sassdoc="example-header">
+      <span data-sassdoc="example-language">
+        {{ language }}
+      </span>
+
       {% if description %}
-        – <em>{{ description|striptags }}</em>
+        <span data-sassdoc='example-description'>
+          {{ description|striptags }}
+        </span>
       {% endif %}
     </div>
     {{ code_block(language=language, content=code|escape|safe) }}
@@ -217,7 +222,7 @@ ${{ item.context.name }}: {{ item.context.value }}{% if item.context.scope != 'p
   {% for example in examples_list %}
     {% if not (example.description|striptags == 'compiled') %}
       {# Get compiled language and code, if available from `rendered` or `next` #}
-      {% set rendered = example.rendered if example.rendered else none %}
+      {% set rendered = example.rendered if (example.rendered and render_types[example.type]) else none %}
       {% set rendered_type = render_types[example.type] if rendered else none %}
       {% set next = examples_list[loop.index] %}
       {% set next = next if (next.description|striptags == 'compiled') else none %}

@@ -41,7 +41,7 @@
   }
 }
 
-[data-sassdoc-title] {
+[data-sassdoc='example-header'] {
   @include contrasted('light-gray');
   @include font-family('code');
   @include font-size('smaller');
@@ -51,6 +51,11 @@
   + [data-sassdoc] {
     flex: 1 1 auto;
   }
+}
+
+[data-sassdoc='example-description'] {
+  @include before(' – ');
+  font-style: italic;
 }
 
 [data-sassdoc-rendered] {
