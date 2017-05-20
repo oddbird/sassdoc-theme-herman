@@ -22,16 +22,10 @@
     "test": "mocha test"
   },
   "devDependencies": {
-    "accoutrement-a11y": "^1.0.6",
     "accoutrement-color": "^2.0.1",
-    "accoutrement-fonts": "^2.0.0-alpha.4",
-    "accoutrement-herman": "^1.0.0-alpha.4",
     "accoutrement-init": "^1.1.0",
     "accoutrement-layout": "^2.0.0",
-    "accoutrement-pseudo": "^1.0.2",
-    "accoutrement-queries": "^1.1.0",
-    "accoutrement-scale": "^2.0.0",
-    "accoutrement-strings": "^1.1.0",
+    "accoutrement-scale": "2.0.0",
     "accoutrement-type": "^2.0.0",
     "browser-sync": "^2.17.5",
     "chalk": "^1.1.3",
