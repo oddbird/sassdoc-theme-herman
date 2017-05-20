@@ -15,7 +15,7 @@ user-experience and code patterns:
 - Font specimens
 - Color palettes
 - SVG icon previews
-- Referencing & rendering Jinja/Nunjucks macros from the Sass docs
+- Referencing & rendering Nunjucks macros from the Sass docs
 - more on the way!
 
 [oddbird]: http://oddbird.net/
@@ -61,12 +61,15 @@ will render the `mymacro` macro from the file `macros.j2`
 (which happens to use the `[data-mymacro]` attribute).
 
 In order for this to work for scss,
-you must include a `hermanIncludePaths` key in your sassdoc configuration.
+you must include a `sassincludepaths` key in your sassdoc configuration.
 It should be an array of places to look for Sass includes,
-like `hermanIncludePaths: [ path.join(__dirname, 'static/sass') ]`.
+like `sassincludepaths: [ path.join(__dirname, 'static/sass') ]`.
 Further, all of the Sass examples will have to be complete and valid.
 This may require including something like `@import 'config/manifest';`
-at the top of each.
+at the top of each. If you include a `sassincludes` array in your sassdoc
+configuration, those files (relative to the `sassincludepaths`) will always
+be `@import`-ed for `@example scss`. *Note: Included Sass files should not
+contain any CSS output; any output will be displayed along with the @example.*
 
 In order for this to work for nunjucks,
 you must also either specify a `templatepath`
@@ -114,6 +117,8 @@ Releases
   Closes [#65](https://github.com/oddbird/sassdoc-theme-herman/issues/65).
 - Add support for @todo annotation. Closes
   [#18](https://github.com/oddbird/sassdoc-theme-herman/issues/18).
+- Show compiled CSS for `@example scss` annotations. Closes
+  [#37](https://github.com/oddbird/sassdoc-theme-herman/issues/37).
 
 ### 0.5.5: 2017-02-22
 

@@ -439,6 +439,12 @@ module.exports.annotations = [
               var sassData = exampleItem.code;
               exampleItem.rendered = undefined;
               try {
+                if (env.sassincludes) {
+                  for (var i = env.sassincludes.length - 1; i >= 0; i = i - 1) {
+                    sassData =
+                      "@import '" + env.sassincludes[i] + "';\n" + sassData;
+                  }
+                }
                 var rendered = sass.renderSync({
                   data: sassData,
                   importer: function (url) {
@@ -447,12 +453,16 @@ module.exports.annotations = [
                     }
                     return { file: url };
                   },
-                  includePaths: env.hermanIncludePaths || []
+                  includePaths: env.sassincludepaths || [],
+                  outputStyle: 'expanded'
                 });
                 var encoded = rendered.css.toString('utf-8');
                 exampleItem.rendered = encoded;
               } catch (err) {
-                console.warn(err); // eslint-disable-line no-console
+                env.logger.warn(
+                  'Error compiling @example scss: \n' +
+                  err.message + '\n' + sassData
+                );
               }
             }
           });

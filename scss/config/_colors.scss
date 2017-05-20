@@ -19,7 +19,7 @@
 ///   [Accoutrement-Color](http://oddbird.net/accoutrement-color/sassdoc/)).
 /// @link http://oddbird.net/accoutrement-color/sassdoc/
 ///   Accoutrement Color
-/// @example
+/// @example scss
 ///   // @preview color-palette
 ///   @include herman-add-colors('brand-colors', $brand-colors);
 $brand-colors: (
@@ -39,7 +39,7 @@ $brand-colors: (
 /// @group colors
 /// @link http://oddbird.net/accoutrement-color/sassdoc/
 ///   Accoutrement Color
-/// @example
+/// @example scss
 ///   // @preview color-palette
 ///   @include herman-add-colors('neutral-colors', $neutral-colors);
 $neutral-colors: (
@@ -59,7 +59,7 @@ $neutral-colors: (
 /// @group colors
 /// @link http://oddbird.net/accoutrement-color/sassdoc/
 ///   Accoutrement Color
-/// @example
+/// @example scss
 ///   // @preview color-palette
 ///   @include herman-add-colors('status-colors', $status-colors);
 $status-colors: (
@@ -79,7 +79,7 @@ $status-colors: (
 /// @group colors
 /// @link http://oddbird.net/accoutrement-color/sassdoc/
 ///   Accoutrement Color
-/// @example
+/// @example scss
 ///   // @preview color-palette
 ///   @include herman-add-colors('theme-colors', $theme-colors);
 $theme-colors: (
