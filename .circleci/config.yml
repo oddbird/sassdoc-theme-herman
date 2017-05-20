@@ -38,8 +38,7 @@ jobs:
           name: Update yarn.lock [greenkeeper]
           command: |
             if [[ "${CIRCLE_BRANCH}" =~ greenkeeper\/.* ]]; then
-              yarn check && { echo ">> yarn check passed, yarn.lock does not need to update"; exit 0; }
-              yarn && { echo ">> running yarn"; }
+              [[ $(git diff --name-only yarn.lock) == "" ]] && exit 0
               USER_EMAIL=${USER_EMAIL:-"circleci@users.noreply.github.com"}
               USER_NAME=${USER_NAME:-"CircleCI"}
               git config user.email $USER_EMAIL
@@ -49,4 +48,6 @@ jobs:
               git add yarn.lock
               git commit -m "chore(yarn): update yarn.lock"
               git push origin $CIRCLE_BRANCH
+            else
+              [[ $(git diff --name-only yarn.lock) != "" ]] && exit 1
             fi
