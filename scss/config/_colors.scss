@@ -83,6 +83,9 @@ $status-colors: (
 ///   // @preview color-palette
 ///   @include herman-add-colors('theme-colors', $theme-colors);
 $theme-colors: (
+  'theme-dark': 'brand-blue',
+  'theme-light': 'brand-blue' ('tint': 50%),
+
   'background': #fff,
   'text': 'black',
   'text-light': 'gray',
@@ -90,11 +93,12 @@ $theme-colors: (
   'callout': 'light-gray',
   'overlay': 'callout' ('rgba': 0.9),
   'shadow': 'gray' ('rgba': 0.5),
-  'action': 'brand-orange',
+  'action': 'theme-dark',
   'focus': 'action' ('shade': 10%),
   'active': 'action',
   'accent': 'brand-pink',
   'slight': 'light-gray' ('rgba': 0.4),
+
 );
 
 @include herman-add-colors('theme-colors', $theme-colors);

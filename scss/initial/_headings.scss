@@ -53,10 +53,7 @@
 }
 
 [data-sassdoc='nav-title'] {
-  [href] {
-    #{$link} {
-      font-style: normal;
-      margin: size('half-shim') 0;
-    }
-  }
+  font-style: normal;
+  font-weight: normal;
+  margin: size('half-shim') 0;
 }

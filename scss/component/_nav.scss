@@ -11,14 +11,13 @@
 ///   <a href="#" data-sassdoc-nav="is-active">active</a>
 [data-sassdoc-nav] {
   #{$link} {
+    border-bottom: 5px solid transparent;
     color: inherit;
-    font-style: italic;
-    text-transform: capitalize;
   }
 
   &[data-sassdoc-nav='is-active'] {
     #{$link} {
-      color: color('active');
+      border-color: color('background' (rgba: 0.75));
       text-decoration: none;
     }
   }

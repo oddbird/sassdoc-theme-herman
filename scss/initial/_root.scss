@@ -29,7 +29,7 @@
 
     [data-sassdoc-region='banner'] &,
     [data-sassdoc-region='nav'] & {
-      color: color('action');
+      color: inherit;
     }
   }
 }

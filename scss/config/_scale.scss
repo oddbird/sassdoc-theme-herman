@@ -83,6 +83,7 @@ $spacing-sizes: (
 ///   // @preview sizes; style: output-only
 ///   @include herman-add-sizes('pattern-sizes', $pattern-sizes);
 $pattern-sizes: (
+  'border': 8px,
   'page': 50rem,
   'specimen': 'rhythm' ('linear': 3),
   'color-swatch': 'rhythm' ('linear': 4),
