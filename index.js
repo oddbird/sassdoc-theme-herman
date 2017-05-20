@@ -5,6 +5,7 @@ var fs = require('fs');
 var nunjucks = require('nunjucks');
 var path = require('path');
 var Promise = require('bluebird');
+var sassdoc = require('sassdoc');
 
 var copy = require('./lib/assets.js');
 var parse = require('./lib/parse.js');
@@ -20,11 +21,39 @@ nunjucks.installJinjaCompat();
  */
 var extras = require('sassdoc-extras');
 
+
+var byGroup = function (data) {
+  var sorted = {};
+  data.forEach(function (item) {
+    var group = item.group[0];
+    if (!(group in sorted)) {
+      sorted[group] = [];
+    }
+    sorted[group].push(item);
+  });
+  return sorted;
+};
+
+
+var parseSubprojects = function (ctx) {
+  var promises = [];
+  if (ctx.subprojects) {
+    Object.keys(ctx.subprojects).forEach(function (name) {
+      var promise = sassdoc.parse(ctx.subprojects[name]).then(function (data) {
+        ctx.subprojects[name] = byGroup(data);
+      });
+      promises.push(promise);
+    });
+  }
+  return Promise.all(promises);
+};
+
+
 /**
  * Actual theme function. It takes the destination directory `dest`,
  * and the context variables `ctx`.
  */
-module.exports = function (dest, ctx) {
+var renderHerman = function (dest, ctx) {
   var base = path.resolve(__dirname, './templates');
   var indexTemplate = path.join(base, 'index.j2');
   var indexDest = path.join(dest, 'index.html');
@@ -38,6 +67,91 @@ module.exports = function (dest, ctx) {
 
   dest = path.resolve(dest);
 
+  // check if we need to copy a favicon file or use the default
+  var copyShortcutIcon = false;
+  if (!ctx.shortcutIcon) {
+    ctx.shortcutIcon = { type: 'internal', url: 'assets/img/favicon.ico' };
+  } else if (ctx.shortcutIcon.type === 'internal') {
+    ctx.shortcutIcon.url = 'assets/img/' + ctx.shortcutIcon.url;
+    copyShortcutIcon = true;
+  }
+
+  // if needed, copy in a custom css file
+  var copyCustomCSS = false;
+  if (ctx.customCSS) {
+    var srcPath = path.resolve(ctx.dir, ctx.customCSS);
+    var cssUrl = 'assets/css/custom/' + path.basename(ctx.customCSS);
+    ctx.customCSS = {
+      path: srcPath,
+      url: cssUrl
+    };
+    copyCustomCSS = true;
+  }
+
+  // if needed, read in minified icons SVG
+  ctx.iconsSvg = '';
+  if (ctx.templatepath && ctx.minifiedIcons) {
+    ctx.iconsSvg = fs.readFileSync(
+      path.join(ctx.templatepath, ctx.minifiedIcons));
+  }
+
+  // render the index template and copy the static assets.
+  var promises = [
+    render(nunjucksEnv, indexTemplate, indexDest, ctx),
+    copy(
+      path.join(assets, '/**/*.{css,js,svg,png,eot,woff,woff2,ttf,ico,map}'),
+      path.join(dest, 'assets')
+    ).then(function () {
+      if (copyShortcutIcon) {
+        return copy(ctx.shortcutIcon.path, path.resolve(dest, 'assets/img/'));
+      }
+      return Promise.resolve();
+    }).then(function () {
+      if (copyCustomCSS) {
+        return copy(
+          ctx.customCSS.path,
+          path.resolve(dest, 'assets/css/custom')
+        );
+      }
+      return Promise.resolve();
+    })
+  ];
+
+  // Render a template for each group, too. The group template is passed the
+  // main context with an added `data.currentGroup` key which contains the name
+  // of the current group.
+  Object.getOwnPropertyNames(ctx.data.byGroup).forEach(
+    function (groupName) {
+      var groupDest = path.join(dest, groupName + '.html');
+      var groupData = extend({ currentGroup: groupName }, ctx.data);
+      var groupCtx = extend({}, ctx);
+      groupCtx.data = groupData;
+      promises.push(render(nunjucksEnv, groupTemplate, groupDest, groupCtx));
+    }
+  );
+
+  return Promise.all(promises);
+};
+
+// get nunjucks env lazily so that we only throw an error on missing
+// templatepath if annotation was actually used.
+var getNunjucksEnv = function (name, env, warned) {
+  if (env.nunjucksEnv) { return env.nunjucksEnv; }
+  if (!env.templatepath) {
+    if (!warned) {
+      env.logger.warn('Must pass in a templatepath if using ' + name + '.');
+    }
+    return null;
+  }
+  return nunjucks.configure(env.templatepath);
+};
+
+
+/**
+ * Actual theme function. It takes the destination directory `dest`,
+ * and the context variables `ctx`.
+ */
+module.exports = function (dest, ctx) {
   var def = {
     display: {
       access: [ 'public', 'private' ],
@@ -193,86 +307,15 @@ module.exports = function (dest, ctx) {
    * You can then use `data.byGroupAndType` instead of `data` in your
    * templates to manipulate the indexed object.
    */
-  ctx.data.byGroupAndType = extras.byGroupAndType(ctx.data);
+  ctx.data.byGroup = byGroup(ctx.data);
 
-  // check if we need to copy a favicon file or use the default
-  var copyShortcutIcon = false;
-  if (!ctx.shortcutIcon) {
-    ctx.shortcutIcon = { type: 'internal', url: 'assets/img/favicon.ico' };
-  } else if (ctx.shortcutIcon.type === 'internal') {
-    ctx.shortcutIcon.url = 'assets/img/' + ctx.shortcutIcon.url;
-    copyShortcutIcon = true;
-  }
+  return parseSubprojects(ctx).then(function () {
+    console.log(ctx.subprojects);
+    renderHerman(dest, ctx);
+  });
 
-  // if needed, copy in a custom css file
-  var copyCustomCSS = false;
-  if (ctx.customCSS) {
-    var srcPath = path.resolve(ctx.dir, ctx.customCSS);
-    var cssUrl = 'assets/css/custom/' + path.basename(ctx.customCSS);
-    ctx.customCSS = {
-      path: srcPath,
-      url: cssUrl
-    };
-    copyCustomCSS = true;
-  }
-
-  // if needed, read in minified icons SVG
-  ctx.iconsSvg = '';
-  if (ctx.templatepath && ctx.minifiedIcons) {
-    ctx.iconsSvg = fs.readFileSync(
-      path.join(ctx.templatepath, ctx.minifiedIcons));
-  }
-
-  // render the index template and copy the static assets.
-  var promises = [
-    render(nunjucksEnv, indexTemplate, indexDest, ctx),
-    copy(
-      path.join(assets, '/**/*.{css,js,svg,png,eot,woff,woff2,ttf,ico,map}'),
-      path.join(dest, 'assets')
-    ).then(function () {
-      if (copyShortcutIcon) {
-        return copy(ctx.shortcutIcon.path, path.resolve(dest, 'assets/img/'));
-      }
-      return Promise.resolve();
-    }).then(function () {
-      if (copyCustomCSS) {
-        return copy(
-          ctx.customCSS.path,
-          path.resolve(dest, 'assets/css/custom')
-        );
-      }
-      return Promise.resolve();
-    })
-  ];
-
-  // Render a template for each group, too. The group template is passed the
-  // main context with an added `data.currentGroup` key which contains the name
-  // of the current group.
-  Object.getOwnPropertyNames(ctx.data.byGroupAndType).forEach(
-    function (groupName) {
-      var groupDest = path.join(dest, groupName + '.html');
-      var groupData = extend({ currentGroup: groupName }, ctx.data);
-      var groupCtx = extend({}, ctx);
-      groupCtx.data = groupData;
-      promises.push(render(nunjucksEnv, groupTemplate, groupDest, groupCtx));
-    }
-  );
-
-  return Promise.all(promises);
 };
 
-// get nunjucks env lazily so that we only throw an error on missing
-// templatepath if annotation was actually used.
-var getNunjucksEnv = function (name, env, warned) {
-  if (env.nunjucksEnv) { return env.nunjucksEnv; }
-  if (!env.templatepath) {
-    if (!warned) {
-      env.logger.warn('Must pass in a templatepath if using ' + name + '.');
-    }
-    return null;
-  }
-  return nunjucks.configure(env.templatepath);
-};
 
 module.exports.annotations = [
   /**
