@@ -84,7 +84,7 @@ $status-colors: (
 ///   @include herman-add-colors('theme-colors', $theme-colors);
 $theme-colors: (
   'theme-dark': 'brand-blue',
-  'theme-light': 'brand-blue' ('tint': 50%),
+  'theme-light': 'brand-blue' ('tint': 80%),
 
   'background': #fff,
   'text': 'black',
@@ -97,8 +97,7 @@ $theme-colors: (
   'focus': 'action' ('shade': 10%),
   'active': 'action',
   'accent': 'brand-pink',
-  'slight': 'light-gray' ('rgba': 0.4),
-
+  'slight': 'light-gray' ('rgba': 0.1),
 );
 
 @include herman-add-colors('theme-colors', $theme-colors);

@@ -43,6 +43,7 @@ $text-sizes: (
 
   'small': 18px,
   'smaller': 16px,
+  'smallest': 16px,
 );
 
 @include herman-add-sizes('text-sizes', $text-sizes);
