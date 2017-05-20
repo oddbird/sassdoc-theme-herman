@@ -2,6 +2,7 @@
 // ========
 
 [data-sassdoc-example] {
+  flex: 1 1 auto;
   margin: size('gutter') 0;
 
   [aria-hidden='true'] {
@@ -39,3 +40,17 @@
 [data-sassdoc-example-panel='output'] {
   padding: size('shim');
 }
+
+[data-sassdoc-examples='usage'] {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+[data-sassdoc-example='visual-output'] {
+  flex: 1 0 100%;
+}
+
+// [data-sassdoc-example-lang='scss'],
+// [data-sassdoc-example-lang='css'] {
+//   width: 50%;
+// }

@@ -13,6 +13,11 @@
 ///       color: blue;
 ///     }
 ///   }
+/// @example css -
+///   a:link,
+///   a:visited {
+///     color: blue;
+///   }
 $link: '&:link, &:visited';
 
 

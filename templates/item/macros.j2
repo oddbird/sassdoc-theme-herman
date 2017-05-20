@@ -168,58 +168,36 @@ ${{ item.context.name }}: {{ item.context.value }}{% if item.context.scope != 'p
 
 
 {% macro examples(examples_list, id) %}
+  <div data-sassdoc-examples="usage">
   {% for example in examples_list %}
-    {% set group = ['examples', id, loop.index]|join('_') if example.rendered else null %}
     {% set code = code_block(
       language=example.type,
       content=example.code|escape|safe
       ) %}
 
-    <div data-sassdoc-example="{{ group or 'simple' }}">
-      {% if example.rendered %}
-        {% set input_id = [group, example.type]|join('_') %}
-        {% set output_id = [group, 'output']|join('_') %}
+    <div data-sassdoc-example="{{ group or 'simple' }}" data-sassdoc-example-lang="{{ example.type }}">
 
-        <div data-sassdoc="example-tabs">
-          {{ utility.tab(
-            id=input_id,
-            group=group,
-            content=example.type
-            ) }}
-          {{ utility.tab(
-            id=output_id,
-            group=group,
-            content='output',
-            active=true
-            ) }}
-        </div>
-
-        {{ utility.tab_panel(
-          id=input_id,
-          group=group,
-          content=code|safe,
-          class='input'
-          ) }}
-
-        {{ utility.tab_panel(
-          id=output_id,
-          group=group,
-          content=example.rendered|safe,
-          active=true,
-          class='output'
-          ) }}
-      {% else %}
-        <div data-sassdoc="example-tabs">
-          <span data-sassdoc="example-tab-solo">{{ example.type }}</span>
-        </div>
-        <div data-sassdoc-example-panel="{{ example.type }}">
-          {{ code|safe }}
-        </div>
-      {% endif %}
+      <div data-sassdoc="example-tabs">
+        <span data-sassdoc="example-tab-solo">{{ example.type }}</span>
+      </div>
+      <div data-sassdoc-example-panel="{{ example.type }}">
+        {{ code|safe }}
+      </div>
 
       {% if example.description %}
         <p data-sassdoc="example-description">{{ example.description|safe }}</p>
       {% endif %}
     </div>
+
+    {% if example.rendered %}
+      <div data-sassdoc-example="visual-output">
+        <div data-sassdoc="example-tabs">
+          <span data-sassdoc="example-tab-solo">Visual Output</span>
+        </div>
+        {{ example.rendered|safe }}
+      </div>
+    {% endif %}
+
   {% endfor %}
+  </div>
 {% endmacro %}
