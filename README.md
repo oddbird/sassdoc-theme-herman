@@ -15,7 +15,7 @@ user-experience and code patterns:
 - Font specimens
 - Color palettes
 - SVG icon previews
-- Referencing & rendering Jinja/Nunjucks macros from the Sass docs
+- Referencing & rendering Nunjucks macros from the Sass docs
 - more on the way!
 
 [oddbird]: http://oddbird.net/
@@ -37,10 +37,10 @@ so you'll want to specify `herman`
 as the theme in your `sassdoc` options.
 
 
-Rendering `nunjucks` examples
------------------------------
+Rendering `scss` and `nunjucks` examples
+----------------------------------------
 
-If you use an `@example` annotation with the `njk` language,
+If you use an `@example` annotation with the `scss` or `njk` languages,
 Herman will display both the source code of the example
 and its rendered output.
 
@@ -60,7 +60,18 @@ For example, this:
 will render the `mymacro` macro from the file `macros.j2`
 (which happens to use the `[data-mymacro]` attribute).
 
-In order for this to work,
+In order for this to work for scss,
+you must include a `sassincludepaths` key in your sassdoc configuration.
+It should be an array of places to look for Sass includes,
+like `sassincludepaths: [ path.join(__dirname, 'static/sass') ]`.
+Further, all of the Sass examples will have to be complete and valid.
+This may require including something like `@import 'config/manifest';`
+at the top of each. If you include a `sassincludes` array in your sassdoc
+configuration, those files (relative to the `sassincludepaths`) will always
+be `@import`-ed for `@example scss`. *Note: Included Sass files should not
+contain any CSS output; any output will be displayed along with the @example.*
+
+In order for this to work for nunjucks,
 you must also either specify a `templatepath`
 (the path where nunjucks will look to import templates),
 or a `nunjucksEnv` (a custom nunjucks environment —
@@ -106,6 +117,8 @@ Releases
   Closes [#65](https://github.com/oddbird/sassdoc-theme-herman/issues/65).
 - Add support for @todo annotation. Closes
   [#18](https://github.com/oddbird/sassdoc-theme-herman/issues/18).
+- Show compiled CSS for `@example scss` annotations. Closes
+  [#37](https://github.com/oddbird/sassdoc-theme-herman/issues/37).
 
 ### 0.5.5: 2017-02-22
 

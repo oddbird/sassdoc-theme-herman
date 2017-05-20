@@ -289,7 +289,7 @@ ${{ item.context.name }}: {{ item.context.value }}{% if item.context.scope != 'p
     ) }}
 
   {% for example in examples_list %}
-    {% if example.rendered %}
+    {% if example.rendered and example.type != 'scss' %}
       <div data-sassdoc-rendered="{{ example.type }}">
         {{ example.rendered|safe }}
       </div>

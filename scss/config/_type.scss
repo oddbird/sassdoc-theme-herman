@@ -10,17 +10,12 @@
 /// @example njk
 ///   {% import 'utility.macros.j2' as utility %}
 ///   {{ utility.link_if( content='stacy', url='#', attrs={'data-sassdoc': 'font-name'} ) }}
+/// @todo Add a sample @todo
 /// @example scss - target link and visited anchors
 ///   a {
 ///     #{$link} {
 ///       color: blue;
 ///     }
-///   }
-/// @todo Automate compiled css from the source scss
-/// @example css - compiled
-///   a:link,
-///   a:visited {
-///     color: blue;
 ///   }
 $link: '&:link, &:visited';
 
