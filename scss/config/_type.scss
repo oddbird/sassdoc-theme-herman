@@ -7,6 +7,9 @@
 /// Shortcut for `link` and `visited` pseudo-classes.
 /// @group utilities
 /// @see $focus
+/// @example njk -
+///   {% import 'utility.macros.j2' as utility %}
+///   {{ utility.link_if( content='stacy', url='#', attrs={'data-sassdoc': 'font-name'} ) }}
 /// @example scss -
 ///   a {
 ///     #{$link} {

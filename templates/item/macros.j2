@@ -184,6 +184,15 @@ ${{ item.context.name }}: {{ item.context.value }}{% if item.context.scope != 'p
         {{ code|safe }}
       </div>
 
+      {% if example.type == 'njk' %}
+        <div data-sassdoc="example-tabs">
+          <span data-sassdoc="example-tab-solo">html</span>
+        </div>
+        <div data-sassdoc-example-panel="html">
+          {{ code_block(language='html', content=example.rendered) }}
+        </div>
+      {% endif %}
+
       {% if example.description %}
         <p data-sassdoc="example-description">{{ example.description|safe }}</p>
       {% endif %}
