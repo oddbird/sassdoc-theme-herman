@@ -5,6 +5,7 @@ var fs = require('fs');
 var nunjucks = require('nunjucks');
 var path = require('path');
 var Promise = require('bluebird');
+var sass = require('node-sass');
 
 var copy = require('./lib/assets.js');
 var parse = require('./lib/parse.js');
@@ -47,7 +48,8 @@ module.exports = function (dest, ctx) {
     groups: {
       undefined: 'general'
     },
-    sort: [ 'group', 'file', 'line', 'access' ]
+    sort: [ 'group', 'file', 'line', 'access' ],
+    herman: {}
   };
 
   // Apply default values for groups and display.
@@ -65,8 +67,8 @@ module.exports = function (dest, ctx) {
    * Load a `sass-json file` (if one is given in the context) and add its
    * contents under the `sassjson` key of the context.
    */
-  if (ctx.sassjsonfile) {
-    ctx.sassjson = parse.sassJson(fs.readFileSync(ctx.sassjsonfile));
+  if (ctx.herman.sassjsonfile) {
+    ctx.sassjson = parse.sassJson(fs.readFileSync(ctx.herman.sassjsonfile));
   }
 
   /**
@@ -206,9 +208,9 @@ module.exports = function (dest, ctx) {
 
   // if needed, copy in a custom css file
   var copyCustomCSS = false;
-  if (ctx.customCSS) {
-    var srcPath = path.resolve(ctx.dir, ctx.customCSS);
-    var cssUrl = 'assets/css/custom/' + path.basename(ctx.customCSS);
+  if (ctx.herman.customCSS) {
+    var srcPath = path.resolve(ctx.dir, ctx.herman.customCSS);
+    var cssUrl = 'assets/css/custom/' + path.basename(ctx.herman.customCSS);
     ctx.customCSS = {
       path: srcPath,
       url: cssUrl
@@ -218,9 +220,9 @@ module.exports = function (dest, ctx) {
 
   // if needed, read in minified icons SVG
   ctx.iconsSvg = '';
-  if (ctx.templatepath && ctx.minifiedIcons) {
+  if (ctx.herman.templatepath && ctx.herman.minifiedIcons) {
     ctx.iconsSvg = fs.readFileSync(
-      path.join(ctx.templatepath, ctx.minifiedIcons));
+      path.join(ctx.herman.templatepath, ctx.herman.minifiedIcons));
   }
 
   // render the index template and copy the static assets.
@@ -264,14 +266,14 @@ module.exports = function (dest, ctx) {
 // get nunjucks env lazily so that we only throw an error on missing
 // templatepath if annotation was actually used.
 var getNunjucksEnv = function (name, env, warned) {
-  if (env.nunjucksEnv) { return env.nunjucksEnv; }
-  if (!env.templatepath) {
+  if (env.herman.nunjucksEnv) { return env.herman.nunjucksEnv; }
+  if (!env.herman.templatepath) {
     if (!warned) {
       env.logger.warn('Must pass in a templatepath if using ' + name + '.');
     }
     return null;
   }
-  return nunjucks.configure(env.templatepath);
+  return nunjucks.configure(env.herman.templatepath);
 };
 
 module.exports.annotations = [
@@ -350,7 +352,7 @@ module.exports.annotations = [
             return;
           }
           var inData = item.icons;
-          var iconsPath = path.join(env.templatepath, inData.iconsPath);
+          var iconsPath = path.join(env.herman.templatepath, inData.iconsPath);
           var iconFiles = fs.readdirSync(iconsPath);
           var renderTpl = '{% import "' + inData.macroFile + '" as it %}' +
             '{{ it.' + inData.macroName + '(iconName) }}';
@@ -434,11 +436,39 @@ module.exports.annotations = [
               }
               exampleItem.rendered = nunjucksEnv.renderString(
                 exampleItem.code).trim();
+            } else if (exampleItem.type === 'scss') {
+              var sassData = exampleItem.code;
+              exampleItem.rendered = undefined;
+              try {
+                if (env.herman.sassincludes) {
+                  var arr = env.herman.sassincludes;
+                  for (var i = arr.length - 1; i >= 0; i = i - 1) {
+                    sassData = "@import '" + arr[i] + "';\n" + sassData;
+                  }
+                }
+                var rendered = sass.renderSync({
+                  data: sassData,
+                  importer: function (url) {
+                    if (url[0] === '~') {
+                      url = path.resolve('node_modules', url.substr(1));
+                    }
+                    return { file: url };
+                  },
+                  includePaths: env.herman.sassincludepaths || [],
+                  outputStyle: 'expanded'
+                });
+                var encoded = rendered.css.toString('utf-8');
+                exampleItem.rendered = encoded;
+              } catch (err) {
+                env.logger.warn(
+                  'Error compiling @example scss: \n' +
+                  err.message + '\n' + sassData
+                );
+              }
             }
           });
         });
       }
     };
   }
-
 ];
