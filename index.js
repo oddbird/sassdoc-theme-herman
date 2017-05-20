@@ -436,12 +436,12 @@ module.exports.annotations = [
               exampleItem.rendered = nunjucksEnv.renderString(
                 exampleItem.code).trim();
             } else if (exampleItem.type === 'scss') {
-              var data = exampleItem.code;
+              var sassData = exampleItem.code;
               exampleItem.rendered = undefined;
               try {
                 var rendered = sass.renderSync({
-                  data: data,
-                  importer: function (url, prev, done) {
+                  data: sassData,
+                  importer: function (url) {
                     if (url[0] === '~') {
                       url = path.resolve('node_modules', url.substr(1));
                     }
@@ -451,8 +451,8 @@ module.exports.annotations = [
                 });
                 var encoded = rendered.css.toString('utf-8');
                 exampleItem.rendered = encoded;
-              } catch (e) {
-                console.warn(e);
+              } catch (err) {
+                console.warn(err); // eslint-disable-line no-console
               }
             }
           });
