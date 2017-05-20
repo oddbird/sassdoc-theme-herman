@@ -5,6 +5,7 @@ var fs = require('fs');
 var nunjucks = require('nunjucks');
 var path = require('path');
 var Promise = require('bluebird');
+var sass = require('node-sass');
 
 var copy = require('./lib/assets.js');
 var parse = require('./lib/parse.js');
@@ -418,8 +419,6 @@ module.exports.annotations = [
       parse: baseExample.parse,
       resolve: function (data) {
         var nunjucksEnv;
-        var scssSourceMap;
-        var cssCompiled;
         var warned = false;
         data.forEach(function (item) {
           if (!item.example) { return; }
@@ -437,33 +436,24 @@ module.exports.annotations = [
               exampleItem.rendered = nunjucksEnv.renderString(
                 exampleItem.code).trim();
             } else if (exampleItem.type === 'scss') {
-              // @@@TODO: this approach might be wrong; we might need to
-              // compile the example on its own, as a whole bit of Sass, and
-              // fail cleanly if it's missing needed context.
-              if (!(scssSourceMap && cssCompiled)) {
-                // @@@TODO Get source map location somehow, fs.readFileSync it
-                // in.
-                // @@@TODO Get compiled css, fs.readFileSync it in, split by
-                // lines.
+              var data = exampleItem.code;
+              exampleItem.rendered = undefined;
+              try {
+                var rendered = sass.renderSync({
+                  data: data,
+                  importer: function (url, prev, done) {
+                    if (url[0] === '~') {
+                      url = path.resolve('node_modules', url.substr(1));
+                    }
+                    return { file: url };
+                  },
+                  includePaths: env.hermanIncludePaths || []
+                });
+                var encoded = rendered.css.toString('utf-8');
+                exampleItem.rendered = encoded;
+              } catch (e) {
+                console.warn(e);
               }
-              if (!(scssSourceMap && cssCompiled)) {
-                warned = true;
-                return;
-              }
-              var consumer = new sourceMap.SourceMapConsumer(scssSourceMap);
-              consumer.computeColumnSpans();
-              var line = undefined; // @@@TODO what?
-              var source = undefined; // @@@TODO what?
-              var positions = consumer.allGeneratedPositionsFor({
-                line: line,
-                source: source
-              });
-              // Get CSS from first position start to last position end.
-              var css = '';
-              for (var position of positions) {
-                css += getFromCompiledCss(cssCompiled, position);
-              }
-              exampleItem.rendered = css;
             }
           });
         });
@@ -471,11 +461,3 @@ module.exports.annotations = [
     };
   }
 ];
-
-function getFromCompiledCss(css, position) {
-  var line = position.line;
-  var column = position.column;
-  var lastColumn = position.lastColumn;
-
-  return css[line].slice(column, lastColumn);
-}
