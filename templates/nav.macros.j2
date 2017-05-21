@@ -1,0 +1,6 @@
+{% import 'utility.macros.j2' as utility %}
+
+
+{% macro toggle(size, expanded=false) %}
+  <button data-nav-toggle="{{ size }}" {{ utility.toggle_button(['nav', size]|join('-'), button='true', expanded=expanded) }}>menu</button>
+{% endmacro %}

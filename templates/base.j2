@@ -13,11 +13,11 @@
     {{ customHead|safe }}
   {% endif %}
 
-  <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="stylesheet" href="{{ basePath }}assets/css/main.css" />
   {% if customCSS and customCSS.url %}
     <link rel="stylesheet" href="{{ customCSS.url }}" />
   {% else %}
-    <link rel="stylesheet" href="assets/css/theme.css" />
+    <link rel="stylesheet" href="{{ basePath }}assets/css/theme.css" />
   {% endif %}
 </head>
 <body>
@@ -25,16 +25,20 @@
   {{ iconsSvg|safe }}
 
   {% import 'utility.macros.j2' as utility %}
+  {% import 'nav.macros.j2' as nav %}
 
   <div data-sassdoc-region="app">
     <header role="banner" data-sassdoc-region="banner">
-    <button class="nav-icon nav-icon-small" {{ utility.toggle_button('nav-small', button='true') }}>menu</button>
-    <button class="nav-icon nav-icon-large" {{ utility.toggle_button('nav-large', button='true', expanded='true') }}>menu</button>
+      {{ nav.toggle('small') }}
+      {{ nav.toggle('large', true) }}
 
       <h1 data-sassdoc="project-title">
-        <a href="{{ homepage or package.homepage or 'index.html' }}" rel="home" data-sassdoc="project-name">{{ project_title }}</a>
+        <a href="{{ homepage or package.homepage or basePath + 'index.html' }}" rel="home" data-sassdoc="project-name">{{ project_title }}</a>
         {% if package.version %}
           <span data-sassdoc="project-version">{{ package.version }}</span>
+        {% endif %}
+        {% if activeProject %}
+          : <a href="{{ basePath }}{{ activeProject }}/index.html">{{ activeProject }}</a>
         {% endif %}
       </h1>
     </header>
@@ -58,26 +62,39 @@
       {# Wide Menu #}
       <nav role="navigation" data-sassdoc-region="nav" class="nav-large" {{ utility.toggle_target('nav-large',expanded='true')}}>
         <h2 data-sassdoc="nav-title">
-          {% set active_nav = 'is-not-active' if data.currentGroup else 'is-active' %}
-          <a href="index.html" rel="home" data-sassdoc-nav="{{ active_nav }}">StyleGuide</a>
+          {% set activeNav = 'is-active' if activeProject == none and activeGroup == none else 'is-not-active' %}
+          <a href="{{ basePath }}index.html" rel="home" data-sassdoc-nav="{{ activeNav }}">StyleGuide</a>
         </h2>
-        {% for group_name, group in data.byGroupAndType %}
-          {% set active_nav = 'is-active' if (group_name == data.currentGroup) else 'is-not-active' %}
+        {% for groupName, group in topByGroup %}
+          {% set activeNav = 'is-active' if activeProject == none and activeGroup == groupName else 'is-not-active' %}
           <li data-sassdoc="nav-item">
-            <a href="{{ group_name }}.html" data-sassdoc-nav="{{ active_nav }}">{{ groups[group_name] }}</a>
+            <a href="{{ basePath }}{{ groupName }}.html" data-sassdoc-nav="{{ activeNav }}">{{ topGroups[groupName] }}</a>
           </li>
+        {% endfor %}
+
+        {% for prjName, prjCtx in subprojects %}
+          <h3 data-sassdoc="nav-title">
+            {% set activeNav = 'is-active' if activeProject == prjName and activeGroup == none else 'is-not-active' %}
+            <a href="{{ basePath }}{{ prjName }}/index.html" data-sassdoc-nav="{{ activeNav }}">{{ prjName }}</a>
+          </h3>
+          {% for groupName, group in prjCtx.byGroup %}
+            {% set activeNav = 'is-active' if activeProject == prjName and activeGroup == groupName else 'is-not-active' %}
+            <li data-sassdoc="nav-item">
+              <a href="{{ basePath }}{{prjName}}/{{ groupName }}.html" data-sassdoc-nav="{{ activeNav }}">{{ prjCtx.groups[groupName] }}</a>
+            </li>
+          {% endfor %}
         {% endfor %}
       </nav>
 
-      <main role="main" data-sassdoc-region="main" data-sassdoc-page="{% block page_slug %}{{ data.currentGroup or 'index' }}{% endblock %}">
+      <main role="main" data-sassdoc-region="main" data-sassdoc-page="{% block page_slug %}{{ activeGroup or 'index' }}{% endblock %}">
         {% block main %}{% endblock %}
       </main>
     </div>
   </div>
 
-  <script type="text/javascript" src="assets/js/jquery-3.1.1.slim.js"></script>
-  <script type="text/javascript" src="assets/js/highlight.js"></script>
-  <script type="text/javascript" src="assets/js/base.js"></script>
-  <script type="text/javascript" src="assets/js/init.js"></script>
+  <script type="text/javascript" src="{{ basePath }}assets/js/jquery-3.1.1.slim.js"></script>
+  <script type="text/javascript" src="{{ basePath }}assets/js/highlight.js"></script>
+  <script type="text/javascript" src="{{ basePath }}assets/js/base.js"></script>
+  <script type="text/javascript" src="{{ basePath }}assets/js/init.js"></script>
 </body>
 </html>

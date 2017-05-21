@@ -6,6 +6,7 @@ var nunjucks = require('nunjucks');
 var path = require('path');
 var Promise = require('bluebird');
 var sass = require('node-sass');
+var sassdoc = require('sassdoc');
 
 var copy = require('./lib/assets.js');
 var parse = require('./lib/parse.js');
@@ -21,24 +22,21 @@ nunjucks.installJinjaCompat();
  */
 var extras = require('sassdoc-extras');
 
-/**
- * Actual theme function. It takes the destination directory `dest`,
- * and the context variables `ctx`.
- */
-module.exports = function (dest, ctx) {
-  var base = path.resolve(__dirname, './templates');
-  var indexTemplate = path.join(base, 'index.j2');
-  var indexDest = path.join(dest, 'index.html');
-  var groupTemplate = path.join(base, 'group.j2');
-  var assets = path.resolve(__dirname, './dist');
 
-  var nunjucksEnv = nunjucks.configure(base, { noCache: true });
-  nunjucksEnv.addFilter('split', function (str, separator) {
-    return str.split(separator);
+var byGroup = function (data) {
+  var sorted = {};
+  data.forEach(function (item) {
+    var group = item.group[0];
+    if (!(group in sorted)) {
+      sorted[group] = [];
+    }
+    sorted[group].push(item);
   });
+  return sorted;
+};
 
-  dest = path.resolve(dest);
 
+var prepareContext = function (ctx) {
   var def = {
     display: {
       access: [ 'public', 'private' ],
@@ -49,7 +47,7 @@ module.exports = function (dest, ctx) {
       undefined: 'general'
     },
     sort: [ 'group', 'file', 'line', 'access' ],
-    herman: {}
+    herman: { sass: {}}
   };
 
   // Apply default values for groups and display.
@@ -67,8 +65,8 @@ module.exports = function (dest, ctx) {
    * Load a `sass-json file` (if one is given in the context) and add its
    * contents under the `sassjson` key of the context.
    */
-  if (ctx.herman.sassjsonfile) {
-    ctx.sassjson = parse.sassJson(fs.readFileSync(ctx.herman.sassjsonfile));
+  if (ctx.herman.sass.jsonfile) {
+    ctx.sassjson = parse.sassJson(fs.readFileSync(ctx.herman.sass.jsonfile));
   }
 
   /**
@@ -176,26 +174,68 @@ module.exports = function (dest, ctx) {
   extras.resolveVariables(ctx);
 
   /**
-   * Use SassDoc indexer to index the data by group and type, so we
-   * have the following structure:
+   * Index the data by group, so we have the following structure:
    *
    *     {
-   *       "group-slug": {
-   *         "function": [...],
-   *         "mixin": [...],
-   *         "variable": [...]
-   *       },
-   *       "another-group": {
-   *         "function": [...],
-   *         "mixin": [...],
-   *         "variable": [...]
-   *       }
+   *       "group-slug": [...],
+   *       "another-group": [...]
    *     }
    *
-   * You can then use `data.byGroupAndType` instead of `data` in your
+   * You can then use `data.byGroup` instead of `data` in your
    * templates to manipulate the indexed object.
    */
-  ctx.data.byGroupAndType = extras.byGroupAndType(ctx.data);
+  ctx.byGroup = byGroup(ctx.data);
+
+  return ctx;
+};
+
+
+var parseSubprojects = function (ctx) {
+  var promises = [];
+  if (ctx.herman.subprojects) {
+    ctx.subprojects = {};
+    Object.keys(ctx.herman.subprojects).forEach(function (name) {
+      var prjCtx = extend({}, ctx.herman.subprojects[name]);
+      var promise = sassdoc.parse(prjCtx.src, prjCtx).then(function (data) {
+        prjCtx.package = ctx.package;
+        prjCtx.basePath = '../';
+        prjCtx.activeProject = name;
+        prjCtx.data = data;
+        prjCtx.subprojects = ctx.subprojects;
+        prjCtx.topGroups = ctx.groups;
+        prjCtx.topByGroup = ctx.byGroup;
+        ctx.subprojects[name] = prepareContext(prjCtx);
+      });
+      promises.push(promise);
+    });
+  }
+  return Promise.all(promises);
+};
+
+
+/**
+ * Actual theme function. It takes the destination directory `dest`,
+ * and the context variables `ctx`.
+ */
+var renderHerman = function (dest, ctx) {
+  var base = path.resolve(__dirname, './templates');
+  var indexTemplate = path.join(base, 'index.j2');
+  var indexDest = path.join(dest, 'index.html');
+  var groupTemplate = path.join(base, 'group.j2');
+  var assets = path.resolve(__dirname, './dist');
+
+  var nunjucksEnv = nunjucks.configure(base, { noCache: true });
+  nunjucksEnv.addFilter('split', function (str, separator) {
+    return str.split(separator);
+  });
+
+  dest = path.resolve(dest);
+
+  // set (external) base path for links
+  ctx.basePath = '';
+  ctx.activeProject = null;
+  ctx.topByGroup = ctx.byGroup;
+  ctx.topGroups = ctx.groups;
 
   // check if we need to copy a favicon file or use the default
   var copyShortcutIcon = false;
@@ -247,18 +287,38 @@ module.exports = function (dest, ctx) {
     })
   ];
 
-  // Render a template for each group, too. The group template is passed the
-  // main context with an added `data.currentGroup` key which contains the name
-  // of the current group.
-  Object.getOwnPropertyNames(ctx.data.byGroupAndType).forEach(
+  var getRenderCtx = function (context, groupName) {
+    return extend({}, context, {
+      pageTitle: context.groups[groupName],
+      activeGroup: groupName,
+      items: context.byGroup[groupName]
+    });
+  };
+
+  // Render a page for each group, too.
+  Object.getOwnPropertyNames(ctx.byGroup).forEach(
     function (groupName) {
       var groupDest = path.join(dest, groupName + '.html');
-      var groupData = extend({ currentGroup: groupName }, ctx.data);
-      var groupCtx = extend({}, ctx);
-      groupCtx.data = groupData;
+      var groupCtx = getRenderCtx(ctx, groupName);
       promises.push(render(nunjucksEnv, groupTemplate, groupDest, groupCtx));
     }
   );
+
+  // Render pages for subprojects.
+  Object.getOwnPropertyNames(ctx.subprojects).forEach(function (prjName) {
+    var prjCtx = ctx.subprojects[prjName];
+    var prjDest = path.join(dest, prjName);
+    var pageDest = path.join(prjDest, 'index.html');
+    promises.push(render(nunjucksEnv, indexTemplate, pageDest, prjCtx));
+
+    Object.getOwnPropertyNames(prjCtx.byGroup).forEach(
+      function (groupName) {
+        var groupDest = path.join(prjDest, groupName + '.html');
+        var groupCtx = getRenderCtx(prjCtx, groupName);
+        promises.push(render(nunjucksEnv, groupTemplate, groupDest, groupCtx));
+      }
+    );
+  });
 
   return Promise.all(promises);
 };
@@ -275,6 +335,21 @@ var getNunjucksEnv = function (name, env, warned) {
   }
   return nunjucks.configure(env.herman.templatepath);
 };
+
+
+/**
+ * Actual theme function. It takes the destination directory `dest`,
+ * and the context variables `ctx`.
+ */
+module.exports = function (dest, ctx) {
+  ctx = prepareContext(ctx);
+
+  return parseSubprojects(ctx).then(function () {
+    renderHerman(dest, ctx);
+  });
+
+};
+
 
 module.exports.annotations = [
   /**
@@ -440,8 +515,8 @@ module.exports.annotations = [
               var sassData = exampleItem.code;
               exampleItem.rendered = undefined;
               try {
-                if (env.herman.sassincludes) {
-                  var arr = env.herman.sassincludes;
+                if (env.herman.sass.includes) {
+                  var arr = env.herman.sass.includes;
                   for (var i = arr.length - 1; i >= 0; i = i - 1) {
                     sassData = "@import '" + arr[i] + "';\n" + sassData;
                   }
@@ -454,7 +529,7 @@ module.exports.annotations = [
                     }
                     return { file: url };
                   },
-                  includePaths: env.herman.sassincludepaths || [],
+                  includePaths: env.herman.sass.includepaths || [],
                   outputStyle: 'expanded'
                 });
                 var encoded = rendered.css.toString('utf-8');
@@ -471,4 +546,5 @@ module.exports.annotations = [
       }
     };
   }
+
 ];

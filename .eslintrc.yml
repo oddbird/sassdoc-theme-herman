@@ -98,6 +98,7 @@ rules:
   no-confusing-arrow:
     - 2
     - allowParens: true
+  no-console: 1
   no-const-assign: 2
   no-constant-condition: 2
   no-continue: 2
