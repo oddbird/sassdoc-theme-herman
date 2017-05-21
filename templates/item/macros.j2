@@ -92,7 +92,7 @@ ${{ item.context.name }}: {{ item.context.value }}{% if item.context.scope != 'p
 
 
 {# @require annotation #}
-{% macro require(item) -%}
+{% macro require(item, display_private=false) -%}
   {% if item.require.length > 0 %}
     <div data-sassdoc-display="require description">
       <h5 data-sassdoc="item-subtitle">Requires</h5>
@@ -115,7 +115,11 @@ ${{ item.context.name }}: {{ item.context.value }}{% if item.context.scope != 'p
           {% else %}
             <li data-sassdoc="requires-item">
               <code>[{{ require.item.context.type }}]</code>
-              <a href="{{ require.item.group }}.html#{{ require.item.context.type }}--{{ require.item.context.name }}"><code>{{ require.item.context.name }}</code></a>
+              {% if require.item.access == 'private' and not display_private %}
+                <code>{{ require.item.context.name }} [private]</code>
+              {% else %}
+                <a href="{{ require.item.group }}.html#{{ require.item.context.type }}--{{ require.item.context.name }}"><code>{{ require.item.context.name }}</code></a>
+              {% endif %}
               {% if require.description %}
                 &mdash; {{ require.description }}
               {% endif %}
@@ -151,14 +155,18 @@ ${{ item.context.name }}: {{ item.context.value }}{% if item.context.scope != 'p
 {%- endmacro %}
 
 {# @see annotation #}
-{% macro see(item) -%}
+{% macro see(item, display_private=false) -%}
   {% if item.see.length > 0 %}
     <div data-sassdoc-display="see description">
       <h5 data-sassdoc="item-subtitle">See</h5>
       <ul>
         {% for see in item.see %}
           <li data-sassdoc="see-item">
-            <a href="{{ see.group }}.html#{{ see.context.type }}--{{ see.context.name }}">{{ see.context.name }}</a>
+            {% if see.access == 'private' and not display_private %}
+              {{ see.context.name }} [private]
+            {% else %}
+              <a href="{{ see.group }}.html#{{ see.context.type }}--{{ see.context.name }}">{{ see.context.name }}</a>
+            {% endif %}
           </li>
         {% endfor %}
       </ul>
