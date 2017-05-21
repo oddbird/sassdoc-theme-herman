@@ -10,13 +10,18 @@
 // App
 // ---
 [data-sassdoc-region='app'] {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   margin: 0 auto;
+  min-height: 100vh;
   padding: 0;
 }
 
 [data-sassdoc-region='container'] {
   @include clearfix;
   display: flex;
+  flex: 1 1 auto;
   position: relative;
 
   @include above('page') {
