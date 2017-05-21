@@ -9,8 +9,6 @@
 /// @access private
 @mixin h1 {
   @include font-size('h1');
-  font-style: italic;
-  font-weight: normal;
 }
 
 
@@ -22,7 +20,6 @@
 @mixin h2 {
   @include font-size('h2');
   margin-bottom: size('shim');
-  text-transform: capitalize;
 }
 
 
@@ -41,22 +38,27 @@
 
 [data-sassdoc='project-title'] {
   @include h1;
+  color: color('theme-dark');
 }
 
 [data-sassdoc='page-title'] {
   @include h2;
+  color: color('black');
 }
 
 [data-sassdoc='item-name'] {
   @include h3;
   @include font-family('code');
+  color: color('gray');
+}
+
+[data-sassdoc='item-subtitle'] {
+  color: color('gray');
+  font-size: size('medium');
 }
 
 [data-sassdoc='nav-title'] {
-  [href] {
-    #{$link} {
-      font-style: normal;
-      margin: size('half-shim') 0;
-    }
-  }
+  font-style: normal;
+  font-weight: normal;
+  margin: size('half-shim') 0 size('gutter');
 }

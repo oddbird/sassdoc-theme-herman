@@ -19,6 +19,10 @@
   font-weight: normal;
 }
 
+[data-sassdoc='item-description'] {
+  margin-bottom: size('gutter');
+}
+
 [data-sassdoc-display] {
   margin: size('gutter') 0;
 }

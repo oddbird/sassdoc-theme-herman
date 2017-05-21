@@ -3,7 +3,7 @@
 
 
 [data-sassdoc-region] {
-  max-width: 100%;
+  width: 100%;
 }
 
 
@@ -11,28 +11,29 @@
 // ---
 [data-sassdoc-region='app'] {
   margin: 0 auto;
-  padding: size('shim');
+  padding: 0;
 }
 
 [data-sassdoc-region='container'] {
   @include clearfix;
+  display: flex;
 }
-
 
 // Navigation
 // ----------
 [data-sassdoc-region='nav'] {
-  margin: size('shim') size('gutter') size('gutter') 0;
+  @include contrasted('theme-dark');
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: size('gutter');
 
-  @include above(35em) {
-    float: left;
-    width: 10%;
+  @include above('page') {
+    flex: 1 0 auto;
+    max-width: 15vw;
   }
 }
 
-[data-sassdoc-nav] {
-  display: block;
-}
 
 
 // Page
@@ -40,7 +41,8 @@
 [data-sassdoc-region='main'] {
   padding: size('shim');
 
-  @include above(35em) {
+  @include above('page') {
     overflow: hidden;
+    padding: size('gutter');
   }
 }

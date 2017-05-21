@@ -30,14 +30,14 @@ tr {
   border-left: 1px solid color('slight');
   border-right: 1px solid color('slight');
 
-  @include above(35em) {
+  @include above('page') {
     border: 0;
   }
 
   &:first-of-type {
     border-top: 1px solid color('slight');
 
-    @include above(35em) {
+    @include above('page') {
       border-top: 0;
     }
 
@@ -49,7 +49,7 @@ tr {
   &:nth-of-type(even) {
     background: color('slight');
 
-    @include above(35em) {
+    @include above('page') {
       background: transparent;
     }
   }
@@ -65,7 +65,7 @@ th {
 td {
   border-top: 0;
 
-  @include above(35em) {
+  @include above('page') {
     border-top: 1px solid color('light-gray');
   }
 }

@@ -14,7 +14,7 @@ $hljs-colors: (
   'hljs-orange': #cb4b16,
   'hljs-red': #dc322f,
   'hljs-formula': #eee8d5,
-  'hljs-shadow': 'hljs-text' (rgba: 0.5),
+  'hljs-shadow': 'hljs-text' (rgba: 0.2),
 );
 
 $colors: map-merge($colors, $hljs-colors);
@@ -34,6 +34,7 @@ $colors: map-merge($colors, $hljs-colors);
   box-shadow: 0 0 size('half-shim') color('hljs-shadow') inset;
   color: color('hljs-text');
   display: block;
+  margin-bottom: size('gutter');
   overflow-x: auto;
   padding: size('shim');
 }

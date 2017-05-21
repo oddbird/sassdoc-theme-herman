@@ -42,7 +42,9 @@
         </h2>
         {% for group_name, group in data.byGroupAndType %}
           {% set active_nav = 'is-active' if (group_name == data.currentGroup) else 'is-not-active' %}
-          <a href="{{ group_name }}.html" data-sassdoc-nav="{{ active_nav }}">{{ groups[group_name] }}</a>
+          <li data-sassdoc="nav-item">
+            <a href="{{ group_name }}.html" data-sassdoc-nav="{{ active_nav }}">{{ groups[group_name] }}</a>
+          </li>
         {% endfor %}
       </nav>
 
