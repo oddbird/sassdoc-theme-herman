@@ -3,11 +3,11 @@
 
 [data-sassdoc='example-tabs'] {
   @include font-size('smaller');
+  display: flex;
   font-weight: bold;
   letter-spacing: 0.02rem;
 
   [aria-controls] {
-    display: inline-block;
     margin-right: 1px;
     padding: size('half-shim') size('shim');
 
