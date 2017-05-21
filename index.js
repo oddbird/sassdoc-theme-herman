@@ -287,15 +287,19 @@ var renderHerman = function (dest, ctx) {
     })
   ];
 
+  var getRenderCtx = function (context, groupName) {
+    return extend({}, context, {
+      pageTitle: context.groups[groupName],
+      activeGroup: groupName,
+      items: context.byGroup[groupName]
+    });
+  };
+
   // Render a page for each group, too.
   Object.getOwnPropertyNames(ctx.byGroup).forEach(
     function (groupName) {
       var groupDest = path.join(dest, groupName + '.html');
-      var groupCtx = extend({}, ctx, {
-        pageTitle: ctx.groups[groupName],
-        activeGroup: groupName,
-        items: ctx.byGroup[groupName]
-      });
+      var groupCtx = getRenderCtx(ctx, groupName);
       promises.push(render(nunjucksEnv, groupTemplate, groupDest, groupCtx));
     }
   );
@@ -310,11 +314,7 @@ var renderHerman = function (dest, ctx) {
     Object.getOwnPropertyNames(prjCtx.byGroup).forEach(
       function (groupName) {
         var groupDest = path.join(prjDest, groupName + '.html');
-        var groupCtx = extend({}, prjCtx, {
-          pageTitle: prjCtx.groups[groupName],
-          activeGroup: groupName,
-          items: prjCtx.byGroup[groupName]
-        });
+        var groupCtx = getRenderCtx(prjCtx, groupName);
         promises.push(render(nunjucksEnv, groupTemplate, groupDest, groupCtx));
       }
     );
