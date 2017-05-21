@@ -41,10 +41,9 @@ $text-sizes: (
   'h2': 'root' ('herman': 2),
   'h3': 'root' ('herman': 1),
 
-  'medium': 20px,
-  'small': 18px,
-  'smaller': 16px,
-  'smallest': 16px,
+  'medium': 20px ('convert-units': 'rem'),
+  'small': 18px ('convert-units': 'rem'),
+  'smaller': 16px ('convert-units': 'rem'),
 );
 
 @include herman-add-sizes('text-sizes', $text-sizes);
@@ -62,7 +61,7 @@ $text-sizes: (
 ///   // @preview sizes; style: ruler
 ///   @include herman-add-sizes('spacing-sizes', $spacing-sizes);
 $spacing-sizes: (
-  'rhythm': 'root' ('herman': 1),
+  'rhythm': 'root' ('herman': 1, 'convert-units': 'rem'),
   'gutter': 'rhythm',
   'spacer': 'gutter' ('linear': 3),
   'shim': 'gutter' ('linear': 0.5),
