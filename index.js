@@ -203,7 +203,8 @@ var parseSubprojects = function (ctx) {
         // Load .sassdocrc configuration from subproject directory
         config = yaml.safeLoad(fs.readFileSync(configFile, 'utf-8'));
       } catch (err) {
-        ctx.logger.warn('No .sassdocrc found for subproject: ' + name);
+        ctx.logger.warn(
+          'Invalid or no .sassdocrc found for subproject: ' + name);
       }
       if (!config.description && !config.descriptionPath) {
         // Set default descriptionPath for subproject
@@ -212,7 +213,7 @@ var parseSubprojects = function (ctx) {
       var src;
       if (config.src) {
         // Set subproject src files based on .sassdocrc `src` option
-        src = prjPath + config.src;
+        src = path.isAbsolute(config.src) ? config.src : prjPath + config.src;
       } else {
         // Fall back to all subproject `.scss` files
         src = prjPath + '**/*.scss';
