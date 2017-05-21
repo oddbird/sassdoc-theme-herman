@@ -10,6 +10,7 @@
     "extend": "^3.0.0",
     "gulp-rename": "^1.2.2",
     "html-minifier": "^3.1.0",
+    "js-yaml": "^3.8.4",
     "node-sass": "^4.5.3",
     "nunjucks": "^2.5.2",
     "sassdoc-extras": "^2.4.1",
