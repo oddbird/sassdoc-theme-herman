@@ -35,14 +35,15 @@ $text-ratios: (
 ///   // @preview sizes;
 ///   @include herman-add-sizes('text-sizes', $text-sizes);
 $text-sizes: (
-  'root': 22px,
+  'root': 18px,
 
   'h1': 'root' ('herman': 3),
   'h2': 'root' ('herman': 2),
   'h3': 'root' ('herman': 1),
 
-  'small': 18px,
-  'smaller': 16px,
+  'medium': 20px ('convert-units': 'rem'),
+  'small': 18px ('convert-units': 'rem'),
+  'smaller': 16px ('convert-units': 'rem'),
 );
 
 @include herman-add-sizes('text-sizes', $text-sizes);
@@ -60,7 +61,7 @@ $text-sizes: (
 ///   // @preview sizes; style: ruler
 ///   @include herman-add-sizes('spacing-sizes', $spacing-sizes);
 $spacing-sizes: (
-  'rhythm': 'root' ('herman': 1),
+  'rhythm': 'root' ('herman': 1, 'convert-units': 'rem'),
   'gutter': 'rhythm',
   'spacer': 'gutter' ('linear': 3),
   'shim': 'gutter' ('linear': 0.5),
@@ -83,9 +84,12 @@ $spacing-sizes: (
 ///   // @preview sizes; style: output-only
 ///   @include herman-add-sizes('pattern-sizes', $pattern-sizes);
 $pattern-sizes: (
+  'border': 8px,
   'page': 50rem,
   'specimen': 'rhythm' ('linear': 3),
   'color-swatch': 'rhythm' ('linear': 4),
+
+  'nav-underline': 5px,
 );
 
 @include herman-add-sizes('pattern-sizes', $pattern-sizes);

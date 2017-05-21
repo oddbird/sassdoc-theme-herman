@@ -55,7 +55,9 @@
           </h3>
           {% for groupName, group in prjCtx.byGroup %}
             {% set activeNav = 'is-active' if activeProject == prjName and activeGroup == groupName else 'is-not-active' %}
-            <a href="{{ basePath }}{{prjName}}/{{ groupName }}.html" data-sassdoc-nav="{{ activeNav }}">{{ prjCtx.groups[groupName] }}</a>
+            <li data-sassdoc="nav-item">
+              <a href="{{ basePath }}{{prjName}}/{{ groupName }}.html" data-sassdoc-nav="{{ activeNav }}">{{ prjCtx.groups[groupName] }}</a>
+            </li>
           {% endfor %}
         {% endfor %}
       </nav>

@@ -121,6 +121,9 @@ Releases
   [#37](https://github.com/oddbird/sassdoc-theme-herman/issues/37).
 - BREAKING: Nest Herman-specific options under `herman` object in sassdoc
   configuration.
+- Re-brand with sidebar navigation. Closes
+  [#58](https://github.com/oddbird/sassdoc-theme-herman/issues/58) and
+  [#69](https://github.com/oddbird/sassdoc-theme-herman/issues/69).
 - Add support for rendering documentation from dependency subprojects.
   Closes [#61](https://github.com/oddbird/sassdoc-theme-herman/issues/61).
 
