@@ -24,8 +24,12 @@
 
   {{ iconsSvg|safe }}
 
+  {% import 'utility.macros.j2' as utility %}
+
   <div data-sassdoc-region="app">
     <header role="banner" data-sassdoc-region="banner">
+    <button {{ utility.toggle_button('nav', button='true') }}>menu</button>
+
       <h1 data-sassdoc="project-title">
         <a href="{{ homepage or package.homepage or 'index.html' }}" rel="home" data-sassdoc="project-name">{{ project_title }}</a>
         {% if package.version %}
@@ -35,7 +39,7 @@
     </header>
 
     <div data-sassdoc-region="container">
-      <nav role="navigation" data-sassdoc-region="nav">
+      <nav role="navigation" data-sassdoc-region="nav" {{ utility.toggle_target('nav')}}>
         <h2 data-sassdoc="nav-title">
           {% set active_nav = 'is-not-active' if data.currentGroup else 'is-active' %}
           <a href="index.html" rel="home" data-sassdoc-nav="{{ active_nav }}">StyleGuide</a>

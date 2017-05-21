@@ -3,8 +3,10 @@
 
 [data-sassdoc-region='banner'] {
   @include section-arrow;
+  @include z-index('banner');
   box-shadow: 0 2px 2px color('shadow');
-  z-index: 2;
+  display: flex;
+  padding: size('shim');
 }
 
 [data-sassdoc='project-version'] {
@@ -13,4 +15,6 @@
   color: color('light');
   font-style: normal;
   font-weight: normal;
+  margin-left: auto;
+  margin-right: auto;
 }

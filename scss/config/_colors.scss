@@ -98,6 +98,8 @@ $theme-colors: (
   'active': 'action',
   'accent': 'brand-pink',
   'slight': 'light-gray' ('rgba': 0.1),
+  'code': hsl(196, 23%, 45%),
+  'code-shadow': 'code' (rgba: 0.2),
 );
 
 @include herman-add-colors('theme-colors', $theme-colors);
