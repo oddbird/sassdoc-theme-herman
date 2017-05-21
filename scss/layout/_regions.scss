@@ -17,6 +17,7 @@
 [data-sassdoc-region='container'] {
   @include clearfix;
   display: flex;
+  justify-content: flex-end;
 }
 
 // Navigation
@@ -32,7 +33,6 @@
 // Page
 // ----
 [data-sassdoc-region='main'] {
-  flex: 1 0 auto;
   padding: size('shim');
 
   @include above('page') {
