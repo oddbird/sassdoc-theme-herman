@@ -159,6 +159,12 @@ gulp.task('compile', [ 'sass', 'minify' ], function () {
     theme: './',
     herman: {
       sassjsonfile: './dist/css/json.css',
+      subprojects: {
+        'accoutrement-color': {
+          descriptionPath: 'node_modules/accoutrement-color/README.md',
+          src: 'node_modules/accoutrement-color/sass/*.scss'
+        }
+      },
       templatepath: path.join(__dirname, 'templates'),
       sassincludepaths: [path.join(__dirname, 'scss')],
       sassincludes: [ 'utilities', 'config/manifest' ]
