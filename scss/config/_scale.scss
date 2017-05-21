@@ -89,6 +89,8 @@ $pattern-sizes: (
   'page': 50rem,
   'specimen': 'rhythm' ('linear': 3),
   'color-swatch': 'rhythm' ('linear': 4),
+
+  'nav-underline': 5px,
 );
 
 @include herman-add-sizes('pattern-sizes', $pattern-sizes);
