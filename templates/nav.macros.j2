@@ -23,6 +23,12 @@
   expanded=false
 ) %}
   <nav role="navigation" data-nav-menu="{{ size }}" {{ utility.toggle_target(['nav', size]|join('-'), expanded=expanded)}}>
+
+    <h3 data-sassdoc="nav-title">
+      {% set activeNav = 'is-active' if activeProject == prjName and activeGroup == none else 'is-not-active' %}
+      <a href="{{ basePath }}/index.html" data-sassdoc-nav="{{ activeNav }}">Help Me!</a>
+      </h3>
+
     {% for groupName, group in topByGroup %}
       {% set activeNav = 'is-active' if activeProject == none and activeGroup == groupName else 'is-not-active' %}
       <li data-sassdoc="nav-item">
