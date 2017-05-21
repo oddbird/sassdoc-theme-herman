@@ -2,8 +2,9 @@
 // ========
 
 [data-sassdoc='example-tabs'] {
-  @include font-family('code');
   @include font-size('smaller');
+  font-weight: bold;
+  letter-spacing: 0.02rem;
 
   [aria-controls] {
     display: inline-block;
@@ -65,7 +66,6 @@
 
 [data-sassdoc='example-header'] {
   @include contrasted('theme-light');
-  @include font-family('code');
   @include font-size('smaller');
   flex: 0 0 auto;
   padding: 0 size('shim');

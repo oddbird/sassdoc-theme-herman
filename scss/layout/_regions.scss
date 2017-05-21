@@ -23,22 +23,16 @@
 // ----------
 [data-sassdoc-region='nav'] {
   @include contrasted('theme-dark');
-  display: flex;
-  flex-direction: column;
   margin: 0;
   padding: size('gutter');
-
-  @include above('page') {
-    flex: 1 0 auto;
-    max-width: 15vw;
-  }
+  white-space: nowrap;
 }
-
 
 
 // Page
 // ----
 [data-sassdoc-region='main'] {
+  flex: 1 0 auto;
   padding: size('shim');
 
   @include above('page') {

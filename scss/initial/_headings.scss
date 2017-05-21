@@ -39,6 +39,8 @@
 [data-sassdoc='project-title'] {
   @include h1;
   color: color('theme-dark');
+  margin-left: auto;
+  margin-right: auto;
 }
 
 [data-sassdoc='page-title'] {

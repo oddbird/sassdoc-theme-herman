@@ -28,7 +28,8 @@
 
   <div data-sassdoc-region="app">
     <header role="banner" data-sassdoc-region="banner">
-    <button {{ utility.toggle_button('nav', button='true') }}>menu</button>
+    <button class="nav-icon nav-icon-small" {{ utility.toggle_button('nav-small', button='true') }}>menu</button>
+    <button class="nav-icon nav-icon-large" {{ utility.toggle_button('nav-large', button='true', expanded='true') }}>menu</button>
 
       <h1 data-sassdoc="project-title">
         <a href="{{ homepage or package.homepage or 'index.html' }}" rel="home" data-sassdoc="project-name">{{ project_title }}</a>
@@ -39,7 +40,23 @@
     </header>
 
     <div data-sassdoc-region="container">
-      <nav role="navigation" data-sassdoc-region="nav" {{ utility.toggle_target('nav')}}>
+
+      {# Mobile Menu #}
+      <nav role="navigation" data-sassdoc-region="nav" class="nav-small" {{ utility.toggle_target('nav-small')}}>
+        <h2 data-sassdoc="nav-title">
+          {% set active_nav = 'is-not-active' if data.currentGroup else 'is-active' %}
+          <a href="index.html" rel="home" data-sassdoc-nav="{{ active_nav }}">StyleGuide</a>
+        </h2>
+        {% for group_name, group in data.byGroupAndType %}
+          {% set active_nav = 'is-active' if (group_name == data.currentGroup) else 'is-not-active' %}
+          <li data-sassdoc="nav-item">
+            <a href="{{ group_name }}.html" data-sassdoc-nav="{{ active_nav }}">{{ groups[group_name] }}</a>
+          </li>
+        {% endfor %}
+      </nav>
+
+      {# Wide Menu #}
+      <nav role="navigation" data-sassdoc-region="nav" class="nav-large" {{ utility.toggle_target('nav-large',expanded='true')}}>
         <h2 data-sassdoc="nav-title">
           {% set active_nav = 'is-not-active' if data.currentGroup else 'is-active' %}
           <a href="index.html" rel="home" data-sassdoc-nav="{{ active_nav }}">StyleGuide</a>

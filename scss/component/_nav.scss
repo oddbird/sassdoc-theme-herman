@@ -2,6 +2,59 @@
 // =================
 
 
+.nav-small {
+  position: absolute;
+  transform: translatex(-100%);
+  transition: transform 0.4s;
+  width: 100%;
+
+  &[aria-expanded='true'] {
+    transform: translatex(0%);
+  }
+
+  @include above('nav-medium') {
+    width: auto;
+  }
+
+  @include above('page') {
+    display: none;
+  }
+}
+
+.nav-large {
+  display: flex;
+  flex: 0 1 auto;
+  flex-direction: column;
+  margin-left: -100%;
+  transition: margin-left 0.4s;
+
+
+  &[aria-expanded='true'] {
+    margin-left: 0;
+  }
+
+  @include below('page') {
+    display: none;
+  }
+}
+
+.nav-icon-small {
+  @include above('page') {
+    display: none;
+  }
+}
+
+.nav-icon-large {
+  @include below('page') {
+    display: none;
+  }
+}
+
+.nav-icon {
+  padding: size('half-shim') size('shim');
+}
+
+
 [data-sassdoc='nav-item'] {
   list-style: none;
   margin-bottom: size('gutter');

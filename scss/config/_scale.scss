@@ -44,7 +44,7 @@ $text-sizes: (
   'medium': 20px,
   'small': 18px,
   'smaller': 16px,
-  'smallest': 16px,
+  'smallest': 15px,
 );
 
 @include herman-add-sizes('text-sizes', $text-sizes);
@@ -87,6 +87,8 @@ $spacing-sizes: (
 $pattern-sizes: (
   'border': 8px,
   'page': 50rem,
+  'nav-small': 20rem,
+  'nav-medium': 32rem,
   'specimen': 'rhythm' ('linear': 3),
   'color-swatch': 'rhythm' ('linear': 4),
 );
