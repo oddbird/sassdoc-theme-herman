@@ -18,12 +18,13 @@
     </div>
   {% endif %}
 
+  {% set display_private = display and display.access and 'private' in display.access %}
   {{ code.source(item, type) }}
   {{ code.link(item) }}
-  {{ code.see(item) }}
+  {{ code.see(item, display_private) }}
   {{ code.parameter(item) }}
   {{ code.property(item) }}
-  {{ code.require(item) }}
+  {{ code.require(item, display_private) }}
   {{ code.todo(item) }}
 
   {{ code.examples(item.example, id) }}

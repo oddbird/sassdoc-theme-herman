@@ -44,10 +44,13 @@
 
     <div data-sassdoc-region="container">
       {{ nav.menus(
+        basePath=basePath,
         topGroups=topGroups,
         topByGroup=topByGroup,
-        subprojects=subprojects
-        ) }}
+        subprojects=subprojects,
+        activeProject=activeProject,
+        activeGroup=activeGroup
+      ) }}
 
       <main role="main" data-sassdoc-region="main" data-sassdoc-page="{% block page_slug %}{{ activeGroup or 'index' }}{% endblock %}">
         {% block main %}{% endblock %}
