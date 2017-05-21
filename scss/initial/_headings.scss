@@ -6,11 +6,22 @@
 // -----------
 
 [data-sassdoc='project-title'] {
-  color: color('theme-dark');
   font-size: size('h1');
   line-height: 1.25;
   margin-left: auto;
   margin-right: auto;
+}
+
+[data-sassdoc='project-name'] {
+  &,
+  #{$link} {
+    color: color('theme-dark');
+  }
+
+  #{$focus} {
+    color: color('focus');
+    text-decoration: none;
+  }
 }
 
 [data-sassdoc='page-title'] {

@@ -59,7 +59,12 @@
 }
 
 [data-nav-toggle] {
+  fill: color('theme-dark');
   padding: size('half-shim') size('shim');
+
+  #{$focus} {
+    fill: color('focus');
+  }
 }
 
 

@@ -11,11 +11,6 @@
   // search and menu icons
   [data-icon] {
     @include square('icon');
-    fill: color('theme-dark');
-
-    #{$focus} {
-      color: color('theme-dark');
-    }
   }
 }
 
