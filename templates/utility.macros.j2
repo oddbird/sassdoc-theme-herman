@@ -26,6 +26,16 @@
 {%- endmacro %}
 
 
+{% macro code_block(language=none, content=none) %}
+  {% set content = caller() if caller else content %}
+  {% if content %}
+    {% set language = 'jinja' if language == 'njk' else language %}
+    {% set language = ['lang', language]|join('-') if language !== none %}
+    <pre data-sassdoc="hljs"><code{% if language %} class="{{ language }}"{% endif %}>{{ content }}</code></pre>
+  {% endif %}
+{% endmacro %}
+
+
 {# Toggle collapsible elements (see `static/js/app/base.js`) #}
 {% macro toggle_button(id, expanded=false, button=false, synced=false) -%}
   data-toggle="button" aria-controls="{{ id }}" aria-pressed="{{ 'true' if expanded else 'false' }}"{% if not button %} role="button"{% endif %} data-toggle-synced="{{ 'true' if synced else 'false' }}"
@@ -38,19 +48,3 @@
 {% macro toggle_close(id) -%}
   data-toggle="close" aria-controls="{{ id }}"
 {%- endmacro %}
-
-
-{# Tabbed elements (see `static/js/app/base.js`) #}
-{% macro tab(id, group, content=none, active=false) %}
-  {%- set content = caller() if caller else content -%}
-  <a href="#panel-{{ id }}" data-sassdoc="example-tab" id="tab-{{ id }}" role="tab" data-tab-group="{{ group }}" data-contents="{{ id }}" aria-controls="panel-{{ id }}"{% if active %} aria-selected="true" tabindex="0"{% else %} tabindex="-1"{% endif %}>
-    {{ content }}
-  </a>
-{% endmacro %}
-
-{% macro tab_panel(id, group, content=none, active=false, class=none) %}
-  {%- set content = caller() if caller else content -%}
-  <div data-sassdoc="example-panel" id="panel-{{ id }}" role="tabpanel" data-tab-group="{{ group }}" aria-labelledby="tab-{{ id }}" aria-hidden="{{ 'false' if active else 'true' }}" {{ attr_if('data-sassdoc-example-panel', class) }}>
-    {{ content }}
-  </div>
-{% endmacro %}

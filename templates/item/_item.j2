@@ -1,5 +1,6 @@
 {% import 'item/macros.j2' as code %}
 {% import 'item/preview.macros.j2' as preview %}
+{% import 'example/macros.j2' as example %}
 
 {% set slug = item.context.name|urlencode|replace("'", '') %}
 {% set id = [type, slug]|join('--') %}
@@ -26,7 +27,7 @@
   {{ code.require(item) }}
   {{ code.todo(item) }}
 
-  {{ code.examples(item.example, id) }}
+  {{ example.display(item.example, id) }}
 
   {{ preview.show_previews(
     data=sassjson,
