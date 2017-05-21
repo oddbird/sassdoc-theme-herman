@@ -31,7 +31,7 @@
 
 // Navigation
 // ----------
-[data-sassdoc-region='nav'] {
+[data-nav-menu] {
   @include contrasted('theme-dark');
   margin: 0;
   padding: size('gutter');
