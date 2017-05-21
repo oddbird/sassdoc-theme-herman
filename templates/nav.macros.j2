@@ -26,7 +26,7 @@
 
     <h3 data-sassdoc="nav-title">
       {% set activeNav = 'is-active' if activeProject == prjName and activeGroup == none else 'is-not-active' %}
-      <a href="{{ basePath }}/index.html" data-sassdoc-nav="{{ activeNav }}">Help Me!</a>
+      <a href="{{ basePath }}index.html" data-sassdoc-nav="{{ activeNav }}">Help Me!</a>
       </h3>
 
     {% for groupName, group in topByGroup %}

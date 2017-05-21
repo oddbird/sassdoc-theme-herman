@@ -83,12 +83,12 @@
   margin: size('half-shim') 0 size('shim');
   padding-top: size('shim');
   width: 100%;
-}
 
-// add a top separator to all but the first nav-title
-[data-sassdoc='nav-title'] {
+  // add a top separator to all but the first nav-title
   &:nth-of-type(n+2) {
     border-top: 1px solid color('theme-light');
+    margin-top: size('shim');
+    padding-top: size('gutter');
   }
 }
 
