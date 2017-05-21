@@ -26,6 +26,17 @@
 {%- endmacro %}
 
 
+{# SVG Icon #}
+{% macro icon(name, alt=none, size=none, class=none) %}
+  <svg data-icon="{{ name }}" {{ attr_if('data-icon-size', size) }} {{ attr_if('class', class) }}>
+    {%- if alt -%}
+      <title>{{ alt }}</title>
+    {%- endif -%}
+    <use xlink:href="#icon-{{ name }}" />
+  </svg>
+{% endmacro %}
+
+
 {# Toggle collapsible elements (see `static/js/app/base.js`) #}
 {% macro toggle_button(id, expanded=false, button=false, synced=false) -%}
   data-toggle="button" aria-controls="{{ id }}" aria-pressed="{{ 'true' if expanded else 'false' }}"{% if not button %} role="button"{% endif %} data-toggle-synced="{{ 'true' if synced else 'false' }}"

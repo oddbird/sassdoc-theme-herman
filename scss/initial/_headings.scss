@@ -8,6 +8,7 @@
 [data-sassdoc='project-title'] {
   color: color('theme-dark');
   font-size: size('h1');
+  line-height: 1.25;
   margin-left: auto;
   margin-right: auto;
 }
@@ -27,10 +28,4 @@
 [data-sassdoc='item-subtitle'] {
   color: color('gray');
   font-size: size('medium');
-}
-
-[data-sassdoc='nav-title'] {
-  font-style: normal;
-  font-weight: normal;
-  margin: size('half-shim') 0 size('gutter');
 }

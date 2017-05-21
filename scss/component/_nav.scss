@@ -3,10 +3,7 @@
 
 
 [data-nav-menu='small'] {
-  align-content: flex-start;
   bottom: 0;
-  display: flex;
-  flex-wrap: wrap;
   position: absolute;
   top: 0;
   transform: translatex(-100%);
@@ -15,6 +12,13 @@
 
   &[aria-expanded='true'] {
     transform: translatex(0);
+  }
+
+  @include below('nav-small') {
+    align-content: flex-start;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
   }
 
   @include above('nav-small') {
@@ -56,20 +60,30 @@
 
 [data-nav-toggle] {
   padding: size('half-shim') size('shim');
-
-  #{$focus} {
-    color: color('theme-dark');
-  }
 }
 
 
 [data-sassdoc='nav-item'] {
   list-style: none;
-  margin-bottom: size('gutter');
+  margin-bottom: size('shim');
 
   @include below('nav-small') {
-    flex: 0 0 50%;
+    width: 50%;
+
+    &:nth-of-type(2n) {
+      padding-right: 1rem;
+    }
   }
+}
+
+// Nav Titles
+// ----------
+[data-sassdoc='nav-title'] {
+  border-top: 1px solid color('theme-light');
+  font-weight: bold;
+  margin: size('half-shim') 0 size('shim');
+  padding-top: size('shim');
+  width: 100%;
 }
 
 
@@ -84,7 +98,7 @@
   #{$link} {
     color: color('background');
     line-height: 1.1;
-    padding-bottom: size('half-shim');
+    padding-bottom: size('quarter-shim');
     position: relative;
     text-decoration: none;
     transition: color 0.4s;

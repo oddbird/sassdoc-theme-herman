@@ -2,7 +2,7 @@
 
 
 {% macro toggle(size, expanded=false) %}
-  <button data-nav-toggle="{{ size }}" {{ utility.toggle_button(['nav', size]|join('-'), button='true', expanded=expanded) }}>menu</button>
+  <button data-nav-toggle="{{ size }}" {{ utility.toggle_button(['nav', size]|join('-'), button='true', expanded=expanded) }}>{{ utility.icon('menu', 'menu', size='icon-small') }}</button>
 {% endmacro %}
 
 

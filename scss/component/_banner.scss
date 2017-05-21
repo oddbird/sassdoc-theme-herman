@@ -7,6 +7,16 @@
   box-shadow: 0 2px 2px color('shadow');
   display: flex;
   padding: size('shim');
+
+  // search and menu icons
+  [data-icon] {
+    @include square('icon');
+    fill: color('theme-dark');
+
+    #{$focus} {
+      color: color('theme-dark');
+    }
+  }
 }
 
 [data-sassdoc='project-version'] {
