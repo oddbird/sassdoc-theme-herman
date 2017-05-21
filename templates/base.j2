@@ -45,7 +45,9 @@
         </h2>
         {% for groupName, group in topByGroup %}
           {% set activeNav = 'is-active' if activeProject == none and activeGroup == groupName else 'is-not-active' %}
-          <a href="{{ basePath }}{{ groupName }}.html" data-sassdoc-nav="{{ activeNav }}">{{ topGroups[groupName] }}</a>
+          <li data-sassdoc="nav-item">
+            <a href="{{ basePath }}{{ groupName }}.html" data-sassdoc-nav="{{ activeNav }}">{{ topGroups[groupName] }}</a>
+          </li>
         {% endfor %}
 
         {% for prjName, prjCtx in subprojects %}
