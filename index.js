@@ -197,10 +197,11 @@ var parseSubprojects = function (ctx) {
     Object.keys(ctx.herman.subprojects).forEach(function (name) {
       var prjCtx = extend({}, ctx.herman.subprojects[name]);
       var promise = sassdoc.parse(prjCtx.src, prjCtx).then(function (data) {
+        prjCtx.package = ctx.package;
         prjCtx.basePath = '../';
         prjCtx.activeProject = name;
         prjCtx.data = data;
-        prjCtx.subprojects = ctx.herman.subprojects;
+        prjCtx.subprojects = ctx.subprojects;
         prjCtx.topGroups = ctx.groups;
         prjCtx.topByGroup = ctx.byGroup;
         ctx.subprojects[name] = prepareContext(prjCtx);

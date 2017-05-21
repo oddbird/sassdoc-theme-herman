@@ -40,17 +40,17 @@
     <div data-sassdoc-region="container">
       <nav role="navigation" data-sassdoc-region="nav">
         <h2 data-sassdoc="nav-title">
-          {% set activeNav = 'is-active' if activeProject == None and activeGroup == None else 'is-not-active' %}
+          {% set activeNav = 'is-active' if activeProject == none and activeGroup == none else 'is-not-active' %}
           <a href="{{ basePath }}index.html" rel="home" data-sassdoc-nav="{{ activeNav }}">StyleGuide</a>
         </h2>
         {% for groupName, group in topByGroup %}
-          {% set activeNav = 'is-active' if activeProject == None and activeGroup == groupName else 'is-not-active' %}
+          {% set activeNav = 'is-active' if activeProject == none and activeGroup == groupName else 'is-not-active' %}
           <a href="{{ basePath }}{{ groupName }}.html" data-sassdoc-nav="{{ activeNav }}">{{ topGroups[groupName] }}</a>
         {% endfor %}
 
         {% for prjName, prjCtx in subprojects %}
           <h3 data-sassdoc="nav-title">
-            {% set activeNav = 'is-active' if activeProject == prjName and activeGroup == None else 'is-not-active' %}
+            {% set activeNav = 'is-active' if activeProject == prjName and activeGroup == none else 'is-not-active' %}
             <a href="{{ basePath }}{{ prjName }}/index.html" data-sassdoc-nav="{{ activeNav }}">{{ prjName }}</a>
           </h3>
           {% for groupName, group in prjCtx.byGroup %}
