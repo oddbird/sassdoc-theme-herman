@@ -3,7 +3,10 @@
 
 
 .nav-small {
+  align-content: flex-start;
   bottom: 0;
+  display: flex;
+  flex-wrap: wrap;
   position: absolute;
   top: 0;
   transform: translatex(-100%);
@@ -14,7 +17,7 @@
     transform: translatex(0);
   }
 
-  @include above('nav-medium') {
+  @include above('nav-small') {
     width: auto;
   }
 
@@ -63,6 +66,10 @@
 [data-sassdoc='nav-item'] {
   list-style: none;
   margin-bottom: size('gutter');
+
+  @include below('nav-small') {
+    flex: 0 0 50%;
+  }
 }
 
 // Nav Links
