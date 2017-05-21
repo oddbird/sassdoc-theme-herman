@@ -15,6 +15,7 @@
 {% macro menu(
   size,
   basePath,
+  project,
   topGroups,
   topByGroup,
   subprojects,
@@ -26,7 +27,7 @@
 
     <h3 data-sassdoc="nav-title">
       {% set activeNav = 'is-active' if activeProject == prjName and activeGroup == none else 'is-not-active' %}
-      <a href="{{ basePath }}index.html" data-sassdoc-nav="{{ activeNav }}">Help Me!</a>
+      <a href="{{ basePath }}index.html" data-sassdoc-nav="{{ activeNav }}">{{ project }}</a>
       </h3>
 
     {% for groupName, group in topByGroup %}
@@ -54,33 +55,29 @@
 
 {% macro menus(
   basePath,
+  project,
   topGroups,
   topByGroup,
   subprojects,
   activeProject,
   activeGroup
 ) %}
-  {# Mobile Menu #}
-  {{ menu(
-    size='small',
-    basePath=basePath,
-    topGroups=topGroups,
-    topByGroup=topByGroup,
-    subprojects=subprojects,
-    activeProject=activeProject,
-    activeGroup=activeGroup,
-    expanded=false
-  ) }}
+  {% set menu_expanded = {
+    'small': false,
+    'large': true
+  } %}
 
-  {# Wide Menu #}
-  {{ menu(
-    size='large',
-    basePath=basePath,
-    topGroups=topGroups,
-    topByGroup=topByGroup,
-    subprojects=subprojects,
-    activeProject=activeProject,
-    activeGroup=activeGroup,
-    expanded=true
-  ) }}
+  {% for size, expanded in menu_expanded %}
+    {{ menu(
+      size=size,
+      basePath=basePath,
+      project=project,
+      topGroups=topGroups,
+      topByGroup=topByGroup,
+      subprojects=subprojects,
+      activeProject=activeProject,
+      activeGroup=activeGroup,
+      expanded=expanded
+    ) }}
+  {% endfor %}
 {% endmacro %}
