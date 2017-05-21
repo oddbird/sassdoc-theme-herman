@@ -87,7 +87,7 @@ ${{ item.context.name }}: {{ item.context.value }}{% if item.context.scope != 'p
 
 {# @prop annotation #}
 {% macro property(item) -%}
-  {{ table('property', item.property, 'Properties') }}
+  {{ table('property', item.property, 'Map Properties') }}
 {%- endmacro %}
 
 

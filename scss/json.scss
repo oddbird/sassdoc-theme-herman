@@ -4,5 +4,6 @@
 @import '../node_modules/sass-json-export/stylesheets/sass-json-export';
 @import 'utilities';
 @import 'config/manifest';
+@import 'docs/manifest';
 
 @include json-encode($json, comment);
