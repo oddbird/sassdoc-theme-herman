@@ -12,7 +12,16 @@
 {% endmacro %}
 
 
-{% macro menu(size, topGroups, topByGroup, subprojects, expanded=false) %}
+{% macro menu(
+  size,
+  basePath,
+  topGroups,
+  topByGroup,
+  subprojects,
+  activeProject,
+  activeGroup,
+  expanded=false
+) %}
   <nav role="navigation" data-nav-menu="{{ size }}" {{ utility.toggle_target(['nav', size]|join('-'), expanded=expanded)}}>
     {% for groupName, group in topByGroup %}
       {% set activeNav = 'is-active' if activeProject == none and activeGroup == groupName else 'is-not-active' %}
@@ -37,22 +46,35 @@
 {% endmacro %}
 
 
-{% macro menus(topGroups, topByGroup, subprojects) %}
+{% macro menus(
+  basePath,
+  topGroups,
+  topByGroup,
+  subprojects,
+  activeProject,
+  activeGroup
+) %}
   {# Mobile Menu #}
   {{ menu(
     size='small',
+    basePath=basePath,
     topGroups=topGroups,
     topByGroup=topByGroup,
     subprojects=subprojects,
+    activeProject=activeProject,
+    activeGroup=activeGroup,
     expanded=false
-    ) }}
+  ) }}
 
   {# Wide Menu #}
   {{ menu(
     size='large',
+    basePath=basePath,
     topGroups=topGroups,
     topByGroup=topByGroup,
     subprojects=subprojects,
+    activeProject=activeProject,
+    activeGroup=activeGroup,
     expanded=true
-    ) }}
+  ) }}
 {% endmacro %}

@@ -7,6 +7,7 @@ var path = require('path');
 var Promise = require('bluebird');
 var sass = require('node-sass');
 var sassdoc = require('sassdoc');
+var yaml = require('js-yaml');
 
 var copy = require('./lib/assets.js');
 var parse = require('./lib/parse.js');
@@ -194,9 +195,35 @@ var parseSubprojects = function (ctx) {
   var promises = [];
   if (ctx.herman.subprojects) {
     ctx.subprojects = {};
-    Object.keys(ctx.herman.subprojects).forEach(function (name) {
-      var prjCtx = extend({}, ctx.herman.subprojects[name]);
-      var promise = sassdoc.parse(prjCtx.src, prjCtx).then(function (data) {
+    ctx.herman.subprojects.forEach(function (name) {
+      var prjPath = './node_modules/' + name + '/';
+      var configFile = prjPath + '.sassdocrc';
+      var config = {};
+      try {
+        // Load .sassdocrc configuration from subproject directory
+        config = yaml.safeLoad(fs.readFileSync(configFile, 'utf-8'));
+      } catch (err) {
+        ctx.logger.warn(
+          'Invalid or no .sassdocrc found for subproject: ' + name);
+      }
+      if (!config.description && !config.descriptionPath) {
+        // Set default descriptionPath for subproject
+        config.descriptionPath = prjPath + 'README.md';
+      }
+      var src;
+      if (config.src) {
+        // Set subproject src files based on .sassdocrc `src` option
+        src = path.isAbsolute(config.src) ? config.src : prjPath + config.src;
+      } else {
+        // Fall back to all subproject `.scss` files
+        src = prjPath + '**/*.scss';
+      }
+      // Remove unused/unnecessary config options
+      config.src = undefined;
+      config.theme = undefined;
+      config.dest = undefined;
+      var prjCtx = extend({}, config);
+      var promise = sassdoc.parse(src, prjCtx).then(function (data) {
         prjCtx.package = ctx.package;
         prjCtx.basePath = '../';
         prjCtx.activeProject = name;
