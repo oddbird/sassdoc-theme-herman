@@ -17,6 +17,7 @@
 [data-sassdoc-region='container'] {
   @include clearfix;
   display: flex;
+  position: relative;
 
   @include above('page') {
     justify-content: flex-end;

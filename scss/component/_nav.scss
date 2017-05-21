@@ -3,13 +3,15 @@
 
 
 .nav-small {
+  bottom: 0;
   position: absolute;
+  top: 0;
   transform: translatex(-100%);
   transition: transform 0.4s;
   width: 100%;
 
   &[aria-expanded='true'] {
-    transform: translatex(0%);
+    transform: translatex(0);
   }
 
   @include above('nav-medium') {
@@ -27,7 +29,6 @@
   flex-direction: column;
   margin-left: -100%;
   transition: margin-left 0.4s;
-
 
   &[aria-expanded='true'] {
     margin-left: 0;
@@ -52,6 +53,10 @@
 
 .nav-icon {
   padding: size('half-shim') size('shim');
+
+  #{$focus} {
+    color: color('theme-dark');
+  }
 }
 
 
