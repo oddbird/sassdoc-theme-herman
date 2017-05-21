@@ -40,7 +40,7 @@
 pre,
 code {
   @include font-family('code');
-  @include font-size('smaller', 0.75);
+  font-size: size('smaller');
 }
 
 code {
