@@ -9,7 +9,7 @@
 - Show compiled CSS for `@example scss` annotations. Closes
   [#37](https://github.com/oddbird/sassdoc-theme-herman/issues/37).
 - BREAKING: Nest Herman-specific options under `herman` object in sassdoc
-  configuration.
+  configuration, and Sass-specific options under `herman.sass` object.
 - Re-brand with sidebar navigation. Closes
   [#58](https://github.com/oddbird/sassdoc-theme-herman/issues/58) and
   [#69](https://github.com/oddbird/sassdoc-theme-herman/issues/69).

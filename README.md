@@ -60,14 +60,14 @@ For example, this:
 will render the `mymacro` macro from the file `macros.j2`
 (which happens to use the `[data-mymacro]` attribute).
 
-In order for this to work for scss, you must include a `sassincludepaths` key
-in your sassdoc configuration `herman` option object. It should be an array of
-places to look for Sass includes, like
-`sassincludepaths: [ path.join(__dirname, 'static/sass') ]`. Further, all of
+In order for this to work for scss, you must include an `includepaths` key in
+your sassdoc configuration `herman.sass` option object. It should be an array
+of places to look for Sass includes, like
+`includepaths: [ path.join(__dirname, 'static/sass') ]`. Further, all of
 the Sass examples will have to be complete and valid. This may require
 including something like `@import 'config/manifest';` at the top of each. If
-you include a `sassincludes` array in your sassdoc configuration `herman`
-option object, those files (relative to the `sassincludepaths`) will always be
+you include an `includes` array in your sassdoc configuration `herman.sass`
+option object, those files (relative to the `includepaths`) will always be
 `@import`-ed for `@example scss`. *Note: Included Sass files should not contain
 any CSS output; any output will be displayed along with the @example.*
 
