@@ -27,22 +27,18 @@
   <div data-sassdoc-region="app">
     <header role="banner" data-sassdoc-region="banner">
       <h1 data-sassdoc="project-title">
-        <a href="{{ homepage or package.homepage or basePath + 'index.html' }}" rel="home" data-sassdoc="project-name">{{ project_title }}</a>
+        <a href="{{ basePath + 'index.html' }}" rel="home" data-sassdoc="project-name">{{ project_title }}</a>
         {% if package.version %}
-          <span data-sassdoc="project-version">{{ package.version }}</span>
-        {% endif %}
-        {% if activeProject %}
-          : <a href="{{ basePath }}{{ activeProject }}/index.html">{{ activeProject }}</a>
+          <a href="{{ homepage or package.homepage }}" data-sassdoc="project-version">{{ package.version }}</a>
         {% endif %}
       </h1>
+      {% if activeProject %}
+        <a href="{{ basePath }}{{ activeProject }}/index.html">{{ activeProject }}</a>
+      {% endif %}
     </header>
 
     <div data-sassdoc-region="container">
       <nav role="navigation" data-sassdoc-region="nav">
-        <h2 data-sassdoc="nav-title">
-          {% set activeNav = 'is-active' if activeProject == none and activeGroup == none else 'is-not-active' %}
-          <a href="{{ basePath }}index.html" rel="home" data-sassdoc-nav="{{ activeNav }}">StyleGuide</a>
-        </h2>
         {% for groupName, group in topByGroup %}
           {% set activeNav = 'is-active' if activeProject == none and activeGroup == groupName else 'is-not-active' %}
           <li data-sassdoc="nav-item">

@@ -1,0 +1,32 @@
+// Feature Documentation Sample
+// ============================
+
+
+// Preview Colors
+// --------------
+/// Create color-maps using the
+/// [Accoutrement-Color](http://oddbird.net/accoutrement-color/sassdoc/) syntax,
+/// and preview them in Herman.
+///
+/// @group doc-samples
+/// @preview color-palette
+/// @link http://oddbird.net/accoutrement-color/sassdoc/
+///   Accoutrement Color
+///
+/// @type Map (@@@ doesn't seem to display)
+/// @prop {Color | String | List} '<color-name>' -
+///   Each `<color-name>` key can be assigned a color
+///   or previously-defined key,
+///   followed by an optional map of adjustments
+///   (as defined in
+///   [Accoutrement-Color](http://oddbird.net/accoutrement-color/sassdoc/)).
+/// @example scss
+///   // @preview color-palette
+///   @include herman-add-colors('brand-colors', $brand-colors);
+$preview-colors: (
+  'sample-orange': hsl(24, 100%, 39%),
+  'sample-blue': hsl(195, 85%, 35%),
+  'sample-pink': hsl(330, 85%, 48%),
+);
+
+@include herman-add-colors('preview-colors', $preview-colors);
