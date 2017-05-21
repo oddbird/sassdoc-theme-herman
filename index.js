@@ -47,7 +47,7 @@ var prepareContext = function (ctx) {
       undefined: 'general'
     },
     sort: [ 'group', 'file', 'line', 'access' ],
-    herman: {}
+    herman: { sass: {}}
   };
 
   // Apply default values for groups and display.
@@ -65,8 +65,8 @@ var prepareContext = function (ctx) {
    * Load a `sass-json file` (if one is given in the context) and add its
    * contents under the `sassjson` key of the context.
    */
-  if (ctx.herman.sassjsonfile) {
-    ctx.sassjson = parse.sassJson(fs.readFileSync(ctx.herman.sassjsonfile));
+  if (ctx.herman.sass.jsonfile) {
+    ctx.sassjson = parse.sassJson(fs.readFileSync(ctx.herman.sass.jsonfile));
   }
 
   /**
@@ -515,8 +515,8 @@ module.exports.annotations = [
               var sassData = exampleItem.code;
               exampleItem.rendered = undefined;
               try {
-                if (env.herman.sassincludes) {
-                  var arr = env.herman.sassincludes;
+                if (env.herman.sass.includes) {
+                  var arr = env.herman.sass.includes;
                   for (var i = arr.length - 1; i >= 0; i = i - 1) {
                     sassData = "@import '" + arr[i] + "';\n" + sassData;
                   }
@@ -529,7 +529,7 @@ module.exports.annotations = [
                     }
                     return { file: url };
                   },
-                  includePaths: env.herman.sassincludepaths || [],
+                  includePaths: env.herman.sass.includepaths || [],
                   outputStyle: 'expanded'
                 });
                 var encoded = rendered.css.toString('utf-8');
