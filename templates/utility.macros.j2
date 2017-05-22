@@ -11,16 +11,16 @@
 
 
 {% macro show_attrs(attrs) %}
-  {%- for name, value in attrs.items() %}{{ attr_if(value, name) }}{% endfor -%}
+  {%- for name, value in attrs.items() %}{{ attr_if(name, value) }}{% endfor -%}
 {% endmacro %}
 
 
 {% macro link_if(content=none, url=none, attrs={}) -%}
   {%- set content = content if (content != none) else caller() -%}
   {%- if url -%}
-    <a href="{{ url }}" {{ show_attrs(attrs) }}>{{ content }}</a>
+    <a href="{{ url }}" {{ show_attrs(attrs) }}>{{ content|trim() }}</a>
   {%- else -%}
-    <span {{ show_attrs(attrs) }}>{{ content }}</span>
+    <span {{ show_attrs(attrs) }}>{{ content|trim() }}</span>
   {%- endif -%}
 {%- endmacro %}
 

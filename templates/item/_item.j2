@@ -4,9 +4,10 @@
 
 {% set slug = item.context.name|urlencode|replace("'", '') %}
 {% set id = [type, slug]|join('--') %}
+{% set display_private = display and display.access and ('private' in display.access) %}
 
 <section class="item" id="{{ id }}">
-  {{ show.heading(item, type, id) }}
+  {{ show.heading(item, type, id, display) }}
   {{ show.source(item, type) }}
   {{ show.summary(item.description) }}
 

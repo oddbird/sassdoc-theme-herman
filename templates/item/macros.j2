@@ -1,12 +1,9 @@
 {% import 'utility.macros.j2' as utility %}
 
 
-{% macro heading(item, type, id) %}
-  {% set item_name = [item.context.name, '()']|join if (type == 'mixin' or type == 'function') else item.context.name %}
-  {% set item_name = ['$', item_name]|join if (type == 'variable') else item_name %}
-  {% set display_type = ['@', type]|join if ((type == 'mixin') or (type == 'function')) else type %}
-  {% set display_type = none if ((type == 'variable') or (type == 'css')) else display_type %}
-  {% set display_private = display and display.access and 'private' in display.access %}
+{% macro heading(item, type, id, display=none) %}
+  {% set item_name = format_name(item, type) %}
+  {% set display_type = format_type(type) %}
 
   <header data-item-section="header">
     <h3 class="item-title">
@@ -24,37 +21,74 @@
     {{ alias(
       is_alias=item.alias,
       has_alias=item.aliased,
-      type=type
+      type=type,
+      display=display
       ) }}
   </header>
 {% endmacro %}
 
 
-{% macro alias(is_alias, has_alias, type) %}
+{% macro alias(is_alias, has_alias, type, display=none) %}
   {% if is_alias or has_alias %}
     {% set alias_intro = 'alias for' if is_alias else 'aliased as' %}
-    {% set alias_text = is_alias if is_alias else has_alias %}
-    {% set alias_text = [alias_text, '()']|join if ((type == 'mixin') or (type == 'function')) else alias_text %}
-    {% set alias_url = get_link(is_alias or has_alias) %}
-    {% set alias_url = alias_url if (alias_url != '') else none %}
+    {% set items = is_alias or has_alias %}
 
     <p class="alias">
-      <span class="alias-intro">{{ alias_intro }}</span>
-      {{ utility.link_if(
-        content=alias_text,
-        url=alias_url,
-        attrs={'class': 'alias-link'}
-        ) }}
+      {{ alias_intro }}
+
+      {# the only list-check that worked for me #}
+      {% if (',' in items|string()) %}
+        {% for item in items %}
+          {{ alias_link(
+            item=item,
+            type=type,
+            link_alias=display['alias']
+            ) }}{% if not loop.last %},{% endif %}
+        {% endfor %}
+      {% else %}
+        {{ alias_link(
+          item=items,
+          type=type,
+          link_alias=display['alias']
+          ) }}
+      {% endif %}
     </p>
   {% endif %}
 {% endmacro %}
 
 
-{% macro get_link(item) -%}
-  {%- set slug = item.context.name|urlencode|replace("'", '') if item.context.name else item -%}
-  {%- set id = [type, slug]|join('--') -%}
-  {%- set url = [item.group, '.html#', id]|join() if item.group else ['#', id]|join('')  -%}
-  {{ url }}
+{% macro alias_link(item, type, link_alias) %}
+  {% set alias_text = format_name(item, type) %}
+  {% set alias_url = get_link(item, type) if link_alias else none %}
+  {% set alias_url = alias_url if (alias_url != '') else none %}
+  {{ utility.link_if(
+    content=alias_text,
+    url=alias_url,
+    attrs={'class': 'alias-title'}
+    ) }}
+{% endmacro %}
+
+
+{# This works great if we know the group,
+   or the referenced item is on the same page #}
+{% macro get_link(name, type, group=none) -%}
+  {% set group = [group, 'html']|join('.') if group else none %}
+  {{ group }}#{{ type }}--{{ name }}
+{%- endmacro %}
+
+
+{% macro format_name(item, type) -%}
+  {%- set item_name = item.context.name if item.context else item -%}
+  {%- set item_name = [item_name, '()']|join if (type == 'mixin' or type == 'function') else item_name -%}
+  {%- set item_name = ['$', item_name]|join if (type == 'variable') else item_name -%}
+  {{ item_name }}
+{%- endmacro %}
+
+
+{% macro format_type(type) -%}
+  {%- set display_type = ['@', type]|join if ((type == 'mixin') or (type == 'function')) else type -%}
+  {%- set display_type = none if ((type == 'variable') or (type == 'css')) else display_type -%}
+  {{ display_type }}
 {%- endmacro %}
 
 

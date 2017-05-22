@@ -1,4 +1,5 @@
 {% import 'utility.macros.j2' as utility %}
+{% import 'item/macros.j2' as show %}
 
 
 {# @param & @prop groups #}
@@ -48,41 +49,56 @@
     <div data-item-section="require">
       <h4 class="item-subtitle">Requires</h4>
 
-      <ul>
-        {% for require in item.require %}
-          {# External links #}
-          {% if require.external %}
-            <li data-sassdoc="requires-item"><code>[external]</code>
-              {% if require.url %}
-                <a href="{{ require.url }}"><code>{{ require.name }}</code></a> {{ require.description }}</li>
-              {% else %}
-                <code>{{ require.name }}</code>
-              {% endif %}
-              {% if require.description %}
-                &mdash; {{ require.description }}
-              {% endif %}
-            </li>
+      {% set prev = '' %}
+      {% for req in item.require %}
+        {% set name = req.name if req.name else req.item.context.name %}
+        {% set type = req.type if req.type else (req.item.context.type or none) %}
+        {% set check = [name|string(), type|string()]|join('') %}
+        {% set display = display_private or ('public' in req.item.access) %}
 
-          {# Internal links #}
-          {% else %}
-            <li data-sassdoc="requires-item">
-              <code>[{{ require.item.context.type }}]</code>
-              {% if require.item.access == 'private' and not display_private %}
-                <code>{{ require.item.context.name }}</code>
-                [private]
-              {% else %}
-                <a href="{{ require.item.group }}.html#{{ require.item.context.type }}--{{ require.item.context.name }}"><code>{{ require.item.context.name }}</code></a>
-              {% endif %}
-              {% if require.description %}
-                &mdash; {{ require.description }}
-              {% endif %}
-            </li>
-          {% endif %}
-        {% endfor %}
-      </ul>
+        {% if display and not (prev == check) %}
+          {% set prev = check %}
+          {{ require_item(req) }}
+        {% endif %}
+      {% endfor %}
     </div>
   {% endif %}
 {%- endmacro %}
+
+
+{# @require items #}
+{% macro require_item(req) %}
+  <div class="parameter">
+    {% set require_name = req.name if req.name else req.item.context.name %}
+    {% set require_type = req.type if req.type else (req.item.context.type or none) %}
+    {% set require_url = req.url if req.url else show.get_link(require_name, req.item.context.type, req.item.group) %}
+    {% set require_name = show.format_name(require_name, require_type) %}
+    {% set require_type = show.format_type(require_type) %}
+    {% set require_desc = require.description %}
+
+    <h5 class="param-title">
+      {% if require_type %}
+        <span class="param-default">{{ require_type }}</span>
+      {% endif %}
+
+      {{ utility.link_if(
+        content=require_name,
+        url=require_url,
+        attrs={'class': 'param-name'}
+        ) }}
+
+      {% if require.external %}
+        <span class="param-type">[external]</span>
+      {% elif (require.item.access == 'private') %}
+        <span class="param-type">[private]</span>
+      {% endif %}
+    </h5>
+
+    {% if require.description %}
+      <p>{{ require.description|safe }}</p>
+    {% endif %}
+  </div>
+{% endmacro %}
 
 
 {# @link annotation #}
@@ -90,22 +106,31 @@
   {% if item.link.length > 0 %}
     <div data-item-section="link">
       <h4 class="item-subtitle">Links</h4>
-      <ul>
-        {% for link in item.link %}
-          <li data-sassdoc="link-item">
-            <a href="{{ link.url }}">
-              {% if link.caption %}
-                {{ link.caption }}
-              {% else %}
-                {{ link.url }}
-              {% endif %}
-            </a>
-          </li>
-        {% endfor %}
-      </ul>
+
+      {% for link in item.link %}
+        {{ link_item(link) }}
+      {% endfor %}
     </div>
   {% endif %}
 {%- endmacro %}
+
+
+{# @link items #}
+{% macro link_item(link) %}
+  <div class="parameter">
+    <h5 class="param-title">
+      {{ utility.link_if(
+        content=link.caption or link.url,
+        url=link.url,
+        attrs={'class': 'param-name'}
+        ) }}
+
+      {% if '://' in link.url %}
+        <span class="param-type">[external]</span>
+      {% endif %}
+    </h5>
+  </div>
+{% endmacro %}
 
 
 {# @see annotation #}
@@ -113,20 +138,46 @@
   {% if item.see.length > 0 %}
     <div data-item-section="see">
       <h4 class="item-subtitle">See</h4>
-      <ul>
-        {% for see in item.see %}
-          <li data-sassdoc="see-item">
-            {% if see.access == 'private' and not display_private %}
-              {{ see.context.name }} [private]
-            {% else %}
-              <a href="{{ see.group }}.html#{{ see.context.type }}--{{ see.context.name }}">{{ see.context.name }}</a>
-            {% endif %}
-          </li>
-        {% endfor %}
-      </ul>
+
+      {% for obj in item.see %}
+        {{ see_item(obj, display_private) }}
+      {% endfor %}
     </div>
   {% endif %}
 {%- endmacro %}
+
+
+{# @see items #}
+{% macro see_item(item, display_private=false) %}
+  {% set private = (item.access == 'private') and (not display_private) %}
+  {% set url = show.get_link(item.context.name, item.context.type, item.group) %}
+  {% set text = show.format_name(item.context.name, item.context.type) %}
+  {% set type = show.format_type(item.context.type) %}
+
+  <div class="parameter">
+    {% if type and (type != '') %}
+      <span class="param-default">
+        {{ type }}
+      </span>
+    {% endif %}
+
+    <h5 class="param-title">
+      {{ utility.link_if(
+        content=text,
+        url=url,
+        attrs={'class': 'param-name'}
+        ) }}
+
+      {% if private %}
+        <span class="param-type">[private]</span>
+      {% endif %}
+    </h5>
+
+    {% if item.context.description %}
+      {{ item.context.description }}
+    {% endif %}
+  </div>
+{% endmacro %}
 
 
 {# @todo annotation #}

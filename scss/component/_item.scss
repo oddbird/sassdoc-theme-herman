@@ -40,27 +40,30 @@
   font-weight: normal;
 }
 
-.alias-intro {
+.alias {
   font-style: italic;
 }
 
-.alias-link {
+.alias-title {
+  &,
   #{$link} {
     @include font-family('code');
+    font-style: normal;
+    font-weight: bold;
   }
 }
 
 .parameter {
   margin-bottom: size('shim');
-
-  p {
-    padding-left: size('gutter');
-  }
 }
 
 .param-title {
   color: color('text-light');
   font-size: size('medium');
+
+  ~ * {
+    margin-left: size('gutter');
+  }
 }
 
 .param-name,
