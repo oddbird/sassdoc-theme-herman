@@ -62,13 +62,22 @@ ${{ item.context.name }}: {{ item.context.value }}{% if item.context.scope != 'p
           {% set name = ['$', item.name]|join('') if (table == 'parameter') else item.name %}
           <tr data-sassdoc="{{ table }}-item">
             <td scope="row" data-label="name"><code>{{ name }}</code></td>
-            <td data-label="desc">{% if item.description %}{{ item.description|safe }}{% endif %}</td>
-            <td data-label="type"><code>{% if item.type %}{{ item.type }}{% endif %}</code></td>
-            <td data-label="default">{% if not item.default %}
+            <td data-label="desc">
+              {%- if item.description -%}
+                {{ item.description|safe }}
+              {%- endif -%}
+            </td>
+            <td data-label="type">
+              {%- if item.type -%}
+                {{ item.type }}
+              {%- endif -%}
+            </td>
+            <td data-label="default">
+              {%- if not item.default -%}
                 &mdash;<span class="visually-hidden"> none</span>
-              {% else %}
+              {%- else -%}
                 <code>{{ item.default }}</code>
-              {% endif %}
+              {%- endif -%}
             </td>
           </tr>
           {%- endfor %}
@@ -116,7 +125,8 @@ ${{ item.context.name }}: {{ item.context.value }}{% if item.context.scope != 'p
             <li data-sassdoc="requires-item">
               <code>[{{ require.item.context.type }}]</code>
               {% if require.item.access == 'private' and not display_private %}
-                <code>{{ require.item.context.name }} [private]</code>
+                <code>{{ require.item.context.name }}</code>
+                [private]
               {% else %}
                 <a href="{{ require.item.group }}.html#{{ require.item.context.type }}--{{ require.item.context.name }}"><code>{{ require.item.context.name }}</code></a>
               {% endif %}

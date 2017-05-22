@@ -16,21 +16,11 @@
   #{$link} {
     color: color('action');
     text-decoration: none;
-
-    [data-sassdoc-region='banner'] &,
-    [data-sassdoc-region='nav'] & {
-      color: inherit;
-    }
   }
 
   #{$focus} {
     color: color('focus');
     text-decoration: underline;
-
-    [data-sassdoc-region='banner'] &,
-    [data-sassdoc-region='nav'] & {
-      color: inherit;
-    }
   }
 }
 

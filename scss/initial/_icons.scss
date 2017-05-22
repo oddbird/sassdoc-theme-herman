@@ -1,0 +1,6 @@
+// Icons
+// =====
+
+[data-icon-size='icon-small'] {
+  @include square('icon');
+}

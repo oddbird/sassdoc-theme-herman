@@ -15,6 +15,7 @@
 {% macro menu(
   size,
   basePath,
+  project,
   topGroups,
   topByGroup,
   subprojects,
@@ -23,6 +24,12 @@
   expanded=false
 ) %}
   <nav role="navigation" data-nav-menu="{{ size }}" {{ utility.toggle_target(['nav', size]|join('-'), expanded=expanded)}}>
+
+    <h3 data-sassdoc="nav-title">
+      {% set activeNav = 'is-active' if activeProject == none and activeGroup == none else 'is-not-active' %}
+      <a href="{{ basePath }}index.html" data-sassdoc-nav="{{ activeNav }}">{{ project }}</a>
+    </h3>
+
     {% for groupName, group in topByGroup %}
       {% set activeNav = 'is-active' if activeProject == none and activeGroup == groupName else 'is-not-active' %}
       <li data-sassdoc="nav-item">
@@ -48,33 +55,29 @@
 
 {% macro menus(
   basePath,
+  project,
   topGroups,
   topByGroup,
   subprojects,
   activeProject,
   activeGroup
 ) %}
-  {# Mobile Menu #}
-  {{ menu(
-    size='small',
-    basePath=basePath,
-    topGroups=topGroups,
-    topByGroup=topByGroup,
-    subprojects=subprojects,
-    activeProject=activeProject,
-    activeGroup=activeGroup,
-    expanded=false
-  ) }}
+  {% set menu_expanded = {
+    'small': false,
+    'large': true
+  } %}
 
-  {# Wide Menu #}
-  {{ menu(
-    size='large',
-    basePath=basePath,
-    topGroups=topGroups,
-    topByGroup=topByGroup,
-    subprojects=subprojects,
-    activeProject=activeProject,
-    activeGroup=activeGroup,
-    expanded=true
-  ) }}
+  {% for size, expanded in menu_expanded %}
+    {{ menu(
+      size=size,
+      basePath=basePath,
+      project=project,
+      topGroups=topGroups,
+      topByGroup=topByGroup,
+      subprojects=subprojects,
+      activeProject=activeProject,
+      activeGroup=activeGroup,
+      expanded=expanded
+    ) }}
+  {% endfor %}
 {% endmacro %}
