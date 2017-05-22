@@ -85,7 +85,7 @@ Development
 To install the necessary Node dependencies, run ``yarn``.
 
 You can lint the project's JS with ``gulp eslint``
-and run the JS unit tests with ``gulp jstest``
+and run the JS unit tests with ``gulp test``
 (or ``yarn test``).
 You can lint Sass with
 ``gulp sasslint``.
@@ -96,7 +96,7 @@ run ``gulp compile``.
 
 Just running ``gulp`` will perform all of the above tasks.
 
-You can start up a local development server with ``gulp develop``.
+You can start up a local development server with ``gulp serve``.
 This will also watch for changes to local files
 and automatically perform an appropriate selection of the above tasks
 whenever changes are detected to relevant files.
