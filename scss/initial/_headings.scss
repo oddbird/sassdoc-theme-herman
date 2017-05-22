@@ -46,10 +46,11 @@
   color: color('black');
 }
 
-[data-sassdoc='item-name'] {
+[data-sassdoc='item-title'] {
   @include h3;
   @include font-family('code');
   color: color('gray');
+  margin-bottom: size('shim');
 }
 
 [data-sassdoc='item-subtitle'] {

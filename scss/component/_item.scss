@@ -7,14 +7,8 @@
   padding: size('gutter') 0;
 }
 
-[data-sassdoc='item-title'] {
-  margin-bottom: size('shim');
-}
-
-[data-sassdoc='item-type'] {
-  @include font-family('sans');
-  @include font-size('small');
-  @include wrap-content('[' ']');
+[data-sassdoc='item-type'],
+[data-sassdoc='var-type'] {
   color: color('light');
   font-weight: normal;
 }
