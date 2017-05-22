@@ -22,10 +22,15 @@
 </head>
 <body>
 
+  {% include '_icons.svg' %}
   {{ iconsSvg|safe }}
+  {% import 'utility.macros.j2' as utility %}
+  {% import 'nav.macros.j2' as nav %}
 
   <div data-sassdoc-region="app">
     <header role="banner" data-sassdoc-region="banner">
+      {{ nav.toggles() }}
+
       <h1 data-sassdoc="project-title">
         <a href="{{ homepage or package.homepage or basePath + 'index.html' }}" rel="home" data-sassdoc="project-name">{{ project_title }}</a>
         {% if package.version %}
@@ -38,31 +43,15 @@
     </header>
 
     <div data-sassdoc-region="container">
-      <nav role="navigation" data-sassdoc-region="nav">
-        <h2 data-sassdoc="nav-title">
-          {% set activeNav = 'is-active' if activeProject == none and activeGroup == none else 'is-not-active' %}
-          <a href="{{ basePath }}index.html" rel="home" data-sassdoc-nav="{{ activeNav }}">StyleGuide</a>
-        </h2>
-        {% for groupName, group in topByGroup %}
-          {% set activeNav = 'is-active' if activeProject == none and activeGroup == groupName else 'is-not-active' %}
-          <li data-sassdoc="nav-item">
-            <a href="{{ basePath }}{{ groupName }}.html" data-sassdoc-nav="{{ activeNav }}">{{ topGroups[groupName] }}</a>
-          </li>
-        {% endfor %}
-
-        {% for prjName, prjCtx in subprojects %}
-          <h3 data-sassdoc="nav-title">
-            {% set activeNav = 'is-active' if activeProject == prjName and activeGroup == none else 'is-not-active' %}
-            <a href="{{ basePath }}{{ prjName }}/index.html" data-sassdoc-nav="{{ activeNav }}">{{ prjName }}</a>
-          </h3>
-          {% for groupName, group in prjCtx.byGroup %}
-            {% set activeNav = 'is-active' if activeProject == prjName and activeGroup == groupName else 'is-not-active' %}
-            <li data-sassdoc="nav-item">
-              <a href="{{ basePath }}{{prjName}}/{{ groupName }}.html" data-sassdoc-nav="{{ activeNav }}">{{ prjCtx.groups[groupName] }}</a>
-            </li>
-          {% endfor %}
-        {% endfor %}
-      </nav>
+      {{ nav.menus(
+        basePath=basePath,
+        project=project_title,
+        topGroups=topGroups,
+        topByGroup=topByGroup,
+        subprojects=subprojects,
+        activeProject=activeProject,
+        activeGroup=activeGroup
+      ) }}
 
       <main role="main" data-sassdoc-region="main" data-sassdoc-page="{% block page_slug %}{{ activeGroup or 'index' }}{% endblock %}">
         {% block main %}{% endblock %}

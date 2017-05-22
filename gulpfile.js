@@ -3,16 +3,19 @@
 var autoprefixer = require('gulp-autoprefixer');
 var browserSync = require('browser-sync').create();
 var chalk = require('chalk');
+var del = require('del');
 var eslint = require('gulp-eslint');
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var imagemin = require('gulp-imagemin');
 var mocha = require('gulp-mocha');
 var path = require('path');
+var rename = require('gulp-rename');
 var sass = require('gulp-sass');
 var sassdoc = require('sassdoc');
 var sasslint = require('gulp-sass-lint');
 var sourcemaps = require('gulp-sourcemaps');
+var svg = require('gulp-svg-symbols');
 var uglify = require('gulp-uglify');
 
 // Set your Sass project (the one you're generating docs for) path.
@@ -30,7 +33,6 @@ var project = function () {
 var paths = {
   DIST_DIR: 'dist/',
   SASS_DIR: 'scss/',
-  CSS_DIR: 'dist/css/',
   IMG: 'assets/img/**/*',
   SVG: 'assets/svg/**/*.svg',
   JS_DIR: 'assets/js/',
@@ -38,6 +40,7 @@ var paths = {
   SRC_SASS_DIR: project('scss'),
   DOCS_DIR: project('sassdoc'),
   JS_TESTS_DIR: 'test/',
+  TEMPLATES_DIR: 'templates/',
   TEMPLATES: 'templates/**/*.j2',
   IGNORE: [
     '!**/.#*',
@@ -128,7 +131,7 @@ gulp.task('sass', function () {
       cascade: false
     }))
     .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest(paths.CSS_DIR));
+    .pipe(gulp.dest(paths.DIST_DIR + 'css/'));
 });
 
 // Need to finish compile before running tests,
@@ -235,14 +238,26 @@ gulp.task('jsmin', function () {
     .pipe(gulp.dest(dest));
 });
 
-gulp.task('svgmin', function () {
-  var dest = paths.DIST_DIR + 'svg/';
+gulp.task('svg-clean', function (cb) {
+  del(paths.TEMPLATES_DIR + '_icons.svg').then(function () {
+    cb();
+  });
+});
 
+gulp.task('svgmin', ['svg-clean'], function () {
   return gulp.src(paths.SVG)
     .pipe(imagemin([
-      imagemin.svgo({ plugins: [{ removeViewBox: false }] })
+      imagemin.svgo()
     ]))
-    .pipe(gulp.dest(dest));
+    .pipe(svg({
+      id: 'icon-%f',
+      title: '%f icon',
+      templates: [
+        path.join(__dirname, paths.TEMPLATES_DIR, '_icon_template.lodash')
+      ]
+    }))
+    .pipe(rename('_icons.svg'))
+    .pipe(gulp.dest(paths.TEMPLATES_DIR));
 });
 
 gulp.task('imagemin', function () {

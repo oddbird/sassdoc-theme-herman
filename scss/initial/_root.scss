@@ -16,21 +16,11 @@
   #{$link} {
     color: color('action');
     text-decoration: none;
-
-    [data-sassdoc-region='banner'] &,
-    [data-sassdoc-region='nav'] & {
-      color: inherit;
-    }
   }
 
   #{$focus} {
     color: color('focus');
     text-decoration: underline;
-
-    [data-sassdoc-region='banner'] &,
-    [data-sassdoc-region='nav'] & {
-      color: inherit;
-    }
   }
 }
 
@@ -40,7 +30,22 @@
 pre,
 code {
   @include font-family('code');
-  @include font-size('smaller', 0.75);
+  font-size: size('smaller');
+}
+
+code {
+  background-color: color('slight');
+  border-radius: 3px;
+  box-shadow: 0 0 size('half-shim') color('code-shadow') inset;
+  color: color('code');
+  padding: 0 size('half-shim');
+
+  pre & {
+    background-color: transparent;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0;
+  }
 }
 
 .visually-hidden {

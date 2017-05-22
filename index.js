@@ -296,7 +296,7 @@ var renderHerman = function (dest, ctx) {
   var promises = [
     render(nunjucksEnv, indexTemplate, indexDest, ctx),
     copy(
-      path.join(assets, '/**/*.{css,js,svg,png,eot,woff,woff2,ttf,ico,map}'),
+      path.join(assets, '/**/*.{css,js,png,eot,woff,woff2,ttf,ico,map}'),
       path.join(dest, 'assets')
     ).then(function () {
       if (copyShortcutIcon) {
