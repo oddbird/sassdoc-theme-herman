@@ -23,10 +23,7 @@
 {% macro render(examples_list) %}
   {% for example in examples_list %}
     {% if example.rendered and example.type != 'scss' %}
-      <iframe class="render-example">
-        {# This should load data from 'example/base.j2' #}
-        {{ example.rendered|safe }}
-      </iframe>
+      <iframe class="render-example" srcdoc="{{ example.iframed }}"></iframe>
     {% endif %}
   {% endfor %}
 {% endmacro %}
