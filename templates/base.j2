@@ -56,14 +56,18 @@
       <main role="main" data-sassdoc-region="main" data-sassdoc-page="{% block page_slug %}{{ activeGroup or 'index' }}{% endblock %}">
 
         {% if package.homepage or package.repository.url %}
-          <div data-sassdoc="project-links">
+          <ul data-sassdoc="project-links">
             {% if package.homepage %}
-              <a href="{{ package.homepage }}" data-sassdoc="project-link">View Project</a>
+              <li data-sassdoc="project-link-item" class="project-link-start">
+                <a href="{{ package.homepage }}" data-sassdoc="project-link">View Project</a>
+              </li>
             {% endif %}
             {% if package.repository.url %}
-              <a href="{{ package.repository.url }}" data-sassdoc="project-link">View Source</a>
+              <li data-sassdoc="project-link-item">
+                <a href="{{ package.repository.url }}" data-sassdoc="project-link">View Source</a>
+              </li>
             {% endif %}
-          </div>
+          </ul>
         {% endif %}
 
         {% block main %}{% endblock %}

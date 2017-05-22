@@ -4,14 +4,27 @@
 
 [data-sassdoc='project-links'] {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
+  margin-left: 0;
+  margin-right: 0;
 
   @include below('project-link-nav') {
     margin-bottom: size('shim');
   }
+}
 
-  @include above('project-link-nav') {
-    justify-content: flex-end;
+[data-sassdoc='project-link-item'] {
+  display: flex;
+  list-style: none;
+
+  & + & {
+    margin-left: size('shim');
+  }
+}
+
+.project-link-start {
+  @include below('project-link-nav') {
+    margin-right: auto;
   }
 }
 
@@ -27,9 +40,5 @@
   #{$focus} {
     @include contrasted('theme-dark');
     text-decoration: none;
-  }
-
-  & + & {
-    margin-left: size('shim');
   }
 }
