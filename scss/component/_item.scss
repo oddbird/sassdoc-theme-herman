@@ -22,11 +22,15 @@
 }
 
 [data-sassdoc-table] {
-  @include font-size('small');
+  font-size: size('small');
 
   td,
   th {
     padding: size('half-shim') size('shim');
+
+    @include below('page') {
+      padding-left: 0;
+    }
   }
 
   code {
