@@ -33,7 +33,6 @@ var project = function () {
 var paths = {
   DIST_DIR: 'dist/',
   SASS_DIR: 'scss/',
-  CSS_DIR: 'dist/css/',
   IMG: 'assets/img/**/*',
   SVG: 'assets/svg/**/*.svg',
   JS_DIR: 'assets/js/',
@@ -132,7 +131,7 @@ gulp.task('sass', function () {
       cascade: false
     }))
     .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest(paths.CSS_DIR));
+    .pipe(gulp.dest(paths.DIST_DIR + 'css/'));
 });
 
 // Need to finish compile before running tests,

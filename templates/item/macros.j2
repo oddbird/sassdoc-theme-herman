@@ -125,7 +125,8 @@ ${{ item.context.name }}: {{ item.context.value }}{% if item.context.scope != 'p
             <li data-sassdoc="requires-item">
               <code>[{{ require.item.context.type }}]</code>
               {% if require.item.access == 'private' and not display_private %}
-                <code>{{ require.item.context.name }} [private]</code>
+                <code>{{ require.item.context.name }}</code>
+                [private]
               {% else %}
                 <a href="{{ require.item.group }}.html#{{ require.item.context.type }}--{{ require.item.context.name }}"><code>{{ require.item.context.name }}</code></a>
               {% endif %}
