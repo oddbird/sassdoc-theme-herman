@@ -13,9 +13,8 @@
 
   {{ annotation.param_or_prop(item.parameter, item.property) }}
 
-  {{ annotation.link(item) }}
-  {{ annotation.see(item, display_private) }}
-  {{ annotation.require(item, display_private) }}
+  {{ annotation.related(item, display_private) }}
+  {{ annotation.requires(item, display_private) }}
   {{ annotation.todo(item) }}
 
   {{ annotation.examples(item.example, id) }}

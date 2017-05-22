@@ -45,8 +45,16 @@
 
 
 {# @require annotation #}
-{% macro require(item, display_private=false) -%}
-  {% if item.require.length > 0 %}
+{% macro requires(item, display_private=false) -%}
+  {% set has_count = true if (item.require|length > 0) or display_private else none %}
+
+  {% if not display_private %}
+    {% for check in item.require %}
+      {% set has_count = true if ('public' in check.item.access) else has_count %}
+    {% endfor %}
+  {% endif %}
+
+  {% if has_count %}
     <div data-item-section="require">
       <h4 class="item-subtitle">Requires</h4>
 
@@ -102,14 +110,18 @@
 {% endmacro %}
 
 
-{# @link annotation #}
-{% macro link(item) -%}
-  {% if item.link.length > 0 %}
+{# @link and @see annotations #}
+{% macro related(item, display_private=false) -%}
+  {% if (item.link.length > 0) or (item.see.length > 0) %}
     <div data-item-section="link">
-      <h4 class="item-subtitle">Links</h4>
+      <h4 class="item-subtitle">Related</h4>
 
       {% for link in item.link %}
         {{ link_item(link) }}
+      {% endfor %}
+
+      {% for see in item.see %}
+        {{ see_item(see, display_private) }}
       {% endfor %}
     </div>
   {% endif %}
@@ -132,20 +144,6 @@
     </h5>
   </div>
 {% endmacro %}
-
-
-{# @see annotation #}
-{% macro see(item, display_private=false) -%}
-  {% if item.see.length > 0 %}
-    <div data-item-section="see">
-      <h4 class="item-subtitle">See</h4>
-
-      {% for obj in item.see %}
-        {{ see_item(obj, display_private) }}
-      {% endfor %}
-    </div>
-  {% endif %}
-{%- endmacro %}
 
 
 {# @see items #}
