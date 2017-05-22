@@ -210,7 +210,7 @@ gulp.task('compile', ['sass', 'minify'], function() {
 
 gulp.task('default', ['compile', 'eslint', 'sasslint', 'test']);
 
-gulp.task('serve', ['dev', 'browser-sync']);
+gulp.task('serve', ['watch', 'browser-sync']);
 
 // Development task.
 // While working on a theme.
@@ -218,12 +218,11 @@ gulp.task('dev', [
   'prettier',
   'eslint-nofail',
   'sasslint-nofail',
-  'compile',
   'test',
   'watch'
 ]);
 
-gulp.task('watch', function() {
+gulp.task('watch', ['compile'], function() {
   gulp.watch(
     [
       paths.SRC_JS,
@@ -233,7 +232,8 @@ gulp.task('watch', function() {
       paths.SVG,
       paths.FONTS,
       paths.TEMPLATES_DIR + '_icon_template.lodash',
-      './README.md'
+      './README.md',
+      './package.json'
     ],
     ['compile']
   );
