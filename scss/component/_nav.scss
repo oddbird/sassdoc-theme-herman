@@ -3,9 +3,7 @@
 
 
 [data-nav-menu='small'] {
-  bottom: 0;
-  position: absolute;
-  top: 0;
+  @include stretch(0, null, 0, null, position);
   transform: translatex(-100%);
   transition: transform 0.4s;
   width: 100%;
@@ -31,9 +29,7 @@
 }
 
 [data-nav-menu='large'] {
-  display: flex;
   flex: 0 1 0;
-  flex-direction: column;
   margin-left: -100%;
   transition: margin-left 0.4s;
 
