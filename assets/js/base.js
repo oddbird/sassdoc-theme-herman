@@ -173,6 +173,23 @@ window.Herman = (function (Herman, $) {
     });
   };
 
+  Herman.initializeIframes = function () {
+    var fitIframeToContent = function (iframe) {
+      if (iframe.contentWindow.document.body) {
+        iframe.height = iframe.contentWindow.document.body.scrollHeight;
+      }
+    };
+    var fitIframesToContent = function () {
+      $('iframe').each(function () { fitIframeToContent(this); });
+    };
+
+    fitIframesToContent();
+    $('iframe').on('load', function () {
+      fitIframeToContent(this);
+    });
+    $(window).on('resize', fitIframesToContent);
+  };
+
   return Herman;
 
 }(window.Herman || {}, window.jQuery));

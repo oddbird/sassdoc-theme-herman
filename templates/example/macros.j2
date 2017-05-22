@@ -23,7 +23,7 @@
 {% macro render(examples_list) %}
   {% for example in examples_list %}
     {% if example.rendered and example.type != 'scss' %}
-      <iframe class="render-example" srcdoc="{{ example.iframed }}"></iframe>
+      <iframe class="render-example" srcdoc="{{ example.iframed }}" width="100%" height="0"></iframe>
     {% endif %}
   {% endfor %}
 {% endmacro %}

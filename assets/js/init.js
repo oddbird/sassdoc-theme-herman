@@ -6,6 +6,7 @@ window.Herman = (function (Herman, $) {
     window.hljs.initHighlightingOnLoad();
     Herman.initializeToggles();
     Herman.initializeTabs();
+    Herman.initializeIframes();
   });
 
   return Herman;
