@@ -1,0 +1,259 @@
+{% import 'utility.macros.j2' as utility %}
+
+
+{# @param & @prop groups #}
+{% macro param_or_prop(params_data, props_data) %}
+  {% set data = params_data or props_data %}
+
+  {% if data %}
+    {% set type = 'property' if (data == props_data) else 'parameter' %}
+    {% set header = 'Map Properties' if (data == props_data) else 'Parameters' %}
+
+    <div data-item-section="{{ type }}">
+      <h4 class="item-subtitle">{{ header }}</h4>
+
+      {% for item in data %}
+        {% set name = ['$', item.name]|join if (type == 'parameter') else item.name %}
+        {{ param(name, item) }}
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endmacro %}
+
+
+{# @param & @prop items #}
+{% macro param(name, item) %}
+  <div class="parameter">
+    <h5 class="param-title">
+      <span class="param-name">{{ name }}</span>
+      {%- if item.default %}:
+        <span class="param-default">{{ item.default }}</span>
+      {% endif %}
+
+      {% if item.type %}
+        <span class="param-type">({{ item.type }})</span>
+      {% endif %}
+    </h5>
+
+    {% if item.description %}
+      {{ item.description|safe }}
+    {% endif %}
+  </div>
+{% endmacro %}
+
+
+{# @require annotation #}
+{% macro require(item, display_private=false) -%}
+  {% if item.require.length > 0 %}
+    <div data-item-section="require">
+      <h4 class="item-subtitle">Requires</h4>
+
+      <ul>
+        {% for require in item.require %}
+          {# External links #}
+          {% if require.external %}
+            <li data-sassdoc="requires-item"><code>[external]</code>
+              {% if require.url %}
+                <a href="{{ require.url }}"><code>{{ require.name }}</code></a> {{ require.description }}</li>
+              {% else %}
+                <code>{{ require.name }}</code>
+              {% endif %}
+              {% if require.description %}
+                &mdash; {{ require.description }}
+              {% endif %}
+            </li>
+
+          {# Internal links #}
+          {% else %}
+            <li data-sassdoc="requires-item">
+              <code>[{{ require.item.context.type }}]</code>
+              {% if require.item.access == 'private' and not display_private %}
+                <code>{{ require.item.context.name }}</code>
+                [private]
+              {% else %}
+                <a href="{{ require.item.group }}.html#{{ require.item.context.type }}--{{ require.item.context.name }}"><code>{{ require.item.context.name }}</code></a>
+              {% endif %}
+              {% if require.description %}
+                &mdash; {{ require.description }}
+              {% endif %}
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+{%- endmacro %}
+
+
+{# @link annotation #}
+{% macro link(item) -%}
+  {% if item.link.length > 0 %}
+    <div data-item-section="link">
+      <h4 class="item-subtitle">Links</h4>
+      <ul>
+        {% for link in item.link %}
+          <li data-sassdoc="link-item">
+            <a href="{{ link.url }}">
+              {% if link.caption %}
+                {{ link.caption }}
+              {% else %}
+                {{ link.url }}
+              {% endif %}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+{%- endmacro %}
+
+
+{# @see annotation #}
+{% macro see(item, display_private=false) -%}
+  {% if item.see.length > 0 %}
+    <div data-item-section="see">
+      <h4 class="item-subtitle">See</h4>
+      <ul>
+        {% for see in item.see %}
+          <li data-sassdoc="see-item">
+            {% if see.access == 'private' and not display_private %}
+              {{ see.context.name }} [private]
+            {% else %}
+              <a href="{{ see.group }}.html#{{ see.context.type }}--{{ see.context.name }}">{{ see.context.name }}</a>
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+{%- endmacro %}
+
+
+{# @todo annotation #}
+{% macro todo(item) -%}
+  {% if item.todo.length > 0 %}
+    <div data-item-section="todo">
+      <h4 class="item-subtitle">Todo List</h4>
+      <ul>
+        {% for todo in item.todo %}
+          <li data-sassdoc="todo-item">
+            {{ todo|safe }}
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+{%- endmacro %}
+
+
+{# @example annotation #}
+{% macro example_code(language, code, description=false) %}
+  <div data-sassdoc-example="{{ language }}">
+    <div data-sassdoc="example-header">
+      <span data-sassdoc="example-language">
+        {{ language }}
+      </span>
+
+      {% if description %}
+        <span data-sassdoc='example-description'>
+          {{ description|striptags }}
+        </span>
+      {% endif %}
+    </div>
+    {{ utility.code_block(language=language, content=code|escape|safe) }}
+  </div>
+{% endmacro %}
+
+
+{% macro example_tabs(examples_list, group) %}
+  {% set lang_types = {
+    'njk': 'markup',
+    'html': 'markup',
+    'j2': 'markup',
+    'css': 'style',
+    'scss': 'style',
+    'sass': 'style',
+    'js': 'interaction',
+    'javascript': 'interaction'
+  } %}
+
+  <div data-sassdoc="example-tabs">
+    {% for example in examples_list %}
+      {% if not (example.description|striptags == 'compiled') %}
+        {{ utility.tab(
+          id=[group, example.type]|join('_'),
+          group=group,
+          content=lang_types[example.type],
+          active=true if loop.first else false
+          ) }}
+      {% endif %}
+    {% endfor %}
+  </div>
+{% endmacro %}
+
+
+{% macro example_panels(examples_list, group) %}
+  {% set render_types = {
+    'njk': 'html',
+    'scss': 'css',
+    'sass': 'css'
+  } %}
+
+  {% for example in examples_list %}
+    {% if not (example.description|striptags == 'compiled') %}
+      {# Get compiled language and code, if available from `rendered` or `next` #}
+      {% set rendered = example.rendered if (example.rendered and render_types[example.type]) else none %}
+      {% set rendered_type = render_types[example.type] if rendered else none %}
+      {% set next = examples_list[loop.index] %}
+      {% set next = next if (next.description|striptags == 'compiled') else none %}
+      {% set next_type = next.type if next else none %}
+      {% set next_code = next.code if next else none %}
+      {% set compiled_type = rendered_type or next_type %}
+      {% set compiled_code = rendered or next_code %}
+
+      {% call utility.tab_panel(
+        id=[group, example.type]|join('_'),
+        group=group,
+        active=true if loop.first else false
+        ) %}
+
+        {{ example_code(
+          language=example.type,
+          code=example.code,
+          description=example.description
+          ) }}
+
+        {% if compiled_code %}
+          {{ example_code(
+            language=compiled_type,
+            code=compiled_code,
+            description='compiled'
+            ) }}
+        {% endif %}
+      {% endcall %}
+    {% endif %}
+  {% endfor %}
+{% endmacro %}
+
+
+{% macro examples(examples_list, id) %}
+  {% set group = ['examples', id]|join('_') %}
+
+  {{ example_tabs(
+    examples_list=examples_list,
+    group=group
+    ) }}
+
+  {{ example_panels(
+    examples_list=examples_list,
+    group=group
+    ) }}
+
+  {% for example in examples_list %}
+    {% if example.rendered and example.type != 'scss' %}
+      <div data-sassdoc-rendered="{{ example.type }}">
+        {{ example.rendered|safe }}
+      </div>
+    {% endif %}
+  {% endfor %}
+{% endmacro %}

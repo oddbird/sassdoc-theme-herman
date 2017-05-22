@@ -1,39 +1,69 @@
 // Item Styles
 // ===========
 
-[data-sassdoc-item] {
+.item {
   border-top: 2px dotted color('border');
   margin: size('gutter') 0;
   padding: size('gutter') 0;
 }
 
-[data-sassdoc='item-type'],
-[data-sassdoc='var-type'] {
-  color: color('light');
-  font-weight: normal;
+[data-item-section] {
+  margin-bottom: size('double-gutter');
 }
 
-[data-sassdoc='item-description'] {
-  margin-bottom: size('gutter');
-}
-
-[data-sassdoc-display] {
+[data-item-section='header'] {
   margin: size('gutter') 0;
 }
 
-[data-sassdoc-table] {
+.item-title {
+  @include font-family('code');
+  color: color('text-light');
+  font-size: size('h3');
+}
+
+.item-subtitle {
+  border-bottom: 1px dotted color('light-gray');
+  color: color('text-light');
   font-size: size('small');
+  font-weight: normal;
+  letter-spacing: 0.05em;
+  margin-bottom: size('shim');
+  text-transform: uppercase;
+}
 
-  td,
-  th {
-    padding: size('half-shim') size('shim');
+.item-type,
+.var-type,
+.alias,
+.param-type,
+.param-default {
+  color: color('text-light');
+  font-weight: normal;
+}
 
-    @include below('page') {
-      padding-left: 0;
-    }
+.alias-intro {
+  font-style: italic;
+}
+
+.alias-link {
+  #{$link} {
+    @include font-family('code');
   }
+}
 
-  code {
-    white-space: nowrap;
+.parameter {
+  margin-bottom: size('shim');
+
+  p {
+    padding-left: size('gutter');
   }
+}
+
+.param-title {
+  color: color('text-light');
+  font-size: size('medium');
+}
+
+.param-name,
+.param-default {
+  @include font-family('code');
 }

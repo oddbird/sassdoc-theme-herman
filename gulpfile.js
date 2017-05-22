@@ -195,7 +195,8 @@ gulp.task('compile', ['sass', 'minify'], function() {
       }
     },
     display: {
-      access: ['public']
+      access: ['public'],
+      alias: true
     },
     // Disable cache to enable live-reloading.
     // Usefull for some template engines (e.g. Swig).

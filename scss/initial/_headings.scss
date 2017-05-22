@@ -29,15 +29,3 @@
   font-size: size('h2');
   margin-bottom: size('shim');
 }
-
-[data-sassdoc='item-title'] {
-  @include font-family('code');
-  color: color('gray');
-  font-size: size('h3');
-  margin-bottom: size('shim');
-}
-
-[data-sassdoc='item-subtitle'] {
-  color: color('gray');
-  font-size: size('medium');
-}

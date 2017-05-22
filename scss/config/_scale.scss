@@ -63,6 +63,7 @@ $text-sizes: (
 $spacing-sizes: (
   'rhythm': 'root' ('herman': 1, 'convert-units': 'rem'),
   'gutter': 'rhythm',
+  'double-gutter': 'gutter' ('linear': 2),
   'spacer': 'gutter' ('linear': 3),
   'shim': 'gutter' ('linear': 0.5),
   'half-shim': 'shim' ('linear': 0.5),

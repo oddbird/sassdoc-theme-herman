@@ -46,6 +46,6 @@
 
   @include above('page') {
     overflow: hidden;
-    padding: size('gutter');
+    padding: size('gutter') size('double-gutter');
   }
 }
