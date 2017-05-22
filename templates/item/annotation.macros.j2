@@ -14,8 +14,7 @@
       <h4 class="item-subtitle">{{ header }}</h4>
 
       {% for item in data %}
-        {% set name = ['$', item.name]|join if (type == 'parameter') else item.name %}
-        {{ param(name, item) }}
+        {{ param(name, item, type) }}
       {% endfor %}
     </div>
   {% endif %}
@@ -23,7 +22,9 @@
 
 
 {# @param & @prop items #}
-{% macro param(name, item) %}
+{% macro param(name, item, type) %}
+  {% set name = ['$', item.name]|join if (type == 'parameter') else item.name %}
+  {% set name = [name, '…']|join if (item.type|lower == 'arglist') else name %}
   <div class="parameter">
     <h5 class="param-title">
       <span class="param-name">{{ name }}</span>
