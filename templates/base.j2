@@ -36,9 +36,6 @@
         {% if package.version %}
           <span data-sassdoc="project-version">{{ package.version }}</span>
         {% endif %}
-        {% if activeProject %}
-          : <a href="{{ basePath }}{{ activeProject }}/index.html">{{ activeProject }}</a>
-        {% endif %}
       </h1>
     </header>
 
@@ -55,20 +52,9 @@
 
       <main role="main" data-sassdoc-region="main" data-sassdoc-page="{% block page_slug %}{{ activeGroup or 'index' }}{% endblock %}">
 
-        {% if package.homepage or package.repository.url %}
-          <ul data-sassdoc="project-links">
-            {% if package.homepage %}
-              <li data-sassdoc="project-link-item" class="project-link-start">
-                <a href="{{ package.homepage }}" data-sassdoc="project-link">View Project</a>
-              </li>
-            {% endif %}
-            {% if package.repository.url %}
-              <li data-sassdoc="project-link-item">
-                <a href="{{ package.repository.url }}" data-sassdoc="project-link">View Source</a>
-              </li>
-            {% endif %}
-          </ul>
-        {% endif %}
+        {# if activeProject %}
+          <a href="{{ basePath }}{{ activeProject }}/index.html">{{ activeProject }}</a>
+        {% endif #}
 
         {% block main %}{% endblock %}
       </main>
