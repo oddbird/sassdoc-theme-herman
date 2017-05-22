@@ -11,6 +11,7 @@
 /// everything else is based on these colors.
 /// @preview color-palette
 /// @group colors
+/// @type Map
 /// @prop {Color | String | List} '<color-name>' -
 ///   Each `<color-name>` key can be assigned a color
 ///   or previously-defined key,
@@ -94,10 +95,12 @@ $theme-colors: (
   'overlay': 'callout' ('rgba': 0.9),
   'shadow': 'gray' ('rgba': 0.5),
   'action': 'theme-dark',
-  'focus': 'action' ('shade': 10%),
+  'focus': 'action' ('shade': 25%),
   'active': 'action',
   'accent': 'brand-pink',
   'slight': 'light-gray' ('rgba': 0.1),
+  'code': hsl(196, 23%, 45%),
+  'code-shadow': 'code' (rgba: 0.2),
 );
 
 @include herman-add-colors('theme-colors', $theme-colors);

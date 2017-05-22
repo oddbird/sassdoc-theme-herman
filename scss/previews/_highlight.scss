@@ -5,7 +5,7 @@
 
 $hljs-colors: (
   'hljs-background': 'slight',
-  'hljs-text': #657b83,
+  'hljs-text': 'code',
   'hljs-comment': #93a1a1,
   'hljs-green': #859900,
   'hljs-cyan': #2aa198,
@@ -14,7 +14,7 @@ $hljs-colors: (
   'hljs-orange': #cb4b16,
   'hljs-red': #dc322f,
   'hljs-formula': #eee8d5,
-  'hljs-shadow': 'hljs-text' (rgba: 0.2),
+  'hljs-shadow': 'code-shadow',
 );
 
 $colors: map-merge($colors, $hljs-colors);

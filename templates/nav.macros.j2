@@ -1,0 +1,83 @@
+{% import 'utility.macros.j2' as utility %}
+
+
+{% macro toggle(size, expanded=false) %}
+  <button data-nav-toggle="{{ size }}" {{ utility.toggle_button(['nav', size]|join('-'), button='true', expanded=expanded) }}>{{ utility.icon('menu', 'menu', size='icon-small') }}</button>
+{% endmacro %}
+
+
+{% macro toggles() %}
+  {{ toggle('small') }}
+  {{ toggle('large', true) }}
+{% endmacro %}
+
+
+{% macro menu(
+  size,
+  basePath,
+  project,
+  topGroups,
+  topByGroup,
+  subprojects,
+  activeProject,
+  activeGroup,
+  expanded=false
+) %}
+  <nav role="navigation" data-nav-menu="{{ size }}" {{ utility.toggle_target(['nav', size]|join('-'), expanded=expanded)}}>
+
+    <h3 data-sassdoc="nav-title">
+      {% set activeNav = 'is-active' if activeProject == none and activeGroup == none else 'is-not-active' %}
+      <a href="{{ basePath }}index.html" data-sassdoc-nav="{{ activeNav }}">{{ project }}</a>
+    </h3>
+
+    {% for groupName, group in topByGroup %}
+      {% set activeNav = 'is-active' if activeProject == none and activeGroup == groupName else 'is-not-active' %}
+      <li data-sassdoc="nav-item">
+        <a href="{{ basePath }}{{ groupName }}.html" data-sassdoc-nav="{{ activeNav }}">{{ topGroups[groupName] }}</a>
+      </li>
+    {% endfor %}
+
+    {% for prjName, prjCtx in subprojects %}
+      <h3 data-sassdoc="nav-title">
+        {% set activeNav = 'is-active' if activeProject == prjName and activeGroup == none else 'is-not-active' %}
+        <a href="{{ basePath }}{{ prjName }}/index.html" data-sassdoc-nav="{{ activeNav }}">{{ prjName }}</a>
+      </h3>
+      {% for groupName, group in prjCtx.byGroup %}
+        {% set activeNav = 'is-active' if activeProject == prjName and activeGroup == groupName else 'is-not-active' %}
+        <li data-sassdoc="nav-item">
+          <a href="{{ basePath }}{{prjName}}/{{ groupName }}.html" data-sassdoc-nav="{{ activeNav }}">{{ prjCtx.groups[groupName] }}</a>
+        </li>
+      {% endfor %}
+    {% endfor %}
+  </nav>
+{% endmacro %}
+
+
+{% macro menus(
+  basePath,
+  project,
+  topGroups,
+  topByGroup,
+  subprojects,
+  activeProject,
+  activeGroup
+) %}
+  {% set menu_expanded = {
+    'small': false,
+    'large': true
+  } %}
+
+  {% for size, expanded in menu_expanded %}
+    {{ menu(
+      size=size,
+      basePath=basePath,
+      project=project,
+      topGroups=topGroups,
+      topByGroup=topByGroup,
+      subprojects=subprojects,
+      activeProject=activeProject,
+      activeGroup=activeGroup,
+      expanded=expanded
+    ) }}
+  {% endfor %}
+{% endmacro %}
