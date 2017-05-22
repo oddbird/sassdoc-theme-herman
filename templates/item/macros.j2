@@ -62,14 +62,22 @@ ${{ item.context.name }}: {{ item.context.value }}{% if item.context.scope != 'p
           {% set name = ['$', item.name]|join('') if (table == 'parameter') else item.name %}
           <tr data-sassdoc="{{ table }}-item">
             <td scope="row" data-label="name"><code>{{ name }}</code></td>
-            <td data-label="desc">{% if item.description %}{{ item.description|safe }}{% endif %}</td>
-            <td data-label="type">{% if item.type %}
-              <code>{{ item.type }}</code>{% endif %}</td>
-            <td data-label="default">{% if not item.default %}
+            <td data-label="desc">
+              {%- if item.description -%}
+                {{ item.description|safe }}
+              {%- endif -%}
+            </td>
+            <td data-label="type">
+              {%- if item.type -%}
+                <code>{{ item.type }}</code>
+              {%- endif -%}
+            </td>
+            <td data-label="default">
+              {%- if not item.default -%}
                 &mdash;<span class="visually-hidden"> none</span>
-              {% else %}
+              {%- else -%}
                 <code>{{ item.default }}</code>
-              {% endif %}
+              {%- endif -%}
             </td>
           </tr>
           {%- endfor %}
