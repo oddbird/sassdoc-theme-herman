@@ -12,7 +12,6 @@
 [data-sassdoc='project-version'] {
   @include font-family('sans');
   @include font-size('root');
-  color: color('light');
-  font-style: normal;
+  color: color('gray');
   font-weight: normal;
 }

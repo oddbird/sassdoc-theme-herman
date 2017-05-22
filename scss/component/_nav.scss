@@ -56,7 +56,12 @@
 
 [data-nav-toggle] {
   fill: color('theme-dark');
-  padding: size('half-shim') size('shim');
+  padding: size('half-shim');
+
+  @include above('page') {
+    padding-left: size('shim');
+    padding-right:  size('shim');
+  }
 
   #{$focus} {
     fill: color('focus');

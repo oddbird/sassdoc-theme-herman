@@ -6,13 +6,17 @@
 // -----------
 
 [data-sassdoc='project-title'] {
+  align-items: baseline;
+  display: flex;
   font-size: size('h1');
-  line-height: 1.25;
   margin-left: auto;
   margin-right: auto;
 }
 
 [data-sassdoc='project-name'] {
+  padding-left: size('half-shim');
+  padding-right: size('half-shim');
+
   &,
   #{$link} {
     color: color('theme-dark');

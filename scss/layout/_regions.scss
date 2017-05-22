@@ -42,10 +42,11 @@
 // Page
 // ----
 [data-sassdoc-region='main'] {
-  padding: size('shim');
+  padding: size('shim') size('flex-gutter');
 
   @include above('page') {
     overflow: hidden;
-    padding: size('gutter');
+    padding-bottom: size('gutter');
+    padding-top: size('gutter');
   }
 }
