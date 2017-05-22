@@ -30,10 +30,11 @@
   margin-bottom: size('shim');
 }
 
-[data-sassdoc='item-name'] {
+[data-sassdoc='item-title'] {
   @include font-family('code');
   color: color('gray');
   font-size: size('h3');
+  margin-bottom: size('shim');
 }
 
 [data-sassdoc='item-subtitle'] {

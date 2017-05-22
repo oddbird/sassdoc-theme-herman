@@ -3,7 +3,7 @@
 
 {% macro code_block(language=none, content=none) %}
   {% set content = caller() if caller else content %}
-  {% if content %}
+  {% if content and (content != '') %}
     {% set language = 'jinja' if language == 'njk' else language %}
     {% set language = ['lang', language]|join('-') if language !== none %}
     <pre data-sassdoc="hljs"><code{% if language %} class="{{ language }}"{% endif %}>{{ content }}</code></pre>
@@ -59,7 +59,7 @@ ${{ item.context.name }}: {{ item.context.value }}{% if item.context.scope != 'p
         </thead>
         <tbody>
           {%- for item in data %}
-          {% set name = ['$', item.name]|join('') if (table == 'parameter') else item.name %}
+          {% set name = ['$', item.name]|join if (table == 'parameter') else item.name %}
           <tr data-sassdoc="{{ table }}-item">
             <td scope="row" data-label="name"><code>{{ name }}</code></td>
             <td data-label="desc">
