@@ -19,17 +19,6 @@ var sourcemaps = require('gulp-sourcemaps');
 var svg = require('gulp-svg-symbols');
 var uglify = require('gulp-uglify');
 
-// Set your Sass project (the one you're generating docs for) path.
-// Relative to this Gulpfile.
-var projectPath = './';
-
-// Project path helper.
-var project = function() {
-  var args = Array.prototype.slice.call(arguments);
-  args.unshift(projectPath);
-  return path.resolve.apply(path, args);
-};
-
 // Theme and project specific paths.
 var paths = {
   DIST_DIR: 'dist/',
@@ -38,15 +27,17 @@ var paths = {
   SVG: 'assets/svg/**/*.svg',
   JS_DIR: 'assets/js/',
   FONTS: 'assets/fonts/**/*',
-  SRC_SASS_DIR: project('scss'),
-  DOCS_DIR: project('sassdoc'),
+  DOCS_DIR: 'sassdoc/',
   JS_TESTS_DIR: 'test/',
   TEMPLATES_DIR: 'templates/',
-  TEMPLATES: 'templates/**/*.j2',
   IGNORE: ['!**/.#*', '!**/flycheck_*'],
   init: function() {
+    this.TEMPLATES = [this.TEMPLATES_DIR + '**/*.j2'].concat(this.IGNORE);
     this.SASS = [this.SASS_DIR + '**/*.scss'].concat(this.IGNORE);
     this.JS = [this.JS_DIR + '**/*.js'].concat(this.IGNORE);
+    this.SRC_JS = [this.JS_DIR + '**/*.js', 'lib/**/*.js', 'index.js'].concat(
+      this.IGNORE
+    );
     this.ALL_JS = [
       this.JS_DIR + '**/*.js',
       'lib/**/*.js',
@@ -64,6 +55,14 @@ var paths = {
     return this;
   }
 }.init();
+
+// Try to ensure that all processes are killed on exit
+var spawned = [];
+process.on('exit', function() {
+  spawned.forEach(function(pcs) {
+    pcs.kill();
+  });
+});
 
 var onError = function(err) {
   gutil.log(chalk.red(err.message));
@@ -135,7 +134,7 @@ gulp.task('sasslint-nofail', function() {
 
 gulp.task('sass', function() {
   return gulp
-    .src(paths.SASS_DIR + '*.scss')
+    .src(paths.SASS)
     .pipe(sourcemaps.init())
     .pipe(sass({ outputStyle: 'compressed' }))
     .on('error', onError)
@@ -151,7 +150,7 @@ gulp.task('sass', function() {
 
 // Need to finish compile before running tests,
 // so that the processes do not conflict
-gulp.task('jstest', ['compile'], function() {
+gulp.task('test', ['compile'], function() {
   return gulp
     .src(paths.JS_TESTS_DIR + '**/*.js', { read: false })
     .pipe(mocha());
@@ -160,13 +159,21 @@ gulp.task('jstest', ['compile'], function() {
 gulp.task('browser-sync', function(cb) {
   browserSync.init(
     {
+      open: false,
       server: {
         baseDir: paths.DOCS_DIR
       },
       logLevel: 'info',
       logPrefix: 'herman',
       notify: false,
-      files: [paths.DOCS_DIR + '**/*']
+      ghostMode: false,
+      files: [paths.DOCS_DIR + '**/*'],
+      reloadDelay: 300,
+      reloadThrottle: 500,
+      // Because we're debouncing, we always want to reload the page to prevent
+      // a case where the CSS change is detected first (and injected), and
+      // subsequent JS/HTML changes are ignored.
+      injectChanges: false
     },
     cb
   );
@@ -197,50 +204,59 @@ gulp.task('compile', ['sass', 'minify'], function() {
   };
 
   return gulp
-    .src(path.join(paths.SRC_SASS_DIR, '**/*.scss'))
+    .src(path.join(paths.SASS_DIR + '**/*.scss'))
     .pipe(sassdoc(config));
 });
 
-gulp.task('default', ['compile', 'eslint', 'sasslint', 'jstest']);
+gulp.task('default', ['compile', 'eslint', 'sasslint', 'test']);
+
+gulp.task('serve', ['watch', 'browser-sync']);
 
 // Development task.
 // While working on a theme.
-gulp.task(
-  'develop',
-  [
-    'prettier',
-    'eslint-nofail',
-    'sasslint-nofail',
-    'compile',
-    'jstest',
-    'browser-sync'
-  ],
-  function() {
-    gulp.watch(
-      [paths.SASS, paths.TEMPLATES, paths.IMG, paths.SVG, paths.FONTS],
-      ['compile']
-    );
+gulp.task('dev', [
+  'prettier',
+  'eslint-nofail',
+  'sasslint-nofail',
+  'test',
+  'watch'
+]);
 
-    gulp.watch([paths.JS, paths.JS_TESTS_FILES], ['jstest']);
+gulp.task('watch', ['compile'], function() {
+  gulp.watch(
+    [
+      paths.SRC_JS,
+      paths.SASS,
+      paths.TEMPLATES,
+      paths.IMG,
+      paths.SVG,
+      paths.FONTS,
+      paths.TEMPLATES_DIR + '_icon_template.lodash',
+      './README.md',
+      './package.json'
+    ],
+    ['compile']
+  );
 
-    gulp.watch(paths.SASS, function(ev) {
-      if (ev.type === 'added' || ev.type === 'changed') {
-        sasslintTask(ev.path, false, true);
-      }
-    });
+  gulp.watch([paths.JS, paths.JS_TESTS_FILES], ['test']);
 
-    gulp.watch(paths.ALL_JS, { debounceDelay: 1000 }, function(ev) {
-      if (ev.type === 'added' || ev.type === 'changed') {
-        prettierTask(ev.path, true).on('end', function() {
-          eslintTask(ev.path, false, true);
-        });
-      }
-    });
+  gulp.watch(paths.SASS, function(ev) {
+    if (ev.type === 'added' || ev.type === 'changed') {
+      sasslintTask(ev.path, false, true);
+    }
+  });
 
-    gulp.watch('**/.sass-lint.yml', ['sasslint-nofail']);
-    gulp.watch('**/.eslintrc.yml', ['eslint-nofail']);
-  }
-);
+  gulp.watch(paths.ALL_JS, { debounceDelay: 1000 }, function(ev) {
+    if (ev.type === 'added' || ev.type === 'changed') {
+      prettierTask(ev.path, true).on('end', function() {
+        eslintTask(ev.path, false, true);
+      });
+    }
+  });
+
+  gulp.watch('**/.sass-lint.yml', ['sasslint-nofail']);
+  gulp.watch('**/.eslintrc.yml', ['eslint-nofail']);
+});
 
 gulp.task('copy-fonts', function() {
   var dest = paths.DIST_DIR + 'fonts/';
