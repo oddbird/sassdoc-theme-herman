@@ -17,7 +17,6 @@
 
 {% macro link_if(content=none, url=none, attrs={}) -%}
   {%- set content = caller() if caller else content -%}
-
   {%- if url -%}
     <a href="{{ url }}" {{ show_attrs(attrs) }}>{{ content }}</a>
   {%- else -%}
