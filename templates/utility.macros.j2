@@ -17,13 +17,23 @@
 
 {% macro link_if(content=none, url=none, attrs={}) -%}
   {%- set content = caller() if caller else content -%}
-
   {%- if url -%}
     <a href="{{ url }}" {{ show_attrs(attrs) }}>{{ content }}</a>
   {%- else -%}
     <span {{ show_attrs(attrs) }}>{{ content }}</span>
   {%- endif -%}
 {%- endmacro %}
+
+
+{# SVG Icon #}
+{% macro icon(name, alt=none, size=none, class=none) %}
+  <svg data-icon="{{ name }}" {{ attr_if('data-icon-size', size) }} {{ attr_if('class', class) }}>
+    {%- if alt -%}
+      <title>{{ alt }}</title>
+    {%- endif -%}
+    <use xlink:href="#icon-{{ name }}" />
+  </svg>
+{% endmacro %}
 
 
 {# Toggle collapsible elements (see `static/js/app/base.js`) #}

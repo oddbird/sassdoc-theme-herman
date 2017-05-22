@@ -2,63 +2,42 @@
 // ========
 
 
-// H1
-// --
-/// Styles for a top level heading.
-/// @group headings
-/// @access private
-@mixin h1 {
-  @include font-size('h1');
-}
-
-
-// H2
-// --
-/// Styles for a second level heading.
-/// @group headings
-/// @access private
-@mixin h2 {
-  @include font-size('h2');
-  margin-bottom: size('shim');
-}
-
-
-// H3
-// --
-/// Styles for a third level heading.
-/// @group headings
-/// @access private
-@mixin h3 {
-  @include font-size('h3');
-}
-
-
 // Application
 // -----------
 
 [data-sassdoc='project-title'] {
-  @include h1;
-  color: color('theme-dark');
+  font-size: size('h1');
+  line-height: 1.25;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+[data-sassdoc='project-name'] {
+  &,
+  #{$link} {
+    color: color('theme-dark');
+  }
+
+  #{$focus} {
+    color: color('focus');
+    text-decoration: none;
+  }
 }
 
 [data-sassdoc='page-title'] {
-  @include h2;
   color: color('black');
+  font-size: size('h2');
+  margin-bottom: size('shim');
 }
 
-[data-sassdoc='item-name'] {
-  @include h3;
+[data-sassdoc='item-title'] {
   @include font-family('code');
   color: color('gray');
+  font-size: size('h3');
+  margin-bottom: size('shim');
 }
 
 [data-sassdoc='item-subtitle'] {
   color: color('gray');
   font-size: size('medium');
-}
-
-[data-sassdoc='nav-title'] {
-  font-style: normal;
-  font-weight: normal;
-  margin: size('half-shim') 0 size('gutter');
 }

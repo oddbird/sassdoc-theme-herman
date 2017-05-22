@@ -10,30 +10,33 @@
 // App
 // ---
 [data-sassdoc-region='app'] {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   margin: 0 auto;
+  min-height: 100vh;
   padding: 0;
 }
 
 [data-sassdoc-region='container'] {
   @include clearfix;
   display: flex;
+  flex: 1 1 auto;
+  position: relative;
+
+  @include above('page') {
+    justify-content: flex-end;
+  }
 }
 
 // Navigation
 // ----------
-[data-sassdoc-region='nav'] {
+[data-nav-menu] {
   @include contrasted('theme-dark');
-  display: flex;
-  flex-direction: column;
   margin: 0;
   padding: size('gutter');
-
-  @include above('page') {
-    flex: 1 0 auto;
-    max-width: 15vw;
-  }
+  white-space: nowrap;
 }
-
 
 
 // Page
