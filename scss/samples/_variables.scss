@@ -1,0 +1,40 @@
+// Sample Variable Documentation
+// =============================
+
+
+// Private
+// -------
+/// Private variables will display unless you set `access: ['public']`
+/// in your [SassDoc config](http://sassdoc.com/configuration/).
+/// @group samples
+/// @access private
+/// @type *
+$private: 'for internal use only';
+
+
+// Basic Value
+// -----------
+/// The basics for documenting your average non-map variable.
+/// @group samples
+/// @type *
+/// @requires $private
+$basic-value: if(not 'social', $private, 'hello world');
+
+
+// Map Value
+// ---------
+/// The basics for documenting your average non-map variable.
+/// @group samples
+/// @type map
+/// @requires $private -
+///   We can also override the link <http://oddbird.net>
+/// @requires $basic-value -
+///   We can require other variables, and explain why
+/// @property {string} 'morning' [$basic-value] -
+///   What to say in the morning when you get up
+/// @property {string} 'evening' [$private] -
+///   What to say in the evening before bed
+$map-value: (
+  'morning': $basic-value,
+  'evening': $private,
+);

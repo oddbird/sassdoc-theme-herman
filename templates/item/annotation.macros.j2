@@ -46,15 +46,7 @@
 
 {# @require annotation #}
 {% macro requires(item, display_private=false) -%}
-  {% set has_count = true if (item.require|length > 0) or display_private else none %}
-
-  {% if not display_private %}
-    {% for check in item.require %}
-      {% set has_count = true if ('public' in check.item.access) else has_count %}
-    {% endfor %}
-  {% endif %}
-
-  {% if has_count %}
+  {% if (item.require|length > 0) %}
     <div data-item-section="require">
       <h4 class="item-subtitle">Requires</h4>
 
@@ -63,11 +55,10 @@
         {% set name = req.name if req.name else req.item.context.name %}
         {% set type = req.type if req.type else (req.item.context.type or none) %}
         {% set check = [name|string(), type|string()]|join('') %}
-        {% set display = display_private or ('public' in req.item.access) %}
 
-        {% if display and not (prev == check) %}
+        {% if not (prev == check) %}
           {% set prev = check %}
-          {{ require_item(req) }}
+          {{ require_item(req, display_private) }}
         {% endif %}
       {% endfor %}
     </div>
@@ -76,14 +67,13 @@
 
 
 {# @require items #}
-{% macro require_item(req) %}
+{% macro require_item(req, display_private=false) %}
   <div class="parameter">
-    {% set require_name = req.name if req.name else req.item.context.name %}
-    {% set require_type = req.type if req.type else (req.item.context.type or none) %}
-    {% set require_url = req.url if req.url else show.get_link(require_name, req.item.context.type, req.item.group) %}
-    {% set require_name = show.format_name(require_name, require_type) %}
-    {% set require_type = show.format_type(require_type) %}
-    {% set require_desc = require.description %}
+    {% set require_name = show.format_name(req.name, req.type) %}
+    {% set require_type = show.format_type(req.type) %}
+    {% set is_hidden = true if (req.item.access == 'private' and not display_private) else false %}
+    {% set require_url = none if is_hidden else show.get_link(req.name, req.type, req.item.group) %}
+    {% set require_url = req.url if req.url else require_url %}
 
     <h5 class="param-title">
       {% if require_type %}
@@ -96,15 +86,19 @@
         attrs={'class': 'param-name'}
         ) }}
 
-      {% if require.external %}
+      {% if req.item.type %}
+        <span class="param-type">({{ req.item.type }})</span>
+      {% endif %}
+
+      {% if req.external %}
         <span class="param-type">[external]</span>
-      {% elif (require.item.access == 'private') %}
+      {% elif (req.item.access == 'private') %}
         <span class="param-type">[private]</span>
       {% endif %}
     </h5>
 
-    {% if require.description %}
-      <p>{{ require.description|safe }}</p>
+    {% if req.description %}
+      <p>{{ req.description|safe }}</p>
     {% endif %}
   </div>
 {% endmacro %}
