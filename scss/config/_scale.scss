@@ -42,7 +42,7 @@ $text-sizes: (
   'smaller': 16px ('convert-units': 'rem'),
 
   'h1': calc(%s + %s) ('small', 2.5vw),
-  'h2': calc(%s + %s) ('medium', 2vw),
+  'h2': calc(%s + %s) ('small', 2vw),
   'h3': calc(%s + %s) ('small', 1.5vw),
 );
 
@@ -63,6 +63,7 @@ $text-sizes: (
 $spacing-sizes: (
   'rhythm': 'root' ('herman': 1, 'convert-units': 'rem'),
   'gutter': 'rhythm',
+  'flex-gutter': calc(%s + %s) ('shim', 2.5vw),
   'double-gutter': 'gutter' ('linear': 2),
   'spacer': 'gutter' ('linear': 3),
   'shim': 'gutter' ('linear': 0.5),
@@ -95,7 +96,7 @@ $pattern-sizes: (
   'project-link-nav': 36rem,
   'specimen': 'rhythm' ('linear': 3),
   'color-swatch': 'rhythm' ('linear': 4),
-  'icon': 32px,
+  'icon': 28px,
   'nav-underline': 4px,
 );
 

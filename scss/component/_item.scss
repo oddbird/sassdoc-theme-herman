@@ -1,12 +1,6 @@
 // Item Styles
 // ===========
 
-.item {
-  @include pad-main;
-  padding-bottom: size('gutter');
-  padding-top: size('gutter');
-}
-
 [data-item-section] {
   margin-bottom: size('double-gutter');
 }

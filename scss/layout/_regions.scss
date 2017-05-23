@@ -33,6 +33,7 @@
 // ----------
 [data-nav-menu] {
   @include contrasted('theme-dark');
+  @include z-index('sidebar');
   margin: 0;
   padding: size('gutter');
   white-space: nowrap;
@@ -42,7 +43,13 @@
 // Page
 // ----
 [data-sassdoc-region='main'] {
+  @include z-index('main');
+  padding: size('gutter') size('flex-gutter');
+  position: relative;
+
   @include above('page') {
     overflow: hidden;
+    padding-bottom: size('double-gutter');
+    padding-top: size('double-gutter');
   }
 }
