@@ -17,27 +17,23 @@
 {% macro param_list(name, url=none, item_type=none, value=none, value_type=none, note=none, description=none) %}
   <div class="param-list">
     <h5 class="param-title">
-      {%- if item_type -%}
+      {% if item_type and (item_type != '') -%}
         <span class="item-type">{{ item_type }}</span>
-      {%- endif -%}
-
+      {%- endif %}
       {{ utility.link_if(
         content=name,
         url=url,
         attrs={'class': 'item-name'}
         ) }}
-
-      {%- if value -%}
+      {% if value -%}
         <span class="item-value">{{ value }}</span>
-      {%- endif -%}
-
-      {%- if value_type -%}
+      {%- endif %}
+      {% if value_type -%}
         <span class="value-type">({{ value_type }})</span>
-      {%- endif -%}
-
-      {%- if note -%}
+      {%- endif %}
+      {% if note -%}
         <span class="item-note">[{{ note }}]</span>
-      {%- endif -%}
+      {%- endif %}
     </h5>
 
     {% if description %}
@@ -86,13 +82,14 @@
   {% if (item.require|length > 0) %}
     {% call item_section('requires') %}
       {% set prev = '' %}
+
       {% for req in item.require %}
         {% set name = req.name if req.name else req.item.context.name %}
         {% set type = req.type if req.type else (req.item.context.type or none) %}
         {% set check = [name|string(), type|string()]|join('') %}
 
-        {% if not (prev == check) %}
-          {% set prev = check %}
+        {% if not (check in prev) %}
+          {% set prev = [prev, ', ', check]|join if (prev != '') else check %}
           {{ require_item(req, display_private) }}
         {% endif %}
       {% endfor %}
