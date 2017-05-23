@@ -14,7 +14,7 @@
       <a href="#{{ id }}" class="item-name">{{ item_name }}</a>
 
       {% if item.type %}
-        <span class="var-type">({{ item.type }})</span>
+        <span class="value-type">({{ item.type }})</span>
       {% endif %}
     </h3>
 
@@ -36,8 +36,7 @@
     <p class="alias">
       {{ alias_intro }}
 
-      {# the only list-check that worked for me #}
-      {% if (',' in items|string()) %}
+      {% if (items.length > 1) %}
         {% for item in items %}
           {{ alias_link(
             item=item,

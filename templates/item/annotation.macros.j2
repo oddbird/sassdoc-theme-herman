@@ -2,6 +2,54 @@
 {% import 'item/macros.j2' as show %}
 
 
+{# Section template #}
+{% macro item_section(slug, title=none) %}
+  {% set title = title if title else slug %}
+
+  <div data-item-section="{{ slug }}">
+    <h4 class="item-subtitle">{{ title }}</h4>
+    {{ caller() }}
+  </div>
+{% endmacro %}
+
+
+{# Parameter list template #}
+{% macro param_list(name, url=none, item_type=none, value=none, value_type=none, note=none, description=none) %}
+  <div class="param-list">
+    <h5 class="param-title">
+      {%- if item_type -%}
+        <span class="item-type">{{ item_type }}</span>
+      {%- endif -%}
+
+      {{ utility.link_if(
+        content=name,
+        url=url,
+        attrs={'class': 'item-name'}
+        ) }}
+
+      {%- if value -%}
+        <span class="item-value">{{ value }}</span>
+      {%- endif -%}
+
+      {%- if value_type -%}
+        <span class="value-type">({{ value_type }})</span>
+      {%- endif -%}
+
+      {%- if note -%}
+        <span class="item-note">[{{ note }}]</span>
+      {%- endif -%}
+    </h5>
+
+    {% if description %}
+      {% set description = ['<p>', description, '</p>']|join if not ('</' in description) else description %}
+      <div class="param-details">
+        {{ description|safe }}
+      </div>
+    {% endif %}
+  </div>
+{% endmacro %}
+
+
 {# @param & @prop groups #}
 {% macro param_or_prop(params_data, props_data) %}
   {% set data = params_data or props_data %}
@@ -10,46 +58,33 @@
     {% set type = 'property' if (data == props_data) else 'parameter' %}
     {% set header = 'Map Properties' if (data == props_data) else 'Parameters' %}
 
-    <div data-item-section="{{ type }}">
-      <h4 class="item-subtitle">{{ header }}</h4>
-
+    {% call item_section(type, header) %}
       {% for item in data %}
         {{ param(name, item, type) }}
       {% endfor %}
-    </div>
+    {% endcall %}
   {% endif %}
 {% endmacro %}
 
 
 {# @param & @prop items #}
 {% macro param(name, item, type) %}
-  {% set name = ['$', item.name]|join if (type == 'parameter') else item.name %}
+  {% set name = ['$', item.name, ':']|join if (type == 'parameter') else item.name %}
   {% set name = [name, '…']|join if (item.type|lower == 'arglist') else name %}
-  <div class="parameter">
-    <h5 class="param-title">
-      <span class="param-name">{{ name }}</span>
-      {%- if item.default %}:
-        <span class="param-default">{{ item.default }}</span>
-      {% endif %}
 
-      {% if item.type %}
-        <span class="param-type">({{ item.type }})</span>
-      {% endif %}
-    </h5>
-
-    {% if item.description %}
-      {{ item.description|safe }}
-    {% endif %}
-  </div>
+  {{ param_list(
+    name=name,
+    value=item.default,
+    value_type=item.type,
+    description=item.description
+    ) }}
 {% endmacro %}
 
 
 {# @require annotation #}
 {% macro requires(item, display_private=false) -%}
   {% if (item.require|length > 0) %}
-    <div data-item-section="require">
-      <h4 class="item-subtitle">Requires</h4>
-
+    {% call item_section('requires') %}
       {% set prev = '' %}
       {% for req in item.require %}
         {% set name = req.name if req.name else req.item.context.name %}
@@ -61,55 +96,38 @@
           {{ require_item(req, display_private) }}
         {% endif %}
       {% endfor %}
-    </div>
+    {% endcall %}
   {% endif %}
 {%- endmacro %}
 
 
 {# @require items #}
 {% macro require_item(req, display_private=false) %}
-  <div class="parameter">
-    {% set require_name = show.format_name(req.name, req.type) %}
-    {% set require_type = show.format_type(req.type) %}
-    {% set is_hidden = true if (req.item.access == 'private' and not display_private) else false %}
-    {% set require_url = none if is_hidden else show.get_link(req.name, req.type, req.item.group) %}
-    {% set require_url = req.url if req.url else require_url %}
+  {% set require_name = show.format_name(req.name, req.type) %}
+  {% set require_type = show.format_type(req.type) %}
+  {% set is_hidden = true if (req.item.access == 'private' and not display_private) else false %}
+  {% set require_url = none if is_hidden else show.get_link(req.name, req.type, req.item.group) %}
+  {% set require_url = req.url if req.url else require_url %}
+  {% set value_type = req.item.type if (req.type == 'variable') else none %}
+  {% set note = 'private' if (req.item.access == 'private') else none %}
+  {% set note = 'external' if req.external else note %}
 
-    <h5 class="param-title">
-      {% if require_type %}
-        <span class="param-default">{{ require_type }}</span>
-      {% endif %}
-
-      {{ utility.link_if(
-        content=require_name,
-        url=require_url,
-        attrs={'class': 'param-name'}
-        ) }}
-
-      {% if req.item.type %}
-        <span class="param-type">({{ req.item.type }})</span>
-      {% endif %}
-
-      {% if req.external %}
-        <span class="param-type">[external]</span>
-      {% elif (req.item.access == 'private') %}
-        <span class="param-type">[private]</span>
-      {% endif %}
-    </h5>
-
-    {% if req.description %}
-      <p>{{ req.description|safe }}</p>
-    {% endif %}
-  </div>
+  {{ param_list(
+    name=require_name,
+    url=require_url,
+    item_type=require_type,
+    value_type=value_type,
+    note=note,
+    description=req.description
+    ) }}
 {% endmacro %}
 
 
 {# @link and @see annotations #}
 {% macro related(item, display_private=false) -%}
   {% if (item.link.length > 0) or (item.see.length > 0) %}
-    <div data-item-section="link">
-      <h4 class="item-subtitle">Related</h4>
 
+    {% call item_section('related') %}
       {% for link in item.link %}
         {{ link_item(link) }}
       {% endfor %}
@@ -117,67 +135,46 @@
       {% for see in item.see %}
         {{ see_item(see, display_private) }}
       {% endfor %}
-    </div>
+    {% endcall %}
   {% endif %}
 {%- endmacro %}
 
 
 {# @link items #}
 {% macro link_item(link) %}
-  <div class="parameter">
-    <h5 class="param-title">
-      {{ utility.link_if(
-        content=link.caption or link.url,
-        url=link.url,
-        attrs={'class': 'param-name'}
-        ) }}
+  {% set note = 'external' if ('://' in link.url) else none %}
 
-      {% if '://' in link.url %}
-        <span class="param-type">[external]</span>
-      {% endif %}
-    </h5>
-  </div>
+  {{ param_list(
+    name=link.caption or link.url,
+    url=link.url,
+    note=note
+    ) }}
 {% endmacro %}
 
 
 {# @see items #}
 {% macro see_item(item, display_private=false) %}
   {% set private = (item.access == 'private') and (not display_private) %}
-  {% set url = show.get_link(item.context.name, item.context.type, item.group) %}
-  {% set text = show.format_name(item.context.name, item.context.type) %}
+  {% set url = show.get_link(item.context.name, item.context.type, item.group) if not private else none %}
+  {% set name = show.format_name(item.context.name, item.context.type) %}
   {% set type = show.format_type(item.context.type) %}
+  {% set note = 'private' if private else none %}
 
-  <div class="parameter">
-    {% if type and (type != '') %}
-      <span class="param-default">
-        {{ type }}
-      </span>
-    {% endif %}
-
-    <h5 class="param-title">
-      {{ utility.link_if(
-        content=text,
-        url=url,
-        attrs={'class': 'param-name'}
-        ) }}
-
-      {% if private %}
-        <span class="param-type">[private]</span>
-      {% endif %}
-    </h5>
-
-    {% if item.context.description %}
-      {{ item.context.description }}
-    {% endif %}
-  </div>
+  {{ param_list(
+    name=name,
+    url=url,
+    item_type=type,
+    value_type=value_type,
+    note=note,
+    description=item.context.description
+    ) }}
 {% endmacro %}
 
 
 {# @todo annotation #}
-{% macro todo(item) -%}
-  {% if item.todo.length > 0 %}
-    <div data-item-section="todo">
-      <h4 class="item-subtitle">Todo List</h4>
+{% macro todo(item) %}
+  {% if (item.todo.length > 0) %}
+    {% call item_section('todo', 'Todo List') %}
       <ul>
         {% for todo in item.todo %}
           <li data-sassdoc="todo-item">
@@ -185,9 +182,9 @@
           </li>
         {% endfor %}
       </ul>
-    </div>
+    {% endcall %}
   {% endif %}
-{%- endmacro %}
+{% endmacro %}
 
 
 {# @example annotation #}

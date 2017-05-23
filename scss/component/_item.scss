@@ -16,8 +16,6 @@
 }
 
 .item-title {
-  @include font-family('code');
-  color: color('text-light');
   font-size: size('h3');
 }
 
@@ -32,41 +30,41 @@
 }
 
 .item-type,
-.var-type,
-.alias,
-.param-type,
-.param-default {
+.item-name,
+.item-value,
+.alias-title {
+  @include font-family('code');
+  display: inline-block;
+}
+
+.item-type,
+.item-value,
+.value-type,
+.item-note {
   color: color('text-light');
+  display: inline-block;
   font-weight: normal;
 }
 
 .alias {
+  color: color('text-light');
   font-style: italic;
 }
 
 .alias-title {
-  &,
-  #{$link} {
-    @include font-family('code');
-    font-style: normal;
-    font-weight: bold;
-  }
+  font-style: normal;
+  font-weight: bold;
 }
 
-.parameter {
+.param-list {
   margin-bottom: size('shim');
 }
 
 .param-title {
   color: color('text-light');
   font-size: size('medium');
-
-  ~ * {
-    margin-left: size('gutter');
-  }
 }
 
-.param-name,
-.param-default {
-  @include font-family('code');
+.param-details {
+  margin-left: size('gutter');
 }
