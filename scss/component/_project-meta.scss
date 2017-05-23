@@ -2,7 +2,7 @@
 // ===================
 
 
-[data-sassdoc='project-links'] {
+.project-links {
   display: flex;
   justify-content: flex-end;
   margin-left: 0;
@@ -13,7 +13,7 @@
   }
 }
 
-[data-sassdoc='project-link-item'] {
+.project-link-item {
   display: flex;
   list-style: none;
 
@@ -28,7 +28,7 @@
   }
 }
 
-[data-sassdoc='project-link'] {
+.project-link {
   border: 1px solid color('theme-dark');
   border-radius: size('gutter');
   font-size: size('smaller');

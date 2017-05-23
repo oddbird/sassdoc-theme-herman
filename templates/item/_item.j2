@@ -1,46 +1,23 @@
-{% import 'item/macros.j2' as code %}
+{% import 'item/macros.j2' as show %}
+{% import 'item/annotation.macros.j2' as annotation %}
 {% import 'item/preview.macros.j2' as preview %}
 
 {% set slug = item.context.name|urlencode|replace("'", '') %}
 {% set id = [type, slug]|join('--') %}
+{% set display_private = display and display.access and ('private' in display.access) %}
 
-<section data-sassdoc-item='{{ type }}' id="{{ id }}">
-  {% set item_name = [item.context.name, '()']|join if (type == 'mixin' or type == 'function') else item.context.name %}
-  {% set item_name = ['$', item_name]|join if (type == 'variable') else item_name %}
-  {% set display_type = ['@', type]|join if ((type == 'mixin') or (type == 'function')) else type %}
-  {% set display_private = display and display.access and 'private' in display.access %}
+<section class="item" id="{{ id }}">
+  {{ show.heading(item, type, id, display) }}
+  {{ show.source(item, type) }}
+  {{ show.summary(item.description) }}
 
-  <h3 data-sassdoc="item-title">
-    {% if not ((type == 'variable') or (type == 'css')) %}
-      <span data-sassdoc="item-type">{{ display_type }}</span>
-    {% endif %}
+  {{ annotation.param_or_prop(item.parameter, item.property) }}
 
-    <span data-sassdoc="item-name">{{ item_name }}</span>
+  {{ annotation.related(item, display_private) }}
+  {{ annotation.requires(item, display_private) }}
+  {{ annotation.todo(item) }}
 
-    {% if item.type %}
-      <span data-sassdoc="var-type">({{ item.type }})</span>
-    {% endif %}
-  </h3>
-
-  {% if item.description %}
-    <div data-sassdoc="item-description">
-      {{ item.description|safe }}
-    </div>
-  {% endif %}
-
-  {% if not item.parameter %}
-    {{ code.source(item, type) }}
-  {% endif %}
-
-  {{ code.property(item) }}
-  {{ code.parameter(item) }}
-
-  {{ code.link(item) }}
-  {{ code.see(item, display_private) }}
-  {{ code.require(item, display_private) }}
-  {{ code.todo(item) }}
-
-  {{ code.examples(item.example, id) }}
+  {{ annotation.examples(item.example, id) }}
 
   {{ preview.icons(item.icons) }}
   {{ preview.show_previews(

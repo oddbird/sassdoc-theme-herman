@@ -93,7 +93,7 @@
   // add a top separator to all but the first nav-title
   &:nth-of-type(n+2) {
     border-top: 1px solid color('theme-light');
-    margin-top: size('shim');
+    margin-top: size('gutter');
     padding-top: size('gutter');
   }
 }

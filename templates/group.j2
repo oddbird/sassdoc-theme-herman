@@ -1,8 +1,6 @@
 {% extends 'base.j2' %}
 
 {% block main %}
-  <h2 data-sassdoc="page-title">{{ pageTitle }}</h2>
-
   {% for item in items %}
     {% set type = item.context.type %}
     {% include 'item/_item.j2' %}

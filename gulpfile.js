@@ -197,6 +197,11 @@ gulp.task('compile', ['sass', 'minify'], function() {
     display: {
       access: ['public']
     },
+    groups: {
+      config: 'configuration',
+      'sass-utilities': 'Sass API utilities',
+      utilities: 'internal utilities'
+    },
     // Disable cache to enable live-reloading.
     // Usefull for some template engines (e.g. Swig).
     cache: false

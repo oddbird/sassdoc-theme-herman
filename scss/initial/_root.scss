@@ -38,12 +38,14 @@ code {
   border-radius: 3px;
   box-shadow: 0 0 size('half-shim') color('code-shadow') inset;
   color: color('code');
+  display: inline-block;
   padding: 0 size('half-shim');
 
   pre & {
     background-color: transparent;
     border-radius: 0;
     box-shadow: none;
+    display: block;
     padding: 0;
   }
 }
