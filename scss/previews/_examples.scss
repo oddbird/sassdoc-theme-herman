@@ -39,6 +39,7 @@
   display: flex;
   flex-wrap: wrap;
   margin-bottom: size('gutter');
+  overflow: hidden;
 
   [data-sassdoc='hljs'] {
     margin-bottom: 0; // override the hljs margin needed for non-nested blocks

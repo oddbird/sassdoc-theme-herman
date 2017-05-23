@@ -4,7 +4,8 @@
 
 [data-nav-menu='small'] {
   @include stretch(0, null, 0, null, absolute);
-  transform: translatex(-100%);
+  box-shadow: 0 0 size('half-shim') color('shadow');
+  transform: translatex(-102%);
   transition: transform 0.4s;
   width: 100%;
 

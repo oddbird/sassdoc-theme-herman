@@ -2,6 +2,7 @@
 // ===================
 // Orginal Style from ethanschoonover.com/solarized
 // (c) Jeremy Hull <sourdrums@gmail.com>
+// sass-lint:disable force-element-nesting, class-name-format
 
 $hljs-colors: (
   'hljs-background': 'slight',
@@ -20,28 +21,40 @@ $hljs-colors: (
 $colors: map-merge($colors, $hljs-colors);
 
 
-/// Style sassdoc code-blocks
-/// @group code-blocks
-/// @example njk
-///   {% import 'utility.macros.j2' as utility %}
-///   {% call utility.code_block(language='scss') -%}
-///   .sample-code {
-///     color: red;
-///   }
-///   {%- endcall %}
-@mixin code-block {
-  background-color: color('hljs-background');
-  box-shadow: 0 0 size('half-shim') color('hljs-shadow') inset;
-  color: color('hljs-text');
-  display: block;
-  margin-bottom: size('gutter');
-  overflow-x: auto;
-  padding: size('shim');
+@function hljs-gradient(
+  $direction,
+  $small: false
+) {
+  $color: color('hljs-background');
+  $dir: unquote($direction);
+  $first: if($small, size('quarter-shim'), size('half-shim'));
+  $second: if($small, size('shim'), size('gutter') + size('shim'));
+
+  @return linear-gradient($dir, $color $first, transparent $second);
 }
+
 
 [data-sassdoc='hljs'],
 [data-sassdoc-page='index'] pre {
-  @include code-block;
+  align-items: stretch;
+  background-color: color('hljs-background');
+  color: color('hljs-text');
+  display: flex;
+  margin-bottom: size('gutter');
+  position: relative;
+
+  code {
+    flex: 0 0 100%;
+    overflow-x: auto;
+    padding: size('shim');
+  }
+
+  @include before(' ') {
+    @include stretch(0, 0, 0, 0);
+    background: hljs-gradient('to top', 'small'), hljs-gradient('to left') no-repeat scroll;
+    box-shadow: 0 0 size('half-shim') color('hljs-shadow') inset;
+    pointer-events: none;
+  }
 }
 
 .hljs-comment,
