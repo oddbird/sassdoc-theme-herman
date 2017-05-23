@@ -18,7 +18,7 @@ table {
 }
 
 thead {
-  color: color('gray');
+  color: color('text-light');
   font-weight: bold;
 
   @include below(35em) {
@@ -58,7 +58,7 @@ tr {
 th {
   border-bottom: 2px solid color('light-gray');
   border-top: 0;
-  color: color('gray');
+  color: color('text-light');
   text-align: left;
 }
 
@@ -81,7 +81,7 @@ td {
 
     &::before {
       @include font-size('root');
-      color: color('gray');
+      color: color('text-light');
       content: attr(data-label) ': ';
       font-weight: bold;
       text-transform: capitalize;
