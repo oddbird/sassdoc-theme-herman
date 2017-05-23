@@ -2,9 +2,9 @@
 // ===========
 
 .item {
-  border-top: 2px dotted color('border');
-  margin: size('shim') 0;
-  padding: size('gutter') 0;
+  @include pad-main;
+  padding-bottom: size('gutter');
+  padding-top: size('gutter');
 }
 
 [data-item-section] {
@@ -20,7 +20,7 @@
 }
 
 .item-subtitle {
-  border-bottom: 1px dotted color('light-gray');
+  border-bottom: 1px solid color('light-border');
   color: color('text-light');
   font-size: size('small');
   font-weight: normal;

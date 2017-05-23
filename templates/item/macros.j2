@@ -6,7 +6,7 @@
   {% set display_type = format_type(type) %}
 
   <header data-item-section="header">
-    <h3 class="item-title">
+    <h2 class="item-title">
       {% if display_type %}
         <span class="item-type">{{ display_type }}</span>
       {% endif %}
@@ -16,7 +16,7 @@
       {% if item.type %}
         <span class="value-type">({{ item.type }})</span>
       {% endif %}
-    </h3>
+    </h2>
 
     {{ alias(
       is_alias=item.alias,
@@ -106,7 +106,7 @@
 {% macro summary(content) %}
   {% if content %}
     <div data-item-section="summary">
-      <h4 class="item-subtitle">Description</h4>
+      <h3 class="item-subtitle">Description</h3>
       {{ content|safe }}
     </div>
   {% endif %}

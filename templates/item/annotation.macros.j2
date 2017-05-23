@@ -7,7 +7,7 @@
   {% set title = title if title else slug %}
 
   <div data-item-section="{{ slug }}">
-    <h4 class="item-subtitle">{{ title }}</h4>
+    <h3 class="item-subtitle">{{ title }}</h3>
     {{ caller() }}
   </div>
 {% endmacro %}
@@ -16,7 +16,7 @@
 {# Parameter list template #}
 {% macro param_list(name, url=none, item_type=none, value=none, value_type=none, note=none, description=none) %}
   <div class="param-list">
-    <h5 class="param-title">
+    <h4 class="param-title">
       {% if item_type and (item_type != '') -%}
         <span class="item-type">{{ item_type }}</span>
       {%- endif %}
@@ -34,7 +34,7 @@
       {% if note -%}
         <span class="item-note">[{{ note }}]</span>
       {%- endif %}
-    </h5>
+    </h4>
 
     {% if description %}
       {% set description = ['<p>', description, '</p>']|join if not ('</' in description) else description %}

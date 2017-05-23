@@ -1,0 +1,18 @@
+// Layout Helpers
+// ==============
+
+
+// Pad Main
+// --------
+/// Add incremental horizontal padding to main content areas
+@mixin pad-main {
+  padding: size('gutter') size('shim');
+
+  @include above('nav-medium') {
+    padding: size('gutter');
+  }
+
+  @include above('page') {
+    padding: size('double-gutter');
+  }
+}

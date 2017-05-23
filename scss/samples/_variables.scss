@@ -23,7 +23,7 @@ $basic-value: if(not 'social', $private, 'hello world');
 
 // Map Value
 // ---------
-/// The basics for documenting your average non-map variable.
+/// You can add properties when documenting map variables.
 /// @group samples
 /// @type map
 /// @requires $basic-value -
