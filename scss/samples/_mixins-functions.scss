@@ -1,0 +1,56 @@
+// Mixin and Function Documentation
+// ================================
+
+// Herman Sample
+// -------------
+/// This is a sample function.
+/// You can actually put much more text in here,
+/// and include markdown.
+/// Lorem markdownum rapite neque loquentis pro inque; nullaque [triones
+/// promisistis](http://duabuset-tandem.com/denos) quaque. Non iura oves creatas
+/// mixta gente torum Caune. Huius sacra *corpora refert celeberrima* luctus tibi
+/// cornua, nec qui [illum poteram](http://puta-elementa.com/vocequoque), et eundi
+/// recalfecit efficiens isdem superi. Alii virginibusque vultus certa socios venae
+/// ferrove finis longave, pignus duros nubifer!
+///
+/// - Tenuatus percussae tanta iudice Hippolytus miseram inmunis
+/// - Ture Iovis holus est et vere
+/// - Domus cum quid meae erras
+/// - Quam apta fata puppis ergo solis praeteriti
+///
+/// @group samples
+@function herman-sample(
+  $one,
+  $two: $one,
+  $three: 'three'
+) {
+  @return $one $two $three;
+}
+
+
+// Sample Alias
+// ------------
+/// This is a sample function alias.
+/// @group samples
+/// @alias herman-sample
+@function sample-alias(
+  $one,
+  $two: $one,
+  $three: 'three'
+) {
+  @return herman-sample($one, $two, $three);
+}
+
+
+// Sample Alias Two
+// ----------------
+/// This is a sample function alias.
+/// @group samples
+/// @alias herman-sample
+@function sample-alias-two(
+  $one,
+  $two: $one,
+  $three: 'three'
+) {
+  @return herman-sample($one, $two, $three);
+}

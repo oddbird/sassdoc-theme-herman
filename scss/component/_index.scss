@@ -2,6 +2,7 @@
 // ============
 
 [data-sassdoc-page='index'] {
+  @include pad-main;
   color: color('black');
 
   h1,

@@ -42,10 +42,7 @@
 // Page
 // ----
 [data-sassdoc-region='main'] {
-  padding: size('shim');
-
   @include above('page') {
     overflow: hidden;
-    padding: size('gutter');
   }
 }

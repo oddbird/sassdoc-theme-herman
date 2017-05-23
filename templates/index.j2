@@ -1,5 +1,30 @@
 {% extends 'base.j2' %}
 
 {% block main %}
+  {# @@@ why not?? #}
+  {% set home = subprojects[activeProject].package.homepage if activeProject else package.homepage %}
+  {% set source = subprojects[activeProject].package.repository.url if activeProject else package.repository.url %}
+  {% if not activeProject %}{# @@@ temp! #}
+    {{ project_links(home, source) }}
+  {% endif %}
+
   {{ description|safe }}
 {% endblock %}
+
+
+{% macro project_links(home, repo) %}
+  {% if home or repo %}
+    <ul class="project-links">
+      {% if home %}
+        <li class="project-link-item" class="project-link-start">
+          <a href="{{ home }}" class="project-link">View Project</a>
+        </li>
+      {% endif %}
+      {% if repo %}
+        <li class="project-link-item">
+          <a href="{{ repo }}" class="project-link">View Source</a>
+        </li>
+      {% endif %}
+    </ul>
+  {% endif %}
+{% endmacro %}
