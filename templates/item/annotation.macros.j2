@@ -171,7 +171,7 @@
 {# @todo annotation #}
 {% macro todo(item) %}
   {% if (item.todo.length > 0) %}
-    {% call item_section('todo', 'Todo List') %}
+    {% call item_section('todo', 'To-do List') %}
       <ul>
         {% for todo in item.todo %}
           <li data-sassdoc="todo-item">
