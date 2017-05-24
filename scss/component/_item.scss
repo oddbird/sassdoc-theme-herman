@@ -1,6 +1,10 @@
 // Item Styles
 // ===========
 
+.item {
+  margin-bottom: size('double-spacer');
+}
+
 [data-item-section] {
   margin-bottom: size('double-gutter');
 }

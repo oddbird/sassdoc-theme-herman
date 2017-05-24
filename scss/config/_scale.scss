@@ -66,6 +66,7 @@ $spacing-sizes: (
   'flex-gutter': calc(%s + %s) ('shim', 2.5vw),
   'double-gutter': 'gutter' ('linear': 2),
   'spacer': 'gutter' ('linear': 3),
+  'double-spacer': 'spacer' ('linear': 2),
   'shim': 'gutter' ('linear': 0.5),
   'half-shim': 'shim' ('linear': 0.5),
   'quarter-shim': 'shim' ('linear': 0.25)

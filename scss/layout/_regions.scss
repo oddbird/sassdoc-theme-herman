@@ -39,17 +39,34 @@
   white-space: nowrap;
 }
 
+[data-sassdoc-region='breadcrumb'] {
+  background: color('theme-light');
+  padding: size('shim') size('flex-gutter');
+
+  @include below('nav-medium') {
+    padding-top: size('flex-gutter');
+  }
+
+  a,
+  span,
+  strong {
+    display: inline-block;
+  }
+}
+
 
 // Page
 // ----
-[data-sassdoc-region='main'] {
+[role='main'] {
   @include z-index('main');
-  padding: size('gutter') size('flex-gutter');
-  position: relative;
+  width: 100%;
 
   @include above('page') {
     overflow: hidden;
-    padding-bottom: size('double-gutter');
-    padding-top: size('double-gutter');
   }
+}
+
+[data-sassdoc-region='main'] {
+  padding: size('gutter') size('flex-gutter');
+  position: relative;
 }
