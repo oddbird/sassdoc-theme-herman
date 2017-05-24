@@ -1,5 +1,6 @@
 {% import 'item/macros.j2' as show %}
 {% import 'item/annotation.macros.j2' as annotation %}
+{% import 'item/example.macros.j2' as example %}
 {% import 'item/preview.macros.j2' as preview %}
 
 {% set slug = item.context.name|urlencode|replace("'", '') %}
@@ -8,16 +9,17 @@
 
 <section class="item" id="{{ id }}">
   {{ show.heading(item, type, id, display) }}
+
   {{ show.source(item, type) }}
   {{ show.summary(item.description) }}
 
-  {{ annotation.param_or_prop(item.parameter, item.property) }}
+  {{ annotation.param_or_prop(item.parameter, item.property, item.return) }}
 
   {{ annotation.related(item, display_private) }}
   {{ annotation.requires(item, display_private) }}
   {{ annotation.todo(item) }}
 
-  {{ annotation.examples(item.example, id) }}
+  {{ example.list(item.example, id) }}
 
   {{ preview.icons(item.icons) }}
   {{ preview.show_previews(
