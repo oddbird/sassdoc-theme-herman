@@ -97,7 +97,6 @@
   {% if (item.require|length > 0) %}
     {% call item_section('requires') %}
       {% set prev = '' %}
-
       {% for req in item.require %}
         {% set name = req.name if req.name else req.item.context.name %}
         {% set type = req.type if req.type else (req.item.context.type or none) %}
@@ -134,6 +133,40 @@
     ) }}
 {% endmacro %}
 
+
+{# @require backlink #}
+{% macro used_by(list, display_private=false) %}
+  {% if list %}
+    {% call item_section('used by') %}
+      {% set prev = '' %}
+      {% for req in list %}
+        {% set check = [req.context.name|string(), req.context.type|string()]|join %}
+
+        {% if not (check in prev) %}
+          {% set prev = [prev, ', ', check]|join if (prev != '') else check %}
+          {{ used_item(req, display_private) }}
+        {% endif %}
+      {% endfor %}
+    {% endcall %}
+  {% endif %}
+{% endmacro %}
+
+
+{# @require backlink item #}
+{% macro used_item(req, display_private=false) %}
+  {% set require_name = show.format_name(req.context.name, req.context.type) %}
+  {% set require_type = show.format_type(req.context.type) %}
+  {% set is_hidden = true if (req.access == 'private' and not display_private) else false %}
+  {% set require_url = none if is_hidden else show.get_link(req.context.name, req.context.type, req.group) %}
+  {% set note = 'private' if (req.access == 'private') else none %}
+
+  {{ param_list(
+    name=require_name,
+    url=require_url,
+    item_type=require_type,
+    note=note
+    ) }}
+{% endmacro %}
 
 {# @link and @see annotations #}
 {% macro related(item, display_private=false) -%}

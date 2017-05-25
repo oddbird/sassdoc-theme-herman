@@ -17,6 +17,7 @@
 
   {{ annotation.related(item, display_private) }}
   {{ annotation.requires(item, display_private) }}
+  {{ annotation.used_by(item.usedBy, display_private) }}
   {{ annotation.todo(item) }}
 
   {{ example.list(item.example, id) }}
