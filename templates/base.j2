@@ -50,13 +50,11 @@
         activeGroup=activeGroup
       ) }}
 
-      <main role="main" data-sassdoc-region="main" data-sassdoc-page="{% block page_slug %}{{ activeGroup or 'index' }}{% endblock %}">
-
-        {# if activeProject %}
-          <a href="{{ basePath }}{{ activeProject }}/index.html">{{ activeProject }}</a>
-        {% endif #}
-
-        {% block main %}{% endblock %}
+      <main role="main">
+        {% block breadcrumb %}{% endblock %}
+        <div data-sassdoc-region="main" data-sassdoc-page="{% block page_slug %}{{ activeGroup or 'index' }}{% endblock %}">
+          {% block main %}{% endblock %}
+        </div>
       </main>
     </div>
   </div>
