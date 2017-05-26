@@ -1,0 +1,114 @@
+{% import 'utility.macros.j2' as utility %}
+
+
+{# @example annotation #}
+{% macro list(examples_list, id) %}
+  {% set group = ['examples', id]|join('_') %}
+
+  {{ tabs(
+    examples_list=examples_list,
+    group=group
+    ) }}
+
+  {{ panels(
+    examples_list=examples_list,
+    group=group
+    ) }}
+
+  {% for example in examples_list %}
+    {% if example.rendered and example.type != 'scss' %}
+      <div data-sassdoc-rendered="{{ example.type }}">
+        {{ example.rendered|safe }}
+      </div>
+    {% endif %}
+  {% endfor %}
+{% endmacro %}
+
+
+{% macro code_block(language, code, description=false) %}
+  <div data-sassdoc-example="{{ language }}">
+    <div data-sassdoc="example-header">
+      <span data-sassdoc="example-language">
+        {{ language }}
+      </span>
+
+      {% if description %}
+        <span data-sassdoc='example-description'>
+          {{ description|striptags }}
+        </span>
+      {% endif %}
+    </div>
+    {{ utility.code_block(language=language, content=code|escape|safe) }}
+  </div>
+{% endmacro %}
+
+
+{% macro tabs(examples_list, group) %}
+  {% set lang_types = {
+    'njk': 'markup',
+    'html': 'markup',
+    'j2': 'markup',
+    'css': 'style',
+    'scss': 'style',
+    'sass': 'style',
+    'js': 'interaction',
+    'javascript': 'interaction'
+  } %}
+
+  <div data-sassdoc="example-tabs">
+    {% for example in examples_list %}
+      {% if not (example.description|striptags == 'compiled') %}
+        {{ utility.tab(
+          id=[group, example.type]|join('_'),
+          group=group,
+          content=lang_types[example.type],
+          active=true if loop.first else false
+          ) }}
+      {% endif %}
+    {% endfor %}
+  </div>
+{% endmacro %}
+
+
+{% macro panels(examples_list, group) %}
+  {% set render_types = {
+    'njk': 'html',
+    'scss': 'css',
+    'sass': 'css'
+  } %}
+
+  {% for example in examples_list %}
+    {% if not (example.description|striptags == 'compiled') %}
+      {# Get compiled language and code, if available from `rendered` or `next` #}
+      {% set rendered = example.rendered if (example.rendered and render_types[example.type]) else none %}
+      {% set rendered_type = render_types[example.type] if rendered else none %}
+      {% set next = examples_list[loop.index] %}
+      {% set next = next if (next.description|striptags == 'compiled') else none %}
+      {% set next_type = next.type if next else none %}
+      {% set next_code = next.code if next else none %}
+      {% set compiled_type = rendered_type or next_type %}
+      {% set compiled_code = rendered or next_code %}
+
+      {% call utility.tab_panel(
+        id=[group, example.type]|join('_'),
+        group=group,
+        active=true if loop.first else false
+        ) %}
+
+        {{ code_block(
+          language=example.type,
+          code=example.code,
+          description=example.description
+          ) }}
+
+        {% if compiled_code %}
+          {{ code_block(
+            language=compiled_type,
+            code=compiled_code,
+            description='compiled'
+            ) }}
+        {% endif %}
+      {% endcall %}
+    {% endif %}
+  {% endfor %}
+{% endmacro %}
