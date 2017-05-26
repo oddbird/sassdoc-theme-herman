@@ -1,20 +1,32 @@
 # Herman Changelog
 
-## 1.0.0: unreleased
+## 0.6.0: 2017-05-26
 
-- Display source and compiled code (njk and html; scss and css) side-by-side.
-  Closes [#65](https://github.com/oddbird/sassdoc-theme-herman/issues/65).
-- Add support for @todo annotation. Closes
-  [#18](https://github.com/oddbird/sassdoc-theme-herman/issues/18).
-- Show compiled CSS for `@example scss` annotations. Closes
-  [#37](https://github.com/oddbird/sassdoc-theme-herman/issues/37).
+- Display links on index pages to project home and source,
+  when defined in the project `package.json` –
+  [#91](https://github.com/oddbird/sassdoc-theme-herman/issues/65)
+- Clean up display of parameters and properties –
+  [#53](https://github.com/oddbird/sassdoc-theme-herman/issues/53) and
+  [#49](https://github.com/oddbird/sassdoc-theme-herman/issues/49) and
+  [#55](https://github.com/oddbird/sassdoc-theme-herman/issues/55)
+- Display source and compiled code (njk and html; scss and css) side-by-side –
+  [#65](https://github.com/oddbird/sassdoc-theme-herman/issues/65)
+- Add support for @todo annotation –
+  [#18](https://github.com/oddbird/sassdoc-theme-herman/issues/18)
+- Add support for @type annotation –
+  [#19](https://github.com/oddbird/sassdoc-theme-herman/issues/19)
+- Add support for @alias (and aliased callback) annotation –
+  [#5](https://github.com/oddbird/sassdoc-theme-herman/issues/5)
+- Add support for used-by (@require annotation callbacks).
+- Show compiled CSS for `@example scss` annotations –
+  [#37](https://github.com/oddbird/sassdoc-theme-herman/issues/37)
 - BREAKING: Nest Herman-specific options under `herman` object in sassdoc
   configuration, and Sass-specific options under `herman.sass` object.
-- Re-brand with sidebar navigation. Closes
+- Re-brand with sidebar navigation –
   [#58](https://github.com/oddbird/sassdoc-theme-herman/issues/58) and
   [#69](https://github.com/oddbird/sassdoc-theme-herman/issues/69).
-- Add support for rendering documentation from dependency subprojects.
-  Closes [#61](https://github.com/oddbird/sassdoc-theme-herman/issues/61).
+- Add support for rendering documentation from dependency subprojects –
+  [#61](https://github.com/oddbird/sassdoc-theme-herman/issues/61).
 - BUGFIX: Do not link to internal `@access private` items if `display` option
   is set to `access: ['public']`.
 
