@@ -2,8 +2,8 @@
 // ========
 
 [data-sassdoc='example-tabs'] {
-  @include font-size('smaller');
   display: flex;
+  font-size: size('small');
   font-weight: bold;
   letter-spacing: 0.02rem;
 
@@ -67,8 +67,8 @@
 
 [data-sassdoc='example-header'] {
   @include contrasted('theme-light');
-  @include font-size('smaller');
   flex: 0 0 auto;
+  font-size: size('small');
   padding: 0 size('shim');
 
   + [data-sassdoc] {
@@ -78,5 +78,5 @@
 
 [data-sassdoc='example-description'] {
   @include before(' – ');
-  @include font-size('smaller');
+  font-size: size('small');
 }

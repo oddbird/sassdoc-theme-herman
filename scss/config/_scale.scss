@@ -37,13 +37,18 @@ $text-ratios: (
 $text-sizes: (
   'root': 18px,
 
-  'medium': 20px ('convert-units': 'rem'),
-  'small': 18px ('convert-units': 'rem'),
-  'smaller': 16px ('convert-units': 'rem'),
+  'large-rem': 20px ('convert-units': 'rem'),
+  'base-rem': 'root' ('convert-units': 'rem'),
+  'small-rem': 16px ('convert-units': 'rem'),
 
-  'h1': calc(%s + %s) ('small', 2.5vw),
-  'h2': calc(%s + %s) ('small', 2vw),
-  'h3': calc(%s + %s) ('small', 1.5vw),
+  'large': calc(%s + %s) ('base-rem', 1.5vw),
+  'base': calc(%s + %s) ('small-rem', 0.5vw),
+  'small': calc(%s + %s) ('small-rem', 0.25vw),
+  'code': calc(0.75rem + 0.25vw),
+
+  'h1': calc(%s + %s) ('base-rem', 2.5vw),
+  'h2': calc(%s + %s) ('base-rem', 2vw),
+  'h3': 'large',
 );
 
 @include herman-add-sizes('text-sizes', $text-sizes);

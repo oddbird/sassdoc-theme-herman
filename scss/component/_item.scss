@@ -60,10 +60,13 @@
 
 .param-title {
   color: color('text-light');
-  font-size: size('medium');
+  font-size: size('base');
 }
 
 .param-details {
-  margin-left: size('gutter');
   margin-top: size('half-shim');
+
+  @include above('nav-medium') {
+    margin-left: size('gutter');
+  }
 }
