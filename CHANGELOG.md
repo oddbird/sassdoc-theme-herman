@@ -4,6 +4,8 @@
 
 - BUGFIX: Do not error if missing `herman.subprojects` option. Closes
   [#107](https://github.com/oddbird/sassdoc-theme-herman/issues/107).
+- BUGFIX: Do not error if missing `herman` options. Closes
+  [#108](https://github.com/oddbird/sassdoc-theme-herman/issues/108).
 
 ## 0.6.0: 2017-05-26
 

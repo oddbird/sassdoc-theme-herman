@@ -351,10 +351,10 @@ var renderHerman = function(dest, ctx) {
 // get nunjucks env lazily so that we only throw an error on missing
 // templatepath if annotation was actually used.
 var getNunjucksEnv = function(name, env, warned) {
-  if (env.herman.nunjucksEnv) {
+  if (env.herman && env.herman.nunjucksEnv) {
     return env.herman.nunjucksEnv;
   }
-  if (!env.herman.templatepath) {
+  if (!env.herman || !env.herman.templatepath) {
     if (!warned) {
       env.logger.warn('Must pass in a templatepath if using ' + name + '.');
     }
@@ -551,33 +551,35 @@ module.exports.annotations = [
             } else if (exampleItem.type === 'scss') {
               var sassData = exampleItem.code;
               exampleItem.rendered = undefined;
-              try {
-                if (env.herman.sass.includes) {
-                  var arr = env.herman.sass.includes;
-                  for (var i = arr.length - 1; i >= 0; i = i - 1) {
-                    sassData = "@import '" + arr[i] + "';\n" + sassData;
-                  }
-                }
-                var rendered = sass.renderSync({
-                  data: sassData,
-                  importer: function(url) {
-                    if (url[0] === '~') {
-                      url = path.resolve('node_modules', url.substr(1));
+              if (env.herman && env.herman.sass) {
+                try {
+                  if (env.herman.sass.includes) {
+                    var arr = env.herman.sass.includes;
+                    for (var i = arr.length - 1; i >= 0; i = i - 1) {
+                      sassData = "@import '" + arr[i] + "';\n" + sassData;
                     }
-                    return { file: url };
-                  },
-                  includePaths: env.herman.sass.includepaths || [],
-                  outputStyle: 'expanded'
-                });
-                var encoded = rendered.css.toString('utf-8');
-                exampleItem.rendered = encoded;
-              } catch (err) {
-                env.logger.warn(
-                  'Error compiling @example scss: \n' +
-                    err.message +
-                    '\n' +
-                    sassData
-                );
+                  }
+                  var rendered = sass.renderSync({
+                    data: sassData,
+                    importer: function(url) {
+                      if (url[0] === '~') {
+                        url = path.resolve('node_modules', url.substr(1));
+                      }
+                      return { file: url };
+                    },
+                    includePaths: env.herman.sass.includepaths || [],
+                    outputStyle: 'expanded'
+                  });
+                  var encoded = rendered.css.toString('utf-8');
+                  exampleItem.rendered = encoded;
+                } catch (err) {
+                  env.logger.warn(
+                    'Error compiling @example scss: \n' +
+                      err.message +
+                      '\n' +
+                      sassData
+                  );
+                }
               }
             }
           });
