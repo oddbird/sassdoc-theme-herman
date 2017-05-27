@@ -1,5 +1,10 @@
 # Herman Changelog
 
+## 0.6.1: unreleased
+
+- BUGFIX: Do not error if missing `herman.subprojects` option. Closes
+  [#107](https://github.com/oddbird/sassdoc-theme-herman/issues/107).
+
 ## 0.6.0: 2017-05-26
 
 - Display links on index pages to project home and source,

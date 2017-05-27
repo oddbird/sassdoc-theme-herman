@@ -329,19 +329,21 @@ var renderHerman = function(dest, ctx) {
     promises.push(render(nunjucksEnv, groupTemplate, groupDest, groupCtx));
   });
 
-  // Render pages for subprojects.
-  Object.getOwnPropertyNames(ctx.subprojects).forEach(function(prjName) {
-    var prjCtx = ctx.subprojects[prjName];
-    var prjDest = path.join(dest, prjName);
-    var pageDest = path.join(prjDest, 'index.html');
-    promises.push(render(nunjucksEnv, indexTemplate, pageDest, prjCtx));
+  if (ctx.subprojects) {
+    // Render pages for subprojects.
+    Object.getOwnPropertyNames(ctx.subprojects).forEach(function(prjName) {
+      var prjCtx = ctx.subprojects[prjName];
+      var prjDest = path.join(dest, prjName);
+      var pageDest = path.join(prjDest, 'index.html');
+      promises.push(render(nunjucksEnv, indexTemplate, pageDest, prjCtx));
 
-    Object.getOwnPropertyNames(prjCtx.byGroup).forEach(function(groupName) {
-      var groupDest = path.join(prjDest, groupName + '.html');
-      var groupCtx = getRenderCtx(prjCtx, groupName);
-      promises.push(render(nunjucksEnv, groupTemplate, groupDest, groupCtx));
+      Object.getOwnPropertyNames(prjCtx.byGroup).forEach(function(groupName) {
+        var groupDest = path.join(prjDest, groupName + '.html');
+        var groupCtx = getRenderCtx(prjCtx, groupName);
+        promises.push(render(nunjucksEnv, groupTemplate, groupDest, groupCtx));
+      });
     });
-  });
+  }
 
   return Promise.all(promises);
 };
