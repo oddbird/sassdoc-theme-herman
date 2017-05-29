@@ -1,7 +1,7 @@
 {
   "name": "sassdoc-theme-herman",
   "description": "An Odd SassDoc theme.",
-  "version": "0.6.0",
+  "version": "1.0.0-alpha.1",
   "homepage": "http://oddbird.net/open-source/herman/",
   "keywords": [
     "sassdoc-theme"

@@ -1,13 +1,6 @@
 # Herman Changelog
 
-## 0.6.1: unreleased
-
-- BUGFIX: Do not error if missing `herman.subprojects` option. Closes
-  [#107](https://github.com/oddbird/sassdoc-theme-herman/issues/107).
-- BUGFIX: Do not error if missing `herman` options. Closes
-  [#108](https://github.com/oddbird/sassdoc-theme-herman/issues/108).
-
-## 0.6.0: 2017-05-26
+## 1.0.0-alpha.1: 2017-05-29
 
 - Display links on index pages to project home and source,
   when defined in the project `package.json` –
@@ -36,6 +29,10 @@
   [#61](https://github.com/oddbird/sassdoc-theme-herman/issues/61).
 - BUGFIX: Do not link to internal `@access private` items if `display` option
   is set to `access: ['public']`.
+- BUGFIX: Do not error if missing `herman.subprojects` option –
+  [#107](https://github.com/oddbird/sassdoc-theme-herman/issues/107).
+- BUGFIX: Do not error if missing `herman` options –
+  [#108](https://github.com/oddbird/sassdoc-theme-herman/issues/108).
 
 ## 0.5.5: 2017-02-22
 
@@ -44,7 +41,7 @@
 
 ## 0.5.4: 2017-01-16
 
-- Render type `html` examples to HTML. Closes
+- Render type `html` examples to HTML –
   [#45](https://github.com/oddbird/sassdoc-theme-herman/issues/45).
 
 
