@@ -1,7 +1,7 @@
 // Examples
 // ========
 
-[data-sassdoc='example-tabs'] {
+.example-tabs {
   display: flex;
   font-size: size('small');
   font-weight: bold;
@@ -33,7 +33,7 @@
 }
 
 
-[data-sassdoc='example-panel'] {
+.example-panel {
   align-items: stretch;
   border: 1px solid color('theme-light');
   display: flex;
@@ -50,7 +50,7 @@
   }
 }
 
-[data-sassdoc-example] {
+.code-block {
   align-items: stretch;
   display: flex;
   flex: 1 1 40%;
@@ -65,18 +65,18 @@
   }
 }
 
-[data-sassdoc='example-header'] {
+.code-header {
   @include contrasted('theme-light');
   flex: 0 0 auto;
   font-size: size('small');
   padding: 0 size('shim');
 
-  + [data-sassdoc] {
+  + [data-sassdoc='hljs'] {
     flex: 1 1 auto;
   }
 }
 
-[data-sassdoc='example-description'] {
+.code-description {
   @include before(' – ');
   font-size: size('small');
 }

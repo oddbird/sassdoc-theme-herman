@@ -35,7 +35,7 @@
     "accoutrement-color": "^2.0.1",
     "accoutrement-init": "^1.1.0",
     "accoutrement-layout": "^2.0.0",
-    "accoutrement-scale": "3.1.0",
+    "accoutrement-scale": "^3.1.1",
     "accoutrement-type": "^2.0.0",
     "browser-sync": "^2.17.5",
     "chalk": "^1.1.3",

@@ -37,12 +37,29 @@
 
 
 {# Pre-Formated & Highlighted Code Block #}
-{% macro code_block(language=none, content=none) %}
+{% macro code_block(language=none, content=none, description=none) %}
   {% set content = content if (content != none) else caller() %}
+
   {% if content and (content != '') %}
-    {% set language = 'jinja' if language == 'njk' else language %}
-    {% set language = ['lang', language]|join('-') if language !== none %}
-    <pre data-sassdoc="hljs"><code{% if language %} class="{{ language }}"{% endif %}>{{ content }}</code></pre>
+    <div class="code-block">
+      {% if language or description %}
+        <div class="code-header">
+          <span class="code-language">
+            {{ language }}
+          </span>
+
+          {% if description %}
+            <span class='code-description'>
+              {{ description|striptags }}
+            </span>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      {% set language = 'jinja' if language == 'njk' else language %}
+      {% set language = ['lang', language]|join('-') if language !== none %}
+      <pre data-sassdoc="hljs"><code{% if language %} class="{{ language }}"{% endif %}>{{ content|escape|safe }}</code></pre>
+    </div>
   {% endif %}
 {% endmacro %}
 
@@ -64,14 +81,14 @@
 {# Tabbed elements (see `static/js/app/base.js`) #}
 {% macro tab(id, group, content=none, active=false) %}
   {%- set content = content if (content != none) else caller() -%}
-  <a href="#panel-{{ id }}" data-sassdoc="example-tab" id="tab-{{ id }}" role="tab" data-tab-group="{{ group }}" data-contents="{{ id }}" aria-controls="panel-{{ id }}"{% if active %} aria-selected="true" tabindex="0"{% else %} tabindex="-1"{% endif %}>
+  <a href="#panel-{{ id }}" class="example-tab" id="tab-{{ id }}" role="tab" data-tab-group="{{ group }}" data-contents="{{ id }}" aria-controls="panel-{{ id }}"{% if active %} aria-selected="true" tabindex="0"{% else %} tabindex="-1"{% endif %}>
     {{ content }}
   </a>
 {% endmacro %}
 
-{% macro tab_panel(id, group, content=none, active=false, class=none) %}
+{% macro tab_panel(id, group, content=none, active=false) %}
   {%- set content = content if (content != none) else caller() -%}
-  <div data-sassdoc="example-panel" id="panel-{{ id }}" role="tabpanel" data-tab-group="{{ group }}" aria-labelledby="tab-{{ id }}" aria-hidden="{{ 'false' if active else 'true' }}" {{ attr_if('data-sassdoc-example-panel', class) }}>
-    {{ content }}
+  <div class="example-panel" id="panel-{{ id }}" role="tabpanel" data-tab-group="{{ group }}" aria-labelledby="tab-{{ id }}" aria-hidden="{{ 'false' if active else 'true' }}">
+    {{ content|safe }}
   </div>
 {% endmacro %}
