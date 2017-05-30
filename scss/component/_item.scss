@@ -70,3 +70,21 @@
     margin-left: size('gutter');
   }
 }
+
+
+// Requires
+// --------
+.requires-wrapper {
+  @include above('nav-medium') {
+    display: flex;
+
+    [data-item-section] {
+      flex: 1 1 40%;
+      max-width: 100%;
+
+      &:first-child {
+        margin-right: size('gutter');
+      }
+    }
+  }
+}
