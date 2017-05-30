@@ -16,6 +16,10 @@
       {% if item.type %}
         <span class="value-type">({{ item.type }})</span>
       {% endif %}
+
+      {% if item.access == 'private' %}
+        <span class="item-note">[private]</span>
+      {% endif %}
     </h2>
 
     {{ alias(

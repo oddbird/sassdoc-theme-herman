@@ -194,9 +194,6 @@ gulp.task('compile', ['sass', 'minify'], function() {
         includes: ['utilities', 'config/manifest']
       }
     },
-    display: {
-      access: ['public']
-    },
     groups: {
       config: 'configuration',
       'sass-utilities': 'Sass API utilities',
