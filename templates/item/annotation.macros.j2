@@ -49,14 +49,14 @@
 
 
 {# @param & @prop groups #}
-{% macro param_or_prop(params_data, props_data, content_data, return_data, output_data) %}
+{% macro param_or_prop(params_data, props_data, content_data, return_data, output_data, throw_data) %}
   {% set data = params_data or props_data %}
   {% set type = 'property' if (data == props_data) else 'parameter' %}
   {% set header = 'Map Properties' if (data == props_data) else 'Parameters' %}
-  {% set header = [header, ' & CSS Output']|join if output_data else header %}
-  {% set header = [header, ' & Return Value']|join if return_data else header %}
+  {% set header = [header, ' & Output']|join if output_data else header %}
+  {% set header = [header, ' & Return']|join if return_data or (throw_data.length > 0) else header %}
 
-  {% if data or content_data or output_data or return_data %}
+  {% if data or content_data or output_data or return_data or (throw_data.length > 0) %}
     {% call item_section(type, header) %}
       {% for item in data %}
         {{ param(name, item, type) }}
@@ -65,6 +65,7 @@
       {{ content(content_data) }}
       {{ return(return_data) }}
       {{ output(output_data) }}
+      {{ throw(throw_data) }}
     {% endcall %}
   {% endif %}
 {% endmacro %}
@@ -116,6 +117,19 @@
       value_type='code block',
       description=data
       ) }}
+  {% endif %}
+{% endmacro %}
+
+
+{# @throw annotation #}
+{% macro throw(data) %}
+  {% if (data.length > 0) %}
+    {% for item in data %}
+      {{ param_list(
+        name='@error',
+        description=item
+        ) }}
+    {% endfor %}
   {% endif %}
 {% endmacro %}
 

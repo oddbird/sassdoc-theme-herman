@@ -31,6 +31,10 @@
   $two: $one,
   $three: 'three'
 ) {
+  @if (not $one) or (not $two) or (not $three) {
+    @error 'Please provide values for all three parameters';
+  }
+
   @return $one $two $three;
 }
 
