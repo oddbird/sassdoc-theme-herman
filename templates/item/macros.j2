@@ -111,7 +111,9 @@
   {% if content %}
     <div data-item-section="summary">
       <h3 class="item-subtitle">Description</h3>
-      {{ content|safe }}
+      <div class="text-block">
+        {{ content|safe }}
+      </div>
     </div>
   {% endif %}
 {% endmacro %}

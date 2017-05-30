@@ -40,7 +40,7 @@
 
     {% if description %}
       {% set description = ['<p>', description, '</p>']|join if not ('</' in description) else description %}
-      <div class="param-details">
+      <div class="param-details text-block">
         {{ description|safe }}
       </div>
     {% endif %}
@@ -177,7 +177,7 @@
 {% endmacro %}
 
 
-{# @require backlink #}
+{# @require backlink list #}
 {% macro used_by(list, display_private=false) %}
   {% if list %}
     {% call item_section('used by') %}
