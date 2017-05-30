@@ -19,6 +19,8 @@
 /// - Quam apta fata puppis ergo solis praeteriti
 ///
 /// @group samples
+/// @author [Miriam Suzanne](http://oddbird.net/birds/#bird-miriam)
+/// @since 1.0.0-alpha.1 Adding samples files to the documentation.
 /// @param {number} $one -
 ///   The first parameter is required, because no default is given
 /// @param {number} $two [$one] -
@@ -44,6 +46,7 @@
 /// This is a sample function alias.
 /// @group samples
 /// @alias herman-sample
+/// @deprecated I don't think this alias is useful anymore
 @function sample-alias(
   $one,
   $two: $one,
@@ -58,6 +61,7 @@
 /// This is a sample function alias.
 /// @group samples
 /// @alias herman-sample
+/// @deprecated Doesn't seem to work without a message
 @function sample-alias-two(
   $one,
   $two: $one,

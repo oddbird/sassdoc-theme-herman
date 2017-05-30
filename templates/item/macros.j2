@@ -6,6 +6,11 @@
   {% set display_type = format_type(type) %}
 
   <header data-item-section="header">
+    {% set private = 'private' if (item.access == 'private') else none %}
+    {% set deprecate = 'deprecated' if item.deprecated else none %}
+    {% set note = private or deprecate or none %}
+    {% set note = [private, deprecate]|join(' – ') if (private and deprecate) else note %}
+
     <h2 class="item-title">
       {% if display_type %}
         <span class="item-type">{{ display_type }}</span>
@@ -17,8 +22,8 @@
         <span class="value-type">({{ item.type }})</span>
       {% endif %}
 
-      {% if item.access == 'private' %}
-        <span class="item-note">[private]</span>
+      {% if note %}
+        <span class="item-note">[{{ note }}]</span>
       {% endif %}
     </h2>
 
@@ -36,40 +41,41 @@
   {% if is_alias or has_alias %}
     {% set alias_intro = 'alias for' if is_alias else 'aliased as' %}
     {% set items = is_alias or has_alias %}
+    {% set string = items|string %}
 
     <p class="alias">
       {{ alias_intro }}
 
-      {% if (items.length > 1) %}
-        {% for item in items %}
-          {{ alias_link(
-            item=item,
-            type=type,
-            link_alias=display['alias']
-            ) }}{% if not loop.last %},{% endif %}
-        {% endfor %}
-      {% else %}
+      {% if (items.length == string.length) %}
         {{ alias_link(
           item=items,
           type=type,
           link_alias=display['alias']
           ) }}
+      {% else %}
+        {% for item in items -%}
+          {{ alias_link(
+            item=item,
+            type=type,
+            link_alias=display['alias']
+            ) }}{%- if not loop.last %},{% endif %}
+        {% endfor %}
       {% endif %}
     </p>
   {% endif %}
 {% endmacro %}
 
 
-{% macro alias_link(item, type, link_alias) %}
-  {% set alias_text = format_name(item, type) %}
-  {% set alias_url = get_link(item, type) if link_alias else none %}
-  {% set alias_url = alias_url if (alias_url != '') else none %}
+{% macro alias_link(item, type, link_alias) -%}
+  {%- set alias_text = format_name(item, type) -%}
+  {%- set alias_url = get_link(item, type) if link_alias else none -%}
+  {%- set alias_url = alias_url if (alias_url != '') else none -%}
   {{ utility.link_if(
     content=alias_text,
     url=alias_url,
     attrs={'class': 'alias-title'}
     ) }}
-{% endmacro %}
+{%- endmacro %}
 
 
 {# This works great if we know the group,
@@ -107,14 +113,51 @@
 {% endmacro %}
 
 
-{% macro summary(content) %}
-  {% if content %}
+{% macro summary(item) %}
+  {% set content = item.description %}
+  {% set origin = item.since %}
+  {% set by = item.author %}
+  {% set deprecation = item.deprecated %}
+
+  {% if content or origin or by or deprecation %}
     <div data-item-section="summary">
       <h3 class="item-subtitle">Description</h3>
+
       <div class="text-block">
         {{ content|safe }}
+        {{ since(origin) }}
+        {{ authors(by) }}
+        {{ deprecated(deprecation) }}
       </div>
     </div>
+  {% endif %}
+{% endmacro %}
+
+
+{% macro authors(data) %}
+  {% if (data.length > 0) %}
+    <h4 class="summary-subtitle">Authors</h4>
+    {% for author in data %}
+      {{ author|safe }}
+    {% endfor %}
+  {% endif %}
+{% endmacro %}
+
+
+{% macro deprecated(data) %}
+  {% if data and (data != '') %}
+    <h4 class="summary-subtitle">Deprecated</h4>
+    {{ data|safe }}
+  {% endif %}
+{% endmacro %}
+
+
+{% macro since(data) %}
+  {% if (data.length > 0) %}
+    {% for item in data %}
+      <h4 class="summary-subtitle">Since {{ item.version }}</h4>
+      {{ item.description|safe }}
+    {% endfor %}
   {% endif %}
 {% endmacro %}
 
