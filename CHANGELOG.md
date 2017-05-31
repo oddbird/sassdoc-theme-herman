@@ -1,5 +1,12 @@
 # Herman Changelog
 
+## 1.0.0-alpha.3: UNRELEASED
+
+- Use GoogleFonts rather than shipping font files
+- Add support for remaining SassDoc annotations:
+  `@throw`, `@return`, `@output`, `@content`, `@since`, `@deprecated`, `@author`
+- Provide more samples
+
 ## 1.0.0-alpha.2: 2017-05-31
 
 - BUGFIX: Show compiled html/css @example even if only one type.
