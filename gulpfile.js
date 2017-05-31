@@ -195,7 +195,7 @@ gulp.task('compile', ['sass', 'minify'], function() {
       }
     },
     display: {
-      access: ['public']
+      alias: true
     },
     groups: {
       config: 'configuration',

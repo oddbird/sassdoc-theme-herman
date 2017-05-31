@@ -70,3 +70,34 @@
     margin-left: size('gutter');
   }
 }
+
+.text-block {
+  max-width: 80ch;
+
+  p {
+    margin-bottom: size('gutter');
+  }
+}
+
+.summary-subtitle {
+  color: color('text-light');
+  margin: size('gutter') 0 size('half-shim');
+}
+
+
+// Requires
+// --------
+.requires-wrapper {
+  @include above('nav-medium') {
+    display: flex;
+
+    [data-item-section] {
+      flex: 1 1 40%;
+      max-width: 100%;
+
+      &:first-child {
+        margin-right: size('gutter');
+      }
+    }
+  }
+}

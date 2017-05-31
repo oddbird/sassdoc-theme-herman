@@ -19,11 +19,32 @@
 /// - Quam apta fata puppis ergo solis praeteriti
 ///
 /// @group samples
+/// @see {function} sample-alias
+/// @link http://oddbird.net OddBird Home Page
+/// @todo Create more samples like this one
+/// @todo Add more todo items
+/// @author [Miriam Suzanne](http://oddbird.net/birds/#bird-miriam)
+/// @since 1.0.0-alpha.1 Adding samples files to the documentation.
+/// @param {number} $one -
+///   The first parameter is required, because no default is given
+/// @param {number} $two [$one] -
+///   Our second parameter defaults to the value of our first one
+/// @param {string} $three ['three'] -
+///   Looks like this one takes a string instead
+/// @returns {list} All three of the arguments in order
+/// @example scss - describe examples if you want…
+///   .example::before {
+///     content: herman-sample(1, 2);
+///   }
 @function herman-sample(
   $one,
   $two: $one,
   $three: 'three'
 ) {
+  @if (not $one) or (not $two) or (not $three) {
+    @error 'Please provide values for all three parameters';
+  }
+
   @return $one $two $three;
 }
 
@@ -33,6 +54,7 @@
 /// This is a sample function alias.
 /// @group samples
 /// @alias herman-sample
+/// @deprecated I don't think this alias is useful anymore
 @function sample-alias(
   $one,
   $two: $one,
@@ -47,6 +69,7 @@
 /// This is a sample function alias.
 /// @group samples
 /// @alias herman-sample
+/// @deprecated Doesn't seem to work without a message
 @function sample-alias-two(
   $one,
   $two: $one,
@@ -54,3 +77,36 @@
 ) {
   @return herman-sample($one, $two, $three);
 }
+
+
+// Mixin with Content
+// ------------------
+/// Mixins can optionally accept a @content block,
+/// passed in brackets. This example creates
+/// a generated element `:before` the element it is used on.
+/// @group samples
+/// @param {String} $content -
+///   A value for the `content` property
+/// @content
+///   Any other styles that should be applied to the <code>::before</code> element
+/// @output
+///   A <code>::before</code> pseudo-element,
+///   with the <code>content</code> property established,
+///   and any passed-in styled applied.
+/// @example scss
+///   @import 'samples/mixins-functions';
+///
+///   .item {
+///     @include before-sample('Test One: ') {
+///       color: red;
+///     }
+///   }
+@mixin before-sample(
+  $content
+) {
+  &::before {
+    content: $content;
+    @content;
+  }
+}
+
