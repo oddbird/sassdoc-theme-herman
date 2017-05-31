@@ -1,5 +1,9 @@
 # Herman Changelog
 
+## 1.0.0-alpha.2: 2017-05-31
+
+- BUGFIX: Show compiled html/css @example even if only one type.
+
 ## 1.0.0-alpha.1: 2017-05-29
 
 - Display links on index pages to project home and source,
