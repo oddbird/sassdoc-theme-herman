@@ -87,7 +87,7 @@
         ) }}
     {% else %}
       <div class="example-panel">
-        {{ content|safe }}
+        {{ (content + compiled)|safe }}
       </div>
     {% endif %}
   {% endfor %}
