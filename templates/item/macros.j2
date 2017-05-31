@@ -136,7 +136,8 @@
 
 {% macro authors(data) %}
   {% if (data.length > 0) %}
-    <h4 class="summary-subtitle">Authors</h4>
+    {% set title = 'Authors' if (data.length > 1) else 'Author' %}
+    <h4 class="summary-subtitle">{{ title }}</h4>
     {% for author in data %}
       {{ author|safe }}
     {% endfor %}

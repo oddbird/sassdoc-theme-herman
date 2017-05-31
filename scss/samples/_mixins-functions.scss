@@ -19,6 +19,10 @@
 /// - Quam apta fata puppis ergo solis praeteriti
 ///
 /// @group samples
+/// @see {function} sample-alias
+/// @link http://oddbird.net OddBird Home Page
+/// @todo Create more samples like this one
+/// @todo Add more todo items
 /// @author [Miriam Suzanne](http://oddbird.net/birds/#bird-miriam)
 /// @since 1.0.0-alpha.1 Adding samples files to the documentation.
 /// @param {number} $one -
@@ -28,6 +32,10 @@
 /// @param {string} $three ['three'] -
 ///   Looks like this one takes a string instead
 /// @returns {list} All three of the arguments in order
+/// @example scss - describe examples if you want…
+///   .example::before {
+///     content: herman-sample(1, 2);
+///   }
 @function herman-sample(
   $one,
   $two: $one,

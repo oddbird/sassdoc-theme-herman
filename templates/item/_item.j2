@@ -22,11 +22,11 @@
     throw_data=item.throw
     ) }}
 
+  {{ example.list(item.example, id) }}
+
   {{ annotation.related(item, display_private) }}
   {{ annotation.require_or_used(item, display_private) }}
   {{ annotation.todo(item) }}
-
-  {{ example.list(item.example, id) }}
 
   {{ preview.icons(item.icons) }}
   {{ preview.show_previews(

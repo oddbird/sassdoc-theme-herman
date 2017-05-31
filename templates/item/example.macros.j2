@@ -3,25 +3,32 @@
 
 {# @example annotation #}
 {% macro list(examples_list, id) %}
-  {% set group = ['examples', id]|join('_') %}
+  {% if examples_list %}
+    {% set title = 'Examples' if (examples_list.length > 1) else 'Example' %}
+    {% set group = ['examples', id]|join('_') %}
 
-  {{ tabs(
-    examples_list=examples_list,
-    group=group
-    ) }}
+    <div data-item-section="examples">
+      <h3 class="item-subtitle">{{ title }}</h3>
 
-  {{ panels(
-    examples_list=examples_list,
-    group=group
-    ) }}
+      {{ tabs(
+        examples_list=examples_list,
+        group=group
+        ) }}
 
-  {% for example in examples_list %}
-    {% if example.rendered and example.type != 'scss' %}
-      <div data-sassdoc-rendered="{{ example.type }}">
-        {{ example.rendered|safe }}
-      </div>
-    {% endif %}
-  {% endfor %}
+      {{ panels(
+        examples_list=examples_list,
+        group=group
+        ) }}
+
+      {% for example in examples_list %}
+        {% if example.rendered and example.type != 'scss' %}
+          <div data-sassdoc-rendered="{{ example.type }}">
+            {{ example.rendered|safe }}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  {% endif %}
 {% endmacro %}
 
 
