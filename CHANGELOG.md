@@ -1,6 +1,6 @@
 # Herman Changelog
 
-## 1.0.0-alpha.3: UNRELEASED
+## 1.0.0-alpha.3: 2017-05-31
 
 - Use GoogleFonts rather than shipping font files
 - Add support for remaining SassDoc annotations:
