@@ -86,7 +86,7 @@
 ///   with the <code>content</code> property established,
 ///   and any passed-in styled applied.
 /// @example scss
-///   @import 'samples/mixins-functions'
+///   @import 'samples/mixins-functions';
 ///
 ///   .item {
 ///     @include before-sample('Test One: ') {
