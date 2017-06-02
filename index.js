@@ -371,7 +371,7 @@ module.exports = function(dest, ctx) {
   ctx = prepareContext(ctx);
 
   return parseSubprojects(ctx).then(function() {
-    renderHerman(dest, ctx);
+    return renderHerman(dest, ctx);
   });
 };
 

@@ -1,5 +1,10 @@
 # Herman Changelog
 
+## 1.0.0-alpha.4: 2017-06-02
+
+- BREAKING: Move `customHead` option into `herman` options object.
+- BUGFIX: Return correct promise from theme function (fixes early resolution).
+
 ## 1.0.0-alpha.3: 2017-05-31
 
 - Use GoogleFonts rather than shipping font files
