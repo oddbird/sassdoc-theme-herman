@@ -51,7 +51,7 @@ $hljs-colors: (
   $first: if($small, size('quarter-shim'), size('half-shim'));
   $second: if($small, size('shim'), size('gutter') + size('shim'));
 
-  @return linear-gradient($dir, $color $first, transparent $second);
+  @return linear-gradient($dir, $color $first, rgba($color, 0) $second);
 }
 
 
