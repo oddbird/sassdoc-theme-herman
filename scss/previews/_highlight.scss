@@ -66,7 +66,6 @@ $hljs-colors: (
   background-color: color('hljs-background');
   color: color('hljs-text');
   display: flex;
-  margin-bottom: size('gutter');
   position: relative;
 
   code {
@@ -86,6 +85,10 @@ $hljs-colors: (
     box-shadow: 0 0 size('half-shim') color('hljs-shadow') inset;
     pointer-events: none;
   }
+}
+
+[data-sassdoc-page='index'] pre {
+  margin-bottom: size('gutter');
 }
 
 .hljs-comment,

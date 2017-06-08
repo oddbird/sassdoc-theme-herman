@@ -10,92 +10,50 @@
     <div data-item-section="examples">
       <h3 class="item-subtitle">{{ title }}</h3>
 
-      {{ tabs(
-        examples_list=examples_list,
-        group=group
-        ) }}
-
-      {{ panels(
-        examples_list=examples_list,
-        group=group
-        ) }}
-
       {% for example in examples_list %}
-        {% if example.rendered and example.type != 'scss' %}
-          <div data-sassdoc-rendered="{{ example.type }}">
-            {{ example.rendered|safe }}
-          </div>
-        {% endif %}
+        {{ show(example) }}
       {% endfor %}
     </div>
   {% endif %}
 {% endmacro %}
 
 
-{% macro tabs(examples_list, group) %}
-  {% set lang_types = {
-    'njk': 'markup',
-    'html': 'markup',
-    'j2': 'markup',
-    'css': 'style',
-    'scss': 'style',
-    'sass': 'style',
-    'js': 'interaction',
-    'javascript': 'interaction'
-  } %}
-
-  {% if (examples_list.length > 1) %}
-    <div class="example-tabs">
-      {% for example in examples_list %}
-        {{ utility.tab(
-          id=[group, example.type]|join('_'),
-          group=group,
-          content=lang_types[example.type],
-          active=true if loop.first else false
-          ) }}
-      {% endfor %}
-    </div>
-  {% endif %}
-{% endmacro %}
-
-
-{% macro panels(examples_list, group) %}
+{% macro show(example) %}
+  {% set css = ['scss', 'sass', 'less', 'stylus', 'postcss'] %}
   {% set render_types = {
     'njk': 'html',
     'scss': 'css',
     'sass': 'css'
   } %}
 
-  {% set has_tabs = true if (examples_list.length > 1) else false %}
+  {# Get compiled language and code, if available from `rendered` #}
+  {% set rendered_type = render_types[example.type] if example.rendered else none %}
+  {% set rendered = example.rendered if rendered_type else none %}
 
-  {% for example in examples_list %}
-    {# Get compiled language and code, if available from `rendered` #}
-    {% set rendered_type = render_types[example.type] if example.rendered else none %}
-    {% set rendered = example.rendered if rendered_type else none %}
+  {# Build the initial code block #}
+  {% set initial = utility.code_block(
+    language=example.type,
+    content=example.code,
+    description=example.description
+    ) %}
 
-    {% set content = utility.code_block(
-      language=example.type,
-      content=example.code,
-      description=example.description
-      ) %}
+  {# Build the rendered code block #}
+  {% set compiled = utility.code_block(
+    language=rendered_type,
+    content=example.rendered,
+    description='compiled'
+    ) if rendered else '' %}
 
-    {% set compiled = utility.code_block(
-      language=rendered_type,
-      content=rendered,
-      description='compiled'
-      ) if rendered else '' %}
+  {# Display what we got #}
+  <div class="example">
+    <div class="example-code">
+      {{ (initial + compiled)|safe }}
+    </div>
 
-    {% if has_tabs %}
-      {{ utility.tab_panel(
-        id=[group, example.type]|join('_'),
-        group=group,
-        content=content + compiled,
-        active=true if loop.first else false
-        ) }}
-    {% else %}
-      <div class="example-panel">
-        {{ (content + compiled)|safe }}
+    {% if example.rendered and not (example.type in css) %}
+      <div class="example-render">
+        {{ example.rendered|safe }}
       </div>
     {% endif %}
-  {% endfor %}
+  </div>
 {% endmacro %}
