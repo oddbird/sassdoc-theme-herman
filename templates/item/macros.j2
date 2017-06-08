@@ -50,14 +50,14 @@
         {{ alias_link(
           item=items,
           type=type,
-          link_alias=display['alias']
+          link_alias=display.alias
           ) }}
       {% else %}
         {% for item in items -%}
           {{ alias_link(
             item=item,
             type=type,
-            link_alias=display['alias']
+            link_alias=display.alias
             ) }}{%- if not loop.last %},{% endif %}
         {% endfor %}
       {% endif %}
