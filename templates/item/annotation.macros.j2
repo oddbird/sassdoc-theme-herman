@@ -74,7 +74,7 @@
 {# @param & @prop items #}
 {% macro param(name, item, type) %}
   {% set name = ['$', item.name, ':']|join if (type == 'parameter') else item.name %}
-  {% set name = [name, '…']|join if (item.type|lower == 'arglist') else name %}
+  {% set name = [item.name, ':']|join if (type == 'property') else name %}
 
   {{ param_list(
     name=name,
@@ -135,16 +135,16 @@
 
 
 {# Group require and used-by in a single block #}
-{% macro require_or_used(item, display_private=false) %}
+{% macro require_or_used(item, display_private=false, display_alias=false) %}
   {# Add a wrapper if we have both #}
   {% if (item.require|length > 0) and item.usedBy %}
     <div class="requires-wrapper">
     {{ requires(item, display_private) }}
-    {{ used_by(item.usedBy, display_private) }}
+    {{ used_by(item.usedBy, display_private, display_alias) }}
     </div>
   {% else %}
     {{ requires(item, display_private) }}
-    {{ used_by(item.usedBy, display_private) }}
+    {{ used_by(item.usedBy, display_private, display_alias) }}
   {% endif %}
 {% endmacro %}
 
@@ -192,7 +192,7 @@
 
 
 {# @require backlink list #}
-{% macro used_by(list, display_private=false) %}
+{% macro used_by(list, display_private=false, display_alias=false) %}
   {% if list %}
     {% call item_section('used by') %}
       {% set prev = '' %}
@@ -201,7 +201,7 @@
 
         {% if not (check in prev) %}
           {% set prev = [prev, ', ', check]|join if (prev != '') else check %}
-          {{ used_item(req, display_private) }}
+          {{ used_item(req, display_private, display_alias) }}
         {% endif %}
       {% endfor %}
     {% endcall %}
@@ -210,10 +210,11 @@
 
 
 {# @require backlink item #}
-{% macro used_item(req, display_private=false) %}
+{% macro used_item(req, display_private=false, display_alias=false) %}
   {% set require_name = show.format_name(req.context.name, req.context.type) %}
   {% set require_type = show.format_type(req.context.type) %}
   {% set is_hidden = true if (req.access == 'private' and not display_private) else false %}
+  {% set is_hidden = true if (req.alias and not display_alias) else is_hidden %}
   {% set require_url = none if is_hidden else show.get_link(req.context.name, req.context.type, req.group) %}
   {% set note = 'private' if (req.access == 'private') else none %}
 

@@ -6,6 +6,7 @@
 {% set slug = item.context.name|urlencode|replace("'", '') %}
 {% set id = [type, slug]|join('--') %}
 {% set display_private = display and display.access and ('private' in display.access) %}
+{% set display_alias = display and display.alias %}
 
 <section class="item" id="{{ id }}">
   {{ show.heading(item, type, id, display) }}
@@ -25,7 +26,7 @@
   {{ example.list(item.example, id) }}
 
   {{ annotation.related(item, display_private) }}
-  {{ annotation.require_or_used(item, display_private) }}
+  {{ annotation.require_or_used(item, display_private, display_alias) }}
   {{ annotation.todo(item) }}
 
   {{ preview.icons(item.icons) }}
