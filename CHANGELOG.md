@@ -1,5 +1,10 @@
 # Herman Changelog
 
+## 1.0.0-alpha.5: 2017-06-08
+
+- BUGFIX: Style cleanup for code-blocks, examples, and properties
+- BUGFIX: UsedBy list is aware of `display.alias` to unlink hidden aliases
+
 ## 1.0.0-alpha.4: 2017-06-02
 
 - BREAKING: Move `customHead` option into `herman` options object.
