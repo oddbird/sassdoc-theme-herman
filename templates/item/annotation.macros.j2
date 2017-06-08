@@ -74,7 +74,7 @@
 {# @param & @prop items #}
 {% macro param(name, item, type) %}
   {% set name = ['$', item.name, ':']|join if (type == 'parameter') else item.name %}
-  {% set name = [name, '…']|join if (item.type|lower == 'arglist') else name %}
+  {% set name = [item.name, ':']|join if (type == 'property') else name %}
 
   {{ param_list(
     name=name,

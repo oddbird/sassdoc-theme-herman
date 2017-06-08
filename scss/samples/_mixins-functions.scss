@@ -87,6 +87,8 @@
 /// @group samples
 /// @param {String} $content -
 ///   A value for the `content` property
+/// @param {arglist} $list… -
+///   Sass also allows arglists!
 /// @content
 ///   Any other styles that should be applied to the <code>::before</code> element
 /// @output
@@ -102,7 +104,8 @@
 ///     }
 ///   }
 @mixin before-sample(
-  $content
+  $content,
+  $list...
 ) {
   &::before {
     content: $content;
