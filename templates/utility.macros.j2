@@ -25,16 +25,6 @@
 {%- endmacro %}
 
 
-{% macro code_block(language=none, content=none) %}
-  {% set content = caller() if caller else content %}
-  {% if content and (content != '') %}
-    {% set language = 'jinja' if language == 'njk' else language %}
-    {% set language = ['lang', language]|join('-') if language !== none %}
-    <pre data-sassdoc="hljs"><code{% if language %} class="{{ language }}"{% endif %}>{{ content }}</code></pre>
-  {% endif %}
-{% endmacro %}
-
-
 {# SVG Icon #}
 {% macro icon(name, alt=none, size=none, class=none) %}
   <svg data-icon="{{ name }}" {{ attr_if('data-icon-size', size) }} {{ attr_if('class', class) }}>
