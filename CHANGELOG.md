@@ -1,5 +1,10 @@
 # Herman Changelog
 
+## 1.0.0-alpha.6: 2017-06-14
+
+- BREAKING: Render examples in iframes and only include custom CSS
+  in those iframes, for better isolation.
+
 ## 1.0.0-alpha.5: 2017-06-08
 
 - BUGFIX: Style cleanup for code-blocks, examples, and properties
