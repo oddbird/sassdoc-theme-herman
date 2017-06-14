@@ -10,7 +10,8 @@
     <link rel="stylesheet" href="{{ customCSS.url }}" />
   {% endif %}
 </head>
-<body>
+<body class="sassdoc">
+  {{ iconsSvg|safe }}
   {{ example.rendered|safe }}
 </body>
 </html>

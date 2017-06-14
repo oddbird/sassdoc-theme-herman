@@ -380,7 +380,8 @@ module.exports = function(dest, ctx) {
 var renderIframe = function(env, item) {
   if (item.rendered) {
     var nunjucksEnv = nunjucks.configure(base, { noCache: true });
-    if (env.herman.customCSS) {
+
+    if (env.herman.customCSS && !env.customCSS) {
       var srcPath = path.resolve(env.dir, env.herman.customCSS);
       var cssUrl = 'assets/css/custom/' + path.basename(env.herman.customCSS);
       env.customCSS = {
@@ -388,6 +389,13 @@ var renderIframe = function(env, item) {
         url: cssUrl
       };
     }
+
+    if (env.herman.templatepath && env.herman.minifiedIcons && !env.iconsSvg) {
+      env.iconsSvg = fs.readFileSync(
+        path.join(env.herman.templatepath, env.herman.minifiedIcons)
+      );
+    }
+
     var ctx = extend({}, env, { example: item });
     item.iframed = nunjucksEnv.render(iframeTpl, ctx);
   }
