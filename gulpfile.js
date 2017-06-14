@@ -193,10 +193,16 @@ gulp.task('compile', ['sass', 'minify'], function() {
         jsonfile: './dist/css/json.css',
         includepaths: [path.join(__dirname, 'scss')],
         includes: ['utilities', 'config/manifest']
-      }
+      },
+      customCSS: paths.DIST_DIR + 'css/main.css'
     },
     display: {
-      access: ['public']
+      alias: true
+    },
+    groups: {
+      config: 'configuration',
+      'sass-utilities': 'Sass API utilities',
+      utilities: 'internal utilities'
     },
     // Disable cache to enable live-reloading.
     // Usefull for some template engines (e.g. Swig).

@@ -8,9 +8,10 @@
   <title>{% block title %}{{ project_title }} Documentation{% endblock %}</title>
 
   <link href="{{ shortcutIcon.url }}" rel="shortcut icon">
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
 
-  {% if customHead %}
-    {{ customHead|safe }}
+  {% if herman.customHead %}
+    {{ herman.customHead|safe }}
   {% endif %}
 
   <link rel="stylesheet" href="{{ basePath }}assets/css/main.css" />
@@ -31,9 +32,6 @@
         {% if package.version %}
           <span data-sassdoc="project-version">{{ package.version }}</span>
         {% endif %}
-        {% if activeProject %}
-          : <a href="{{ basePath }}{{ activeProject }}/index.html">{{ activeProject }}</a>
-        {% endif %}
       </h1>
     </header>
 
@@ -48,20 +46,11 @@
         activeGroup=activeGroup
       ) }}
 
-      <main role="main" data-sassdoc-region="main" data-sassdoc-page="{% block page_slug %}{{ activeGroup or 'index' }}{% endblock %}">
-
-        {% if package.homepage or package.repository.url %}
-          <div data-sassdoc="project-links">
-            {% if package.homepage %}
-              <a href="{{ package.homepage }}" data-sassdoc="project-link">View Project</a>
-            {% endif %}
-            {% if package.repository.url %}
-              <a href="{{ package.repository.url }}" data-sassdoc="project-link">View Source</a>
-            {% endif %}
-          </div>
-        {% endif %}
-
-        {% block main %}{% endblock %}
+      <main role="main">
+        {% block breadcrumb %}{% endblock %}
+        <div data-sassdoc-region="main" data-sassdoc-page="{% block page_slug %}{{ activeGroup or 'index' }}{% endblock %}">
+          {% block main %}{% endblock %}
+        </div>
       </main>
     </div>
   </div>

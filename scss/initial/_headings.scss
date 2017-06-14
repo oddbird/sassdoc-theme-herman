@@ -6,13 +6,17 @@
 // -----------
 
 [data-sassdoc='project-title'] {
+  align-items: baseline;
+  display: flex;
   font-size: size('h1');
-  line-height: 1.25;
   margin-left: auto;
   margin-right: auto;
 }
 
 [data-sassdoc='project-name'] {
+  padding-left: size('half-shim');
+  padding-right: size('half-shim');
+
   &,
   #{$link} {
     color: color('theme-dark');
@@ -22,22 +26,4 @@
     color: color('focus');
     text-decoration: none;
   }
-}
-
-[data-sassdoc='page-title'] {
-  color: color('black');
-  font-size: size('h2');
-  margin-bottom: size('shim');
-}
-
-[data-sassdoc='item-title'] {
-  @include font-family('code');
-  color: color('gray');
-  font-size: size('h3');
-  margin-bottom: size('shim');
-}
-
-[data-sassdoc='item-subtitle'] {
-  color: color('gray');
-  font-size: size('medium');
 }

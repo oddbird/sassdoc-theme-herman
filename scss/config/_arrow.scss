@@ -4,9 +4,9 @@
 /// Apply a top-border with centered down-arrow triangle,
 /// for use as a section-divider.
 /// @group sections
-/// @parameter $color ['theme-dark'] -
+/// @parameter {color | string} $color ['theme-dark'] -
 ///   The color of the border/arrow line
-/// @parameter $background ['background'] -
+/// @parameter {color | string} $background ['background'] -
 ///   The background color above the border/arrow,
 ///   used to make it an arrow-outline rather than a solid triangle
 /// @example scss

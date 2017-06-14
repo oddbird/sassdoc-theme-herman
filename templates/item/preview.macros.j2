@@ -7,7 +7,7 @@
   Call the requested previews with the appropriate JSON data.
 #}
 {% macro show_previews(data, name, args) %}
-  {% if args %}
+  {% if data and args %}
     {% set type = args.type %}
     {% set key = args.key or name %}
 

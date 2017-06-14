@@ -1,16 +1,165 @@
 {% import 'utility.macros.j2' as utility %}
 
 
+{% macro heading(item, type, id, display=none) %}
+  {% set item_name = format_name(item, type) %}
+  {% set display_type = format_type(type) %}
+
+  <header data-item-section="header">
+    {% set private = 'private' if (item.access == 'private') else none %}
+    {% set deprecate = 'deprecated' if item.deprecated else none %}
+    {% set note = private or deprecate or none %}
+    {% set note = [private, deprecate]|join(' – ') if (private and deprecate) else note %}
+
+    <h2 class="item-title">
+      {% if display_type %}
+        <span class="item-type">{{ display_type }}</span>
+      {% endif %}
+
+      <a href="#{{ id }}" class="item-name">{{ item_name }}</a>
+
+      {% if item.type %}
+        <span class="value-type">({{ item.type }})</span>
+      {% endif %}
+
+      {% if note %}
+        <span class="item-note">[{{ note }}]</span>
+      {% endif %}
+    </h2>
+
+    {{ alias(
+      is_alias=item.alias,
+      has_alias=item.aliased,
+      type=type,
+      display=display
+      ) }}
+  </header>
+{% endmacro %}
+
+
+{% macro alias(is_alias, has_alias, type, display=none) %}
+  {% if is_alias or has_alias %}
+    {% set alias_intro = 'alias for' if is_alias else 'aliased as' %}
+    {% set items = is_alias or has_alias %}
+    {% set string = items|string %}
+
+    <p class="alias">
+      {{ alias_intro }}
+
+      {% if (items.length == string.length) %}
+        {{ alias_link(
+          item=items,
+          type=type,
+          link_alias=display.alias
+          ) }}
+      {% else %}
+        {% for item in items -%}
+          {{ alias_link(
+            item=item,
+            type=type,
+            link_alias=display.alias
+            ) }}{%- if not loop.last %},{% endif %}
+        {% endfor %}
+      {% endif %}
+    </p>
+  {% endif %}
+{% endmacro %}
+
+
+{% macro alias_link(item, type, link_alias) -%}
+  {%- set alias_text = format_name(item, type) -%}
+  {%- set alias_url = get_link(item, type) if link_alias else none -%}
+  {%- set alias_url = alias_url if (alias_url != '') else none -%}
+  {{ utility.link_if(
+    content=alias_text,
+    url=alias_url,
+    attrs={'class': 'alias-title'}
+    ) }}
+{%- endmacro %}
+
+
+{# This works great if we know the group,
+   or the referenced item is on the same page #}
+{% macro get_link(name, type, group=none) -%}
+  {% set group = [group, 'html']|join('.') if group else none %}
+  {{ group }}#{{ type }}--{{ name }}
+{%- endmacro %}
+
+
+{% macro format_name(item, type) -%}
+  {%- set item_name = item.context.name if item.context else item -%}
+  {%- set item_name = [item_name, '()']|join if (type == 'mixin' or type == 'function') else item_name -%}
+  {%- set item_name = ['$', item_name]|join if (type == 'variable') else item_name -%}
+  {{ item_name }}
+{%- endmacro %}
+
+
+{% macro format_type(type) -%}
+  {%- set display_type = ['@', type]|join if ((type == 'mixin') or (type == 'function')) else type -%}
+  {%- set display_type = none if ((type == 'variable') or (type == 'css')) else display_type -%}
+  {{ display_type }}
+{%- endmacro %}
+
+
 {% macro source(item, type) %}
-{%- call utility.code_block(language='scss') -%}
-  {%- if (type == 'variable') -%}
-    {{ scss_variable(item) }}
-  {%- elif (type == 'css') -%}
-    {{ scss_css(item) }}
-  {%- elif (type == 'function') or (type == 'mixin') -%}
-    {{ scss_function_or_mixin(item) }}
+  {%- if not ((type == 'mixin') or (type == 'function')) -%}
+    {% set code = scss_variable(item) if (type == 'variable') else none %}
+    {% set code = scss_css(item) if (type == 'css') else code %}
+
+    <div data-item-section="source">
+      {{ utility.code_block(language='scss', content=code|escape|safe) }}
+    </div>
   {%- endif -%}
-{%- endcall -%}
+{% endmacro %}
+
+
+{% macro summary(item) %}
+  {% set content = item.description %}
+  {% set origin = item.since %}
+  {% set by = item.author %}
+  {% set deprecation = item.deprecated %}
+
+  {% if content or origin or by or deprecation %}
+    <div data-item-section="summary">
+      <h3 class="item-subtitle">Description</h3>
+
+      <div class="text-block">
+        {{ content|safe }}
+        {{ since(origin) }}
+        {{ authors(by) }}
+        {{ deprecated(deprecation) }}
+      </div>
+    </div>
+  {% endif %}
+{% endmacro %}
+
+
+{% macro authors(data) %}
+  {% if (data.length > 0) %}
+    {% set title = 'Authors' if (data.length > 1) else 'Author' %}
+    <h4 class="summary-subtitle">{{ title }}</h4>
+    {% for author in data %}
+      {{ author|safe }}
+    {% endfor %}
+  {% endif %}
+{% endmacro %}
+
+
+{% macro deprecated(data) %}
+  {% if data and (data != '') %}
+    <h4 class="summary-subtitle">Deprecated</h4>
+    {{ data|safe }}
+  {% endif %}
+{% endmacro %}
+
+
+{% macro since(data) %}
+  {% if (data.length > 0) %}
+    {% for item in data %}
+      <h4 class="summary-subtitle">Since {{ item.version }}</h4>
+      {{ item.description|safe }}
+    {% endfor %}
+  {% endif %}
 {% endmacro %}
 
 
@@ -19,176 +168,8 @@ ${{ item.context.name }}: {{ item.context.value }}{% if item.context.scope != 'p
 {%- endmacro %}
 
 
-{% macro scss_function_or_mixin(item) -%}
-@{{ item.context.type }} {{ item.context.name }}{% if item.parameter %}(
-{%- for parameter in item.parameter %}
-  ${{ parameter.name }}{% if parameter.type|lower == "arglist" %}...{% elif parameter.default %}: {{ parameter.default }}{% endif %}{% if not loop.last %},{% endif %}
-{%- endfor %}
-){% endif %} { /* ... */ }
-{%- endmacro %}
-
 {%- macro scss_css(item) -%}
 {{ item.context.name }} {
   {{ item.context.value }}
 }
 {%- endmacro -%}
-
-
-{# Parameter & Property tables #}
-{% macro table(table, data, header=null, columns=['name', 'description', 'type', 'default']) %}
-  {% if data %}
-    <div data-sassdoc-display="{{ table }}">
-      <h5 data-sassdoc="item-subtitle">{{ header or table }}</h5>
-      <table data-sassdoc-table="{{ table }}">
-        <thead>
-          <tr scope="row">
-            {% for col in columns %}
-              <th scope="col">{{ col }}</th>
-            {% endfor %}
-          </tr>
-        </thead>
-        <tbody>
-          {%- for item in data %}
-          {% set name = ['$', item.name]|join if (table == 'parameter') else item.name %}
-          <tr data-sassdoc="{{ table }}-item">
-            <td scope="row" data-label="name"><code>{{ name }}</code></td>
-            <td data-label="desc">
-              {%- if item.description -%}
-                {{ item.description|safe }}
-              {%- endif -%}
-            </td>
-            <td data-label="type">
-              {%- if item.type -%}
-                {{ item.type }}
-              {%- endif -%}
-            </td>
-            <td data-label="default">
-              {%- if not item.default -%}
-                &mdash;<span class="visually-hidden"> none</span>
-              {%- else -%}
-                <code>{{ item.default }}</code>
-              {%- endif -%}
-            </td>
-          </tr>
-          {%- endfor %}
-        </tbody>
-      </table>
-    </div>
-  {% endif %}
-{% endmacro %}
-
-
-{# @param annotation #}
-{% macro parameter(item) -%}
-  {{ table('parameter', item.parameter, 'Parameters') }}
-{%- endmacro %}
-
-
-{# @prop annotation #}
-{% macro property(item) -%}
-  {{ table('property', item.property, 'Properties') }}
-{%- endmacro %}
-
-
-{# @require annotation #}
-{% macro require(item, display_private=false) -%}
-  {% if item.require.length > 0 %}
-    <div data-sassdoc-display="require description">
-      <h5 data-sassdoc="item-subtitle">Requires</h5>
-      <ul>
-        {% for require in item.require %}
-          {# External links #}
-          {% if require.external %}
-            <li data-sassdoc="requires-item"><code>[external]</code>
-              {% if require.url %}
-                <a href="{{ require.url }}"><code>{{ require.name }}</code></a> {{ require.description }}</li>
-              {% else %}
-                <code>{{ require.name }}</code>
-              {% endif %}
-              {% if require.description %}
-                &mdash; {{ require.description }}
-              {% endif %}
-            </li>
-
-          {# Internal links #}
-          {% else %}
-            <li data-sassdoc="requires-item">
-              <code>[{{ require.item.context.type }}]</code>
-              {% if require.item.access == 'private' and not display_private %}
-                <code>{{ require.item.context.name }}</code>
-                [private]
-              {% else %}
-                <a href="{{ require.item.group }}.html#{{ require.item.context.type }}--{{ require.item.context.name }}"><code>{{ require.item.context.name }}</code></a>
-              {% endif %}
-              {% if require.description %}
-                &mdash; {{ require.description }}
-              {% endif %}
-            </li>
-          {% endif %}
-        {% endfor %}
-      </ul>
-    </div>
-  {% endif %}
-{%- endmacro %}
-
-
-{# @link annotation #}
-{% macro link(item) -%}
-  {% if item.link.length > 0 %}
-    <div data-sassdoc-display="link description">
-      <h5 data-sassdoc="item-subtitle">Links</h5>
-      <ul>
-        {% for link in item.link %}
-          <li data-sassdoc="link-item">
-            <a href="{{ link.url }}">
-              {% if link.caption %}
-                {{ link.caption }}
-              {% else %}
-                {{ link.url }}
-              {% endif %}
-            </a>
-          </li>
-        {% endfor %}
-      </ul>
-    </div>
-  {% endif %}
-{%- endmacro %}
-
-{# @see annotation #}
-{% macro see(item, display_private=false) -%}
-  {% if item.see.length > 0 %}
-    <div data-sassdoc-display="see description">
-      <h5 data-sassdoc="item-subtitle">See</h5>
-      <ul>
-        {% for see in item.see %}
-          <li data-sassdoc="see-item">
-            {% if see.access == 'private' and not display_private %}
-              {{ see.context.name }} [private]
-            {% else %}
-              <a href="{{ see.group }}.html#{{ see.context.type }}--{{ see.context.name }}">{{ see.context.name }}</a>
-            {% endif %}
-          </li>
-        {% endfor %}
-      </ul>
-    </div>
-  {% endif %}
-{%- endmacro %}
-
-
-
-{# @todo annotation #}
-{% macro todo(item) -%}
-  {% if item.todo.length > 0 %}
-    <div data-sassdoc="todo">
-      <h5 data-sassdoc="item-subtitle">Todo List</h5>
-      <ul>
-        {% for todo in item.todo %}
-          <li data-sassdoc="todo-item">
-            {{ todo|safe }}
-          </li>
-        {% endfor %}
-      </ul>
-    </div>
-  {% endif %}
-{%- endmacro %}
-

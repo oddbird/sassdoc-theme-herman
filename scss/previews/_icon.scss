@@ -20,7 +20,7 @@
 }
 
 [data-sassdoc='icon-info'] {
-  @include font-size('smaller', 0.75);
+  font-size: size('small');
   padding: size('half-shim') 0;
   white-space: nowrap;
 }

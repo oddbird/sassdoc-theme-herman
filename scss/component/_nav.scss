@@ -4,7 +4,8 @@
 
 [data-nav-menu='small'] {
   @include stretch(0, null, 0, null, absolute);
-  transform: translatex(-100%);
+  box-shadow: 0 0 size('half-shim') color('shadow');
+  transform: translatex(-102%);
   transition: transform 0.4s;
   width: 100%;
 
@@ -56,7 +57,12 @@
 
 [data-nav-toggle] {
   fill: color('theme-dark');
-  padding: size('half-shim') size('shim');
+  padding: size('half-shim');
+
+  @include above('page') {
+    padding-left: size('shim');
+    padding-right:  size('shim');
+  }
 
   #{$focus} {
     fill: color('focus');
@@ -88,7 +94,7 @@
   // add a top separator to all but the first nav-title
   &:nth-of-type(n+2) {
     border-top: 1px solid color('theme-light');
-    margin-top: size('shim');
+    margin-top: size('gutter');
     padding-top: size('gutter');
   }
 }

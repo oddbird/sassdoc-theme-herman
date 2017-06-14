@@ -331,19 +331,21 @@ var renderHerman = function(dest, ctx) {
     promises.push(render(nunjucksEnv, groupTemplate, groupDest, groupCtx));
   });
 
-  // Render pages for subprojects.
-  Object.getOwnPropertyNames(ctx.subprojects).forEach(function(prjName) {
-    var prjCtx = ctx.subprojects[prjName];
-    var prjDest = path.join(dest, prjName);
-    var pageDest = path.join(prjDest, 'index.html');
-    promises.push(render(nunjucksEnv, indexTemplate, pageDest, prjCtx));
+  if (ctx.subprojects) {
+    // Render pages for subprojects.
+    Object.getOwnPropertyNames(ctx.subprojects).forEach(function(prjName) {
+      var prjCtx = ctx.subprojects[prjName];
+      var prjDest = path.join(dest, prjName);
+      var pageDest = path.join(prjDest, 'index.html');
+      promises.push(render(nunjucksEnv, indexTemplate, pageDest, prjCtx));
 
-    Object.getOwnPropertyNames(prjCtx.byGroup).forEach(function(groupName) {
-      var groupDest = path.join(prjDest, groupName + '.html');
-      var groupCtx = getRenderCtx(prjCtx, groupName);
-      promises.push(render(nunjucksEnv, groupTemplate, groupDest, groupCtx));
+      Object.getOwnPropertyNames(prjCtx.byGroup).forEach(function(groupName) {
+        var groupDest = path.join(prjDest, groupName + '.html');
+        var groupCtx = getRenderCtx(prjCtx, groupName);
+        promises.push(render(nunjucksEnv, groupTemplate, groupDest, groupCtx));
+      });
     });
-  });
+  }
 
   return Promise.all(promises);
 };
@@ -351,10 +353,10 @@ var renderHerman = function(dest, ctx) {
 // get nunjucks env lazily so that we only throw an error on missing
 // templatepath if annotation was actually used.
 var getNunjucksEnv = function(name, env, warned) {
-  if (env.herman.nunjucksEnv) {
+  if (env.herman && env.herman.nunjucksEnv) {
     return env.herman.nunjucksEnv;
   }
-  if (!env.herman.templatepath) {
+  if (!env.herman || !env.herman.templatepath) {
     if (!warned) {
       env.logger.warn('Must pass in a templatepath if using ' + name + '.');
     }
@@ -371,13 +373,21 @@ module.exports = function(dest, ctx) {
   ctx = prepareContext(ctx);
 
   return parseSubprojects(ctx).then(function() {
-    renderHerman(dest, ctx);
+    return renderHerman(dest, ctx);
   });
 };
 
 var renderIframe = function(env, item) {
   if (item.rendered) {
     var nunjucksEnv = nunjucks.configure(base, { noCache: true });
+    if (env.herman.customCSS) {
+      var srcPath = path.resolve(env.dir, env.herman.customCSS);
+      var cssUrl = 'assets/css/custom/' + path.basename(env.herman.customCSS);
+      env.customCSS = {
+        path: srcPath,
+        url: cssUrl
+      };
+    }
     var ctx = extend({}, env, { example: item });
     item.iframed = nunjucksEnv.render(iframeTpl, ctx);
   }
@@ -559,33 +569,35 @@ module.exports.annotations = [
             } else if (exampleItem.type === 'scss') {
               var sassData = exampleItem.code;
               exampleItem.rendered = undefined;
-              try {
-                if (env.herman.sass.includes) {
-                  var arr = env.herman.sass.includes;
-                  for (var i = arr.length - 1; i >= 0; i = i - 1) {
-                    sassData = "@import '" + arr[i] + "';\n" + sassData;
-                  }
-                }
-                var rendered = sass.renderSync({
-                  data: sassData,
-                  importer: function(url) {
-                    if (url[0] === '~') {
-                      url = path.resolve('node_modules', url.substr(1));
+              if (env.herman && env.herman.sass) {
+                try {
+                  if (env.herman.sass.includes) {
+                    var arr = env.herman.sass.includes;
+                    for (var i = arr.length - 1; i >= 0; i = i - 1) {
+                      sassData = "@import '" + arr[i] + "';\n" + sassData;
                     }
-                    return { file: url };
-                  },
-                  includePaths: env.herman.sass.includepaths || [],
-                  outputStyle: 'expanded'
-                });
-                var encoded = rendered.css.toString('utf-8');
-                exampleItem.rendered = encoded;
-              } catch (err) {
-                env.logger.warn(
-                  'Error compiling @example scss: \n' +
-                    err.message +
-                    '\n' +
-                    sassData
-                );
+                  }
+                  var rendered = sass.renderSync({
+                    data: sassData,
+                    importer: function(url) {
+                      if (url[0] === '~') {
+                        url = path.resolve('node_modules', url.substr(1));
+                      }
+                      return { file: url };
+                    },
+                    includePaths: env.herman.sass.includepaths || [],
+                    outputStyle: 'expanded'
+                  });
+                  var encoded = rendered.css.toString('utf-8');
+                  exampleItem.rendered = encoded;
+                } catch (err) {
+                  env.logger.warn(
+                    'Error compiling @example scss: \n' +
+                      err.message +
+                      '\n' +
+                      sassData
+                  );
+                }
               }
             }
             renderIframe(env, exampleItem);

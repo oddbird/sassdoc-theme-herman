@@ -2,23 +2,36 @@
 // ===================
 
 
-[data-sassdoc='project-links'] {
+.project-links {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
+  margin-left: 0;
+  margin-right: 0;
 
   @include below('project-link-nav') {
     margin-bottom: size('shim');
   }
+}
 
-  @include above('project-link-nav') {
-    justify-content: flex-end;
+.project-link-item {
+  display: flex;
+  list-style: none;
+
+  & + & {
+    margin-left: size('shim');
   }
 }
 
-[data-sassdoc='project-link'] {
+.project-link-start {
+  @include below('project-link-nav') {
+    margin-right: auto;
+  }
+}
+
+.project-link {
   border: 1px solid color('theme-dark');
   border-radius: size('gutter');
-  font-size: size('smaller');
+  font-size: size('small');
   line-height: 1.6;
   padding: size('half-shim') size('gutter');
   text-align: center;
@@ -27,9 +40,5 @@
   #{$focus} {
     @include contrasted('theme-dark');
     text-decoration: none;
-  }
-
-  & + & {
-    margin-left: size('shim');
   }
 }

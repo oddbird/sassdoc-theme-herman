@@ -1,44 +1,16 @@
 // Examples
 // ========
 
-[data-sassdoc='example-tabs'] {
-  @include font-size('smaller');
-  display: flex;
-  font-weight: bold;
-  letter-spacing: 0.02rem;
-
-  [aria-controls] {
-    margin-right: 1px;
-    padding: size('half-shim') size('shim');
-
-    #{$link} {
-      @include contrasted('light-gray');
-    }
-
-    #{$focus} {
-      @include contrasted('theme-dark');
-      text-decoration: none;
-    }
-  }
-
-  [aria-selected='true'] {
-    #{$link} {
-      @include contrasted('theme-light');
-    }
-
-    #{$focus} {
-      @include contrasted('theme-dark');
-    }
-  }
+.example {
+  margin-bottom: size('gutter');
 }
 
-
-[data-sassdoc='example-panel'] {
+.example-code {
   align-items: stretch;
   border: 1px solid color('theme-light');
   display: flex;
   flex-wrap: wrap;
-  margin-bottom: size('gutter');
+  overflow: hidden;
 
   [data-sassdoc='hljs'] {
     margin-bottom: 0; // override the hljs margin needed for non-nested blocks
@@ -49,7 +21,7 @@
   }
 }
 
-[data-sassdoc-example] {
+.code-block {
   align-items: stretch;
   display: flex;
   flex: 1 1 40%;
@@ -64,18 +36,25 @@
   }
 }
 
-[data-sassdoc='example-header'] {
+.code-header {
   @include contrasted('theme-light');
-  @include font-size('smaller');
   flex: 0 0 auto;
+  font-size: size('small');
   padding: 0 size('shim');
 
-  + [data-sassdoc] {
+  + [data-sassdoc='hljs'] {
     flex: 1 1 auto;
   }
 }
 
-[data-sassdoc='example-description'] {
+.code-description {
   @include before(' – ');
-  @include font-size('smaller');
+  font-size: size('small');
 }
+
+.example-render {
+  border: 1px solid color('light-border');
+  border-top: 0;
+  padding: size('gutter');
+}
+
