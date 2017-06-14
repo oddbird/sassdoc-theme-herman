@@ -13,6 +13,9 @@ var copy = require('./lib/assets.js');
 var parse = require('./lib/parse.js');
 var render = require('./lib/render.js');
 
+var base = path.resolve(__dirname, './templates');
+var iframeTpl = path.join(base, 'example', 'base.j2');
+
 nunjucks.installJinjaCompat();
 
 /**
@@ -242,7 +245,6 @@ var parseSubprojects = function(ctx) {
  * and the context variables `ctx`.
  */
 var renderHerman = function(dest, ctx) {
-  var base = path.resolve(__dirname, './templates');
   var indexTemplate = path.join(base, 'index.j2');
   var indexDest = path.join(dest, 'index.html');
   var groupTemplate = path.join(base, 'group.j2');
@@ -373,6 +375,30 @@ module.exports = function(dest, ctx) {
   return parseSubprojects(ctx).then(function() {
     return renderHerman(dest, ctx);
   });
+};
+
+var renderIframe = function(env, item) {
+  if (item.rendered) {
+    var nunjucksEnv = nunjucks.configure(base, { noCache: true });
+
+    if (env.herman.customCSS && !env.customCSS) {
+      var srcPath = path.resolve(env.dir, env.herman.customCSS);
+      var cssUrl = 'assets/css/custom/' + path.basename(env.herman.customCSS);
+      env.customCSS = {
+        path: srcPath,
+        url: cssUrl
+      };
+    }
+
+    if (env.herman.templatepath && env.herman.minifiedIcons && !env.iconsSvg) {
+      env.iconsSvg = fs.readFileSync(
+        path.join(env.herman.templatepath, env.herman.minifiedIcons)
+      );
+    }
+
+    var ctx = extend({}, env, { example: item });
+    item.iframed = nunjucksEnv.render(iframeTpl, ctx);
+  }
 };
 
 module.exports.annotations = [
@@ -582,6 +608,7 @@ module.exports.annotations = [
                 }
               }
             }
+            renderIframe(env, exampleItem);
           });
         });
       }

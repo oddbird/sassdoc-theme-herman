@@ -12,3 +12,4 @@ rules:
   prettier/prettier:
     - 2
     - singleQuote: true
+  no-console: 1

@@ -45,7 +45,8 @@ var paths = {
       'gulpfile.js',
       'index.js',
       '!assets/js/highlight.js',
-      '!assets/js/jquery-3.1.1.slim.js'
+      '!assets/js/jquery-3.1.1.slim.js',
+      '!assets/js/srcdoc-polyfill.min.js'
     ].concat(this.IGNORE);
     this.JS_TESTS_FILES = [
       this.JS_TESTS_DIR + '**/*.js',
@@ -192,7 +193,8 @@ gulp.task('compile', ['sass', 'minify'], function() {
         jsonfile: './dist/css/json.css',
         includepaths: [path.join(__dirname, 'scss')],
         includes: ['utilities', 'config/manifest']
-      }
+      },
+      customCSS: paths.DIST_DIR + 'css/main.css'
     },
     display: {
       alias: true

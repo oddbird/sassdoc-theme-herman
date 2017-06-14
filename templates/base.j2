@@ -15,11 +15,6 @@
   {% endif %}
 
   <link rel="stylesheet" href="{{ basePath }}assets/css/main.css" />
-  {% if customCSS and customCSS.url %}
-    <link rel="stylesheet" href="{{ customCSS.url }}" />
-  {% else %}
-    <link rel="stylesheet" href="{{ basePath }}assets/css/theme.css" />
-  {% endif %}
 </head>
 <body>
 
@@ -61,6 +56,7 @@
   </div>
 
   <script type="text/javascript" src="{{ basePath }}assets/js/jquery-3.1.1.slim.js"></script>
+  <script type="text/javascript" src="{{ basePath }}assets/js/srcdoc-polyfill.min.js"></script>
   <script type="text/javascript" src="{{ basePath }}assets/js/highlight.js"></script>
   <script type="text/javascript" src="{{ basePath }}assets/js/base.js"></script>
   <script type="text/javascript" src="{{ basePath }}assets/js/init.js"></script>
