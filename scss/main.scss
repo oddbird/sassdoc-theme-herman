@@ -4,8 +4,8 @@
 @import 'utilities';
 @import 'config/manifest';
 @import '../node_modules/accoutrement-init/sass/init';
+@import 'initial/manifest';
 @import 'layout/manifest';
 @import 'previews/manifest';
-@import 'initial/manifest';
 @import 'component/manifest';
-@import 'samples/variables';
+@import 'samples/manifest';
