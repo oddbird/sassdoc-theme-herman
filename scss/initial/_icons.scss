@@ -1,6 +1,12 @@
 // Icons
 // =====
 
+/// A data attribute for setting an icon.
+/// @group pattern-icons
+/// @icons assets/svg/ utility.macros.j2:icon
+/// @example njk
+///   {% import 'utility.macros.j2' as utility %}
+///   {{ utility.icon('menu') }}
 [data-icon-size='icon-small'] {
   @include square('icon');
 }

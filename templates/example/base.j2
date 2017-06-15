@@ -11,7 +11,9 @@
   {% endif %}
 </head>
 <body class="sassdoc">
-  {{ iconsSvg|safe }}
-  {{ example.rendered|safe }}
+  {% if iconsSvg %}
+    {{ iconsSvg|safe }}
+  {% endif %}
+  {{ item.rendered|safe }}
 </body>
 </html>

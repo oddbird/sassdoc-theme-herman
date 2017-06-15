@@ -1,6 +1,6 @@
-{% import 'item/macros.j2' as show %}
 {% import 'item/annotation.macros.j2' as annotation %}
 {% import 'item/example.macros.j2' as example %}
+{% import 'item/macros.j2' as show %}
 {% import 'item/preview.macros.j2' as preview %}
 
 {% set slug = item.context.name|urlencode|replace("'", '') %}
@@ -29,7 +29,7 @@
   {{ annotation.require_or_used(item, display_private, display_alias) }}
   {{ annotation.todo(item) }}
 
-  {{ preview.icons(item.icons) }}
+  {{ preview.icons(item) }}
   {{ preview.show_previews(
     data=sassjson,
     name=item.context.name,
