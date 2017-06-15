@@ -6,7 +6,7 @@
 /// @icons assets/svg/ utility.macros.j2:icon
 /// @example njk
 ///   {% import 'utility.macros.j2' as utility %}
-///   {{ utility.icon('menu') }}
+///   {{ utility.icon('menu', size='icon-small') }}
 [data-icon-size='icon-small'] {
   @include square('icon');
 }
