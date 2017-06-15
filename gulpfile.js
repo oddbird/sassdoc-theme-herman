@@ -190,11 +190,12 @@ gulp.task('compile', ['sass', 'minify'], function() {
       subprojects: ['accoutrement-color'],
       templatepath: path.join(__dirname, 'templates'),
       sass: {
-        jsonfile: './dist/css/json.css',
+        jsonfile: paths.DIST_DIR + 'css/json.css',
         includepaths: [path.join(__dirname, 'scss')],
         includes: ['utilities', 'config/manifest']
       },
-      customCSS: paths.DIST_DIR + 'css/main.css'
+      customCSS: paths.DIST_DIR + 'css/main.css',
+      minifiedIcons: paths.TEMPLATES_DIR + '_icons.svg'
     },
     display: {
       alias: true

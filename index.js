@@ -14,9 +14,11 @@ var parse = require('./lib/parse.js');
 var render = require('./lib/render.js');
 
 var base = path.resolve(__dirname, './templates');
-var iframeTpl = path.join(base, 'example', 'base.j2');
+var example_iFrameTpl = path.join(base, 'example', 'base.j2');
+var icons_iFrameTpl = path.join(base, 'item', 'icons_base.j2');
 
 nunjucks.installJinjaCompat();
+var nunjucksEnv = nunjucks.configure(base, { noCache: true });
 
 /**
  * SassDoc extras (providing Markdown and other filters, and different way to
@@ -250,7 +252,6 @@ var renderHerman = function(dest, ctx) {
   var groupTemplate = path.join(base, 'group.j2');
   var assets = path.resolve(__dirname, './dist');
 
-  var nunjucksEnv = nunjucks.configure(base, { noCache: true });
   nunjucksEnv.addFilter('split', function(str, separator) {
     return str.split(separator);
   });
@@ -272,26 +273,6 @@ var renderHerman = function(dest, ctx) {
     copyShortcutIcon = true;
   }
 
-  // if needed, copy in a custom css file
-  var copyCustomCSS = false;
-  if (ctx.herman.customCSS) {
-    var srcPath = path.resolve(ctx.dir, ctx.herman.customCSS);
-    var cssUrl = 'assets/css/custom/' + path.basename(ctx.herman.customCSS);
-    ctx.customCSS = {
-      path: srcPath,
-      url: cssUrl
-    };
-    copyCustomCSS = true;
-  }
-
-  // if needed, read in minified icons SVG
-  ctx.iconsSvg = '';
-  if (ctx.herman.templatepath && ctx.herman.minifiedIcons) {
-    ctx.iconsSvg = fs.readFileSync(
-      path.join(ctx.herman.templatepath, ctx.herman.minifiedIcons)
-    );
-  }
-
   // render the index template and copy the static assets.
   var promises = [
     render(nunjucksEnv, indexTemplate, indexDest, ctx),
@@ -306,7 +287,7 @@ var renderHerman = function(dest, ctx) {
         return Promise.resolve();
       })
       .then(function() {
-        if (copyCustomCSS) {
+        if (ctx.customCSS) {
           return copy(
             ctx.customCSS.path,
             path.resolve(dest, 'assets/css/custom')
@@ -377,10 +358,14 @@ module.exports = function(dest, ctx) {
   });
 };
 
-var renderIframe = function(env, item) {
-  if (item.rendered) {
-    var nunjucksEnv = nunjucks.configure(base, { noCache: true });
+var renderIframe = function(env, item, type) {
+  if (item.rendered || (item.icons && item.icons.length)) {
+    // if needed, read in minified icons SVG
+    if (env.herman.minifiedIcons && !env.iconsSvg) {
+      env.iconsSvg = fs.readFileSync(env.herman.minifiedIcons);
+    }
 
+    // if needed, prepare custom css file
     if (env.herman.customCSS && !env.customCSS) {
       var srcPath = path.resolve(env.dir, env.herman.customCSS);
       var cssUrl = 'assets/css/custom/' + path.basename(env.herman.customCSS);
@@ -390,14 +375,19 @@ var renderIframe = function(env, item) {
       };
     }
 
-    if (env.herman.templatepath && env.herman.minifiedIcons && !env.iconsSvg) {
-      env.iconsSvg = fs.readFileSync(
-        path.join(env.herman.templatepath, env.herman.minifiedIcons)
-      );
+    var ctx = extend({}, env, { item: item });
+
+    var tpl;
+    switch (type) {
+      case 'example':
+        tpl = example_iFrameTpl;
+        break;
+      case 'icon':
+        tpl = icons_iFrameTpl;
+        break;
     }
 
-    var ctx = extend({}, env, { example: item });
-    item.iframed = nunjucksEnv.render(iframeTpl, ctx);
+    item.iframed = nunjucksEnv.render(tpl, ctx);
   }
 };
 
@@ -419,22 +409,22 @@ module.exports.annotations = [
         return { file: bits[0], name: bits[1] };
       },
       resolve: function(data) {
-        var nunjucksEnv;
+        var customNjkEnv;
         var warned = false;
         data.forEach(function(item) {
           if (!item.macro) {
             return;
           }
-          if (!nunjucksEnv) {
-            nunjucksEnv = getNunjucksEnv('@macro', env, warned);
+          if (!customNjkEnv) {
+            customNjkEnv = getNunjucksEnv('@macro', env, warned);
           }
-          if (!nunjucksEnv) {
+          if (!customNjkEnv) {
             warned = true;
             return;
           }
           var prefix = '{% import "' + item.macro.file + '" as it %}';
           var docTpl = prefix + '{{ it.' + item.macro.name + '_doc }}';
-          item.macro.doc = nunjucksEnv.renderString(docTpl);
+          item.macro.doc = customNjkEnv.renderString(docTpl);
         });
       }
     };
@@ -443,7 +433,7 @@ module.exports.annotations = [
   /**
    * Custom `@icons` annotation. Expects `iconspath macrofile:macroname`.
    *
-   * First argument should be the template path to a directory of icon svg
+   * First argument should be the relative path to a directory of icon svg
    * files. Will render given macroname (from given macrofile) with that icon's
    * name as first argument. Sends to template context an `icons` item which is
    * a list of icons, where each one is an object with properties `name`,
@@ -455,8 +445,8 @@ module.exports.annotations = [
       name: 'icons',
       multiple: false,
       parse: function(raw) {
-        // expects e.g. 'icons/ utility.macros.js.j2:icon' and returns {
-        // iconsPath: 'icons/', macroFile: 'utility.macros.js.j2', macroName:
+        // expects e.g. 'icons/ utility.macros.j2:icon' and returns {
+        // iconsPath: 'icons/', macroFile: 'utility.macros.j2', macroName:
         // 'icon' }
         var bits = raw.split(' ');
         var macrobits = bits[1].split(':');
@@ -467,21 +457,21 @@ module.exports.annotations = [
         };
       },
       resolve: function(data) {
-        var nunjucksEnv;
+        var customNjkEnv;
         var warned = false;
         data.forEach(function(item) {
           if (!item.icons) {
             return;
           }
-          if (!nunjucksEnv) {
-            nunjucksEnv = getNunjucksEnv('@icons', env, warned);
+          if (!customNjkEnv) {
+            customNjkEnv = getNunjucksEnv('@icons', env, warned);
           }
-          if (!nunjucksEnv) {
+          if (!customNjkEnv) {
             warned = true;
             return;
           }
           var inData = item.icons;
-          var iconsPath = path.join(env.herman.templatepath, inData.iconsPath);
+          var iconsPath = inData.iconsPath;
           var iconFiles = fs.readdirSync(iconsPath);
           var renderTpl =
             '{% import "' +
@@ -494,15 +484,17 @@ module.exports.annotations = [
           iconFiles.forEach(function(iconFile) {
             if (path.extname(iconFile) === '.svg') {
               var iconName = path.basename(iconFile, '.svg');
-              item.icons.push({
+              var icon = {
                 name: iconName,
                 path: path.join(inData.iconsPath, iconFile),
-                rendered: nunjucksEnv
+                rendered: customNjkEnv
                   .renderString(renderTpl, { iconName: iconName })
                   .trim()
-              });
+              };
+              item.icons.push(icon);
             }
           });
+          renderIframe(env, item, 'icon');
         });
       }
     };
@@ -554,7 +546,7 @@ module.exports.annotations = [
       name: 'example',
       parse: baseExample.parse,
       resolve: function(data) {
-        var nunjucksEnv;
+        var customNjkEnv;
         var warned = false;
         data.forEach(function(item) {
           if (!item.example) {
@@ -564,14 +556,14 @@ module.exports.annotations = [
             if (exampleItem.type === 'html') {
               exampleItem.rendered = exampleItem.code;
             } else if (exampleItem.type === 'njk') {
-              if (!nunjucksEnv) {
-                nunjucksEnv = getNunjucksEnv('Nunjucks @example', env, warned);
+              if (!customNjkEnv) {
+                customNjkEnv = getNunjucksEnv('Nunjucks @example', env, warned);
               }
-              if (!nunjucksEnv) {
+              if (!customNjkEnv) {
                 warned = true;
                 return;
               }
-              exampleItem.rendered = nunjucksEnv
+              exampleItem.rendered = customNjkEnv
                 .renderString(exampleItem.code)
                 .trim();
             } else if (exampleItem.type === 'scss') {
@@ -608,7 +600,7 @@ module.exports.annotations = [
                 }
               }
             }
-            renderIframe(env, exampleItem);
+            renderIframe(env, exampleItem, 'example');
           });
         });
       }
