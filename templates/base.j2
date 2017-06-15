@@ -48,6 +48,7 @@
 
       <main role="main">
         {% block breadcrumb %}{% endblock %}
+
         <div data-sassdoc-region="main" data-sassdoc-page="{% block page_slug %}{{ activeGroup or 'index' }}{% endblock %}">
           {% block main %}{% endblock %}
         </div>

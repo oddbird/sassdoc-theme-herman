@@ -71,14 +71,6 @@
   }
 }
 
-.text-block {
-  max-width: 80ch;
-
-  p {
-    margin-bottom: size('gutter');
-  }
-}
-
 .summary-subtitle {
   color: color('text-light');
   margin: size('gutter') 0 size('half-shim');
