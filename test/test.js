@@ -137,7 +137,7 @@ describe('icons annotation', function() {
       var data = [
         {
           icons: {
-            iconsPath: 'icons/',
+            iconsPath: 'test/templates/icons',
             macroFile: 'macros.j2',
             macroName: 'icon'
           }
@@ -146,22 +146,19 @@ describe('icons annotation', function() {
 
       this.icons.resolve(data);
 
-      assert.deepEqual(data, [
+      assert.deepEqual(data[0].icons, [
         {
-          icons: [
-            {
-              name: 'ok',
-              path: 'icons/ok.svg',
-              rendered: 'rendered ok'
-            },
-            {
-              name: 'warning',
-              path: 'icons/warning.svg',
-              rendered: 'rendered warning'
-            }
-          ]
+          name: 'ok',
+          path: 'test/templates/icons/ok.svg',
+          rendered: 'rendered ok'
+        },
+        {
+          name: 'warning',
+          path: 'test/templates/icons/warning.svg',
+          rendered: 'rendered warning'
         }
       ]);
+      assert.ok(data[0].iframed !== undefined);
     });
   });
 });

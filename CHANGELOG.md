@@ -1,5 +1,9 @@
 # Herman Changelog
 
+## 1.0.0-alpha.7: unreleased
+
+- BUGFIX: Render icon previews in iframes.
+
 ## 1.0.0-alpha.6: 2017-06-14
 
 - BREAKING: Render examples in iframes and only include custom CSS
