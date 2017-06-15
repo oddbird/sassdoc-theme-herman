@@ -105,8 +105,14 @@
 /// Navigation items, with inactive and active states.
 /// @group layout
 /// @example html
-///   <a href="#" data-sassdoc-nav="is-not-active">not active</a>
-///   <a href="#" data-sassdoc-nav="is-active">active</a>
+///   <ul data-nav-menu>
+///     <li data-sassdoc="nav-item">
+///       <a href="#" data-sassdoc-nav="is-not-active">not active</a>
+///     </li>
+///     <li data-sassdoc="nav-item">
+///       <a href="#" data-sassdoc-nav="is-active">active</a>
+///     </li>
+///   </ul>
 [data-sassdoc-nav] {
   #{$link} {
     color: color('background');
