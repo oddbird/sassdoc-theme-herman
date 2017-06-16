@@ -42,6 +42,7 @@ $text-sizes: (
   'small-rem': 16px ('convert-units': 'rem'),
 
   'large': calc(%s + %s) ('base-rem', 1.5vw),
+  'medium': calc(%s + %s) ('base-rem', 0.5vw),
   'base': calc(%s + %s) ('small-rem', 0.5vw),
   'small': calc(%s + %s) ('small-rem', 0.25vw),
   'code': calc(0.75rem + 0.25vw),
@@ -49,6 +50,7 @@ $text-sizes: (
   'h1': calc(%s + %s) ('base-rem', 2.5vw),
   'h2': calc(%s + %s) ('base-rem', 2vw),
   'h3': 'large',
+  'quote': 'medium',
 );
 
 @include herman-add-sizes('text-sizes', $text-sizes);

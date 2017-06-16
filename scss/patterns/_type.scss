@@ -32,4 +32,27 @@
   ul {
     margin: size('shim') size('gutter') size('gutter');
   }
+
+  blockquote {
+    border-left: size('half-shim') solid color('light-border');
+    font-size: size('quote');
+    padding-left: size('shim') + size('half-shim');
+
+    > :first-child {
+      text-indent: -0.4em;
+    }
+
+    > :nth-last-child(2) {
+      margin-bottom: size('shim');
+    }
+
+    > :last-child {
+      margin-top: size('shim');
+    }
+
+    cite {
+      display: block;
+      font-size: size('small');
+    }
+  }
 }

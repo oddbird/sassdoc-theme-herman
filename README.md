@@ -3,6 +3,12 @@ Herman [a SassDoc theme]
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/oddbird/sassdoc-theme-herman.svg)](https://greenkeeper.io/)
 
+> “Documentation should be the default option,
+> baked directly into the development process.
+> If it’s not documented, it doesn't exist.”
+>
+> <cite>—Miriam Suzanne</cite>
+
 At [OddBird][oddbird],
 we wanted to a tool to help us
 document the entire front end of a project,
