@@ -1,9 +1,10 @@
 # Herman Changelog
 
-## 1.0.0-alpha.7: unreleased
+## 1.0.0-alpha.7: 2017-06-16
 
 - BUGFIX: Render icon previews in iframes.
 - BUGFIX: Adjusted styles for navigation and text.
+- BUGFIX: Added styles for blockquotes.
 
 ## 1.0.0-alpha.6: 2017-06-14
 
