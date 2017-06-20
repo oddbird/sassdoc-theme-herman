@@ -26,7 +26,15 @@
     "precommit": "lint-staged"
   },
   "lint-staged": {
-    "*.js": [
+    "{lib/,test/}**/*.js": [
+      "prettier --single-quote --write",
+      "git add"
+    ],
+    "assets/js/{base,init}.js": [
+      "prettier --single-quote --write",
+      "git add"
+    ],
+    "{gulpfile,index}.js": [
       "prettier --single-quote --write",
       "git add"
     ]
