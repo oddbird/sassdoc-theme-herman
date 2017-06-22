@@ -63,7 +63,7 @@
     "gulp-svg-symbols": "^2.0.2",
     "gulp-uglify": "^3.0.0",
     "gulp-util": "^3.0.7",
-    "husky": "^0.13.3",
+    "husky": "^0.14.0",
     "lint-staged": "^4.0.0",
     "mathsass": "^0.10.0",
     "mocha": "^3.1.2",
