@@ -5,6 +5,9 @@
 - BUGFIX: Render icon previews in iframes.
 - BUGFIX: Adjusted styles for navigation and text.
 - BUGFIX: Added styles for blockquotes.
+- BREAKING: `minifiedIcons` option and the first argument to the `@icons`
+  annotation are both paths relative to the project directory, no longer
+  relative to the `templatepath` option.
 
 ## 1.0.0-alpha.6: 2017-06-14
 
