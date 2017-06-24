@@ -2,25 +2,153 @@
 // =================
 
 
+[data-nav-menu='small'] {
+  @include stretch(0, null, 0, null, absolute);
+  box-shadow: 0 0 size('half-shim') color('shadow');
+  transform: translatex(-102%);
+  transition: transform 0.4s;
+  width: 100%;
+
+  &[aria-expanded='true'] {
+    transform: translatex(0);
+  }
+
+  @include below('nav-small') {
+    align-content: flex-start;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  @include above('nav-small') {
+    width: auto;
+  }
+
+  @include above('page') {
+    display: none;
+  }
+}
+
+[data-nav-menu='large'] {
+  flex: 0 1 0;
+  margin-left: -100%;
+  transition: margin-left 0.4s;
+
+  &[aria-expanded='true'] {
+    margin-left: 0;
+  }
+
+  @include below('page') {
+    display: none;
+  }
+}
+
+[data-nav-toggle='small'] {
+  @include above('page') {
+    display: none;
+  }
+}
+
+[data-nav-toggle='large'] {
+  @include below('page') {
+    display: none;
+  }
+}
+
+[data-nav-toggle] {
+  fill: color('theme-dark');
+  padding: size('half-shim');
+
+  @include above('page') {
+    padding-left: size('shim');
+    padding-right:  size('shim');
+  }
+
+  #{$focus} {
+    fill: color('focus');
+  }
+}
+
+
+[data-sassdoc='nav-item'] {
+  list-style: none;
+  margin-bottom: size('shim');
+
+  @include below('nav-small') {
+    width: 50%;
+
+    &:nth-of-type(2n) {
+      padding-right: 1rem;
+    }
+  }
+}
+
+// Nav Titles
+// ----------
+[data-sassdoc='nav-title'] {
+  font-weight: bold;
+  margin: size('half-shim') 0 size('shim');
+  padding-top: size('shim');
+  width: 100%;
+
+  // add a top separator to all but the first nav-title
+  &:nth-of-type(n+2) {
+    border-top: 1px solid color('theme-light');
+    margin-top: size('gutter');
+    padding-top: size('gutter');
+  }
+}
+
+
 // Nav Links
 // ---------
 /// Navigation items, with inactive and active states.
 /// @group layout
 /// @example html
-///   <a href="#" data-sassdoc-nav="is-not-active">not active</a>
-///   <a href="#" data-sassdoc-nav="is-active">active</a>
+///   <ul data-nav-menu>
+///     <li data-sassdoc="nav-item">
+///       <a href="#" data-sassdoc-nav="is-not-active">not active</a>
+///     </li>
+///     <li data-sassdoc="nav-item">
+///       <a href="#" data-sassdoc-nav="is-active">active</a>
+///     </li>
+///   </ul>
 [data-sassdoc-nav] {
   #{$link} {
-    color: inherit;
-    font-style: italic;
-    text-transform: capitalize;
+    color: color('background');
+    line-height: 1.1;
+    padding-bottom: size('quarter-shim');
+    position: relative;
+    text-decoration: none;
+    transition: color 0.4s;
+
+    // Animated underlines
+    @include before('') {
+      @include stretch(auto, auto, 0, 0);
+      background: color('theme-light');
+      height: size('nav-underline');
+      transform: scale3d(0, 1, 1);
+      transform-origin: center left;
+      transition: transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+      transition-delay: 0.2s;
+      width: 100%;
+    }
+  }
+
+  #{$focus} {
+    @include before('') {
+      transform: scale3d(1, 1, 1);
+      transition-delay: 0s;
+    }
   }
 
   &[data-sassdoc-nav='is-active'] {
-    #{$link} {
-      color: color('active');
-      text-decoration: none;
+    #{$link},
+    #{$focus} {
+      @include before('') {
+        transform: scale3d(1, 1, 1);
+        transition-delay: 0s;
+      }
     }
   }
 }
-

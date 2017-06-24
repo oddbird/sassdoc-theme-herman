@@ -1,10 +1,17 @@
 // Banner Theme
 // ============
 
+[data-sassdoc-region='banner'] {
+  @include section-arrow;
+  @include z-index('banner');
+  box-shadow: 0 2px 2px color('shadow');
+  display: flex;
+  padding: size('shim');
+}
+
 [data-sassdoc='project-version'] {
   @include font-family('sans');
-  @include font-size('root');
-  color: color('light');
-  font-style: normal;
+  color: color('text-light');
+  font-size: size('base');
   font-weight: normal;
 }

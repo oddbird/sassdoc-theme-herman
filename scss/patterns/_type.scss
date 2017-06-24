@@ -1,0 +1,58 @@
+// Typography Styles
+// =================
+
+
+/// Style a block of rendered html-text,
+/// with line-length and typographic styles.
+/// @group typography
+.text-block {
+  max-width: 90ch;
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    color: color('black');
+    margin-bottom: size('shim');
+  }
+
+  h1 {
+    font-size: size('h2');
+  }
+
+  h2 {
+    font-size: size('h3');
+  }
+
+  p {
+    margin: size('gutter') 0;
+  }
+
+  ol,
+  ul {
+    margin: size('shim') size('gutter') size('gutter');
+  }
+
+  blockquote {
+    border-left: size('half-shim') solid color('light-border');
+    font-size: size('quote');
+    padding-left: size('shim') + size('half-shim');
+
+    > :first-child {
+      text-indent: -0.4em;
+    }
+
+    > :nth-last-child(2) {
+      margin-bottom: size('shim');
+    }
+
+    > :last-child {
+      margin-top: size('shim');
+    }
+
+    cite {
+      display: block;
+      font-size: size('small');
+    }
+  }
+}

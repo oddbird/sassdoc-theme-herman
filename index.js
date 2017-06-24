@@ -5,12 +5,20 @@ var fs = require('fs');
 var nunjucks = require('nunjucks');
 var path = require('path');
 var Promise = require('bluebird');
+var sass = require('node-sass');
+var sassdoc = require('sassdoc');
+var yaml = require('js-yaml');
 
 var copy = require('./lib/assets.js');
 var parse = require('./lib/parse.js');
 var render = require('./lib/render.js');
 
+var base = path.resolve(__dirname, './templates');
+var example_iFrameTpl = path.join(base, 'example', 'base.j2');
+var icons_iFrameTpl = path.join(base, 'item', 'icons_base.j2');
+
 nunjucks.installJinjaCompat();
+var nunjucksEnv = nunjucks.configure(base, { noCache: true });
 
 /**
  * SassDoc extras (providing Markdown and other filters, and different way to
@@ -20,34 +28,30 @@ nunjucks.installJinjaCompat();
  */
 var extras = require('sassdoc-extras');
 
-/**
- * Actual theme function. It takes the destination directory `dest`,
- * and the context variables `ctx`.
- */
-var herman = function (dest, ctx) {
-  var base = path.resolve(__dirname, './templates');
-  var indexTemplate = path.join(base, 'index.j2');
-  var indexDest = path.join(dest, 'index.html');
-  var groupTemplate = path.join(base, 'group.j2');
-  var assets = path.resolve(__dirname, './dist');
-
-  var nunjucksEnv = nunjucks.configure(base, { noCache: true });
-  nunjucksEnv.addFilter('split', function (str, separator) {
-    return str.split(separator);
+var byGroup = function(data) {
+  var sorted = {};
+  data.forEach(function(item) {
+    var group = item.group[0];
+    if (!(group in sorted)) {
+      sorted[group] = [];
+    }
+    sorted[group].push(item);
   });
+  return sorted;
+};
 
-  dest = path.resolve(dest);
-
+var prepareContext = function(ctx) {
   var def = {
     display: {
-      access: [ 'public', 'private' ],
+      access: ['public', 'private'],
       alias: false,
       watermark: true
     },
     groups: {
       undefined: 'general'
     },
-    sort: [ 'group', 'file', 'line', 'access' ]
+    sort: ['group', 'file', 'line', 'access'],
+    herman: { sass: {} }
   };
 
   // Apply default values for groups and display.
@@ -65,8 +69,8 @@ var herman = function (dest, ctx) {
    * Load a `sass-json file` (if one is given in the context) and add its
    * contents under the `sassjson` key of the context.
    */
-  if (ctx.sassjsonfile) {
-    ctx.sassjson = parse.sassJson(fs.readFileSync(ctx.sassjsonfile));
+  if (ctx.herman.sass.jsonfile) {
+    ctx.sassjson = parse.sassJson(fs.readFileSync(ctx.herman.sass.jsonfile));
   }
 
   /**
@@ -74,7 +78,7 @@ var herman = function (dest, ctx) {
    * (We detect these if the context starts more than one line after the
    * sassdoc comment ends.)
    */
-  ctx.data.forEach(function (item) {
+  ctx.data.forEach(function(item) {
     if (!item.context || !item.context.line) {
       return;
     }
@@ -195,7 +199,7 @@ var herman = function (dest, ctx) {
   extras.resolveVariables(ctx);
 
   /**
-   * Index the data by group and type, so we have the following structure:
+   * Index the data by group, so we have the following structure:
    *
    *     {
    *       "group-slug": [...],
@@ -205,18 +209,81 @@ var herman = function (dest, ctx) {
    * You can then use `data.byGroup` instead of `data` in your
    * templates to manipulate the indexed object.
    */
-  var byGroup = function (data) {
-    var sorted = {};
-    data.forEach(function (item) {
-      var group = item.group[0];
-      if (!(group in sorted)) {
-        sorted[group] = [];
+  ctx.byGroup = byGroup(ctx.data);
+
+  return ctx;
+};
+
+var parseSubprojects = function(ctx) {
+  var promises = [];
+  if (ctx.herman.subprojects) {
+    ctx.subprojects = {};
+    ctx.herman.subprojects.forEach(function(name) {
+      var prjPath = './node_modules/' + name + '/';
+      var configFile = prjPath + '.sassdocrc';
+      var config = {};
+      try {
+        // Load .sassdocrc configuration from subproject directory
+        config = yaml.safeLoad(fs.readFileSync(configFile, 'utf-8'));
+      } catch (err) {
+        ctx.logger.warn(
+          'Invalid or no .sassdocrc found for subproject: ' + name
+        );
       }
-      sorted[group].push(item);
+      if (!config.description && !config.descriptionPath) {
+        // Set default descriptionPath for subproject
+        config.descriptionPath = prjPath + 'README.md';
+      }
+      var src;
+      if (config.src) {
+        // Set subproject src files based on .sassdocrc `src` option
+        src = path.isAbsolute(config.src) ? config.src : prjPath + config.src;
+      } else {
+        // Fall back to all subproject `.scss` files
+        src = prjPath + '**/*.scss';
+      }
+      // Remove unused/unnecessary config options
+      config.src = undefined;
+      config.theme = undefined;
+      config.dest = undefined;
+      var prjCtx = extend({}, config);
+      var promise = sassdoc.parse(src, prjCtx).then(function(data) {
+        prjCtx.package = ctx.package;
+        prjCtx.basePath = '../';
+        prjCtx.activeProject = name;
+        prjCtx.data = data;
+        prjCtx.subprojects = ctx.subprojects;
+        prjCtx.topGroups = ctx.groups;
+        prjCtx.topByGroup = ctx.byGroup;
+        ctx.subprojects[name] = prepareContext(prjCtx);
+      });
+      promises.push(promise);
     });
-    return sorted;
-  };
-  ctx.data.byGroup = byGroup(ctx.data);
+  }
+  return Promise.all(promises);
+};
+
+/**
+ * Actual theme function. It takes the destination directory `dest`,
+ * and the context variables `ctx`.
+ */
+var renderHerman = function(dest, ctx) {
+  var indexTemplate = path.join(base, 'index.j2');
+  var indexDest = path.join(dest, 'index.html');
+  var groupTemplate = path.join(base, 'group.j2');
+  var assets = path.resolve(__dirname, './dist');
+
+  nunjucksEnv.addFilter('split', function(str, separator) {
+    return str.split(separator);
+  });
+
+  dest = path.resolve(dest);
+
+  // set (external) base path for links
+  ctx.basePath = '';
+  ctx.activeProject = null;
+  ctx.topByGroup = ctx.byGroup;
+  ctx.topGroups = ctx.groups;
 
   // check if we need to copy a favicon file or use the default
   var copyShortcutIcon = false;
@@ -227,74 +294,122 @@ var herman = function (dest, ctx) {
     copyShortcutIcon = true;
   }
 
-  // if needed, copy in a custom css file
-  var copyCustomCSS = false;
-  if (ctx.customCSS) {
-    var srcPath = path.resolve(ctx.dir, ctx.customCSS);
-    var cssUrl = 'assets/css/custom/' + path.basename(ctx.customCSS);
-    ctx.customCSS = {
-      path: srcPath,
-      url: cssUrl
-    };
-    copyCustomCSS = true;
-  }
-
-  // if needed, read in minified icons SVG
-  ctx.iconsSvg = '';
-  if (ctx.templatepath && ctx.minifiedIcons) {
-    ctx.iconsSvg = fs.readFileSync(
-      path.join(ctx.templatepath, ctx.minifiedIcons));
-  }
-
   // render the index template and copy the static assets.
   var promises = [
     render(nunjucksEnv, indexTemplate, indexDest, ctx),
     copy(
-      path.join(assets, '/**/*.{css,js,svg,png,eot,woff,woff2,ttf,ico,map}'),
+      path.join(assets, '/**/*.{css,js,png,eot,woff,woff2,ttf,ico,map}'),
       path.join(dest, 'assets')
-    ).then(function () {
-      if (copyShortcutIcon) {
-        return copy(ctx.shortcutIcon.path, path.resolve(dest, 'assets/img/'));
-      }
-      return Promise.resolve();
-    }).then(function () {
-      if (copyCustomCSS) {
-        return copy(
-          ctx.customCSS.path,
-          path.resolve(dest, 'assets/css/custom')
-        );
-      }
-      return Promise.resolve();
-    })
+    )
+      .then(function() {
+        if (copyShortcutIcon) {
+          return copy(ctx.shortcutIcon.path, path.resolve(dest, 'assets/img/'));
+        }
+        return Promise.resolve();
+      })
+      .then(function() {
+        if (ctx.customCSS) {
+          return copy(
+            ctx.customCSS.path,
+            path.resolve(dest, 'assets/css/custom')
+          );
+        }
+        return Promise.resolve();
+      })
   ];
 
-  // Render a template for each group, too. The group template is passed the
-  // main context with an added `data.currentGroup` key which contains the name
-  // of the current group.
-  Object.getOwnPropertyNames(ctx.data.byGroup).forEach(
-    function (groupName) {
-      var groupDest = path.join(dest, groupName + '.html');
-      var groupData = extend({ currentGroup: groupName }, ctx.data);
-      var groupCtx = extend({}, ctx);
-      groupCtx.data = groupData;
-      promises.push(render(nunjucksEnv, groupTemplate, groupDest, groupCtx));
-    }
-  );
+  var getRenderCtx = function(context, groupName) {
+    return extend({}, context, {
+      pageTitle: context.groups[groupName],
+      activeGroup: groupName,
+      items: context.byGroup[groupName]
+    });
+  };
+
+  // Render a page for each group, too.
+  Object.getOwnPropertyNames(ctx.byGroup).forEach(function(groupName) {
+    var groupDest = path.join(dest, groupName + '.html');
+    var groupCtx = getRenderCtx(ctx, groupName);
+    promises.push(render(nunjucksEnv, groupTemplate, groupDest, groupCtx));
+  });
+
+  if (ctx.subprojects) {
+    // Render pages for subprojects.
+    Object.getOwnPropertyNames(ctx.subprojects).forEach(function(prjName) {
+      var prjCtx = ctx.subprojects[prjName];
+      var prjDest = path.join(dest, prjName);
+      var pageDest = path.join(prjDest, 'index.html');
+      promises.push(render(nunjucksEnv, indexTemplate, pageDest, prjCtx));
+
+      Object.getOwnPropertyNames(prjCtx.byGroup).forEach(function(groupName) {
+        var groupDest = path.join(prjDest, groupName + '.html');
+        var groupCtx = getRenderCtx(prjCtx, groupName);
+        promises.push(render(nunjucksEnv, groupTemplate, groupDest, groupCtx));
+      });
+    });
+  }
 
   return Promise.all(promises);
 };
 
 // get nunjucks env lazily so that we only throw an error on missing
 // templatepath if annotation was actually used.
-var getNunjucksEnv = function (name, env, warned) {
-  if (env.nunjucksEnv) { return env.nunjucksEnv; }
-  if (!env.templatepath) {
+var getNunjucksEnv = function(name, env, warned) {
+  if (env.herman && env.herman.nunjucksEnv) {
+    return env.herman.nunjucksEnv;
+  }
+  if (!env.herman || !env.herman.templatepath) {
     if (!warned) {
       env.logger.warn('Must pass in a templatepath if using ' + name + '.');
     }
     return null;
   }
-  return nunjucks.configure(env.templatepath);
+  return nunjucks.configure(env.herman.templatepath);
+};
+
+/**
+ * Actual theme function. It takes the destination directory `dest`,
+ * and the context variables `ctx`.
+ */
+var herman = function(dest, ctx) {
+  ctx = prepareContext(ctx);
+
+  return parseSubprojects(ctx).then(function() {
+    return renderHerman(dest, ctx);
+  });
+};
+
+var renderIframe = function(env, item, type) {
+  if (item.rendered || (item.icons && item.icons.length)) {
+    // if needed, read in minified icons SVG
+    if (env.herman.minifiedIcons && !env.iconsSvg) {
+      env.iconsSvg = fs.readFileSync(env.herman.minifiedIcons);
+    }
+
+    // if needed, prepare custom css file
+    if (env.herman.customCSS && !env.customCSS) {
+      var srcPath = path.resolve(env.dir, env.herman.customCSS);
+      var cssUrl = 'assets/css/custom/' + path.basename(env.herman.customCSS);
+      env.customCSS = {
+        path: srcPath,
+        url: cssUrl
+      };
+    }
+
+    var ctx = extend({}, env, { item: item });
+
+    var tpl;
+    switch (type) {
+      case 'example':
+        tpl = example_iFrameTpl;
+        break;
+      case 'icon':
+        tpl = icons_iFrameTpl;
+        break;
+    }
+
+    item.iframed = nunjucksEnv.render(tpl, ctx);
+  }
 };
 
 herman.annotations = [
@@ -304,31 +419,33 @@ herman.annotations = [
    * The referenced macro should have a `macroname_doc` (a string containing
    * documentation for the macro) var defined in the same macro file.
    */
-  function macro (env) {
+  function macro(env) {
     return {
       name: 'macro',
       multiple: false,
-      parse: function (raw) {
+      parse: function(raw) {
         // expects e.g. 'forms.macros.js.j2:label' and returns { file:
         // 'forms.macros.js.j2', name: 'label' }
         var bits = raw.split(':');
         return { file: bits[0], name: bits[1] };
       },
-      resolve: function (data) {
-        var nunjucksEnv;
+      resolve: function(data) {
+        var customNjkEnv;
         var warned = false;
-        data.forEach(function (item) {
-          if (!item.macro) { return; }
-          if (!nunjucksEnv) {
-            nunjucksEnv = getNunjucksEnv('@macro', env, warned);
+        data.forEach(function(item) {
+          if (!item.macro) {
+            return;
           }
-          if (!nunjucksEnv) {
+          if (!customNjkEnv) {
+            customNjkEnv = getNunjucksEnv('@macro', env, warned);
+          }
+          if (!customNjkEnv) {
             warned = true;
             return;
           }
           var prefix = '{% import "' + item.macro.file + '" as it %}';
           var docTpl = prefix + '{{ it.' + item.macro.name + '_doc }}';
-          item.macro.doc = nunjucksEnv.renderString(docTpl);
+          item.macro.doc = customNjkEnv.renderString(docTpl);
         });
       }
     };
@@ -337,20 +454,20 @@ herman.annotations = [
   /**
    * Custom `@icons` annotation. Expects `iconspath macrofile:macroname`.
    *
-   * First argument should be the template path to a directory of icon svg
+   * First argument should be the relative path to a directory of icon svg
    * files. Will render given macroname (from given macrofile) with that icon's
    * name as first argument. Sends to template context an `icons` item which is
    * a list of icons, where each one is an object with properties `name`,
    * `path`, and `rendered` (where the latter is the result of rendering the
    * icon macro).
    */
-  function icons (env) {
+  function icons(env) {
     return {
       name: 'icons',
       multiple: false,
-      parse: function (raw) {
-        // expects e.g. 'icons/ utility.macros.js.j2:icon' and returns {
-        // iconsPath: 'icons/', macroFile: 'utility.macros.js.j2', macroName:
+      parse: function(raw) {
+        // expects e.g. 'icons/ utility.macros.j2:icon' and returns {
+        // iconsPath: 'icons/', macroFile: 'utility.macros.j2', macroName:
         // 'icon' }
         var bits = raw.split(' ');
         var macrobits = bits[1].split(':');
@@ -360,35 +477,45 @@ herman.annotations = [
           macroName: macrobits[1]
         };
       },
-      resolve: function (data) {
-        var nunjucksEnv;
+      resolve: function(data) {
+        var customNjkEnv;
         var warned = false;
-        data.forEach(function (item) {
-          if (!item.icons) { return; }
-          if (!nunjucksEnv) {
-            nunjucksEnv = getNunjucksEnv('@icons', env, warned);
+        data.forEach(function(item) {
+          if (!item.icons) {
+            return;
           }
-          if (!nunjucksEnv) {
+          if (!customNjkEnv) {
+            customNjkEnv = getNunjucksEnv('@icons', env, warned);
+          }
+          if (!customNjkEnv) {
             warned = true;
             return;
           }
           var inData = item.icons;
-          var iconsPath = path.join(env.templatepath, inData.iconsPath);
+          var iconsPath = inData.iconsPath;
           var iconFiles = fs.readdirSync(iconsPath);
-          var renderTpl = '{% import "' + inData.macroFile + '" as it %}' +
-            '{{ it.' + inData.macroName + '(iconName) }}';
+          var renderTpl =
+            '{% import "' +
+            inData.macroFile +
+            '" as it %}' +
+            '{{ it.' +
+            inData.macroName +
+            '(iconName) }}';
           item.icons = [];
-          iconFiles.forEach(function (iconFile) {
+          iconFiles.forEach(function(iconFile) {
             if (path.extname(iconFile) === '.svg') {
               var iconName = path.basename(iconFile, '.svg');
-              item.icons.push({
+              var icon = {
                 name: iconName,
                 path: path.join(inData.iconsPath, iconFile),
-                rendered: nunjucksEnv.renderString(
-                  renderTpl, { iconName: iconName }).trim()
-              });
+                rendered: customNjkEnv
+                  .renderString(renderTpl, { iconName: iconName })
+                  .trim()
+              };
+              item.icons.push(icon);
             }
           });
+          renderIframe(env, item, 'icon');
         });
       }
     };
@@ -398,17 +525,17 @@ herman.annotations = [
    * Custom `@preview` annotation. Expects comma-separated list of names of
    * preview types.
    */
-  function preview () {
+  function preview() {
     return {
       name: 'preview',
       multiple: false,
-      parse: function (raw) {
+      parse: function(raw) {
         // expects e.g. 'color-palette; key: sans; sizes: text-sizes;'
         // and returns object {
         //   type: "color-palette", key: "sans", sizes: "text-sizes" }
         var options = {};
         var key, value;
-        raw.split(';').forEach(function (option) {
+        raw.split(';').forEach(function(option) {
           var parts = option.split(':');
           key = parts[0].trim();
           value = parts[1] ? parts[1].trim() : null;
@@ -430,7 +557,7 @@ herman.annotations = [
    * If example language is 'njk' (nunjucks), render the example
    * and put the result in the `rendered` property of the parsed example.
    */
-  function example (env) {
+  function example(env) {
     var baseExampleFn = require('sassdoc/dist/annotation/annotations/example');
     if (typeof baseExampleFn !== 'function') {
       baseExampleFn = baseExampleFn.default;
@@ -439,31 +566,67 @@ herman.annotations = [
     return {
       name: 'example',
       parse: baseExample.parse,
-      resolve: function (data) {
-        var nunjucksEnv;
+      resolve: function(data) {
+        var customNjkEnv;
         var warned = false;
-        data.forEach(function (item) {
-          if (!item.example) { return; }
-          item.example.forEach(function (exampleItem) {
+        data.forEach(function(item) {
+          if (!item.example) {
+            return;
+          }
+          item.example.forEach(function(exampleItem) {
             if (exampleItem.type === 'html') {
               exampleItem.rendered = exampleItem.code;
             } else if (exampleItem.type === 'njk') {
-              if (!nunjucksEnv) {
-                nunjucksEnv = getNunjucksEnv('Nunjucks @example', env, warned);
+              if (!customNjkEnv) {
+                customNjkEnv = getNunjucksEnv('Nunjucks @example', env, warned);
               }
-              if (!nunjucksEnv) {
+              if (!customNjkEnv) {
                 warned = true;
                 return;
               }
-              exampleItem.rendered = nunjucksEnv.renderString(
-                exampleItem.code).trim();
+              exampleItem.rendered = customNjkEnv
+                .renderString(exampleItem.code)
+                .trim();
+            } else if (exampleItem.type === 'scss') {
+              var sassData = exampleItem.code;
+              exampleItem.rendered = undefined;
+              if (env.herman && env.herman.sass) {
+                try {
+                  if (env.herman.sass.includes) {
+                    var arr = env.herman.sass.includes;
+                    for (var i = arr.length - 1; i >= 0; i = i - 1) {
+                      sassData = "@import '" + arr[i] + "';\n" + sassData;
+                    }
+                  }
+                  var rendered = sass.renderSync({
+                    data: sassData,
+                    importer: function(url) {
+                      if (url[0] === '~') {
+                        url = path.resolve('node_modules', url.substr(1));
+                      }
+                      return { file: url };
+                    },
+                    includePaths: env.herman.sass.includepaths || [],
+                    outputStyle: 'expanded'
+                  });
+                  var encoded = rendered.css.toString('utf-8');
+                  exampleItem.rendered = encoded;
+                } catch (err) {
+                  env.logger.warn(
+                    'Error compiling @example scss: \n' +
+                      err.message +
+                      '\n' +
+                      sassData
+                  );
+                }
+              }
             }
+            renderIframe(env, exampleItem, 'example');
           });
         });
       }
     };
   }
-
 ];
 
 // make sure sassdoc will preserve comments not attached to Sass

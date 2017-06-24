@@ -10,13 +10,13 @@
 // ------
 
 [data-sassdoc='font-type'] {
-  @include font-size('h3');
+  font-size: size('h3');
   font-weight: bold;
 }
 
 [data-sassdoc='font-stack'] {
   @include font-family('code');
-  @include font-size('smaller');
+  font-size: size('small');
 }
 
 
@@ -40,8 +40,8 @@
 }
 
 [data-specimen='aa'] {
-  @include font-size('specimen');
   flex: 0 1 auto;
+  font-size: size('specimen');
 }
 
 [data-specimen='lorem'] {

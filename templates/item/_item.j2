@@ -1,41 +1,40 @@
-{% import 'item/macros.j2' as code %}
+{% import 'item/annotation.macros.j2' as annotation %}
+{% import 'item/example.macros.j2' as example %}
+{% import 'item/macros.j2' as show %}
 {% import 'item/preview.macros.j2' as preview %}
 
 {% set slug = item.context.name|urlencode|replace("'", '') %}
 {% set id = [type, slug]|join('--') %}
+{% set display_private = display and display.access and ('private' in display.access) %}
+{% set display_alias = display and display.alias %}
 
-<section data-sassdoc-item='{{ type }}' {% if id -%} id="{{ id }} {%- endif %}">
-  {% set item_name = [item.context.name, '()']|join('') if (type == 'mixin' or type == 'function') else item.context.name %}
-  {% set item_name = ['$', item_name]|join('') if type == 'variable' else item_name %}
-  {% if item_name %}
-    <h3 data-sassdoc="item-title">
-      <span data-sassdoc="item-name">{{ item_name }}</span>
-      <span data-sassdoc="item-type">{{ type }}</span>
-    </h3>
-  {% endif %}
-
-  {% if item.description %}
-    <div data-sassdoc="item-description">
-      <p>{{ item.description|safe }}</p>
-    </div>
-  {% endif %}
+<section class="item"{% if id %} id="{{ id }}"{% endif %}>
+  {{ show.heading(item, type, id, display) }}
 
   {% if type != 'prose' %}
-    {{ code.source(item, type) }}
+    {{ show.source(item, type) }}
   {% endif %}
-  {{ code.link(item) }}
-  {{ code.see(item) }}
-  {{ code.parameter(item) }}
-  {{ code.property(item) }}
-  {{ code.require(item) }}
+  {{ show.summary(item) }}
 
-  {{ code.examples(item.example, id) }}
+  {{ annotation.param_or_prop(
+    params_data=item.parameter,
+    props_data=item.property,
+    content_data=item.content,
+    return_data=item.return,
+    output_data=item.output,
+    throw_data=item.throw
+    ) }}
 
+  {{ example.list(item.example, id) }}
+
+  {{ annotation.related(item, display_private) }}
+  {{ annotation.require_or_used(item, display_private, display_alias) }}
+  {{ annotation.todo(item) }}
+
+  {{ preview.icons(item) }}
   {{ preview.show_previews(
     data=sassjson,
     name=item.context.name,
     args=item.preview
-    ) }}
-
-  {{ preview.icons(item.icons) }}
+  ) }}
 </section>

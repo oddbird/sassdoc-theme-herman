@@ -1,41 +1,63 @@
 // Examples
 // ========
 
-[data-sassdoc-example] {
-  margin: size('gutter') 0;
+.example {
+  margin-bottom: size('gutter');
+}
 
-  [aria-hidden='true'] {
+.example-code {
+  align-items: stretch;
+  border: 1px solid color('theme-light');
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+
+  [data-sassdoc='hljs'] {
+    margin-bottom: 0; // override the hljs margin needed for non-nested blocks
+  }
+
+  &[aria-hidden='true'] {
     display: none;
   }
 }
 
-[data-sassdoc='example-tabs'] {
-  @include font-family('code');
-  @include font-size('smaller');
-
-  [aria-controls] {
-    display: inline-block;
-    padding: 0 size('shim');
-  }
-
-  [aria-selected='true'] {
-    @include contrasted('text');
-  }
-}
-
-[data-sassdoc='example-tab-solo'] {
-  @include contrasted('text');
-  display: inline-block;
-  padding: 0 size('shim');
-}
-
-[data-sassdoc-example-panel] {
-  border: 1px solid color('border');
+.code-block {
+  align-items: stretch;
+  display: flex;
+  flex: 1 1 40%;
+  flex-direction: column;
   max-height: size('rhythm') * 12;
   max-width: 100%;
+  min-width: 20em;
   overflow: auto;
+
+  & + & {
+    border-left: 1px solid color('theme-light');
+  }
 }
 
-[data-sassdoc-example-panel='output'] {
+.code-header {
+  @include contrasted('theme-light');
+  flex: 0 0 auto;
+  font-size: size('small');
+  padding: 0 size('shim');
+
+  + [data-sassdoc='hljs'] {
+    flex: 1 1 auto;
+  }
+}
+
+.code-description {
+  @include before(' – ');
+  font-size: size('small');
+}
+
+.example-render {
+  border: 1px solid color('light-border');
+  border-top: 0;
   padding: size('shim');
+}
+
+.sassdoc {
+  overflow: visible;
 }

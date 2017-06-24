@@ -1,13 +1,11 @@
-window.Herman = (function (Herman, $) {
-
+window.Herman = (function(Herman, $) {
   'use strict';
-
-  $(function () {
+  $(function() {
     window.hljs.initHighlightingOnLoad();
     Herman.initializeToggles();
     Herman.initializeTabs();
+    Herman.initializeIframes();
   });
 
   return Herman;
-
-}(window.Herman || {}, window.jQuery));
+})(window.Herman || {}, window.jQuery);

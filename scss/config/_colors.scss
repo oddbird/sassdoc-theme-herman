@@ -16,6 +16,7 @@
 /// everything else is based on these colors.
 /// @preview color-palette
 /// @group colors
+/// @type Map
 /// @prop {Color | String | List} '<color-name>' -
 ///   Each `<color-name>` key can be assigned a color
 ///   or previously-defined key,
@@ -24,7 +25,7 @@
 ///   [Accoutrement-Color](http://oddbird.net/accoutrement-color/sassdoc/)).
 /// @link http://oddbird.net/accoutrement-color/sassdoc/
 ///   Accoutrement Color
-/// @example
+/// @example scss
 ///   // @preview color-palette
 ///   @include herman-add-colors('brand-colors', $brand-colors);
 $brand-colors: (
@@ -49,13 +50,13 @@ $brand-colors: (
 /// @group colors
 /// @link http://oddbird.net/accoutrement-color/sassdoc/
 ///   Accoutrement Color
-/// @example
+/// @example scss
 ///   // @preview color-palette
 ///   @include herman-add-colors('neutral-colors', $neutral-colors);
 $neutral-colors: (
   'light-gray': 'brand-blue' ('tint': 80%, 'desaturate': 80%),
   'gray': 'brand-blue' ('desaturate': 80%),
-  'black': 'brand-blue' ('shade': 65%),
+  'black': 'brand-blue' ('shade': 30%, 'desaturate': 80%),
 );
 
 @include herman-add-colors('neutral-colors', $neutral-colors);
@@ -69,7 +70,7 @@ $neutral-colors: (
 /// @group colors
 /// @link http://oddbird.net/accoutrement-color/sassdoc/
 ///   Accoutrement Color
-/// @example
+/// @example scss
 ///   // @preview color-palette
 ///   @include herman-add-colors('status-colors', $status-colors);
 $status-colors: (
@@ -89,22 +90,28 @@ $status-colors: (
 /// @group colors
 /// @link http://oddbird.net/accoutrement-color/sassdoc/
 ///   Accoutrement Color
-/// @example
+/// @example scss
 ///   // @preview color-palette
 ///   @include herman-add-colors('theme-colors', $theme-colors);
 $theme-colors: (
+  'theme-dark': 'brand-blue',
+  'theme-light': 'brand-blue' ('tint': 80%),
+
   'background': #fff,
   'text': 'black',
   'text-light': 'gray',
   'border': 'gray',
+  'light-border': 'light-gray',
   'callout': 'light-gray',
   'overlay': 'callout' ('rgba': 0.9),
   'shadow': 'gray' ('rgba': 0.5),
-  'action': 'brand-orange',
-  'focus': 'action' ('shade': 10%),
+  'action': 'theme-dark',
+  'focus': 'action' ('shade': 25%),
   'active': 'action',
   'accent': 'brand-pink',
-  'slight': 'light-gray' ('rgba': 0.4),
+  'slight': 'light-gray' ('tint': 90%),
+  'code': hsl(196, 23%, 45%),
+  'code-shadow': 'code' (rgba: 0.2),
 );
 
 @include herman-add-colors('theme-colors', $theme-colors);

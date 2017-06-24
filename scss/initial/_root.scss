@@ -3,7 +3,7 @@
 
 :root {
   @include baseline;
-  @include font-family('body');
+  @include font-family('sans');
   font-size: calc(size('root') + 0.25vw);
   line-height: map-get($ratios, 'herman');
 }
@@ -16,21 +16,11 @@
   #{$link} {
     color: color('action');
     text-decoration: none;
-
-    [data-sassdoc-region='banner'] &,
-    [data-sassdoc-region='nav'] & {
-      color: inherit;
-    }
   }
 
   #{$focus} {
     color: color('focus');
     text-decoration: underline;
-
-    [data-sassdoc-region='banner'] &,
-    [data-sassdoc-region='nav'] & {
-      color: color('action');
-    }
   }
 }
 
@@ -40,7 +30,24 @@
 pre,
 code {
   @include font-family('code');
-  @include font-size('smaller', 0.75);
+  font-size: size('code');
+}
+
+code {
+  background-color: color('slight');
+  border-radius: 3px;
+  box-shadow: 0 0 size('half-shim') color('code-shadow') inset;
+  color: color('code');
+  display: inline-block;
+  padding: 0 size('half-shim');
+
+  pre & {
+    background-color: transparent;
+    border-radius: 0;
+    box-shadow: none;
+    display: block;
+    padding: 0;
+  }
 }
 
 .visually-hidden {

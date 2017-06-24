@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>@@@ icon title</title>
+
+  {% if customCSS and customCSS.url %}
+    <link rel="stylesheet" href="{{ customCSS.url }}" />
+  {% endif %}
+</head>
+<body>
+  {% if iconsSvg %}
+    {{ iconsSvg|safe }}
+  {% endif %}
+  {% if item.icons %}
+    <div data-sassdoc="icon-preview">
+      {% for icon in item.icons %}
+        <div data-sassdoc-icon="{{ icon.name }}">
+          {{ icon.rendered|safe }}
+          <div data-sassdoc="icon-info">
+            <div data-sassdoc="icon-name">{{ icon.name }}</div>
+            <div data-sassdoc="icon-path">{{ icon.path }}</div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+</body>
+</html>

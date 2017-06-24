@@ -54,6 +54,6 @@
 
 [data-sassdoc='color-value'] {
   @include font-family('code');
-  @include font-size('smaller');
   color: color('text-light');
+  font-size: size('small');
 }

@@ -7,7 +7,11 @@
 /// Shortcut for `link` and `visited` pseudo-classes.
 /// @group utilities
 /// @see $focus
-/// @example scss -
+/// @example njk
+///   {% import 'utility.macros.j2' as utility %}
+///   {{ utility.link_if( content='stacy', url='#', attrs={'data-sassdoc': 'font-name'} ) }}
+/// @todo Add a sample @todo
+/// @example scss - target link and visited anchors
 ///   a {
 ///     #{$link} {
 ///       color: blue;
@@ -21,7 +25,7 @@ $link: '&:link, &:visited';
 /// Shortcut for `hover`, `focus`, and `active` pseudo-classes.
 /// @group utilities
 /// @see $link
-/// @example scss -
+/// @example scss
 ///   a {
 ///     #{$focus} {
 ///       color: red;

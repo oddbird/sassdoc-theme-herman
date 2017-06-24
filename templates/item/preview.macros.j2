@@ -7,7 +7,7 @@
   Call the requested previews with the appropriate JSON data.
 #}
 {% macro show_previews(data, name, args) %}
-  {% if args %}
+  {% if data and args %}
     {% set type = args.type %}
     {% set key = args.key or name %}
 
@@ -274,18 +274,8 @@
 {% endmacro %}
 
 
-{% macro icons(list) %}
-  {% if list %}
-    <div data-sassdoc="icon-preview">
-      {% for icon in list %}
-        <div data-sassdoc-icon="{{ icon.name }}">
-          {{ icon.rendered|safe }}
-          <div data-sassdoc="icon-info">
-            <div data-sassdoc="icon-name">{{ icon.name }}</div>
-            <div data-sassdoc="icon-path">{{ icon.path }}</div>
-          </div>
-        </div>
-      {% endfor %}
-    </div>
+{% macro icons(item) %}
+  {% if item.iframed %}
+    <iframe class="render-example" srcdoc="{{ item.iframed }}" width="100%" height="0"></iframe>
   {% endif %}
 {% endmacro %}

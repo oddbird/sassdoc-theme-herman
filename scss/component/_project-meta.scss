@@ -1,0 +1,44 @@
+// Project Meta Styles
+// ===================
+
+
+.project-links {
+  display: flex;
+  justify-content: flex-end;
+  margin-left: 0;
+  margin-right: 0;
+
+  @include below('project-link-nav') {
+    margin-bottom: size('shim');
+  }
+}
+
+.project-link-item {
+  display: flex;
+  list-style: none;
+
+  & + & {
+    margin-left: size('shim');
+  }
+}
+
+.project-link-start {
+  @include below('project-link-nav') {
+    margin-right: auto;
+  }
+}
+
+.project-link {
+  border: 1px solid color('theme-dark');
+  border-radius: size('gutter');
+  font-size: size('small');
+  line-height: 1.6;
+  padding: size('half-shim') size('gutter');
+  text-align: center;
+  transition: background-color 0.4s;
+
+  #{$focus} {
+    @include contrasted('theme-dark');
+    text-decoration: none;
+  }
+}
