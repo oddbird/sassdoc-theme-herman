@@ -89,7 +89,7 @@
 
 
 {% macro format_name(item, type) -%}
-  {%- set item_name = item.context.name if item.context else '' -%}
+  {%- set item_name = item.context.name if item.context else item -%}
   {%- set item_name = [item_name, '()']|join if (type == 'mixin' or type == 'function') else item_name -%}
   {%- set item_name = ['$', item_name]|join if (type == 'variable') else item_name -%}
   {{ item_name }}

@@ -161,7 +161,6 @@
 
         {% if not (check in prev) %}
           {% set prev = [prev, ', ', check]|join if (prev != '') else check %}
-          {{ prev }}
           {{ require_item(req, display_private) }}
         {% endif %}
       {% endfor %}
