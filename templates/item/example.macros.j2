@@ -2,10 +2,9 @@
 
 
 {# @example annotation #}
-{% macro list(examples_list, id) %}
+{% macro list(examples_list) %}
   {% if examples_list %}
     {% set title = 'Examples' if (examples_list.length > 1) else 'Example' %}
-    {% set group = ['examples', id]|join('_') %}
 
     <div data-item-section="examples">
       <h3 class="item-subtitle">{{ title }}</h3>

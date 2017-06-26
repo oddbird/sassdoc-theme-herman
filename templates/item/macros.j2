@@ -16,7 +16,7 @@
         <span class="item-type">{{ display_type }}</span>
       {% endif %}
 
-      {% if item_name %}
+      {% if item_name and id %}
         <a href="#{{ id }}" class="item-name">{{ item_name }}</a>
       {% endif %}
 
@@ -89,7 +89,7 @@
 
 
 {% macro format_name(item, type) -%}
-  {%- set item_name = item.context.name if item.context else item -%}
+  {%- set item_name = item.context.name if item.context else '' -%}
   {%- set item_name = [item_name, '()']|join if (type == 'mixin' or type == 'function') else item_name -%}
   {%- set item_name = ['$', item_name]|join if (type == 'variable') else item_name -%}
   {{ item_name }}
@@ -137,7 +137,7 @@
 
 
 {% macro authors(data) %}
-  {% if (data.length > 0) %}
+  {% if (data.length) %}
     {% set title = 'Authors' if (data.length > 1) else 'Author' %}
     <h4 class="summary-subtitle">{{ title }}</h4>
     {% for author in data %}
@@ -156,7 +156,7 @@
 
 
 {% macro since(data) %}
-  {% if (data.length > 0) %}
+  {% if (data.length) %}
     {% for item in data %}
       <h4 class="summary-subtitle">Since {{ item.version }}</h4>
       {{ item.description|safe }}

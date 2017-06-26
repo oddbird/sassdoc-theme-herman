@@ -4928,7 +4928,7 @@ sassdoc-theme-default@^2.6.1:
     swig "1.4.0"
     swig-extras "0.0.1"
 
-sassdoc@^2.1.20:
+sassdoc@^2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/sassdoc/-/sassdoc-2.3.0.tgz#1a5b3982ac6abbd54f332dfc106294dd99fce42e"
   dependencies:
