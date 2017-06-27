@@ -1,5 +1,9 @@
 # Herman Changelog
 
+## 1.0.0-alpha.8: UNRELEASED
+
+- BUGFIX: Remove un-used font files from distribution
+
 ## 1.0.0-alpha.7: 2017-06-16
 
 - BUGFIX: Render icon previews in iframes.
