@@ -39,6 +39,25 @@
 {% endmacro %}
 
 
+{% macro prose(item) %}
+  {% set content = item.description %}
+  {% set origin = item.since %}
+  {% set by = item.author %}
+  {% set deprecation = item.deprecated %}
+
+  {% if content or origin or by or deprecation %}
+    <header data-item-section="prose">
+      <div class="text-block">
+        {{ content|safe }}
+        {{ since(origin) }}
+        {{ authors(by) }}
+        {{ deprecated(deprecation) }}
+      </div>
+    </header>
+  {% endif %}
+{% endmacro %}
+
+
 {% macro alias(is_alias, has_alias, type, display=none) %}
   {% if is_alias or has_alias %}
     {% set alias_intro = 'alias for' if is_alias else 'aliased as' %}

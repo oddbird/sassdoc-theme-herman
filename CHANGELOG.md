@@ -1,6 +1,6 @@
 # Herman Changelog
 
-## 1.0.0-alpha.8: unreleased
+## 1.0.0-alpha.8: UNRELEASED
 
 - BUGFIX: Remove un-used font files from distribution
 - Render sassdoc comments that aren't attached to a Sass block as Markdown

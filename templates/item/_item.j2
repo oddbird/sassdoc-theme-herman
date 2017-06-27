@@ -10,11 +10,13 @@
 {% set display_alias = display and display.alias %}
 
 <section class="item" {{ utility.attr_if('id', id) }}>
-  {% if type != 'prose' %}
+  {% if type == 'prose' %}
+    {{ show.prose(item) }}
+  {% else %}
     {{ show.heading(item, type, id, display) }}
     {{ show.source(item, type) }}
+    {{ show.summary(item) }}
   {% endif %}
-  {{ show.summary(item) }}
 
   {{ annotation.param_or_prop(
     params_data=item.parameter,

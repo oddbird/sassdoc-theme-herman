@@ -4,11 +4,6 @@
 @import '../../node_modules/mathsass/dist/math';
 @import '../../node_modules/accoutrement-color/sass/color';
 
-/// Test 1
-/// ======
-/// This is a *test*.
-/// @group colors
-
 
 // Brand Colors
 // ------------
@@ -35,11 +30,6 @@ $brand-colors: (
 );
 
 @include herman-add-colors('brand-colors', $brand-colors);
-
-/// Test 2
-/// ======
-/// This is a *test*.
-/// @group colors
 
 
 // Neutral Colors

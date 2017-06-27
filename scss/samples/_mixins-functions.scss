@@ -1,6 +1,15 @@
 // Mixin and Function Documentation
 // ================================
 
+
+/// Prose Commentary
+/// ================
+/// Herman allows you to write "prose" markdown blocks,
+/// to help introduce groups,
+/// or add narrative flow between documented items.
+/// @group samples
+
+
 // Herman Sample
 // -------------
 /// This is a sample function.
@@ -47,6 +56,18 @@
 
   @return $one $two $three;
 }
+
+
+/// More Commentary
+/// ===============
+/// Prose blocks can also include examples, and other annotations:
+/// @example scss
+///   @import 'samples/variables';
+///   .private::after {
+///     content: $private;
+///   }
+/// @see http://sassdoc.com/annotations/
+/// @group samples
 
 
 // Sample Alias
