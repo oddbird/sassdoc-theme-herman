@@ -8,6 +8,7 @@
 /// to help introduce groups,
 /// or add narrative flow between documented items.
 /// @group samples
+/// @name a
 
 
 // Herman Sample
@@ -58,15 +59,19 @@
 }
 
 
-/// More Commentary
-/// ===============
-/// Prose blocks can also include examples, and other annotations:
+/// Extra Commentary
+/// ================
+/// Prose blocks can also include examples, and other annotations.
+/// Documented items are sorted alphabetically in the output,
+/// but you can move prose blocks by changing the `@name` annotation,
+/// which will not be displayed.
+/// @name herman-sample+
 /// @example scss
 ///   @import 'samples/variables';
 ///   .private::after {
 ///     content: $private;
 ///   }
-/// @see http://sassdoc.com/annotations/
+/// @link http://sassdoc.com/annotations/
 /// @group samples
 
 
