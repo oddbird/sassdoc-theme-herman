@@ -2,6 +2,7 @@
 
 ## 1.0.0-alpha.8: unreleased
 
+- BUGFIX: Remove un-used font files from distribution
 - Render sassdoc comments that aren't attached to a Sass block as Markdown
   prose.
 - Preserve the original order of sassdoc comments rather than grouping by type.
