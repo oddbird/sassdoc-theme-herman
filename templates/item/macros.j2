@@ -137,18 +137,24 @@
 {% macro authors(data) %}
   {% if (data.length > 0) %}
     {% set title = 'Authors' if (data.length > 1) else 'Author' %}
-    <h4 class="summary-subtitle">{{ title }}</h4>
-    {% for author in data %}
-      {{ author|safe }}
-    {% endfor %}
+    <section class="summary-subsection">
+      <h4 class="summary-subtitle">{{ title }}:</h4>
+      <ul class="subsection-details">
+        {% for author in data %}
+          <li>{{ author|safe }}</li>
+        {% endfor %}
+      </ul>
+    </section>
   {% endif %}
 {% endmacro %}
 
 
 {% macro deprecated(data) %}
   {% if data and (data != '') %}
-    <h4 class="summary-subtitle">Deprecated</h4>
-    {{ data|safe }}
+    <section class="summary-subsection">
+      <h4 class="summary-subtitle">DEPRECATED:</h4>
+      <div class="subsection-details">{{ data|safe }}</div>
+    </section>
   {% endif %}
 {% endmacro %}
 
@@ -156,8 +162,10 @@
 {% macro since(data) %}
   {% if (data.length > 0) %}
     {% for item in data %}
-      <h4 class="summary-subtitle">Since {{ item.version }}</h4>
-      {{ item.description|safe }}
+      <section class="summary-subsection">
+        <h4 class="summary-subtitle">Since <code>{{ item.version }}</code>:</h4>
+        <div class="subsection-details">{{ item.description|safe }}</div>
+      </section>
     {% endfor %}
   {% endif %}
 {% endmacro %}

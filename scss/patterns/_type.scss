@@ -25,12 +25,18 @@
   }
 
   p {
-    margin: size('gutter') 0;
+    margin: size('shim') 0 size('gutter');
   }
 
   ol,
   ul {
     margin: size('shim') size('gutter') size('gutter');
+  }
+
+  li {
+    > p {
+      margin: size('half-shim') 0;
+    }
   }
 
   blockquote {
