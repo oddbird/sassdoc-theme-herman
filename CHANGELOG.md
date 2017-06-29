@@ -1,5 +1,10 @@
 # Herman Changelog
 
+
+## 1.0.0-alpha.9: 2017-06-29
+
+- BUGFIX: Remove non-standard html markup on prose blocks
+
 ## 1.0.0-alpha.8: 2017-06-28
 
 - BUGFIX: Remove un-used font files from distribution
