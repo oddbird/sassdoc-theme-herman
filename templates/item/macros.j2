@@ -46,14 +46,12 @@
   {% set deprecation = item.deprecated %}
 
   {% if content or origin or by or deprecation %}
-    <header data-item-section="prose">
-      <div class="text-block">
-        {{ content|safe }}
-        {{ since(origin) }}
-        {{ authors(by) }}
-        {{ deprecated(deprecation) }}
-      </div>
-    </header>
+    <div data-item-section="prose" class="text-block">
+      {{ content|safe }}
+      {{ since(origin) }}
+      {{ authors(by) }}
+      {{ deprecated(deprecation) }}
+    </div>
   {% endif %}
 {% endmacro %}
 
