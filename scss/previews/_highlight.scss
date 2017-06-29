@@ -59,7 +59,7 @@ $hljs-colors: (
 /// @name Code Blocks
 /// @group code
 /// @access private
-/// @require {function} hljs-gradient
+/// @requires {function} hljs-gradient
 [data-sassdoc='hljs'],
 [data-sassdoc-page='index'] pre {
   align-items: stretch;

@@ -74,6 +74,29 @@ var prepareContext = function(ctx) {
   }
 
   /**
+   * Remove the bogus context from any standalone sassdoc comments.
+   * (We detect these if the context starts more than one line after the
+   * sassdoc comment ends.)
+   */
+  ctx.data.forEach(function(item) {
+    if (!item.context || !item.context.line) {
+      return;
+    }
+    if (item.context.type === 'unknown') {
+      item.context.type = 'prose';
+      item.context.line.end = item.context.line.start;
+    }
+    // @@@ This breaks cases where a Sass block selector is more than 2 lines.
+    // https://github.com/oddbird/sassdoc-theme-herman/pull/71#pullrequestreview-46309820
+    if (item.context.line.start > item.commentRange.end + 2) {
+      item.context = {
+        type: 'prose',
+        line: item.commentRange
+      };
+    }
+  });
+
+  /**
    * Add `description` and `descriptionPath` from configuration.
    * Note: `descriptionPath` will override `description`.
    *
@@ -350,7 +373,7 @@ var getNunjucksEnv = function(name, env, warned) {
  * Actual theme function. It takes the destination directory `dest`,
  * and the context variables `ctx`.
  */
-module.exports = function(dest, ctx) {
+var herman = function(dest, ctx) {
   ctx = prepareContext(ctx);
 
   return parseSubprojects(ctx).then(function() {
@@ -391,7 +414,7 @@ var renderIframe = function(env, item, type) {
   }
 };
 
-module.exports.annotations = [
+herman.annotations = [
   /**
    * Custom `@macro` annotation. Expects macrofile:macroname.
    *
@@ -607,3 +630,8 @@ module.exports.annotations = [
     };
   }
 ];
+
+// make sure sassdoc will preserve comments not attached to Sass
+herman.includeUnknownContexts = true;
+
+module.exports = herman;

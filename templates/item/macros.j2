@@ -16,7 +16,9 @@
         <span class="item-type">{{ display_type }}</span>
       {% endif %}
 
-      <a href="#{{ id }}" class="item-name">{{ item_name }}</a>
+      {% if item_name and id %}
+        <a href="#{{ id }}" class="item-name">{{ item_name }}</a>
+      {% endif %}
 
       {% if item.type %}
         <span class="value-type">({{ item.type }})</span>
@@ -34,6 +36,25 @@
       display=display
       ) }}
   </header>
+{% endmacro %}
+
+
+{% macro prose(item) %}
+  {% set content = item.description %}
+  {% set origin = item.since %}
+  {% set by = item.author %}
+  {% set deprecation = item.deprecated %}
+
+  {% if content or origin or by or deprecation %}
+    <header data-item-section="prose">
+      <div class="text-block">
+        {{ content|safe }}
+        {{ since(origin) }}
+        {{ authors(by) }}
+        {{ deprecated(deprecation) }}
+      </div>
+    </header>
+  {% endif %}
 {% endmacro %}
 
 
@@ -135,7 +156,7 @@
 
 
 {% macro authors(data) %}
-  {% if (data.length > 0) %}
+  {% if (data.length) %}
     {% set title = 'Authors' if (data.length > 1) else 'Author' %}
     <section class="summary-subsection">
       <h4 class="summary-subtitle">{{ title }}:</h4>
@@ -160,7 +181,7 @@
 
 
 {% macro since(data) %}
-  {% if (data.length > 0) %}
+  {% if (data.length) %}
     {% for item in data %}
       <section class="summary-subsection">
         <h4 class="summary-subtitle">Since <code>{{ item.version }}</code>:</h4>
