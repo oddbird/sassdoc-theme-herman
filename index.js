@@ -86,9 +86,10 @@ var prepareContext = function(ctx) {
       item.context.type = 'prose';
       item.context.line.end = item.context.line.start;
     }
-    // @@@ This breaks cases where a Sass block selector is more than 2 lines.
-    // https://github.com/oddbird/sassdoc-theme-herman/pull/71#pullrequestreview-46309820
-    if (item.context.line.start > item.commentRange.end + 2) {
+    // Consider it to be prose if it's separated from the next Sass block
+    // by any blank lines.
+    var lineCount = item.context.name.split('\n').length;
+    if (item.context.line.start > item.commentRange.end + lineCount) {
       item.context = {
         type: 'prose',
         line: item.commentRange
