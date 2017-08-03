@@ -70,7 +70,7 @@
     "prettier": "^1.4.4",
     "sass-json-export": "^2.0.0",
     "sassdoc": "^2.3.0",
-    "sinon": "^2.2.0"
+    "sinon": "^3.0.0"
   },
   "peerDependencies": {
     "sassdoc": "^2.1.20"
