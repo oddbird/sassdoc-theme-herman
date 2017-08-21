@@ -2,21 +2,20 @@
 // ================
 
 
-// Json
-// ----
+// Herman
+// ------
 /// A map of values to be exported to JSON.
-/// Use the `herman-add-` mixins to automatically populate
-/// fonts, colors, sizes, and ratios
-/// based on [Accoutrement](http://oddbird.net/accoutrement)
-/// configurations.
+/// Use the `herman-add` mixin to automatically populate
+/// fonts, colors, sizes, and ratios.
 /// @group sass-utilities
-$json: ();
+$herman: ();
 
 
 // String Replace
 // --------------
 /// Return a string, with a substring replaced
 /// @group sass-utilities
+/// @access private
 /// @param {String} $string -
 ///   The base string to be manipulated
 /// @param {String} $old -
@@ -62,13 +61,14 @@ $json: ();
 // --------------
 /// Convert any value into a json-export-ready string
 /// @group sass-utilities
+/// @access private
 /// @param $value -
 ///   Any sass value to convert
 /// @return {String} -
 ///   A string reprepesentation of the given value,
 ///   with leading zeros on numbers,
 ///   and quotes escaped for JSON
-@function herman-inspect(
+@function _herman-inspect(
   $value
 ) {
   $value: inspect($value);
@@ -90,34 +90,25 @@ $json: ();
 /// Get output values from a sass map,
 /// using any function for compilation
 /// @group sass-utilities
+/// @access private
 /// @param {Map} $map -
 ///   A sass map with values that need to be compiled,
 ///   such as Accoutrement Colors or Sizes with adjustments
 /// @param {String} $function -
 ///   The function name to use in compiling values,
 ///   such as Accoutrement `color` and `size` functions
-/// @param {Boolean} $inspect [true] -
-///   Return the value directly,
-///   or convert it to an export-ready string?
 /// @return {String | Any} -
 ///   An updated map,
 ///   with values compiled by a third-party function
-@function herman-map-compile(
+@function _herman-map-compile(
   $map,
-  $function,
-  $inspect: true
+  $function
 ) {
   $output: ();
 
   @each $name, $value in $map {
-    @if function-exists($function) {
-      $value: call($function, $name);
-    }
-
-    @if $inspect {
-      $value: herman-inspect($value);
-    }
-
+    $value: call($function, $value);
+    $value: _herman-inspect($value);
     $output: map-merge($output, ($name: $value));
   }
 
@@ -125,139 +116,80 @@ $json: ();
 }
 
 
-// Herman Add Color
-// ----------------
-/// Add a map of colors
-/// to both the Accoutrment `$colors` map,
-/// and the Herman `$json` export map
+// Herman Add
+// ----------
+/// Add a map of colors, fonts, sizes, ratios, etc
+/// to the `$herman` export map for JSON.
 /// @group sass-utilities
-/// @param {String} $json-key -
-///   A key name for accessing these colors in JSON —
+/// @param {String} $key -
+///   A key name for accessing this data in JSON —
 ///   should match the variable name,
 ///   unless otherwise set in the `@preview` annotation
 /// @param {Map} $map -
-///   A map of colors
-/// @param {String} $function ['color'] -
-///   The name of a color function to use
-///   for compiling JSON output values
+///   A map of name/value pairs
+/// @param {String | Function} $function [false] -
+///   A function to use for compiling values before export
 /// @output
-///   Updated global `$colors` and `$json` maps,
-///   with new colors added to both
-@mixin herman-add-colors(
-  $json-key,
+///   Updated `$herman` map, ready for JSON export
+@mixin herman-add(
+  $key,
   $map,
-  $function: 'color'
+  $function: false
 ) {
-  $colors: map-merge($colors, $map) !global;
-  $expanded: ();
-
   @if $function {
-    $map: herman-map-compile($map, $function, false);
+    $map: _herman-map-compile($map, $function);
   }
 
-  @each $key, $value in $map {
-    $r: herman-inspect(round(red($value)));
-    $g: herman-inspect(round(green($value)));
-    $b: herman-inspect(round(blue($value)));
-    $h: herman-inspect(round(hue($value)));
-    $s: herman-inspect(round(saturation($value)));
-    $l: herman-inspect(round(lightness($value)));
-    $a: herman-inspect(alpha($value));
-
-    $map: (
-      'output': herman-inspect($value),
-      'rgba': 'rgba(#{$r}, #{$g}, #{$b}, #{$a})',
-      'hsla': 'hsla(#{$h}, #{$s}, #{$l}, #{$a})',
-    );
-
-    @if $a != '1' {
-      $map: map-remove($map, 'rgba');
-    }
-
-    $expanded: map-merge($expanded, ($key: $map));
-  }
-
-  $json: map-merge($json, ($json-key: $expanded)) !global;
+  $herman: map-merge($herman, ($key: $map)) !global;
 }
 
 
-// Herman Add Sizes
+// Accoutrement Add
 // ----------------
-/// Add a map of sizes
-/// to both the Accoutrment `$sizes` map,
-/// and the Herman `$json` export map
+/// Add [Accoutrement](http://oddbird.net/open-source/accoutrement/)
+/// map-partials to both the Herman export map and
+/// the appropriate global Accoutrement map variable –
+/// e.g. colors are added to both `$herman` (compiled)
+/// and `$colors` (raw).
 /// @group sass-utilities
-/// @param {String} $json-key -
-///   A key name for accessing these sizes in JSON —
+/// @param {String} $type -
+///   The type of map being added,
+///   e.g. `colors`, `fonts`, `sizes`, or `ratios`
+///   (plural or singular).
+/// @param {String} $key -
+///   A key name for accessing this data in JSON —
 ///   should match the variable name,
 ///   unless otherwise set in the `@preview` annotation
 /// @param {Map} $map -
-///   A map of sizes
-/// @param {String} $function ['size'] -
-///   The name of a size function to use
-///   for compiling JSON output values
+///   A map of name/value pairs,
+///   based on the Accoutrement syntax
 /// @output
-///   Updated global `$sizes` and `$json` maps,
-///   with new sizes added to both
-@mixin herman-add-sizes(
-  $json-key,
-  $map,
-  $function: 'size'
-) {
-  $sizes: map-merge($sizes, $map) !global;
-
-  @if $function {
-    $map: herman-map-compile($map, $function);
-  }
-
-  $json: map-merge($json, ($json-key: $map)) !global;
-}
-
-
-// Herman Ratios
-// -------------
-/// Add a map of ratios
-/// to both the Accoutrment `$ratios` map,
-/// and the Herman `$json` export map
-/// @group sass-utilities
-/// @param {String} $json-key -
-///   A key name for accessing these ratios in JSON —
-///   should match the variable name,
-///   unless otherwise set in the `@preview` annotation
-/// @param {Map} $map -
-///   A map of ratios
-/// @output
-///   Updated global `$ratios` and `$json` maps,
-///   with new ratios added to both
-@mixin herman-add-ratios(
-  $json-key,
+///   Updated `$herman` map, ready for JSON export
+@mixin accoutrement-add(
+  $type,
+  $key,
   $map
 ) {
-  $ratios: map-merge($ratios, $map) !global;
-  $json: map-merge($json, ($json-key: $map)) !global;
-}
+  $functions: (
+    'color': 'color',
+    'colors': 'color',
+    'size': 'size',
+    'sizes': 'size',
+    'scale': 'size',
+  );
+  $call: map-get($functions, $type);
+  $get: function-exists('get-function');
+  $call: if($get and $call, get-function($call), $call);
 
+  @include herman-add($key, $map, $call);
 
-// Herman Add Font
-// ---------------
-/// Add a map of fonts
-/// to both the Accoutrment `$fonts` map,
-/// and the Herman `$json` export map
-/// @group sass-utilities
-/// @param {String} $json-key -
-///   A key name for accessing these fonts in JSON —
-///   should match the variable name,
-///   unless otherwise set in the `@preview` annotation
-/// @param {Map} $map -
-///   A map of fonts
-/// @output
-///   Updated global `$fonts` and `$json` maps,
-///   with new fonts added to both
-@mixin herman-add-font(
-  $name,
-  $map
-) {
-  $new: ($name: $map);
-  $fonts: map-merge($fonts, $new) !global;
-  $json: map-merge($json, $new) !global;
+  @if ($call == 'color') {
+    $colors: map-merge($colors, $map) !global;
+  } @else if ($call == 'size') {
+    $sizes: map-merge($sizes, $map) !global;
+  } @else if index('font' 'fonts', $type) {
+    $fonts: map-merge($fonts, ($key: $map)) !global;
+  } @else if index('ratio' 'ratios', $type) {
+    $ratios: map-merge($ratios, $map) !global;
+  }
 }
