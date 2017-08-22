@@ -22,14 +22,14 @@
 ///   Accoutrement Color
 /// @example scss
 ///   // @preview color-palette
-///   @include herman-add-colors('brand-colors', $brand-colors);
+///   @include accoutrement-add('colors', 'brand-colors', $brand-colors);
 $brand-colors: (
   'brand-orange': hsl(24, 100%, 39%),
   'brand-blue': hsl(195, 85%, 35%),
   'brand-pink': hsl(330, 85%, 48%),
 );
 
-@include herman-add-colors('brand-colors', $brand-colors);
+@include accoutrement-add('colors', 'brand-colors', $brand-colors);
 
 
 // Neutral Colors
@@ -42,14 +42,14 @@ $brand-colors: (
 ///   Accoutrement Color
 /// @example scss
 ///   // @preview color-palette
-///   @include herman-add-colors('neutral-colors', $neutral-colors);
+///   @include accoutrement-add('colors', 'neutral-colors', $neutral-colors);
 $neutral-colors: (
   'light-gray': 'brand-blue' ('tint': 80%, 'desaturate': 80%),
   'gray': 'brand-blue' ('desaturate': 80%),
   'black': 'brand-blue' ('shade': 30%, 'desaturate': 80%),
 );
 
-@include herman-add-colors('neutral-colors', $neutral-colors);
+@include accoutrement-add('colors', 'neutral-colors', $neutral-colors);
 
 
 // Status Colors
@@ -62,14 +62,14 @@ $neutral-colors: (
 ///   Accoutrement Color
 /// @example scss
 ///   // @preview color-palette
-///   @include herman-add-colors('status-colors', $status-colors);
+///   @include accoutrement-add('colors', 'status-colors', $status-colors);
 $status-colors: (
   'go': hsl(75, 65%, 30%),
   'yield': 'brand-orange',
   'stop': hsl(0, 85%, 50%),
 );
 
-@include herman-add-colors('status-colors', $status-colors);
+@include accoutrement-add('colors', 'status-colors', $status-colors);
 
 
 // Theme Colors
@@ -82,7 +82,7 @@ $status-colors: (
 ///   Accoutrement Color
 /// @example scss
 ///   // @preview color-palette
-///   @include herman-add-colors('theme-colors', $theme-colors);
+///   @include accoutrement-add('colors', 'theme-colors', $theme-colors);
 $theme-colors: (
   'theme-dark': 'brand-blue',
   'theme-light': 'brand-blue' ('tint': 80%),
@@ -104,7 +104,7 @@ $theme-colors: (
   'code-shadow': 'code' (rgba: 0.2),
 );
 
-@include herman-add-colors('theme-colors', $theme-colors);
+@include accoutrement-add('colors', 'theme-colors', $theme-colors);
 
 
 // System Colors
@@ -119,4 +119,4 @@ $system-colors: (
   'contrast-dark': 'text',
 );
 
-@include herman-add-colors('system-colors', $system-colors);
+@include accoutrement-add('colors', 'system-colors', $system-colors);

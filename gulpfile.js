@@ -23,6 +23,7 @@ var uglify = require('gulp-uglify');
 var paths = {
   DIST_DIR: 'dist/',
   SASS_DIR: 'scss/',
+  SASS_TESTS_DIR: 'test/sass/',
   IMG: 'assets/img/**/*',
   SVG: 'assets/svg/**/*.svg',
   JS_DIR: 'assets/js/',
@@ -148,6 +149,12 @@ gulp.task('sass', function() {
     .pipe(gulp.dest(paths.DIST_DIR + 'css/'));
 });
 
+gulp.task('sasstest', () =>
+  gulp
+    .src([`${paths.SASS_TESTS_DIR}test_sass.js`], { read: false })
+    .pipe(mocha({ reporter: 'dot' }))
+);
+
 // Need to finish compile before running tests,
 // so that the processes do not conflict
 gulp.task('test', ['compile'], function() {
@@ -215,7 +222,7 @@ gulp.task('compile', ['sass', 'minify'], function() {
     .pipe(sassdoc(config));
 });
 
-gulp.task('default', ['compile', 'eslint', 'sasslint', 'test']);
+gulp.task('default', ['compile', 'eslint', 'sasslint', 'sasstest', 'test']);
 
 gulp.task('serve', ['watch', 'browser-sync']);
 
@@ -225,6 +232,7 @@ gulp.task('dev', [
   'prettier',
   'eslint-nofail',
   'sasslint-nofail',
+  'sasstest',
   'test',
   'watch'
 ]);
@@ -252,6 +260,8 @@ gulp.task('watch', ['compile'], function() {
       sasslintTask(ev.path, false, true);
     }
   });
+
+  gulp.watch(paths.SASS, ['sasstest']);
 
   gulp.watch(paths.ALL_JS, { debounceDelay: 1000 }, function(ev) {
     if (ev.type === 'added' || ev.type === 'changed') {

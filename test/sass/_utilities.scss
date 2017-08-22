@@ -1,0 +1,23 @@
+// Utility Tests
+// =============
+
+
+@include describe('herman-str-replace [function]') {
+  @include it('replaces a single sub-string') {
+    @include assert-equal(
+      _herman-str-replace('hello world', 'hello', 'goodbye'),
+      'goodbye world');
+  }
+
+  @include it('replaces multiple sub-strings') {
+    @include assert-equal(
+      _herman-str-replace('hello world', 'o', '0', true),
+      'hell0 w0rld');
+  }
+
+  @include it('replaces entire string') {
+    @include assert-equal(
+      _herman-str-replace('hello world', 'hello world', 'BOOM'),
+      'BOOM');
+  }
+}

@@ -15,12 +15,12 @@
 ///   Accoutrement Scale
 /// @example scss
 ///   // @preview ratios;
-///   @include herman-add-ratios('text-ratios', $text-ratios);
+///   @include accoutrement-add('ratios', 'text-ratios', $text-ratios);
 $text-ratios: (
   'herman': 1.4
 );
 
-@include herman-add-ratios('text-ratios', $text-ratios);
+@include accoutrement-add('ratios', 'text-ratios', $text-ratios);
 
 
 // Text Sizes
@@ -33,7 +33,7 @@ $text-ratios: (
 ///   Accoutrement Scale
 /// @example scss
 ///   // @preview sizes;
-///   @include herman-add-sizes('text-sizes', $text-sizes);
+///   @include accoutrement-add('sizes', 'text-sizes', $text-sizes);
 $text-sizes: (
   'root': 18px,
 
@@ -53,7 +53,7 @@ $text-sizes: (
   'quote': 'medium',
 );
 
-@include herman-add-sizes('text-sizes', $text-sizes);
+@include accoutrement-add('sizes', 'text-sizes', $text-sizes);
 
 
 // Spacing Sizes
@@ -66,7 +66,7 @@ $text-sizes: (
 ///   Accoutrement Scale
 /// @example scss
 ///   // @preview sizes; style: ruler
-///   @include herman-add-sizes('spacing-sizes', $spacing-sizes);
+///   @include accoutrement-add('sizes', 'spacing-sizes', $spacing-sizes);
 $spacing-sizes: (
   'rhythm': 'root' ('herman': 1, 'convert-units': 'rem'),
   'gutter': 'rhythm',
@@ -79,7 +79,7 @@ $spacing-sizes: (
   'quarter-shim': 'shim' ('linear': 0.25)
 );
 
-@include herman-add-sizes('spacing-sizes', $spacing-sizes);
+@include accoutrement-add('sizes', 'spacing-sizes', $spacing-sizes);
 
 
 // Pattern Sizes
@@ -93,7 +93,7 @@ $spacing-sizes: (
 ///   Accoutrement Scale
 /// @example scss
 ///   // @preview sizes; style: output-only
-///   @include herman-add-sizes('pattern-sizes', $pattern-sizes);
+///   @include accoutrement-add('sizes', 'pattern-sizes', $pattern-sizes);
 $pattern-sizes: (
   'border': 8px,
   'page': 50rem,
@@ -108,4 +108,4 @@ $pattern-sizes: (
   'nav-underline': 4px,
 );
 
-@include herman-add-sizes('pattern-sizes', $pattern-sizes);
+@include accoutrement-add('sizes', 'pattern-sizes', $pattern-sizes);

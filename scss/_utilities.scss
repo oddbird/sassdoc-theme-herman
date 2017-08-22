@@ -181,8 +181,6 @@ $herman: ();
   $get: function-exists('get-function');
   $call: if($get and $call, get-function($call), $call);
 
-  @include herman-add($key, $map, $call);
-
   @if ($call == 'color') {
     $colors: map-merge($colors, $map) !global;
   } @else if ($call == 'size') {
@@ -192,4 +190,6 @@ $herman: ();
   } @else if index('ratio' 'ratios', $type) {
     $ratios: map-merge($ratios, $map) !global;
   }
+
+  @include herman-add($key, $map, $call);
 }
