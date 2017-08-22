@@ -149,11 +149,11 @@ gulp.task('sass', function() {
     .pipe(gulp.dest(paths.DIST_DIR + 'css/'));
 });
 
-gulp.task('sasstest', () =>
-  gulp
-    .src([`${paths.SASS_TESTS_DIR}test_sass.js`], { read: false })
-    .pipe(mocha({ reporter: 'dot' }))
-);
+gulp.task('sasstest', function() {
+  return gulp
+    .src(paths.SASS_TESTS_DIR + 'test_sass.js', { read: false })
+    .pipe(mocha({ reporter: 'dot' }));
+});
 
 // Need to finish compile before running tests,
 // so that the processes do not conflict

@@ -94,22 +94,30 @@ $herman: ();
 /// @param {Map} $map -
 ///   A sass map with values that need to be compiled,
 ///   such as Accoutrement Colors or Sizes with adjustments
-/// @param {String} $function -
-///   The function name to use in compiling values,
+/// @param {String | Function} $function -
+///   The function (or function name) to use in compiling values,
 ///   such as Accoutrement `color` and `size` functions
+/// @param {Arglist} $args… -
+///   Pass in any additional arguments for the function
 /// @return {String | Any} -
 ///   An updated map,
 ///   with values compiled by a third-party function
 @function _herman-map-compile(
   $map,
-  $function
+  $function,
+  $args...
 ) {
   $output: ();
 
-  @each $name, $value in $map {
-    $value: call($function, $value);
+  @each $key, $value in $map {
+    // this is a workaround for a sass bug I thought was fixed…
+    // https://github.com/sass/libsass/issues/1645#issuecomment-324102683
+    $call: ($function, $value);
+    $call: if(length($args) > 0, join($call, $args...), $call);
+
+    $value: call($call...);
     $value: _herman-inspect($value);
-    $output: map-merge($output, ($name: $value));
+    $output: map-merge($output, ($key: $value));
   }
 
   @return $output;
@@ -129,15 +137,18 @@ $herman: ();
 ///   A map of name/value pairs
 /// @param {String | Function} $function [false] -
 ///   A function to use for compiling values before export
+/// @param {Arglist} $args… -
+///   Pass in any additional arguments for the function
 /// @output
 ///   Updated `$herman` map, ready for JSON export
 @mixin herman-add(
   $key,
   $map,
-  $function: false
+  $function: false,
+  $args...
 ) {
   @if $function {
-    $map: _herman-map-compile($map, $function);
+    $map: _herman-map-compile($map, $function, $args...);
   }
 
   $herman: map-merge($herman, ($key: $map)) !global;
