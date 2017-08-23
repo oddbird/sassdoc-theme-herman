@@ -1,6 +1,21 @@
 # Herman Changelog
 
 
+## UNRELEASED
+
+- BREAKING: Rename `$json` to `$herman` for clearer name-spacing
+- BREAKING: Remove `herman-add-colors`/`-sizes`/`-ratios`/`-font` from utils
+- BREAKING: `_herman-inspect`, and `_herman-str-replace`
+  are now considered private functions
+- BREAKING: `herman-map-compile` always returns inspected (json-ready) values,
+  and now accepts function args
+- NEW: Use `herman-add($key, $map, $args…)` to add maps directly to `$herman`,
+  with optional function/args to compile raw map values
+- NEW: Use `accoutrement-add($type, $key, $map)` to automate compilation
+  of accoutrement (color, ratio, size, font) maps,
+  while adding to both `$herman` and the appropriate accoutrement global
+  (`$colors`, `$ratios`, `$sizes`, `$fonts`).
+
 ## 1.0.0-alpha.9: 2017-06-29
 
 - BUGFIX: Remove non-standard html markup on prose blocks

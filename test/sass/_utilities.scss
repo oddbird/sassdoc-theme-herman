@@ -72,14 +72,14 @@ $darken: (
 @include describe('herman-map-compile [function]') {
   @include it('returns a map with values run through a given function') {
     @include assert-equal(
-      _herman-map-compile($initial, 'color'),
+      herman-map-compile($initial, 'color'),
       $compiled,
       $inspect: true);
   }
 
   @include it('allows extra args be passed in') {
     @include assert-equal(
-      _herman-map-compile($compiled, 'darken', 20%),
+      herman-map-compile($compiled, 'darken', 20%),
       $darken);
   }
 }
@@ -162,7 +162,7 @@ $darken: (
       $ratios,
       $ratio-new);
 
-    $new-ratio-comp: _herman-map-compile($ratios, 'scale');
+    $new-ratio-comp: herman-map-compile($ratios, 'scale');
     $expect: map-merge($herman, ('new-ratio': $new-ratio-comp));
 
     @include assert-equal(
@@ -187,7 +187,7 @@ $darken: (
       $sizes,
       $new-size);
 
-    $new-size-comp: _herman-map-compile($sizes, 'size');
+    $new-size-comp: herman-map-compile($sizes, 'size');
     $expect: map-merge($herman, ('size-new': $new-size-comp));
 
     @include assert-equal(

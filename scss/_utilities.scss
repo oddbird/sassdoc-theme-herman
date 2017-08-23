@@ -5,9 +5,31 @@
 // Herman
 // ------
 /// A map of values to be exported to JSON.
-/// Use the `herman-add` mixin to automatically populate
+/// Use the `herman-add` or `accoutrement-add` mixins
+/// to automatically populate
 /// fonts, colors, sizes, and ratios.
 /// @group sass-utilities
+/// @see accoutrement-add
+/// @example scss - resulting map structure
+///   // <preview item key>: <preview values map>
+///   $herman: (
+///     'brand-colors': (
+///       'brand-orange': '#c75000',
+///       'brand-blue': '#0d7fa5',
+///     ),
+///     'status-colors': (
+///       'go': '#657e1b',
+///       'yield': '#c75000',
+///     ),
+///     'body-font': (
+///       'name': 'Source Sans Pro',
+///       'stack': ('Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'),
+///     ),
+///     'test-sizes': (
+///       'root': '18px',
+///       'large': 'calc(1rem + 1.5vw)',
+///     ),
+///   );
 $herman: ();
 
 
@@ -87,10 +109,10 @@ $herman: ();
 
 // Map Compile
 // -----------
-/// Get output values from a sass map,
-/// using any function for compilation
+/// Pass the values of any map through a given function
+/// (with optional arguments)
+/// and return the compiled map.
 /// @group sass-utilities
-/// @access private
 /// @param {Map} $map -
 ///   A sass map with values that need to be compiled,
 ///   such as Accoutrement Colors or Sizes with adjustments
@@ -101,8 +123,16 @@ $herman: ();
 ///   Pass in any additional arguments for the function
 /// @return {String | Any} -
 ///   An updated map,
-///   with values compiled by a third-party function
-@function _herman-map-compile(
+///   with values compiled by a third-party function,
+///   and converted to json-ready strings
+/// @example scss
+///   $brand-colors: (
+///     'brand-orange': hsl(24, 100%, 39%),
+///     'brand-blue': hsl(195, 85%, 35%),
+///     'light-gray': 'brand-blue' ('tint': 80%, 'desaturate': 80%),
+///   );
+///   /* #{herman-map-compile($brand-colors, 'color')} */
+@function herman-map-compile(
   $map,
   $function,
   $args...
@@ -127,12 +157,14 @@ $herman: ();
 // Herman Add
 // ----------
 /// Add a map of colors, fonts, sizes, ratios, etc
-/// to the `$herman` export map for JSON.
+/// to the `$herman` map for JSON-export,
+/// converting values to JSON-ready strings,
+/// with optional functions/args for compiling raw values.
 /// @group sass-utilities
 /// @param {String} $key -
 ///   A key name for accessing this data in JSON —
 ///   should match the variable name,
-///   unless otherwise set in the `@preview` annotation
+///   unless `key` is otherwise set in the `@preview` annotation
 /// @param {Map} $map -
 ///   A map of name/value pairs
 /// @param {Arglist} $args… -
@@ -140,13 +172,20 @@ $herman: ();
 ///   and any additional arguments for the function
 /// @output
 ///   Updated `$herman` map, ready for JSON export
+/// @example scss
+///   $brand-colors: (
+///     'brand-blue': hsl(195, 85%, 35%),
+///     'light-gray': 'brand-blue' ('tint': 80%, 'desaturate': 80%),
+///   );
+///   @include herman-add('brand-colors', $brand-colors, 'color');
+///   /* #{$herman} */
 @mixin herman-add(
   $key,
   $map,
   $args...
 ) {
   @if (length($args) > 0) {
-    $map: _herman-map-compile($map, $args...);
+    $map: herman-map-compile($map, $args...);
   }
 
   $herman: map-merge($herman, ($key: $map)) !global;
@@ -174,6 +213,19 @@ $herman: ();
 ///   based on the Accoutrement syntax
 /// @output
 ///   Updated `$herman` map, ready for JSON export
+/// @example scss
+///   $brand-colors: (
+///     'brand-blue': hsl(195, 85%, 35%),
+///     'light-gray': 'brand-blue' ('tint': 80%, 'desaturate': 80%),
+///   );
+///
+///   @include accoutrement-add('color', 'brand-colors', $brand-colors);
+///
+///   /* Herman: */
+///   /* #{$herman} */
+///   /* --- */
+///   /* Accoutrement-Colors: */
+///   /* #{$colors} */
 @mixin accoutrement-add(
   $type,
   $key,
