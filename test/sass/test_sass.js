@@ -12,4 +12,4 @@ var importer = function(url) {
 };
 
 var sassFile = path.join(__dirname, 'test.scss');
-sassTrue.runSass({ importer, file: sassFile }, describe, it);
+sassTrue.runSass({ importer: importer, file: sassFile }, describe, it);
