@@ -163,8 +163,8 @@ $herman: ();
 /// @group sass-utilities
 /// @param {String} $type -
 ///   The type of map being added,
-///   e.g. `colors`, `fonts`, `sizes`, or `ratios`
-///   (plural or singular).
+///   e.g. `color/colors`, `font/fonts`,
+///   `size/sizes`, or `scale/ratio/ratios`.
 /// @param {String} $key -
 ///   A key name for accessing this data in JSON —
 ///   should match the variable name,
@@ -184,7 +184,9 @@ $herman: ();
     'colors': 'color',
     'size': 'size',
     'sizes': 'size',
-    'scale': 'size',
+    'scale': 'scale',
+    'ratio': 'scale',
+    'ratios': 'scale',
   );
   $call: map-get($functions, $type);
   $get: function-exists('get-function');
@@ -194,10 +196,10 @@ $herman: ();
     $colors: map-merge($colors, $map) !global;
   } @else if ($call == 'size') {
     $sizes: map-merge($sizes, $map) !global;
-  } @else if index('font' 'fonts', $type) {
-    $fonts: map-merge($fonts, ($key: $map)) !global;
-  } @else if index('ratio' 'ratios', $type) {
+  } @else if ($call == 'scale') {
     $ratios: map-merge($ratios, $map) !global;
+  }@else if index('font' 'fonts', $type) {
+    $fonts: map-merge($fonts, ($key: $map)) !global;
   }
 
   $args: ($key, $map);

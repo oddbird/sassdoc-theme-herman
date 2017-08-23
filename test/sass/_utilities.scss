@@ -149,16 +149,21 @@ $darken: (
   }
 
   @include it('Compiles accoutrement-ratio maps, & adds to global variables') {
-    $ratio-new: ('rhythm': 1.4);
+    $ratio-new: (
+      'rhythm': 1.4,
+      'line': 'rhythm',
+    );
 
     @include assert-equal($ratios, $empty);
 
     @include accoutrement-add('ratio', 'new-ratio', $ratio-new);
-    $expect: map-merge($herman, ('new-ratio': $ratio-new));
 
     @include assert-equal(
       $ratios,
       $ratio-new);
+
+    $new-ratio-comp: _herman-map-compile($ratios, 'scale');
+    $expect: map-merge($herman, ('new-ratio': $new-ratio-comp));
 
     @include assert-equal(
       $herman,
@@ -166,8 +171,8 @@ $darken: (
       $inspect: true);
   }
 
-  @include it('Compiles accoutrement-scale maps, & adds to global variables') {
-    $new-scale: (
+  @include it('Compiles accoutrement-size maps, & adds to global variables') {
+    $new-size: (
       'root': 16px,
       'base-rem': 'root' ('convert-units': 'rem'),
       'line': 'base-rem' ('rhythm': 1.4),
@@ -176,14 +181,14 @@ $darken: (
 
     @include assert-equal($sizes, $empty);
 
-    @include accoutrement-add('scale', 'scale-new', $new-scale);
+    @include accoutrement-add('size', 'size-new', $new-size);
 
     @include assert-equal(
       $sizes,
-      $new-scale);
+      $new-size);
 
-    $new-scale-comp: _herman-map-compile($sizes, 'size');
-    $expect: map-merge($herman, ('scale-new': $new-scale-comp));
+    $new-size-comp: _herman-map-compile($sizes, 'size');
+    $expect: map-merge($herman, ('size-new': $new-size-comp));
 
     @include assert-equal(
       $herman,
