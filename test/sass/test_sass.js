@@ -1,9 +1,9 @@
 /* eslint-env mocha */
 
-const path = require('path');
-const sassTrue = require('sass-true');
+var path = require('path');
+var sassTrue = require('sass-true');
 
-const importer = function(url) {
+var importer = function(url) {
   if (url[0] === '~') {
     url = path.resolve('node_modules', url.substr(1));
   }
@@ -11,5 +11,5 @@ const importer = function(url) {
   return { file: url };
 };
 
-const sassFile = path.join(__dirname, 'test.scss');
+var sassFile = path.join(__dirname, 'test.scss');
 sassTrue.runSass({ importer, file: sassFile }, describe, it);

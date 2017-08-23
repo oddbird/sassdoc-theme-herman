@@ -147,4 +147,70 @@ $darken: (
       $expect,
       $inspect: true);
   }
+
+  @include it('Compiles accoutrement-ratio maps, & adds to global variables') {
+    $ratio-new: ('rhythm': 1.4);
+
+    @include assert-equal($ratios, $empty);
+
+    @include accoutrement-add('ratio', 'new-ratio', $ratio-new);
+    $expect: map-merge($herman, ('new-ratio': $ratio-new));
+
+    @include assert-equal(
+      $ratios,
+      $ratio-new);
+
+    @include assert-equal(
+      $herman,
+      $expect,
+      $inspect: true);
+  }
+
+  @include it('Compiles accoutrement-scale maps, & adds to global variables') {
+    $new-scale: (
+      'root': 16px,
+      'base-rem': 'root' ('convert-units': 'rem'),
+      'line': 'base-rem' ('rhythm': 1.4),
+      'h1': calc(%s + %s) ('base-rem', 2.5vw),
+    );
+
+    @include assert-equal($sizes, $empty);
+
+    @include accoutrement-add('scale', 'scale-new', $new-scale);
+
+    @include assert-equal(
+      $sizes,
+      $new-scale);
+
+    $new-scale-comp: _herman-map-compile($sizes, 'size');
+    $expect: map-merge($herman, ('scale-new': $new-scale-comp));
+
+    @include assert-equal(
+      $herman,
+      $expect,
+      $inspect: true);
+  }
+
+  @include it('Compiles accoutrement-font maps, & adds to global variables') {
+    $new-font: (
+      'name': 'Source Sans Pro',
+      'source': 'https://fonts.google.com/specimen/Source+Sans+Pro',
+      'stack': ('Helvetica Neue', 'Helvetica', 'Arial', sans-serif),
+    );
+
+    @include assert-equal($fonts, $empty);
+
+    @include accoutrement-add('font', 'new-font', $new-font);
+    $expect-font: ('new-font': $new-font);
+    $expect: map-merge($herman, ('new-font': $new-font));
+
+    @include assert-equal(
+      $fonts,
+      $expect-font);
+
+    @include assert-equal(
+      $herman,
+      $expect,
+      $inspect: true);
+  }
 }

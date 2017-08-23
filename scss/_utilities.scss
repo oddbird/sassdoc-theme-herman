@@ -135,20 +135,18 @@ $herman: ();
 ///   unless otherwise set in the `@preview` annotation
 /// @param {Map} $map -
 ///   A map of name/value pairs
-/// @param {String | Function} $function [false] -
-///   A function to use for compiling values before export
 /// @param {Arglist} $args… -
-///   Pass in any additional arguments for the function
+///   A function to use for compiling values before export,
+///   and any additional arguments for the function
 /// @output
 ///   Updated `$herman` map, ready for JSON export
 @mixin herman-add(
   $key,
   $map,
-  $function: false,
   $args...
 ) {
-  @if $function {
-    $map: _herman-map-compile($map, $function, $args...);
+  @if (length($args) > 0) {
+    $map: _herman-map-compile($map, $args...);
   }
 
   $herman: map-merge($herman, ($key: $map)) !global;
@@ -202,5 +200,8 @@ $herman: ();
     $ratios: map-merge($ratios, $map) !global;
   }
 
-  @include herman-add($key, $map, $call);
+  $args: ($key, $map);
+  $args: if($call, append($args, $call), $args);
+
+  @include herman-add($args...);
 }
