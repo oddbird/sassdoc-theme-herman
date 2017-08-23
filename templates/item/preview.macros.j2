@@ -32,19 +32,35 @@
   Display color palettes based on JSON map output.
 #}
 {% macro color_palette(data) %}
+  {% set data = data|dictsort(false, 'value') %}
+
   {% call show.item_section('color-palette', 'Color Preview') %}
     <div class="color-palette">
+      {% set next = none %}
+
       {% for name, value in data %}
-        <div class="color-preview">
-          <div class="color-swatch">
-            <div class="transparency-grid"></div>
-            <div class="color-overlay" style="background-color: {{ value }};"></div>
+        {% if data[loop.index][1] == value %}
+          {% set next = [next, name]|join(', ') if next else name %}
+        {% else %}
+          <div class="color-preview">
+            <div class="color-swatch">
+              <div class="transparency-grid"></div>
+              <div class="color-overlay" style="background-color: {{ value }};"></div>
+            </div>
+            <div class="color-info">
+              {% set name = [next, name]|join(', ') if next else name %}
+              <strong class="color-name">
+                {% for opt in name|split(', ') %}
+                  <span class="color-name-option">
+                    {{ opt }}{% if not loop.last %},&nbsp;{% endif %}
+                  </span>
+                {% endfor %}
+              </strong>
+              <code class="color-value">{{ value }}</code>
+            </div>
           </div>
-          <div class="color-info">
-            <strong class="color-name">{{ name }}</strong>
-            <code class="color-value">{{ value }}</code>
-          </div>
-        </div>
+          {% set next = none %}
+      {% endif %}
       {% endfor %}
     </div>
   {% endcall %}
