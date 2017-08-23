@@ -36,15 +36,13 @@
     <div data-sassdoc-color="{{ name }}">
       <div data-sassdoc="color-swatch">
         <div data-sassdoc="transparency-grid"></div>
-        <div data-sassdoc="color-overlay" style="background-color: {{ value.output }};"></div>
+        <div data-sassdoc="color-overlay" style="background-color: {{ value }};"></div>
       </div>
       <div data-sassdoc="color-info">
         <strong data-sassdoc="color-name">{{ name }}</strong>
-        {% for type, color in value %}
-          <div data-sassdoc="color-value">
-            {{ color }}
-          </div>
-        {% endfor %}
+        <div data-sassdoc="color-value">
+          {{ value }}
+        </div>
       </div>
     </div>
   {% endfor %}
