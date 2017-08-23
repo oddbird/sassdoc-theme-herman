@@ -5,35 +5,49 @@
 // Color Preview
 // -------------
 
-[data-sassdoc='color-palette'] {
-  margin: size('gutter') 0;
-}
-
-[data-sassdoc-color] {
+.color-palette {
   display: flex;
   flex-wrap: wrap;
-  margin: size('shim') 0;
-  position: relative;
+  margin: negative('shim');
+
+  @supports (display: grid) {
+    display: grid;
+    grid-auto-rows: auto;
+    grid-gap: size('gutter'); // sass-lint:disable-line no-misspelled-properties
+    grid-template-columns: repeat(auto-fit, minmax(size('color-preview'), 1fr));
+    margin: 0;
+  }
+}
+
+.color-preview {
+  align-items: stretch;
+  display: flex;
+  flex: 1 0 size('color-preview');
+  flex-direction: column;
+  margin: size('shim');
+
+  @supports (display: grid) {
+    margin: 0;
+  }
 }
 
 
 // Color Swatch
 // ------------
 
-[data-sassdoc='color-swatch'] {
+.color-swatch {
   border: 1px solid color('border');
-  flex: 1 1 size('color-swatch');
-  min-height: size('color-swatch');
-  min-width: size('color-swatch') / 2;
+  height: size('color-swatch');
+  min-width: size('color-swatch');
   position: relative;
 }
 
-[data-sassdoc='transparency-grid'],
-[data-sassdoc='color-overlay'] {
+.transparency-grid,
+.color-overlay {
   @include stretch;
 }
 
-[data-sassdoc='transparency-grid'] {
+.transparency-grid {
   background: url('data:image/svg+xml;utf8,<svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 20 20"><rect width="10" height="10"/><rect x="10" y="10" width="10" height="10"/></svg>') center repeat scroll;
   background-size: 0.5em 0.5em;
   left: 50%;
@@ -43,17 +57,14 @@
 // Color Info
 // ----------
 
-[data-sassdoc='color-info'] {
-  flex: 100 0 auto;
-  padding: size('half-shim');
-}
-
-[data-sassdoc='color-name'] {
+.color-name,
+.color-value {
   display: block;
+  padding: size('half-shim');
+  white-space: nowrap;
 }
 
-[data-sassdoc='color-value'] {
-  @include font-family('code');
+.color-value {
   color: color('text-light');
-  font-size: size('small');
+  font-size: size('code');
 }
