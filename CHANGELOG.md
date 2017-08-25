@@ -15,6 +15,7 @@
   of accoutrement (color, ratio, size, font) maps,
   while adding to both `$herman` and the appropriate accoutrement global
   (`$colors`, `$ratios`, `$sizes`, `$fonts`).
+- NEW: `displayColors` option (type: `Array`, default: `['hex', 'rgb', 'hsl']`)
 
 ## 1.0.0-alpha.9: 2017-06-29
 

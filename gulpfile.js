@@ -202,7 +202,8 @@ gulp.task('compile', ['sass', 'minify'], function() {
         includes: ['utilities', 'config/manifest']
       },
       customCSS: paths.DIST_DIR + 'css/main.css',
-      minifiedIcons: paths.TEMPLATES_DIR + '_icons.svg'
+      minifiedIcons: paths.TEMPLATES_DIR + '_icons.svg',
+      displayColors: ['hex', 'hsl']
     },
     display: {
       alias: true
