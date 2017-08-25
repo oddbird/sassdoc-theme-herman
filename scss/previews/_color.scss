@@ -24,6 +24,7 @@
   display: flex;
   flex: 1 0 size('color-preview');
   flex-direction: column;
+  font-size: size('xsmall');
   margin: size('shim');
 
   @supports (display: grid) {
@@ -69,7 +70,7 @@
 
 .color-value {
   color: color('text-light');
-  font-size: size('code');
+  font-size: size('small-code');
   white-space: nowrap;
 
   & + & {

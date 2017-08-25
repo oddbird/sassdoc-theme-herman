@@ -48,6 +48,7 @@ $text-sizes: (
   'small': calc(%s + %s) ('small-rem', 0.25vw),
   'xsmall': calc(%s + %s) ('xsmall-rem', 0.25vw),
   'code': 'xsmall',
+  'small-code': calc(%s + %s) ('base-rem' ('times': 0.675), 0.25vw),
 
   'h1': calc(%s + %s) ('base-rem', 2.5vw),
   'h2': calc(%s + %s) ('base-rem', 2vw),
@@ -105,7 +106,7 @@ $pattern-sizes: (
 
   'project-link-nav': 36rem,
   'specimen': 'rhythm' ('linear': 3),
-  'color-preview': 14rem,
+  'color-preview': calc(15em + 0.25vw), // trial and error…
   'color-swatch': 'rhythm' ('linear': 4),
   'icon': 28px,
   'nav-underline': 4px,
