@@ -71,4 +71,8 @@
   color: color('text-light');
   font-size: size('code');
   white-space: nowrap;
+
+  & + & {
+    margin-top: size('half-shim');
+  }
 }

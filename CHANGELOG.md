@@ -4,11 +4,11 @@
 ## UNRELEASED
 
 - BREAKING: Rename `$json` to `$herman` for clearer name-spacing
-- BREAKING: Remove `herman-add-colors`/`-sizes`/`-ratios`/`-font` from utils
 - BREAKING: `_herman-inspect`, and `_herman-str-replace`
   are now considered private functions
 - BREAKING: `herman-map-compile` always returns inspected (json-ready) values,
   and now accepts function args
+- BREAKING: Remove `herman-add-colors`/`-sizes`/`-ratios`/`-font` from utils
 - NEW: Use `herman-add($key, $map, $args…)` to add maps directly to `$herman`,
   with optional function/args to compile raw map values
 - NEW: Use `accoutrement-add($type, $key, $map)` to automate compilation
