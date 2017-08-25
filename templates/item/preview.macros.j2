@@ -32,44 +32,32 @@
   Display color palettes based on JSON map output.
 #}
 {% macro color_palette(data) %}
-  {% set data = data|dictsort(false, 'value') %}
-
   {% call show.item_section('color-palette', 'Color Preview') %}
     <div class="color-palette">
-      {% set next = none %}
-
-      {% for name, value in data %}
-        {% if data[loop.index][1] == value %}
-          {% set next = [next, name]|join(', ') if next else name %}
-        {% else %}
-          <div class="color-preview">
-            <div class="color-swatch">
-              <div class="transparency-grid"></div>
-              <div class="color-overlay" style="background-color: {{ value }};"></div>
-            </div>
-            <div class="color-info">
-              {% set name = [next, name]|join(', ') if next else name %}
-              <strong class="color-name">
-                {% for opt in name|split(', ') %}
-                  <span class="color-name-option">
-                    {{ opt }}{% if not loop.last %},&nbsp;{% endif %}
-                  </span>
-                {% endfor %}
-              </strong>
-              {% set color = value|colors %}
-              {% if color %}
-                {% for format in ['hex', 'rgb', 'hsl'] %}
-                  {% if color[format] %}
-                    <code class="color-value">{{ color[format] }}</code>
-                  {% endif %}
-                {% endfor %}
-              {% else %}
-                <code class="color-value">{{ value }}</code>
-              {% endif %}
-            </div>
+      {% for value, items in data|list|groupby('value') %}
+        <div class="color-preview">
+          <div class="color-swatch">
+            <div class="transparency-grid"></div>
+            <div class="color-overlay" style="background-color: {{ value }};"></div>
           </div>
-          {% set next = none %}
-        {% endif %}
+          <div class="color-info">
+            <strong class="color-name">
+              {% for item in items %}
+                <span class="color-name-option">{{ item.key }}{% if not loop.last %},&nbsp;{% endif %}</span>
+              {% endfor %}
+            </strong>
+            {% set color = value|colors %}
+            {% if color %}
+              {% for format in ['hex', 'rgb', 'hsl'] %}
+                {% if color[format] %}
+                  <code class="color-value">{{ color[format] }}</code>
+                {% endif %}
+              {% endfor %}
+            {% else %}
+              <code class="color-value">{{ value }}</code>
+            {% endif %}
+          </div>
+        </div>
       {% endfor %}
     </div>
   {% endcall %}
