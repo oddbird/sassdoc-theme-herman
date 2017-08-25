@@ -42,7 +42,16 @@
           </div>
           <div class="color-info">
             <strong class="color-name">{{ name }}</strong>
-            <code class="color-value">{{ value }}</code>
+            {% set color = value|colors %}
+            {% if color %}
+              {% for format in ['hex', 'rgb', 'hsl'] %}
+                {% if color[format] %}
+                  <code class="color-value">{{ color[format] }}</code>
+                {% endif %}
+              {% endfor %}
+            {% else %}
+              <code class="color-value">{{ value }}</code>
+            {% endif %}
           </div>
         </div>
       {% endfor %}
