@@ -61,10 +61,14 @@
 .color-value {
   display: block;
   padding: size('half-shim');
-  white-space: nowrap;
+}
+
+.color-name-option {
+  display: inline-block;
 }
 
 .color-value {
   color: color('text-light');
   font-size: size('code');
+  white-space: nowrap;
 }

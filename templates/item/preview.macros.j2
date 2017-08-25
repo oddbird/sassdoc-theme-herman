@@ -34,14 +34,18 @@
 {% macro color_palette(data) %}
   {% call show.item_section('color-palette', 'Color Preview') %}
     <div class="color-palette">
-      {% for name, value in data %}
+      {% for value, items in data|list|groupby('value') %}
         <div class="color-preview">
           <div class="color-swatch">
             <div class="transparency-grid"></div>
             <div class="color-overlay" style="background-color: {{ value }};"></div>
           </div>
           <div class="color-info">
-            <strong class="color-name">{{ name }}</strong>
+            <strong class="color-name">
+              {% for item in items %}
+                <span class="color-name-option">{{ item.key }}{% if not loop.last %},&nbsp;{% endif %}</span>
+              {% endfor %}
+            </strong>
             {% set color = value|colors %}
             {% if color %}
               {% for format in ['hex', 'rgb', 'hsl'] %}
