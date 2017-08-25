@@ -16,6 +16,8 @@
   while adding to both `$herman` and the appropriate accoutrement global
   (`$colors`, `$ratios`, `$sizes`, `$fonts`).
 - NEW: `displayColors` option (type: `Array`, default: `['hex', 'rgb', 'hsl']`)
+- Group identical colors in color-palette –
+  [#123](https://github.com/oddbird/sassdoc-theme-herman/issues/123)
 
 ## 1.0.0-alpha.9: 2017-06-29
 
