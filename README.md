@@ -10,18 +10,21 @@ Herman [a SassDoc theme]
 > <cite>—Miriam Suzanne</cite>
 
 At [OddBird][oddbird],
-we wanted to a tool to help us
+we wanted a tool to help us
 document the entire front end of a project,
 from brand guidelines to UX Elements and code patterns.
-Herman is our odd [SassDoc][SassDoc] theme,
+
+Herman is built as an extension to [SassDoc][SassDoc],
 still in alpha-development,
-with a number of extra features for documenting
-user-experience and code patterns:
+with features for documenting and automating
+user-experience and code patterns, such as:
 
 - Font specimens
 - Color palettes
 - SVG icon previews
 - Referencing & rendering Nunjucks macros from the Sass docs
+- Displaying pre-and-post compilation code samples
+- Rendering sample components
 - more on the way!
 
 [oddbird]: http://oddbird.net/
@@ -83,6 +86,9 @@ you must also either specify a `templatepath`
 or a `nunjucksEnv` (a custom nunjucks environment —
 this is particularly useful if your macros contain custom filters)
 in your sassdoc configuration `herman` option object.
+
+Any html (or html-compiled) examples
+will also be rendered in iframes.
 
 
 Development
