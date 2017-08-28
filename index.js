@@ -223,13 +223,23 @@ var parseSubprojects = function(ctx) {
     ctx.herman.subprojects.forEach(function(name) {
       var prjPath = './node_modules/' + name + '/';
       var configFile = prjPath + '.sassdocrc';
+      var packageFile = prjPath + 'package.json';
       var config = {};
+      var packageJSON = {};
       try {
         // Load .sassdocrc configuration from subproject directory
         config = yaml.safeLoad(fs.readFileSync(configFile, 'utf-8'));
       } catch (err) {
         ctx.logger.warn(
           'Invalid or no .sassdocrc found for subproject: ' + name
+        );
+      }
+      try {
+        // Load package.json data from subproject directory
+        packageJSON = yaml.safeLoad(fs.readFileSync(packageFile, 'utf-8'));
+      } catch (err) {
+        ctx.logger.warn(
+          'Invalid or no package.json found for subproject: ' + name
         );
       }
       if (!config.description && !config.descriptionPath) {
@@ -250,6 +260,7 @@ var parseSubprojects = function(ctx) {
       config.dest = undefined;
       var prjCtx = extend({}, config);
       var promise = sassdoc.parse(src, prjCtx).then(function(data) {
+        prjCtx.subpackage = packageJSON;
         prjCtx.package = ctx.package;
         prjCtx.basePath = '../';
         prjCtx.activeProject = name;

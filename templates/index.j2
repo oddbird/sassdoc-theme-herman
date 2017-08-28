@@ -1,12 +1,9 @@
 {% extends 'base.j2' %}
 
 {% block main %}
-  {# @@@ why not?? #}
-  {% set home = subprojects[activeProject].package.homepage if activeProject else package.homepage %}
-  {% set source = subprojects[activeProject].package.repository.url if activeProject else package.repository.url %}
-  {% if not activeProject %}{# @@@ temp! #}
-    {{ project_links(home, source) }}
-  {% endif %}
+  {% set home = subprojects[activeProject].subpackage.homepage if activeProject else package.homepage %}
+  {% set source = subprojects[activeProject].subpackage.repository.url if activeProject else package.repository.url %}
+  {{ project_links(home, source) }}
 
   <div class="text-block">
     {{ description|safe }}
