@@ -88,7 +88,8 @@ var prepareContext = function(ctx) {
     }
     // Consider it to be prose if it's separated from the next Sass block
     // by any blank lines.
-    var lineCount = item.context.name.split('\n').length;
+    var name = item.context.origName || item.context.name;
+    var lineCount = name.split('\n').length;
     if (item.context.line.start > item.commentRange.end + lineCount) {
       item.context = {
         type: 'prose',
@@ -627,6 +628,27 @@ herman.annotations = [
             renderIframe(env, exampleItem, 'example');
           });
         });
+      }
+    };
+  },
+  /**
+   * Override `@name` annotation to preserve the original name
+   */
+  function name() {
+    return {
+      name: 'name',
+      multiple: false,
+      parse: function parse(text) {
+        return text.trim();
+      },
+      // Abuse the autofill feature to rewrite the `item.context`
+      autofill: function autofill(item) {
+        if (item.name) {
+          item.context.origName = item.context.name;
+          item.context.name = item.name;
+          // Cleanup
+          delete item.name;
+        }
       }
     };
   }

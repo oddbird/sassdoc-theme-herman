@@ -196,7 +196,7 @@ ${{ item.context.name }}: {{ item.context.value }}{% if item.context.scope != 'p
 
 
 {%- macro scss_css(item) -%}
-{{ item.context.name }} {
+{{ item.context.origName or item.context.name }} {
   {{ item.context.value }}
 }
 {%- endmacro -%}
