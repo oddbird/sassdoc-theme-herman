@@ -25,7 +25,7 @@ $hljs-colors: (
   'hljs-shadow': 'code-shadow',
 );
 
-@include herman-add-colors('hljs-colors', $hljs-colors);
+@include accoutrement-add('colors', 'hljs-colors', $hljs-colors);
 
 
 // hljs-gradient

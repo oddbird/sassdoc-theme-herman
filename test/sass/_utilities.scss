@@ -1,0 +1,221 @@
+// Utility Tests
+// =============
+
+$initial: (
+  'brand-blue': hsl(195, 85%, 35%),
+  'light-gray': 'brand-blue' ('tint': 80%, 'desaturate': 80%),
+  'gray': 'brand-blue' ('desaturate': 80%),
+  'black': 'brand-blue' ('shade': 30%, 'desaturate': 80%),
+);
+
+$compiled: (
+  'brand-blue': #0d7fa5,
+  'light-gray': #dedede,
+  'gray': #555b5e,
+  'black': #3b4042,
+);
+
+$darken: (
+  'brand-blue': '#063646',
+  'light-gray': '#ababab',
+  'gray': '#252728',
+  'black': '#0b0c0c',
+);
+
+
+// String Replace
+// --------------
+@include describe('herman-str-replace [function]') {
+  @include it('replaces a single sub-string') {
+    @include assert-equal(
+      _herman-str-replace('hello world', 'hello', 'goodbye'),
+      'goodbye world');
+  }
+
+  @include it('replaces multiple sub-strings') {
+    @include assert-equal(
+      _herman-str-replace('hello world', 'o', '0', true),
+      'hell0 w0rld');
+  }
+
+  @include it('replaces entire string') {
+    @include assert-equal(
+      _herman-str-replace('hello world', 'hello world', 'BOOM'),
+      'BOOM');
+  }
+}
+
+
+// Herman Inspect
+// --------------
+@include describe('herman-inspect [function]') {
+  @include it('converts values to strings') {
+    @include assert-equal(
+      _herman-inspect(1em),
+      '1em');
+  }
+  @include it('adds leading zeros') {
+    @include assert-equal(
+      _herman-inspect(.33333),
+      '0.33333');
+  }
+  @include it('escapes double-quotes') {
+    @include assert-equal(
+      _herman-inspect('this "something" has quotes'),
+      'this \\"something\\" has quotes');
+  }
+}
+
+
+// Map Compile
+// -----------
+@include describe('herman-map-compile [function]') {
+  @include it('returns a map with values run through a given function') {
+    @include assert-equal(
+      herman-map-compile($initial, 'color'),
+      $compiled,
+      $inspect: true);
+  }
+
+  @include it('allows extra args be passed in') {
+    @include assert-equal(
+      herman-map-compile($compiled, 'darken', 20%),
+      $darken);
+  }
+}
+
+
+// Herman Add
+// ----------
+@include describe('herman-add [mixin]') {
+  $herman: () !global;
+  $empty: ();
+
+  @include it('adds a map to the $herman global') {
+    @include assert-equal(
+      $herman,
+      $empty);
+
+    @include herman-add('compiled', $compiled);
+    $expect: map-merge($herman, ('compiled': $compiled));
+
+    @include assert-equal(
+      $herman,
+      $expect);
+  }
+
+  @include it('accepts compilation functions') {
+    $herman: () !global;
+
+    @include assert-equal(
+      $herman,
+      $empty);
+
+    @include herman-add('dark', $compiled, 'darken', 20%);
+    $expect: map-merge($herman, ('dark': $darken));
+
+    @include assert-equal(
+      $herman,
+      $expect);
+  }
+}
+
+
+// Accoutrement Add
+// ----------------
+@include describe('accoutrement-add [mixin]') {
+  $empty: ();
+  $herman: $empty !global;
+  $colors: $empty !global;
+  $ratios: $empty !global;
+  $sizes: $empty !global;
+  $fonts: $empty !global;
+
+  @include it('Compiles accoutrement-color maps, & adds to global variables') {
+    @include assert-equal($herman, $empty);
+    @include assert-equal($colors, $empty);
+
+    @include accoutrement-add('colors', 'initial', $initial);
+    $expect: ('initial': $compiled);
+
+    @include assert-equal(
+      $colors,
+      $initial);
+
+    @include assert-equal(
+      $herman,
+      $expect,
+      $inspect: true);
+  }
+
+  @include it('Compiles accoutrement-ratio maps, & adds to global variables') {
+    $ratio-new: (
+      'rhythm': 1.4,
+      'line': 'rhythm',
+    );
+
+    @include assert-equal($ratios, $empty);
+
+    @include accoutrement-add('ratio', 'new-ratio', $ratio-new);
+
+    @include assert-equal(
+      $ratios,
+      $ratio-new);
+
+    $new-ratio-comp: herman-map-compile($ratios, 'scale');
+    $expect: map-merge($herman, ('new-ratio': $new-ratio-comp));
+
+    @include assert-equal(
+      $herman,
+      $expect,
+      $inspect: true);
+  }
+
+  @include it('Compiles accoutrement-size maps, & adds to global variables') {
+    $new-size: (
+      'root': 16px,
+      'base-rem': 'root' ('convert-units': 'rem'),
+      'line': 'base-rem' ('rhythm': 1.4),
+      'h1': calc(%s + %s) ('base-rem', 2.5vw),
+    );
+
+    @include assert-equal($sizes, $empty);
+
+    @include accoutrement-add('size', 'size-new', $new-size);
+
+    @include assert-equal(
+      $sizes,
+      $new-size);
+
+    $new-size-comp: herman-map-compile($sizes, 'size');
+    $expect: map-merge($herman, ('size-new': $new-size-comp));
+
+    @include assert-equal(
+      $herman,
+      $expect,
+      $inspect: true);
+  }
+
+  @include it('Compiles accoutrement-font maps, & adds to global variables') {
+    $new-font: (
+      'name': 'Source Sans Pro',
+      'source': 'https://fonts.google.com/specimen/Source+Sans+Pro',
+      'stack': ('Helvetica Neue', 'Helvetica', 'Arial', sans-serif),
+    );
+
+    @include assert-equal($fonts, $empty);
+
+    @include accoutrement-add('font', 'new-font', $new-font);
+    $expect-font: ('new-font': $new-font);
+    $expect: map-merge($herman, ('new-font': $new-font));
+
+    @include assert-equal(
+      $fonts,
+      $expect-font);
+
+    @include assert-equal(
+      $herman,
+      $expect,
+      $inspect: true);
+  }
+}

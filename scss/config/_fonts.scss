@@ -23,14 +23,14 @@ $font-formats: 'woff' 'ttf';
 ///   Accoutrement Type
 /// @example scss
 ///   // @preview font-specimen; key: sans
-///   @include herman-add-font('sans', $sans-font);
+///   @include accoutrement-add('font', 'sans', $sans-font);
 $sans-font: (
   'name': 'Source Sans Pro',
   'source': 'https://fonts.google.com/specimen/Source+Sans+Pro',
   'stack': ('Helvetica Neue', 'Helvetica', 'Arial', sans-serif),
 );
 
-@include herman-add-font('sans', $sans-font);
+@include accoutrement-add('font', 'sans', $sans-font);
 
 
 // Code Font
@@ -42,11 +42,11 @@ $sans-font: (
 ///   Accoutrement Type
 /// @example scss
 ///   // @preview font-specimen; key: code
-///   @include herman-add-font('code', $code-font);
+///   @include accoutrement-add('font', 'code', $code-font);
 $code-font: (
   'name': 'Source Code Pro',
   'source': 'https://fonts.google.com/specimen/Source+Code+Pro',
   'stack': ('Consolas', 'Menlo', 'Monaco', 'Lucida Console', 'Liberation Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace, sans-serif),
 );
 
-@include herman-add-font('code', $code-font);
+@include accoutrement-add('font', 'code', $code-font);

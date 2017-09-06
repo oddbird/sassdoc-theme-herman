@@ -7,6 +7,7 @@ var path = require('path');
 var Promise = require('bluebird');
 var sass = require('node-sass');
 var sassdoc = require('sassdoc');
+var tinycolor = require('tinycolor2');
 var yaml = require('js-yaml');
 
 var copy = require('./lib/assets.js');
@@ -288,6 +289,43 @@ var renderHerman = function(dest, ctx) {
 
   nunjucksEnv.addFilter('split', function(str, separator) {
     return str.split(separator);
+  });
+
+  // Accepts a color (in any format) and returns an object with hex, rgba, and
+  // hsla strings.
+  nunjucksEnv.addFilter('colors', function(input) {
+    var color = tinycolor(input);
+    if (!color.isValid()) {
+      return null;
+    }
+    var obj = {};
+    var formats = ctx.herman.displayColors || ['hex', 'rgb', 'hsl'];
+    formats.forEach(function(format) {
+      var fn;
+      switch (format) {
+        case 'hex':
+          fn = 'toHexString';
+          break;
+        case 'rgb':
+          fn = 'toRgbString';
+          break;
+        case 'rgba':
+          format = 'rgb';
+          fn = 'toRgbString';
+          break;
+        case 'hsl':
+          fn = 'toHslString';
+          break;
+        case 'hsla':
+          format = 'hsl';
+          fn = 'toHslString';
+          break;
+      }
+      if (fn) {
+        obj[format] = color[fn]();
+      }
+    });
+    return obj;
   });
 
   dest = path.resolve(dest);

@@ -1,6 +1,24 @@
 # Herman Changelog
 
 
+## UNRELEASED
+
+- BREAKING: Rename `$json` to `$herman` for clearer name-spacing
+- BREAKING: `_herman-inspect`, and `_herman-str-replace`
+  are now considered private functions
+- BREAKING: `herman-map-compile` always returns inspected (json-ready) values,
+  and now accepts function args
+- BREAKING: Remove `herman-add-colors`/`-sizes`/`-ratios`/`-font` from utils
+- NEW: Use `herman-add($key, $map, $args…)` to add maps directly to `$herman`,
+  with optional function/args to compile raw map values
+- NEW: Use `accoutrement-add($type, $key, $map)` to automate compilation
+  of accoutrement (color, ratio, size, font) maps,
+  while adding to both `$herman` and the appropriate accoutrement global
+  (`$colors`, `$ratios`, `$sizes`, `$fonts`).
+- NEW: `displayColors` option (type: `Array`, default: `['hex', 'rgb', 'hsl']`)
+- Group identical colors in color-palette –
+  [#123](https://github.com/oddbird/sassdoc-theme-herman/issues/123)
+
 ## 1.0.0-alpha.9: 2017-06-29
 
 - BUGFIX: Remove non-standard html markup on prose blocks

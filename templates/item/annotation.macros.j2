@@ -2,17 +2,6 @@
 {% import 'item/macros.j2' as show %}
 
 
-{# Section template #}
-{% macro item_section(slug, title=none) %}
-  {% set title = title if title else slug %}
-
-  <div data-item-section="{{ slug }}">
-    <h3 class="item-subtitle">{{ title }}</h3>
-    {{ caller() }}
-  </div>
-{% endmacro %}
-
-
 {# Parameter list template #}
 {% macro param_list(name=none, url=none, item_type=none, value=none, value_type=none, note=none, description=none) %}
   <div class="param-list">
@@ -57,7 +46,7 @@
   {% set header = [header, ' & Return']|join if return_data or (throw_data.length) else header %}
 
   {% if data or content_data or output_data or return_data or (throw_data.length) %}
-    {% call item_section(type, header) %}
+    {% call show.item_section(type, header) %}
       {% for item in data %}
         {{ param(name, item, type) }}
       {% endfor %}
@@ -152,7 +141,7 @@
 {# @require annotation #}
 {% macro requires(item, display_private=false) -%}
   {% if (item.require|length) %}
-    {% call item_section('requires') %}
+    {% call show.item_section('requires') %}
       {% set prev = '' %}
       {% for req in item.require %}
         {% set name = req.name if req.name else req.item.context.name %}
@@ -194,7 +183,7 @@
 {# @require backlink list #}
 {% macro used_by(list, display_private=false, display_alias=false) %}
   {% if list %}
-    {% call item_section('used by') %}
+    {% call show.item_section('used by') %}
       {% set prev = '' %}
       {% for req in list %}
         {% set check = [req.context.name|string, req.context.type|string]|join %}
@@ -231,7 +220,7 @@
 {% macro related(item, display_private=false) -%}
   {% if (item.link.length) or (item.see.length) %}
 
-    {% call item_section('related') %}
+    {% call show.item_section('related') %}
       {% for link in item.link %}
         {{ link_item(link) }}
       {% endfor %}
@@ -278,7 +267,7 @@
 {# @todo annotation #}
 {% macro todo(item) %}
   {% if (item.todo.length) %}
-    {% call item_section('todo', 'To-do List') %}
+    {% call show.item_section('todo', 'To-do List') %}
       <ul>
         {% for todo in item.todo %}
           <li data-sassdoc="todo-item">

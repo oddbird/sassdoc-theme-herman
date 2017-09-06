@@ -1,16 +1,26 @@
 {% import 'utility.macros.j2' as utility %}
 
 
+{% macro item_section(slug, title=none) %}
+  {% set title = title if title else slug %}
+
+  <div data-item-section="{{ slug }}">
+    <h3 class="item-subtitle">{{ title }}</h3>
+    {{ caller() }}
+  </div>
+{% endmacro %}
+
+
 {% macro heading(item, type, id, display=none) %}
   {% set item_name = format_name(item, type) %}
   {% set display_type = format_type(type) %}
 
-  <header data-item-section="header">
-    {% set private = 'private' if (item.access == 'private') else none %}
-    {% set deprecate = 'deprecated' if item.deprecated else none %}
-    {% set note = private or deprecate or none %}
-    {% set note = [private, deprecate]|join(' – ') if (private and deprecate) else note %}
+  {% set private = 'private' if (item.access == 'private') else none %}
+  {% set deprecate = 'deprecated' if item.deprecated else none %}
+  {% set note = private or deprecate or none %}
+  {% set note = [private, deprecate]|join(' – ') if (private and deprecate) else note %}
 
+  <header data-item-section="header">
     <h2 class="item-title">
       {% if display_type %}
         <span class="item-type">{{ display_type }}</span>
@@ -139,16 +149,14 @@
   {% set deprecation = item.deprecated %}
 
   {% if content or origin or by or deprecation %}
-    <div data-item-section="summary">
-      <h3 class="item-subtitle">Description</h3>
-
+    {% call item_section('summary', 'Description') %}
       <div class="text-block">
         {{ content|safe }}
         {{ since(origin) }}
         {{ authors(by) }}
         {{ deprecated(deprecation) }}
       </div>
-    </div>
+    {% endcall %}
   {% endif %}
 {% endmacro %}
 
