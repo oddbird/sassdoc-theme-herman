@@ -16,12 +16,14 @@
   while adding to both `$herman` and the appropriate accoutrement global
   (`$colors`, `$ratios`, `$sizes`, `$fonts`).
 - NEW: `displayColors` option (type: `Array`, default: `['hex', 'rgb', 'hsl']`)
-- Group identical colors in color-palette –
+- CHANGE: Group identical colors in color-palette –
   [#123](https://github.com/oddbird/sassdoc-theme-herman/issues/123)
+
 
 ## 1.0.0-alpha.9: 2017-06-29
 
 - BUGFIX: Remove non-standard html markup on prose blocks
+
 
 ## 1.0.0-alpha.8: 2017-06-28
 
@@ -29,6 +31,7 @@
 - Render sassdoc comments that aren't attached to a Sass block as Markdown
   prose.
 - Preserve the original order of sassdoc comments rather than grouping by type.
+
 
 ## 1.0.0-alpha.7: 2017-06-16
 
@@ -39,20 +42,24 @@
   annotation are both paths relative to the project directory, no longer
   relative to the `templatepath` option.
 
+
 ## 1.0.0-alpha.6: 2017-06-14
 
 - BREAKING: Render examples in iframes and only include custom CSS
   in those iframes, for better isolation.
+
 
 ## 1.0.0-alpha.5: 2017-06-08
 
 - BUGFIX: Style cleanup for code-blocks, examples, and properties
 - BUGFIX: UsedBy list is aware of `display.alias` to unlink hidden aliases
 
+
 ## 1.0.0-alpha.4: 2017-06-02
 
 - BREAKING: Move `customHead` option into `herman` options object.
 - BUGFIX: Return correct promise from theme function (fixes early resolution).
+
 
 ## 1.0.0-alpha.3: 2017-05-31
 
@@ -61,9 +68,11 @@
   `@throw`, `@return`, `@output`, `@content`, `@since`, `@deprecated`, `@author`
 - Provide more samples
 
+
 ## 1.0.0-alpha.2: 2017-05-31
 
 - BUGFIX: Show compiled html/css @example even if only one type.
+
 
 ## 1.0.0-alpha.1: 2017-05-29
 
@@ -99,10 +108,12 @@
 - BUGFIX: Do not error if missing `herman` options –
   [#108](https://github.com/oddbird/sassdoc-theme-herman/issues/108).
 
+
 ## 0.5.5: 2017-02-22
 
 - Fix @example macro to work with sassdoc v2.2.0. See
   [https://github.com/SassDoc/sassdoc/commit/842847493f9644e50f9e2ce783eacf886ccf69a0][].
+
 
 ## 0.5.4: 2017-01-16
 
@@ -160,29 +171,35 @@
   determining the type of preview to display
   (default is `text`, see [scale](scale.html) for examples)
 
+
 ## 0.3.2: 2016-09-29
 
 - Mark imported `minifiedIcons` file as `|safe`.
+
 
 ## 0.3.1: 2016-09-14
 
 - Added `nunjucksEnv` option to use a custom nunjucks environment.
 - Added `jinja` syntax highlighting for `@example njk` code blocks.
 
+
 ## 0.3.0: 2016-08-17
 
 - Added rendering of @example annotations using the njk (nunjucks) language.
 - Removed rendering of macro examples using `macroname_data`.
 
+
 ## 0.2.1: 2015-12-23
 
 - Updated dependencies.
+
 
 ## 0.2.0: 2015-12-17
 
 - Add `@icons` annotation.
 - Add `@preview` annotation for color palettes and font specimens.
 - Add syntax highlighting of code blocks.
+
 
 ## 0.1.0: 2015-11-25
 
