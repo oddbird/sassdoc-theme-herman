@@ -46,9 +46,9 @@ accoutrement-scale@^3.2.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/accoutrement-scale/-/accoutrement-scale-3.2.0.tgz#3b58259fa6ca3a1b77c297d6f3ef56e80a4dbaae"
 
-accoutrement-type@^2.0.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/accoutrement-type/-/accoutrement-type-2.1.0.tgz#871e9163ab377c43bd0ab7ca0b6d718c61d26af2"
+accoutrement-type@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/accoutrement-type/-/accoutrement-type-3.0.0.tgz#a85747fcf609d7b30176f195edcb9f7a7dca8ffd"
 
 acorn-jsx@^3.0.0, acorn-jsx@^3.0.1:
   version "3.0.1"
