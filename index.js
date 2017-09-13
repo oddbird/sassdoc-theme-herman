@@ -631,6 +631,7 @@ herman.annotations = [
       }
     };
   },
+
   /**
    * Override `@name` annotation to preserve the original name
    */
