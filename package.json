@@ -20,7 +20,7 @@
     "vinyl-fs": "^2.4.4"
   },
   "engines": {
-    "node": ">=4.5"
+    "node": ">=4.8"
   },
   "scripts": {
     "test": "mocha test",
