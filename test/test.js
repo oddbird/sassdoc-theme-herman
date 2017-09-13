@@ -270,3 +270,25 @@ describe('example annotation', function() {
     });
   });
 });
+
+describe('name annotation', function() {
+  before(function() {
+    this.macro = theme.annotations[4](this.env);
+  });
+
+  describe('parse', function() {
+    it('trims text', function() {
+      assert.equal(this.macro.parse('foo '), 'foo');
+    });
+  });
+
+  describe('autofill', function() {
+    it('preserves original context name', function() {
+      var data = { name: 'foo', context: { name: 'bar' } };
+
+      this.macro.autofill(data);
+
+      assert.deepEqual(data, { context: { name: 'foo', origName: 'bar' } });
+    });
+  });
+});
