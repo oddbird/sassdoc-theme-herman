@@ -199,9 +199,19 @@ gulp.task('compile', ['sass', 'minify'], () => {
       alias: true,
     },
     groups: {
-      config: 'configuration',
-      'sass-utilities': 'Sass API utilities',
-      utilities: 'internal utilities',
+      'api_sass-utilities': 'Sass API',
+      demo_mixins: 'Documenting Mixins & Functions',
+      demo_variables: 'Documenting Variables',
+      'z_config-colors': '_Colors',
+      'z_config-fonts': '_Fonts',
+      'z_config-scale': '_Sizes',
+      'z_config-utils': '_Utilities',
+      'z_config-z-index': '_Z-index',
+      'z_style-code': '_Code Blocks',
+      'z_style-icons': '_Icons',
+      'z_style-nav': '_Navigation',
+      'z_style-sections': '_Sections',
+      'z_style-typography': '_Typography',
     },
     // Disable cache to enable live-reloading.
     // Usefull for some template engines (e.g. Swig).

@@ -2,15 +2,6 @@
 // ================================
 
 
-/// Prose Commentary
-/// ================
-/// Herman allows you to write "prose" markdown blocks,
-/// to help introduce groups,
-/// or add narrative flow between documented items.
-///
-/// @group samples
-
-
 // Herman Sample
 // -------------
 /// This is a sample function.
@@ -28,7 +19,7 @@
 /// - Domus cum quid meae erras
 /// - Quam apta fata puppis ergo solis praeteriti
 ///
-/// @group samples
+/// @group demo_mixins
 /// @see {function} sample-alias
 /// @link http://oddbird.net OddBird Home Page
 /// @todo Create more samples like this one
@@ -62,7 +53,7 @@
 // Sample Alias
 // ------------
 /// This is a sample function alias.
-/// @group samples
+/// @group demo_mixins
 /// @alias herman-sample
 /// @deprecated I don't think this alias is useful anymore
 @function sample-alias(
@@ -77,7 +68,7 @@
 // Sample Alias Two
 // ----------------
 /// This is a sample function alias.
-/// @group samples
+/// @group demo_mixins
 /// @alias herman-sample
 /// @deprecated Doesn't seem to work without a message
 @function sample-alias-two(
@@ -91,6 +82,9 @@
 
 /// Extra Commentary
 /// ================
+/// Herman allows you to write "prose" markdown blocks,
+/// to help introduce groups,
+/// or add narrative flow between documented items.
 /// Prose blocks can also include examples, and other annotations.
 /// @example scss
 ///   @import 'samples/variables';
@@ -98,7 +92,7 @@
 ///     content: $private;
 ///   }
 /// @link http://sassdoc.com/annotations/
-/// @group samples
+/// @group demo_mixins
 
 
 // Mixin with Content
@@ -106,7 +100,7 @@
 /// Mixins can optionally accept a @content block,
 /// passed in brackets. This example creates
 /// a generated element `:before` the element it is used on.
-/// @group samples
+/// @group demo_mixins
 /// @param {String} $content -
 ///   A value for the `content` property
 /// @param {arglist} $list… -
