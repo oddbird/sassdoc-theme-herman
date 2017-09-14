@@ -2,10 +2,10 @@
 // ====
 
 :root {
-  @include baseline;
   @include font-family('sans');
-  font-size: calc(size('root') + 0.25vw);
-  line-height: map-get($ratios, 'herman');
+  font-size: size('root');
+  font-size: calc(size('root') + 0.25vw); //sass-lint:disable-line no-duplicate-properties
+  line-height: ratio('herman');
 }
 
 
