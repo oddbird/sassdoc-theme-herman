@@ -45,7 +45,7 @@
 
 .transparency-grid,
 .color-overlay {
-  @include stretch;
+  @include position(0);
 }
 
 .transparency-grid {

@@ -1,7 +1,7 @@
 # Herman Changelog
 
 
-## UNRELEASED
+## 1.0.0-alpha.10: 2017-09-14
 
 - BREAKING: Rename `$json` to `$herman` for clearer name-spacing
 - BREAKING: `_herman-inspect`, and `_herman-str-replace`
@@ -9,6 +9,7 @@
 - BREAKING: `herman-map-compile` always returns inspected (json-ready) values,
   and now accepts function args
 - BREAKING: Remove `herman-add-colors`/`-sizes`/`-ratios`/`-font` from utils
+- BREAKING: Require Node >= 6.0.0
 - NEW: Use `herman-add($key, $map, $args…)` to add maps directly to `$herman`,
   with optional function/args to compile raw map values
 - NEW: Use `accoutrement-add($type, $key, $map)` to automate compilation
@@ -18,6 +19,9 @@
 - NEW: `displayColors` option (type: `Array`, default: `['hex', 'rgb', 'hsl']`)
 - CHANGE: Group identical colors in color-palette –
   [#123](https://github.com/oddbird/sassdoc-theme-herman/issues/123)
+- BUGFIX: Fix blocks with multi-line selectors and custom @name annotations –
+  [#140](https://github.com/oddbird/sassdoc-theme-herman/pull/140)
+- DOCS: Move to `docs/` and include in repo.
 
 
 ## 1.0.0-alpha.9: 2017-06-29

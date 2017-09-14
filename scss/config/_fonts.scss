@@ -8,7 +8,7 @@
 // ------------
 /// The font-formats that we want to import
 /// @group webfonts
-/// @link http://oddbird.net/accoutrement-type/sassdoc/
+/// @link http://oddbird.net/accoutrement-type/docs/
 ///   Accoutrement Type
 $font-formats: 'woff' 'ttf';
 
@@ -19,7 +19,7 @@ $font-formats: 'woff' 'ttf';
 /// used for smaller text like captions and labels.
 /// @preview font-specimen; key: sans; show: regular, bold, italic, bold italic
 /// @group webfonts
-/// @link http://oddbird.net/accoutrement-type/sassdoc/
+/// @link http://oddbird.net/accoutrement-type/docs/
 ///   Accoutrement Type
 /// @example scss
 ///   // @preview font-specimen; key: sans
@@ -38,7 +38,7 @@ $sans-font: (
 /// A readable monospace font for code previews.
 /// @preview font-specimen; key: code; show: regular, bold
 /// @group webfonts
-/// @link http://oddbird.net/accoutrement-type/sassdoc/
+/// @link http://oddbird.net/accoutrement-type/docs/
 ///   Accoutrement Type
 /// @example scss
 ///   // @preview font-specimen; key: code

@@ -199,12 +199,12 @@
 
 
 {% macro scss_variable(item) -%}
-${{ item.context.name }}: {{ item.context.value }}{% if item.context.scope != 'private' %} !{{ item.context.scope }}{% endif %};
+${{ item.context.origName or item.context.name }}: {{ item.context.value }}{% if item.context.scope != 'private' %} !{{ item.context.scope }}{% endif %};
 {%- endmacro %}
 
 
 {%- macro scss_css(item) -%}
-{{ item.context.name }} {
+{{ item.context.origName or item.context.name }} {
   {{ item.context.value }}
 }
 {%- endmacro -%}

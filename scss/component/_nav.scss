@@ -3,7 +3,7 @@
 
 
 [data-nav-menu='small'] {
-  @include stretch(0, null, 0, null, absolute);
+  @include position(0 null);
   box-shadow: 0 0 size('half-shim') color('shadow');
   transform: translatex(-102%);
   transition: transform 0.4s;
@@ -124,7 +124,7 @@
 
     // Animated underlines
     @include before('') {
-      @include stretch(auto, auto, 0, 0);
+      @include position(null null 0 0);
       background: color('theme-light');
       height: size('nav-underline');
       transform: scale3d(0, 1, 1);

@@ -76,7 +76,7 @@ $hljs-colors: (
   }
 
   @include before(' ') {
-    @include stretch(0, 0, 0, 0);
+    @include position(0);
     background:
       hljs-gradient('to top', 'small'),
       hljs-gradient('to right', 'small'),

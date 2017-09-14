@@ -1,15 +1,15 @@
 'use strict';
 
-var assert = require('assert');
-var path = require('path');
-var sinon = require('sinon');
-var theme = require('../');
-var nunjucks = require('nunjucks');
+const assert = require('assert');
+const path = require('path');
+const sinon = require('sinon');
+const theme = require('../');
+const nunjucks = require('nunjucks');
 
 describe('macro annotation', function() {
   before(function() {
     this.env = {
-      herman: { templatepath: path.resolve(__dirname, 'templates') }
+      herman: { templatepath: path.resolve(__dirname, 'templates') },
     };
     this.macro = theme.annotations[0](this.env);
   });
@@ -18,16 +18,16 @@ describe('macro annotation', function() {
     it('splits on colon', function() {
       assert.deepEqual(this.macro.parse('foo.j2:name'), {
         file: 'foo.j2',
-        name: 'name'
+        name: 'name',
       });
     });
   });
 
   describe('resolve', function() {
     it('warns and exits if no templatepath and @macro used', function() {
-      var env = { logger: { warn: sinon.stub() }, herman: {} };
-      var macro = theme.annotations[0](env);
-      var data = [{ macro: {} }];
+      const env = { logger: { warn: sinon.stub() }, herman: {} };
+      const macro = theme.annotations[0](env);
+      const data = [{ macro: {} }];
 
       macro.resolve(data);
 
@@ -40,9 +40,9 @@ describe('macro annotation', function() {
     });
 
     it('warns only once about missing templatepath', function() {
-      var env = { logger: { warn: sinon.stub() }, herman: {} };
-      var macro = theme.annotations[0](env);
-      var data = [{ macro: {} }, { macro: {} }];
+      const env = { logger: { warn: sinon.stub() }, herman: {} };
+      const macro = theme.annotations[0](env);
+      const data = [{ macro: {} }, { macro: {} }];
 
       macro.resolve(data);
 
@@ -50,9 +50,9 @@ describe('macro annotation', function() {
     });
 
     it('does not warn on lack of templatepath if @macro not used', function() {
-      var env = { logger: { warn: sinon.stub() }, herman: {} };
-      var macro = theme.annotations[0](env);
-      var data = [{}];
+      const env = { logger: { warn: sinon.stub() }, herman: {} };
+      const macro = theme.annotations[0](env);
+      const data = [{}];
 
       macro.resolve(data);
 
@@ -61,7 +61,7 @@ describe('macro annotation', function() {
     });
 
     it('renders macro and doc', function() {
-      var data = [{ macro: { file: 'macros.j2', name: 'mymacro' } }];
+      const data = [{ macro: { file: 'macros.j2', name: 'mymacro' } }];
 
       this.macro.resolve(data);
 
@@ -70,9 +70,9 @@ describe('macro annotation', function() {
           macro: {
             file: 'macros.j2',
             name: 'mymacro',
-            doc: 'This is my macro.'
-          }
-        }
+            doc: 'This is my macro.',
+          },
+        },
       ]);
     });
   });
@@ -81,7 +81,7 @@ describe('macro annotation', function() {
 describe('icons annotation', function() {
   before(function() {
     this.env = {
-      herman: { templatepath: path.resolve(__dirname, 'templates') }
+      herman: { templatepath: path.resolve(__dirname, 'templates') },
     };
     this.icons = theme.annotations[1](this.env);
   });
@@ -91,16 +91,16 @@ describe('icons annotation', function() {
       assert.deepEqual(this.icons.parse('icons/ foo.j2:name'), {
         iconsPath: 'icons/',
         macroFile: 'foo.j2',
-        macroName: 'name'
+        macroName: 'name',
       });
     });
   });
 
   describe('resolve', function() {
     it('warns and exits if no templatepath and @icons used', function() {
-      var env = { logger: { warn: sinon.stub() }, herman: {} };
-      var icons = theme.annotations[1](env);
-      var data = [{ icons: {} }];
+      const env = { logger: { warn: sinon.stub() }, herman: {} };
+      const icons = theme.annotations[1](env);
+      const data = [{ icons: {} }];
 
       icons.resolve(data);
 
@@ -113,9 +113,9 @@ describe('icons annotation', function() {
     });
 
     it('warns only once about missing templatepath', function() {
-      var env = { logger: { warn: sinon.stub() }, herman: {} };
-      var icons = theme.annotations[1](env);
-      var data = [{ icons: {} }, { icons: {} }];
+      const env = { logger: { warn: sinon.stub() }, herman: {} };
+      const icons = theme.annotations[1](env);
+      const data = [{ icons: {} }, { icons: {} }];
 
       icons.resolve(data);
 
@@ -123,9 +123,9 @@ describe('icons annotation', function() {
     });
 
     it('does not warn on lack of templatepath if @icons not used', function() {
-      var env = { logger: { warn: sinon.stub() }, herman: {} };
-      var icons = theme.annotations[1](env);
-      var data = [{}];
+      const env = { logger: { warn: sinon.stub() }, herman: {} };
+      const icons = theme.annotations[1](env);
+      const data = [{}];
 
       icons.resolve(data);
 
@@ -134,14 +134,14 @@ describe('icons annotation', function() {
     });
 
     it('renders icons', function() {
-      var data = [
+      const data = [
         {
           icons: {
             iconsPath: 'test/templates/icons',
             macroFile: 'macros.j2',
-            macroName: 'icon'
-          }
-        }
+            macroName: 'icon',
+          },
+        },
       ];
 
       this.icons.resolve(data);
@@ -150,13 +150,13 @@ describe('icons annotation', function() {
         {
           name: 'ok',
           path: 'test/templates/icons/ok.svg',
-          rendered: 'rendered ok'
+          rendered: 'rendered ok',
         },
         {
           name: 'warning',
           path: 'test/templates/icons/warning.svg',
-          rendered: 'rendered warning'
-        }
+          rendered: 'rendered warning',
+        },
       ]);
       assert.ok(data[0].iframed !== undefined);
     });
@@ -181,16 +181,16 @@ describe('preview annotation', function() {
 describe('example annotation', function() {
   before(function() {
     this.env = {
-      herman: { templatepath: path.resolve(__dirname, 'templates') }
+      herman: { templatepath: path.resolve(__dirname, 'templates') },
     };
     this.example = theme.annotations[3](this.env);
   });
 
   describe('resolve', function() {
     it('warns and exits if no templatepath and njk @example used', function() {
-      var env = { logger: { warn: sinon.stub() }, herman: {} };
-      var example = theme.annotations[3](env);
-      var data = [{ example: [{ type: 'njk' }] }];
+      const env = { logger: { warn: sinon.stub() }, herman: {} };
+      const example = theme.annotations[3](env);
+      const data = [{ example: [{ type: 'njk' }] }];
 
       example.resolve(data);
 
@@ -203,11 +203,11 @@ describe('example annotation', function() {
     });
 
     it('warns only once about missing templatepath', function() {
-      var env = { logger: { warn: sinon.stub() }, herman: {} };
-      var example = theme.annotations[3](env);
-      var data = [
+      const env = { logger: { warn: sinon.stub() }, herman: {} };
+      const example = theme.annotations[3](env);
+      const data = [
         { example: [{ type: 'njk' }] },
-        { example: [{ type: 'njk' }] }
+        { example: [{ type: 'njk' }] },
       ];
 
       example.resolve(data);
@@ -216,9 +216,9 @@ describe('example annotation', function() {
     });
 
     it('does not warn if njk @example not used', function() {
-      var env = { logger: { warn: sinon.stub() }, herman: {} };
-      var example = theme.annotations[3](env);
-      var data = [{}];
+      const env = { logger: { warn: sinon.stub() }, herman: {} };
+      const example = theme.annotations[3](env);
+      const data = [{}];
 
       example.resolve(data);
 
@@ -227,46 +227,69 @@ describe('example annotation', function() {
     });
 
     it('renders nunjucks example', function() {
-      var data = [
-        {
-          example: [
-            {
-              type: 'njk',
-              code:
-                "{% import 'macros.j2' as macros %}\n{{ macros.mymacro(1, 2) }}"
-            }
-          ]
-        }
-      ];
-      this.example.resolve(data);
-      assert.equal(data[0].example[0].rendered, '1 then 2.');
-    });
-
-    it('uses custom nunjucks env, if exists', function() {
-      var nunjucksEnv = nunjucks.configure(
-        path.resolve(__dirname, 'templates')
-      );
-      nunjucksEnv.addFilter('plus_one', function(val) {
-        return val + 1;
-      });
-      var env = { herman: { nunjucksEnv: nunjucksEnv } };
-      var example = theme.annotations[3](env);
-      var data = [
+      const data = [
         {
           example: [
             {
               type: 'njk',
               code:
                 "{% import 'macros.j2' as macros %}\n" +
-                  '{{ macros.macro_with_custom_filter(5) }}'
-            }
-          ]
-        }
+                '{{ macros.mymacro(1, 2) }}',
+            },
+          ],
+        },
+      ];
+      this.example.resolve(data);
+      assert.equal(data[0].example[0].rendered, '1 then 2.');
+    });
+
+    it('uses custom nunjucks env, if exists', function() {
+      const nunjucksEnv = nunjucks.configure(
+        path.resolve(__dirname, 'templates')
+      );
+      nunjucksEnv.addFilter('plus_one', function(val) {
+        return val + 1;
+      });
+      const env = { herman: { nunjucksEnv } };
+      const example = theme.annotations[3](env);
+      const data = [
+        {
+          example: [
+            {
+              type: 'njk',
+              code:
+                "{% import 'macros.j2' as macros %}\n" +
+                '{{ macros.macro_with_custom_filter(5) }}',
+            },
+          ],
+        },
       ];
 
       example.resolve(data);
 
       assert.equal(data[0].example[0].rendered, '6');
+    });
+  });
+});
+
+describe('name annotation', function() {
+  before(function() {
+    this.macro = theme.annotations[4](this.env);
+  });
+
+  describe('parse', function() {
+    it('trims text', function() {
+      assert.equal(this.macro.parse('foo '), 'foo');
+    });
+  });
+
+  describe('autofill', function() {
+    it('preserves original context name', function() {
+      const data = { name: 'foo', context: { name: 'bar' } };
+
+      this.macro.autofill(data);
+
+      assert.deepEqual(data, { context: { name: 'foo', origName: 'bar' } });
     });
   });
 });
