@@ -1,7 +1,6 @@
 // Color Settings
 // ==============
 
-@import '../../node_modules/mathsass/dist/math';
 @import '../../node_modules/accoutrement-color/sass/color';
 
 
@@ -17,8 +16,8 @@
 ///   or previously-defined key,
 ///   followed by an optional map of adjustments
 ///   (as defined in
-///   [Accoutrement-Color](http://oddbird.net/accoutrement-color/sassdoc/)).
-/// @link http://oddbird.net/accoutrement-color/sassdoc/
+///   [Accoutrement-Color](http://oddbird.net/accoutrement-color/docs/)).
+/// @link http://oddbird.net/accoutrement-color/docs/
 ///   Accoutrement Color
 /// @example scss
 ///   // @preview color-palette
@@ -38,7 +37,7 @@ $brand-colors: (
 /// to create structure and hierarchy in the document.
 /// @preview color-palette
 /// @group colors
-/// @link http://oddbird.net/accoutrement-color/sassdoc/
+/// @link http://oddbird.net/accoutrement-color/docs/
 ///   Accoutrement Color
 /// @example scss
 ///   // @preview color-palette
@@ -58,7 +57,7 @@ $neutral-colors: (
 /// give a quick sense of progress, warning, or errors.
 /// @preview color-palette
 /// @group colors
-/// @link http://oddbird.net/accoutrement-color/sassdoc/
+/// @link http://oddbird.net/accoutrement-color/docs/
 ///   Accoutrement Color
 /// @example scss
 ///   // @preview color-palette
@@ -78,7 +77,7 @@ $status-colors: (
 /// to a sitewide theme.
 /// @preview color-palette
 /// @group colors
-/// @link http://oddbird.net/accoutrement-color/sassdoc/
+/// @link http://oddbird.net/accoutrement-color/docs/
 ///   Accoutrement Color
 /// @example scss
 ///   // @preview color-palette
@@ -112,7 +111,7 @@ $theme-colors: (
 /// Colors used by accoutrement-color
 /// to calculate contrast ratios.
 /// @group colors
-/// @link http://oddbird.net/accoutrement-color/sassdoc/
+/// @link http://oddbird.net/accoutrement-color/docs/
 ///   Accoutrement Color
 $system-colors: (
   'contrast-light': 'background',

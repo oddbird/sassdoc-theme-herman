@@ -37,11 +37,11 @@ jobs:
           name: Run Tests [node latest]
           command: yarn test
       - run:
-          name: Run Tests [node 4.8]
+          name: Run Tests [node 6]
           command: |
             export NVM_DIR="$HOME/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-            nvm install 4.8.0
+            nvm install 6.0.0
             yarn install --force
             yarn test
       - deploy:
