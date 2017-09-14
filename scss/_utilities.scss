@@ -189,9 +189,9 @@ $herman: () !default;
     'colors': 'color',
     'size': 'size',
     'sizes': 'size',
-    'scale': 'scale',
-    'ratio': 'scale',
-    'ratios': 'scale',
+    'scale': 'ratio',
+    'ratio': 'ratio',
+    'ratios': 'ratio',
   );
   $call: map-get($functions, $type);
   $get: function-exists('get-function');
@@ -201,7 +201,7 @@ $herman: () !default;
     $colors: map-merge($colors, $map) !global;
   } @else if ($call == 'size') {
     $sizes: map-merge($sizes, $map) !global;
-  } @else if ($call == 'scale') {
+  } @else if ($call == 'ratio') {
     $ratios: map-merge($ratios, $map) !global;
   }@else if index('font' 'fonts', $type) {
     $fonts: map-merge($fonts, ($key: $map)) !global;
