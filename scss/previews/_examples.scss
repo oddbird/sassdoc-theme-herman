@@ -24,11 +24,10 @@
 .code-block {
   align-items: stretch;
   display: flex;
-  flex: 1 1 40%;
+  flex: 1 1 20em;
   flex-direction: column;
   max-height: size('rhythm') * 12;
   max-width: 100%;
-  min-width: 20em;
   overflow: auto;
 
   & + & {

@@ -43,7 +43,7 @@
   "devDependencies": {
     "accoutrement-color": "^2.2.1",
     "accoutrement-init": "^1.1.2",
-    "accoutrement-layout": "^2.2.0",
+    "accoutrement-layout": "3.0.2",
     "accoutrement-scale": "5.0.1",
     "accoutrement-type": "^2.1.0",
     "browser-sync": "^2.18.13",
