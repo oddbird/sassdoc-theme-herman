@@ -81,7 +81,7 @@
 /// )
 /// ```
 ///
-/// @group sass-utilities
+/// @group api_sass-utilities
 ///
 /// @example scss - sample map structure
 ///   $herman: (
@@ -113,7 +113,7 @@ $herman: () !default;
 /// to the `$herman` map for JSON-export,
 /// converting values to JSON-ready strings,
 /// with optional functions/args for compiling raw values.
-/// @group sass-utilities
+/// @group api_sass-utilities
 /// @param {String} $key -
 ///   A key name for accessing this data in JSON —
 ///   should match the variable name,
@@ -152,7 +152,7 @@ $herman: () !default;
 /// the appropriate global Accoutrement map variable –
 /// e.g. colors are added to both `$herman` (compiled)
 /// and `$colors` (raw).
-/// @group sass-utilities
+/// @group api_sass-utilities
 /// @param {String} $type -
 ///   The type of map being added,
 ///   e.g. `color/colors`, `font/fonts`,
@@ -222,7 +222,7 @@ $herman: () !default;
 /// This is used by `herman-add` and `accoutrement-add`,
 /// but can also be accessed directly.
 ///
-/// @group sass-utilities
+/// @group api_sass-utilities
 ///
 /// @param {Map} $map -
 ///   A sass map with values that need to be compiled,
@@ -268,7 +268,7 @@ $herman: () !default;
 // Herman Inspect
 // --------------
 /// Convert any value into a json-export-ready string
-/// @group sass-utilities
+/// @group api_sass-utilities
 /// @access private
 /// @param $value -
 ///   Any sass value to convert
@@ -296,7 +296,7 @@ $herman: () !default;
 // String Replace
 // --------------
 /// Return a string, with a substring replaced
-/// @group sass-utilities
+/// @group api_sass-utilities
 /// @access private
 /// @param {String} $string -
 ///   The base string to be manipulated

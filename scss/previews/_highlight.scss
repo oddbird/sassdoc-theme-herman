@@ -8,7 +8,7 @@
 // hljs colors
 // -----------
 /// A map of colors for code-highlighting
-/// @group code
+/// @group z_style-code
 /// @access private
 /// @type map
 $hljs-colors: (
@@ -33,7 +33,7 @@ $hljs-colors: (
 /// Creates a faux-background gradient
 /// to overlay the edges of a code-block,
 /// so code-overflow is more obvious.
-/// @group code
+/// @group z_style-code
 /// @access private
 /// @see {css} Code Blocks
 /// @parameter {string} $direction -
@@ -57,11 +57,11 @@ $hljs-colors: (
 
 // Code Blocks
 /// @name Code Blocks
-/// @group code
+/// @group z_style-code
 /// @access private
 /// @requires {function} hljs-gradient
 [data-sassdoc='hljs'],
-[data-sassdoc-page='index'] pre {
+.text-block pre {
   align-items: stretch;
   background-color: color('hljs-background');
   color: color('hljs-text');

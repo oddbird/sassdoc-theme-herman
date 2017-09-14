@@ -7,7 +7,7 @@
 // Font Formats
 // ------------
 /// The font-formats that we want to import
-/// @group webfonts
+/// @group z_config-fonts
 /// @link http://oddbird.net/accoutrement-type/docs/
 ///   Accoutrement Type
 $font-formats: 'woff' 'ttf';
@@ -18,7 +18,7 @@ $font-formats: 'woff' 'ttf';
 /// A clean sans-serif option
 /// used for smaller text like captions and labels.
 /// @preview font-specimen; key: sans; show: regular, bold, italic, bold italic
-/// @group webfonts
+/// @group z_config-fonts
 /// @link http://oddbird.net/accoutrement-type/docs/
 ///   Accoutrement Type
 /// @example scss
@@ -37,7 +37,7 @@ $sans-font: (
 // ---------
 /// A readable monospace font for code previews.
 /// @preview font-specimen; key: code; show: regular, bold
-/// @group webfonts
+/// @group z_config-fonts
 /// @link http://oddbird.net/accoutrement-type/docs/
 ///   Accoutrement Type
 /// @example scss

@@ -9,7 +9,7 @@
 /// A set of standard ratios
 /// for creating text rhythm and modular-scales.
 ///
-/// @group scale
+/// @group z_config-scale
 /// @preview ratios
 /// @link http://oddbird.net/accoutrement-scale/docs/
 ///   Accoutrement Scale
@@ -27,7 +27,7 @@ $text-ratios: (
 // ----------
 /// A set of standard text sizes.
 ///
-/// @group scale
+/// @group z_config-scale
 /// @preview sizes
 /// @link http://oddbird.net/accoutrement-scale/docs/
 ///   Accoutrement Scale
@@ -63,7 +63,7 @@ $text-sizes: (
 // -------------
 /// A set of standard spacing sizes.
 ///
-/// @group scale
+/// @group z_config-scale
 /// @preview sizes; style: ruler
 /// @link http://oddbird.net/accoutrement-scale/docs/
 ///   Accoutrement Scale
@@ -90,7 +90,7 @@ $spacing-sizes: (
 /// A set of pattern-specific sizes,
 /// that can be applied to various components.
 ///
-/// @group scale
+/// @group z_config-scale
 /// @preview sizes; style: output-only
 /// @link http://oddbird.net/accoutrement-scale/docs/
 ///   Accoutrement Scale
