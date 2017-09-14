@@ -45,7 +45,7 @@
     "accoutrement-init": "^1.1.2",
     "accoutrement-layout": "3.0.2",
     "accoutrement-scale": "5.0.1",
-    "accoutrement-type": "^2.1.0",
+    "accoutrement-type": "3.0.1",
     "browser-sync": "^2.18.13",
     "chalk": "^2.1.0",
     "del": "^3.0.0",
