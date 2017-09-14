@@ -1,26 +1,26 @@
 'use strict';
 
-var autoprefixer = require('gulp-autoprefixer');
-var browserSync = require('browser-sync').create();
-var chalk = require('chalk');
-var del = require('del');
-var eslint = require('gulp-eslint');
-var gulp = require('gulp');
-var gutil = require('gulp-util');
-var imagemin = require('gulp-imagemin');
-var mocha = require('gulp-mocha');
-var path = require('path');
-var prettier = require('gulp-nf-prettier');
-var rename = require('gulp-rename');
-var sass = require('gulp-sass');
-var sassdoc = require('sassdoc');
-var sasslint = require('gulp-sass-lint');
-var sourcemaps = require('gulp-sourcemaps');
-var svg = require('gulp-svg-symbols');
-var uglify = require('gulp-uglify');
+const autoprefixer = require('gulp-autoprefixer');
+const browserSync = require('browser-sync').create();
+const chalk = require('chalk');
+const del = require('del');
+const eslint = require('gulp-eslint');
+const gulp = require('gulp');
+const gutil = require('gulp-util');
+const imagemin = require('gulp-imagemin');
+const mocha = require('gulp-mocha');
+const path = require('path');
+const prettier = require('gulp-prettier-plugin');
+const rename = require('gulp-rename');
+const sass = require('gulp-sass');
+const sassdoc = require('sassdoc');
+const sasslint = require('gulp-sass-lint');
+const sourcemaps = require('gulp-sourcemaps');
+const svg = require('gulp-svg-symbols');
+const uglify = require('gulp-uglify-es').default;
 
 // Theme and project specific paths.
-var paths = {
+const paths = {
   DIST_DIR: 'dist/',
   SASS_DIR: 'scss/',
   SASS_TESTS_DIR: 'test/sass/',
@@ -28,54 +28,55 @@ var paths = {
   SVG: 'assets/svg/**/*.svg',
   JS_DIR: 'assets/js/',
   FONTS: 'assets/fonts/**/*',
-  DOCS_DIR: 'sassdoc/',
+  DOCS_DIR: 'docs/',
   JS_TESTS_DIR: 'test/',
   TEMPLATES_DIR: 'templates/',
   IGNORE: ['!**/.#*', '!**/flycheck_*'],
-  init: function() {
-    this.TEMPLATES = [this.TEMPLATES_DIR + '**/*.j2'].concat(this.IGNORE);
-    this.SASS = [this.SASS_DIR + '**/*.scss'].concat(this.IGNORE);
-    this.JS = [this.JS_DIR + '**/*.js'].concat(this.IGNORE);
-    this.SRC_JS = [this.JS_DIR + '**/*.js', 'lib/**/*.js', 'index.js'].concat(
+  init() {
+    this.TEMPLATES = [`${this.TEMPLATES_DIR}**/*.j2`].concat(this.IGNORE);
+    this.SASS = [`${this.SASS_DIR}**/*.scss`].concat(this.IGNORE);
+    this.JS = [`${this.JS_DIR}**/*.js`].concat(this.IGNORE);
+    this.SRC_JS = [`${this.JS_DIR}**/*.js`, 'lib/**/*.js', 'index.js'].concat(
       this.IGNORE
     );
     this.ALL_JS = [
-      this.JS_DIR + '**/*.js',
+      `${this.JS_DIR}**/*.js`,
       'lib/**/*.js',
-      this.JS_TESTS_DIR + '**/*.js',
+      `${this.JS_TESTS_DIR}**/*.js`,
       'gulpfile.js',
       'index.js',
       '!assets/js/highlight.js',
       '!assets/js/jquery-3.1.1.slim.js',
-      '!assets/js/srcdoc-polyfill.min.js'
+      '!assets/js/srcdoc-polyfill.min.js',
     ].concat(this.IGNORE);
     this.JS_TESTS_FILES = [
-      this.JS_TESTS_DIR + '**/*.js',
-      this.JS_TESTS_DIR + '**/*.j2'
+      `${this.JS_TESTS_DIR}*.js`,
+      `${this.JS_TESTS_DIR}**/*.j2`,
     ].concat(this.IGNORE);
     return this;
-  }
+  },
 }.init();
 
 // Try to ensure that all processes are killed on exit
-var spawned = [];
-process.on('exit', function() {
-  spawned.forEach(function(pcs) {
+const spawned = [];
+process.on('exit', () => {
+  spawned.forEach(pcs => {
     pcs.kill();
   });
 });
 
-var onError = function(err) {
+const onError = function(err) {
   gutil.log(chalk.red(err.message));
   gutil.beep();
   this.emit('end');
 };
 
-var eslintTask = function(src, failOnError, log) {
+const eslintTask = (src, failOnError, log) => {
   if (log) {
-    gutil.log('Running', "'" + chalk.cyan('eslint ' + src) + "'...");
+    const cmd = `eslint ${src}`;
+    gutil.log('Running', `'${chalk.cyan(cmd)}'...`);
   }
-  var stream = gulp
+  const stream = gulp
     .src(src)
     .pipe(eslint())
     .pipe(eslint.format())
@@ -86,23 +87,24 @@ var eslintTask = function(src, failOnError, log) {
   return stream;
 };
 
-var prettierTask = function(src, log) {
+const prettierTask = function(src, log) {
   if (log) {
-    var cmd = 'prettier ' + src;
-    gutil.log('Running', "'" + chalk.cyan(cmd) + "'...");
+    const cmd = `prettier ${src}`;
+    gutil.log('Running', `'${chalk.cyan(cmd)}'...`);
   }
   return gulp
     .src(src, { base: './' })
-    .pipe(prettier({ singleQuote: true }))
+    .pipe(prettier({ singleQuote: true, trailingComma: 'es5' }))
     .pipe(gulp.dest('./'))
     .on('error', onError);
 };
 
-var sasslintTask = function(src, failOnError, log) {
+const sasslintTask = function(src, failOnError, log) {
   if (log) {
-    gutil.log('Running', "'" + chalk.cyan('sasslint ' + src) + "'...");
+    const cmd = `sasslint ${src}`;
+    gutil.log('Running', `'${chalk.cyan(cmd)}'...`);
   }
-  var stream = gulp
+  const stream = gulp
     .src(src)
     .pipe(sasslint())
     .pipe(sasslint.format())
@@ -113,28 +115,18 @@ var sasslintTask = function(src, failOnError, log) {
   return stream;
 };
 
-gulp.task('prettier', function() {
-  return prettierTask(paths.ALL_JS);
-});
+gulp.task('prettier', () => prettierTask(paths.ALL_JS));
 
-gulp.task('eslint', ['prettier'], function() {
-  return eslintTask(paths.ALL_JS, true);
-});
+gulp.task('eslint', ['prettier'], () => eslintTask(paths.ALL_JS, true));
 
-gulp.task('eslint-nofail', function() {
-  return eslintTask(paths.ALL_JS);
-});
+gulp.task('eslint-nofail', () => eslintTask(paths.ALL_JS));
 
-gulp.task('sasslint', function() {
-  return sasslintTask(paths.SASS, true);
-});
+gulp.task('sasslint', () => sasslintTask(paths.SASS, true));
 
-gulp.task('sasslint-nofail', function() {
-  return sasslintTask(paths.SASS);
-});
+gulp.task('sasslint-nofail', () => sasslintTask(paths.SASS));
 
-gulp.task('sass', function() {
-  return gulp
+gulp.task('sass', () =>
+  gulp
     .src(paths.SASS)
     .pipe(sourcemaps.init())
     .pipe(sass({ outputStyle: 'compressed' }))
@@ -142,45 +134,43 @@ gulp.task('sass', function() {
     .pipe(
       autoprefixer({
         browsers: ['last 2 versions'],
-        cascade: false
+        cascade: false,
       })
     )
     .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest(paths.DIST_DIR + 'css/'));
-});
+    .pipe(gulp.dest(`${paths.DIST_DIR}css/`))
+);
 
-gulp.task('sasstest', function() {
-  return gulp
-    .src(paths.SASS_TESTS_DIR + 'test_sass.js', { read: false })
-    .pipe(mocha({ reporter: 'dot' }));
-});
+gulp.task('sasstest', () =>
+  gulp
+    .src(`${paths.SASS_TESTS_DIR}test_sass.js'`, { read: false })
+    .pipe(mocha({ reporter: 'dot' }))
+);
 
 // Need to finish compile before running tests,
 // so that the processes do not conflict
-gulp.task('test', ['compile'], function() {
-  return gulp
-    .src(paths.JS_TESTS_DIR + '**/*.js', { read: false })
-    .pipe(mocha());
-});
+gulp.task('test', ['compile'], () =>
+  gulp.src(`${paths.JS_TESTS_DIR}*.js`, { read: false }).pipe(mocha())
+);
 
-gulp.task('browser-sync', function(cb) {
+gulp.task('browser-sync', cb => {
   browserSync.init(
     {
       open: false,
       server: {
-        baseDir: paths.DOCS_DIR
+        baseDir: paths.DOCS_DIR,
       },
       logLevel: 'info',
       logPrefix: 'herman',
       notify: false,
       ghostMode: false,
-      files: [paths.DOCS_DIR + '**/*'],
+      files: [`${paths.DOCS_DIR}**/*`],
       reloadDelay: 300,
       reloadThrottle: 500,
       // Because we're debouncing, we always want to reload the page to prevent
       // a case where the CSS change is detected first (and injected), and
       // subsequent JS/HTML changes are ignored.
-      injectChanges: false
+      injectChanges: false,
     },
     cb
   );
@@ -188,8 +178,8 @@ gulp.task('browser-sync', function(cb) {
 
 // SassDoc compilation.
 // See: http://sassdoc.com/customising-the-view/
-gulp.task('compile', ['sass', 'minify'], function() {
-  var config = {
+gulp.task('compile', ['sass', 'minify'], () => {
+  const config = {
     verbose: true,
     dest: paths.DOCS_DIR,
     theme: './',
@@ -197,29 +187,29 @@ gulp.task('compile', ['sass', 'minify'], function() {
       subprojects: ['accoutrement-color'],
       templatepath: path.join(__dirname, 'templates'),
       sass: {
-        jsonfile: paths.DIST_DIR + 'css/json.css',
+        jsonfile: `${paths.DIST_DIR}css/json.css`,
         includepaths: [path.join(__dirname, 'scss')],
-        includes: ['utilities', 'config/manifest']
+        includes: ['utilities', 'config/manifest'],
       },
-      customCSS: paths.DIST_DIR + 'css/main.css',
-      minifiedIcons: paths.TEMPLATES_DIR + '_icons.svg',
-      displayColors: ['hex', 'hsl']
+      customCSS: `${paths.DIST_DIR}css/main.css`,
+      minifiedIcons: `${paths.TEMPLATES_DIR}_icons.svg`,
+      displayColors: ['hex', 'hsl'],
     },
     display: {
-      alias: true
+      alias: true,
     },
     groups: {
       config: 'configuration',
       'sass-utilities': 'Sass API utilities',
-      utilities: 'internal utilities'
+      utilities: 'internal utilities',
     },
     // Disable cache to enable live-reloading.
     // Usefull for some template engines (e.g. Swig).
-    cache: false
+    cache: false,
   };
 
   return gulp
-    .src(path.join(paths.SASS_DIR + '**/*.scss'))
+    .src(path.join(`${paths.SASS_DIR}**/*.scss`))
     .pipe(sassdoc(config));
 });
 
@@ -235,10 +225,10 @@ gulp.task('dev', [
   'sasslint-nofail',
   'sasstest',
   'test',
-  'watch'
+  'watch',
 ]);
 
-gulp.task('watch', ['compile'], function() {
+gulp.task('watch', ['compile'], () => {
   gulp.watch(
     [
       paths.SRC_JS,
@@ -247,16 +237,16 @@ gulp.task('watch', ['compile'], function() {
       paths.IMG,
       paths.SVG,
       paths.FONTS,
-      paths.TEMPLATES_DIR + '_icon_template.lodash',
+      `${paths.TEMPLATES_DIR}_icon_template.lodash`,
       './README.md',
-      './package.json'
+      './package.json',
     ],
     ['compile']
   );
 
   gulp.watch([paths.JS, paths.JS_TESTS_FILES], ['test']);
 
-  gulp.watch(paths.SASS, function(ev) {
+  gulp.watch(paths.SASS, ev => {
     if (ev.type === 'added' || ev.type === 'changed') {
       sasslintTask(ev.path, false, true);
     }
@@ -264,41 +254,33 @@ gulp.task('watch', ['compile'], function() {
 
   gulp.watch(paths.SASS, ['sasstest']);
 
-  gulp.watch(paths.ALL_JS, { debounceDelay: 1000 }, function(ev) {
-    if (ev.type === 'added' || ev.type === 'changed') {
-      prettierTask(ev.path, true).on('end', function() {
-        eslintTask(ev.path, false, true);
-      });
-    }
-  });
-
   gulp.watch('**/.sass-lint.yml', ['sasslint-nofail']);
   gulp.watch('**/.eslintrc.yml', ['eslint-nofail']);
 });
 
-gulp.task('copy-fonts', function() {
-  var dest = paths.DIST_DIR + 'fonts/';
+gulp.task('copy-fonts', () => {
+  const dest = `${paths.DIST_DIR}fonts/`;
 
   return gulp.src(paths.FONTS).pipe(gulp.dest(dest));
 });
 
-gulp.task('jsmin', function() {
-  var dest = paths.DIST_DIR + 'js/';
+gulp.task('jsmin', () => {
+  const dest = `${paths.DIST_DIR}js/`;
 
   return gulp
-    .src(paths.JS_DIR + '**/*.js')
+    .src(`${paths.JS_DIR}**/*.js`)
     .pipe(uglify())
     .pipe(gulp.dest(dest));
 });
 
-gulp.task('svg-clean', function(cb) {
-  del(paths.TEMPLATES_DIR + '_icons.svg').then(function() {
+gulp.task('svg-clean', cb => {
+  del(`${paths.TEMPLATES_DIR}_icons.svg`).then(() => {
     cb();
   });
 });
 
-gulp.task('svgmin', ['svg-clean'], function() {
-  return gulp
+gulp.task('svgmin', ['svg-clean'], () =>
+  gulp
     .src(paths.SVG)
     .pipe(imagemin([imagemin.svgo()]))
     .pipe(
@@ -306,16 +288,16 @@ gulp.task('svgmin', ['svg-clean'], function() {
         id: 'icon-%f',
         title: '%f icon',
         templates: [
-          path.join(__dirname, paths.TEMPLATES_DIR, '_icon_template.lodash')
-        ]
+          path.join(__dirname, paths.TEMPLATES_DIR, '_icon_template.lodash'),
+        ],
       })
     )
     .pipe(rename('_icons.svg'))
-    .pipe(gulp.dest(paths.TEMPLATES_DIR));
-});
+    .pipe(gulp.dest(paths.TEMPLATES_DIR))
+);
 
-gulp.task('imagemin', function() {
-  var dest = paths.DIST_DIR + 'img/';
+gulp.task('imagemin', () => {
+  const dest = `${paths.DIST_DIR}img/`;
 
   return gulp
     .src(paths.IMG)
@@ -324,7 +306,7 @@ gulp.task('imagemin', function() {
         imagemin.gifsicle(),
         imagemin.jpegtran(),
         imagemin.optipng(),
-        imagemin.svgo()
+        imagemin.svgo(),
       ])
     )
     .pipe(gulp.dest(dest));

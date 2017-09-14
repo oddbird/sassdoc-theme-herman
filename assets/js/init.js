@@ -1,6 +1,6 @@
-window.Herman = (function(Herman, $) {
+window.Herman = (function init(Herman, $) {
   'use strict';
-  $(function() {
+  $(() => {
     window.hljs.initHighlightingOnLoad();
     Herman.initializeToggles();
     Herman.initializeTabs();

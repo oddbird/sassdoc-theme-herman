@@ -1,7 +1,8 @@
-window.Herman = (function(Herman, $) {
+window.Herman = (function base(Herman, $) {
   'use strict';
+
   // Store keycode variables for easier readability
-  var KEYCODES = {
+  const KEYCODES = {
     SPACE: 32,
     ENTER: 13,
     TAB: 9,
@@ -16,30 +17,28 @@ window.Herman = (function(Herman, $) {
     RIGHT: 39,
     DOWN: 40,
     DELETE: 46,
-    COMMA: 44
+    COMMA: 44,
   };
 
-  Herman.initializeToggles = function() {
-    var body = $('body');
+  Herman.initializeToggles = function initializeToggles() {
+    const body = $('body');
 
-    body.on('toggle:close', '[data-toggle="button"]', function() {
-      var id = $(this).attr('aria-controls');
-      var target = $('[data-target-id="' + id + '"]');
-      var openToggles = $(
-        '[data-toggle="button"][aria-controls="' +
-          id +
-          '"][aria-pressed="true"]'
+    body.on('toggle:close', '[data-toggle="button"]', function cb() {
+      const id = $(this).attr('aria-controls');
+      const target = $(`[data-target-id="${id}"]`);
+      const openToggles = $(
+        `[data-toggle="button"][aria-controls="${id}"][aria-pressed="true"]`
       );
       openToggles.attr('aria-pressed', 'false');
       target.trigger('target:close');
     });
 
-    body.on('toggle:open', '[data-toggle="button"]', function() {
-      var toggle = $(this);
-      var targetID = toggle.attr('aria-controls');
-      var target = $('[data-target-id="' + targetID + '"]');
-      var otherToggles = $(
-        '[data-toggle="button"][aria-controls="' + targetID + '"]'
+    body.on('toggle:open', '[data-toggle="button"]', function cb() {
+      const toggle = $(this);
+      const targetID = toggle.attr('aria-controls');
+      const target = $(`[data-target-id="${targetID}"]`);
+      const otherToggles = $(
+        `[data-toggle="button"][aria-controls="${targetID}"]`
       ).not(toggle);
       // If this is a synced toggle, open all other attached toggles
       if (toggle.data('toggle-synced')) {
@@ -56,22 +55,19 @@ window.Herman = (function(Herman, $) {
       target.trigger('target:open');
     });
 
-    body.on('target:close', '[data-toggle="target"]', function(evt) {
-      var target = $(this);
+    body.on('target:close', '[data-toggle="target"]', function cb(evt) {
+      const target = $(this);
       // Prevent event firing on multiple nested targets
       if ($(evt.target).is(target)) {
         target.attr('aria-expanded', 'false');
       }
     });
 
-    var counter = 0;
-    var closeTarget = function(target) {
+    const closeTarget = function(target) {
       // Close a target and update any attached toggles
-      var id = target.attr('data-target-id');
-      var openToggles = $(
-        '[data-toggle="button"][aria-controls="' +
-          id +
-          '"][aria-pressed="true"]'
+      const id = target.attr('data-target-id');
+      const openToggles = $(
+        `[data-toggle="button"][aria-controls="${id}"][aria-pressed="true"]`
       );
       if (openToggles.length) {
         openToggles.trigger('toggle:close');
@@ -79,36 +75,18 @@ window.Herman = (function(Herman, $) {
         target.trigger('target:close');
       }
     };
-    var autoClose = function(evtName, evt) {
-      // "this" is bound to the original target
-      var targetID = this.attr('data-target-id');
-      var newTarget = $(evt.target);
-      if (
-        this.data('auto-closing-on-any-click') ||
-        !newTarget.closest(this).length ||
-        newTarget.closest('[data-close-toggle="' + targetID + '"]').length
-      ) {
-        body.off(evtName);
-        closeTarget(this);
-      }
-    };
 
-    body.on('target:open', '[data-toggle="target"]', function(evt) {
-      var target = $(this);
+    body.on('target:open', '[data-toggle="target"]', function cb(evt) {
+      const target = $(this);
       // Prevent event firing on multiple nested targets
       if ($(evt.target).is(target)) {
         target.attr('aria-expanded', 'true');
-        if (target.data('auto-closing')) {
-          counter = counter + 1;
-          var evtName = 'click.toggle_' + counter;
-          body.on(evtName, autoClose.bind(target, evtName));
-        }
       }
     });
 
-    body.on('click', '[data-toggle="button"]', function(evt) {
+    body.on('click', '[data-toggle="button"]', function cb(evt) {
       evt.preventDefault();
-      var toggle = $(this);
+      const toggle = $(this);
       if (toggle.attr('aria-pressed') === 'true') {
         toggle.trigger('toggle:close');
       } else {
@@ -116,56 +94,86 @@ window.Herman = (function(Herman, $) {
       }
     });
 
-    body.on('click', '[data-toggle="close"]', function(evt) {
+    body.on('click', '[data-toggle="close"]', function cb(evt) {
       evt.preventDefault();
-      var id = $(this).attr('aria-controls');
-      var target = $('[data-target-id="' + id + '"]');
+      const target = $(`[data-target-id="${$(this).attr('aria-controls')}"]`);
       closeTarget(target);
+    });
+
+    const autoClose = function(newTarget, target) {
+      const targetID = target.attr('data-target-id');
+      const toggleClicked = newTarget.closest(`[aria-controls="${targetID}"]`)
+        .length;
+      const clickedElInDOM = document.contains(newTarget.get(0));
+      const clickedOutsideTarget = !newTarget.closest(target).length;
+      const exception = target.attr('data-auto-closing-exception');
+      const clickedException = exception
+        ? newTarget.closest(exception).length
+        : false;
+      if (
+        !toggleClicked &&
+        (target.data('auto-closing-on-any-click') ||
+          (clickedElInDOM && clickedOutsideTarget && !clickedException))
+      ) {
+        closeTarget(target);
+      }
+    };
+
+    body.on('click', evt => {
+      const openTargets = $(
+        '[data-toggle="target"][aria-expanded="true"][data-auto-closing="true"]'
+      );
+      openTargets.each((index, target) => {
+        autoClose($(evt.target), $(target));
+      });
     });
   };
 
-  Herman.initializeTabs = function() {
-    var body = $('body');
+  Herman.initializeTabs = function initializeTabs() {
+    const body = $('body');
 
-    var getAllTabsInGroup = function(tab) {
-      var group = tab.attr('data-tab-group');
-      return $('[role="tab"][data-tab-group="' + group + '"]');
+    const getAllTabsInGroup = function(tab) {
+      const group = tab.attr('data-tab-group');
+      return $(`[role="tab"][data-tab-group="${group}"]`);
     };
 
-    var getAllPanelsInGroup = function(tab) {
-      var group = tab.attr('data-tab-group');
-      return $('[role="tabpanel"][data-tab-group="' + group + '"]');
+    const getAllPanelsInGroup = function(tab) {
+      const group = tab.attr('data-tab-group');
+      return $(`[role="tabpanel"][data-tab-group="${group}"]`);
     };
 
-    var showPanel = function(tab) {
-      var tabs = getAllTabsInGroup(tab);
-      var panels = getAllPanelsInGroup(tab);
-      var panel = panels.filter('[aria-labelledby="' + tab.attr('id') + '"]');
+    const showPanel = function(tab) {
+      const tabs = getAllTabsInGroup(tab);
+      const panels = getAllPanelsInGroup(tab);
+      const panel = panels.filter(`[aria-labelledby="${tab.attr('id')}"]`);
       tab.attr({ tabindex: 0, 'aria-selected': true });
-      tabs.not(tab).attr('tabindex', -1).removeAttr('aria-selected');
+      tabs
+        .not(tab)
+        .attr('tabindex', -1)
+        .removeAttr('aria-selected');
       panel.removeAttr('aria-hidden').trigger('visible');
       panels.not(panel).attr('aria-hidden', true);
       tab.trigger('tab:active');
     };
 
-    body.on('tabs:close', '[role="tab"]', function() {
-      var tab = $(this);
-      var tabs = getAllTabsInGroup(tab);
-      var panels = getAllPanelsInGroup(tab);
+    body.on('tabs:close', '[role="tab"]', function cb() {
+      const tab = $(this);
+      const tabs = getAllTabsInGroup(tab);
+      const panels = getAllPanelsInGroup(tab);
       tabs.attr('tabindex', -1).removeAttr('aria-selected');
       panels.attr('aria-hidden', true);
     });
 
-    body.on('click', '[role="tab"]', function(evt) {
+    body.on('click', '[role="tab"]', function cb(evt) {
       evt.preventDefault();
       showPanel($(this));
     });
 
-    body.on('keydown', '[role="tab"]', function(evt) {
-      var tab = $(this);
-      var tabs = getAllTabsInGroup(tab);
-      var idx = tabs.index(tab);
-      var targetIdx = idx;
+    body.on('keydown', '[role="tab"]', function cb(evt) {
+      const tab = $(this);
+      const tabs = getAllTabsInGroup(tab);
+      const idx = tabs.index(tab);
+      let targetIdx = idx;
       switch (evt.keyCode) {
         case KEYCODES.LEFT:
           targetIdx = idx > 0 ? idx - 1 : idx;
@@ -174,7 +182,7 @@ window.Herman = (function(Herman, $) {
           targetIdx = idx + 1;
           break;
       }
-      var target = tabs.eq(targetIdx);
+      const target = tabs.eq(targetIdx);
       if (idx !== targetIdx && target.length) {
         showPanel(target);
         target.focus();
@@ -182,20 +190,20 @@ window.Herman = (function(Herman, $) {
     });
   };
 
-  Herman.initializeIframes = function() {
-    var fitIframeToContent = function(iframe) {
+  Herman.initializeIframes = function initializeIframes() {
+    const fitIframeToContent = function(iframe) {
       if (iframe.contentWindow.document.body) {
         iframe.height = iframe.contentWindow.document.body.scrollHeight;
       }
     };
-    var fitIframesToContent = function() {
-      $('iframe').each(function() {
+    const fitIframesToContent = function() {
+      $('iframe').each(function cb() {
         fitIframeToContent(this);
       });
     };
 
     fitIframesToContent();
-    $('iframe').on('load', function() {
+    $('iframe').on('load', function cb() {
       fitIframeToContent(this);
     });
     $(window).on('resize', fitIframesToContent);
