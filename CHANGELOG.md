@@ -1,6 +1,11 @@
 # Herman Changelog
 
 
+## 1.0.0-alpha.11: 2017-09-18
+
+- BUGFIX: Do not error on prose blocks without `item.context.name`
+
+
 ## 1.0.0-alpha.10: 2017-09-14
 
 - BREAKING: Rename `$json` to `$herman` for clearer name-spacing

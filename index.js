@@ -91,9 +91,9 @@ const prepareContext = ctx => {
     }
     // Consider it to be prose if it's separated from the next Sass block
     // by any blank lines.
-    const name = item.context.origName || item.context.name;
+    const name = item.context.origName || item.context.name || '';
     const lineCount = name.split('\n').length;
-    if (item.context.line.start > item.commentRange.end + lineCount) {
+    if (!name || item.context.line.start > item.commentRange.end + lineCount) {
       item.context = {
         type: 'prose',
         line: item.commentRange,
