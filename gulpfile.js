@@ -143,7 +143,7 @@ gulp.task('sass', () =>
 
 gulp.task('sasstest', () =>
   gulp
-    .src(`${paths.SASS_TESTS_DIR}test_sass.js'`, { read: false })
+    .src(`${paths.SASS_TESTS_DIR}test_sass.js`, { read: false })
     .pipe(mocha({ reporter: 'dot' }))
 );
 
