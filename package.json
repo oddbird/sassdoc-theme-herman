@@ -23,7 +23,6 @@
     "node": ">=6"
   },
   "scripts": {
-    "test": "mocha test",
     "precommit": "lint-staged"
   },
   "lint-staged": {
