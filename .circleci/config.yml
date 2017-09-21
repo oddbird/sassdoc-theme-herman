@@ -11,6 +11,7 @@ jobs:
       - run:
           name: Install Dependencies
           command: yarn
+      - run: echo 'export PATH=~/herman/node_modules/.bin:$PATH' >> $BASH_ENV
       - run:
           name: Check that yarn.lock matches package.json
           command: |
@@ -29,13 +30,16 @@ jobs:
             - "~/.nvm"
       - run:
           name: Lint JS
-          command: ./node_modules/.bin/gulp eslint
+          command: gulp eslint
       - run:
           name: Lint Sass
-          command: ./node_modules/.bin/gulp sasslint
+          command: gulp sasslint
       - run:
-          name: Run Tests [node latest]
-          command: yarn test
+          name: Test Sass
+          command: gulp sasstest
+      - run:
+          name: Run JS Tests [node latest]
+          command: gulp jstest
       - run:
           name: Run Tests [node 6]
           command: |
@@ -43,19 +47,12 @@ jobs:
             [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
             nvm install 6.0.0
             yarn install --force
-            yarn test
+            gulp jstest
       - deploy:
           name: Update yarn.lock [greenkeeper]
           command: |
             if [[ "${CIRCLE_BRANCH}" =~ greenkeeper\/.* ]]; then
-              [[ $(git diff --name-only yarn.lock) == "" ]] && exit 0
-              USER_EMAIL=${USER_EMAIL:-"circleci@users.noreply.github.com"}
-              USER_NAME=${USER_NAME:-"CircleCI"}
-              git config user.email $USER_EMAIL
-              git config user.name $USER_NAME
-              git config push.default simple
-              git --no-pager diff
-              git add yarn.lock
-              git commit -m "chore(yarn): update yarn.lock"
-              git push origin $CIRCLE_BRANCH
+              yarn global add greenkeeper-lockfile@1
+              greenkeeper-lockfile-update
+              greenkeeper-lockfile-upload
             fi

@@ -142,16 +142,16 @@ gulp.task('sass', () =>
 );
 
 gulp.task('sasstest', () =>
-  gulp
-    .src(`${paths.SASS_TESTS_DIR}test_sass.js`, { read: false })
-    .pipe(mocha({ reporter: 'dot' }))
+  gulp.src(`${paths.SASS_TESTS_DIR}test_sass.js`, { read: false }).pipe(mocha())
 );
 
 // Need to finish compile before running tests,
 // so that the processes do not conflict
-gulp.task('test', ['compile'], () =>
+gulp.task('jstest', ['compile'], () =>
   gulp.src(`${paths.JS_TESTS_DIR}*.js`, { read: false }).pipe(mocha())
 );
+
+gulp.task('test', ['sasstest', 'jstest']);
 
 gulp.task('browser-sync', cb => {
   browserSync.init(
@@ -223,7 +223,7 @@ gulp.task('compile', ['sass', 'minify'], () => {
     .pipe(sassdoc(config));
 });
 
-gulp.task('default', ['compile', 'eslint', 'sasslint', 'sasstest', 'test']);
+gulp.task('default', ['compile', 'eslint', 'sasslint', 'test']);
 
 gulp.task('serve', ['watch', 'browser-sync']);
 
@@ -233,7 +233,6 @@ gulp.task('dev', [
   'prettier',
   'eslint-nofail',
   'sasslint-nofail',
-  'sasstest',
   'test',
   'watch',
 ]);
@@ -254,7 +253,7 @@ gulp.task('watch', ['compile'], () => {
     ['compile']
   );
 
-  gulp.watch([paths.JS, paths.JS_TESTS_FILES], ['test']);
+  gulp.watch([paths.JS, paths.JS_TESTS_FILES], ['jstest']);
 
   gulp.watch(paths.SASS, ev => {
     if (ev.type === 'added' || ev.type === 'changed') {
