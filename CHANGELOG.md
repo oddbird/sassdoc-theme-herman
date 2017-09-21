@@ -1,6 +1,12 @@
 # Herman Changelog
 
 
+## 1.0.0-alpha.12: 2017-09-18
+
+- BUGFIX: Typo from updating to latest accoutrement-scale
+- BUGFIX: Improved internal logic for `herman-map-compile` mixin
+
+
 ## 1.0.0-alpha.11: 2017-09-18
 
 - BUGFIX: Do not error on prose blocks without `item.context.name`
