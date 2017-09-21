@@ -251,18 +251,21 @@ $herman: () !default;
   $output: ();
 
   @each $key, $value in $map {
-    // this is a workaround for a sass bug I thought was fixed…
-    // https://github.com/sass/libsass/issues/1645#issuecomment-324102683
-    $call: ($function, $value);
-    $call: if(length($args) > 0, join($call, $args...), $call);
+    @if length($args) > 0 {
+      $value: append((), $value);
+      $value: join($value, $args);
+      $value: call($function, $value...);
+    } @else {
+      $value: call($function, $value);
+    }
 
-    $value: call($call...);
     $value: _herman-inspect($value);
     $output: map-merge($output, ($key: $value));
   }
 
   @return $output;
 }
+
 
 
 // Herman Inspect

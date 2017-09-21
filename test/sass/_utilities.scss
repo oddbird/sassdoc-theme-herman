@@ -1,14 +1,14 @@
 // Utility Tests
 // =============
 
-$initial: (
+$colors-initial: (
   'brand-blue': hsl(195, 85%, 35%),
   'light-gray': 'brand-blue' ('tint': 80%, 'desaturate': 80%),
   'gray': 'brand-blue' ('desaturate': 80%),
   'black': 'brand-blue' ('shade': 30%, 'desaturate': 80%),
 );
 
-$compiled: (
+$colors-compiled: (
   'brand-blue': #0d7fa5,
   'light-gray': #dedede,
   'gray': #555b5e,
@@ -72,14 +72,14 @@ $darken: (
 @include describe('herman-map-compile [function]') {
   @include it('returns a map with values run through a given function') {
     @include assert-equal(
-      herman-map-compile($initial, 'color'),
-      $compiled,
+      herman-map-compile($colors-initial, 'color'),
+      $colors-compiled,
       $inspect: true);
   }
 
   @include it('allows extra args be passed in') {
     @include assert-equal(
-      herman-map-compile($compiled, 'darken', 20%),
+      herman-map-compile($colors-compiled, 'darken', 20%),
       $darken);
   }
 }
@@ -96,8 +96,8 @@ $darken: (
       $herman,
       $empty);
 
-    @include herman-add('compiled', $compiled);
-    $expect: map-merge($herman, ('compiled': $compiled));
+    @include herman-add('compiled', $colors-compiled);
+    $expect: map-merge($herman, ('compiled': $colors-compiled));
 
     @include assert-equal(
       $herman,
@@ -111,7 +111,7 @@ $darken: (
       $herman,
       $empty);
 
-    @include herman-add('dark', $compiled, 'darken', 20%);
+    @include herman-add('dark', $colors-compiled, 'darken', 20%);
     $expect: map-merge($herman, ('dark': $darken));
 
     @include assert-equal(
@@ -135,12 +135,12 @@ $darken: (
     @include assert-equal($herman, $empty);
     @include assert-equal($colors, $empty);
 
-    @include accoutrement-add('colors', 'initial', $initial);
-    $expect: ('initial': $compiled);
+    @include accoutrement-add('colors', 'initial', $colors-initial);
+    $expect: ('initial': $colors-compiled);
 
     @include assert-equal(
       $colors,
-      $initial);
+      $colors-initial);
 
     @include assert-equal(
       $herman,
@@ -162,7 +162,7 @@ $darken: (
       $ratios,
       $ratio-new);
 
-    $new-ratio-comp: herman-map-compile($ratios, 'scale');
+    $new-ratio-comp: herman-map-compile($ratios, 'ratio');
     $expect: map-merge($herman, ('new-ratio': $new-ratio-comp));
 
     @include assert-equal(
@@ -175,7 +175,7 @@ $darken: (
     $new-size: (
       'root': 16px,
       'base-rem': 'root' ('convert-units': 'rem'),
-      'line': 'base-rem' ('rhythm': 1.4),
+      'line': 'root' ('rhythm': 1.4, 'convert-units': 'rem'),
       'h1': calc(%s + %s) ('base-rem', 2.5vw),
     );
 
@@ -187,7 +187,12 @@ $darken: (
       $sizes,
       $new-size);
 
-    $new-size-comp: herman-map-compile($sizes, 'size');
+    $new-size-comp: (
+      'root': 16px,
+      'base-rem': 1rem,
+      'line': 1.60169rem,
+      'h1': calc(1rem + 2.5vw),
+    );
     $expect: map-merge($herman, ('size-new': $new-size-comp));
 
     @include assert-equal(
