@@ -12,14 +12,24 @@
     {% set type = args.type %}
     {% set key = args.key or name %}
 
+    {% set preview_options = {
+      'color-palette': 'colors',
+      'font-specimen': 'fonts',
+      'ratios': 'ratios',
+      'sizes': 'sizes'
+    } %}
+
+    {% set data_type = preview_options[type] %}
+    {% set data = data[data_type][key] %}
+
     {% if type == 'color-palette' %}
-      {{ color_palette(data[key]) }}
+      {{ color_palette(data) }}
     {% elif type == 'font-specimen' %}
-      {{ font_specimen(key, data[key], args) }}
+      {{ font_specimen(key, data, args) }}
     {% elif type == 'ratios' %}
-      {{ ratios(data[key], args) }}
+      {{ ratios(data, args) }}
     {% elif type == 'sizes' %}
-      {{ sizes(data[key], args) }}
+      {{ sizes(data, args) }}
     {% endif %}
 
   {% endif %}
