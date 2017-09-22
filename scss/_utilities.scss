@@ -199,7 +199,7 @@ $herman: () !default;
 ///     'brand-blue': hsl(195, 85%, 35%),
 ///     'light-gray': 'brand-blue' ('tint': 80%, 'desaturate': 80%),
 ///   );
-///   @include herman-add('brand-colors', $brand-colors, 'color');
+///   @include herman-add('colors', 'brand-colors', $brand-colors, 'color');
 ///   /* #{$herman} */
 @mixin herman-add(
   $type,
@@ -235,7 +235,7 @@ $herman: () !default;
 /// @group api_sass-utilities
 /// @param {String} $type -
 ///   The type of map being added,
-///   e.g. `colors`, `font/fonts`,
+///   e.g. `colors`, `fonts`,
 ///   `sizes`, or `ratios`.
 /// @param {String} $key -
 ///   A key name for accessing this data in JSON —
