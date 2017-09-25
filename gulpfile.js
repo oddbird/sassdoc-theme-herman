@@ -184,7 +184,13 @@ gulp.task('compile', ['sass', 'minify'], () => {
     dest: paths.DOCS_DIR,
     theme: './',
     herman: {
-      subprojects: ['accoutrement-color'],
+      subprojects: [
+        'accoutrement-color',
+        'accoutrement-scale',
+        'accoutrement-type',
+        'accoutrement-layout',
+        'accoutrement-init',
+      ],
       templatepath: path.join(__dirname, 'templates'),
       sass: {
         jsonfile: `${paths.DIST_DIR}css/json.css`,

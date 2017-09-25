@@ -2,6 +2,44 @@
 // ================
 
 
+// Plural Types
+// ------------
+// A map of data-types used in herman,
+// for correcting singular input
+// so data is consistently stored with a plural access key.
+//
+// No need to display these in the docs…
+//
+// @access private
+// @group api_sass-utilities
+// @type map
+// @see herman-add
+$_herman-plural-types: (
+  'color': 'colors',
+  'size': 'sizes',
+  'ratio': 'ratios',
+  'font': 'fonts',
+);
+
+
+// Accoutrement Functions Per Type
+// -------------------------------
+// The accoutrement function to use
+// when compiling a map for Herman export.
+//
+// No need to display these in the docs…
+//
+// @access private
+// @group api_sass-utilities
+// @type map
+// @see accoutrement-add
+$_herman-accoutrement-per-type: (
+  'colors': 'color',
+  'sizes': 'size',
+  'ratios': 'ratio'
+);
+
+
 // Herman
 // ------
 /// A map of values to be exported to JSON.
@@ -15,6 +53,27 @@
 /// fonts, colors, sizes, and ratios from existing maps –
 /// or construct your `$herman` map by hand,
 /// following these guidelines…
+///
+/// ### Map structure:
+///
+/// Each type of preview value should be nested inside
+/// a map that describes what type of data is being stored:
+///
+/// ```
+/// $herman: (
+///   'colors': (
+///     /* color maps */
+///   );
+///   'sizes': (
+///     /* color maps */
+///   );
+///   'ratios': (
+///     /* color maps */
+///   );
+///   'fonts': (
+///     /* color maps */
+///   );
+/// );
 ///
 /// ### Colors:
 ///
@@ -85,23 +144,29 @@
 ///
 /// @example scss - sample map structure
 ///   $herman: (
-///     'brand-colors': (
-///       'brand-orange': '#c75000',
-///       'brand-blue': '#0d7fa5',
+///     'colors': (
+///       'brand-colors': (
+///         'brand-orange': '#c75000',
+///         'brand-blue': '#0d7fa5',
+///       ),
+///       'status-colors': (
+///         'go': '#657e1b',
+///         'yield': '#c75000',
+///       ),
 ///     ),
-///     'status-colors': (
-///       'go': '#657e1b',
-///       'yield': '#c75000',
+///     'fonts': (
+///       'body-font': (
+///         'name': 'Source Sans Pro',
+///         'stack': ('Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'),
+///         'regular': 'sans/sourcesanspro-regular-webfont',
+///         'italic': 'sans/sourcesanspro-italic-webfont',
+///       ),
 ///     ),
-///     'body-font': (
-///       'name': 'Source Sans Pro',
-///       'stack': ('Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'),
-///       'regular': 'sans/sourcesanspro-regular-webfont',
-///       'italic': 'sans/sourcesanspro-italic-webfont',
-///     ),
-///     'text-sizes': (
-///       'root': '18px',
-///       'large': 'calc(1rem + 1.5vw)',
+///     'sizes': (
+///       'text-sizes': (
+///         'root': '18px',
+///         'large': 'calc(1rem + 1.5vw)',
+///       ),
 ///     ),
 ///   );
 $herman: () !default;
@@ -114,6 +179,10 @@ $herman: () !default;
 /// converting values to JSON-ready strings,
 /// with optional functions/args for compiling raw values.
 /// @group api_sass-utilities
+/// @param {String} $type -
+///   The type of map being added,
+///   e.g. `colors`, `fonts`,
+///   `sizes`, or `ratios`.
 /// @param {String} $key -
 ///   A key name for accessing this data in JSON —
 ///   should match the variable name,
@@ -130,18 +199,29 @@ $herman: () !default;
 ///     'brand-blue': hsl(195, 85%, 35%),
 ///     'light-gray': 'brand-blue' ('tint': 80%, 'desaturate': 80%),
 ///   );
-///   @include herman-add('brand-colors', $brand-colors, 'color');
+///   @include herman-add('colors', 'brand-colors', $brand-colors, 'color');
 ///   /* #{$herman} */
 @mixin herman-add(
+  $type,
   $key,
   $map,
   $args...
 ) {
+  // pluralize type
+  $type: map-get($_herman-plural-types, $type) or $type;
+
+  // compile maps as needed
   @if (length($args) > 0) {
     $map: herman-map-compile($map, $args...);
   }
 
-  $herman: map-merge($herman, ($key: $map)) !global;
+  // Update nested map by type
+  $nested: map-get($herman, $type) or ();
+  $nested: map-merge($nested, ($key: $map));
+  $nested: ($type: $nested);
+
+  // Merge nested map back into $herman
+  $herman: map-merge($herman, $nested) !global;
 }
 
 
@@ -155,8 +235,8 @@ $herman: () !default;
 /// @group api_sass-utilities
 /// @param {String} $type -
 ///   The type of map being added,
-///   e.g. `color/colors`, `font/fonts`,
-///   `size/sizes`, or `scale/ratio/ratios`.
+///   e.g. `colors`, `fonts`,
+///   `sizes`, or `ratios`.
 /// @param {String} $key -
 ///   A key name for accessing this data in JSON —
 ///   should match the variable name,
@@ -184,32 +264,30 @@ $herman: () !default;
   $key,
   $map
 ) {
-  $functions: (
-    'color': 'color',
-    'colors': 'color',
-    'size': 'size',
-    'sizes': 'size',
-    'scale': 'ratio',
-    'ratio': 'ratio',
-    'ratios': 'ratio',
-  );
-  $call: map-get($functions, $type);
+  // pluralize type
+  $type: map-get($_herman-plural-types, $type) or $type;
+
+  // find the proper accoutrement function
+  $call: map-get($_herman-accoutrement-per-type, $type);
+
+  // get-function, as needed
   $get: function-exists('get-function');
   $call: if($get and $call, get-function($call), $call);
 
-  @if ($call == 'color') {
+  // merge into accoutrement-maps
+  @if ($type == 'colors') {
     $colors: map-merge($colors, $map) !global;
-  } @else if ($call == 'size') {
+  } @else if ($type == 'sizes') {
     $sizes: map-merge($sizes, $map) !global;
-  } @else if ($call == 'ratio') {
+  } @else if ($type == 'ratios') {
     $ratios: map-merge($ratios, $map) !global;
-  }@else if index('font' 'fonts', $type) {
+  } @else if ($type == 'fonts') {
     $fonts: map-merge($fonts, ($key: $map)) !global;
   }
 
-  $args: ($key, $map);
+  // send proper arguments to herman-add
+  $args: ($type, $key, $map);
   $args: if($call, append($args, $call), $args);
-
   @include herman-add($args...);
 }
 

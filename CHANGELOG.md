@@ -1,6 +1,14 @@
 # Herman Changelog
 
 
+## 1.0.0-alpha.13: UNRELEASED
+
+- BREAKING: `$herman` export map structure is now organized by type,
+  in nested maps: `colors`, `sizes`, `ratios`, and `fonts`.
+- BREAKING: `herman-add` mixin now requires an initial `$type` argument,
+  in order to assign the given data to the proper nested data-type map.
+
+
 ## 1.0.0-alpha.12: 2017-09-18
 
 - BUGFIX: Typo from updating to latest accoutrement-scale
