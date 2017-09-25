@@ -1,7 +1,7 @@
 # Herman Changelog
 
 
-## 1.0.0-alpha.13: UNRELEASED
+## 1.0.0-alpha.13: 2017-09-25
 
 - BREAKING: `$herman` export map structure is now organized by type,
   in nested maps: `colors`, `sizes`, `ratios`, and `fonts`.
