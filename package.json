@@ -69,7 +69,7 @@
     "sass-json-export": "^2.0.0",
     "sass-true": "^3.0.1",
     "sassdoc": "^2.3.0",
-    "sinon": "^3.3.0"
+    "sinon": "^4.0.0"
   },
   "peerDependencies": {
     "sassdoc": "^2.3.0"
