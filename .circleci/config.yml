@@ -11,7 +11,9 @@ jobs:
       - run:
           name: Install Dependencies
           command: yarn
-      - run: echo 'export PATH=~/herman/node_modules/.bin:$PATH' >> $BASH_ENV
+      - run:
+          name: Set $PATH
+          command: echo 'export PATH=~/herman/node_modules/.bin:$PATH' >> $BASH_ENV
       - run:
           name: Check that yarn.lock matches package.json
           command: |
@@ -52,7 +54,7 @@ jobs:
           name: Update yarn.lock [greenkeeper]
           command: |
             if [[ "${CIRCLE_BRANCH}" =~ greenkeeper\/.* ]]; then
-              yarn global add greenkeeper-lockfile@1
-              greenkeeper-lockfile-update
-              greenkeeper-lockfile-upload
+              yarn global add greenkeeper-lockfile@1 --prefix ~/.yarn
+              ~/.yarn/bin/greenkeeper-lockfile-update
+              ~/.yarn/bin/greenkeeper-lockfile-upload
             fi
