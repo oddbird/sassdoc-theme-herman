@@ -39,22 +39,32 @@ in your `sassdocrc` or cli options:
 sassdoc <src> --theme herman
 ```
 
+
+### SassDoc Comments
+
 Currently,
 all SassDoc/Herman annotations are written as Sass comments
 starting with `///` to differentiate documentation
 from other developer comments (`//`).
 
-  // This comment will be ignored by Herman
-  /// This comment will be rendered in the documentation
+```scss
+// This comment will be ignored by Herman
+/// This comment will be rendered in the documentation
+```
 
 Annotation comments can be free-floating,
 or attached to a particular Sass/CSS object –
 such as a variable, mixin, function, or selector block.
 
-  /// this is a free-floating comment
+```scss
+/// this is a free-floating comment
 
-  /// this comment is attached to the following mixin code-block
-  @mixin sample-object { … }
+/// this comment is attached to the following mixin code-block
+@mixin sample-object { … }
+```
+
+
+### Herman Annotations
 
 In addition to the core SassDoc annotations,
 our `@icons` annotation allows you to
@@ -73,7 +83,7 @@ and render sample components.
 [docs]: http://oddbird.net/herman/docs/
 
 
-## Additional Herman Options
+## Herman Configuration Options
 
 ### customCSS
 
