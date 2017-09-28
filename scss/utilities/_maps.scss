@@ -1,0 +1,110 @@
+// Map Utilities
+// =============
+
+
+// Herman Add
+// ----------
+/// Add a map of colors, fonts, sizes, ratios, etc
+/// to the `$herman` map for JSON-export,
+/// converting values to JSON-ready strings,
+/// with optional functions/args for compiling raw values.
+///
+/// @group api_json-export
+///
+/// @param {String} $type -
+///   The type of map being added,
+///   e.g. `colors`, `fonts`,
+///   `sizes`, or `ratios`.
+/// @param {String} $key -
+///   A key name for accessing this data in JSON —
+///   should match the variable name,
+///   unless `key` is otherwise set in the `@preview` annotation
+/// @param {Map} $map -
+///   A map of name/value pairs
+/// @param {Arglist} $args… -
+///   A function to use for compiling values before export,
+///   and any additional arguments for the function
+/// @output
+///   Updated `$herman` map, ready for JSON export
+/// @example scss
+///   $brand-colors: (
+///     'brand-blue': hsl(195, 85%, 35%),
+///     'light-gray': 'brand-blue' ('tint': 80%, 'desaturate': 80%),
+///   );
+///   @include herman-add('colors', 'brand-colors', $brand-colors, 'color');
+///   /* #{$herman} */
+@mixin herman-add(
+  $type,
+  $key,
+  $map,
+  $args...
+) {
+  // pluralize type
+  $type: map-get($_herman-plural-types, $type) or $type;
+
+  // compile maps as needed
+  @if (length($args) > 0) {
+    $map: herman-map-compile($map, $args...);
+  }
+
+  // Update nested map by type
+  $nested: map-get($herman, $type) or ();
+  $nested: map-merge($nested, ($key: $map));
+  $nested: ($type: $nested);
+
+  // Merge nested map back into $herman
+  $herman: map-merge($herman, $nested) !global;
+}
+
+
+// Map Compile
+// -----------
+/// Pass the values of any map through a given function
+/// (with optional arguments)
+/// and return the compiled map.
+/// This is used by `herman-add` and `accoutrement-add`,
+/// but can also be accessed directly.
+///
+/// @group api_json-export
+///
+/// @param {Map} $map -
+///   A sass map with values that need to be compiled,
+///   such as Accoutrement Colors or Sizes with adjustments
+/// @param {String | Function} $function -
+///   The function (or function name) to use in compiling values,
+///   such as Accoutrement `color` and `size` functions
+/// @param {Arglist} $args… -
+///   Pass in any additional arguments for the function
+/// @return {String | Any} -
+///   An updated map,
+///   with values compiled by a third-party function,
+///   and converted to json-ready strings
+/// @example scss
+///   $brand-colors: (
+///     'brand-orange': hsl(24, 100%, 39%),
+///     'brand-blue': hsl(195, 85%, 35%),
+///     'light-gray': 'brand-blue' ('tint': 80%, 'desaturate': 80%),
+///   );
+///   /* #{herman-map-compile($brand-colors, 'color')} */
+@function herman-map-compile(
+  $map,
+  $function,
+  $args...
+) {
+  $output: ();
+
+  @each $key, $value in $map {
+    @if length($args) > 0 {
+      $value: append((), $value);
+      $value: join($value, $args);
+      $value: call($function, $value...);
+    } @else {
+      $value: call($function, $value);
+    }
+
+    $value: _herman-inspect($value);
+    $output: map-merge($output, ($key: $value));
+  }
+
+  @return $output;
+}
