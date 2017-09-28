@@ -1,0 +1,243 @@
+// JSO Export Utilities
+// --------------------
+
+
+/// ## Exporting Styles to JSON
+///
+/// While many UX patterns will be rendered as HTML components,
+/// there are several abstract style patterns –
+/// like color-palettes and font-specimens –
+/// that never appear as comonents in the application.
+///
+/// Herman provides several `@preview` annotations
+/// to help visualize these abstract patterns –
+/// but that requires passing the data from your styles
+/// to Herman's templates.
+/// We do that using Sass maps
+/// (key:value object variables)
+/// and the [`sass-json-export`][json] toolkit
+/// to generate JSON out of Sass variables.
+///
+/// [json]: https://github.com/oddbird/sass-json-export
+///
+/// @group api_json-export
+/// @link https://github.com/oddbird/sass-json-export Sass-JSON-Export
+///
+/// @example scss
+///   @import 'sass-json-export/stylesheets/sass-json-export';
+///   @import 'utilities', 'config/manifest';
+///
+///   @include json-encode($herman, comment);
+
+
+// Herman
+// ------
+/// Use this map to collect and organize
+/// color, font, size, and ratio values
+/// to be exported for Herman.
+///
+/// The `$herman` map should be structured
+/// with top-level keys representing individual sassdoc items.
+/// Top-level values will often be a nested map
+/// of the data to preview.
+/// Use the `herman-add` or `accoutrement-add` mixins
+/// to automatically populate
+/// fonts, colors, sizes, and ratios from existing maps –
+/// or construct your `$herman` map by hand,
+/// following these guidelines…
+///
+/// ### Map structure:
+///
+/// Each type of preview value should be nested inside
+/// a map that describes what type of data is being stored:
+///
+/// ```scss
+/// $herman: (
+///   'colors': (
+///     /* color maps */
+///   );
+///   'sizes': (
+///     /* color maps */
+///   );
+///   'ratios': (
+///     /* color maps */
+///   );
+///   'fonts': (
+///     /* color maps */
+///   );
+/// );
+/// ```
+///
+/// ### Colors:
+///
+/// Each color has an access name and value.
+/// For us, that is often a map-key string,
+/// and Sass hex/rgba output color:
+///
+/// ```
+/// 'brand-colors': (
+///   'brand-orange': '#c75000',
+///   'brand-blue': '#0d7fa5',
+/// )
+/// ```
+///
+/// If you are storing colors in variables,
+/// you may want to use name keys like `$brand-orange`
+/// to represent the proper use of a color.
+///
+/// Color values can be in any valid web-color format –
+/// hex, hsl/a, rgba/a, etc –
+/// converted to a valid JSON string.
+///
+/// ### Sizes & Ratios
+///
+/// Size and ratio data is similar to colors,
+/// organized into top-level groups that may contain
+/// one or more size/ratio key:value pairs:
+///
+/// ```
+/// 'font-ratios': (
+///   'line-height': '1.4',
+///   'minor-seventh': '16/9',
+/// ),
+/// 'text-sizes': (
+///   'root': '18px',
+///   'large': 'calc(1rem + 1.5vw)',
+/// )
+/// ```
+///
+/// Ratio values can be in any valid number,
+/// and size values should be valid CSS lengths –
+/// both converted to a valid JSON string.
+///
+/// ### Fonts:
+///
+/// Each font should have a top-level key of it's own,
+/// since font-previews display a single font at a time.
+/// The data map accepts:
+///
+/// - `name`: how the font should be referenced in CSS
+/// - `stack`: optional list of font-stack fallbacks
+/// - `source`: link to more information on the font,
+///    or typekit/googlefonts as useful
+/// - `<variant>`: describe any number of relative paths to locally-hosted
+///   font-files per variant: e.g. `regular`, `bold italic`, etc.
+///
+/// ```
+/// 'body-font': (
+///   'name': 'Source Sans Pro',
+///   'source': 'https://github.com/adobe-fonts/source-sans-pro'
+///   'stack': ('Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'),
+///   'regular': 'sans/sourcesanspro-regular-webfont',
+///   'italic': 'sans/sourcesanspro-italic-webfont',
+/// )
+/// ```
+///
+/// @group api_json-export
+///
+/// @example scss - sample map structure
+///   $herman: (
+///     'colors': (
+///       'brand-colors': (
+///         'brand-orange': '#c75000',
+///         'brand-blue': '#0d7fa5',
+///       ),
+///       'status-colors': (
+///         'go': '#657e1b',
+///         'yield': '#c75000',
+///       ),
+///     ),
+///     'fonts': (
+///       'body-font': (
+///         'name': 'Source Sans Pro',
+///         'stack': ('Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'),
+///         'regular': 'sans/sourcesanspro-regular-webfont',
+///         'italic': 'sans/sourcesanspro-italic-webfont',
+///       ),
+///     ),
+///     'sizes': (
+///       'text-sizes': (
+///         'root': '18px',
+///         'large': 'calc(1rem + 1.5vw)',
+///       ),
+///     ),
+///   );
+$herman: () !default;
+
+
+// Herman Inspect
+// --------------
+/// Convert any value into a json-export-ready string
+///
+/// @group z_api-utilities
+/// @access private
+///
+/// @param $value -
+///   Any sass value to convert
+/// @return {String} -
+///   A string reprepesentation of the given value,
+///   with leading zeros on numbers,
+///   and quotes escaped for JSON
+@function _herman-inspect(
+  $value
+) {
+  $value: inspect($value);
+
+  @if str-index($value, '.') == 1 {
+    $value: '0' + $value;
+  }
+
+  @if str-index($value, '"') {
+    $value: _herman-str-replace($value, '"', '\\"', true);
+  }
+
+  @return $value;
+}
+
+
+// String Replace
+// --------------
+/// Return a string, with a substring replaced
+///
+/// @group z_api-utilities
+/// @access private
+///
+/// @param {String} $string -
+///   The base string to be manipulated
+/// @param {String} $old -
+///   A sub-string to look for, and replace,
+///   inside the base string
+/// @param {String} $new -
+///   A sub string to insert
+///   in place of the `$old` string
+/// @param {Boolean} $replace-all [false] -
+///   Replace all instances of the `$old` string
+///   or just the first instance?
+/// @return {String} -
+///   Return the base string,
+///   with one or more instances of a substring replaced
+@function _herman-str-replace(
+  $string,
+  $old,
+  $new: null,
+  $replace-all: false
+) {
+  $return: $string;
+  $i: str-index($string, $old);
+  $n: str-length($old);
+
+  @if $string == $old {
+    $return: $new;
+  } @else if $i {
+    $a: if($i > 1, str-slice($string, 1, $i - 1), '');
+    $z: str-slice($string, $i + $n);
+
+    @if $replace-all {
+      $z: _herman-str-replace($z, $old, $new, true);
+    }
+
+    $return: $a + if($new, $new, '') + $z;
+  }
+
+  @return $return;
+}
