@@ -157,7 +157,7 @@ $sizes-compiled: (
 
 // Accoutrement Add
 // ----------------
-@include describe('accoutrement-add [mixin]') {
+@include describe('config [mixin]') {
   $empty: ();
   $herman: $empty !global;
   $colors: $empty !global;
@@ -169,7 +169,7 @@ $sizes-compiled: (
     @include assert-equal($herman, $empty);
     @include assert-equal($colors, $empty);
 
-    @include accoutrement-add('colors', 'initial', $colors-initial);
+    @include config('colors', 'initial', $colors-initial);
     $expect: ('colors': ('initial': $colors-compiled));
 
     @include assert-equal(
@@ -192,7 +192,7 @@ $sizes-compiled: (
 
     @include assert-equal($ratios, $empty);
 
-    @include accoutrement-add('ratio', 'new-ratio', $ratio-new);
+    @include config('ratio', 'new-ratio', $ratio-new);
 
     @include assert-equal(
       $ratios,
@@ -221,7 +221,7 @@ $sizes-compiled: (
 
     @include assert-equal($sizes, $empty);
 
-    @include accoutrement-add('size', 'size-new', $new-size);
+    @include config('size', 'size-new', $new-size);
 
     @include assert-equal(
       $sizes,
@@ -252,7 +252,7 @@ $sizes-compiled: (
 
     @include assert-equal($fonts, $empty);
 
-    @include accoutrement-add('font', 'new-font', $new-font);
+    @include config('font', 'new-font', $new-font);
     $expect: ('new-font': $new-font);
 
     @include assert-equal(

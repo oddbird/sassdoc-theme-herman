@@ -1,0 +1,34 @@
+// Accoutrement Utils
+// ==================
+
+
+// Config
+// ------
+/// Internal utility for managing herman and accoutrement maps
+/// in one single mixin.
+/// In preparation for the Sass 3.5+ modular syntax,
+/// this can only be done in the project being documented.
+///
+/// @group z_config-utils
+/// @link http://oddbird.net/accoutrement-color Accoutrement-Color
+/// @link http://oddbird.net/accoutrement-type Accoutrement-Type
+/// @link http://oddbird.net/accoutrement-scale Accoutrement-Scale
+@mixin config(
+  $type,
+  $name,
+  $value
+) {
+  @if index('color' 'colors', $type) {
+    @include add-colors($value);
+    @include herman-add($type, $name, $value, 'color');
+  } @else if index('size' 'sizes', $type) {
+    $sizes: map-merge($sizes, $value) !global;
+    @include herman-add($type, $name, $value, 'size');
+  } @else if index('ratio' 'ratios', $type) {
+    $ratios: map-merge($ratios, $value) !global;
+    @include herman-add($type, $name, $value, 'ratio');
+  } @else if index('font' 'fonts', $type) {
+    @include add-font($name, $value);
+    @include herman-add($type, $name, $value);
+  }
+}
