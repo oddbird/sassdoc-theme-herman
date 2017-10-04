@@ -5,6 +5,7 @@
 // Font Formats
 // ------------
 /// The font-formats that we want to import
+///
 /// @group z_config-fonts
 /// @link http://oddbird.net/accoutrement-type/docs/
 ///   Accoutrement Type
@@ -15,36 +16,32 @@ $font-formats: 'woff' 'ttf';
 // ---------
 /// A clean sans-serif option
 /// used for smaller text like captions and labels.
+///
 /// @preview font-specimen; key: sans; show: regular, bold, italic, bold italic
 /// @group z_config-fonts
 /// @link http://oddbird.net/accoutrement-type/docs/
 ///   Accoutrement Type
-/// @example scss
-///   // @preview font-specimen; key: sans
-///   @include accoutrement-add('font', 'sans', $sans-font);
 $sans-font: (
   'name': 'Source Sans Pro',
   'source': 'https://fonts.google.com/specimen/Source+Sans+Pro',
   'stack': ('Helvetica Neue', 'Helvetica', 'Arial', sans-serif),
 );
 
-@include accoutrement-add('font', 'sans', $sans-font);
+@include config('font', 'sans', $sans-font);
 
 
 // Code Font
 // ---------
 /// A readable monospace font for code previews.
+///
 /// @preview font-specimen; key: code; show: regular, bold
 /// @group z_config-fonts
 /// @link http://oddbird.net/accoutrement-type/docs/
 ///   Accoutrement Type
-/// @example scss
-///   // @preview font-specimen; key: code
-///   @include accoutrement-add('font', 'code', $code-font);
 $code-font: (
   'name': 'Source Code Pro',
   'source': 'https://fonts.google.com/specimen/Source+Code+Pro',
   'stack': ('Consolas', 'Menlo', 'Monaco', 'Lucida Console', 'Liberation Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace, sans-serif),
 );
 
-@include accoutrement-add('font', 'code', $code-font);
+@include config('font', 'code', $code-font);

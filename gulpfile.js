@@ -217,7 +217,6 @@ gulp.task('compile', ['sass', 'minify'], () => {
       'demo_test-sassdoc': 'SassDoc Annotations',
       'z_api-utilities': '_API Utilities',
       'z_config-colors': '_Colors',
-      'z_config-colors': '_Colors',
       'z_config-fonts': '_Fonts',
       'z_config-scale': '_Sizes',
       'z_config-utils': '_Utilities',

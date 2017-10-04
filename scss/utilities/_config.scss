@@ -8,8 +8,6 @@
 /// for correcting singular input
 /// so data is consistently stored with a plural access key.
 ///
-/// No need to display these in the docs…
-///
 /// @access private
 /// @group z_api-utilities
 /// @type map
@@ -19,22 +17,4 @@ $_herman-plural-types: (
   'size': 'sizes',
   'ratio': 'ratios',
   'font': 'fonts',
-);
-
-
-/// Accoutrement Functions Per Type
-/// -------------------------------
-/// The accoutrement function to use
-/// when compiling a map for Herman export.
-///
-/// No need to display these in the docs…
-///
-/// @access private
-/// @group z_api-utilities
-/// @type map
-/// @see accoutrement-add
-$_herman-accoutrement-per-type: (
-  'colors': 'color',
-  'sizes': 'size',
-  'ratios': 'ratio'
 );

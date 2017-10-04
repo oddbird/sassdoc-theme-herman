@@ -11,14 +11,11 @@
 /// @preview ratios
 /// @link http://oddbird.net/accoutrement-scale/docs/
 ///   Accoutrement Scale
-/// @example scss
-///   // @preview ratios;
-///   @include accoutrement-add('ratios', 'text-ratios', $text-ratios);
 $text-ratios: (
   'herman': 1.4
 );
 
-@include accoutrement-add('ratios', 'text-ratios', $text-ratios);
+@include config('ratios', 'text-ratios', $text-ratios);
 
 
 // Text Sizes
@@ -29,9 +26,6 @@ $text-ratios: (
 /// @preview sizes
 /// @link http://oddbird.net/accoutrement-scale/docs/
 ///   Accoutrement Scale
-/// @example scss
-///   // @preview sizes;
-///   @include accoutrement-add('sizes', 'text-sizes', $text-sizes);
 $text-sizes: (
   'root': 18px,
 
@@ -54,7 +48,7 @@ $text-sizes: (
   'quote': 'medium',
 );
 
-@include accoutrement-add('sizes', 'text-sizes', $text-sizes);
+@include config('sizes', 'text-sizes', $text-sizes);
 
 
 // Spacing Sizes
@@ -65,9 +59,6 @@ $text-sizes: (
 /// @preview sizes; style: ruler
 /// @link http://oddbird.net/accoutrement-scale/docs/
 ///   Accoutrement Scale
-/// @example scss
-///   // @preview sizes; style: ruler
-///   @include accoutrement-add('sizes', 'spacing-sizes', $spacing-sizes);
 $spacing-sizes: (
   'rhythm': 'root' ('herman': 1, 'convert-units': 'rem'),
   'gutter': 'rhythm',
@@ -80,7 +71,7 @@ $spacing-sizes: (
   'quarter-shim': 'shim' ('linear': 0.25)
 );
 
-@include accoutrement-add('sizes', 'spacing-sizes', $spacing-sizes);
+@include config('sizes', 'spacing-sizes', $spacing-sizes);
 
 
 // Pattern Sizes
@@ -92,9 +83,6 @@ $spacing-sizes: (
 /// @preview sizes; style: output-only
 /// @link http://oddbird.net/accoutrement-scale/docs/
 ///   Accoutrement Scale
-/// @example scss
-///   // @preview sizes; style: output-only
-///   @include accoutrement-add('sizes', 'pattern-sizes', $pattern-sizes);
 $pattern-sizes: (
   'border': 8px,
   'page': 50rem,
@@ -110,4 +98,4 @@ $pattern-sizes: (
   'nav-underline': 4px,
 );
 
-@include accoutrement-add('sizes', 'pattern-sizes', $pattern-sizes);
+@include config('sizes', 'pattern-sizes', $pattern-sizes);

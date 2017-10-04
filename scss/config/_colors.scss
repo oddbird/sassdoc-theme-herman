@@ -6,8 +6,12 @@
 // ------------
 /// We use bright primary colors for the main brand,
 /// everything else is based on these colors.
+///
 /// @preview color-palette
 /// @group z_config-colors
+/// @link http://oddbird.net/accoutrement-color/docs/
+///   Accoutrement Color
+///
 /// @type Map
 /// @prop {Color | String | List} '<color-name>' -
 ///   Each `<color-name>` key can be assigned a color
@@ -15,71 +19,59 @@
 ///   followed by an optional map of adjustments
 ///   (as defined in
 ///   [Accoutrement-Color](http://oddbird.net/accoutrement-color/docs/)).
-/// @link http://oddbird.net/accoutrement-color/docs/
-///   Accoutrement Color
-/// @example scss
-///   // @preview color-palette
-///   @include accoutrement-add('colors', 'brand-colors', $brand-colors);
 $brand-colors: (
   'brand-orange': hsl(24, 100%, 39%),
   'brand-blue': hsl(195, 85%, 35%),
   'brand-pink': hsl(330, 85%, 48%),
 );
 
-@include accoutrement-add('colors', 'brand-colors', $brand-colors);
-
+@include config('colors', 'brand-colors', $brand-colors);
 
 // Neutral Colors
 // --------------
 /// Use these neutral colors
 /// to create structure and hierarchy in the document.
+///
 /// @preview color-palette
 /// @group z_config-colors
 /// @link http://oddbird.net/accoutrement-color/docs/
 ///   Accoutrement Color
-/// @example scss
-///   // @preview color-palette
-///   @include accoutrement-add('colors', 'neutral-colors', $neutral-colors);
 $neutral-colors: (
   'light-gray': 'brand-blue' ('tint': 80%, 'desaturate': 80%),
   'gray': 'brand-blue' ('desaturate': 80%),
   'black': 'brand-blue' ('shade': 30%, 'desaturate': 80%),
 );
 
-@include accoutrement-add('colors', 'neutral-colors', $neutral-colors);
+@include config('colors', 'neutral-colors', $neutral-colors);
 
 
 // Status Colors
 // -------------
 /// These status colors for UI elements
 /// give a quick sense of progress, warning, or errors.
+///
 /// @preview color-palette
 /// @group z_config-colors
 /// @link http://oddbird.net/accoutrement-color/docs/
 ///   Accoutrement Color
-/// @example scss
-///   // @preview color-palette
-///   @include accoutrement-add('colors', 'status-colors', $status-colors);
 $status-colors: (
   'go': hsl(75, 65%, 30%),
   'yield': 'brand-orange',
   'stop': hsl(0, 85%, 50%),
 );
 
-@include accoutrement-add('colors', 'status-colors', $status-colors);
+@include config('colors', 'status-colors', $status-colors);
 
 
 // Theme Colors
 // ------------
 /// Applying the brand and accent colors
 /// to a sitewide theme.
+///
 /// @preview color-palette
 /// @group z_config-colors
 /// @link http://oddbird.net/accoutrement-color/docs/
 ///   Accoutrement Color
-/// @example scss
-///   // @preview color-palette
-///   @include accoutrement-add('colors', 'theme-colors', $theme-colors);
 $theme-colors: (
   'theme-dark': 'brand-blue',
   'theme-light': 'brand-blue' ('tint': 80%),
@@ -101,13 +93,14 @@ $theme-colors: (
   'code-shadow': 'code' (rgba: 0.2),
 );
 
-@include accoutrement-add('colors', 'theme-colors', $theme-colors);
+@include config('colors', 'theme-colors', $theme-colors);
 
 
 // System Colors
 // -------------
 /// Colors used by accoutrement-color
 /// to calculate contrast ratios.
+///
 /// @preview color-palette
 /// @group z_config-colors
 /// @link http://oddbird.net/accoutrement-color/docs/
@@ -117,4 +110,4 @@ $system-colors: (
   'contrast-dark': 'text',
 );
 
-@include accoutrement-add('colors', 'system-colors', $system-colors);
+@include config('colors', 'system-colors', $system-colors);
