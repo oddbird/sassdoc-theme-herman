@@ -1,0 +1,122 @@
+// Demo Examples
+// =============
+
+
+/// ## Extended SassDoc examples
+///
+/// [SassDoc][sassdoc] provides the `@example` annotation
+/// for displaying example Sass code.
+/// We've expanded on their feature
+/// to show compiled CSS along side the Sass input,
+/// comile Nunjucks examples for templating,
+/// and render any input-or-compiled HTML
+/// so you can see the results.
+///
+/// The resulting annotation syntax
+/// is identical to the original SassDoc feature.
+/// If you use the `@example` annotation
+/// with `scss`/`sass` ([Sass][sass])
+/// or `njk` ([Nunjucks][njk]) languages,
+/// Herman will display the source of the example,
+/// along with the compiled output,
+/// and rendered html.
+/// Both Sass & Nunjucks examples
+/// allow you to import external partials:
+///
+/// ```scss
+///  // This is a widget that we use on our site…
+///  // @example scss -
+///  //   [data-widget] {
+///  //     @include widget-style;
+///  //   }
+///  // @example njk -
+///  //  {% import 'macros.njk' as macros %}
+///  //  {{ macros.widget(1, 2) }}
+///  @mixin widget-style { … }
+/// ```
+///
+/// Will display:
+///   - Input Sass and Nunjucks code
+///   - Compiled CSS and HTML output
+///   - Rendered HTML in an iframe
+///
+/// We hope to support [Vue][vue] components in the near future,
+/// with an API for supporting additional languages.
+///
+/// [sassdoc]: http://sassdoc.com/annotations/#example
+/// [sass]: http://sass-lang.com/
+/// [njk]: https://mozilla.github.io/nunjucks/
+/// [vue]: https://vuejs.org/
+///
+/// @group demo_examples
+/// @link http://sassdoc.com/annotations/#example @example Annotation Reference
+
+
+/// ## Compiling Sass/Scss
+///
+/// Example annotations with language set to `sass` or `scss`
+/// will be compiled by Herman,
+/// in order to display the output along side the source.
+/// In order for this to work with Sass/Scss,
+/// you must set an `includepaths` key
+/// in your sassdoc `herman.sass` configuration object –
+/// an array of places to look for Sass includes:
+///
+///   includepaths: [ path.join(__dirname, 'static/sass') ]
+///
+/// All Sass examples will have to be complete and valid,
+/// with the ability to import Sass partials inside each example.
+/// You can also set an array of default `includes`
+/// (relative to any `includepaths`)
+/// to include for all Sass examples:
+///
+/// ```yaml
+/// # sossdocrc (yaml)
+/// herman:
+///   sass:
+///     includepaths: ['sass', 'node_modules']
+///     includes: ['utilities', 'config/manifest']
+/// ```
+///
+/// Generally, included Sass files should not contain
+/// any CSS output of their own,
+/// since all compiled output will be displayed with the `@example`.
+///
+/// @group demo_examples
+///
+/// @example scss -
+///   .sass {
+///     &-nesting {
+///       content: 'Example: Compiling Sass…';
+///     }
+///   }
+
+
+/// ## Compiling Nunjucks
+///
+/// Example annotations with language set to `njk`
+/// can also be compiled.
+/// In order for this to work,
+/// you must either specify a `templatepath`
+/// (the path where nunjucks will look to import templates),
+/// or a `nunjucksEnv` (custom environment).
+/// Using a custom nunjucks environment
+/// is particularly useful if your macros contain custom filters.
+/// Either can be established
+/// in your sassdoc `herman` configuration object:
+///
+/// ### Setting `templatepath`:
+///
+/// ```yaml
+/// # sossdocrc (yaml)
+/// herman:
+///   templatepath: 'templates'
+/// ```
+///
+/// ### Setting `nunjucksEnv`:
+///
+/// ```
+/// @@@
+/// ```
+///
+/// @group demo_examples
