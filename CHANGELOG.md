@@ -11,6 +11,7 @@
 - BREAKING: `customHead` option is included in `iframe` for `@example` and
   `@preview font-specimen` annotations, but is no longer included in base
   Herman template.
+- BUGFIX: Do not error if `sass` config option is `undefined`.
 
 
 ## 1.0.0-alpha.13: 2017-09-25

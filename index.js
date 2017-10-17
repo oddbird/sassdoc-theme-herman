@@ -74,7 +74,7 @@ const prepareContext = ctx => {
    * Load a `sass-json file` (if one is given in the context) and add its
    * contents under the `sassjson` key of the context.
    */
-  if (ctx.herman.sass.jsonfile && !ctx.sassjson) {
+  if (ctx.herman.sass && ctx.herman.sass.jsonfile && !ctx.sassjson) {
     ctx.sassjson = parse.sassJson(fs.readFileSync(ctx.herman.sass.jsonfile));
   }
 
@@ -466,7 +466,13 @@ const renderIframe = (env, item, type) => {
       };
     }
 
-    if (includeSassJSON && env.herman.sass.jsonfile && !env.sassjson) {
+    if (
+      includeSassJSON &&
+      env.herman &&
+      env.herman.sass &&
+      env.herman.sass.jsonfile &&
+      !env.sassjson
+    ) {
       env.sassjson = parse.sassJson(fs.readFileSync(env.herman.sass.jsonfile));
     }
 
