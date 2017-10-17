@@ -17,6 +17,7 @@
   basePath,
   project,
   topGroups,
+  topGroupOrder,
   topByGroup,
   subprojects,
   activeProject,
@@ -31,11 +32,13 @@
     </h3>
 
     <ul>
-      {% for groupName, group in topByGroup %}
-        {% set activeNav = 'is-active' if (activeProject == none) and (activeGroup == groupName) else 'is-not-active' %}
-        <li data-sassdoc="nav-item">
-          <a href="{{ basePath }}{{ groupName }}.html" data-sassdoc-nav="{{ activeNav }}">{{ topGroups[groupName] }}</a>
-        </li>
+      {% for groupName in topGroupOrder %}
+        {% if topByGroup[groupName] %}
+          {% set activeNav = 'is-active' if (activeProject == none) and (activeGroup == groupName) else 'is-not-active' %}
+          <li data-sassdoc="nav-item">
+            <a href="{{ basePath }}{{ groupName }}.html" data-sassdoc-nav="{{ activeNav }}">{{ topGroups[groupName] }}</a>
+          </li>
+        {% endif %}
       {% endfor %}
     </ul>
 
@@ -45,11 +48,13 @@
         <a href="{{ basePath }}{{ prjName }}/index.html" data-sassdoc-nav="{{ activeNav }}">{{ prjName }}</a>
       </h3>
       <ul>
-        {% for groupName, group in prjCtx.byGroup %}
-          {% set activeNav = 'is-active' if (activeProject == prjName) and (activeGroup == groupName) else 'is-not-active' %}
-          <li data-sassdoc="nav-item">
-            <a href="{{ basePath }}{{prjName}}/{{ groupName }}.html" data-sassdoc-nav="{{ activeNav }}">{{ prjCtx.groups[groupName] }}</a>
-          </li>
+        {% for groupName in prjCtx.groupOrder %}
+          {% if prjCtx.byGroup[groupName] %}
+            {% set activeNav = 'is-active' if (activeProject == prjName) and (activeGroup == groupName) else 'is-not-active' %}
+            <li data-sassdoc="nav-item">
+              <a href="{{ basePath }}{{prjName}}/{{ groupName }}.html" data-sassdoc-nav="{{ activeNav }}">{{ prjCtx.groups[groupName] }}</a>
+            </li>
+          {% endif %}
         {% endfor %}
       </ul>
     {% endfor %}
@@ -61,6 +66,7 @@
   basePath,
   project,
   topGroups,
+  topGroupOrder,
   topByGroup,
   subprojects,
   activeProject,
@@ -77,6 +83,7 @@
       basePath=basePath,
       project=project,
       topGroups=topGroups,
+      topGroupOrder=topGroupOrder,
       topByGroup=topByGroup,
       subprojects=subprojects,
       activeProject=activeProject,
