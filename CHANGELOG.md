@@ -6,7 +6,8 @@
 - BREAKING: Remove `accoutrement-add` as a public utility,
   since Sass 3.5+ modular sytems will make it unusable.
 - Updated dependencies.
-- BREAKING: Group navigation is ordered according to config `groups` order.
+- BREAKING: Group navigation is ordered according to config `groups` order –
+  [#150](https://github.com/oddbird/sassdoc-theme-herman/issues/150)
 
 
 ## 1.0.0-alpha.13: 2017-09-25
