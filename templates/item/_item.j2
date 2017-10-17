@@ -4,8 +4,8 @@
 {% import 'item/preview.macros.j2' as preview %}
 {% import 'utility.macros.j2' as utility %}
 
-{% set slug = item.context.name|urlencode|replace("'", '') %}
-{% set id = [type, slug]|join('--') if (type and slug) else '' %}
+{% set slug = item.context.name %}
+{% set id = [type, slug]|join('--')|urlencode if (type and slug) else '' %}
 {% set display_private = display and display.access and ('private' in display.access) %}
 {% set display_alias = display and display.alias %}
 

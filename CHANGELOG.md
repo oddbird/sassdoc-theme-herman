@@ -6,6 +6,8 @@
 - BREAKING: Remove `accoutrement-add` as a public utility,
   since Sass 3.5+ modular sytems will make it unusable.
 - Updated dependencies.
+- BUGFIX: Fix broken internal links –
+  [#106](https://github.com/oddbird/sassdoc-theme-herman/issues/106)
 - BREAKING: `@preview font-specimen` is now rendered in an `iframe` (with
   access to `customHead` option).
 - BREAKING: `customHead` option is included in `iframe` for `@example` and
