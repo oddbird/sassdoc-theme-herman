@@ -4,10 +4,14 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>@@@ example title</title>
+  <title>example</title>
 
   {% if customCSS and customCSS.url %}
     <link rel="stylesheet" href="{{ customCSS.url }}" />
+  {% endif %}
+
+  {% if herman.customHead %}
+    {{ herman.customHead|safe }}
   {% endif %}
 </head>
 <body class="sassdoc">

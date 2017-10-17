@@ -18,10 +18,12 @@ const render = require('./lib/render.js');
 
 const base = path.resolve(__dirname, './templates');
 const example_iFrameTpl = path.join(base, 'example', 'base.j2');
-const icons_iFrameTpl = path.join(base, 'item', 'icons_base.j2');
+const icons_iFrameTpl = path.join(base, 'icons', 'base.j2');
+const fonts_iFrameTpl = path.join(base, 'fonts', 'base.j2');
 
 nunjucks.installJinjaCompat();
 const nunjucksEnv = nunjucks.configure(base, { noCache: true });
+nunjucksEnv.addFilter('split', (str, separator) => str.split(separator));
 
 /**
  * SassDoc extras (providing Markdown and other filters, and different way to
@@ -72,7 +74,7 @@ const prepareContext = ctx => {
    * Load a `sass-json file` (if one is given in the context) and add its
    * contents under the `sassjson` key of the context.
    */
-  if (ctx.herman.sass.jsonfile) {
+  if (ctx.herman.sass.jsonfile && !ctx.sassjson) {
     ctx.sassjson = parse.sassJson(fs.readFileSync(ctx.herman.sass.jsonfile));
   }
 
@@ -291,8 +293,6 @@ const renderHerman = (dest, ctx) => {
   const groupTemplate = path.join(base, 'group.j2');
   const assets = path.resolve(__dirname, './dist');
 
-  nunjucksEnv.addFilter('split', (str, separator) => str.split(separator));
-
   // Accepts a color (in any format) and returns an object with hex, rgba, and
   // hsla strings.
   nunjucksEnv.addFilter('colors', input => {
@@ -430,20 +430,44 @@ const herman = (dest, ctx) => {
 };
 
 const renderIframe = (env, item, type) => {
-  if (item.rendered || (item.icons && item.icons.length)) {
+  let shouldRender = false;
+  let includeIcons = false;
+  let includeCustomCSS = false;
+  let includeSassJSON = false;
+  switch (type) {
+    case 'example':
+      shouldRender = item.rendered;
+      includeIcons = true;
+      includeCustomCSS = true;
+      break;
+    case 'icon':
+      shouldRender = item.icons && item.icons.length;
+      includeIcons = true;
+      break;
+    case 'font':
+      shouldRender = item.preview && item.preview.type === 'font-specimen';
+      includeSassJSON = true;
+      break;
+  }
+
+  if (shouldRender) {
     // if needed, read in minified icons SVG
-    if (env.herman.minifiedIcons && !env.iconsSvg) {
+    if (includeIcons && env.herman.minifiedIcons && !env.iconsSvg) {
       env.iconsSvg = fs.readFileSync(env.herman.minifiedIcons);
     }
 
     // if needed, prepare custom css file
-    if (env.herman.customCSS && !env.customCSS) {
+    if (includeCustomCSS && env.herman.customCSS && !env.customCSS) {
       const srcPath = path.resolve(env.dir, env.herman.customCSS);
       const cssUrl = `assets/css/custom/${path.basename(env.herman.customCSS)}`;
       env.customCSS = {
         path: srcPath,
         url: cssUrl,
       };
+    }
+
+    if (includeSassJSON && env.herman.sass.jsonfile && !env.sassjson) {
+      env.sassjson = parse.sassJson(fs.readFileSync(env.herman.sass.jsonfile));
     }
 
     const ctx = extend({}, env, { item });
@@ -455,6 +479,9 @@ const renderIframe = (env, item, type) => {
         break;
       case 'icon':
         tpl = icons_iFrameTpl;
+        break;
+      case 'font':
+        tpl = fonts_iFrameTpl;
         break;
     }
 
@@ -571,7 +598,7 @@ herman.annotations = [
    * Custom `@preview` annotation. Expects comma-separated list of names of
    * preview types.
    */
-  function preview() {
+  function preview(env) {
     return {
       name: 'preview',
       multiple: false,
@@ -592,6 +619,14 @@ herman.annotations = [
           }
         });
         return options;
+      },
+      resolve: data => {
+        data.forEach(item => {
+          if (!item.preview || item.preview.type !== 'font-specimen') {
+            return;
+          }
+          renderIframe(env, item, 'font');
+        });
       },
     };
   },

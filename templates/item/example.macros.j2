@@ -49,7 +49,7 @@
       {{ (initial + compiled)|safe }}
     </div>
 
-    {% if example.rendered and not (example.type in css) %}
+    {% if example.iframed and not (example.type in css) %}
       <div class="example-render">
         <iframe class="render-example" srcdoc="{{ example.iframed }}" width="100%" height="0"></iframe>
       </div>

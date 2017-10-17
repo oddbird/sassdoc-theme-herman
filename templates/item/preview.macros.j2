@@ -7,10 +7,11 @@
   -------------
   Call the requested previews with the appropriate JSON data.
 #}
-{% macro show_previews(data, name, args) %}
-  {% if data and args %}
+{% macro show_previews(data, item) %}
+  {% if data and item and item.preview %}
+    {% set args = item.preview %}
     {% set type = args.type %}
-    {% set key = args.key or name %}
+    {% set key = args.key or item.context.origName or item.context.name %}
 
     {% set preview_options = {
       'color-palette': 'colors',
@@ -25,7 +26,7 @@
     {% if type == 'color-palette' %}
       {{ color_palette(data) }}
     {% elif type == 'font-specimen' %}
-      {{ font_specimen(key, data, args) }}
+      {{ font_specimen(key, data, item.iframed) }}
     {% elif type == 'ratios' %}
       {{ ratios(data, args) }}
     {% elif type == 'sizes' %}
@@ -87,12 +88,10 @@
   @prop {Dict} data -
     All the available data on a given font,
     derived from the Sass JSON export.
-  @prop {Dict} args -
-    Arbitrary arguments passes along
-    in the font-specimen call
-    (currently only `show` and `key` are supported).
+  @prop {String} iframed -
+    Rendered font specimen iframe content.
 #}
-{% macro font_specimen(name, data, args=none) %}
+{% macro font_specimen(name, data, iframed) %}
   <div data-sassdoc-font="{{ name }}">
     <h3 data-sassdoc="font-type">
       {{ utility.link_if(
@@ -111,24 +110,8 @@
       {% endfor %}
     </div>
 
-    {% set family = [data.name, data.stack]|join(', ') %}
-
-    {% if args.show %}
-      {% for option in args.show|split(', ') %}
-        {{ specimen_variant(
-          family=family,
-          option=option,
-          data=data
-        ) }}
-      {% endfor %}
-    {% else %}
-      {% for option, path in data %}
-        {{ specimen_variant(
-          family=family,
-          option=option,
-          path=path
-        ) }}
-      {% endfor %}
+    {% if iframed %}
+      <iframe class="render-specimen" srcdoc="{{ iframed }}" width="100%" height="0"></iframe>
     {% endif %}
   </div>
 {% endmacro %}
@@ -297,7 +280,7 @@
 
 
 {% macro icons(item) %}
-  {% if item.iframed %}
-    <iframe class="render-example" srcdoc="{{ item.iframed }}" width="100%" height="0"></iframe>
+  {% if item.icons and item.icons|length and item.iframed %}
+    <iframe class="render-icons" srcdoc="{{ item.iframed }}" width="100%" height="0"></iframe>
   {% endif %}
 {% endmacro %}

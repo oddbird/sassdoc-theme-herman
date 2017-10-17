@@ -6,6 +6,11 @@
 - BREAKING: Remove `accoutrement-add` as a public utility,
   since Sass 3.5+ modular sytems will make it unusable.
 - Updated dependencies.
+- BREAKING: `@preview font-specimen` is now rendered in an `iframe` (with
+  access to `customHead` option).
+- BREAKING: `customHead` option is included in `iframe` for `@example` and
+  `@preview font-specimen` annotations, but is no longer included in base
+  Herman template.
 
 
 ## 1.0.0-alpha.13: 2017-09-25
