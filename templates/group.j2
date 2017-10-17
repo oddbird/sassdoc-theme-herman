@@ -3,13 +3,12 @@
 {% import 'utility.macros.j2' as utility %}
 
 {% block breadcrumb %}
-  <nav  data-sassdoc-region="breadcrumb">
+  <nav data-sassdoc-region="breadcrumb">
     {% set base_url = [basePath, activeProject, '/index.html']|join if activeProject else [basePath, 'index.html']|join %}
     {% set project_title = package.title or package.name or 'Herman' %}
     {% set base_name = activeProject or project_title %}
-    {% set group_name = topGroups[activeGroup] %}
     {{ utility.link_if(base_name, base_url) }} »
-    <strong>{{ group_name }}</strong>
+    <strong>{{ pageTitle }}</strong>
   </nav>
 {% endblock %}
 
