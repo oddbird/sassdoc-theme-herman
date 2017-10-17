@@ -102,7 +102,6 @@
       $value: call($function, $value);
     }
 
-    $value: _herman-inspect($value);
     $output: map-merge($output, ($key: $value));
   }
 

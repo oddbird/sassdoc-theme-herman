@@ -164,79 +164,18 @@
 $herman: () !default;
 
 
-// Herman Inspect
-// --------------
-/// Convert any value into a json-export-ready string
+// Herman Export
+// -------------
+/// Encode a Sass map as a JSON-ready string,
+/// and print to CSS output as a persistent comment.
 ///
-/// @group z_api-utilities
-/// @access private
+/// @group api_json-export
 ///
-/// @param $value -
-///   Any sass value to convert
-/// @return {String} -
-///   A string reprepesentation of the given value,
-///   with leading zeros on numbers,
-///   and quotes escaped for JSON
-@function _herman-inspect(
-  $value
+/// @param {map} $map [$herman] -
+///   Map to be encoded for JSON exporting
+@mixin herman-export(
+  $map: $herman
 ) {
-  $value: inspect($value);
-
-  @if str-index($value, '.') == 1 {
-    $value: '0' + $value;
-  }
-
-  @if str-index($value, '"') {
-    $value: _herman-str-replace($value, '"', '\\"', true);
-  }
-
-  @return $value;
-}
-
-
-// String Replace
-// --------------
-/// Return a string, with a substring replaced
-///
-/// @group z_api-utilities
-/// @access private
-///
-/// @param {String} $string -
-///   The base string to be manipulated
-/// @param {String} $old -
-///   A sub-string to look for, and replace,
-///   inside the base string
-/// @param {String} $new -
-///   A sub string to insert
-///   in place of the `$old` string
-/// @param {Boolean} $replace-all [false] -
-///   Replace all instances of the `$old` string
-///   or just the first instance?
-/// @return {String} -
-///   Return the base string,
-///   with one or more instances of a substring replaced
-@function _herman-str-replace(
-  $string,
-  $old,
-  $new: null,
-  $replace-all: false
-) {
-  $return: $string;
-  $i: str-index($string, $old);
-  $n: str-length($old);
-
-  @if $string == $old {
-    $return: $new;
-  } @else if $i {
-    $a: if($i > 1, str-slice($string, 1, $i - 1), '');
-    $z: str-slice($string, $i + $n);
-
-    @if $replace-all {
-      $z: _herman-str-replace($z, $old, $new, true);
-    }
-
-    $return: $a + if($new, $new, '') + $z;
-  }
-
-  @return $return;
+  $json: json-encode($map);
+  /*! json-encode: #{$json} */
 }

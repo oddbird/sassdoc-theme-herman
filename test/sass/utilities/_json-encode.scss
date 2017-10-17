@@ -1,0 +1,35 @@
+// JSON Encoding Tests
+// ===================
+
+
+// JSON Encode
+// -----------
+
+
+// Herman Quote
+// ------------
+@include describe('herman-quote [function]') {
+  @include it('converts values to strings') {
+    @include assert-equal(
+      _herman-quote(1em),
+      '"1em"'
+    );
+
+    @include assert-equal(
+      _herman-quote('one' 'two' 'three'),
+      '"\\"one\\" \\"two\\" \\"three\\""'
+    );
+  }
+}
+
+
+// String Replace
+// --------------
+@include describe('herman-escape-quotes [function]') {
+  @include it('replaces a single sub-string') {
+    @include assert-equal(
+      _herman-escape-quotes('hello "world"'),
+      'hello \\"world\\"'
+    );
+  }
+}
