@@ -8,6 +8,8 @@
 - Updated dependencies.
 - BUGFIX: Fix broken internal links –
   [#106](https://github.com/oddbird/sassdoc-theme-herman/issues/106)
+- BREAKING: Group navigation is ordered according to config `groups` order –
+  [#150](https://github.com/oddbird/sassdoc-theme-herman/issues/150)
 - BREAKING: `@preview font-specimen` is now rendered in an `iframe` (with
   access to `customHead` option).
 - BREAKING: `customHead` option is included in `iframe` for `@example` and

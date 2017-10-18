@@ -5,7 +5,7 @@
 // Link
 // ----
 /// Shortcut for `link` and `visited` pseudo-classes.
-/// @group z_config-utils
+/// @group config-utils
 /// @see $focus
 /// @example njk
 ///   {% import 'utility.macros.j2' as utility %}
@@ -23,7 +23,7 @@ $link: '&:link, &:visited';
 // Focus
 // -----
 /// Shortcut for `hover`, `focus`, and `active` pseudo-classes.
-/// @group z_config-utils
+/// @group config-utils
 /// @see $link
 /// @example scss
 ///   a {

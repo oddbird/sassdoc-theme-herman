@@ -53,7 +53,7 @@ const prepareContext = ctx => {
       watermark: true,
     },
     groups: {
-      undefined: 'general',
+      undefined: 'General',
     },
     sort: ['group', 'file', 'line', 'access'],
     herman: { sass: {} },
@@ -219,6 +219,7 @@ const prepareContext = ctx => {
    * templates to manipulate the indexed object.
    */
   ctx.byGroup = byGroup(ctx.data);
+  ctx.groupOrder = Object.keys(ctx.groups);
 
   return ctx;
 };
@@ -274,6 +275,7 @@ const parseSubprojects = ctx => {
         prjCtx.data = data;
         prjCtx.subprojects = ctx.subprojects;
         prjCtx.topGroups = ctx.groups;
+        prjCtx.topGroupOrder = ctx.groupOrder;
         prjCtx.topByGroup = ctx.byGroup;
         ctx.subprojects[name] = prepareContext(prjCtx);
       });
@@ -335,8 +337,9 @@ const renderHerman = (dest, ctx) => {
   // set (external) base path for links
   ctx.basePath = '';
   ctx.activeProject = null;
-  ctx.topByGroup = ctx.byGroup;
   ctx.topGroups = ctx.groups;
+  ctx.topGroupOrder = ctx.groupOrder;
+  ctx.topByGroup = ctx.byGroup;
 
   // check if we need to copy a favicon file or use the default
   let copyShortcutIcon = false;
