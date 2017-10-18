@@ -198,9 +198,6 @@ gulp.task('compile', ['sass', 'minify'], () => {
         includes: ['utilities', 'config/manifest'],
       },
       customCSS: `${paths.DIST_DIR}css/main.css`,
-      customHead:
-        '<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro' +
-        ':400,700|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">',
       minifiedIcons: `${paths.TEMPLATES_DIR}_icons.svg`,
       displayColors: ['hex', 'hsl'],
     },

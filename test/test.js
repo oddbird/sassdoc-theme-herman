@@ -170,10 +170,31 @@ describe('preview annotation', function() {
 
   describe('parse', function() {
     it('parses CSS-like options and returns object', function() {
-      assert.deepEqual(
-        this.preview.parse(' font-specimens; foo : bar ; baz ;'),
-        { type: 'font-specimens', foo: 'bar', baz: null }
-      );
+      assert.deepEqual(this.preview.parse(' sizes; foo : bar ; baz ;'), {
+        type: 'sizes',
+        foo: 'bar',
+        baz: null,
+      });
+    });
+  });
+});
+
+describe('font annotation', function() {
+  before(function() {
+    this.font = theme.annotations[3]();
+  });
+
+  describe('parse', function() {
+    it('parses options and returns object', function() {
+      const input =
+        '"key" (variant1, variant2) {format1, format2}\n' +
+        '  <link rel="stylesheet">';
+      assert.deepEqual(this.font.parse(input), {
+        key: 'key',
+        variants: ['variant1', 'variant2'],
+        formats: ['format1', 'format2'],
+        html: '<link rel="stylesheet">',
+      });
     });
   });
 });
@@ -183,13 +204,13 @@ describe('example annotation', function() {
     this.env = {
       herman: { templatepath: path.resolve(__dirname, 'templates') },
     };
-    this.example = theme.annotations[3](this.env);
+    this.example = theme.annotations[4](this.env);
   });
 
   describe('resolve', function() {
     it('warns and exits if no templatepath and njk @example used', function() {
       const env = { logger: { warn: sinon.stub() }, herman: {} };
-      const example = theme.annotations[3](env);
+      const example = theme.annotations[4](env);
       const data = [{ example: [{ type: 'njk' }] }];
 
       example.resolve(data);
@@ -204,7 +225,7 @@ describe('example annotation', function() {
 
     it('warns only once about missing templatepath', function() {
       const env = { logger: { warn: sinon.stub() }, herman: {} };
-      const example = theme.annotations[3](env);
+      const example = theme.annotations[4](env);
       const data = [
         { example: [{ type: 'njk' }] },
         { example: [{ type: 'njk' }] },
@@ -217,7 +238,7 @@ describe('example annotation', function() {
 
     it('does not warn if njk @example not used', function() {
       const env = { logger: { warn: sinon.stub() }, herman: {} };
-      const example = theme.annotations[3](env);
+      const example = theme.annotations[4](env);
       const data = [{}];
 
       example.resolve(data);
@@ -241,6 +262,7 @@ describe('example annotation', function() {
       ];
       this.example.resolve(data);
       assert.equal(data[0].example[0].rendered, '1 then 2.');
+      assert.ok(data[0].example[0].iframed !== undefined);
     });
 
     it('uses custom nunjucks env, if exists', function() {
@@ -251,7 +273,7 @@ describe('example annotation', function() {
         return val + 1;
       });
       const env = { herman: { nunjucksEnv } };
-      const example = theme.annotations[3](env);
+      const example = theme.annotations[4](env);
       const data = [
         {
           example: [
@@ -274,7 +296,7 @@ describe('example annotation', function() {
 
 describe('name annotation', function() {
   before(function() {
-    this.macro = theme.annotations[4](this.env);
+    this.macro = theme.annotations[5](this.env);
   });
 
   describe('parse', function() {

@@ -9,6 +9,7 @@ const path = require('path');
 const Promise = require('bluebird');
 const sass = require('node-sass');
 const sassdoc = require('sassdoc');
+const stripIndent = require('strip-indent');
 const tinycolor = require('tinycolor2');
 const yaml = require('js-yaml');
 
@@ -24,6 +25,7 @@ const fonts_iFrameTpl = path.join(base, 'fonts', 'base.j2');
 nunjucks.installJinjaCompat();
 const nunjucksEnv = nunjucks.configure(base, { noCache: true });
 nunjucksEnv.addFilter('split', (str, separator) => str.split(separator));
+nunjucksEnv.addFilter('isString', val => typeof val === 'string');
 
 /**
  * SassDoc extras (providing Markdown and other filters, and different way to
@@ -448,7 +450,7 @@ const renderIframe = (env, item, type) => {
       includeIcons = true;
       break;
     case 'font':
-      shouldRender = item.preview && item.preview.type === 'font-specimen';
+      shouldRender = item.font && item.font.key;
       includeSassJSON = true;
       break;
   }
@@ -510,8 +512,11 @@ herman.annotations = [
       name: 'macro',
       multiple: false,
       parse: raw => {
-        // expects e.g. 'forms.macros.js.j2:label' and returns { file:
-        // 'forms.macros.js.j2', name: 'label' }
+        // expects e.g. 'forms.macros.js.j2:label'
+        // returns object {
+        //   file: 'forms.macros.js.j2',
+        //   name: 'label'
+        // }
         const bits = raw.split(':');
         return { file: bits[0], name: bits[1] };
       },
@@ -552,9 +557,12 @@ herman.annotations = [
       name: 'icons',
       multiple: false,
       parse: raw => {
-        // expects e.g. 'icons/ utility.macros.j2:icon' and returns {
-        // iconsPath: 'icons/', macroFile: 'utility.macros.j2', macroName:
-        // 'icon' }
+        // expects e.g. 'icons/ utility.macros.j2:icon'
+        // returns {
+        //   iconsPath: 'icons/',
+        //   macroFile: 'utility.macros.j2',
+        //   macroName: 'icon'
+        // }
         const bits = raw.split(' ');
         const macrobits = bits[1].split(':');
         return {
@@ -604,17 +612,20 @@ herman.annotations = [
   },
 
   /**
-   * Custom `@preview` annotation. Expects comma-separated list of names of
-   * preview types.
+   * Custom `@preview` annotation. Expects preview type followed by
+   * semicolon-separated list of `key: value` arguments.
    */
-  function preview(env) {
+  function preview() {
     return {
       name: 'preview',
       multiple: false,
       parse: raw => {
         // expects e.g. 'color-palette; key: sans; sizes: text-sizes;'
-        // and returns object {
-        //   type: "color-palette", key: "sans", sizes: "text-sizes" }
+        // returns object {
+        //   type: "color-palette",
+        //   key: "sans",
+        //   sizes: "text-sizes"
+        // }
         const options = {};
         let key, value;
         raw.split(';').forEach(option => {
@@ -629,9 +640,69 @@ herman.annotations = [
         });
         return options;
       },
+    };
+  },
+
+  /**
+   * Custom `@font` annotation.
+   * For remotely-hosted fonts, expects font name followed by parenthetical list
+   * of variants to display on first line, with optional html head as nested
+   * block.
+   * For locally-hosted fonts, expects font name and bracketed list of formats
+   * on first line, optionally followed by parenthetical list of variants
+   * (defaults to all variants).
+   * NOTE: Locally-hosted fonts require global `fontpath` Herman setting.
+   */
+  function font(env) {
+    const keyRE = /(["'])(?:(?=(\\?))\2.)*?\1/;
+    const variantsRE = /\(([^)]*)\)/;
+    const formatsRE = /{([^}]*)}/;
+    return {
+      name: 'font',
+      multiple: false,
+      parse: raw => {
+        // expects e.g.:
+        // 'body' (regular, bold, italic, bold italic)
+        //   <link href="..." rel="stylesheet">
+        // returns object {
+        //   key: 'sans',
+        //   variants: ['regular', 'bold', 'italic', 'bold italic'],
+        //   formats: [],
+        //   html: '<link href="..." rel="stylesheet">'
+        // }
+        const obj = {
+          key: '',
+          variants: [],
+          formats: [],
+          html: '',
+        };
+        const linebreak = raw.indexOf('\n');
+        let args = raw;
+        if (linebreak > -1) {
+          args = raw.substr(0, linebreak);
+          const html = raw.substr(linebreak + 1);
+          obj.html = stripIndent(html.replace(/^\n|\n$/g, ''));
+        }
+        const keyBits = args.match(keyRE);
+        if (!keyBits) {
+          return undefined;
+        }
+        const key = keyBits[0];
+        obj.key = key.substring(1, key.length - 1).trim();
+        args = args.substr(key.length);
+        const variantsBits = args.match(variantsRE);
+        if (variantsBits) {
+          obj.variants = variantsBits[1].split(', ');
+        }
+        const formatsBits = args.match(formatsRE);
+        if (formatsBits) {
+          obj.formats = formatsBits[1].split(', ');
+        }
+        return obj;
+      },
       resolve: data => {
         data.forEach(item => {
-          if (!item.preview || item.preview.type !== 'font-specimen') {
+          if (!item.font) {
             return;
           }
           renderIframe(env, item, 'font');

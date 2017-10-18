@@ -10,12 +10,10 @@
   [#106](https://github.com/oddbird/sassdoc-theme-herman/issues/106)
 - BREAKING: Group navigation is ordered according to config `groups` order –
   [#150](https://github.com/oddbird/sassdoc-theme-herman/issues/150)
-- BREAKING: `@preview font-specimen` is now rendered in an `iframe` (with
-  access to `customHead` option).
-- BREAKING: `customHead` option is included in `iframe` for `@example` and
-  `@preview font-specimen` annotations, but is no longer included in base
-  Herman template.
 - BUGFIX: Do not error if `sass` config option is `undefined`.
+- BUGFIX: Do not break layout on fonts with single-item stack.
+- BREAKING: `@preview font-specimen` is replaced by new `@font` annotation.
+- BREAKING: Removed `customHead` option.
 
 
 ## 1.0.0-alpha.13: 2017-09-25

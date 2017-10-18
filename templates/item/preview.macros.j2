@@ -8,14 +8,14 @@
   Call the requested previews with the appropriate JSON data.
 #}
 {% macro show_previews(data, item) %}
-  {% if data and item and item.preview %}
-    {% set args = item.preview %}
-    {% set type = args.type %}
+  {% if data and item and (item.preview or item.font) %}
+    {% set args = item.preview or item.font %}
+    {% set type = args.type if item.preview else 'font' %}
     {% set key = args.key or item.context.origName or item.context.name %}
 
     {% set preview_options = {
       'color-palette': 'colors',
-      'font-specimen': 'fonts',
+      'font': 'fonts',
       'ratios': 'ratios',
       'sizes': 'sizes'
     } %}
@@ -25,7 +25,7 @@
 
     {% if type == 'color-palette' %}
       {{ color_palette(data) }}
-    {% elif type == 'font-specimen' %}
+    {% elif type == 'font' %}
       {{ font_specimen(key, data, item.iframed) }}
     {% elif type == 'ratios' %}
       {{ ratios(data, args) }}
@@ -81,8 +81,6 @@
   Display all font-family specimens,
   including multiple variants.
 
-  @group font-specimen
-
   @prop {String} name -
     Title for the font-family being displayed.
   @prop {Dict} data -
@@ -105,9 +103,13 @@
 
     <div data-sassdoc="font-stack">
       <b>Stack:</b>
-      {% for item in data.stack %}
-        {{ item }}{% if not loop.last %},{% endif %}
-      {% endfor %}
+      {% if data.stack|isString %}
+        {{ data.stack }}
+      {% else %}
+        {% for item in data.stack %}
+          {{ item }}{% if not loop.last %},{% endif %}
+        {% endfor %}
+      {% endif %}
     </div>
 
     {% if iframed %}
@@ -121,8 +123,6 @@
   Specimen Variant
   ----------------
   Display a single specimen variant.
-
-  @group font-specimen
 
   @prop {String} family -
     A CSS-ready value for font-family,
@@ -189,8 +189,6 @@
   Lorem
   -----
   Display Lorem Ipsum text for font specimens.
-
-  @group font-specimen
 
   @prop {'title' | 'body' | 'alpha'} length -
     They type of Lorem Ipsum to display:
