@@ -9,6 +9,10 @@
   {% if customCSS and customCSS.url %}
     <link rel="stylesheet" href="{{ customCSS.url }}" />
   {% endif %}
+
+  {% if fontsHTML %}
+    {{ fontsHTML|safe }}
+  {% endif %}
 </head>
 <body class="sassdoc">
   {% if iconsSvg %}
