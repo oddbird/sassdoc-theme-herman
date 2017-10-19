@@ -181,7 +181,8 @@ describe('preview annotation', function() {
 
 describe('font annotation', function() {
   before(function() {
-    this.font = theme.annotations[3]();
+    this.env = {};
+    this.font = theme.annotations[3](this.env);
   });
 
   describe('parse', function() {
@@ -195,6 +196,7 @@ describe('font annotation', function() {
         formats: ['format1', 'format2'],
         html: '<link rel="stylesheet">',
       });
+      assert.equal(this.env.fontsHTML, '\n<link rel="stylesheet">');
     });
   });
 });
