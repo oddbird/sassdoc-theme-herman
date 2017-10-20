@@ -176,13 +176,23 @@
           (<code>{{ path }}</code>)
         {% endif %}
       </h4>
-      <div data-specimen="sample" style="font-family: {{ family }}; font-weight: {{ weight }}; font-style: {{ style }};">
+      <div data-specimen="sample"
+        style="font-family: {{ font_names(family) }}; font-weight: {{ weight }}; font-style: {{ style }};">
         <div data-specimen="aa">Aa</div>
         <div data-specimen="lorem">{{ lorem('alpha') }}</div>
       </div>
     </div>
   {% endif %}
 {% endmacro %}
+
+
+{%- macro font_names(family) -%}
+  {%- set generic = ['serif', 'sans-serif', 'monospace', 'cursive', 'fantasy'] -%}
+  {%- for name in family|split(',') -%}
+    {{ name if (name in generic) else "'" + name + "'" }}
+    {%- if not loop.last %}, {% endif -%}
+  {%- endfor -%}
+{%- endmacro -%}
 
 
 {#
