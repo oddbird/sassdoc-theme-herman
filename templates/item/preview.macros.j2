@@ -93,7 +93,7 @@
   <div data-sassdoc-font="{{ name }}">
     <h3 data-sassdoc="font-type">
       {{ utility.link_if(
-        content=data.name,
+        content=data.name or name,
         url=data.source,
         attrs={'data-sassdoc': 'font-name'}
       ) }}

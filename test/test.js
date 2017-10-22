@@ -199,6 +199,81 @@ describe('font annotation', function() {
       assert.equal(this.env.fontsHTML, '\n<link rel="stylesheet">');
     });
   });
+
+  describe('resolve', function() {
+    describe('local font', function() {
+      before(function() {
+        this.data = [{ font: { key: 'test-font', formats: ['woff'] } }];
+        this.origData = Object.assign({}, this.data);
+      });
+
+      it('warns and exits if no fontpath', function() {
+        const env = { logger: { warn: sinon.stub() }, herman: {} };
+        const example = theme.annotations[3](env);
+
+        example.resolve(this.data);
+
+        assert.deepEqual(this.data, this.origData);
+        assert(
+          env.logger.warn.calledWith(
+            'Must pass in a `fontpath` if using @font annotation with local ' +
+              'fonts.'
+          )
+        );
+      });
+
+      it('warns and exits if no jsonfile', function() {
+        const env = {
+          logger: { warn: sinon.stub() },
+          herman: { fontpath: '/path' },
+        };
+        const example = theme.annotations[3](env);
+
+        example.resolve(this.data);
+
+        assert.deepEqual(this.data, this.origData);
+        assert(
+          env.logger.warn.calledWith(
+            'Must pass in a `sassjson` file if using @font annotation with ' +
+              'local fonts.'
+          )
+        );
+      });
+
+      it('adds `@font-face` CSS and localFonts src', function() {
+        const env = {
+          logger: { warn: sinon.stub() },
+          herman: {
+            fontpath: '/path',
+            sass: {
+              jsonfile: '/json',
+            },
+          },
+          sassjson: {
+            fonts: {
+              'test-font': {
+                regular: 'font/font',
+              },
+            },
+          },
+        };
+        const example = theme.annotations[3](env);
+
+        example.resolve(this.data);
+
+        const css =
+          '@font-face {\n' +
+          "  font-family: 'test-font';\n" +
+          "  src: url('assets/fonts/font/font.woff') format('woff');\n" +
+          '  font-style: normal;\n' +
+          '  font-weight: normal;\n' +
+          '}\n';
+
+        assert.equal(this.data[0].font.localFontCSS, css);
+        assert.deepEqual(env.localFonts, ['/path/**/font/font.woff']);
+      });
+    });
+  });
 });
 
 describe('example annotation', function() {

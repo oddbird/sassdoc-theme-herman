@@ -21,6 +21,7 @@ const base = path.resolve(__dirname, './templates');
 const example_iFrameTpl = path.join(base, 'example', 'base.j2');
 const icons_iFrameTpl = path.join(base, 'icons', 'base.j2');
 const fonts_iFrameTpl = path.join(base, 'fonts', 'base.j2');
+const fontFaceTpl = path.join(base, 'fonts', 'font_face.j2');
 
 nunjucks.installJinjaCompat();
 const nunjucksEnv = nunjucks.configure(base, { noCache: true });
@@ -355,10 +356,7 @@ const renderHerman = (dest, ctx) => {
   // render the index template and copy the static assets.
   const promises = [
     render(nunjucksEnv, indexTemplate, indexDest, ctx),
-    copy(
-      path.join(assets, '/**/*.{css,js,png,eot,woff,woff2,ttf,ico,map}'),
-      path.join(dest, 'assets')
-    )
+    copy(path.join(assets, '/**/*.{css,js,ico,map}'), path.join(dest, 'assets'))
       .then(() => {
         if (copyShortcutIcon) {
           return copy(ctx.shortcutIcon.path, path.resolve(dest, 'assets/img/'));
@@ -375,6 +373,12 @@ const renderHerman = (dest, ctx) => {
         return Promise.resolve();
       }),
   ];
+
+  if (ctx.localFonts && ctx.localFonts.length) {
+    for (const localFont of ctx.localFonts) {
+      promises.push(copy(localFont, path.resolve(dest, 'assets/fonts/')));
+    }
+  }
 
   const getRenderCtx = (context, groupName) =>
     extend({}, context, {
@@ -654,6 +658,7 @@ herman.annotations = [
    * NOTE: Locally-hosted fonts require global `fontpath` Herman setting.
    */
   function font(env) {
+    const valid_formats = ['ttf', 'otf', 'woff', 'woff2', 'svg', 'svgz', 'eot'];
     // Matches first occurence of text within `''` or `""`
     const keyRE = /(["'])(?:(?=(\\?))\2.)*?\1/;
     // Matches text within `()`
@@ -711,6 +716,55 @@ herman.annotations = [
         data.forEach(item => {
           if (!item.font) {
             return;
+          }
+          if (item.font.formats.length) {
+            // Local font
+            if (!(env.herman && env.herman.fontpath)) {
+              env.logger.warn(
+                'Must pass in a `fontpath` if using @font ' +
+                  'annotation with local fonts.'
+              );
+              return;
+            }
+            if (!(env.herman.sass && env.herman.sass.jsonfile)) {
+              env.logger.warn(
+                'Must pass in a `sassjson` file if using @font ' +
+                  'annotation with local fonts.'
+              );
+              return;
+            }
+            if (!env.sassjson) {
+              env.sassjson = parse.sassJson(
+                fs.readFileSync(env.herman.sass.jsonfile)
+              );
+            }
+            const fontData =
+              env.sassjson.fonts && env.sassjson.fonts[item.font.key];
+            if (!fontData) {
+              env.logger.warn(
+                `Sassjson file is missing font "${item.font.key}" data. ` +
+                  'Did you forget to `@include herman-add()` for this font?'
+              );
+              return;
+            }
+            const variants = parse.localFont(item.font, fontData);
+            const css = [];
+            env.localFonts = env.localFonts || [];
+            for (const variant of variants) {
+              // Render custom `@font-face` CSS
+              css.push(nunjucksEnv.render(fontFaceTpl, variant.ctx));
+              const fontpath = path.resolve(env.dir, env.herman.fontpath);
+              for (const format of item.font.formats) {
+                if (valid_formats.includes(format)) {
+                  // Store src path for local font files to copy in
+                  env.localFonts.push(
+                    `${fontpath}/**/${variant.src}.${format}`
+                  );
+                }
+              }
+            }
+            // Concatenate `@font-face` CSS to insert into iframe `<head>`
+            item.font.localFontCSS = css.join('\n');
           }
           renderIframe(env, item, 'font');
         });
