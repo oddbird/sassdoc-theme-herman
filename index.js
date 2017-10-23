@@ -717,7 +717,7 @@ herman.annotations = [
           if (!item.font) {
             return;
           }
-          if (item.font.formats.length) {
+          if (item.font.formats && item.font.formats.length) {
             // Local font
             if (!(env.herman && env.herman.fontpath)) {
               env.logger.warn(
@@ -747,18 +747,20 @@ herman.annotations = [
               );
               return;
             }
+            // For each font variant, return ctx object (for rendering
+            // `@font-face` CSS) and src path (for copying into `assets/`).
             const variants = parse.localFont(item.font, fontData);
             const css = [];
             env.localFonts = env.localFonts || [];
             for (const variant of variants) {
               // Render custom `@font-face` CSS
               css.push(nunjucksEnv.render(fontFaceTpl, variant.ctx));
-              const fontpath = path.resolve(env.dir, env.herman.fontpath);
+              const baseFontPath = path.resolve(env.dir, env.herman.fontpath);
               for (const format of item.font.formats) {
                 if (valid_formats.includes(format)) {
                   // Store src path for local font files to copy in
                   env.localFonts.push(
-                    `${fontpath}/**/${variant.src}.${format}`
+                    `${baseFontPath}/**/${variant.src_path}.${format}`
                   );
                 }
               }
