@@ -7,14 +7,15 @@
   -------------
   Call the requested previews with the appropriate JSON data.
 #}
-{% macro show_previews(data, name, args) %}
-  {% if data and args %}
-    {% set type = args.type %}
-    {% set key = args.key or name %}
+{% macro show_previews(data, item) %}
+  {% if data and item and (item.preview or item.font) %}
+    {% set args = item.preview or item.font %}
+    {% set type = args.type if item.preview else 'font' %}
+    {% set key = args.key or item.context.origName or item.context.name %}
 
     {% set preview_options = {
       'color-palette': 'colors',
-      'font-specimen': 'fonts',
+      'font': 'fonts',
       'ratios': 'ratios',
       'sizes': 'sizes'
     } %}
@@ -24,8 +25,8 @@
 
     {% if type == 'color-palette' %}
       {{ color_palette(data) }}
-    {% elif type == 'font-specimen' %}
-      {{ font_specimen(key, data, args) }}
+    {% elif type == 'font' %}
+      {{ font_specimen(key, data, item.iframed) }}
     {% elif type == 'ratios' %}
       {{ ratios(data, args) }}
     {% elif type == 'sizes' %}
@@ -80,23 +81,19 @@
   Display all font-family specimens,
   including multiple variants.
 
-  @group font-specimen
-
   @prop {String} name -
     Title for the font-family being displayed.
   @prop {Dict} data -
     All the available data on a given font,
     derived from the Sass JSON export.
-  @prop {Dict} args -
-    Arbitrary arguments passes along
-    in the font-specimen call
-    (currently only `show` and `key` are supported).
+  @prop {String} iframed -
+    Rendered font specimen iframe content.
 #}
-{% macro font_specimen(name, data, args=none) %}
+{% macro font_specimen(name, data, iframed) %}
   <div data-sassdoc-font="{{ name }}">
     <h3 data-sassdoc="font-type">
       {{ utility.link_if(
-        content=data.name,
+        content=data.name or name,
         url=data.source,
         attrs={'data-sassdoc': 'font-name'}
       ) }}
@@ -106,29 +103,17 @@
 
     <div data-sassdoc="font-stack">
       <b>Stack:</b>
-      {% for item in data.stack %}
-        {{ item }}{% if not loop.last %},{% endif %}
-      {% endfor %}
+      {% if data.stack|isString %}
+        {{ data.stack }}
+      {% else %}
+        {% for item in data.stack %}
+          {{ item }}{% if not loop.last %},{% endif %}
+        {% endfor %}
+      {% endif %}
     </div>
 
-    {% set family = [data.name, data.stack]|join(', ') %}
-
-    {% if args.show %}
-      {% for option in args.show|split(', ') %}
-        {{ specimen_variant(
-          family=family,
-          option=option,
-          data=data
-        ) }}
-      {% endfor %}
-    {% else %}
-      {% for option, path in data %}
-        {{ specimen_variant(
-          family=family,
-          option=option,
-          path=path
-        ) }}
-      {% endfor %}
+    {% if iframed %}
+      <iframe class="render-specimen" srcdoc="{{ iframed }}" width="100%" height="0"></iframe>
     {% endif %}
   </div>
 {% endmacro %}
@@ -138,8 +123,6 @@
   Specimen Variant
   ----------------
   Display a single specimen variant.
-
-  @group font-specimen
 
   @prop {String} family -
     A CSS-ready value for font-family,
@@ -193,7 +176,8 @@
           (<code>{{ path }}</code>)
         {% endif %}
       </h4>
-      <div data-specimen="sample" style="font-family: {{ family }}; font-weight: {{ weight }}; font-style: {{ style }};">
+      <div data-specimen="sample"
+        style="font-family: {{ font_names(family) }}; font-weight: {{ weight }}; font-style: {{ style }};">
         <div data-specimen="aa">Aa</div>
         <div data-specimen="lorem">{{ lorem('alpha') }}</div>
       </div>
@@ -202,12 +186,19 @@
 {% endmacro %}
 
 
+{%- macro font_names(family) -%}
+  {%- set generic = ['serif', 'sans-serif', 'monospace', 'cursive', 'fantasy'] -%}
+  {%- for name in family|split(',') -%}
+    {{ name if (name in generic) else "'" + name + "'" }}
+    {%- if not loop.last %}, {% endif -%}
+  {%- endfor -%}
+{%- endmacro -%}
+
+
 {#
   Lorem
   -----
   Display Lorem Ipsum text for font specimens.
-
-  @group font-specimen
 
   @prop {'title' | 'body' | 'alpha'} length -
     They type of Lorem Ipsum to display:
@@ -297,7 +288,7 @@
 
 
 {% macro icons(item) %}
-  {% if item.iframed %}
-    <iframe class="render-example" srcdoc="{{ item.iframed }}" width="100%" height="0"></iframe>
+  {% if item.icons and item.icons|length and item.iframed %}
+    <iframe class="render-icons" srcdoc="{{ item.iframed }}" width="100%" height="0"></iframe>
   {% endif %}
 {% endmacro %}

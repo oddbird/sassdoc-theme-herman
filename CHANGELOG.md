@@ -10,6 +10,12 @@
   [#106](https://github.com/oddbird/sassdoc-theme-herman/issues/106)
 - BREAKING: Group navigation is ordered according to config `groups` order –
   [#150](https://github.com/oddbird/sassdoc-theme-herman/issues/150)
+- BUGFIX: Do not error if `sass` config option is `undefined`.
+- BUGFIX: Do not break layout on fonts with single-item stack –
+  [#172](https://github.com/oddbird/sassdoc-theme-herman/issues/172)
+- BREAKING: `@preview font-specimen` is replaced by new `@font` annotation.
+- BREAKING: Removed `customHead` option; replaced by multiline `@font`
+  annotation.
 
 
 ## 1.0.0-alpha.13: 2017-09-25

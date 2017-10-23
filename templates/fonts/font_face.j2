@@ -1,0 +1,24 @@
+{% set format_options = {
+  'ttf': 'truetype',
+  'otf': 'opentype',
+  'woff': 'woff',
+  'woff2': 'woff2',
+  'svg': 'svg',
+  'svgz': 'svg',
+  'eot': 'embedded-opentype'
+} -%}
+
+@font-face {
+  font-family: '{{ family }}';
+{%- if 'eot' in formats %}
+  src: url('{{ dest_path }}.eot');
+{%- endif %}
+  src:
+{%- for format in formats -%}
+  {%- set suffix = '?#iefix' if format == 'eot' else '' -%}
+  {%- set suffix = '#' + svgid if format in ['svg', 'svgz'] else suffix -%}
+  {%- if format_options[format] %} url('{{ dest_path }}.{{ format }}{{ suffix }}') format('{{ format_options[format] }}'){{ ';' if loop.last else ',' }}{% endif %}
+{%- endfor %}
+  font-style: {{ style }};
+  font-weight: {{ weight }};
+}

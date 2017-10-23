@@ -170,10 +170,108 @@ describe('preview annotation', function() {
 
   describe('parse', function() {
     it('parses CSS-like options and returns object', function() {
-      assert.deepEqual(
-        this.preview.parse(' font-specimens; foo : bar ; baz ;'),
-        { type: 'font-specimens', foo: 'bar', baz: null }
-      );
+      assert.deepEqual(this.preview.parse(' sizes; foo : bar ; baz ;'), {
+        type: 'sizes',
+        foo: 'bar',
+        baz: null,
+      });
+    });
+  });
+});
+
+describe('font annotation', function() {
+  before(function() {
+    this.env = {};
+    this.font = theme.annotations[3](this.env);
+  });
+
+  describe('parse', function() {
+    it('parses options and returns object', function() {
+      const input =
+        '"key" (variant1, variant2) {format1, format2}\n' +
+        '  <link rel="stylesheet">';
+      assert.deepEqual(this.font.parse(input), {
+        key: 'key',
+        variants: ['variant1', 'variant2'],
+        formats: ['format1', 'format2'],
+        html: '<link rel="stylesheet">',
+      });
+      assert.equal(this.env.fontsHTML, '\n<link rel="stylesheet">');
+    });
+  });
+
+  describe('resolve', function() {
+    describe('local font', function() {
+      before(function() {
+        this.data = [{ font: { key: 'test-font', formats: ['woff'] } }];
+        this.origData = Object.assign({}, this.data);
+      });
+
+      it('warns and exits if no fontpath', function() {
+        const env = { logger: { warn: sinon.stub() }, herman: {} };
+        const example = theme.annotations[3](env);
+
+        example.resolve(this.data);
+
+        assert.deepEqual(this.data, this.origData);
+        assert(
+          env.logger.warn.calledWith(
+            'Must pass in a `fontpath` if using @font annotation with local ' +
+              'fonts.'
+          )
+        );
+      });
+
+      it('warns and exits if no jsonfile', function() {
+        const env = {
+          logger: { warn: sinon.stub() },
+          herman: { fontpath: '/path' },
+        };
+        const example = theme.annotations[3](env);
+
+        example.resolve(this.data);
+
+        assert.deepEqual(this.data, this.origData);
+        assert(
+          env.logger.warn.calledWith(
+            'Must pass in a `sassjson` file if using @font annotation with ' +
+              'local fonts.'
+          )
+        );
+      });
+
+      it('adds `@font-face` CSS and localFonts src', function() {
+        const env = {
+          logger: { warn: sinon.stub() },
+          herman: {
+            fontpath: '/path',
+            sass: {
+              jsonfile: '/json',
+            },
+          },
+          sassjson: {
+            fonts: {
+              'test-font': {
+                regular: 'font/font',
+              },
+            },
+          },
+        };
+        const example = theme.annotations[3](env);
+
+        example.resolve(this.data);
+
+        const css =
+          '@font-face {\n' +
+          "  font-family: 'test-font';\n" +
+          "  src: url('assets/fonts/font/font.woff') format('woff');\n" +
+          '  font-style: normal;\n' +
+          '  font-weight: normal;\n' +
+          '}\n';
+
+        assert.equal(this.data[0].font.localFontCSS, css);
+        assert.deepEqual(env.localFonts, ['/path/**/font/font.woff']);
+      });
     });
   });
 });
@@ -183,13 +281,13 @@ describe('example annotation', function() {
     this.env = {
       herman: { templatepath: path.resolve(__dirname, 'templates') },
     };
-    this.example = theme.annotations[3](this.env);
+    this.example = theme.annotations[4](this.env);
   });
 
   describe('resolve', function() {
     it('warns and exits if no templatepath and njk @example used', function() {
       const env = { logger: { warn: sinon.stub() }, herman: {} };
-      const example = theme.annotations[3](env);
+      const example = theme.annotations[4](env);
       const data = [{ example: [{ type: 'njk' }] }];
 
       example.resolve(data);
@@ -204,7 +302,7 @@ describe('example annotation', function() {
 
     it('warns only once about missing templatepath', function() {
       const env = { logger: { warn: sinon.stub() }, herman: {} };
-      const example = theme.annotations[3](env);
+      const example = theme.annotations[4](env);
       const data = [
         { example: [{ type: 'njk' }] },
         { example: [{ type: 'njk' }] },
@@ -217,7 +315,7 @@ describe('example annotation', function() {
 
     it('does not warn if njk @example not used', function() {
       const env = { logger: { warn: sinon.stub() }, herman: {} };
-      const example = theme.annotations[3](env);
+      const example = theme.annotations[4](env);
       const data = [{}];
 
       example.resolve(data);
@@ -241,6 +339,7 @@ describe('example annotation', function() {
       ];
       this.example.resolve(data);
       assert.equal(data[0].example[0].rendered, '1 then 2.');
+      assert.ok(data[0].example[0].iframed !== undefined);
     });
 
     it('uses custom nunjucks env, if exists', function() {
@@ -251,7 +350,7 @@ describe('example annotation', function() {
         return val + 1;
       });
       const env = { herman: { nunjucksEnv } };
-      const example = theme.annotations[3](env);
+      const example = theme.annotations[4](env);
       const data = [
         {
           example: [
@@ -274,7 +373,7 @@ describe('example annotation', function() {
 
 describe('name annotation', function() {
   before(function() {
-    this.macro = theme.annotations[4](this.env);
+    this.macro = theme.annotations[5](this.env);
   });
 
   describe('parse', function() {

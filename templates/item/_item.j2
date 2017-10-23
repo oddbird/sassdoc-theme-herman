@@ -36,7 +36,6 @@
   {{ preview.icons(item) }}
   {{ preview.show_previews(
     data=sassjson,
-    name=item.context.origName or item.context.name,
-    args=item.preview
+    item=item
   ) }}
 </section>
