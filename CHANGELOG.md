@@ -16,6 +16,9 @@
 - BREAKING: `@preview font-specimen` is replaced by new `@font` annotation.
 - BREAKING: Removed `customHead` option; replaced by multiline `@font`
   annotation.
+- BUGFIX: Fix assets referenced with relative urls in client-provided
+  `customCSS` for `@example` annotations –
+  [#174](https://github.com/oddbird/sassdoc-theme-herman/issues/174)
 
 
 ## 1.0.0-alpha.13: 2017-09-25
