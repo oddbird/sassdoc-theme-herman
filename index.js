@@ -36,15 +36,22 @@ nunjucksEnv.addFilter('isString', val => typeof val === 'string');
  */
 const extras = require('sassdoc-extras');
 
-const byGroup = data => {
-  const sorted = {};
+const byGroup = (data, orderedGroups) => {
+  const dataByGroup = {};
   data.forEach(item => {
     const group = item.group[0];
-    if (!(group in sorted)) {
-      sorted[group] = [];
+    if (!dataByGroup.hasOwnProperty(group)) {
+      dataByGroup[group] = [];
     }
-    sorted[group].push(item);
+    dataByGroup[group].push(item);
   });
+  // Sort results by order groups were defined
+  const sorted = {};
+  for (const group of Object.keys(orderedGroups)) {
+    if (dataByGroup.hasOwnProperty(group)) {
+      sorted[group] = dataByGroup[group];
+    }
+  }
   return sorted;
 };
 
@@ -221,8 +228,7 @@ const prepareContext = ctx => {
    * You can then use `data.byGroup` instead of `data` in your
    * templates to manipulate the indexed object.
    */
-  ctx.byGroup = byGroup(ctx.data);
-  ctx.groupOrder = Object.keys(ctx.groups);
+  ctx.byGroup = byGroup(ctx.data, ctx.groups);
 
   return ctx;
 };
@@ -278,7 +284,6 @@ const parseSubprojects = ctx => {
         prjCtx.data = data;
         prjCtx.subprojects = ctx.subprojects;
         prjCtx.topGroups = ctx.groups;
-        prjCtx.topGroupOrder = ctx.groupOrder;
         prjCtx.topByGroup = ctx.byGroup;
         ctx.subprojects[name] = prepareContext(prjCtx);
       });
@@ -341,7 +346,6 @@ const renderHerman = (dest, ctx) => {
   ctx.basePath = '';
   ctx.activeProject = null;
   ctx.topGroups = ctx.groups;
-  ctx.topGroupOrder = ctx.groupOrder;
   ctx.topByGroup = ctx.byGroup;
 
   // check if we need to copy a favicon file or use the default
