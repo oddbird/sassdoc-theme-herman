@@ -360,28 +360,39 @@ const renderHerman = (dest, ctx) => {
   // render the index template and copy the static assets.
   const promises = [
     render(nunjucksEnv, indexTemplate, indexDest, ctx),
-    copy(path.join(assets, '/**/*.{css,js,ico,map}'), path.join(dest, 'assets'))
-      .then(() => {
-        if (copyShortcutIcon) {
-          return copy(ctx.shortcutIcon.path, path.resolve(dest, 'assets/img/'));
+    copy(
+      path.join(assets, '/**/*.{css,js,ico,map}'),
+      path.join(dest, 'assets')
+    ).then(() => {
+      if (copyShortcutIcon) {
+        return copy(ctx.shortcutIcon.path, path.resolve(dest, 'assets/img/'));
+      }
+      return Promise.resolve();
+    }),
+  ];
+
+  if (ctx.customCSS) {
+    promises.push(
+      copy(ctx.customCSS.path, path.resolve(dest, 'assets/css/custom'), {
+        parser: parse.customCSS,
+        env: ctx,
+      }).then(() => {
+        if (ctx.customCSSFiles && ctx.customCSSFiles.length) {
+          return copy(ctx.customCSSFiles, path.resolve(dest, 'assets/custom'), {
+            base: ctx.dir,
+          });
         }
         return Promise.resolve();
       })
-      .then(() => {
-        if (ctx.customCSS) {
-          return copy(
-            ctx.customCSS.path,
-            path.resolve(dest, 'assets/css/custom')
-          );
-        }
-        return Promise.resolve();
-      }),
-  ];
+    );
+  }
 
   if (ctx.localFonts && ctx.localFonts.length) {
-    for (const localFont of ctx.localFonts) {
-      promises.push(copy(localFont, path.resolve(dest, 'assets/fonts/')));
-    }
+    promises.push(
+      copy(ctx.localFonts, path.resolve(dest, 'assets/fonts/'), {
+        base: path.resolve(ctx.dir, ctx.herman.fontpath),
+      })
+    );
   }
 
   const getRenderCtx = (context, groupName) =>
@@ -764,7 +775,7 @@ herman.annotations = [
                 if (valid_formats.includes(format)) {
                   // Store src path for local font files to copy in
                   env.localFonts.push(
-                    `${baseFontPath}/**/${variant.src_path}.${format}`
+                    `${baseFontPath}/${variant.src_path}.${format}`
                   );
                 }
               }

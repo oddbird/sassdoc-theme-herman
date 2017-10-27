@@ -270,7 +270,7 @@ describe('font annotation', function() {
           '}\n';
 
         assert.equal(this.data[0].font.localFontCSS, css);
-        assert.deepEqual(env.localFonts, ['/path/**/font/font.woff']);
+        assert.deepEqual(env.localFonts, ['/path/font/font.woff']);
       });
     });
   });
