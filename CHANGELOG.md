@@ -1,7 +1,7 @@
 # Herman Changelog
 
 
-## UNRELEASED
+## 1.0.0-alpha.14: 2017-10-27
 
 - BREAKING: Remove `accoutrement-add` as a public utility,
   since Sass 3.5+ modular sytems will make it unusable.
