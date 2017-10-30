@@ -9,8 +9,10 @@
   "dependencies": {
     "bluebird": "^3.5.1",
     "extend": "^3.0.0",
+    "gulp-istanbul": "^1.1.2",
     "gulp-rename": "^1.2.2",
     "html-minifier": "^3.5.5",
+    "istanbul": "^0.4.5",
     "js-yaml": "^3.10.0",
     "node-sass": "^4.5.3",
     "nunjucks": "^2.5.2",

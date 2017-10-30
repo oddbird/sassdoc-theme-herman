@@ -3,6 +3,7 @@ npm-debug.log
 yarn-error.log
 .sass-cache/
 .cache/
+coverage/
 *.DS_Store
 *~
 .livereload

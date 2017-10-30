@@ -9,6 +9,7 @@ const gulp = require('gulp');
 const gutil = require('gulp-util');
 const imagemin = require('gulp-imagemin');
 const mocha = require('gulp-mocha');
+const istanbul = require('gulp-istanbul');
 const path = require('path');
 const prettier = require('gulp-prettier-plugin');
 const rename = require('gulp-rename');
@@ -145,10 +146,21 @@ gulp.task('sasstest', () =>
   gulp.src(`${paths.SASS_TESTS_DIR}test_sass.js`, { read: false }).pipe(mocha())
 );
 
+gulp.task('jstest-prep', () =>
+  gulp
+    .src(paths.SRC_JS)
+    .pipe(istanbul())
+    .pipe(istanbul.hookRequire())
+);
+
 // Need to finish compile before running tests,
 // so that the processes do not conflict
-gulp.task('jstest', ['compile'], () =>
-  gulp.src(`${paths.JS_TESTS_DIR}*.js`, { read: false }).pipe(mocha())
+gulp.task('jstest', ['compile', 'jstest-prep'], () =>
+  gulp
+    .src(`${paths.JS_TESTS_DIR}*.js`)
+    .pipe(mocha())
+    .pipe(istanbul.writeReports())
+    .pipe(istanbul.enforceThresholds({ thresholds: { global: 100 } }))
 );
 
 gulp.task('test', ['sasstest', 'jstest']);
