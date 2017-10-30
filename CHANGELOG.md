@@ -1,6 +1,12 @@
 # Herman Changelog
 
 
+## 1.0.0-alpha.15: 2017-10-30
+
+- BUGFIX: Do not error if local file (referenced from `customCSS`) is not found
+- BUGFIX: Do not output duplicate custom `@font` HTML in `@example` iframe
+
+
 ## 1.0.0-alpha.14: 2017-10-27
 
 - BREAKING: Remove `accoutrement-add` as a public utility,

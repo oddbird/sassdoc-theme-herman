@@ -707,7 +707,9 @@ herman.annotations = [
           const html = raw.substr(linebreak + 1);
           obj.html = stripIndent(html.replace(/^\n|\n$/g, ''));
           // Concatenate all font HTML to include in `@example` annotations
-          env.fontsHTML = `${env.fontsHTML || ''}\n${obj.html}`;
+          if (!env.fontsHTML || !env.fontsHTML.includes(obj.html)) {
+            env.fontsHTML = `${env.fontsHTML || ''}\n${obj.html}`;
+          }
         }
         const keyBits = args.match(keyRE);
         if (!keyBits) {
