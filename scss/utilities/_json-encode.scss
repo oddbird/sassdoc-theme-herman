@@ -4,52 +4,94 @@
 
 // JSON Ecode
 // ----------
-/// Encode a Sass map as a JSON-ready string.
+/// Encode any Sass value as a JSON-ready string.
 ///
-/// @group api_json-export
+/// @group z_api-utilities
 ///
-/// @param {map} $map [$herman] -
-///   Map to be encoded for JSON exporting
-@function json-encode($value) {
+/// @param {*} $value [$herman] -
+///   Data to be encoded for JSON exporting
+@function _herman-encode($value) {
   $type: type-of($value);
 
-  @if ($type == 'list') {
-
-    // Lists
-    $str: '';
-
-    @each $item in $value {
-      $str: if(length($str) > 0, $str + ', ', $str);
-      $str: $str + json-encode($item);
-    }
-
-    $value: '[#{$str}]';
-
+  @if ($type == 'bool') {
+    @return $value;
+  } @else if ($type == 'null') {
+    @return 'null';
+  } @else if ($type == 'list') {
+    @return _herman-encode-list($value);
   } @else if ($type == 'map') {
-
-    // Maps
-    $str: '';
-
-    @each $key, $value in $map {
-      $str: if(length($str) > 0, $str + ', ', $str);
-      $str: $str + _herman-quote($key) + ': ' + json-encode($value);
-    }
-
-    $value: '{#{$str}}';
-
+    @return _herman-encode-map($value);
   } @else if ($type == 'number') {
-
-    // Numbers
-    $value: if(unitless($value), inspect($value), _herman-quote($value));
-
-  } @else {
-
-    // Catch-All
-    $value: _herman-quote($value);
-
+    @return _herman-encode-number($value);
   }
 
-  @return $value;
+  @return _herman-quote($value);
+}
+
+
+// Encode List
+// -----------
+/// Encode each item in a Sass list,
+/// and convert to a JSON-ready square-bracketed list.
+///
+/// @group z_api-utilities
+///
+/// @param {list} $list -
+///   List to be encoded for JSON exporting
+@function _herman-encode-list(
+  $list
+) {
+  $str: '';
+
+  @each $item in $list {
+    $str: if($str != '', $str + ', ', $str);
+    $str: $str + _herman-encode($item);
+  }
+
+  @return '[#{$str}]';
+}
+
+
+// Encode Map
+// ----------
+/// Encode each key/value in a Sass map,
+/// and convert to a JSON-ready object.
+///
+/// @group z_api-utilities
+///
+/// @param {map} $map -
+///   Map to be encoded for JSON exporting
+@function _herman-encode-map(
+  $map
+) {
+  $str: '';
+
+  @each $key, $value in $map {
+    $str: if($str != '', $str + ', ', $str);
+    $str: $str + _herman-quote($key) + ': ' + _herman-encode($value);
+  }
+
+  @return '{#{$str}}';
+}
+
+
+// Encode Number
+// -------------
+/// Encode a number for JSON,
+/// adding proof-quotes for length values.
+///
+/// @group z_api-utilities
+///
+/// @param {number} $number -
+///   Number to be encoded for JSON exporting
+@function _herman-encode-number(
+  $number
+) {
+  @if unitless($number) {
+    @return inspect($number);
+  }
+
+  @return _herman-quote($number);
 }
 
 
@@ -73,16 +115,13 @@
 
 // Escape Quotes
 // -------------
-/// Return a string, with internal quotes replaced
+/// Return a string, with internal quotes escaped.
 ///
 /// @group z_api-utilities
 /// @access private
 ///
 /// @param {string} $string -
 ///   The string to be manipulated
-/// @return {string} -
-///   The original string,
-///   with internal quotes escaped
 @function _herman-escape-quotes(
   $string
 ) {

@@ -214,6 +214,8 @@ gulp.task('compile', ['sass', 'minify'], () => {
       demo_examples: 'Rendered Examples',
       demo_fonts: 'Font Specimens',
       demo_sizes: 'Ratios & Sizes',
+      demo_variables: 'Variables',
+      demo_mixins: 'Mixins & Functions',
       'demo_test-sassdoc': 'SassDoc Annotations',
       'z_api-utilities': '_API Utilities',
       'z_config-colors': '_Colors',
