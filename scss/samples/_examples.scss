@@ -56,7 +56,7 @@
 ///
 /// Example annotations with language set to `sass` or `scss`
 /// will be compiled by Herman,
-/// in order to display the output along side the source.
+/// and display the output along with the source.
 /// In order for this to work with Sass/Scss,
 /// you must set an `includepaths` key
 /// in your sassdoc `herman.sass` configuration object –
@@ -108,7 +108,7 @@
 /// ### Setting `templatepath`:
 ///
 /// ```yaml
-/// # sossdocrc (yaml)
+/// # .sassdocrc (yaml)
 /// herman:
 ///   templatepath: 'templates'
 /// ```

@@ -6,7 +6,7 @@
 // -------
 /// Private variables will display unless you set `access: ['public']`
 /// in your [SassDoc config](http://sassdoc.com/configuration/).
-/// @group demo_variables
+/// @group demo_test-sassdoc
 /// @access private
 /// @type *
 $private: 'for internal use only';
@@ -15,7 +15,7 @@ $private: 'for internal use only';
 // Basic Value
 // -----------
 /// The basics for documenting your average non-map variable.
-/// @group demo_variables
+/// @group demo_test-sassdoc
 /// @type *
 /// @requires $private
 $basic-value: if(not 'social', $private, 'hello world');
@@ -24,7 +24,7 @@ $basic-value: if(not 'social', $private, 'hello world');
 // Map Value
 // ---------
 /// You can add properties when documenting map variables.
-/// @group demo_variables
+/// @group demo_test-sassdoc
 /// @type map
 /// @requires $basic-value -
 ///   We can require other variables, and explain why
