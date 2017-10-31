@@ -1,14 +1,18 @@
 'use strict';
 
 const assert = require('assert');
+const vfs = require('vinyl-fs');
+const sinon = require('sinon');
+
 const assets = require('../lib/assets.js');
 
 describe('assets', function() {
-  it('Returns a valid promise', async function() {
-    // This test is, so far, just to test wiring up async/await syntax in tests.
+  it('Runs the vfs pipeline', async function() {
     const src = '.';
-    const dest = '.';
+    const dest = 'dest';
+    const destSpy = sinon.spy(vfs, 'dest');
+    // Complete the promise chain, then let's check side-effects:
     await assets(src, dest, {});
-    assert.ok(true);
+    assert(destSpy.calledWith(dest));
   });
 });
