@@ -7,5 +7,3 @@ yarn-error.log
 *~
 .livereload
 *.orig
-*.css.map
-*.js.map

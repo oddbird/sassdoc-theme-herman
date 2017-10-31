@@ -6,7 +6,7 @@
 // ----------
 /// Encode any Sass value as a JSON-ready string.
 ///
-/// @group z_api-utilities
+/// @group config_api-utilities
 ///
 /// @param {*} $value [$herman] -
 ///   Data to be encoded for JSON exporting
@@ -34,7 +34,7 @@
 /// Encode each item in a Sass list,
 /// and convert to a JSON-ready square-bracketed list.
 ///
-/// @group z_api-utilities
+/// @group config_api-utilities
 ///
 /// @param {list} $list -
 ///   List to be encoded for JSON exporting
@@ -57,7 +57,7 @@
 /// Encode each key/value in a Sass map,
 /// and convert to a JSON-ready object.
 ///
-/// @group z_api-utilities
+/// @group config_api-utilities
 ///
 /// @param {map} $map -
 ///   Map to be encoded for JSON exporting
@@ -80,7 +80,7 @@
 /// Encode a number for JSON,
 /// adding proof-quotes for length values.
 ///
-/// @group z_api-utilities
+/// @group config_api-utilities
 ///
 /// @param {number} $number -
 ///   Number to be encoded for JSON exporting
@@ -99,7 +99,7 @@
 // -----
 /// Convert any value to a double-quoted string.
 ///
-/// @group z_api-utilities
+/// @group config_api-utilities
 /// @access private
 ///
 /// @param {*} $value -
@@ -117,7 +117,7 @@
 // -------------
 /// Return a string, with internal quotes escaped.
 ///
-/// @group z_api-utilities
+/// @group config_api-utilities
 /// @access private
 ///
 /// @param {string} $string -

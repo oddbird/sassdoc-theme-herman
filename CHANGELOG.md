@@ -1,13 +1,37 @@
 # Herman Changelog
 
 
-## UNRELEASED
+## Unreleased
 
-- BREAKING: Remove `accoutrement-add` as a public utility,
-  since Sass 3.5+ modular sytems will make it unusable.
 - CHANGE: JSON-export functionality is now built in
   using the `herman-export` mixin.
   Sass-json-export integration should continue to work as expected.
+
+
+## 1.0.0-alpha.15: 2017-10-30
+
+- BUGFIX: Do not error if local file (referenced from `customCSS`) is not found
+- BUGFIX: Do not output duplicate custom `@font` HTML in `@example` iframe
+
+
+## 1.0.0-alpha.14: 2017-10-27
+
+- BREAKING: Remove `accoutrement-add` as a public utility,
+  since Sass 3.5+ modular sytems will make it unusable.
+- Updated dependencies.
+- BUGFIX: Fix broken internal links –
+  [#106](https://github.com/oddbird/sassdoc-theme-herman/issues/106)
+- BREAKING: Group navigation is ordered according to config `groups` order –
+  [#150](https://github.com/oddbird/sassdoc-theme-herman/issues/150)
+- BUGFIX: Do not error if `sass` config option is `undefined`.
+- BUGFIX: Do not break layout on fonts with single-item stack –
+  [#172](https://github.com/oddbird/sassdoc-theme-herman/issues/172)
+- BREAKING: `@preview font-specimen` is replaced by new `@font` annotation.
+- BREAKING: Removed `customHead` option; replaced by multiline `@font`
+  annotation.
+- BUGFIX: Fix assets referenced with relative urls in client-provided
+  `customCSS` for `@example` annotations –
+  [#174](https://github.com/oddbird/sassdoc-theme-herman/issues/174)
 
 
 ## 1.0.0-alpha.13: 2017-09-25

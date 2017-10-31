@@ -193,7 +193,7 @@ window.Herman = (function base(Herman, $) {
   Herman.initializeIframes = function initializeIframes() {
     const fitIframeToContent = function(iframe) {
       if (iframe.contentWindow.document.body) {
-        iframe.height = iframe.contentWindow.document.body.scrollHeight;
+        iframe.height = $(iframe.contentWindow.document).outerHeight(true);
       }
     };
     const fitIframesToContent = function() {

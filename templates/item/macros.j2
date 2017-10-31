@@ -111,7 +111,7 @@
    or the referenced item is on the same page #}
 {% macro get_link(name, type, group=none) -%}
   {% set group = [group, 'html']|join('.') if group else none %}
-  {{ group }}#{{ type }}--{{ name }}
+  {{ group }}#{{ type|urlencode }}--{{ name|urlencode }}
 {%- endmacro %}
 
 
