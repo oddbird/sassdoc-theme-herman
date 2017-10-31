@@ -155,7 +155,7 @@ gulp.task('jstest-prep', () =>
 
 // Need to finish compile before running tests,
 // so that the processes do not conflict
-gulp.task('jstest', ['compile', 'jstest-prep'], () =>
+gulp.task('jstest', ['jstest-prep'], () =>
   gulp
     .src(`${paths.JS_TESTS_DIR}*.js`)
     .pipe(mocha())
