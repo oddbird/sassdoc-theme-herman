@@ -4,39 +4,18 @@
 
 const extend = require('extend');
 const fs = require('fs');
-const nunjucks = require('nunjucks');
 const path = require('path');
-const Promise = require('bluebird');
 const sass = require('node-sass');
-const sassdoc = require('sassdoc');
 const stripIndent = require('strip-indent');
-const tinycolor = require('tinycolor2');
-const yaml = require('js-yaml');
-
-const copy = require('./lib/assets.js');
 const parse = require('./lib/parse.js');
-const render = require('./lib/render.js');
 
-const base = path.resolve(__dirname, './templates');
-const example_iFrameTpl = path.join(base, 'example', 'base.j2');
-const icons_iFrameTpl = path.join(base, 'icons', 'base.j2');
-const fonts_iFrameTpl = path.join(base, 'fonts', 'base.j2');
-const fontFaceTpl = path.join(base, 'fonts', 'font_face.j2');
-
-nunjucks.installJinjaCompat();
-const nunjucksEnv = nunjucks.configure(base, { noCache: true });
-nunjucksEnv.addFilter('split', (str, separator) => str.split(separator));
-nunjucksEnv.addFilter('isString', val => typeof val === 'string');
-
-/**
- * SassDoc extras (providing Markdown and other filters, and different way to
- * index SassDoc data).
- *
- * See <https://github.com/SassDoc/sassdoc-extras>.
- */
-const extras = require('sassdoc-extras');
-
-const byGroup = require('./lib/byGroup');
+const {
+  nunjucksEnv,
+  example_iFrameTpl,
+  icons_iFrameTpl,
+  fonts_iFrameTpl,
+  fontFaceTpl,
+} = require('./constants');
 
 const prepareContext = require('./lib/prepareContext');
 
