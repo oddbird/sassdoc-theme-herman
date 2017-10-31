@@ -4,6 +4,7 @@
 
 const extend = require('extend');
 const fs = require('fs');
+const marked = require('marked');
 const nunjucks = require('nunjucks');
 const path = require('path');
 const Promise = require('bluebird');
@@ -81,11 +82,37 @@ const prepareContext = ctx => {
   ctx = extend({}, def, ctx);
 
   /**
+   * Load `extraDocs` files, and parse contents as markdown.
+   */
+  if (ctx.herman.extraDocs && ctx.herman.extraDocs.length) {
+    ctx.extraDocs = [];
+    for (const doc of ctx.herman.extraDocs) {
+      let filepath, filename, name, text;
+      if (typeof doc === 'string') {
+        filepath = path.resolve(ctx.dir, doc);
+        name = filename = path.parse(filepath).name;
+      } else {
+        filepath = path.resolve(ctx.dir, doc.path);
+        filename = path.parse(filepath).name;
+        name = doc.name;
+      }
+      try {
+        text = marked(fs.readFileSync(filepath, 'utf-8'));
+        ctx.extraDocs.push({ filename, name, text });
+      } catch (err) {
+        ctx.logger.warn(`File not found: ${filepath}\n${err.message}`);
+      }
+    }
+  }
+
+  /**
    * Load a `sass-json file` (if one is given in the context) and add its
    * contents under the `sassjson` key of the context.
    */
   if (ctx.herman.sass && ctx.herman.sass.jsonfile && !ctx.sassjson) {
-    ctx.sassjson = parse.sassJson(fs.readFileSync(ctx.herman.sass.jsonfile));
+    ctx.sassjson = parse.sassJson(
+      fs.readFileSync(ctx.herman.sass.jsonfile, 'utf-8')
+    );
   }
 
   /**
@@ -123,11 +150,9 @@ const prepareContext = ctx => {
   extras.description(ctx);
 
   /**
-   * Parse text data (like descriptions) as Markdown, and put the
-   * rendered HTML in `html*` variables.
+   * Parse text data (like descriptions) as Markdown.
    *
-   * For example, `ctx.package.description` will be parsed as Markdown
-   * in `ctx.package.htmlDescription`.
+   * For example, `ctx.package.description` will be parsed as Markdown.
    *
    * See <http://sassdoc.com/extra-tools/#markdown-markdown>.
    */
@@ -301,6 +326,7 @@ const renderHerman = (dest, ctx) => {
   const indexTemplate = path.join(base, 'index.j2');
   const indexDest = path.join(dest, 'index.html');
   const groupTemplate = path.join(base, 'group.j2');
+  const docTemplate = path.join(base, 'doc.j2');
   const assets = path.resolve(__dirname, './dist');
 
   // Accepts a color (in any format) and returns an object with hex, rgba, and
@@ -395,6 +421,19 @@ const renderHerman = (dest, ctx) => {
     );
   }
 
+  // Render a page for each item in `extraDocs`.
+  if (ctx.extraDocs) {
+    for (const { filename, name, text } of ctx.extraDocs) {
+      const docDest = path.join(dest, `${filename}.html`);
+      const docCtx = extend({}, ctx, {
+        pageTitle: name,
+        activeGroup: filename,
+        docText: text,
+      });
+      promises.push(render(nunjucksEnv, docTemplate, docDest, docCtx));
+    }
+  }
+
   const getRenderCtx = (context, groupName) =>
     extend({}, context, {
       pageTitle: context.groups[groupName],
@@ -477,7 +516,7 @@ const renderIframe = (env, item, type) => {
   if (shouldRender) {
     // if needed, read in minified icons SVG
     if (includeIcons && env.herman.minifiedIcons && !env.iconsSvg) {
-      env.iconsSvg = fs.readFileSync(env.herman.minifiedIcons);
+      env.iconsSvg = fs.readFileSync(env.herman.minifiedIcons, 'utf-8');
     }
 
     // if needed, prepare custom css file
@@ -497,7 +536,9 @@ const renderIframe = (env, item, type) => {
       env.herman.sass.jsonfile &&
       !env.sassjson
     ) {
-      env.sassjson = parse.sassJson(fs.readFileSync(env.herman.sass.jsonfile));
+      env.sassjson = parse.sassJson(
+        fs.readFileSync(env.herman.sass.jsonfile, 'utf-8')
+      );
     }
 
     const ctx = extend({}, env, { item });
@@ -752,7 +793,7 @@ herman.annotations = [
             }
             if (!env.sassjson) {
               env.sassjson = parse.sassJson(
-                fs.readFileSync(env.herman.sass.jsonfile)
+                fs.readFileSync(env.herman.sass.jsonfile, 'utf-8')
               );
             }
             const fontData =
