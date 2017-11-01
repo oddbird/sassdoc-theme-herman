@@ -200,6 +200,7 @@ gulp.task('compile', ['sass', 'minify'], () => {
       customCSS: `${paths.DIST_DIR}css/main.css`,
       minifiedIcons: `${paths.TEMPLATES_DIR}_icons.svg`,
       displayColors: ['hex', 'hsl'],
+      extraDocs: [{ name: 'Changelog', path: './CHANGELOG.md' }],
     },
     display: {
       alias: true,

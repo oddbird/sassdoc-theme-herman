@@ -21,6 +21,7 @@
   subprojects,
   activeProject,
   activeGroup,
+  extraDocs,
   expanded=false
 ) %}
   <nav role="navigation" data-nav-menu="{{ size }}" {{ utility.toggle_target(['nav', size]|join('-'), expanded=expanded)}}>
@@ -29,6 +30,17 @@
       {% set activeNav = 'is-active' if (activeProject == none) and (activeGroup == none) else 'is-not-active' %}
       <a href="{{ basePath }}index.html" data-sassdoc-nav="{{ activeNav }}">{{ project }}</a>
     </h3>
+
+    {% if extraDocs and extraDocs|length %}
+      <ul data-sassdoc="nav-subsection">
+        {% for extraDoc in extraDocs %}
+          {% set activeNav = 'is-active' if (activeProject == none) and (activeGroup == extraDoc.filename) else 'is-not-active' %}
+          <li data-sassdoc="nav-item">
+            <a href="{{ basePath }}{{ extraDoc.filename }}.html" data-sassdoc-nav="{{ activeNav }}">{{ extraDoc.name }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
 
     <ul>
       {% for groupName, group in topByGroup %}
@@ -64,7 +76,8 @@
   topByGroup,
   subprojects,
   activeProject,
-  activeGroup
+  activeGroup,
+  extraDocs
 ) %}
   {% set menu_expanded = {
     'small': false,
@@ -81,6 +94,7 @@
       subprojects=subprojects,
       activeProject=activeProject,
       activeGroup=activeGroup,
+      extraDocs=extraDocs,
       expanded=expanded
     ) }}
   {% endfor %}
