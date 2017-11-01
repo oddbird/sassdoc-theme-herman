@@ -175,8 +175,8 @@ $herman: () !default;
 ///   Map to be encoded for JSON exporting
 ///
 /// @example scss
-///   @import 'utilities';
-///   @import 'config/manifest';
+///   // @import 'utilities';
+///   // @import 'config/manifest';
 ///
 ///   // Export to JSON
 ///   @include herman-export;
