@@ -133,7 +133,7 @@ describe('icons annotation', function() {
       sinon.assert.notCalled(env.logger.warn);
     });
 
-    it('renders icons', function() {
+    it('renders icons', function(done) {
       const data = [
         {
           icons: {
@@ -144,21 +144,28 @@ describe('icons annotation', function() {
         },
       ];
 
-      this.icons.resolve(data);
-
-      assert.deepEqual(data[0].icons, [
-        {
-          name: 'ok',
-          path: 'test/templates/icons/ok.svg',
-          rendered: 'rendered ok',
+      this.icons.resolve(data).then(
+        () => {
+          assert.deepEqual(data[0].icons, [
+            {
+              name: 'ok',
+              path: 'test/templates/icons/ok.svg',
+              rendered: 'rendered ok',
+            },
+            {
+              name: 'warning',
+              path: 'test/templates/icons/warning.svg',
+              rendered: 'rendered warning',
+            },
+          ]);
+          assert.ok(data[0].iframed !== undefined);
+          done();
         },
-        {
-          name: 'warning',
-          path: 'test/templates/icons/warning.svg',
-          rendered: 'rendered warning',
-        },
-      ]);
-      assert.ok(data[0].iframed !== undefined);
+        error => {
+          assert.fail(error);
+          done();
+        }
+      );
     });
   });
 });
@@ -240,7 +247,7 @@ describe('font annotation', function() {
         );
       });
 
-      it('adds `@font-face` CSS and localFonts src', function() {
+      it('adds `@font-face` CSS and localFonts src', function(done) {
         const env = {
           logger: { warn: sinon.stub() },
           herman: {
@@ -259,18 +266,25 @@ describe('font annotation', function() {
         };
         const example = theme.annotations[3](env);
 
-        example.resolve(this.data);
+        example.resolve(this.data).then(
+          () => {
+            const css =
+              '@font-face {\n' +
+              "  font-family: 'test-font';\n" +
+              "  src: url('assets/fonts/font/font.woff') format('woff');\n" +
+              '  font-style: normal;\n' +
+              '  font-weight: normal;\n' +
+              '}\n';
 
-        const css =
-          '@font-face {\n' +
-          "  font-family: 'test-font';\n" +
-          "  src: url('assets/fonts/font/font.woff') format('woff');\n" +
-          '  font-style: normal;\n' +
-          '  font-weight: normal;\n' +
-          '}\n';
-
-        assert.equal(this.data[0].font.localFontCSS, css);
-        assert.deepEqual(env.localFonts, ['/path/font/font.woff']);
+            assert.equal(this.data[0].font.localFontCSS, css);
+            assert.deepEqual(env.localFonts, ['/path/font/font.woff']);
+            done();
+          },
+          err => {
+            assert.fail(err);
+            done();
+          }
+        );
       });
     });
   });

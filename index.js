@@ -94,6 +94,7 @@ herman.annotations = [
       resolve: data => {
         let customNjkEnv;
         let warned = false;
+        const promises = [];
         data.forEach(item => {
           if (!item.icons) {
             return;
@@ -107,26 +108,37 @@ herman.annotations = [
           }
           const inData = item.icons;
           const iconsPath = inData.iconsPath;
-          const iconFiles = fs.readdirSync(iconsPath);
-          const renderTpl =
-            `{% import "${inData.macroFile}" as it %}` +
-            `{{ it.${inData.macroName}(iconName) }}`;
-          item.icons = [];
-          iconFiles.forEach(iconFile => {
-            if (path.extname(iconFile) === '.svg') {
-              const iconName = path.basename(iconFile, '.svg');
-              const icon = {
-                name: iconName,
-                path: path.join(inData.iconsPath, iconFile),
-                rendered: customNjkEnv
-                  .renderString(renderTpl, { iconName })
-                  .trim(),
-              };
-              item.icons.push(icon);
-            }
+          const promise = new Promise((resolve, reject) => {
+            fs.readdir(iconsPath, (err, iconFiles) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(iconFiles);
+              }
+            });
+          }).then(iconFiles => {
+            const renderTpl =
+              `{% import "${inData.macroFile}" as it %}` +
+              `{{ it.${inData.macroName}(iconName) }}`;
+            item.icons = [];
+            iconFiles.forEach(iconFile => {
+              if (path.extname(iconFile) === '.svg') {
+                const iconName = path.basename(iconFile, '.svg');
+                const icon = {
+                  name: iconName,
+                  path: path.join(inData.iconsPath, iconFile),
+                  rendered: customNjkEnv
+                    .renderString(renderTpl, { iconName })
+                    .trim(),
+                };
+                item.icons.push(icon);
+              }
+            });
+            renderIframe(env, item, 'icon');
           });
-          renderIframe(env, item, 'icon');
+          promises.push(promise);
         });
+        return Promise.all(promises);
       },
     };
   },
@@ -231,6 +243,7 @@ herman.annotations = [
         return obj;
       },
       resolve: data => {
+        const promises = [];
         data.forEach(item => {
           if (!item.font) {
             return;
@@ -251,43 +264,62 @@ herman.annotations = [
               );
               return;
             }
-            if (!env.sassjson) {
-              env.sassjson = parse.sassJson(
-                fs.readFileSync(env.herman.sass.jsonfile, 'utf-8')
-              );
+            let promise;
+            if (env.sassjson) {
+              promise = Promise.resolve();
+            } else {
+              promise = new Promise((resolve, reject) => {
+                fs.readFile(
+                  env.herman.sass.jsonfile,
+                  'utf-8',
+                  (err, fileData) => {
+                    if (err) {
+                      reject(err);
+                    } else {
+                      resolve(fileData);
+                    }
+                  }
+                );
+              }).then(fileData => {
+                env.sassjson = parse.sassJson(fileData);
+              });
             }
-            const fontData =
-              env.sassjson.fonts && env.sassjson.fonts[item.font.key];
-            if (!fontData) {
-              env.logger.warn(
-                `Sassjson file is missing font "${item.font.key}" data. ` +
-                  'Did you forget to `@include herman-add()` for this font?'
-              );
-              return;
-            }
-            // For each font variant, return ctx object (for rendering
-            // `@font-face` CSS) and src path (for copying into `assets/`).
-            const variants = parse.localFont(item.font, fontData);
-            const css = [];
-            env.localFonts = env.localFonts || [];
-            for (const variant of variants) {
-              // Render custom `@font-face` CSS
-              css.push(nunjucksEnv.render(fontFaceTpl, variant.ctx));
-              const baseFontPath = path.resolve(env.dir, env.herman.fontpath);
-              for (const format of item.font.formats) {
-                if (valid_formats.includes(format)) {
-                  // Store src path for local font files to copy in
-                  env.localFonts.push(
-                    `${baseFontPath}/${variant.src_path}.${format}`
-                  );
+            promise.then(() => {
+              const fontData =
+                env.sassjson.fonts && env.sassjson.fonts[item.font.key];
+              if (!fontData) {
+                env.logger.warn(
+                  `Sassjson file is missing font "${item.font.key}" data. ` +
+                    'Did you forget to `@include herman-add()` for this font?'
+                );
+                return;
+              }
+              // For each font variant, return ctx object (for rendering
+              // `@font-face` CSS) and src path (for copying into `assets/`).
+              const variants = parse.localFont(item.font, fontData);
+              const css = [];
+              env.localFonts = env.localFonts || [];
+              for (const variant of variants) {
+                // Render custom `@font-face` CSS
+                css.push(nunjucksEnv.render(fontFaceTpl, variant.ctx));
+                const baseFontPath = path.resolve(env.dir, env.herman.fontpath);
+                for (const format of item.font.formats) {
+                  if (valid_formats.includes(format)) {
+                    // Store src path for local font files to copy in
+                    env.localFonts.push(
+                      `${baseFontPath}/${variant.src_path}.${format}`
+                    );
+                  }
                 }
               }
-            }
-            // Concatenate `@font-face` CSS to insert into iframe `<head>`
-            item.font.localFontCSS = css.join('\n');
+              // Concatenate `@font-face` CSS to insert into iframe `<head>`
+              item.font.localFontCSS = css.join('\n');
+              renderIframe(env, item, 'font');
+            });
+            promises.push(promise);
           }
-          renderIframe(env, item, 'font');
         });
+        return Promise.all(promises);
       },
     };
   },
@@ -300,6 +332,7 @@ herman.annotations = [
    * and put the result in the `rendered` property of the parsed example.
    */
   function example(env) {
+    // eslint-disable-next-line global-require
     let baseExampleFn = require('sassdoc/dist/annotation/annotations/example');
     if (typeof baseExampleFn !== 'function') {
       baseExampleFn = baseExampleFn.default;
@@ -340,19 +373,23 @@ herman.annotations = [
                       sassData = `@import '${arr[i]}';\n${sassData}`;
                     }
                   }
-                  const rendered = sass.renderSync({
-                    data: sassData,
-                    importer: url => {
-                      if (url[0] === '~') {
-                        url = path.resolve('node_modules', url.substr(1));
-                      }
-                      return { file: url };
+                  sass.render(
+                    {
+                      data: sassData,
+                      importer: url => {
+                        if (url[0] === '~') {
+                          url = path.resolve('node_modules', url.substr(1));
+                        }
+                        return { file: url };
+                      },
+                      includePaths: env.herman.sass.includepaths || [],
+                      outputStyle: 'expanded',
                     },
-                    includePaths: env.herman.sass.includepaths || [],
-                    outputStyle: 'expanded',
-                  });
-                  const encoded = rendered.css.toString('utf-8');
-                  exampleItem.rendered = encoded;
+                    rendered => {
+                      const encoded = rendered.css.toString('utf-8');
+                      exampleItem.rendered = encoded;
+                    }
+                  );
                 } catch (err) {
                   env.logger.warn(
                     'Error compiling @example scss: \n' +
