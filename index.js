@@ -1,13 +1,11 @@
-/* eslint-disable no-sync, global-require */
-
 'use strict';
 
 const fs = require('fs');
 const path = require('path');
 const sass = require('node-sass');
 const stripIndent = require('strip-indent');
-const parse = require('./lib/parse.js');
 
+const parse = require('./lib/parse.js');
 const { nunjucksEnv, fontFaceTpl } = require('./constants');
 
 // get nunjucks env lazily so that we only throw an error on missing
@@ -255,7 +253,7 @@ herman.annotations = [
             }
             if (!env.sassjson) {
               env.sassjson = parse.sassJson(
-                fs.readFileSync(env.herman.sass.jsonfile)
+                fs.readFileSync(env.herman.sass.jsonfile, 'utf-8')
               );
             }
             const fontData =
