@@ -134,7 +134,7 @@ herman.annotations = [
                 item.icons.push(icon);
               }
             });
-            renderIframe(env, item, 'icon');
+            return renderIframe(env, item, 'icon');
           });
           promises.push(promise);
         });
@@ -344,6 +344,7 @@ herman.annotations = [
       resolve: data => {
         let customNjkEnv;
         let warned = false;
+        const promises = [];
         data.forEach(item => {
           if (!item.example) {
             return;
@@ -373,23 +374,27 @@ herman.annotations = [
                       sassData = `@import '${arr[i]}';\n${sassData}`;
                     }
                   }
-                  sass.render(
-                    {
-                      data: sassData,
-                      importer: url => {
-                        if (url[0] === '~') {
-                          url = path.resolve('node_modules', url.substr(1));
-                        }
-                        return { file: url };
+                  const promise = new Promise((resolve, reject) => {
+                    sass.render(
+                      {
+                        data: sassData,
+                        importer: url => {
+                          if (url[0] === '~') {
+                            url = path.resolve('node_modules', url.substr(1));
+                          }
+                          return { file: url };
+                        },
+                        includePaths: env.herman.sass.includepaths || [],
+                        outputStyle: 'expanded',
                       },
-                      includePaths: env.herman.sass.includepaths || [],
-                      outputStyle: 'expanded',
-                    },
-                    rendered => {
-                      const encoded = rendered.css.toString('utf-8');
-                      exampleItem.rendered = encoded;
-                    }
-                  );
+                      rendered => {
+                        const encoded = rendered.css.toString('utf-8');
+                        exampleItem.rendered = encoded;
+                        resolve();
+                      }
+                    );
+                  });
+                  promises.push(promise);
                 } catch (err) {
                   env.logger.warn(
                     'Error compiling @example scss: \n' +
@@ -398,9 +403,10 @@ herman.annotations = [
                 }
               }
             }
-            renderIframe(env, exampleItem, 'example');
+            promises.push(renderIframe(env, exampleItem, 'example'));
           });
         });
+        return Promise.all(promises);
       },
     };
   },

@@ -338,7 +338,7 @@ describe('example annotation', function() {
       sinon.assert.notCalled(env.logger.warn);
     });
 
-    it('renders nunjucks example', function() {
+    it('renders nunjucks example', function(done) {
       const data = [
         {
           example: [
@@ -351,9 +351,17 @@ describe('example annotation', function() {
           ],
         },
       ];
-      this.example.resolve(data);
-      assert.equal(data[0].example[0].rendered, '1 then 2.');
-      assert.ok(data[0].example[0].iframed !== undefined);
+      this.example.resolve(data).then(
+        () => {
+          assert.equal(data[0].example[0].rendered, '1 then 2.');
+          assert.ok(data[0].example[0].iframed !== undefined);
+          done();
+        },
+        err => {
+          assert.fail(err);
+          done();
+        }
+      );
     });
 
     it('uses custom nunjucks env, if exists', function() {

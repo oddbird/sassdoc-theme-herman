@@ -4,6 +4,7 @@ yarn-error.log
 .sass-cache/
 .cache/
 coverage/
+test/dest
 *.DS_Store
 *~
 .livereload
