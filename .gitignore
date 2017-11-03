@@ -5,6 +5,7 @@ yarn-error.log
 .cache/
 jscov/
 .nyc_output/
+test/dest/
 *.DS_Store
 *~
 .livereload

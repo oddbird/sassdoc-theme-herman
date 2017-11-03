@@ -1,8 +1,9 @@
 'use strict';
 
 const assert = require('assert');
-const render = require('../lib/render.js');
-const prepareContext = require('../lib/prepareContext.js');
+
+const render = require('../lib/render');
+const prepareContext = require('../lib/prepareContext');
 
 describe('render', function() {
   it('does a render', function(done) {
@@ -25,16 +26,14 @@ describe('render', function() {
       display: {},
     })
       .then(ctx => render(env, tpl, dest, ctx))
-      .then(
-        () => {
-          // Look for side-effects
-          assert.ok(true);
-          done();
-        },
-        err => {
-          assert.fail(err);
-          done();
-        }
-      );
+      .then(() => {
+        // Look for side-effects
+        assert.ok(true);
+        done();
+      })
+      .catch(err => {
+        assert.fail(err);
+        done();
+      });
   });
 });

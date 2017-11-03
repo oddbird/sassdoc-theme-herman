@@ -3,8 +3,8 @@
 const assert = require('assert');
 const sinon = require('sinon');
 
-const renderIframe = require('../lib/renderIframe.js');
-const { nunjucksEnv } = require('../constants.js');
+const renderIframe = require('../lib/renderIframe');
+const { nunjucksEnv } = require('../constants');
 
 describe('renderIframe', function() {
   describe('example', function() {

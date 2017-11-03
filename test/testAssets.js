@@ -4,7 +4,7 @@ const assert = require('assert');
 const vfs = require('vinyl-fs');
 const sinon = require('sinon');
 
-const assets = require('../lib/assets.js');
+const assets = require('../lib/assets');
 
 describe('assets', function() {
   it('Runs the vfs pipeline', async function() {

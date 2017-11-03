@@ -1,8 +1,9 @@
 'use strict';
 
 const assert = require('assert');
-const parseSubprojects = require('../lib/parseSubprojects.js');
-const prepareContext = require('../lib/prepareContext.js');
+
+const parseSubprojects = require('../lib/parseSubprojects');
+const prepareContext = require('../lib/prepareContext');
 
 describe('parseSubprojects', function() {
   it('does a parseSubprojects', function(done) {

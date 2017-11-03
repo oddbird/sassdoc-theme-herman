@@ -2,7 +2,7 @@
 
 const assert = require('assert');
 
-const byGroup = require('../lib/byGroup.js');
+const byGroup = require('../lib/byGroup');
 
 describe('byGroup', function() {
   it('returns data ordered by groups', function() {

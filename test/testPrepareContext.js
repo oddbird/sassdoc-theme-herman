@@ -1,7 +1,8 @@
 'use strict';
 
 const assert = require('assert');
-const prepareContext = require('../lib/prepareContext.js');
+
+const prepareContext = require('../lib/prepareContext');
 
 describe('prepareContext', function() {
   it('resolves to a context', function(done) {

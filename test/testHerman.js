@@ -1,8 +1,9 @@
 'use strict';
 
 const assert = require('assert');
-const herman = require('../lib/herman.js');
-const prepareContext = require('../lib/prepareContext.js');
+
+const herman = require('../lib/herman');
+const prepareContext = require('../lib/prepareContext');
 
 describe('herman', function() {
   it('renders herman', function(done) {

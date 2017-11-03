@@ -2,23 +2,22 @@
 
 const fs = require('fs');
 const path = require('path');
+const Promise = require('bluebird');
 const sass = require('node-sass');
 const stripIndent = require('strip-indent');
 
-const parse = require('./lib/parse.js');
+const herman = require('./lib/herman');
+const parse = require('./lib/parse');
+const renderIframe = require('./lib/renderIframe');
 const { nunjucksEnv, fontFaceTpl } = require('./constants');
 
 // get nunjucks env lazily so that we only throw an error on missing
 // templatepath if annotation was actually used.
 const getNunjucksEnv = require('./lib/getNunjucksEnv');
 
-/**
- * Actual theme function. It takes the destination directory `dest`,
- * and the context variables `ctx`.
- */
-const herman = require('./lib/herman');
-
-const renderIframe = require('./lib/renderIframe');
+const readdir = Promise.promisify(fs.readdir);
+const readFile = Promise.promisify(fs.readFile);
+const renderSass = Promise.promisify(sass.render);
 
 herman.annotations = [
   /**
@@ -108,34 +107,32 @@ herman.annotations = [
           }
           const inData = item.icons;
           const iconsPath = inData.iconsPath;
-          const promise = new Promise((resolve, reject) => {
-            fs.readdir(iconsPath, (err, iconFiles) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(iconFiles);
-              }
+          const promise = readdir(iconsPath)
+            .then(iconFiles => {
+              const renderTpl =
+                `{% import "${inData.macroFile}" as it %}` +
+                `{{ it.${inData.macroName}(iconName) }}`;
+              item.icons = [];
+              iconFiles.forEach(iconFile => {
+                if (path.extname(iconFile) === '.svg') {
+                  const iconName = path.basename(iconFile, '.svg');
+                  const icon = {
+                    name: iconName,
+                    path: path.join(inData.iconsPath, iconFile),
+                    rendered: customNjkEnv
+                      .renderString(renderTpl, { iconName })
+                      .trim(),
+                  };
+                  item.icons.push(icon);
+                }
+              });
+              return renderIframe(env, item, 'icon');
+            })
+            .catch(err => {
+              env.logger.warn(
+                `Error reading directory: ${iconsPath}\n${err.message}`
+              );
             });
-          }).then(iconFiles => {
-            const renderTpl =
-              `{% import "${inData.macroFile}" as it %}` +
-              `{{ it.${inData.macroName}(iconName) }}`;
-            item.icons = [];
-            iconFiles.forEach(iconFile => {
-              if (path.extname(iconFile) === '.svg') {
-                const iconName = path.basename(iconFile, '.svg');
-                const icon = {
-                  name: iconName,
-                  path: path.join(inData.iconsPath, iconFile),
-                  rendered: customNjkEnv
-                    .renderString(renderTpl, { iconName })
-                    .trim(),
-                };
-                item.icons.push(icon);
-              }
-            });
-            return renderIframe(env, item, 'icon');
-          });
           promises.push(promise);
         });
         return Promise.all(promises);
@@ -264,25 +261,18 @@ herman.annotations = [
               );
               return;
             }
-            let promise;
-            if (env.sassjson) {
-              promise = Promise.resolve();
-            } else {
-              promise = new Promise((resolve, reject) => {
-                fs.readFile(
-                  env.herman.sass.jsonfile,
-                  'utf-8',
-                  (err, fileData) => {
-                    if (err) {
-                      reject(err);
-                    } else {
-                      resolve(fileData);
-                    }
-                  }
-                );
-              }).then(fileData => {
-                env.sassjson = parse.sassJson(fileData);
-              });
+            let promise = Promise.resolve();
+            if (!env.sassjson) {
+              const filepath = env.herman.sass.jsonfile;
+              promise = readFile(filepath, 'utf-8')
+                .then(fileData => {
+                  env.sassjson = parse.sassJson(fileData);
+                })
+                .catch(err => {
+                  env.logger.warn(
+                    `File not found: ${filepath}\n${err.message}`
+                  );
+                });
             }
             promise.then(() => {
               const fontData =
@@ -292,7 +282,7 @@ herman.annotations = [
                   `Sassjson file is missing font "${item.font.key}" data. ` +
                     'Did you forget to `@include herman-add()` for this font?'
                 );
-                return;
+                return Promise.reject();
               }
               // For each font variant, return ctx object (for rendering
               // `@font-face` CSS) and src path (for copying into `assets/`).
@@ -314,7 +304,7 @@ herman.annotations = [
               }
               // Concatenate `@font-face` CSS to insert into iframe `<head>`
               item.font.localFontCSS = css.join('\n');
-              renderIframe(env, item, 'font');
+              return renderIframe(env, item, 'font');
             });
             promises.push(promise);
           }
@@ -344,7 +334,8 @@ herman.annotations = [
       resolve: data => {
         let customNjkEnv;
         let warned = false;
-        const promises = [];
+        const iFramePromises = [];
+        const sassPromises = [];
         data.forEach(item => {
           if (!item.example) {
             return;
@@ -367,46 +358,43 @@ herman.annotations = [
               let sassData = exampleItem.code;
               exampleItem.rendered = undefined;
               if (env.herman && env.herman.sass) {
-                try {
-                  if (env.herman.sass.includes) {
-                    const arr = env.herman.sass.includes;
-                    for (let i = arr.length - 1; i >= 0; i = i - 1) {
-                      sassData = `@import '${arr[i]}';\n${sassData}`;
-                    }
+                if (env.herman.sass.includes) {
+                  const arr = env.herman.sass.includes;
+                  for (let i = arr.length - 1; i >= 0; i = i - 1) {
+                    sassData = `@import '${arr[i]}';\n${sassData}`;
                   }
-                  const promise = new Promise(resolve => {
-                    sass.render(
-                      {
-                        data: sassData,
-                        importer: url => {
-                          if (url[0] === '~') {
-                            url = path.resolve('node_modules', url.substr(1));
-                          }
-                          return { file: url };
-                        },
-                        includePaths: env.herman.sass.includepaths || [],
-                        outputStyle: 'expanded',
-                      },
-                      rendered => {
-                        const encoded = rendered.css.toString('utf-8');
-                        exampleItem.rendered = encoded;
-                        resolve();
-                      }
+                }
+                const promise = renderSass({
+                  data: sassData,
+                  importer: url => {
+                    if (url[0] === '~') {
+                      url = path.resolve('node_modules', url.substr(1));
+                    }
+                    return { file: url };
+                  },
+                  includePaths: env.herman.sass.includepaths || [],
+                  outputStyle: 'expanded',
+                })
+                  .then(rendered => {
+                    const encoded = rendered.css.toString('utf-8');
+                    exampleItem.rendered = encoded;
+                  })
+                  .catch(err => {
+                    env.logger.warn(
+                      'Error compiling @example scss: \n' +
+                        `${err.message}\n${sassData}`
                     );
                   });
-                  promises.push(promise);
-                } catch (err) {
-                  env.logger.warn(
-                    'Error compiling @example scss: \n' +
-                      `${err.message}\n${sassData}`
-                  );
-                }
+                sassPromises.push(promise);
               }
             }
-            promises.push(renderIframe(env, exampleItem, 'example'));
+            const iframePromise = Promise.all(sassPromises).then(() =>
+              renderIframe(env, exampleItem, 'example')
+            );
+            iFramePromises.push(iframePromise);
           });
         });
-        return Promise.all(promises);
+        return Promise.all(iFramePromises);
       },
     };
   },
