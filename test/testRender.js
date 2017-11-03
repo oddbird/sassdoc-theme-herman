@@ -26,4 +26,8 @@ describe('render', function() {
         done();
       });
   });
+
+  it('no-ops with a non-buffer file', function(done) {
+    // What would that even be? How can we trigger that eventuality?
+  });
 });
