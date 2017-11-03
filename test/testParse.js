@@ -1,6 +1,7 @@
 'use strict';
 
 const assert = require('assert');
+
 const parse = require('../lib/parse.js');
 
 describe('parse', function() {

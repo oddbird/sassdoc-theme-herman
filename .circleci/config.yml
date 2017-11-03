@@ -41,7 +41,9 @@ jobs:
           command: gulp sasstest
       - run:
           name: Run JS Tests [node latest]
-          command: gulp jstest
+          command: |
+            gulp jstest
+            yarn coverage
       - run:
           name: Run Tests [node 6]
           command: |
@@ -50,6 +52,9 @@ jobs:
             nvm install 6.0.0
             yarn install --force
             gulp jstest
+      - run:
+          name: Check JS Test Coverage
+          command: nyc check-coverage --statements=100 --functions=100 --branches=100 --lines=100
       - deploy:
           name: Update yarn.lock [greenkeeper]
           command: |
@@ -58,3 +63,8 @@ jobs:
               ~/.yarn/bin/greenkeeper-lockfile-update
               ~/.yarn/bin/greenkeeper-lockfile-upload
             fi
+      - store_artifacts:
+          path: jscov
+          destination: js-reports
+      - store_test_results:
+          path: jscov

@@ -3,8 +3,9 @@
 const assert = require('assert');
 const path = require('path');
 const sinon = require('sinon');
-const theme = require('../');
 const nunjucks = require('nunjucks');
+
+const theme = require('../');
 
 describe('macro annotation', function() {
   before(function() {
