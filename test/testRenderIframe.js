@@ -4,12 +4,7 @@ const assert = require('assert');
 const sinon = require('sinon');
 
 const renderIframe = require('../lib/renderIframe.js');
-const {
-  nunjucksEnv,
-  example_iFrameTpl,
-  icons_iFrameTpl,
-  fonts_iFrameTpl,
-} = require('../constants.js');
+const { nunjucksEnv } = require('../constants.js');
 
 describe('renderIframe', function() {
   describe('example', function() {
@@ -28,15 +23,6 @@ describe('renderIframe', function() {
       };
       const item = {
         rendered: true,
-      };
-      const ctx = {
-        iconsSvg: '',
-        customCSS: {
-          path: '',
-          url: '',
-        },
-        sassjson: '',
-        item,
       };
       // Returns nothing, mutates input:
       renderIframe(env, item, 'example').then(

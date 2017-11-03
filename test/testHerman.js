@@ -6,7 +6,7 @@ const prepareContext = require('../lib/prepareContext.js');
 
 describe('herman', function() {
   it('renders herman', function(done) {
-    const dest = __dirname + '/dest';
+    const dest = `${__dirname}/dest`;
     prepareContext({
       data: [],
       groups: {},

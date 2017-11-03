@@ -374,7 +374,7 @@ herman.annotations = [
                       sassData = `@import '${arr[i]}';\n${sassData}`;
                     }
                   }
-                  const promise = new Promise((resolve, reject) => {
+                  const promise = new Promise(resolve => {
                     sass.render(
                       {
                         data: sassData,

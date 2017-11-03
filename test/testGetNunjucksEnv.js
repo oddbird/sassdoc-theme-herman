@@ -20,7 +20,7 @@ describe('getNunjucksEnv', function() {
   it('returns null if env.herman missing', function() {
     const env = {
       logger: {
-        warn: function() {},
+        warn() {},
       },
     };
     const actual = getNunjucksEnv(null, env, null);
@@ -34,7 +34,8 @@ describe('getNunjucksEnv', function() {
         templatepath: 'some value',
       },
     };
-    const actual = getNunjucksEnv(null, env, null);
+    // Look for side-effects:
+    getNunjucksEnv(null, env, null);
     assert(configure.calledWith('some value'));
   });
 });
