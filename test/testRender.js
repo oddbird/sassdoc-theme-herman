@@ -1,34 +1,28 @@
 'use strict';
 
 const assert = require('assert');
+const del = require('del');
+const fs = require('fs');
+const path = require('path');
 
-const prepareContext = require('../lib/prepareContext');
 const render = require('../lib/utils/render');
 const { nunjucksEnv } = require('../lib/utils/templates');
 
 describe('render', function() {
   it('does a render', function(done) {
-    const tpl = 'templates/base.j2';
+    const tpl = path.resolve(__dirname, 'templates', 'base.j2');
     const dest = `${__dirname}/dest/base.html`;
-    prepareContext({
-      data: [],
-      groups: {},
-      display: {},
-    })
-      .then(ctx => render(nunjucksEnv, tpl, dest, ctx))
-      .then(() => {
-        // Look for side-effects
-        assert.ok(true);
-        done();
-      })
-      .catch(err => {
-        assert.fail(err);
-        done();
-      });
-  });
+    const ctx = { name: 'World' };
 
-  it('no-ops with a non-buffer file', function() {
-    // What would that even be? How can we trigger that eventuality?
-    assert.ok(true);
+    render(nunjucksEnv, tpl, dest, ctx).then(() => {
+      fs.readFile(dest, (err, data) => {
+        assert.equal(err, undefined);
+        assert.equal(data, 'Hello World!');
+
+        del(dest).then(() => {
+          done();
+        });
+      });
+    });
   });
 });

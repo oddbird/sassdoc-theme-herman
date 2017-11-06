@@ -37,7 +37,12 @@ const paths = {
     this.TEMPLATES = [`${this.TEMPLATES_DIR}**/*.j2`].concat(this.IGNORE);
     this.SASS = [`${this.SASS_DIR}**/*.scss`].concat(this.IGNORE);
     this.ASSETS_JS = [`${this.ASSETS_JS_DIR}**/*.js`].concat(this.IGNORE);
-    this.JS_TESTS = ['lib/**/*.js', 'index.js'].concat(this.IGNORE);
+    this.SRC_JS = ['lib/**/*.js', 'index.js'].concat(this.IGNORE);
+    this.CLIENT_JS = [
+      `${this.ASSETS_JS_DIR}**/*.js`,
+      'lib/**/*.js',
+      'index.js',
+    ].concat(this.IGNORE);
     this.ALL_JS = [
       `${this.ASSETS_JS_DIR}**/*.js`,
       'lib/**/*.js',
@@ -51,6 +56,7 @@ const paths = {
     this.JS_TESTS_FILES = [
       `${this.JS_TESTS_DIR}*.js`,
       `${this.JS_TESTS_DIR}**/*.j2`,
+      `!${this.JS_TESTS_DIR}dest/**/*`,
     ].concat(this.IGNORE);
     return this;
   },
@@ -177,7 +183,7 @@ const getJsTestArgs = verbose => {
     ? ['text', 'html', 'lcovonly']
     : ['text-summary', 'html', 'lcovonly'];
   const obj = {
-    include: paths.JS_TESTS,
+    include: paths.SRC_JS,
     reporter: covReporters,
     cache: true,
     all: true,
@@ -302,7 +308,7 @@ gulp.task('dev', [
 gulp.task('watch', () => {
   gulp.watch(
     [
-      paths.ALL_JS,
+      paths.CLIENT_JS,
       paths.SASS,
       paths.TEMPLATES,
       paths.IMG,
