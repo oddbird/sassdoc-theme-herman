@@ -37,16 +37,13 @@ const paths = {
     this.TEMPLATES = [`${this.TEMPLATES_DIR}**/*.j2`].concat(this.IGNORE);
     this.SASS = [`${this.SASS_DIR}**/*.scss`].concat(this.IGNORE);
     this.ASSETS_JS = [`${this.ASSETS_JS_DIR}**/*.js`].concat(this.IGNORE);
-    this.JS_TESTS = ['lib/**/*.js', 'index.js', 'constants.js'].concat(
-      this.IGNORE
-    );
+    this.JS_TESTS = ['lib/**/*.js', 'index.js'].concat(this.IGNORE);
     this.ALL_JS = [
       `${this.ASSETS_JS_DIR}**/*.js`,
       'lib/**/*.js',
       `${this.JS_TESTS_DIR}**/*.js`,
       'gulpfile.js',
       'index.js',
-      'constants.js',
       '!assets/js/highlight.js',
       '!assets/js/jquery-3.1.1.slim.js',
       '!assets/js/srcdoc-polyfill.min.js',

@@ -9,7 +9,7 @@ const stripIndent = require('strip-indent');
 const herman = require('./lib/herman');
 const parse = require('./lib/parse');
 const renderIframe = require('./lib/renderIframe');
-const { nunjucksEnv, fontFaceTpl } = require('./constants');
+const { nunjucksEnv, templates } = require('./lib/templates');
 
 // get nunjucks env lazily so that we only throw an error on missing
 // templatepath if annotation was actually used.
@@ -291,7 +291,7 @@ herman.annotations = [
               env.localFonts = env.localFonts || [];
               for (const variant of variants) {
                 // Render custom `@font-face` CSS
-                css.push(nunjucksEnv.render(fontFaceTpl, variant.ctx));
+                css.push(nunjucksEnv.render(templates.fontFace, variant.ctx));
                 const baseFontPath = path.resolve(env.dir, env.herman.fontpath);
                 for (const format of item.font.formats) {
                   if (valid_formats.includes(format)) {

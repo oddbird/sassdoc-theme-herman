@@ -5,7 +5,7 @@ const sinon = require('sinon');
 const extend = require('extend');
 
 const renderIframe = require('../lib/renderIframe');
-const { nunjucksEnv } = require('../constants');
+const { nunjucksEnv } = require('../lib/templates');
 
 describe('renderIframe', function() {
   describe('example', function() {
@@ -28,16 +28,6 @@ describe('renderIframe', function() {
     it('renders', function(done) {
       const render = sinon.stub(nunjucksEnv, 'render');
       render.returns('some iframed');
-      const env = {
-        herman: {
-          customCSS: 'dist/css/main.css',
-          minifiedIcons: 'templates/_icons.svg',
-          sass: {
-            jsonfile: 'dist/css/json.css',
-          },
-        },
-        dir: __dirname,
-      };
       const item = {
         rendered: true,
       };
@@ -89,7 +79,8 @@ describe('renderIframe', function() {
           () => {
             assert(
               env.logger.warn.calledWith(
-                "File not found: foo.bar\nENOENT: no such file or directory, open 'foo.bar'"
+                'File not found: foo.bar\n' +
+                  "ENOENT: no such file or directory, open 'foo.bar'"
               )
             );
             done();
@@ -274,7 +265,8 @@ describe('renderIframe', function() {
           () => {
             assert(
               env.logger.warn.calledWith(
-                "File not found: foo.bar\nENOENT: no such file or directory, open 'foo.bar'"
+                'File not found: foo.bar\n' +
+                  "ENOENT: no such file or directory, open 'foo.bar'"
               )
             );
             done();
