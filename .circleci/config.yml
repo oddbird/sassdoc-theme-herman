@@ -43,7 +43,7 @@ jobs:
           name: Run JS Tests [node latest]
           command: |
             gulp jstest
-            yarn coverage
+            yarn coveralls
       - run:
           name: Run Tests [node 6]
           command: |
