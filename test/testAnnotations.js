@@ -143,6 +143,29 @@ describe('icons annotation', function() {
       sinon.assert.notCalled(env.logger.warn);
     });
 
+    it('logs errors on bad icon path', function() {
+      const data = [
+        {
+          icons: {
+            iconsPath: 'test/templates/bad_icons',
+            macroFile: 'macros.j2',
+            macroName: 'icon',
+          },
+        },
+      ];
+
+      this.icons.resolve(data).then(
+        () => {
+          sinon.assert.calledOnce(env.logger.warn);
+          done();
+        },
+        error => {
+          assert.fail(error);
+          done();
+        }
+      );
+    });
+
     it('renders icons', function(done) {
       const data = [
         {
@@ -169,6 +192,38 @@ describe('icons annotation', function() {
             },
           ]);
           assert.ok(data[0].iframed !== undefined);
+          done();
+        },
+        error => {
+          assert.fail(error);
+          done();
+        }
+      );
+    });
+
+    it("doesn't recreate a customNjkEnv", function(done) {
+      const data = [
+        {
+          icons: {
+            iconsPath: 'test/templates/icons',
+            macroFile: 'macros.j2',
+            macroName: 'icon',
+          },
+        },
+        {
+          icons: {
+            iconsPath: 'test/templates/icons',
+            macroFile: 'macros.j2',
+            macroName: 'mymacro',
+          },
+        },
+      ];
+      // Gotta actually spy on a thing here:
+      const getNunjucksEnvSpy = sinon.spy();
+
+      this.icons.resolve(data).then(
+        () => {
+          // assert(getNunjucksEnvSpy.calledOnce);
           done();
         },
         error => {
