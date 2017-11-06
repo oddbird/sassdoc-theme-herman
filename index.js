@@ -245,6 +245,7 @@ herman.annotations = [
           if (!item.font) {
             return;
           }
+          let promise = Promise.resolve();
           if (item.font.formats && item.font.formats.length) {
             // Local font
             if (!(env.herman && env.herman.fontpath)) {
@@ -261,7 +262,6 @@ herman.annotations = [
               );
               return;
             }
-            let promise = Promise.resolve();
             if (!env.sassjson) {
               const filepath = env.herman.sass.jsonfile;
               promise = readFile(filepath, 'utf-8')
@@ -274,7 +274,7 @@ herman.annotations = [
                   );
                 });
             }
-            promise.then(() => {
+            promise = promise.then(() => {
               const fontData =
                 env.sassjson.fonts && env.sassjson.fonts[item.font.key];
               if (!fontData) {
@@ -304,10 +304,11 @@ herman.annotations = [
               }
               // Concatenate `@font-face` CSS to insert into iframe `<head>`
               item.font.localFontCSS = css.join('\n');
-              return renderIframe(env, item, 'font');
+              return Promise.resolve();
             });
-            promises.push(promise);
           }
+          promise = promise.then(() => renderIframe(env, item, 'font'));
+          promises.push(promise);
         });
         return Promise.all(promises);
       },
