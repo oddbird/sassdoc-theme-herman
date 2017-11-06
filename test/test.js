@@ -2,8 +2,8 @@
 
 const assert = require('assert');
 
-const herman = require('../lib/herman');
 const prepareContext = require('../lib/prepareContext');
+const theme = require('../');
 
 describe('herman', function() {
   it('renders herman', function(done) {
@@ -13,7 +13,7 @@ describe('herman', function() {
       groups: {},
       display: {},
     }).then(ctx => {
-      herman(dest, ctx).then(
+      theme(dest, ctx).then(
         () => {
           // assert something about the mutated state?
           done();
