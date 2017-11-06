@@ -1,5 +1,6 @@
 'use strict';
 
+const extend = require('extend');
 const assert = require('assert');
 const nunjucks = require('nunjucks');
 const path = require('path');
@@ -143,7 +144,8 @@ describe('icons annotation', function() {
       sinon.assert.notCalled(env.logger.warn);
     });
 
-    it('logs errors on bad icon path', function() {
+    it('logs errors on bad icon path', function(done) {
+      const env = extend({}, this.env, { logger: { warn: sinon.stub() } });
       const data = [
         {
           icons: {
@@ -153,8 +155,9 @@ describe('icons annotation', function() {
           },
         },
       ];
+      const icons = annotations.icons(env);
 
-      this.icons.resolve(data).then(
+      icons.resolve(data).then(
         () => {
           sinon.assert.calledOnce(env.logger.warn);
           done();
@@ -218,6 +221,7 @@ describe('icons annotation', function() {
           },
         },
       ];
+      // TODO:
       // Gotta actually spy on a thing here:
       const getNunjucksEnvSpy = sinon.spy();
 
@@ -358,10 +362,26 @@ describe('font annotation', function() {
 describe('example annotation', function() {
   before(function() {
     this.env = {
-      herman: { templatepath: path.resolve(__dirname, 'templates') },
+      herman: {
+        templatepath: path.resolve(__dirname, 'templates'),
+      },
     };
     this.example = annotations.example(this.env);
   });
+
+  it(
+    "uses baseExampleFn as-is if it's a function" /* * / function() {
+    // TODO what even.
+    // Make require('sassdoc/dist/annotation/annotations/example') return a fn instead?
+    const baseExample = require('sassdoc/dist/annotation/annotations/example');
+    const baseExampleFn = baseExample.default;
+    const requireStub = sinon.stub(require).returns(baseExampleFn);
+    const example = annotations.example(this.env);
+    // Assert something?
+    requireStub.resetBehavior();
+    }
+  /* */
+  );
 
   describe('resolve', function() {
     it('warns and exits if no templatepath and njk @example used', function() {
@@ -376,6 +396,151 @@ describe('example annotation', function() {
         env.logger.warn.calledWith(
           'Must pass in a templatepath if using Nunjucks @example.'
         )
+      );
+    });
+
+    // TODO make this:
+    it("doesn't recreate a customNjkEnv");
+
+    it('handles html items', function(done) {
+      const data = [
+        {
+          example: [
+            {
+              type: 'html',
+              code: '<html></html>',
+            },
+          ],
+        },
+      ];
+      this.example.resolve(data).then(
+        () => {
+          assert.equal(data[0].example[0].rendered, data[0].example[0].code);
+          done();
+        },
+        error => {
+          assert.fail(error);
+          done();
+        }
+      );
+    });
+
+    it('handles scss items', function(done) {
+      const data = [
+        {
+          example: [
+            {
+              type: 'scss',
+              code: '/* just a placeholder */',
+            },
+          ],
+        },
+      ];
+      this.example.resolve(data).then(
+        () => {
+          assert.equal(data[0].example[0].rendered, undefined);
+          done();
+        },
+        error => {
+          assert.fail(error);
+          done();
+        }
+      );
+    });
+
+    it('renders scss items', function(done) {
+      const data = [
+        {
+          example: [
+            {
+              type: 'scss',
+              code: '/* just a placeholder */',
+            },
+          ],
+        },
+      ];
+      const env = extend(true, {}, this.env, {
+        herman: {
+          sass: {},
+        },
+      });
+      const example = annotations.example(env);
+      example.resolve(data).then(
+        () => {
+          assert.equal(
+            data[0].example[0].rendered,
+            '/* just a placeholder */\n'
+          );
+          done();
+        },
+        error => {
+          assert.fail(error);
+          done();
+        }
+      );
+    });
+
+    it('injects global imports for scss items, and logs errors', function(
+      done
+    ) {
+      const data = [
+        {
+          example: [
+            {
+              type: 'scss',
+              code: '/* just a placeholder */',
+            },
+          ],
+        },
+      ];
+      const env = extend(true, {}, this.env, {
+        logger: {
+          warn: sinon.stub(),
+        },
+        herman: {
+          sass: {
+            includes: [
+              // TODO we're erroring out on importing these; are there things
+              // we can safely import?
+              '~global',
+              'test',
+            ],
+          },
+        },
+      });
+      const example = annotations.example(env);
+      example.resolve(data).then(
+        () => {
+          assert.equal(data[0].example[0].rendered, undefined);
+          assert.ok(env.logger.warn.calledOnce);
+          done();
+        },
+        error => {
+          assert.fail(error);
+          done();
+        }
+      );
+    });
+
+    it('skips non-html, non-njk, non-scss items', function(done) {
+      const data = [
+        {
+          example: [
+            {
+              type: 'other',
+            },
+          ],
+        },
+      ];
+      this.example.resolve(data).then(
+        () => {
+          // assert what?
+          done();
+        },
+        error => {
+          assert.fail(error);
+          done();
+        }
       );
     });
 
