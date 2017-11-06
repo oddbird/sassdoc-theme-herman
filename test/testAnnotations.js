@@ -5,14 +5,23 @@ const nunjucks = require('nunjucks');
 const path = require('path');
 const sinon = require('sinon');
 
-const theme = require('../');
+/* eslint-disable global-require */
+const annotations = {
+  macro: require('../lib/annotations/macro'),
+  icons: require('../lib/annotations/icons'),
+  preview: require('../lib/annotations/preview'),
+  font: require('../lib/annotations/font'),
+  example: require('../lib/annotations/example'),
+  name: require('../lib/annotations/name'),
+};
+/* eslint-enable global-require */
 
 describe('macro annotation', function() {
   before(function() {
     this.env = {
       herman: { templatepath: path.resolve(__dirname, 'templates') },
     };
-    this.macro = theme.annotations[0](this.env);
+    this.macro = annotations.macro(this.env);
   });
 
   describe('parse', function() {
@@ -27,7 +36,7 @@ describe('macro annotation', function() {
   describe('resolve', function() {
     it('warns and exits if no templatepath and @macro used', function() {
       const env = { logger: { warn: sinon.stub() }, herman: {} };
-      const macro = theme.annotations[0](env);
+      const macro = annotations.macro(env);
       const data = [{ macro: {} }];
 
       macro.resolve(data);
@@ -42,7 +51,7 @@ describe('macro annotation', function() {
 
     it('warns only once about missing templatepath', function() {
       const env = { logger: { warn: sinon.stub() }, herman: {} };
-      const macro = theme.annotations[0](env);
+      const macro = annotations.macro(env);
       const data = [{ macro: {} }, { macro: {} }];
 
       macro.resolve(data);
@@ -52,7 +61,7 @@ describe('macro annotation', function() {
 
     it('does not warn on lack of templatepath if @macro not used', function() {
       const env = { logger: { warn: sinon.stub() }, herman: {} };
-      const macro = theme.annotations[0](env);
+      const macro = annotations.macro(env);
       const data = [{}];
 
       macro.resolve(data);
@@ -84,7 +93,7 @@ describe('icons annotation', function() {
     this.env = {
       herman: { templatepath: path.resolve(__dirname, 'templates') },
     };
-    this.icons = theme.annotations[1](this.env);
+    this.icons = annotations.icons(this.env);
   });
 
   describe('parse', function() {
@@ -100,7 +109,7 @@ describe('icons annotation', function() {
   describe('resolve', function() {
     it('warns and exits if no templatepath and @icons used', function() {
       const env = { logger: { warn: sinon.stub() }, herman: {} };
-      const icons = theme.annotations[1](env);
+      const icons = annotations.icons(env);
       const data = [{ icons: {} }];
 
       icons.resolve(data);
@@ -115,7 +124,7 @@ describe('icons annotation', function() {
 
     it('warns only once about missing templatepath', function() {
       const env = { logger: { warn: sinon.stub() }, herman: {} };
-      const icons = theme.annotations[1](env);
+      const icons = annotations.icons(env);
       const data = [{ icons: {} }, { icons: {} }];
 
       icons.resolve(data);
@@ -125,7 +134,7 @@ describe('icons annotation', function() {
 
     it('does not warn on lack of templatepath if @icons not used', function() {
       const env = { logger: { warn: sinon.stub() }, herman: {} };
-      const icons = theme.annotations[1](env);
+      const icons = annotations.icons(env);
       const data = [{}];
 
       icons.resolve(data);
@@ -173,7 +182,7 @@ describe('icons annotation', function() {
 
 describe('preview annotation', function() {
   before(function() {
-    this.preview = theme.annotations[2]();
+    this.preview = annotations.preview();
   });
 
   describe('parse', function() {
@@ -190,7 +199,7 @@ describe('preview annotation', function() {
 describe('font annotation', function() {
   before(function() {
     this.env = {};
-    this.font = theme.annotations[3](this.env);
+    this.font = annotations.font(this.env);
   });
 
   describe('parse', function() {
@@ -217,7 +226,7 @@ describe('font annotation', function() {
 
       it('warns and exits if no fontpath', function() {
         const env = { logger: { warn: sinon.stub() }, herman: {} };
-        const example = theme.annotations[3](env);
+        const example = annotations.font(env);
 
         example.resolve(this.data);
 
@@ -235,7 +244,7 @@ describe('font annotation', function() {
           logger: { warn: sinon.stub() },
           herman: { fontpath: '/path' },
         };
-        const example = theme.annotations[3](env);
+        const example = annotations.font(env);
 
         example.resolve(this.data);
 
@@ -265,7 +274,7 @@ describe('font annotation', function() {
             },
           },
         };
-        const example = theme.annotations[3](env);
+        const example = annotations.font(env);
 
         example.resolve(this.data).then(
           () => {
@@ -296,13 +305,13 @@ describe('example annotation', function() {
     this.env = {
       herman: { templatepath: path.resolve(__dirname, 'templates') },
     };
-    this.example = theme.annotations[4](this.env);
+    this.example = annotations.example(this.env);
   });
 
   describe('resolve', function() {
     it('warns and exits if no templatepath and njk @example used', function() {
       const env = { logger: { warn: sinon.stub() }, herman: {} };
-      const example = theme.annotations[4](env);
+      const example = annotations.example(env);
       const data = [{ example: [{ type: 'njk' }] }];
 
       example.resolve(data);
@@ -317,7 +326,7 @@ describe('example annotation', function() {
 
     it('warns only once about missing templatepath', function() {
       const env = { logger: { warn: sinon.stub() }, herman: {} };
-      const example = theme.annotations[4](env);
+      const example = annotations.example(env);
       const data = [
         { example: [{ type: 'njk' }] },
         { example: [{ type: 'njk' }] },
@@ -330,7 +339,7 @@ describe('example annotation', function() {
 
     it('does not warn if njk @example not used', function() {
       const env = { logger: { warn: sinon.stub() }, herman: {} };
-      const example = theme.annotations[4](env);
+      const example = annotations.example(env);
       const data = [{}];
 
       example.resolve(data);
@@ -373,7 +382,7 @@ describe('example annotation', function() {
         return val + 1;
       });
       const env = { herman: { nunjucksEnv } };
-      const example = theme.annotations[4](env);
+      const example = annotations.example(env);
       const data = [
         {
           example: [
@@ -396,7 +405,7 @@ describe('example annotation', function() {
 
 describe('name annotation', function() {
   before(function() {
-    this.macro = theme.annotations[5](this.env);
+    this.macro = annotations.name(this.env);
   });
 
   describe('parse', function() {
