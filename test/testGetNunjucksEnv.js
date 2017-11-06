@@ -1,10 +1,10 @@
 'use strict';
 
 const assert = require('assert');
-const sinon = require('sinon');
 const nunjucks = require('nunjucks');
+const sinon = require('sinon');
 
-const getNunjucksEnv = require('../lib/getNunjucksEnv');
+const getNunjucksEnv = require('../lib/utils/getNunjucksEnv');
 
 describe('getNunjucksEnv', function() {
   it('uses an existing nunjucksEnv first', function() {

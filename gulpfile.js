@@ -278,9 +278,11 @@ gulp.task('compile', ['sass', 'minify'], () => {
     cache: false,
   };
 
-  return gulp
-    .src(path.join(`${paths.SASS_DIR}**/*.scss`))
-    .pipe(sassdoc(config));
+  const stream = sassdoc(config);
+  gulp.src(path.join(`${paths.SASS_DIR}**/*.scss`)).pipe(stream);
+
+  // Wait for documentation to be fully generated (not just parsed)
+  return stream.promise;
 });
 
 gulp.task('default', ['compile', 'eslint', 'sasslint', 'test']);

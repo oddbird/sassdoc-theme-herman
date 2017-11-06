@@ -2,8 +2,8 @@
 
 const assert = require('assert');
 
-const renderHerman = require('../lib/renderHerman');
 const prepareContext = require('../lib/prepareContext');
+const renderHerman = require('../lib/renderHerman');
 
 describe('renderHerman', function() {
   it('does the herman things', function(done) {

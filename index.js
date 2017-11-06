@@ -6,14 +6,11 @@ const Promise = require('bluebird');
 const sass = require('node-sass');
 const stripIndent = require('strip-indent');
 
+const getNunjucksEnv = require('./lib/utils/getNunjucksEnv');
 const herman = require('./lib/herman');
-const parse = require('./lib/parse');
+const parse = require('./lib/utils/parse');
 const renderIframe = require('./lib/renderIframe');
-const { nunjucksEnv, templates } = require('./lib/templates');
-
-// get nunjucks env lazily so that we only throw an error on missing
-// templatepath if annotation was actually used.
-const getNunjucksEnv = require('./lib/getNunjucksEnv');
+const { nunjucksEnv, templates } = require('./lib/utils/templates');
 
 const readdir = Promise.promisify(fs.readdir);
 const readFile = Promise.promisify(fs.readFile);

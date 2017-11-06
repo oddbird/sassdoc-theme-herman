@@ -1,10 +1,10 @@
 'use strict';
 
 const assert = require('assert');
-const vfs = require('vinyl-fs');
 const sinon = require('sinon');
+const vfs = require('vinyl-fs');
 
-const assets = require('../lib/assets');
+const assets = require('../lib/utils/assets');
 
 describe('assets', function() {
   it('Runs the vfs pipeline', function(done) {

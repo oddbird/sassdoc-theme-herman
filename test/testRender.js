@@ -3,8 +3,8 @@
 const assert = require('assert');
 
 const prepareContext = require('../lib/prepareContext');
-const render = require('../lib/render');
-const { nunjucksEnv } = require('../lib/templates');
+const render = require('../lib/utils/render');
+const { nunjucksEnv } = require('../lib/utils/templates');
 
 describe('render', function() {
   it('does a render', function(done) {

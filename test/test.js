@@ -1,9 +1,9 @@
 'use strict';
 
 const assert = require('assert');
+const nunjucks = require('nunjucks');
 const path = require('path');
 const sinon = require('sinon');
-const nunjucks = require('nunjucks');
 
 const theme = require('../');
 

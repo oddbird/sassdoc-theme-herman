@@ -1,11 +1,11 @@
 'use strict';
 
 const assert = require('assert');
-const sinon = require('sinon');
 const extend = require('extend');
+const sinon = require('sinon');
 
 const renderIframe = require('../lib/renderIframe');
-const { nunjucksEnv } = require('../lib/templates');
+const { nunjucksEnv } = require('../lib/utils/templates');
 
 describe('renderIframe', function() {
   describe('example', function() {
