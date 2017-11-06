@@ -41,7 +41,7 @@ const paths = {
     this.ALL_JS = [
       `${this.ASSETS_JS_DIR}**/*.js`,
       'lib/**/*.js',
-      `${this.JS_TESTS_DIR}**/*.js`,
+      `${this.JS_TESTS_DIR}*.js`,
       'gulpfile.js',
       'index.js',
       '!assets/js/highlight.js',

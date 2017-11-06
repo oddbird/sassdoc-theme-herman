@@ -9,7 +9,7 @@ const assets = require('../lib/assets');
 describe('assets', function() {
   it('Runs the vfs pipeline', function(done) {
     const src = '.';
-    const dest = 'dest';
+    const dest = `${__dirname}/dest`;
     const destSpy = sinon.spy(vfs, 'dest');
     // Complete the promise chain, then let's check side-effects:
     assets(src, dest, {}).then(() => {
