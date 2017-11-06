@@ -274,6 +274,52 @@ describe('font annotation', function() {
       });
       assert.equal(this.env.fontsHTML, '\n<link rel="stylesheet">');
     });
+
+    it('skips if no linebreak', function() {
+      const input = '"key" (variant1, variant2) {format1, format2}';
+      assert.deepEqual(this.font.parse(input), {
+        key: 'key',
+        variants: ['variant1', 'variant2'],
+        formats: ['format1', 'format2'],
+        html: '',
+      });
+      assert.equal(this.env.fontsHTML, '\n<link rel="stylesheet">');
+    });
+
+    // TODO: Not sure what this is really testing.
+    it('sets fontsHTML including obj.html', function() {
+      const input =
+        '"key" (variant1, variant2) {format1, format2}\n' +
+        '  <link rel="stylesheet">';
+      const env = {
+        fontsHTML: '  <link rel="stylesheet">',
+      };
+      const font = annotations.font(env);
+      assert.deepEqual(font.parse(input), {
+        key: 'key',
+        variants: ['variant1', 'variant2'],
+        formats: ['format1', 'format2'],
+        html: '<link rel="stylesheet">',
+      });
+      assert.equal(this.env.fontsHTML, '\n<link rel="stylesheet">');
+    });
+
+    it('returns undefined if no keyBits', function() {
+      const input = '<link>';
+      assert.deepEqual(this.font.parse(input), undefined);
+      assert.equal(this.env.fontsHTML, '\n<link rel="stylesheet">');
+    });
+
+    it("doesn't set variants or formats if not appropriate bits", function() {
+      const input = '"key"\n<link rel="stylesheet">';
+      assert.deepEqual(this.font.parse(input), {
+        key: 'key',
+        variants: [],
+        formats: [],
+        html: '<link rel="stylesheet">',
+      });
+      assert.equal(this.env.fontsHTML, '\n<link rel="stylesheet">');
+    });
   });
 
   describe('resolve', function() {
@@ -285,9 +331,9 @@ describe('font annotation', function() {
 
       it('warns and exits if no fontpath', function() {
         const env = { logger: { warn: sinon.stub() }, herman: {} };
-        const example = annotations.font(env);
+        const font = annotations.font(env);
 
-        example.resolve(this.data);
+        font.resolve(this.data);
 
         assert.deepEqual(this.data, this.origData);
         assert(
@@ -303,9 +349,9 @@ describe('font annotation', function() {
           logger: { warn: sinon.stub() },
           herman: { fontpath: '/path' },
         };
-        const example = annotations.font(env);
+        const font = annotations.font(env);
 
-        example.resolve(this.data);
+        font.resolve(this.data);
 
         assert.deepEqual(this.data, this.origData);
         assert(
@@ -333,9 +379,9 @@ describe('font annotation', function() {
             },
           },
         };
-        const example = annotations.font(env);
+        const font = annotations.font(env);
 
-        example.resolve(this.data).then(
+        font.resolve(this.data).then(
           () => {
             const css =
               '@font-face {\n' +
@@ -356,6 +402,81 @@ describe('font annotation', function() {
         );
       });
     });
+
+    it('skips items without a font attribute', function(done) {
+      const env = {};
+      const font = annotations.font(env);
+      const data = [{}];
+      font.resolve(data).then(
+        () => {
+          // TODO assert that this bailed early?
+          done();
+        },
+        error => {
+          assert.fail(error);
+          done();
+        }
+      );
+    });
+
+    it('skips if item.font.formats is not an array', function(done) {
+      const env = {};
+      const font = annotations.font(env);
+      const data = [
+        {
+          font: {
+            formats: null,
+          },
+        },
+      ];
+      font.resolve(data).then(
+        () => {
+          // TODO assert that this bailed early?
+          done();
+        },
+        error => {
+          assert.fail(error);
+          done();
+        }
+      );
+    });
+
+    it('reads env.herman.sass.jsonfile if no env.sassjson, fails on missing fontData', function(
+      done
+    ) {
+      const env = {
+        herman: {
+          sass: {
+            jsonfile: `${__dirname}/dest/assets/css/json.css`,
+          },
+          fontpath: '/path',
+        },
+        logger: {
+          warn: sinon.spy(),
+        },
+      };
+      const font = annotations.font(env);
+      const data = [
+        {
+          font: {
+            formats: ['woff'],
+          },
+        },
+      ];
+      font.resolve(data).then(
+        () => {
+          assert.fail('The promise should be rejected');
+          done();
+        },
+        error => {
+          // TODO assert that this read the file?
+          assert.ok(env.logger.warn.calledOnce);
+          done();
+        }
+      );
+    });
+
+    it("don't push to env.localFonts if invalid format");
   });
 });
 
