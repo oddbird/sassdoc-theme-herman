@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: ~/herman
     docker:
-      - image: node:latest
+      - image: node:8
     steps:
       - checkout
       - restore_cache:
@@ -49,7 +49,7 @@ jobs:
           command: |
             export NVM_DIR="$HOME/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-            nvm install 6.0.0
+            nvm install 6.2.2
             yarn install --force
             gulp jstest
       - run:
