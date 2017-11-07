@@ -4,7 +4,7 @@
 
 /// ## Documenting colors and rendering palettes
 ///
-/// Whether you store colors as individual variables,
+/// Whether you store colors as individual variables
 /// or group them into a map,
 /// you can use Herman to document and display color palettes.
 /// In the end, Herman will need a map
@@ -32,9 +32,9 @@ $brand-pink: hsl(330, 85%, 48%);
 /// we'll want to combine them into a map
 /// of name/value pairs.
 /// Sass does not provide any shortcuts for automating this step,
-/// or remving the duplication.
+/// or removing the duplication.
 ///
-/// Create as many maps as you like,
+/// Create as many maps as you like
 /// to organize different palettes –
 /// primary, secondary, button-colors, etc.
 /// Each map will be displayed individually,
@@ -46,7 +46,7 @@ $brand-pink: hsl(330, 85%, 48%);
 ///
 /// The color-palette preview accepts an optional `key` argument,
 /// which defaults to the map-variable name.
-/// That key will be used to acccess the data from JSON,
+/// That key will be used to access the data from JSON,
 /// so it doesn't matter what key is used,
 /// as long as the key given here matches the group-name
 /// used when adding this data to `$herman`.
@@ -86,7 +86,7 @@ $demo-colors: (
 /// to the global export map.
 ///
 /// ```
-///  @include herman-add('colors', 'demo-colors', $demo-colors);
+/// /// @include herman-add('colors', 'demo-colors', $demo-colors);
 /// ```
 ///
 /// - The first argument tells Herman what type of data is being added –
@@ -94,17 +94,17 @@ $demo-colors: (
 ///   Herman will organize the output JSON into subgroups by type.
 ///   We use this to our advantage,
 ///   passing the exported colors to application-js as well as Herman,
-///   so colors defined in Sass can be accessed in javascript.
+///   so colors defined in Sass can be accessed in JavaScript.
 /// - The second argument sets a `key` name
 ///   for accessing this particular group of colors.
 ///   The `herman-add` key should match
-///   the key provided to `@preview color-palette` earlier.
+///   the key provided to `@preview color-palette`.
 /// - The third argument provides the actual map of data
 ///   to be added to the `$herman` export map.
 ///
 /// The result is an export map that looks like this:
 ///
-/// ```
+/// ```scss
 /// $herman: (
 ///   'colors': (
 ///     'demo-colors': (
@@ -147,7 +147,7 @@ $demo-noncolors: (
 /// );
 /// ```
 ///
-/// Our `color()` function knows how to interprate that syntax,
+/// Our `color()` function knows how to interpret that syntax
 /// and compile actual colors based on our map notation.
 /// In order to export real color data to Herman,
 /// we want to run every value in our map

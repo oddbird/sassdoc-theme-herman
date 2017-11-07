@@ -6,9 +6,9 @@
 ///
 /// [SassDoc][sassdoc] provides the `@example` annotation
 /// for displaying example Sass code.
-/// We've expanded on their feature
-/// to show compiled CSS along side the Sass input,
-/// comile Nunjucks examples for templating,
+/// We've expanded their feature
+/// to show compiled CSS alongside the Sass input,
+/// compile Nunjucks examples for templating,
 /// and render any input-or-compiled HTML
 /// so you can see the results.
 ///
@@ -18,8 +18,8 @@
 /// with `scss`/`sass` ([Sass][sass])
 /// or `njk` ([Nunjucks][njk]) languages,
 /// Herman will display the source of the example,
-/// along with the compiled output,
-/// and rendered html.
+/// along with the compiled output
+/// (and rendered html, if using `njk` or `html` languages).
 /// Both Sass & Nunjucks examples
 /// allow you to import external partials:
 ///
@@ -57,24 +57,27 @@
 /// Example annotations with language set to `sass` or `scss`
 /// will be compiled by Herman,
 /// and display the output along with the source.
+///
+/// All Sass examples must be complete and valid,
+/// with the ability to import Sass partials inside each example.
 /// In order for this to work with Sass/Scss,
 /// you must set an `includepaths` key
 /// in your sassdoc `herman.sass` configuration object –
 /// an array of places to look for Sass includes:
 ///
-///   includepaths: [ path.join(__dirname, 'static/sass') ]
+/// ```
+/// includepaths: ['static/sass', 'node_modules']
+/// ```
 ///
-/// All Sass examples will have to be complete and valid,
-/// with the ability to import Sass partials inside each example.
 /// You can also set an array of default `includes`
 /// (relative to any `includepaths`)
 /// to include for all Sass examples:
 ///
 /// ```yaml
-/// # sossdocrc (yaml)
+/// # .sassdocrc (yaml)
 /// herman:
 ///   sass:
-///     includepaths: ['sass', 'node_modules']
+///     includepaths: ['static/sass']
 ///     includes: ['utilities', 'config/manifest']
 /// ```
 ///
@@ -87,7 +90,7 @@
 /// @example scss -
 ///   .sass {
 ///     &-nesting {
-///       content: 'Example: Compiling Sass…';
+///       content: 'Example: Compiling Sass...';
 ///     }
 ///   }
 
@@ -115,8 +118,20 @@
 ///
 /// ### Setting `nunjucksEnv`:
 ///
-/// ```
-/// @@@
+/// *This is only possible if using the [SassDoc Node API](http://sassdoc.com/node/).*
+///
+/// ```js
+/// const nunjucks = require('nunjucks');
+/// const sassdoc = require('sassdoc');
+///
+/// const nunjucksEnv = nunjucks.configure('./templates');
+///
+/// sassdoc(src, {
+///   theme: 'herman',
+///   herman: {
+///     nunjucksEnv
+///   }
+/// });
 /// ```
 ///
 /// @group demo_examples

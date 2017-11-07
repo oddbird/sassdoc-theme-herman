@@ -1,5 +1,5 @@
-// JSO Export Utilities
-// --------------------
+// JSON Export Utilities
+// ---------------------
 
 
 /// ## Exporting Styles to JSON
@@ -7,26 +7,22 @@
 /// While many UX patterns will be rendered as HTML components,
 /// there are several abstract style patterns –
 /// like color-palettes and font-specimens –
-/// that never appear as comonents in the application.
+/// that never appear as components in the application.
 ///
 /// Herman provides several `@preview` annotations
 /// to help visualize these abstract patterns –
 /// but that requires passing the data from your styles
 /// to Herman's templates.
 /// We do that using Sass maps
-/// (key:value object variables)
-/// and the [`sass-json-export`][json] toolkit
+/// (`key:value` object variables)
+/// and the `herman-export` mixin
 /// to generate JSON out of Sass variables.
 ///
-/// [json]: https://github.com/oddbird/sass-json-export
-///
 /// @group api_json-export
-/// @link https://github.com/oddbird/sass-json-export Sass-JSON-Export
+/// @see herman-export
 ///
 /// @example scss
-///   @import 'sass-json-export/stylesheets/sass-json-export';
-///
-///   @include json-encode($herman, comment);
+///   @include herman-export;
 
 
 // Herman
@@ -111,14 +107,15 @@
 ///
 /// ### Fonts:
 ///
-/// Each font should have a top-level key of it's own,
+/// Each font should have a top-level key of its own,
 /// since font-previews display a single font at a time.
 /// The data map accepts:
 ///
-/// - `name`: how the font should be referenced in CSS
+/// - `name`: how the font should be referenced in CSS (if omitted, defaults to top-level key)
 /// - `stack`: optional list of font-stack fallbacks
 /// - `source`: link to more information on the font,
 ///    or typekit/googlefonts as useful
+/// - `svgid`: optional suffix value for local SVG font `src`, e.g. `font-file.svg#svgid` (if omitted, defaults to `name`)
 /// - `<variant>`: describe any number of relative paths to locally-hosted
 ///   font-files per variant: e.g. `regular`, `bold italic`, etc.
 ///
@@ -175,9 +172,6 @@ $herman: () !default;
 ///   Map to be encoded for JSON exporting
 ///
 /// @example scss
-///   // @import 'utilities';
-///   // @import 'config/manifest';
-///
 ///   // Export to JSON
 ///   @include herman-export;
 @mixin herman-export(
