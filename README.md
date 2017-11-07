@@ -23,7 +23,8 @@ from brand guidelines to UX patterns and code APIs:
 
 Herman is built as an extension to [SassDoc][sassdoc],
 and supports all their core functionality
-for font specimens, color palettes, sizes, SVG icons,
+in addition to added support for
+font specimens, color palettes, sizes, SVG icons,
 compiled languages, Nunjucks/Jinja macros, HTML previews,
 and more.
 
