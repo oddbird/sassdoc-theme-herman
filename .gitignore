@@ -3,6 +3,9 @@ npm-debug.log
 yarn-error.log
 .sass-cache/
 .cache/
+jscov/
+.nyc_output/
+test/dest/
 *.DS_Store
 *~
 .livereload

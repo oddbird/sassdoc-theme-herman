@@ -8,7 +8,7 @@ const eslint = require('gulp-eslint');
 const gulp = require('gulp');
 const gutil = require('gulp-util');
 const imagemin = require('gulp-imagemin');
-const mocha = require('gulp-mocha');
+const mocha = require('gulp-spawn-mocha');
 const path = require('path');
 const prettier = require('gulp-prettier-plugin');
 const rename = require('gulp-rename');
@@ -18,6 +18,7 @@ const sasslint = require('gulp-sass-lint');
 const sourcemaps = require('gulp-sourcemaps');
 const svg = require('gulp-svg-symbols');
 const uglify = require('gulp-uglify-es').default;
+const { spawn } = require('child_process');
 
 // Theme and project specific paths.
 const paths = {
@@ -26,7 +27,7 @@ const paths = {
   SASS_TESTS_DIR: 'test/sass/',
   IMG: 'assets/img/**/*',
   SVG: 'assets/svg/**/*.svg',
-  JS_DIR: 'assets/js/',
+  ASSETS_JS_DIR: 'assets/js/',
   FONTS: 'assets/fonts/**/*',
   DOCS_DIR: 'docs/',
   JS_TESTS_DIR: 'test/',
@@ -35,14 +36,17 @@ const paths = {
   init() {
     this.TEMPLATES = [`${this.TEMPLATES_DIR}**/*.j2`].concat(this.IGNORE);
     this.SASS = [`${this.SASS_DIR}**/*.scss`].concat(this.IGNORE);
-    this.JS = [`${this.JS_DIR}**/*.js`].concat(this.IGNORE);
-    this.SRC_JS = [`${this.JS_DIR}**/*.js`, 'lib/**/*.js', 'index.js'].concat(
-      this.IGNORE
-    );
-    this.ALL_JS = [
-      `${this.JS_DIR}**/*.js`,
+    this.ASSETS_JS = [`${this.ASSETS_JS_DIR}**/*.js`].concat(this.IGNORE);
+    this.SRC_JS = ['lib/**/*.js', 'index.js'].concat(this.IGNORE);
+    this.CLIENT_JS = [
+      `${this.ASSETS_JS_DIR}**/*.js`,
       'lib/**/*.js',
-      `${this.JS_TESTS_DIR}**/*.js`,
+      'index.js',
+    ].concat(this.IGNORE);
+    this.ALL_JS = [
+      `${this.ASSETS_JS_DIR}**/*.js`,
+      'lib/**/*.js',
+      `${this.JS_TESTS_DIR}*.js`,
       'gulpfile.js',
       'index.js',
       '!assets/js/highlight.js',
@@ -52,6 +56,7 @@ const paths = {
     this.JS_TESTS_FILES = [
       `${this.JS_TESTS_DIR}*.js`,
       `${this.JS_TESTS_DIR}**/*.j2`,
+      `!${this.JS_TESTS_DIR}dest/**/*`,
     ].concat(this.IGNORE);
     return this;
   },
@@ -66,9 +71,36 @@ process.on('exit', () => {
 });
 
 const onError = function(err) {
-  gutil.log(chalk.red(err.message));
+  gutil.log(chalk.red(err.message || `Task failed with code: ${err}`));
   gutil.beep();
-  this.emit('end');
+  if (this && this.emit) {
+    this.emit('end');
+  }
+};
+
+// Execute a command, logging output live while process runs
+const spawnTask = function(command, args, cb, failOnError = true) {
+  spawned.push(
+    spawn(command, args, { stdio: 'inherit' })
+      .on('error', err => {
+        if (failOnError) {
+          gutil.beep();
+          return cb(err);
+        }
+        onError(err);
+        return cb();
+      })
+      .on('exit', code => {
+        if (code) {
+          if (failOnError) {
+            gutil.beep();
+            return cb(new Error(`Task failed with code ${code}`));
+          }
+          onError(code);
+        }
+        return cb();
+      })
+  );
 };
 
 const eslintTask = (src, failOnError, log) => {
@@ -145,11 +177,38 @@ gulp.task('sasstest', () =>
   gulp.src(`${paths.SASS_TESTS_DIR}test_sass.js`, { read: false }).pipe(mocha())
 );
 
-// Need to finish compile before running tests,
-// so that the processes do not conflict
-gulp.task('jstest', ['compile'], () =>
-  gulp.src(`${paths.JS_TESTS_DIR}*.js`, { read: false }).pipe(mocha())
-);
+const getJsTestArgs = verbose => {
+  const mochaReporter = verbose ? 'spec' : 'dot';
+  const covReporters = verbose
+    ? ['text', 'html', 'lcovonly']
+    : ['text-summary', 'html', 'lcovonly'];
+  const obj = {
+    include: paths.SRC_JS,
+    reporter: covReporters,
+    cache: true,
+    all: true,
+    'report-dir': './jscov',
+  };
+  const args = ['./node_modules/.bin/mocha', '--reporter', mochaReporter];
+  for (const key of Object.keys(obj)) {
+    if (Array.isArray(obj[key])) {
+      for (const val of obj[key]) {
+        args.unshift(`--${key}=${val}`);
+      }
+    } else {
+      args.unshift(`--${key}=${obj[key]}`);
+    }
+  }
+  return args;
+};
+
+gulp.task('jstest', cb => {
+  spawnTask('./node_modules/.bin/nyc', getJsTestArgs(true), cb);
+});
+
+gulp.task('jstest-nofail', cb => {
+  spawnTask('./node_modules/.bin/nyc', getJsTestArgs(), cb, false);
+});
 
 gulp.task('test', ['sasstest', 'jstest']);
 
@@ -234,9 +293,11 @@ gulp.task('compile', ['sass', 'minify'], () => {
     cache: false,
   };
 
-  return gulp
-    .src(path.join(`${paths.SASS_DIR}**/*.scss`))
-    .pipe(sassdoc(config));
+  const stream = sassdoc(config);
+  gulp.src(path.join(`${paths.SASS_DIR}**/*.scss`)).pipe(stream);
+
+  // Wait for documentation to be fully generated (not just parsed)
+  return stream.promise;
 });
 
 gulp.task('default', ['compile', 'eslint', 'sasslint', 'test']);
@@ -253,10 +314,10 @@ gulp.task('dev', [
   'watch',
 ]);
 
-gulp.task('watch', ['compile'], () => {
+gulp.task('watch', () => {
   gulp.watch(
     [
-      paths.SRC_JS,
+      paths.CLIENT_JS,
       paths.SASS,
       paths.TEMPLATES,
       paths.IMG,
@@ -269,7 +330,7 @@ gulp.task('watch', ['compile'], () => {
     ['compile']
   );
 
-  gulp.watch([paths.JS, paths.JS_TESTS_FILES], ['jstest']);
+  gulp.watch(paths.JS_TESTS_FILES, ['jstest-nofail']);
 
   gulp.watch(paths.SASS, ev => {
     if (ev.type === 'added' || ev.type === 'changed') {
@@ -293,7 +354,7 @@ gulp.task('jsmin', () => {
   const dest = `${paths.DIST_DIR}js/`;
 
   return gulp
-    .src(`${paths.JS_DIR}**/*.js`)
+    .src(paths.ASSETS_JS)
     .pipe(uglify())
     .pipe(gulp.dest(dest));
 });

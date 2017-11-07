@@ -1,5 +1,9 @@
 # Herman [a SassDoc theme]
 
+[![CircleCI](https://circleci.com/gh/oddbird/sassdoc-theme-herman.svg?style=svg)](https://circleci.com/gh/oddbird/sassdoc-theme-herman)
+[![Coverage Status](https://coveralls.io/repos/github/oddbird/sassdoc-theme-herman/badge.svg)](https://coveralls.io/github/oddbird/sassdoc-theme-herman)
+[![Greenkeeper badge](https://badges.greenkeeper.io/oddbird/sassdoc-theme-herman.svg)](https://greenkeeper.io/)
+
 > “**If it’s not documented, it doesn't exist.**
 > Documentation should become the default,
 > an integrated part of the development process.”

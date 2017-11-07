@@ -8,6 +8,7 @@
 - CHANGE: JSON-export functionality is now built in
   using the `herman-export` mixin.
   Sass-json-export integration should continue to work as expected.
+- Updated dependencies.
 
 
 ## 1.0.0-alpha.15: 2017-10-30
