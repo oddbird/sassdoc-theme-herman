@@ -1,7 +1,8 @@
 'use strict';
 
 const assert = require('assert');
-const parse = require('../lib/parse.js');
+
+const parse = require('../lib/utils/parse');
 
 describe('parse', function() {
   describe('sassJson', function() {
