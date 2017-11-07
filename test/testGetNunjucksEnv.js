@@ -20,11 +20,12 @@ describe('getNunjucksEnv', function() {
   it('returns null if env.herman missing', function() {
     const env = {
       logger: {
-        warn() {},
+        warn: sinon.spy(),
       },
     };
     const actual = getNunjucksEnv(null, env, null);
     assert.equal(actual, null);
+    sinon.assert.calledOnce(env.logger.warn);
   });
 
   it('runs nunjucks.configure if all is good', function() {

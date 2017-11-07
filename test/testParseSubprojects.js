@@ -7,25 +7,26 @@ const prepareContext = require('../lib/prepareContext');
 
 describe('parseSubprojects', function() {
   it('does a parseSubprojects', function(done) {
-    prepareContext({
+    const env = {
       data: [],
-      groups: {},
-      display: {},
       herman: {
-        subprojects: [],
+        subprojects: ['accoutrement-color'],
       },
-    })
-      .then(ctx => parseSubprojects(ctx))
-      .then(
-        () => {
-          // Look for side-effects
-          assert.ok(true);
-          done();
-        },
-        err => {
-          assert.fail(err);
-          done();
-        }
-      );
+    };
+    let result;
+
+    prepareContext(env)
+      .then(ctx => {
+        result = ctx;
+        return parseSubprojects(ctx);
+      })
+      .then(() => {
+        assert.equal(
+          result.subprojects['accoutrement-color'].activeProject,
+          'accoutrement-color'
+        );
+
+        done();
+      });
   });
 });

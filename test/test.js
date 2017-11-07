@@ -1,28 +1,22 @@
 'use strict';
 
 const assert = require('assert');
+const del = require('del');
+const fs = require('fs');
 
-const prepareContext = require('../lib/prepareContext');
-const theme = require('../');
+const herman = require('../');
 
 describe('herman', function() {
   it('renders herman', function(done) {
     const dest = `${__dirname}/dest`;
-    prepareContext({
-      data: [],
-      groups: {},
-      display: {},
-    }).then(ctx => {
-      theme(dest, ctx).then(
-        () => {
-          // assert something about the mutated state?
+    herman(dest, { data: [] }).then(() => {
+      fs.access(`${dest}/index.html`, err => {
+        assert.equal(err, undefined);
+
+        del(dest).then(() => {
           done();
-        },
-        err => {
-          assert.fail(err);
-          done();
-        }
-      );
+        });
+      });
     });
   });
 });
