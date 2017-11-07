@@ -16,7 +16,7 @@ describe('assets', function() {
       fs.access(`${dest}/${path.parse(__filename).base}`, err => {
         assert.equal(err, undefined);
 
-        del(dest).then(() => {
+        del(`${dest}/*`).then(() => {
           done();
         });
       });
@@ -36,7 +36,7 @@ describe('assets', function() {
       assert.ok(contents.includes('Parses file'));
       assert.equal(parser.args[0][2], env);
 
-      del(dest).then(() => {
+      del(`${dest}/*`).then(() => {
         done();
       });
     });

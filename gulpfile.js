@@ -56,7 +56,7 @@ const paths = {
     this.JS_TESTS_FILES = [
       `${this.JS_TESTS_DIR}*.js`,
       `${this.JS_TESTS_DIR}**/*.j2`,
-      `!${this.JS_TESTS_DIR}dest/**/*`,
+      `!${this.JS_TESTS_DIR}dest/**`,
     ].concat(this.IGNORE);
     return this;
   },

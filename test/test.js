@@ -13,7 +13,7 @@ describe('herman', function() {
       fs.access(`${dest}/index.html`, err => {
         assert.equal(err, undefined);
 
-        del(dest).then(() => {
+        del(`${dest}/*`).then(() => {
           done();
         });
       });
