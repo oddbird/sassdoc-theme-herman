@@ -9,12 +9,13 @@
 
 [data-styleguide=&#39;section-arrow&#39;]::before, [data-styleguide=&#39;section-arrow&#39;]::after {
   content: &quot; &quot;;
-  border: 1.4rem solid transparent;
-  border-bottom-width: 0;
+  border: 0.7rem solid transparent;
+  border-width: 0.7rem 1.4rem 0;
   border-top-color: #0d7fa5;
   left: 50%;
   position: absolute;
   top: 100%;
+  transition: border-width 200ms;
 }
 
 [data-styleguide=&#39;section-arrow&#39;]::before {

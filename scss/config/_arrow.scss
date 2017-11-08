@@ -25,12 +25,13 @@
   width: 100%;
 
   @include wrap-content(' ') {
-    border: size('gutter') solid transparent;
-    border-bottom-width: 0;
+    border: size('shim') solid transparent;
     border-top-color: color($color);
+    border-width: size('shim') size('gutter') 0;
     left: 50%;
     position: absolute;
     top: 100%;
+    transition: border-width 200ms;
   }
 
   @include before(' ') {
