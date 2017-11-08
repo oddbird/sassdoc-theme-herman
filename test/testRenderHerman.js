@@ -3,22 +3,38 @@
 const assert = require('assert');
 const del = require('del');
 const fs = require('fs');
+const Promise = require('bluebird');
 
 const prepareContext = require('../lib/prepareContext');
 const renderHerman = require('../lib/renderHerman');
 
+const rmdir = Promise.promisify(fs.rmdir);
+const mkdir = Promise.promisify(fs.mkdir);
+const access = Promise.promisify(fs.access);
+
 describe('renderHerman', function() {
+  beforeEach(function(done) {
+    this.dest = `${__dirname}/dest`;
+    rmdir(this.dest)
+      .then(
+        () => {
+          return mkdir(this.dest);
+        },
+        error => {}
+      )
+      .then(done, done);
+  });
+
   it('does the herman things', function(done) {
-    const dest = `${__dirname}/dest`;
     prepareContext({
       data: [],
     })
-      .then(ctx => renderHerman(dest, ctx))
+      .then(ctx => renderHerman(this.dest, ctx))
       .then(() => {
-        fs.access(`${dest}/index.html`, err => {
+        fs.access(`${this.dest}/index.html`, err => {
           assert.equal(err, undefined);
 
-          del(`${dest}/*`).then(() => {
+          del(`${this.dest}/*`).then(() => {
             done();
           });
         });
@@ -26,48 +42,53 @@ describe('renderHerman', function() {
   });
 
   it('copies an internal shortcutIcon', function(done) {
-    const dest = `${__dirname}/dest`;
+    const shortcutIcon = `${__dirname}/assets/img/favicon.ico`;
+    const expectedShortcutIcon = `${__dirname}/dest/assets/img/favicon.ico`;
     prepareContext({
       data: [],
-      shortcutIcon: `${__dirname}/assets/img/favicon.ico`,
+      shortcutIcon,
     })
-      .then(ctx => renderHerman(dest, ctx))
+      .then(ctx => renderHerman(this.dest, ctx))
       .then(() => {
-        // assert something?
+        return access(shortcutIcon);
+      })
+      .then(() => {
+        // We only get here if the file is accessible.
+        assert.ok(true);
         done();
-      });
+      })
+      .catch(done);
   });
 
   it('ignores an external shortcutIcon', function(done) {
-    const dest = `${__dirname}/dest`;
     prepareContext({
       data: [],
       shortcutIcon: 'http://example.com/img/favicon.ico',
     })
-      .then(ctx => renderHerman(dest, ctx))
+      .then(ctx => renderHerman(this.dest, ctx))
       .then(() => {
+        // TODO
         // assert something?
         done();
       });
   });
 
   it('handles customCSS', function(done) {
-    const dest = `${__dirname}/dest`;
     prepareContext({
       data: [],
       customCSS: {
         path: `${__dirname}/dest/assets/css/main.css`,
       },
     })
-      .then(ctx => renderHerman(dest, ctx))
+      .then(ctx => renderHerman(this.dest, ctx))
       .then(() => {
+        // TODO
         // assert something?
         done();
       });
   });
 
   it('handles customCSS and customCSSFiles', function(done) {
-    const dest = `${__dirname}/dest`;
     prepareContext({
       data: [],
       customCSS: {
@@ -75,15 +96,15 @@ describe('renderHerman', function() {
       },
       customCSSFiles: [`${__dirname}/dest/assets/css/main.css`],
     })
-      .then(ctx => renderHerman(dest, ctx))
+      .then(ctx => renderHerman(this.dest, ctx))
       .then(() => {
+        // TODO
         // assert something?
         done();
       });
   });
 
   it('resolves local fonts', function(done) {
-    const dest = `${__dirname}/dest`;
     prepareContext({
       herman: {
         fontpath: '/path',
@@ -92,15 +113,15 @@ describe('renderHerman', function() {
       data: [],
       localFonts: [`${__dirname}/dest/assets/fonts/sample.ttf`],
     })
-      .then(ctx => renderHerman(dest, ctx))
+      .then(ctx => renderHerman(this.dest, ctx))
       .then(() => {
+        // TODO
         // assert something?
         done();
       });
   });
 
   it('renders extraDocs', function(done) {
-    const dest = `${__dirname}/dest`;
     prepareContext({
       data: [],
       extraDocs: [
@@ -111,15 +132,15 @@ describe('renderHerman', function() {
         },
       ],
     })
-      .then(ctx => renderHerman(dest, ctx))
+      .then(ctx => renderHerman(this.dest, ctx))
       .then(() => {
+        // TODO
         // assert something?
         done();
       });
   });
 
   it('renders a page for each group', function(done) {
-    const dest = `${__dirname}/dest`;
     prepareContext({
       data: [
         {
@@ -138,15 +159,15 @@ describe('renderHerman', function() {
         access: ['private', 'public'],
       },
     })
-      .then(ctx => renderHerman(dest, ctx))
+      .then(ctx => renderHerman(this.dest, ctx))
       .then(() => {
+        // TODO
         // assert something?
         done();
       });
   });
 
   it('renders subprojects', function(done) {
-    const dest = `${__dirname}/dest`;
     const item = {
       description: 'This is some text',
       context: {
@@ -175,8 +196,9 @@ describe('renderHerman', function() {
         },
       },
     })
-      .then(ctx => renderHerman(dest, ctx))
+      .then(ctx => renderHerman(this.dest, ctx))
       .then(() => {
+        // TODO
         // assert something?
         done();
       });
