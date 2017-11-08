@@ -15,9 +15,9 @@ describe('render', function() {
     const ctx = { name: 'World' };
 
     render(nunjucksEnv, tpl, dest, ctx).then(() => {
-      fs.readFile(dest, (err, data) => {
+      fs.readFile(dest, 'utf-8', (err, data) => {
         assert.equal(err, undefined);
-        assert.equal(data, 'Hello World!');
+        assert.equal(data, 'Hello World!\n');
 
         del(dest).then(() => {
           done();

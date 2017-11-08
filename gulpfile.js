@@ -28,7 +28,6 @@ const paths = {
   IMG: 'assets/img/**/*',
   SVG: 'assets/svg/**/*.svg',
   ASSETS_JS_DIR: 'assets/js/',
-  FONTS: 'assets/fonts/**/*',
   DOCS_DIR: 'docs/',
   JS_TESTS_DIR: 'test/',
   TEMPLATES_DIR: 'templates/',
@@ -313,7 +312,6 @@ gulp.task('watch', () => {
       paths.TEMPLATES,
       paths.IMG,
       paths.SVG,
-      paths.FONTS,
       `${paths.TEMPLATES_DIR}_icon_template.lodash`,
       './README.md',
       './package.json',
@@ -333,12 +331,6 @@ gulp.task('watch', () => {
 
   gulp.watch('**/.sass-lint.yml', ['sasslint-nofail']);
   gulp.watch('**/.eslintrc.yml', ['eslint-nofail']);
-});
-
-gulp.task('copy-fonts', () => {
-  const dest = `${paths.DIST_DIR}fonts/`;
-
-  return gulp.src(paths.FONTS).pipe(gulp.dest(dest));
 });
 
 gulp.task('jsmin', () => {
@@ -389,4 +381,4 @@ gulp.task('imagemin', () => {
     .pipe(gulp.dest(dest));
 });
 
-gulp.task('minify', ['jsmin', 'svgmin', 'imagemin', 'copy-fonts']);
+gulp.task('minify', ['jsmin', 'svgmin', 'imagemin']);
