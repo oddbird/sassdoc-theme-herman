@@ -17,10 +17,9 @@ describe('renderHerman', function() {
     this.dest = `${__dirname}/dest`;
     rmdir(this.dest)
       .then(
-        () => {
-          return mkdir(this.dest);
-        },
-        error => {}
+        () => mkdir(this.dest),
+        // Skip in case of error
+        () => {}
       )
       .then(done, done);
   });
@@ -49,9 +48,7 @@ describe('renderHerman', function() {
       shortcutIcon,
     })
       .then(ctx => renderHerman(this.dest, ctx))
-      .then(() => {
-        return access(shortcutIcon);
-      })
+      .then(() => access(expectedShortcutIcon))
       .then(() => {
         // We only get here if the file is accessible.
         assert.ok(true);
