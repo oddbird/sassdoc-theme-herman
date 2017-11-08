@@ -17,7 +17,7 @@ describe('render', function() {
     del.sync(this.dest);
   });
 
-  it('does a render', function(done) {
+  it('renders nunjucks tpl as a string', function(done) {
     const tpl = path.resolve(__dirname, 'files', 'base.j2');
     const ctx = { name: 'World' };
 

@@ -203,81 +203,79 @@ describe('font annotation', function() {
   });
 
   describe('resolve', function() {
-    describe('local font', function() {
-      beforeEach(function() {
-        this.data = [{ font: { key: 'test-font', formats: ['woff'] } }];
-        this.origData = Object.assign({}, this.data);
-      });
+    beforeEach(function() {
+      this.data = [{ font: { key: 'test-font', formats: ['woff'] } }];
+      this.origData = Object.assign({}, this.data);
+    });
 
-      it('warns and exits if no fontpath', function() {
-        const env = { logger: { warn: sinon.stub() }, herman: {} };
-        const font = annotations.font(env);
+    it('warns and exits if no fontpath', function() {
+      const env = { logger: { warn: sinon.stub() }, herman: {} };
+      const font = annotations.font(env);
 
-        font.resolve(this.data);
+      font.resolve(this.data);
 
-        assert.deepEqual(this.data, this.origData);
-        assert(
-          env.logger.warn.calledWith(
-            'Must pass in a `fontpath` if using @font annotation with local ' +
-              'fonts.'
-          )
-        );
-      });
+      assert.deepEqual(this.data, this.origData);
+      assert(
+        env.logger.warn.calledWith(
+          'Must pass in a `fontpath` if using @font annotation with local ' +
+            'fonts.'
+        )
+      );
+    });
 
-      it('warns and exits if no jsonfile', function() {
-        const env = {
-          logger: { warn: sinon.stub() },
-          herman: { fontpath: '/path' },
-        };
-        const font = annotations.font(env);
+    it('warns and exits if no jsonfile', function() {
+      const env = {
+        logger: { warn: sinon.stub() },
+        herman: { fontpath: '/path' },
+      };
+      const font = annotations.font(env);
 
-        font.resolve(this.data);
+      font.resolve(this.data);
 
-        assert.deepEqual(this.data, this.origData);
-        assert(
-          env.logger.warn.calledWith(
-            'Must pass in a `sassjson` file if using @font annotation with ' +
-              'local fonts.'
-          )
-        );
-      });
+      assert.deepEqual(this.data, this.origData);
+      assert(
+        env.logger.warn.calledWith(
+          'Must pass in a `sassjson` file if using @font annotation with ' +
+            'local fonts.'
+        )
+      );
+    });
 
-      it('adds `@font-face` CSS and localFonts src', function(done) {
-        const env = {
-          logger: { warn: sinon.stub() },
-          herman: {
-            fontpath: '/path',
-            sass: {
-              jsonfile: '/json',
+    it('adds `@font-face` CSS and localFonts src', function(done) {
+      const env = {
+        logger: { warn: sinon.stub() },
+        herman: {
+          fontpath: '/path',
+          sass: {
+            jsonfile: '/json',
+          },
+        },
+        sassjson: {
+          fonts: {
+            'test-font': {
+              regular: 'font/font',
             },
           },
-          sassjson: {
-            fonts: {
-              'test-font': {
-                regular: 'font/font',
-              },
-            },
-          },
-        };
-        const font = annotations.font(env);
+        },
+      };
+      const font = annotations.font(env);
 
-        font
-          .resolve(this.data)
-          .then(() => {
-            const css =
-              '@font-face {\n' +
-              "  font-family: 'test-font';\n" +
-              "  src: url('assets/fonts/font/font.woff') format('woff');\n" +
-              '  font-style: normal;\n' +
-              '  font-weight: normal;\n' +
-              '}\n';
+      font
+        .resolve(this.data)
+        .then(() => {
+          const css =
+            '@font-face {\n' +
+            "  font-family: 'test-font';\n" +
+            "  src: url('assets/fonts/font/font.woff') format('woff');\n" +
+            '  font-style: normal;\n' +
+            '  font-weight: normal;\n' +
+            '}\n';
 
-            assert.equal(this.data[0].font.localFontCSS, css);
-            assert.deepEqual(env.localFonts, ['/path/font/font.woff']);
-            done();
-          })
-          .catch(done);
-      });
+          assert.equal(this.data[0].font.localFontCSS, css);
+          assert.deepEqual(env.localFonts, ['/path/font/font.woff']);
+          done();
+        })
+        .catch(done);
     });
 
     it('skips items without a font attribute', function(done) {
@@ -352,8 +350,43 @@ describe('font annotation', function() {
         });
     });
 
-    // TODO make this:
-    it("don't push to env.localFonts if invalid format");
+    it('skips localFonts processing if not a valid format', function(done) {
+      const env = {
+        logger: { warn: sinon.stub() },
+        herman: {
+          fontpath: '/path',
+          sass: {
+            jsonfile: '/json',
+          },
+        },
+        sassjson: {
+          fonts: {
+            'test-font': {
+              regular: 'font/font',
+            },
+          },
+        },
+      };
+      const font = annotations.font(env);
+      const data = [{ font: { key: 'test-font', formats: ['fail'] } }];
+
+      font
+        .resolve(data)
+        .then(() => {
+          const css =
+            '@font-face {\n' +
+            "  font-family: 'test-font';\n" +
+            '  src:\n' +
+            '  font-style: normal;\n' +
+            '  font-weight: normal;\n' +
+            '}\n';
+
+          assert.equal(data[0].font.localFontCSS, css);
+          assert.deepEqual(env.localFonts, []);
+          done();
+        })
+        .catch(done);
+    });
   });
 });
 
@@ -384,8 +417,31 @@ describe('example annotation', function() {
       );
     });
 
-    // TODO make this:
-    it("doesn't recreate a customNjkEnv");
+    it("doesn't recreate a customNjkEnv", function(done) {
+      const data = [
+        {
+          example: [
+            {
+              type: 'njk',
+              code:
+                "{% import 'macros.j2' as macros %}\n" +
+                '{{ macros.mymacro(1, 2) }}',
+            },
+          ],
+        },
+      ];
+      sinon.spy(nunjucks, 'configure');
+
+      this.example
+        .resolve(data)
+        .then(() => {
+          sinon.assert.calledOnce(nunjucks.configure);
+
+          nunjucks.configure.restore();
+          done();
+        })
+        .catch(done);
+    });
 
     it('handles html items', function(done) {
       const data = [

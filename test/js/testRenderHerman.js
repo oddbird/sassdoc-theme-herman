@@ -19,7 +19,7 @@ describe('renderHerman', function() {
     del.sync(`${this.dest}/*`);
   });
 
-  it('does the herman things', function(done) {
+  it('renders index template', function(done) {
     prepareContext({
       data: [],
     })
