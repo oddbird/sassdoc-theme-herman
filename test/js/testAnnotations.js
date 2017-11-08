@@ -8,7 +8,6 @@ const sinon = require('sinon');
 
 /* eslint-disable global-require */
 const annotations = {
-  macro: require('../../lib/annotations/macro'),
   icons: require('../../lib/annotations/icons'),
   preview: require('../../lib/annotations/preview'),
   font: require('../../lib/annotations/font'),
@@ -16,78 +15,6 @@ const annotations = {
   name: require('../../lib/annotations/name'),
 };
 /* eslint-enable global-require */
-
-describe('macro annotation', function() {
-  beforeEach(function() {
-    this.env = {
-      herman: { templatepath: path.resolve(__dirname, 'files') },
-    };
-    this.macro = annotations.macro(this.env);
-  });
-
-  describe('parse', function() {
-    it('splits on colon', function() {
-      assert.deepEqual(this.macro.parse('foo.j2:name'), {
-        file: 'foo.j2',
-        name: 'name',
-      });
-    });
-  });
-
-  describe('resolve', function() {
-    it('warns and exits if no templatepath and @macro used', function() {
-      const env = { logger: { warn: sinon.stub() }, herman: {} };
-      const macro = annotations.macro(env);
-      const data = [{ macro: {} }];
-
-      macro.resolve(data);
-
-      assert.deepEqual(data, [{ macro: {} }]);
-      assert(
-        env.logger.warn.calledWith(
-          'Must pass in a templatepath if using @macro.'
-        )
-      );
-    });
-
-    it('warns only once about missing templatepath', function() {
-      const env = { logger: { warn: sinon.stub() }, herman: {} };
-      const macro = annotations.macro(env);
-      const data = [{ macro: {} }, { macro: {} }];
-
-      macro.resolve(data);
-
-      sinon.assert.calledOnce(env.logger.warn);
-    });
-
-    it('does not warn on lack of templatepath if @macro not used', function() {
-      const env = { logger: { warn: sinon.stub() }, herman: {} };
-      const macro = annotations.macro(env);
-      const data = [{}];
-
-      macro.resolve(data);
-
-      assert.deepEqual(data, [{}]);
-      sinon.assert.notCalled(env.logger.warn);
-    });
-
-    it('renders macro and doc', function() {
-      const data = [{ macro: { file: 'macros.j2', name: 'mymacro' } }];
-
-      this.macro.resolve(data);
-
-      assert.deepEqual(data, [
-        {
-          macro: {
-            file: 'macros.j2',
-            name: 'mymacro',
-            doc: 'This is my macro.',
-          },
-        },
-      ]);
-    });
-  });
-});
 
 describe('icons annotation', function() {
   beforeEach(function() {
@@ -630,12 +557,12 @@ describe('example annotation', function() {
 
 describe('name annotation', function() {
   before(function() {
-    this.macro = annotations.name(this.env);
+    this.name = annotations.name(this.env);
   });
 
   describe('parse', function() {
     it('trims text', function() {
-      assert.equal(this.macro.parse('foo '), 'foo');
+      assert.equal(this.name.parse('foo '), 'foo');
     });
   });
 
@@ -643,7 +570,7 @@ describe('name annotation', function() {
     it('preserves original context name', function() {
       const data = { name: 'foo', context: { name: 'bar' } };
 
-      this.macro.autofill(data);
+      this.name.autofill(data);
 
       assert.deepEqual(data, { context: { name: 'foo', origName: 'bar' } });
     });

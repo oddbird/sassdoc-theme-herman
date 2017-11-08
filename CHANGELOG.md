@@ -6,6 +6,8 @@
 - NEW: Add additional files (parsed as Markdown) with `extraDocs` option –
   [#117](https://github.com/oddbird/sassdoc-theme-herman/issues/117)
 - Updated dependencies.
+- BREAKING: Removed `@macro` annotation; use `@example njk` instead –
+  [#82](https://github.com/oddbird/sassdoc-theme-herman/issues/182)
 
 
 ## 1.0.0-alpha.15: 2017-10-30
