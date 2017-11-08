@@ -9,6 +9,8 @@
   using the `herman-export` mixin.
   Sass-json-export integration should continue to work as expected.
 - Updated dependencies.
+- BREAKING: Removed `@macro` annotation; use `@example njk` instead –
+  [#82](https://github.com/oddbird/sassdoc-theme-herman/issues/182)
 
 
 ## 1.0.0-alpha.15: 2017-10-30
