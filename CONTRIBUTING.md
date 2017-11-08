@@ -32,16 +32,16 @@ We're happy to work with you to make this the best
 
 ## Development
 
-To install the necessary Nodedependencies, run ``yarn``.
+To install the necessary Node dependencies, run ``yarn``.
 
 You can lint the project's JS with ``gulp eslint``
-and run the JS unit tests with ``gulp test`` (or ``yarn test``).
+and run the JS unit tests with ``gulp test``.
 You can lint Sass with ``gulp sasslint``
 and run the Sass tests with ``gulp sasstest``.
 
 To compile and minify the static assets –
-as well as generate the documentation
-– run ``gulp compile``.
+as well as generate the documentation –
+run ``gulp compile``.
 
 Just running ``gulp`` will perform all of the above tasks.
 
@@ -50,7 +50,7 @@ This will also watch for changes to local files
 and automatically perform an appropriate selection of the above tasks
 whenever changes are detected to relevant files.
 
-Access the running server at http://localhost:3000.
+Access the running server at ``http://localhost:3000``.
 
 Refer to the ``gulpfile.js`` source and [gulp](http://gulpjs.com/)
 documentation for more info.
