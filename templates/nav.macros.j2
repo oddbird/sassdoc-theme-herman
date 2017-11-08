@@ -24,22 +24,26 @@
 ) %}
   <nav role="navigation" data-nav-menu="{{ size }}" {{ utility.toggle_target(['nav', size]|join('-'), expanded=expanded)}}>
 
-    <h3 data-sassdoc="nav-title">
-      {% set activeNav = 'is-active' if (activeGroup == none) else 'is-not-active' %}
-      <a href="index.html" data-sassdoc-nav="{{ activeNav }}">{{ project }}</a>
-    </h3>
+    <div data-sassdoc="nav-subsection">
+      <h3 data-sassdoc="nav-title">
+        {% set activeNav = 'is-active' if (activeGroup == none) else 'is-not-active' %}
+        <a href="index.html" data-sassdoc-nav="{{ activeNav }}">{{ project }}</a>
+      </h3>
 
-    {% if extraDocs and extraDocs|length %}
-      <ul data-sassdoc="nav-subsection">
-        {% for extraDoc in extraDocs %}
-          {% set activeNav = 'is-active' if (activeGroup == extraDoc.filename) else 'is-not-active' %}
-          <li data-sassdoc="nav-item">
-            <a href="{{ extraDoc.filename }}.html" data-sassdoc-nav="{{ activeNav }}">{{ extraDoc.name }}</a>
-          </li>
-        {% endfor %}
-      </ul>
-    {% endif %}
+      {# Markdown Files, e.g. Changelog, Getting Started #}
+      {% if extraDocs and extraDocs|length %}
+        <ul>
+          {% for extraDoc in extraDocs %}
+            {% set activeNav = 'is-active' if (activeGroup == extraDoc.filename) else 'is-not-active' %}
+            <li data-sassdoc="nav-item">
+              <a href="{{ extraDoc.filename }}.html" data-sassdoc-nav="{{ activeNav }}">{{ extraDoc.name }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
 
+    {# Generated Sass Docs #}
     <ul data-sassdoc="nav-subsection">
       {% for groupName, group in byGroup %}
         {% set activeNav = 'is-active' if (activeGroup == groupName) else 'is-not-active' %}
@@ -49,14 +53,21 @@
       {% endfor %}
     </ul>
 
+    {# External Links #}
     {% if extraLinks and extraLinks|length %}
-      <ul data-sassdoc="nav-subsection">
-        {% for extraLink in extraLinks %}
-          <li data-sassdoc="nav-item">
-            <a href="{{ extraLink.url }}" data-sassdoc-nav="is-not-active">{{ extraLink.name }}</a>
-          </li>
-        {% endfor %}
-      </ul>
+      <div data-sassdoc="nav-subsection">
+        <h3 data-sassdoc="nav-title">
+          External Links
+        </h3>
+
+        <ul>
+          {% for extraLink in extraLinks %}
+            <li data-sassdoc="nav-item">
+              <a href="{{ extraLink.url }}" data-sassdoc-nav="is-not-active">{{ extraLink.name }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
     {% endif %}
   </nav>
 {% endmacro %}
