@@ -1,9 +1,10 @@
 'use strict';
 
 const assert = require('assert');
+const extend = require('extend');
 const sinon = require('sinon');
 
-const prepareContext = require('../lib/prepareContext');
+const prepareContext = require('../../lib/prepareContext');
 
 describe('prepareContext', function() {
   it('resolves to a context', function(done) {
@@ -33,21 +34,21 @@ describe('prepareContext', function() {
   });
 
   it('sets extraDocs', function(done) {
+    const warn = sinon.spy();
     prepareContext({
       data: [],
-      logger: {
-        warn: sinon.spy(),
-      },
       herman: {
         extraDocs: [
-          // TODO these will have to point to real things:
-          `${__dirname}/extraDocs/simple.md`,
+          `${__dirname}/files/simple.md`,
           {
-            path: `${__dirname}/extraDocs/complex.md`,
+            path: `${__dirname}/files/complex.md`,
             name: 'A complex doc',
           },
           `${__dirname}/no/such/file`,
         ],
+      },
+      logger: {
+        warn,
       },
     })
       .then(ctx => {
@@ -61,9 +62,8 @@ describe('prepareContext', function() {
           name: 'A complex doc',
           text: '<h1 id="a-complex-file">A complex file</h1>\n',
         };
-        assert(ctx.extraDocs.length == 2);
-        assert.deepEqual(ctx.extraDocs[0], simple);
-        assert.deepEqual(ctx.extraDocs[1], complex);
+        assert.deepEqual(ctx.extraDocs.sort(), [simple, complex]);
+        sinon.assert.calledOnce(warn);
         done();
       })
       .catch(done);
@@ -73,20 +73,15 @@ describe('prepareContext', function() {
     const expected = {
       colors: {
         'brand-colors': {
-          'brand-blue': '#0d7fa5',
           'brand-orange': '#c75000',
-          'brand-pink': '#e2127a',
         },
       },
     };
     prepareContext({
       data: [],
-      logger: {
-        warn: sinon.spy(),
-      },
       herman: {
         sass: {
-          jsonfile: `${__dirname}/dist/css/json.css`,
+          jsonfile: `${__dirname}/files/json.css`,
         },
       },
     })
@@ -104,44 +99,46 @@ describe('prepareContext', function() {
       logger: { warn },
       herman: {
         sass: {
-          jsonfile: `${__dirname}/dist/css/missing-json.css`,
+          jsonfile: `${__dirname}/files/missing-json.css`,
         },
       },
     })
-      .then(ctx => {
-        assert(warn.calledOnce);
+      .then(() => {
+        sinon.assert.calledOnce(warn);
         done();
       })
       .catch(done);
   });
 
   it('removes bogus context', function(done) {
-    const expected = {
+    const item = {
+      commentRange: {
+        start: 0,
+        end: 5,
+      },
       context: {
-        type: 'prose',
-        line: undefined,
+        type: 'unknown',
+        name: 'Test\nItem',
+        line: {
+          start: 10,
+          end: 15,
+        },
       },
       group: [],
-      groupName: {},
       access: 'public',
     };
-    prepareContext({
-      data: [
-        {
-          context: {
-            type: 'unknown',
-            line: {
-              start: 0,
-              end: 1,
-            },
-          },
-          group: [],
-          access: 'public',
+    const expected = extend({}, item, {
+      context: {
+        type: 'prose',
+        line: {
+          start: 0,
+          end: 5,
         },
-      ],
-      display: {
-        access: ['private', 'public'],
       },
+      groupName: {},
+    });
+    prepareContext({
+      data: [item],
     })
       .then(ctx => {
         assert.deepEqual(ctx.data[0], expected);

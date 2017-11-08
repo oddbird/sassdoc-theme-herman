@@ -2,8 +2,8 @@
 
 const assert = require('assert');
 
-const parseSubprojects = require('../lib/parseSubprojects');
-const prepareContext = require('../lib/prepareContext');
+const parseSubprojects = require('../../lib/parseSubprojects');
+const prepareContext = require('../../lib/prepareContext');
 
 describe('parseSubprojects', function() {
   it('does a parseSubprojects', function(done) {

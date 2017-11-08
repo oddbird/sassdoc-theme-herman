@@ -4,7 +4,7 @@ const assert = require('assert');
 const nunjucks = require('nunjucks');
 const sinon = require('sinon');
 
-const getNunjucksEnv = require('../lib/utils/getNunjucksEnv');
+const getNunjucksEnv = require('../../lib/utils/getNunjucksEnv');
 
 describe('getNunjucksEnv', function() {
   it('uses an existing nunjucksEnv first', function() {

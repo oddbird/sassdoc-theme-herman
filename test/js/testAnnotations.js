@@ -8,19 +8,19 @@ const sinon = require('sinon');
 
 /* eslint-disable global-require */
 const annotations = {
-  macro: require('../lib/annotations/macro'),
-  icons: require('../lib/annotations/icons'),
-  preview: require('../lib/annotations/preview'),
-  font: require('../lib/annotations/font'),
-  example: require('../lib/annotations/example'),
-  name: require('../lib/annotations/name'),
+  macro: require('../../lib/annotations/macro'),
+  icons: require('../../lib/annotations/icons'),
+  preview: require('../../lib/annotations/preview'),
+  font: require('../../lib/annotations/font'),
+  example: require('../../lib/annotations/example'),
+  name: require('../../lib/annotations/name'),
 };
 /* eslint-enable global-require */
 
 describe('macro annotation', function() {
   beforeEach(function() {
     this.env = {
-      herman: { templatepath: path.resolve(__dirname, 'templates') },
+      herman: { templatepath: path.resolve(__dirname, 'files') },
     };
     this.macro = annotations.macro(this.env);
   });
@@ -93,7 +93,7 @@ describe('icons annotation', function() {
   beforeEach(function() {
     this.env = {
       logger: { warn: sinon.stub() },
-      herman: { templatepath: path.resolve(__dirname, 'templates') },
+      herman: { templatepath: path.resolve(__dirname, 'files') },
     };
     this.icons = annotations.icons(this.env);
   });
@@ -113,7 +113,7 @@ describe('icons annotation', function() {
       const data = [
         {
           icons: {
-            iconsPath: 'test/templates/bad_icons',
+            iconsPath: 'test/js/files/bad_icons',
             macroFile: 'macros.j2',
             macroName: 'icon',
           },
@@ -133,7 +133,7 @@ describe('icons annotation', function() {
       const data = [
         {
           icons: {
-            iconsPath: 'test/templates/icons',
+            iconsPath: 'test/js/files/icons',
             macroFile: 'macros.j2',
             macroName: 'icon',
           },
@@ -146,12 +146,12 @@ describe('icons annotation', function() {
           assert.deepEqual(data[0].icons, [
             {
               name: 'ok',
-              path: 'test/templates/icons/ok.svg',
+              path: 'test/js/files/icons/ok.svg',
               rendered: 'rendered ok',
             },
             {
               name: 'warning',
-              path: 'test/templates/icons/warning.svg',
+              path: 'test/js/files/icons/warning.svg',
               rendered: 'rendered warning',
             },
           ]);
@@ -165,14 +165,14 @@ describe('icons annotation', function() {
       const data = [
         {
           icons: {
-            iconsPath: 'test/templates/icons',
+            iconsPath: 'test/js/files/icons',
             macroFile: 'macros.j2',
             macroName: 'icon',
           },
         },
         {
           icons: {
-            iconsPath: 'test/templates/icons',
+            iconsPath: 'test/js/files/icons',
             macroFile: 'macros.j2',
             macroName: 'mymacro',
           },
@@ -396,7 +396,7 @@ describe('font annotation', function() {
       const env = {
         herman: {
           sass: {
-            jsonfile: `${__dirname}/templates/json.css`,
+            jsonfile: `${__dirname}/files/json.css`,
           },
           fontpath: '/path',
         },
@@ -434,7 +434,7 @@ describe('example annotation', function() {
   beforeEach(function() {
     this.env = {
       herman: {
-        templatepath: path.resolve(__dirname, 'templates'),
+        templatepath: path.resolve(__dirname, 'files'),
       },
       logger: { warn: sinon.spy() },
     };
@@ -518,7 +518,7 @@ describe('example annotation', function() {
         herman: {
           sass: {
             includes: ['~accoutrement-color/sass/utils', 'import'],
-            includepaths: [path.join(__dirname, 'templates')],
+            includepaths: [path.join(__dirname, 'files')],
           },
         },
       });
@@ -602,9 +602,7 @@ describe('example annotation', function() {
     });
 
     it('uses custom nunjucks env, if exists', function() {
-      const nunjucksEnv = nunjucks.configure(
-        path.resolve(__dirname, 'templates')
-      );
+      const nunjucksEnv = nunjucks.configure(path.resolve(__dirname, 'files'));
       nunjucksEnv.addFilter('plus_one', function(val) {
         return val + 1;
       });
