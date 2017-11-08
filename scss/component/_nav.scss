@@ -103,9 +103,11 @@
 // Nav Subsections
 // ---------------
 [data-sassdoc='nav-subsection'] {
-  border-bottom: 1px solid color('theme-light');
-  margin-bottom: size('shim');
-  padding-bottom: size('shim');
+  &:not(:last-child) {
+    border-bottom: 1px solid color('theme-light');
+    margin-bottom: size('shim');
+    padding-bottom: size('shim');
+  }
 }
 
 

@@ -243,13 +243,32 @@ gulp.task('compile', ['sass', 'minify'], () => {
     dest: paths.DOCS_DIR,
     theme: './',
     herman: {
-      subprojects: [
-        'accoutrement-color',
-        'accoutrement-scale',
-        'accoutrement-type',
-        'accoutrement-layout',
-        'accoutrement-init',
+      displayColors: ['hex', 'hsl'],
+      extraDocs: [{ name: 'Changelog', path: './CHANGELOG.md' }],
+      extraLinks: [
+        {
+          name: 'Accoutrement-Color',
+          url: 'http://oddbird.net/accoutrement-color/',
+        },
+        {
+          name: 'Accoutrement-Scale',
+          url: 'http://oddbird.net/accoutrement-scale/',
+        },
+        {
+          name: 'Accoutrement-Type',
+          url: 'http://oddbird.net/accoutrement-type/',
+        },
+        {
+          name: 'Accoutrement-Layout',
+          url: 'http://oddbird.net/accoutrement-layout/',
+        },
+        {
+          name: 'Accoutrement-Init',
+          url: 'http://oddbird.net/accoutrement-init/',
+        },
       ],
+      customCSS: `${paths.DIST_DIR}css/main.css`,
+      minifiedIcons: `${paths.TEMPLATES_DIR}_icons.svg`,
       templatepath: path.join(__dirname, 'templates'),
       sass: {
         jsonfile: `${paths.DIST_DIR}css/json.css`,
@@ -259,10 +278,6 @@ gulp.task('compile', ['sass', 'minify'], () => {
         ],
         includes: ['utilities', 'config/manifest'],
       },
-      customCSS: `${paths.DIST_DIR}css/main.css`,
-      minifiedIcons: `${paths.TEMPLATES_DIR}_icons.svg`,
-      displayColors: ['hex', 'hsl'],
-      extraDocs: [{ name: 'Changelog', path: './CHANGELOG.md' }],
     },
     display: {
       alias: true,

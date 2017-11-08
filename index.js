@@ -1,6 +1,5 @@
 'use strict';
 
-const parseSubprojects = require('./lib/parseSubprojects');
 const prepareContext = require('./lib/prepareContext');
 const renderHerman = require('./lib/renderHerman');
 
@@ -17,9 +16,7 @@ const preview = require('./lib/annotations/preview');
  */
 const herman = (dest, ctx) =>
   prepareContext(ctx).then(preparedContext =>
-    parseSubprojects(preparedContext).then(() =>
-      renderHerman(dest, preparedContext)
-    )
+    renderHerman(dest, preparedContext)
   );
 
 herman.annotations = [macro, icons, preview, font, example, name];
