@@ -3,6 +3,7 @@
 const assert = require('assert');
 const extend = require('extend');
 const sinon = require('sinon');
+const sortBy = require('lodash/sortBy');
 
 const prepareContext = require('../../lib/prepareContext');
 
@@ -62,7 +63,10 @@ describe('prepareContext', function() {
           name: 'A complex doc',
           text: '<h1 id="a-complex-file">A complex file</h1>\n',
         };
-        assert.deepEqual(ctx.extraDocs.sort(), [simple, complex]);
+        assert.deepEqual(sortBy(ctx.extraDocs, ['filename']), [
+          complex,
+          simple,
+        ]);
         sinon.assert.calledOnce(warn);
         done();
       })
