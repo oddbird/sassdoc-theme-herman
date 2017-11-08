@@ -67,10 +67,16 @@ describe('renderHerman', function() {
     })
       .then(ctx => renderHerman(this.dest, ctx))
       .then(() => {
-        // TODO
-        // assert something?
+        const shortcutIcon = `${__dirname}/assets/img/favicon.ico`;
+        // Is this the right thing to test access? I suspect not.
+        return access(shortcutIcon);
+      })
+      .then(() => {
+        // We only get here if the file is accessible.
+        assert.ok(true);
         done();
-      });
+      })
+      .catch(done);
   });
 
   it('handles customCSS', function(done) {
