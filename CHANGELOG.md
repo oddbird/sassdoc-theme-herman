@@ -21,6 +21,7 @@
   [#119](https://github.com/oddbird/sassdoc-theme-herman/issues/119)
 - NEW: Add "widont" text transformations with
   [typogr](https://github.com/ekalinin/typogr.js).
+- BUGFIX: Ensure consistent ordering of `extraDocs`.
 
 
 ## 1.0.0-alpha.15: 2017-10-30
