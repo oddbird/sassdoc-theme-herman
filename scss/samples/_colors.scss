@@ -8,7 +8,7 @@
 /// or group them into a map,
 /// you can use Herman to document and display color palettes.
 /// In the end, Herman will need a map
-/// converted to JSON –
+/// converted to JSON --
 /// but we'll start with individual colors,
 /// and build the export from there.
 ///
@@ -35,7 +35,7 @@ $brand-pink: hsl(330, 85%, 48%);
 /// or removing the duplication.
 ///
 /// Create as many maps as you like
-/// to organize different palettes –
+/// to organize different palettes --
 /// primary, secondary, button-colors, etc.
 /// Each map will be displayed individually,
 /// using the `@preview color-palette` annotation:
@@ -89,7 +89,7 @@ $demo-colors: (
 /// /// @include herman-add('colors', 'demo-colors', $demo-colors);
 /// ```
 ///
-/// - The first argument tells Herman what type of data is being added –
+/// - The first argument tells Herman what type of data is being added --
 ///   in this case `colors`.
 ///   Herman will organize the output JSON into subgroups by type.
 ///   We use this to our advantage,

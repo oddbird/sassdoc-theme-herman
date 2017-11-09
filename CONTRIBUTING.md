@@ -39,8 +39,8 @@ and run the JS unit tests with ``gulp test``.
 You can lint Sass with ``gulp sasslint``
 and run the Sass tests with ``gulp sasstest``.
 
-To compile and minify the static assets –
-as well as generate the documentation –
+To compile and minify the static assets --
+as well as generate the documentation --
 run ``gulp compile``.
 
 Just running ``gulp`` will perform all of the above tasks.

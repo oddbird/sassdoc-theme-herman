@@ -8,11 +8,11 @@
 > Documentation should become the default,
 > an integrated part of the development process."
 >
-> <cite>—Miriam Suzanne</cite>
+> <cite>---Miriam Suzanne</cite>
 
 At [OddBird][oddbird],
 we wanted better tools for documenting
-the entire front end of a project –
+the entire front end of a project --
 from brand guidelines to UX patterns and code APIs:
 
 - Documenting the intersection of languages and styles
@@ -58,7 +58,7 @@ from other developer comments (`//`).
 ```
 
 Annotation comments can be free-floating,
-or attached to a particular Sass/CSS object –
+or attached to a particular Sass/CSS object --
 such as a variable, mixin, function, or selector block.
 
 ```scss

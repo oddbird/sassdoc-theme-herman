@@ -27,7 +27,10 @@ describe('render', function() {
     render(nunjucksEnv, tpl, this.dest, ctx)
       .then(() => readFile(this.dest, 'utf-8'))
       .then(data => {
-        assert.equal(data, 'Hello World!\n');
+        assert.equal(
+          data,
+          '<p>I say: Hello<span class="widont">&nbsp;</span>World!</p>\n'
+        );
         done();
       })
       .catch(done);

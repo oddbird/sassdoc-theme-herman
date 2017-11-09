@@ -90,7 +90,7 @@
       
         
         <li data-sassdoc="nav-item">
-          <a href="api_json-export.html" data-sassdoc-nav="is-not-active">Exporting Sass to JSON</a>
+          <a href="api_json-export.html" data-sassdoc-nav="is-not-active">Exporting Sass to<span class="widont">&nbsp;</span>JSON</a>
         </li>
       
         
@@ -237,7 +237,7 @@
       
         
         <li data-sassdoc="nav-item">
-          <a href="api_json-export.html" data-sassdoc-nav="is-not-active">Exporting Sass to JSON</a>
+          <a href="api_json-export.html" data-sassdoc-nav="is-not-active">Exporting Sass to<span class="widont">&nbsp;</span>JSON</a>
         </li>
       
         
@@ -383,15 +383,15 @@
 
   
     <div data-item-section="prose" class="text-block">
-      <h2 id="documenting-colors-and-rendering-palettes">Documenting colors and rendering palettes</h2>
+      <h2 id="documenting-colors-and-rendering-palettes">Documenting colors and rendering<span class="widont">&nbsp;</span>palettes</h2>
 <p>Whether you store colors as individual variables
 or group them into a map,
 you can use Herman to document and display color palettes.
 In the end, Herman will need a map
 converted to JSON –
 but we’ll start with individual colors,
-and build the export from there.</p>
-<p>For this demo, we’ve defined two brand colors:</p>
+and build the export from<span class="widont">&nbsp;</span>there.</p>
+<p>For this demo, we’ve defined two brand<span class="widont">&nbsp;</span>colors:</p>
 <pre><code>$brand-blue: hsl(195, 85%, 35%);
 $brand-pink: hsl(330, 85%, 48%);
 </code></pre>
@@ -533,12 +533,12 @@ $brand-pink: hsl(330, 85%, 48%);
     <h3 class="item-subtitle">Description</h3>
     
       <div class="text-block">
-        <h2 id="preview-color-maps-as-palettes">Preview color maps as palettes</h2>
+        <h2 id="preview-color-maps-as-palettes">Preview color maps as<span class="widont">&nbsp;</span>palettes</h2>
 <p>In order to export our colors to Herman,
 we’ll want to combine them into a map
 of name/value pairs.
 Sass does not provide any shortcuts for automating this step,
-or removing the duplication.</p>
+or removing the<span class="widont">&nbsp;</span>duplication.</p>
 <p>Create as many maps as you like
 to organize different palettes –
 primary, secondary, button-colors, etc.
@@ -721,15 +721,15 @@ using the <code>herman.displayColors</code> option:</p>
 
   
     <div data-item-section="prose" class="text-block">
-      <h2 id="add-color-data-to-herman">Add color-data to $herman</h2>
+      <h2 id="add-color-data-to-herman">Add color-data to<span class="widont">&nbsp;</span>$herman</h2>
 <p>In order to preview the <code>$demo-colors</code> palette,
 we need to export the data to JSON.
 That’s a two-step process:
 first building the export-map,
 and then creating a sass file to do the actual export.
-We provide shortcuts to help with both.</p>
+We provide shortcuts to help with<span class="widont">&nbsp;</span>both.</p>
 <p>Use the <code>herman-add</code> mixin to add individual data maps
-to the global export map.</p>
+to the global export<span class="widont">&nbsp;</span>map.</p>
 <pre><code> @include herman-add('colors', 'demo-colors', $demo-colors);
 </code></pre>
 <ul>
@@ -738,7 +738,7 @@ in this case <code>colors</code>.
 Herman will organize the output JSON into subgroups by type.
 We use this to our advantage,
 passing the exported colors to application-js as well as Herman,
-so colors defined in Sass can be accessed in JavaScript.</li>
+so colors defined in Sass can be accessed in<span class="widont">&nbsp;</span>JavaScript.</li>
 <li>The second argument sets a <code>key</code> name
 for accessing this particular group of colors.
 The <code>herman-add</code> key should match
@@ -746,7 +746,7 @@ the key provided to <code>@preview color-palette</code>.</li>
 <li>The third argument provides the actual map of data
 to be added to the <code>$herman</code> export map.</li>
 </ul>
-<p>The result is an export map that looks like this:</p>
+<p>The result is an export map that looks like<span class="widont">&nbsp;</span>this:</p>
 <pre><code class="lang-scss">$herman: (
   'colors': (
     'demo-colors': (
@@ -756,7 +756,7 @@ to be added to the <code>$herman</code> export map.</li>
   ),
 );
 </code></pre>
-<p>You can also build that map by hand, if you prefer.</p>
+<p>You can also build that map by hand, if you<span class="widont">&nbsp;</span>prefer.</p>
 
       
   
@@ -895,11 +895,11 @@ to be added to the <code>$herman</code> export map.</li>
 
   
     <div data-item-section="prose" class="text-block">
-      <h2 id="compile-and-export-complex-maps">Compile and export complex maps</h2>
+      <h2 id="compile-and-export-complex-maps">Compile and export complex<span class="widont">&nbsp;</span>maps</h2>
 <p>At OddBird, we store our colors in more complex maps,
 where the values need to be parsed and compiled
 before they can be exported to Herman.
-Using <a href="http://oddbird.net/accoutrement-color">accoutrement-color</a>, our maps look like this:</p>
+Using <a href="http://oddbird.net/accoutrement-color">accoutrement-color</a>, our maps look like<span class="widont">&nbsp;</span>this:</p>
 <pre><code>$demo-noncolors: (
   'light-gray': 'brand-blue' ('tint': 80%, 'desaturate': 80%),
   'gray': 'brand-blue' ('desaturate': 80%),
@@ -915,13 +915,13 @@ through the color function before exporting.
 for calling a function on each value of the map.
 Pass in a function name (Sass 3.4-),
 or first-class function (Sass 3.5+)
-along with any additional arguments that function might need:</p>
+along with any additional arguments that function might<span class="widont">&nbsp;</span>need:</p>
 <pre><code> $color-function: get-function('color');
  @include herman-add('colors', demo-noncolors, $demo-noncolors, $color-function, $args…);
 </code></pre>
 <p>The <code>color</code> function will be called on each value
 before adding it to our <code>$herman</code> map.
-The call happens in this format:</p>
+The call happens in this<span class="widont">&nbsp;</span>format:</p>
 <pre><code>'color-name': color($value, $args…),
 </code></pre>
 

@@ -3,22 +3,24 @@
 
 ## Unreleased
 
-- NEW: Add additional files (parsed as Markdown) with `extraDocs` option –
+- NEW: Add additional files (parsed as Markdown) with `extraDocs` option --
   [#117](https://github.com/oddbird/sassdoc-theme-herman/issues/117)
 - CHANGE: JSON-export functionality is now built in
   using the `herman-export` mixin.
   Sass-json-export integration should continue to work as expected.
 - Updated dependencies.
-- BREAKING: Remove `subprojects` option; replace with `extraLinks` option –
+- BREAKING: Remove `subprojects` option; replace with `extraLinks` option --
   [#175](https://github.com/oddbird/sassdoc-theme-herman/issues/175)
-- BREAKING: Removed `@macro` annotation; use `@example njk` instead –
+- BREAKING: Removed `@macro` annotation; use `@example njk` instead --
   [#182](https://github.com/oddbird/sassdoc-theme-herman/issues/182)
-- CHANGE: HTML assets are no longer minified –
+- CHANGE: HTML assets are no longer minified --
   [#186](https://github.com/oddbird/sassdoc-theme-herman/issues/186)
 - CHANGE: Replace [marked](https://github.com/chjj/marked) with
   [markdown-it](https://github.com/markdown-it/markdown-it) for Markdown
-  parsing, and add quotes beautification –
+  parsing with quote beautification --
   [#119](https://github.com/oddbird/sassdoc-theme-herman/issues/119)
+- NEW: Add "widont" text transformations with
+  [typogr](https://github.com/ekalinin/typogr.js).
 
 
 ## 1.0.0-alpha.15: 2017-10-30
@@ -32,18 +34,18 @@
 - BREAKING: Remove `accoutrement-add` as a public utility,
   since Sass 3.5+ modular sytems will make it unusable.
 - Updated dependencies.
-- BUGFIX: Fix broken internal links –
+- BUGFIX: Fix broken internal links --
   [#106](https://github.com/oddbird/sassdoc-theme-herman/issues/106)
-- BREAKING: Group navigation is ordered according to config `groups` order –
+- BREAKING: Group navigation is ordered according to config `groups` order --
   [#150](https://github.com/oddbird/sassdoc-theme-herman/issues/150)
 - BUGFIX: Do not error if `sass` config option is `undefined`.
-- BUGFIX: Do not break layout on fonts with single-item stack –
+- BUGFIX: Do not break layout on fonts with single-item stack --
   [#172](https://github.com/oddbird/sassdoc-theme-herman/issues/172)
 - BREAKING: `@preview font-specimen` is replaced by new `@font` annotation.
 - BREAKING: Removed `customHead` option; replaced by multiline `@font`
   annotation.
 - BUGFIX: Fix assets referenced with relative urls in client-provided
-  `customCSS` for `@example` annotations –
+  `customCSS` for `@example` annotations --
   [#174](https://github.com/oddbird/sassdoc-theme-herman/issues/174)
 
 
@@ -82,9 +84,9 @@
   while adding to both `$herman` and the appropriate accoutrement global
   (`$colors`, `$ratios`, `$sizes`, `$fonts`).
 - NEW: `displayColors` option (type: `Array`, default: `['hex', 'rgb', 'hsl']`)
-- CHANGE: Group identical colors in color-palette –
+- CHANGE: Group identical colors in color-palette --
   [#123](https://github.com/oddbird/sassdoc-theme-herman/issues/123)
-- BUGFIX: Fix blocks with multi-line selectors and custom @name annotations –
+- BUGFIX: Fix blocks with multi-line selectors and custom @name annotations --
   [#140](https://github.com/oddbird/sassdoc-theme-herman/pull/140)
 - DOCS: Move to `docs/` and include in repo.
 
@@ -146,35 +148,35 @@
 ## 1.0.0-alpha.1: 2017-05-29
 
 - Display links on index pages to project home and source,
-  when defined in the project `package.json` –
+  when defined in the project `package.json` --
   [#91](https://github.com/oddbird/sassdoc-theme-herman/issues/65)
-- Clean up display of parameters and properties –
+- Clean up display of parameters and properties --
   [#53](https://github.com/oddbird/sassdoc-theme-herman/issues/53) and
   [#49](https://github.com/oddbird/sassdoc-theme-herman/issues/49) and
   [#55](https://github.com/oddbird/sassdoc-theme-herman/issues/55)
-- Display source and compiled code (njk and html; scss and css) side-by-side –
+- Display source and compiled code (njk and html; scss and css) side-by-side --
   [#65](https://github.com/oddbird/sassdoc-theme-herman/issues/65)
-- Add support for @todo annotation –
+- Add support for @todo annotation --
   [#18](https://github.com/oddbird/sassdoc-theme-herman/issues/18)
-- Add support for @type annotation –
+- Add support for @type annotation --
   [#19](https://github.com/oddbird/sassdoc-theme-herman/issues/19)
-- Add support for @alias (and aliased callback) annotation –
+- Add support for @alias (and aliased callback) annotation --
   [#5](https://github.com/oddbird/sassdoc-theme-herman/issues/5)
 - Add support for used-by (@require annotation callbacks).
-- Show compiled CSS for `@example scss` annotations –
+- Show compiled CSS for `@example scss` annotations --
   [#37](https://github.com/oddbird/sassdoc-theme-herman/issues/37)
 - BREAKING: Nest Herman-specific options under `herman` object in sassdoc
   configuration, and Sass-specific options under `herman.sass` object.
-- Re-brand with sidebar navigation –
+- Re-brand with sidebar navigation --
   [#58](https://github.com/oddbird/sassdoc-theme-herman/issues/58) and
   [#69](https://github.com/oddbird/sassdoc-theme-herman/issues/69).
-- Add support for rendering documentation from dependency subprojects –
+- Add support for rendering documentation from dependency subprojects --
   [#61](https://github.com/oddbird/sassdoc-theme-herman/issues/61).
 - BUGFIX: Do not link to internal `@access private` items if `display` option
   is set to `access: ['public']`.
-- BUGFIX: Do not error if missing `herman.subprojects` option –
+- BUGFIX: Do not error if missing `herman.subprojects` option --
   [#107](https://github.com/oddbird/sassdoc-theme-herman/issues/107).
-- BUGFIX: Do not error if missing `herman` options –
+- BUGFIX: Do not error if missing `herman` options --
   [#108](https://github.com/oddbird/sassdoc-theme-herman/issues/108).
 
 
@@ -186,7 +188,7 @@
 
 ## 0.5.4: 2017-01-16
 
-- Render type `html` examples to HTML –
+- Render type `html` examples to HTML --
   [#45](https://github.com/oddbird/sassdoc-theme-herman/issues/45).
 
 
@@ -205,8 +207,8 @@
 
 ## 0.5.1: 2016-12-13
 
-- Add optional `show` argument for font-specimen previews —
-  `@preview font-specimen; show: regular, bold, bold italic` —
+- Add optional `show` argument for font-specimen previews --
+  `@preview font-specimen; show: regular, bold, bold italic` --
   allowing you to override what variants are displayed
   in the specimen.
 

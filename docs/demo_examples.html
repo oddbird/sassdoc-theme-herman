@@ -90,7 +90,7 @@
       
         
         <li data-sassdoc="nav-item">
-          <a href="api_json-export.html" data-sassdoc-nav="is-not-active">Exporting Sass to JSON</a>
+          <a href="api_json-export.html" data-sassdoc-nav="is-not-active">Exporting Sass to<span class="widont">&nbsp;</span>JSON</a>
         </li>
       
         
@@ -237,7 +237,7 @@
       
         
         <li data-sassdoc="nav-item">
-          <a href="api_json-export.html" data-sassdoc-nav="is-not-active">Exporting Sass to JSON</a>
+          <a href="api_json-export.html" data-sassdoc-nav="is-not-active">Exporting Sass to<span class="widont">&nbsp;</span>JSON</a>
         </li>
       
         
@@ -390,7 +390,7 @@ We’ve expanded their feature
 to show compiled CSS alongside the Sass input,
 compile Nunjucks examples for templating,
 and render any input-or-compiled HTML
-so you can see the results.</p>
+so you can see the<span class="widont">&nbsp;</span>results.</p>
 <p>The resulting annotation syntax
 is identical to the original SassDoc feature.
 If you use the <code>@example</code> annotation
@@ -400,7 +400,7 @@ Herman will display the source of the example,
 along with the compiled output
 (and rendered html, if using <code>njk</code> or <code>html</code> languages).
 Both Sass &amp; Nunjucks examples
-allow you to import external partials:</p>
+allow you to import external<span class="widont">&nbsp;</span>partials:</p>
 <pre><code class="lang-scss"> // This is a widget that we use on our site…
  // @example scss -
  //   [data-widget] {
@@ -413,12 +413,12 @@ allow you to import external partials:</p>
 </code></pre>
 <p>Will display:</p>
 <ul>
-<li>Input Sass and Nunjucks code</li>
-<li>Compiled CSS and HTML output</li>
-<li>Rendered HTML in an iframe</li>
+<li>Input Sass and Nunjucks<span class="widont">&nbsp;</span>code</li>
+<li>Compiled CSS and HTML<span class="widont">&nbsp;</span>output</li>
+<li>Rendered HTML in an<span class="widont">&nbsp;</span>iframe</li>
 </ul>
 <p>We hope to support <a href="https://vuejs.org/">Vue</a> components in the near future,
-with an API for supporting additional languages.</p>
+with an API for supporting additional<span class="widont">&nbsp;</span>languages.</p>
 
       
   
@@ -530,18 +530,18 @@ with an API for supporting additional languages.</p>
       <h2 id="compiling-sass-scss">Compiling Sass/Scss</h2>
 <p>Example annotations with language set to <code>sass</code> or <code>scss</code>
 will be compiled by Herman,
-and display the output along with the source.</p>
+and display the output along with the<span class="widont">&nbsp;</span>source.</p>
 <p>All Sass examples must be complete and valid,
 with the ability to import Sass partials inside each example.
 In order for this to work with Sass/Scss,
 you must set an <code>includepaths</code> key
 in your sassdoc <code>herman.sass</code> configuration object –
-an array of places to look for Sass includes:</p>
+an array of places to look for Sass<span class="widont">&nbsp;</span>includes:</p>
 <pre><code>includepaths: ['static/sass', 'node_modules']
 </code></pre>
 <p>You can also set an array of default <code>includes</code>
 (relative to any <code>includepaths</code>)
-to include for all Sass examples:</p>
+to include for all Sass<span class="widont">&nbsp;</span>examples:</p>
 <pre><code class="lang-yaml"># .sassdocrc (yaml)
 herman:
   sass:
@@ -726,7 +726,7 @@ herman:
 </code></pre>
 <h3 id="setting-nunjucksenv-">Setting <code>nunjucksEnv</code>:</h3>
 <p><em>This is only possible
-if using the <a href="http://sassdoc.com/node/">SassDoc Node API</a>.</em></p>
+if using the <a href="http://sassdoc.com/node/">SassDoc Node<span class="widont">&nbsp;</span>API</a>.</em></p>
 <pre><code class="lang-js">const nunjucks = require('nunjucks');
 const sassdoc = require('sassdoc');
 

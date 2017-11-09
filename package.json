@@ -22,6 +22,7 @@
     "strip-indent": "^2.0.0",
     "through2": "^2.0.3",
     "tinycolor2": "^1.4.1",
+    "typogr": "^0.6.7",
     "vinyl-fs": "^2.4.4"
   },
   "peerDependencies": {

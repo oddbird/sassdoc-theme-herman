@@ -18,7 +18,7 @@
   {% set private = 'private' if (item.access == 'private') else none %}
   {% set deprecate = 'deprecated' if item.deprecated else none %}
   {% set note = private or deprecate or none %}
-  {% set note = [private, deprecate]|join(' – ') if (private and deprecate) else note %}
+  {% set note = [private, deprecate]|join(' -- ') if (private and deprecate) else note %}
 
   <header data-item-section="header">
     <h2 class="item-title">

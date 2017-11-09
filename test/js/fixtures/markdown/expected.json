@@ -19,11 +19,11 @@
     "parameter": [{
       "type": "String",
       "name": "one",
-      "description": "<p>Param ‘one’ description</p>\n"
+      "description": "<p>Param ‘one’ — description</p>\n"
     }, {
       "type": "String",
       "name": "two",
-    "description": "<p>Param “two” description</p>\n"
+    "description": "<p>Param “two” – description</p>\n"
     }],
     "throw": [
       "<p>Throws description</p>\n"
@@ -33,7 +33,7 @@
       "description": "<p>Returns description</p>\n"
     },
     "content": {
-      "description": "<p>This should be <code>'parsed'</code> as Markdown</p>\n"
+      "description": "<p>This should be <code>'parsed'</code> as Markdown…</p>\n"
     }
   }]
 }

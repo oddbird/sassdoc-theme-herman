@@ -20,12 +20,12 @@
       {
         "type": "String",
         "name": "one",
-        "description": "Param 'one' description"
+        "description": "Param 'one' --- description"
       },
       {
         "type": "String",
         "name": "two",
-        "description": "Param \"two\" description"
+        "description": "Param \"two\" -- description"
       }
     ],
     "throw": [
@@ -36,7 +36,7 @@
       "description": "Returns description"
     },
     "content": {
-      "description": "This should be `'parsed'` as Markdown"
+      "description": "This should be `'parsed'` as Markdown..."
     }
   }]
 }
