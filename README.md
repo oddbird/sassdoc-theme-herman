@@ -1,4 +1,4 @@
-# Herman [a SassDoc theme]
+# [Herman][herman] [a [SassDoc][sassdoc] theme]
 
 [![CircleCI](https://circleci.com/gh/oddbird/sassdoc-theme-herman.svg?style=svg)](https://circleci.com/gh/oddbird/sassdoc-theme-herman)
 [![Coverage Status](https://coveralls.io/repos/github/oddbird/sassdoc-theme-herman/badge.svg)](https://coveralls.io/github/oddbird/sassdoc-theme-herman)
@@ -82,11 +82,9 @@ for displaying color-palettes, text and spacing sizes,
 and modular ratios, and a `@font` annotation
 for displaying font-specimens.
 
-[See the full documentation for details »][docs]
-
+[herman]: http://oddbird.net/herman/docs/
 [oddbird]: http://oddbird.net/
 [sassdoc]: http://sassdoc.com/
-[docs]: http://oddbird.net/herman/docs/
 
 
 
@@ -94,10 +92,10 @@ for displaying font-specimens.
 
 Herman uses a number of SassDoc Extras:
 
-- Description: http://sassdoc.com/extra-tools/#description-description-descriptionpath
-- Markdown: http://sassdoc.com/extra-tools/#markdown-markdown
-- Display: http://sassdoc.com/extra-tools/#display-toggle-display
-- GroupName: http://sassdoc.com/extra-tools/#groups-aliases-groupname
-- ShortcutIcon: http://sassdoc.com/extra-tools/#shortcut-icon-shortcuticon
-- Sort: http://sassdoc.com/extra-tools/#sort-sort
-- ResolveVariables: http://sassdoc.com/extra-tools/#resolved-variables-resolvevariables
+- [Description](http://sassdoc.com/extra-tools/#description-description-descriptionpath)
+- [Markdown](http://sassdoc.com/extra-tools/#markdown-markdown)
+- [Display](http://sassdoc.com/extra-tools/#display-toggle-display)
+- [GroupName](http://sassdoc.com/extra-tools/#groups-aliases-groupname)
+- [ShortcutIcon](http://sassdoc.com/extra-tools/#shortcut-icon-shortcuticon)
+- [Sort](http://sassdoc.com/extra-tools/#sort-sort)
+- [ResolveVariables](http://sassdoc.com/extra-tools/#resolved-variables-resolvevariables)
