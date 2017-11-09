@@ -34,7 +34,7 @@ $text-sizes: (
   'small-rem': 16px ('convert-units': 'rem'),
   'xsmall-rem': 'base-rem' ('times': 0.75),
 
-  'large': calc(%s + %s) ('base-rem', 1.5vw),
+  'large': calc(%s + %s) ('base-rem', 1vw),
   'medium': calc(%s + %s) ('base-rem', 0.5vw),
   'base': calc(%s + %s) ('small-rem', 0.5vw),
   'small': calc(%s + %s) ('small-rem', 0.25vw),

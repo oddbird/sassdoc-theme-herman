@@ -244,7 +244,11 @@ gulp.task('compile', ['sass', 'minify'], () => {
     theme: './',
     herman: {
       displayColors: ['hex', 'hsl'],
-      extraDocs: [{ name: 'Changelog', path: './CHANGELOG.md' }],
+      extraDocs: [
+        { name: 'Configuration', path: './CONFIGURATION.md' },
+        { name: 'Changelog', path: './CHANGELOG.md' },
+        { name: 'Contributing', path: './CONTRIBUTING.md' },
+      ],
       extraLinks: [
         {
           name: 'Accoutrement-Color',
@@ -340,6 +344,9 @@ gulp.task('watch', () => {
       paths.FONTS,
       `${paths.TEMPLATES_DIR}_icon_template.lodash`,
       './README.md',
+      './CHANGELOG.md',
+      './CONFIGURATION.md',
+      './CONTRIBUTING.md',
       './package.json',
     ],
     ['compile']

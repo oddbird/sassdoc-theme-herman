@@ -118,7 +118,10 @@
 ///
 /// ### Setting `nunjucksEnv`:
 ///
-/// *This is only possible if using the [SassDoc Node API](http://sassdoc.com/node/).*
+/// *This is only possible
+/// if using the [SassDoc Node API][api].*
+///
+/// [api]: http://sassdoc.com/node/
 ///
 /// ```js
 /// const nunjucks = require('nunjucks');
