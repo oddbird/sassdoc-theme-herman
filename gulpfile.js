@@ -262,7 +262,11 @@ gulp.task('compile', ['sass', 'minify'], () => {
       customCSS: `${paths.DIST_DIR}css/main.css`,
       minifiedIcons: `${paths.TEMPLATES_DIR}_icons.svg`,
       displayColors: ['hex', 'hsl'],
-      extraDocs: [{ name: 'Changelog', path: './CHANGELOG.md' }],
+      extraDocs: [
+        { name: 'Configuration', path: './CONFIGURATION.md' },
+        { name: 'Changelog', path: './CHANGELOG.md' },
+        { name: 'Contributing', path: './CONTRIBUTING.md' },
+      ],
     },
     display: {
       alias: true,
@@ -325,6 +329,9 @@ gulp.task('watch', () => {
       paths.FONTS,
       `${paths.TEMPLATES_DIR}_icon_template.lodash`,
       './README.md',
+      './CHANGELOG.md',
+      './CONFIGURATION.md',
+      './CONTRIBUTING.md',
       './package.json',
     ],
     ['compile']
