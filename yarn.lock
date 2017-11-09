@@ -5326,10 +5326,6 @@ sass-graph@^2.2.4:
     scss-tokenizer "^0.2.3"
     yargs "^7.0.0"
 
-sass-json-export@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/sass-json-export/-/sass-json-export-2.0.0.tgz#3cb85391ae8de9008a7841476d601b8d6ba1141e"
-
 sass-lint@^1.12.0:
   version "1.12.1"
   resolved "https://registry.yarnpkg.com/sass-lint/-/sass-lint-1.12.1.tgz#630f69c216aa206b8232fb2aa907bdf3336b6d83"

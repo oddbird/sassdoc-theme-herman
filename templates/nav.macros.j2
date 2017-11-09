@@ -14,70 +14,72 @@
 
 {% macro menu(
   size,
-  basePath,
   project,
-  topGroups,
-  topByGroup,
-  subprojects,
-  activeProject,
+  groups,
+  byGroup,
   activeGroup,
   extraDocs,
+  extraLinks,
   expanded=false
 ) %}
   <nav role="navigation" data-nav-menu="{{ size }}" {{ utility.toggle_target(['nav', size]|join('-'), expanded=expanded)}}>
 
-    <h3 data-sassdoc="nav-title">
-      {% set activeNav = 'is-active' if (activeProject == none) and (activeGroup == none) else 'is-not-active' %}
-      <a href="{{ basePath }}index.html" data-sassdoc-nav="{{ activeNav }}">{{ project }}</a>
-    </h3>
+    <div data-sassdoc="nav-subsection">
+      <h3 data-sassdoc="nav-title">
+        {% set activeNav = 'is-active' if (activeGroup == none) else 'is-not-active' %}
+        <a href="index.html" data-sassdoc-nav="{{ activeNav }}">{{ project }}</a>
+      </h3>
 
-    {% if extraDocs and extraDocs|length %}
-      <ul data-sassdoc="nav-subsection">
-        {% for extraDoc in extraDocs %}
-          {% set activeNav = 'is-active' if (activeProject == none) and (activeGroup == extraDoc.filename) else 'is-not-active' %}
-          <li data-sassdoc="nav-item">
-            <a href="{{ basePath }}{{ extraDoc.filename }}.html" data-sassdoc-nav="{{ activeNav }}">{{ extraDoc.name }}</a>
-          </li>
-        {% endfor %}
-      </ul>
-    {% endif %}
+      {# Markdown Files, e.g. Changelog, Getting Started #}
+      {% if extraDocs and extraDocs|length %}
+        <ul>
+          {% for extraDoc in extraDocs %}
+            {% set activeNav = 'is-active' if (activeGroup == extraDoc.filename) else 'is-not-active' %}
+            <li data-sassdoc="nav-item">
+              <a href="{{ extraDoc.filename }}.html" data-sassdoc-nav="{{ activeNav }}">{{ extraDoc.name }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
 
-    <ul>
-      {% for groupName, group in topByGroup %}
-        {% set activeNav = 'is-active' if (activeProject == none) and (activeGroup == groupName) else 'is-not-active' %}
+    {# Generated Sass Docs #}
+    <ul data-sassdoc="nav-subsection">
+      {% for groupName, group in byGroup %}
+        {% set activeNav = 'is-active' if (activeGroup == groupName) else 'is-not-active' %}
         <li data-sassdoc="nav-item">
-          <a href="{{ basePath }}{{ groupName }}.html" data-sassdoc-nav="{{ activeNav }}">{{ topGroups[groupName] }}</a>
+          <a href="{{ groupName }}.html" data-sassdoc-nav="{{ activeNav }}">{{ groups[groupName] }}</a>
         </li>
       {% endfor %}
     </ul>
 
-    {% for prjName, prjCtx in subprojects %}
-      <h3 data-sassdoc="nav-title">
-        {% set activeNav = 'is-active' if (activeProject == prjName) and (activeGroup == none) else 'is-not-active' %}
-        <a href="{{ basePath }}{{ prjName }}/index.html" data-sassdoc-nav="{{ activeNav }}">{{ prjName }}</a>
-      </h3>
-      <ul>
-        {% for groupName, group in prjCtx.byGroup %}
-          {% set activeNav = 'is-active' if (activeProject == prjName) and (activeGroup == groupName) else 'is-not-active' %}
-          <li data-sassdoc="nav-item">
-            <a href="{{ basePath }}{{prjName}}/{{ groupName }}.html" data-sassdoc-nav="{{ activeNav }}">{{ prjCtx.groups[groupName] }}</a>
-          </li>
-        {% endfor %}
-      </ul>
-    {% endfor %}
+    {# External Links #}
+    {% if extraLinks and extraLinks|length %}
+      <div data-sassdoc="nav-subsection">
+        <h3 data-sassdoc="nav-title">
+          External Links
+        </h3>
+
+        <ul>
+          {% for extraLink in extraLinks %}
+            <li data-sassdoc="nav-item">
+              <a href="{{ extraLink.url }}" data-sassdoc-nav="is-not-active">{{ extraLink.name }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
   </nav>
 {% endmacro %}
 
 
 {% macro menus(
-  basePath,
   project,
-  topGroups,
-  topByGroup,
-  subprojects,
-  activeProject,
+  groups,
+  byGroup,
   activeGroup,
-  extraDocs
+  extraDocs,
+  extraLinks
 ) %}
   {% set menu_expanded = {
     'small': false,
@@ -87,14 +89,12 @@
   {% for size, expanded in menu_expanded %}
     {{ menu(
       size=size,
-      basePath=basePath,
       project=project,
-      topGroups=topGroups,
-      topByGroup=topByGroup,
-      subprojects=subprojects,
-      activeProject=activeProject,
+      groups=groups,
+      byGroup=byGroup,
       activeGroup=activeGroup,
       extraDocs=extraDocs,
+      extraLinks=extraLinks,
       expanded=expanded
     ) }}
   {% endfor %}

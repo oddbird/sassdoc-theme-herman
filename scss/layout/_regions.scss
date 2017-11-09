@@ -43,10 +43,6 @@
   background: color('theme-light');
   padding: size('shim') size('flex-gutter');
 
-  @include below('nav-medium') {
-    padding-top: size('flex-gutter');
-  }
-
   a,
   span,
   strong {

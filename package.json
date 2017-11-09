@@ -56,7 +56,6 @@
     "mocha": "^4.0.1",
     "nyc": "^11.3.0",
     "prettier": "^1.7.4",
-    "sass-json-export": "^2.0.0",
     "sass-true": "^3.0.2",
     "sassdoc": "^2.4.0",
     "sinon": "^4.1.1"

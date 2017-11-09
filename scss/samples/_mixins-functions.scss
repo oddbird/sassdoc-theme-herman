@@ -19,7 +19,7 @@
 /// - Domus cum quid meae erras
 /// - Quam apta fata puppis ergo solis praeteriti
 ///
-/// @group demo_mixins
+/// @group demo_test-sassdoc
 /// @see {function} sample-alias
 /// @link http://oddbird.net OddBird Home Page
 /// @todo Create more samples like this one
@@ -53,7 +53,7 @@
 // Sample Alias
 // ------------
 /// This is a sample function alias.
-/// @group demo_mixins
+/// @group demo_test-sassdoc
 /// @alias herman-sample
 /// @deprecated I don't think this alias is useful anymore
 @function sample-alias(
@@ -68,7 +68,7 @@
 // Sample Alias Two
 // ----------------
 /// This is a sample function alias.
-/// @group demo_mixins
+/// @group demo_test-sassdoc
 /// @alias herman-sample
 /// @deprecated Doesn't seem to work without a message
 @function sample-alias-two(
@@ -92,7 +92,7 @@
 ///     content: $private;
 ///   }
 /// @link http://sassdoc.com/annotations/
-/// @group demo_mixins
+/// @group demo_test-sassdoc
 
 
 // Mixin with Content
@@ -100,7 +100,7 @@
 /// Mixins can optionally accept a @content block,
 /// passed in brackets. This example creates
 /// a generated element `:before` the element it is used on.
-/// @group demo_mixins
+/// @group demo_test-sassdoc
 /// @param {String} $content -
 ///   A value for the `content` property
 /// @param {arglist} $list… -

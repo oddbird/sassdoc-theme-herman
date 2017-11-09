@@ -1,0 +1,19 @@
+// Integration Config
+// ------------------
+
+
+// Plural Types
+// ------------
+/// A map of data-types understood by herman,
+/// for correcting singular input
+/// so data is consistently stored with a plural access key.
+///
+/// @access private
+/// @group config_api-utilities
+/// @type map
+$_herman-plural-types: (
+  'color': 'colors',
+  'size': 'sizes',
+  'ratio': 'ratios',
+  'font': 'fonts',
+);

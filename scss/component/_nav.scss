@@ -87,25 +87,19 @@
 // ----------
 [data-sassdoc='nav-title'] {
   font-weight: bold;
-  margin: size('half-shim') 0 size('shim');
-  padding-top: size('shim');
+  margin-bottom: size('shim');
   width: 100%;
-
-  // add a top separator to all but the first nav-title
-  &:nth-of-type(n+2) {
-    border-top: 1px solid color('theme-light');
-    margin-top: size('gutter');
-    padding-top: size('gutter');
-  }
 }
 
 
 // Nav Subsections
 // ---------------
 [data-sassdoc='nav-subsection'] {
-  border-bottom: 1px solid color('theme-light');
-  margin-bottom: size('shim');
-  padding-bottom: size('shim');
+  padding: size('shim') 0;
+
+  & + & {
+    border-top: 1px solid color('theme-light');
+  }
 }
 
 

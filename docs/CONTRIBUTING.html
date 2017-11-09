@@ -78,7 +78,7 @@
           
             
             <li data-sassdoc="nav-item">
-              <a href="CONTRIBUTING.html" data-sassdoc-nav="is-not-active">Contributing</a>
+              <a href="CONTRIBUTING.html" data-sassdoc-nav="is-active">Contributing</a>
             </li>
           
         </ul>
@@ -135,7 +135,7 @@
       
         
         <li data-sassdoc="nav-item">
-          <a href="config-z-index.html" data-sassdoc-nav="is-active">_Z-index</a>
+          <a href="config-z-index.html" data-sassdoc-nav="is-not-active">_Z-index</a>
         </li>
       
         
@@ -225,7 +225,7 @@
           
             
             <li data-sassdoc="nav-item">
-              <a href="CONTRIBUTING.html" data-sassdoc-nav="is-not-active">Contributing</a>
+              <a href="CONTRIBUTING.html" data-sassdoc-nav="is-active">Contributing</a>
             </li>
           
         </ul>
@@ -282,7 +282,7 @@
       
         
         <li data-sassdoc="nav-item">
-          <a href="config-z-index.html" data-sassdoc-nav="is-active">_Z-index</a>
+          <a href="config-z-index.html" data-sassdoc-nav="is-not-active">_Z-index</a>
         </li>
       
         
@@ -354,188 +354,68 @@
   <nav data-sassdoc-region="breadcrumb">
     
     <a href="index.html" >sassdoc-theme-herman</a> »
-    <strong>_Z-index</strong>
+    <strong>Contributing</strong>
   </nav>
 
 
-        <div data-sassdoc-region="main" data-sassdoc-page="config-z-index">
+        <div data-sassdoc-region="main" data-sassdoc-page="CONTRIBUTING">
           
-  
-    
-    
+  <div class="text-block">
+    <h1 id="contributing-to-herman">Contributing to Herman</h1>
+<p>Thanks for contributing to Herman development!</p>
+<p>Feature requests and bug reports
+can be filed on <a href="https://github.com/oddbird/sassdoc-theme-herman/issues">github</a>:</p>
+<ul>
+<li>Write a title that summarizes the specific problem
+or feature request</li>
+<li>Introduce the problem with steps to reproduce</li>
+<li>Help reduce the problem to the smallest code sample possible,
+and provide the relevant code</li>
+</ul>
+<p>If you are contributing code
+with new features or bug-fixes:</p>
+<ul>
+<li>Fork the project, and create a branch for your contribution</li>
+<li>Follow the development guide below to get Herman running locally</li>
+<li>Write tests and documentation as necessary,
+and make sure all tests are passing</li>
+<li>Open a pull request on <a href="https://github.com/oddbird/sassdoc-theme-herman/issues">github</a></li>
+</ul>
+<p>We love having more people involved in the project,
+and everyone is welcome.
+As maintainers, we review all the code,
+and may provide feedback before accepting a PR.
+We&#39;re happy to work with you to make this the best
+(and friendliest) project we can.</p>
+<h2 id="development">Development</h2>
+<p>To install the necessary Node dependencies, run <code>yarn</code>.</p>
+<p>You can lint the project&#39;s JS with <code>gulp eslint</code>
+and run the JS unit tests with <code>gulp test</code>.
+You can lint Sass with <code>gulp sasslint</code>
+and run the Sass tests with <code>gulp sasstest</code>.</p>
+<p>To compile and minify the static assets –
+as well as generate the documentation –
+run <code>gulp compile</code>.</p>
+<p>Just running <code>gulp</code> will perform all of the above tasks.</p>
+<p>You can start up a local development server with <code>gulp serve</code>.
+This will also watch for changes to local files
+and automatically perform an appropriate selection of the above tasks
+whenever changes are detected to relevant files.</p>
+<p>Access the running server at <code>http://localhost:3000</code>.</p>
+<p>Refer to the <code>gulpfile.js</code> source and <a href="http://gulpjs.com/">gulp</a>
+documentation for more info.</p>
+<h2 id="code-of-conduct">Code of Conduct</h2>
+<p>As a company,
+we want to embrace the very differences
+that have made our collaborations successful,
+and work together to provide the best environment
+for learning, growing, working, and sharing ideas.
+It is imperative that <a href="http://oddbird.net/">OddBird</a> continue to be
+a welcoming, challenging, fun, and fair place to contribute.</p>
+<p>See our <a href="http://oddbird.net/conduct/">Code of Conduct</a> for details.
+We also recommend following the <a href="http://sass-lang.com/community-guidelines">Sass community guidelines</a>.</p>
 
-
-
-
-
-
-
-
-
-
-<section class="item" id="variable--z-index">
-  
-    
-  
-  
-
-  
-  
-  
-  
-
-  <header data-item-section="header">
-    <h2 class="item-title">
-      
-        <span class="item-type"></span>
-      
-
-      
-        <a href="#variable--z-index" class="item-name">$z-index</a>
-      
-
-      
-
-      
-    </h2>
-
-    
-  
-
-  </header>
-
-    
-    
-
-    <div data-item-section="source">
-      
-  
-
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            scss
-          </span>
-
-          
-        </div>
-      
-
-      
-      
-      <pre data-sassdoc="hljs"><code class="lang-scss">$z-index: &#39;bump&#39;, &#39;main&#39;, &#39;sidebar&#39;, &#39;banner&#39;, &#39;overlay&#39;, &#39;loader&#39;;</code></pre>
-    </div>
-  
-
-    </div>
-    
-  
-  
-  
-  
-
-  
-    
-  
-
-  <div data-item-section="summary">
-    <h3 class="item-subtitle">Description</h3>
-    
-      <div class="text-block">
-        <p>List of named z-index layers.
-The order they are defined
-will be the integer they are assigned.</p>
-
-        
-  
-
-        
-  
-
-        
-  
-
-      </div>
-    
   </div>
-
-  
-
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-
-  
-  
-
-
-  
-
-    
-  
-
-  <div data-item-section="related">
-    <h3 class="item-subtitle">related</h3>
-    
-      
-        
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <a href="http://oddbird.net/accoutrement-layout/docs/z-index.html" class="item-name">Accoutrement Layout: Z-Index</a>
-      
-      
-      
-      <span class="item-note">[external]</span>
-    </h4>
-
-    
-  </div>
-
-
-      
-
-      
-    
-  </div>
-
-  
-  
-  
-  
-    
-    
-  
-
-  
-
-  
-  
-
-
-  
-  
-
-  
-  
-
-</section>
-
-  
 
         </div>
       </main>
