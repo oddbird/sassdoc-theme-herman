@@ -93,7 +93,6 @@ for displaying font-specimens.
 Herman uses a number of SassDoc Extras:
 
 - [Description](http://sassdoc.com/extra-tools/#description-description-descriptionpath)
-- [Markdown](http://sassdoc.com/extra-tools/#markdown-markdown)
 - [Display](http://sassdoc.com/extra-tools/#display-toggle-display)
 - [GroupName](http://sassdoc.com/extra-tools/#groups-aliases-groupname)
 - [ShortcutIcon](http://sassdoc.com/extra-tools/#shortcut-icon-shortcuticon)
