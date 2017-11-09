@@ -9,6 +9,8 @@
   using the `herman-export` mixin.
   Sass-json-export integration should continue to work as expected.
 - Updated dependencies.
+- BREAKING: Remove `subprojects` option; replace with `extraLinks` option –
+  [#175](https://github.com/oddbird/sassdoc-theme-herman/issues/175)
 - BREAKING: Removed `@macro` annotation; use `@example njk` instead –
   [#82](https://github.com/oddbird/sassdoc-theme-herman/issues/182)
 

@@ -63,12 +63,12 @@ $spacing-sizes: (
   'rhythm': 'root' ('herman': 1, 'convert-units': 'rem'),
   'gutter': 'rhythm',
   'flex-gutter': calc(%s + %s) ('shim', 2.5vw),
-  'double-gutter': 'gutter' ('linear': 2),
-  'spacer': 'gutter' ('linear': 3),
-  'double-spacer': 'spacer' ('linear': 2),
-  'shim': 'gutter' ('linear': 0.5),
-  'half-shim': 'shim' ('linear': 0.5),
-  'quarter-shim': 'shim' ('linear': 0.25)
+  'double-gutter': 'gutter' ('times': 2),
+  'spacer': 'gutter' ('times': 3),
+  'double-spacer': 'spacer' ('times': 2),
+  'shim': 'gutter' ('times': 0.5),
+  'half-shim': 'shim' ('times': 0.5),
+  'quarter-shim': 'shim' ('times': 0.25)
 );
 
 @include config('sizes', 'spacing-sizes', $spacing-sizes);
@@ -91,9 +91,9 @@ $pattern-sizes: (
   'nav-medium': 32rem,
 
   'project-link-nav': 36rem,
-  'specimen': 'rhythm' ('linear': 3),
+  'specimen': 'rhythm' ('times': 3),
   'color-preview': calc(15em + 0.25vw), // trial and error…
-  'color-swatch': 'rhythm' ('linear': 4),
+  'color-swatch': 'rhythm' ('times': 4),
   'icon': 28px,
   'nav-underline': 4px,
 );

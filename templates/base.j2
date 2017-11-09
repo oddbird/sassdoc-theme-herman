@@ -10,7 +10,7 @@
   <link href="{{ shortcutIcon.url }}" rel="shortcut icon">
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
 
-  <link rel="stylesheet" href="{{ basePath }}assets/css/main.css" />
+  <link rel="stylesheet" href="assets/css/main.css" />
 </head>
 <body>
 
@@ -23,7 +23,7 @@
       {{ nav.toggles() }}
 
       <h1 data-sassdoc="project-title">
-        <a href="{{ basePath }}index.html" rel="home" data-sassdoc="project-name">{{ project_title }}</a>
+        <a href="index.html" rel="home" data-sassdoc="project-name">{{ project_title }}</a>
         {% if package.version %}
           <span data-sassdoc="project-version">{{ package.version }}</span>
         {% endif %}
@@ -32,14 +32,12 @@
 
     <div data-sassdoc-region="container">
       {{ nav.menus(
-        basePath=basePath,
         project=project_title,
-        topGroups=topGroups,
-        topByGroup=topByGroup,
-        subprojects=subprojects,
-        activeProject=activeProject,
+        groups=groups,
+        byGroup=byGroup,
         activeGroup=activeGroup,
-        extraDocs=extraDocs
+        extraDocs=extraDocs,
+        extraLinks=extraLinks
       ) }}
 
       <main role="main">
@@ -52,10 +50,10 @@
     </div>
   </div>
 
-  <script type="text/javascript" src="{{ basePath }}assets/js/jquery-3.1.1.slim.js"></script>
-  <script type="text/javascript" src="{{ basePath }}assets/js/srcdoc-polyfill.min.js"></script>
-  <script type="text/javascript" src="{{ basePath }}assets/js/highlight.js"></script>
-  <script type="text/javascript" src="{{ basePath }}assets/js/base.js"></script>
-  <script type="text/javascript" src="{{ basePath }}assets/js/init.js"></script>
+  <script type="text/javascript" src="assets/js/jquery-3.1.1.slim.js"></script>
+  <script type="text/javascript" src="assets/js/srcdoc-polyfill.min.js"></script>
+  <script type="text/javascript" src="assets/js/highlight.js"></script>
+  <script type="text/javascript" src="assets/js/base.js"></script>
+  <script type="text/javascript" src="assets/js/init.js"></script>
 </body>
 </html>

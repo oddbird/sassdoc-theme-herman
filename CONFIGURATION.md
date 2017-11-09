@@ -36,6 +36,15 @@ or a `String` path
 (in which case the filename will be displayed in the navigation).
 
 
+### extraLinks
+
+- Type: `Array`
+- Default: `[]`
+
+Add external links to your compiled documentation navigation.
+Each value in the list should be an `Object` with keys `name` and `url`.
+
+
 ## customCSS
 
 - Type: `String`
