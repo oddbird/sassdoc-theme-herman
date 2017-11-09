@@ -20,7 +20,9 @@ describe('icons annotation', function() {
   beforeEach(function() {
     this.env = {
       logger: { warn: sinon.stub() },
-      herman: { templatepath: path.resolve(__dirname, 'files') },
+      herman: {
+        templatepath: path.resolve(__dirname, 'fixtures', 'templates'),
+      },
     };
     this.icons = annotations.icons(this.env);
   });
@@ -40,7 +42,7 @@ describe('icons annotation', function() {
       const data = [
         {
           icons: {
-            iconsPath: 'test/js/files/bad_icons',
+            iconsPath: 'test/js/fixtures/bad_icons',
             macroFile: 'macros.j2',
             macroName: 'icon',
           },
@@ -60,7 +62,7 @@ describe('icons annotation', function() {
       const data = [
         {
           icons: {
-            iconsPath: 'test/js/files/icons',
+            iconsPath: 'test/js/fixtures/icons',
             macroFile: 'macros.j2',
             macroName: 'icon',
           },
@@ -73,12 +75,12 @@ describe('icons annotation', function() {
           assert.deepEqual(data[0].icons, [
             {
               name: 'ok',
-              path: 'test/js/files/icons/ok.svg',
+              path: 'test/js/fixtures/icons/ok.svg',
               rendered: 'rendered ok',
             },
             {
               name: 'warning',
-              path: 'test/js/files/icons/warning.svg',
+              path: 'test/js/fixtures/icons/warning.svg',
               rendered: 'rendered warning',
             },
           ]);
@@ -92,14 +94,14 @@ describe('icons annotation', function() {
       const data = [
         {
           icons: {
-            iconsPath: 'test/js/files/icons',
+            iconsPath: 'test/js/fixtures/icons',
             macroFile: 'macros.j2',
             macroName: 'icon',
           },
         },
         {
           icons: {
-            iconsPath: 'test/js/files/icons',
+            iconsPath: 'test/js/fixtures/icons',
             macroFile: 'macros.j2',
             macroName: 'mymacro',
           },
@@ -321,7 +323,7 @@ describe('font annotation', function() {
       const env = {
         herman: {
           sass: {
-            jsonfile: `${__dirname}/files/json.css`,
+            jsonfile: `${__dirname}/fixtures/css/json.css`,
           },
           fontpath: '/path',
         },
@@ -394,7 +396,7 @@ describe('example annotation', function() {
   beforeEach(function() {
     this.env = {
       herman: {
-        templatepath: path.resolve(__dirname, 'files'),
+        templatepath: path.resolve(__dirname, 'fixtures', 'templates'),
       },
       logger: { warn: sinon.spy() },
     };
@@ -501,7 +503,7 @@ describe('example annotation', function() {
         herman: {
           sass: {
             includes: ['~accoutrement-color/sass/utils', 'import'],
-            includepaths: [path.join(__dirname, 'files')],
+            includepaths: [path.join(__dirname, 'fixtures', 'scss')],
           },
         },
       });
@@ -585,7 +587,9 @@ describe('example annotation', function() {
     });
 
     it('uses custom nunjucks env, if exists', function() {
-      const nunjucksEnv = nunjucks.configure(path.resolve(__dirname, 'files'));
+      const nunjucksEnv = nunjucks.configure(
+        path.resolve(__dirname, 'fixtures', 'templates')
+      );
       nunjucksEnv.addFilter('plus_one', function(val) {
         return val + 1;
       });

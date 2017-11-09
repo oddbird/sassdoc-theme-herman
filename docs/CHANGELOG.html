@@ -432,7 +432,7 @@ with optional function/args to compile raw map values</li>
 of accoutrement (color, ratio, size, font) maps,
 while adding to both <code>$herman</code> and the appropriate accoutrement global
 (<code>$colors</code>, <code>$ratios</code>, <code>$sizes</code>, <code>$fonts</code>).</li>
-<li>NEW: <code>displayColors</code> option (type: <code>Array</code>, default: <code>[&#39;hex&#39;, &#39;rgb&#39;, &#39;hsl&#39;]</code>)</li>
+<li>NEW: <code>displayColors</code> option (type: <code>Array</code>, default: <code>['hex', 'rgb', 'hsl']</code>)</li>
 <li>CHANGE: Group identical colors in color-palette –
 <a href="https://github.com/oddbird/sassdoc-theme-herman/issues/123">#123</a></li>
 <li>BUGFIX: Fix blocks with multi-line selectors and custom @name annotations –
@@ -446,7 +446,7 @@ while adding to both <code>$herman</code> and the appropriate accoutrement globa
 <h2 id="1-0-0-alpha-8-2017-06-28">1.0.0-alpha.8: 2017-06-28</h2>
 <ul>
 <li>BUGFIX: Remove un-used font files from distribution</li>
-<li>Render sassdoc comments that aren&#39;t attached to a Sass block as Markdown
+<li>Render sassdoc comments that aren’t attached to a Sass block as Markdown
 prose.</li>
 <li>Preserve the original order of sassdoc comments rather than grouping by type.</li>
 </ul>
@@ -513,7 +513,7 @@ configuration, and Sass-specific options under <code>herman.sass</code> object.<
 <li>Add support for rendering documentation from dependency subprojects –
 <a href="https://github.com/oddbird/sassdoc-theme-herman/issues/61">#61</a>.</li>
 <li>BUGFIX: Do not link to internal <code>@access private</code> items if <code>display</code> option
-is set to <code>access: [&#39;public&#39;]</code>.</li>
+is set to <code>access: ['public']</code>.</li>
 <li>BUGFIX: Do not error if missing <code>herman.subprojects</code> option –
 <a href="https://github.com/oddbird/sassdoc-theme-herman/issues/107">#107</a>.</li>
 <li>BUGFIX: Do not error if missing <code>herman</code> options –
@@ -522,7 +522,7 @@ is set to <code>access: [&#39;public&#39;]</code>.</li>
 <h2 id="0-5-5-2017-02-22">0.5.5: 2017-02-22</h2>
 <ul>
 <li>Fix @example macro to work with sassdoc v2.2.0. See
-[<a href="https://github.com/SassDoc/sassdoc/commit/842847493f9644e50f9e2ce783eacf886ccf69a0][">https://github.com/SassDoc/sassdoc/commit/842847493f9644e50f9e2ce783eacf886ccf69a0][</a>].</li>
+<a href="https://github.com/SassDoc/sassdoc/commit/842847493f9644e50f9e2ce783eacf886ccf69a0">https://github.com/SassDoc/sassdoc/commit/842847493f9644e50f9e2ce783eacf886ccf69a0</a>.</li>
 </ul>
 <h2 id="0-5-4-2017-01-16">0.5.4: 2017-01-16</h2>
 <ul>
@@ -537,8 +537,8 @@ is set to <code>access: [&#39;public&#39;]</code>.</li>
 <h2 id="0-5-2-2016-12-15">0.5.2: 2016-12-15</h2>
 <ul>
 <li>Change absolute <code>@see</code> links to relative paths,
-so we&#39;re not assuming a root URL for the styleguide.</li>
-<li>Add <code>customHead</code> option to add custom HTML to the <head>.</li>
+so we’re not assuming a root URL for the styleguide.</li>
+<li>Add <code>customHead</code> option to add custom HTML to the <code>&lt;head&gt;</code>.</li>
 </ul>
 <h2 id="0-5-1-2016-12-13">0.5.1: 2016-12-13</h2>
 <ul>
@@ -551,22 +551,22 @@ in the specimen.</li>
 <ul>
 <li>Add table output for <code>@property</code> annotation,
 similar to <code>@parameter</code> table output.</li>
-<li>Standardize <code>data-sassdoc-display=&#39;&lt;annotation&gt;&#39;</code>
+<li>Standardize <code>data-sassdoc-display='&lt;annotation&gt;'</code>
 for annotation display blocks
 (previously a mix of <code>data-sassdoc</code> values),
-and <code>data-sassdoc-table&#39;&lt;annotation&gt;&#39;</code> for tables
-(previously <code>data-sassdoc=&#39;&lt;annotation&gt;-table&#39;</code>).</li>
+and <code>data-sassdoc-table'&lt;annotation&gt;'</code> for tables
+(previously <code>data-sassdoc='&lt;annotation&gt;-table'</code>).</li>
 </ul>
 <h2 id="0-4-0-2016-11-08">0.4.0: 2016-11-08</h2>
 <ul>
 <li>Inject preview data directly into HTML,
-so that previews don&#39;t have to be styled locally</li>
+so that previews don’t have to be styled locally</li>
 <li>Add <a href="sass-utilities.html">Sass Utilities</a> file,
 for help with setting/exporting Sass data</li>
 <li><code>herman-add-color</code> mixin now exports hex, rgba, and hsla colors.</li>
-<li>Simplified font previews don&#39;t require size input</li>
+<li>Simplified font previews don’t require size input</li>
 <li>Color, font, ratio, and size previews accept <code>key</code> argument,
-in case the JSON key doesn&#39;t match the variable name
+in case the JSON key doesn’t match the variable name
 (most common for fonts)</li>
 <li>Ratio preview accets <code>count</code> argument [<code>1-10</code>],
 determining how many instances of the ratio to display

@@ -33,7 +33,7 @@ describe('renderHerman', function() {
   });
 
   it('copies an internal shortcutIcon', function(done) {
-    const shortcutIcon = `${__dirname}/files/favicon.ico`;
+    const shortcutIcon = `${__dirname}/fixtures/img/favicon.ico`;
     const expectedShortcutIcon = `${this.dest}/assets/img/favicon.ico`;
     prepareContext({
       data: [],
@@ -71,7 +71,7 @@ describe('renderHerman', function() {
     prepareContext({
       data: [],
       customCSS: {
-        path: `${__dirname}/files/main.css`,
+        path: `${__dirname}/fixtures/css/main.css`,
       },
     })
       .then(ctx => renderHerman(this.dest, ctx))
@@ -87,9 +87,9 @@ describe('renderHerman', function() {
     prepareContext({
       data: [],
       customCSS: {
-        path: `${__dirname}/files/main.css`,
+        path: `${__dirname}/fixtures/css/main.css`,
       },
-      customCSSFiles: [`${__dirname}/files/icons/not-an-svg-icon.png`],
+      customCSSFiles: [`${__dirname}/fixtures/icons/not-an-svg-icon.png`],
     })
       .then(ctx => renderHerman(this.dest, ctx))
       .then(() => access(`${this.dest}/assets/custom/not-an-svg-icon.png`))
@@ -103,10 +103,10 @@ describe('renderHerman', function() {
   it('resolves local fonts', function(done) {
     prepareContext({
       herman: {
-        fontpath: 'files/fonts',
+        fontpath: 'fixtures/fonts',
       },
       data: [],
-      localFonts: [`${__dirname}/files/fonts/sample.ttf`],
+      localFonts: [`${__dirname}/fixtures/fonts/sample.ttf`],
     })
       .then(ctx => {
         ctx.dir = __dirname;

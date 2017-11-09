@@ -40,9 +40,9 @@ describe('prepareContext', function() {
       data: [],
       herman: {
         extraDocs: [
-          `${__dirname}/files/simple.md`,
+          `${__dirname}/fixtures/markdown/simple.md`,
           {
-            path: `${__dirname}/files/complex.md`,
+            path: `${__dirname}/fixtures/markdown/complex.md`,
             name: 'A complex doc',
           },
           `${__dirname}/no/such/file`,
@@ -99,7 +99,7 @@ describe('prepareContext', function() {
       data: [],
       herman: {
         sass: {
-          jsonfile: `${__dirname}/files/json.css`,
+          jsonfile: `${__dirname}/fixtures/css/json.css`,
         },
       },
     })
@@ -117,7 +117,7 @@ describe('prepareContext', function() {
       logger: { warn },
       herman: {
         sass: {
-          jsonfile: `${__dirname}/files/missing-json.css`,
+          jsonfile: `${__dirname}/fixtures/css/missing-json.css`,
         },
       },
     })

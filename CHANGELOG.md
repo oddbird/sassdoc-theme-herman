@@ -15,6 +15,10 @@
   [#182](https://github.com/oddbird/sassdoc-theme-herman/issues/182)
 - CHANGE: HTML assets are no longer minified –
   [#186](https://github.com/oddbird/sassdoc-theme-herman/issues/186)
+- CHANGE: Replace [marked](https://github.com/chjj/marked) with
+  [markdown-it](https://github.com/markdown-it/markdown-it) for Markdown
+  parsing, and add quotes beautification –
+  [#119](https://github.com/oddbird/sassdoc-theme-herman/issues/119)
 
 
 ## 1.0.0-alpha.15: 2017-10-30
@@ -177,7 +181,7 @@
 ## 0.5.5: 2017-02-22
 
 - Fix @example macro to work with sassdoc v2.2.0. See
-  [https://github.com/SassDoc/sassdoc/commit/842847493f9644e50f9e2ce783eacf886ccf69a0][].
+  <https://github.com/SassDoc/sassdoc/commit/842847493f9644e50f9e2ce783eacf886ccf69a0>.
 
 
 ## 0.5.4: 2017-01-16
@@ -196,7 +200,7 @@
 
 - Change absolute `@see` links to relative paths,
   so we're not assuming a root URL for the styleguide.
-- Add `customHead` option to add custom HTML to the <head>.
+- Add `customHead` option to add custom HTML to the `<head>`.
 
 
 ## 0.5.1: 2016-12-13

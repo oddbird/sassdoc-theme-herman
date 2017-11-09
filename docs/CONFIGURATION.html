@@ -372,7 +372,7 @@ herman:
 <h2 id="displaycolors">displayColors</h2>
 <ul>
 <li>Type: <code>Array</code></li>
-<li>Default: <code>[&#39;hex&#39;, &#39;rgb&#39;, &#39;hsl&#39;]</code></li>
+<li>Default: <code>['hex', 'rgb', 'hsl']</code></li>
 </ul>
 <p>Configures which color value formats are shown
 when using the <a href="http://oddbird.net/herman/docs/demo_colors.html"><code>@preview color-palette</code> annotation</a>.</p>
@@ -397,7 +397,7 @@ Each value in the list should be an <code>Object</code> with keys <code>name</co
 <h2 id="customcss">customCSS</h2>
 <ul>
 <li>Type: <code>String</code></li>
-<li>Default: <code>&#39;&#39;</code></li>
+<li>Default: <code>''</code></li>
 </ul>
 <p>Relative path to a custom CSS file,
 which will be included in the <code>&lt;head&gt;</code> of rendered
@@ -405,14 +405,14 @@ which will be included in the <code>&lt;head&gt;</code> of rendered
 <h2 id="fontpath">fontpath</h2>
 <ul>
 <li>Type: <code>String</code></li>
-<li>Default: <code>&#39;&#39;</code></li>
+<li>Default: <code>''</code></li>
 </ul>
 <p><em>Required if using <code>@font</code> annotation with local font files.</em></p>
 <p>Relative path to a directory containing local font files.</p>
 <h2 id="minifiedicons">minifiedIcons</h2>
 <ul>
 <li>Type: <code>String</code></li>
-<li>Default: <code>&#39;&#39;</code></li>
+<li>Default: <code>''</code></li>
 </ul>
 <p><em>Required if using <code>@icons</code> annotation, or if using <code>@example</code> annotations that
 require minified SVG icons.</em></p>
@@ -424,7 +424,7 @@ in rendered <code>@icon</code> and <code>@example</code> annotations.</p>
 <h2 id="templatepath">templatepath</h2>
 <ul>
 <li>Type: <code>String</code></li>
-<li>Default: <code>&#39;&#39;</code></li>
+<li>Default: <code>''</code></li>
 </ul>
 <p><em>Either <code>templatepath</code> or <a href="#nunjucksenv"><code>nunjucksEnv</code></a>
 is required if using <code>@icons</code> annotation or
@@ -447,7 +447,7 @@ is required if using <code>@icons</code> annotation or
 <h3 id="sass-jsonfile">sass.jsonfile</h3>
 <ul>
 <li>Type: <code>String</code></li>
-<li>Default: <code>&#39;&#39;</code></li>
+<li>Default: <code>''</code></li>
 </ul>
 <p><em>Required if using <code>@font</code> or <code>@preview</code> annotations.</em></p>
 <p>Relative path to a <code>sass-json file</code>

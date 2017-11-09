@@ -21,7 +21,7 @@ describe('render', function() {
   });
 
   it('renders nunjucks tpl as a string', function(done) {
-    const tpl = path.resolve(__dirname, 'files', 'base.j2');
+    const tpl = path.resolve(__dirname, 'fixtures', 'templates', 'base.j2');
     const ctx = { name: 'World' };
 
     render(nunjucksEnv, tpl, this.dest, ctx)

@@ -1,0 +1,39 @@
+{
+   "package": {
+    "description": "<p>Test markdown description.</p>\n"
+   },
+   "data": [{
+    "description": "<p>Test: function markdown.</p>\n",
+    "output": "<p>Markdown output</p>\n",
+    "deprecated": "<p>deprecated</p>\n",
+    "context": {
+      "type": "function",
+      "name": "test-func-markdown"
+    },
+    "author": [
+      "<p>Hugo Giraudel</p>\n"
+    ],
+    "todo": [
+      "<p>Todo description</p>\n"
+    ],
+    "parameter": [{
+      "type": "String",
+      "name": "one",
+      "description": "<p>Param ‘one’ description</p>\n"
+    }, {
+      "type": "String",
+      "name": "two",
+    "description": "<p>Param “two” description</p>\n"
+    }],
+    "throw": [
+      "<p>Throws description</p>\n"
+    ],
+    "return": {
+      "type": "*",
+      "description": "<p>Returns description</p>\n"
+    },
+    "content": {
+      "description": "<p>This should be <code>'parsed'</code> as Markdown</p>\n"
+    }
+  }]
+}
