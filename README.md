@@ -1,121 +1,101 @@
-Herman [a SassDoc theme]
-========================
+# [Herman][herman] [a [SassDoc][sassdoc] theme]
 
 [![CircleCI](https://circleci.com/gh/oddbird/sassdoc-theme-herman.svg?style=svg)](https://circleci.com/gh/oddbird/sassdoc-theme-herman)
 [![Coverage Status](https://coveralls.io/repos/github/oddbird/sassdoc-theme-herman/badge.svg)](https://coveralls.io/github/oddbird/sassdoc-theme-herman)
 [![Greenkeeper badge](https://badges.greenkeeper.io/oddbird/sassdoc-theme-herman.svg)](https://greenkeeper.io/)
 
-> “Documentation should be the default option,
-> baked directly into the development process.
-> If it’s not documented, it doesn't exist.”
+> “**If it’s not documented, it doesn’t exist.**
+> Documentation should become the default,
+> an integrated part of the development process.”
 >
 > <cite>—Miriam Suzanne</cite>
 
 At [OddBird][oddbird],
-we wanted a tool to help us
-document the entire front end of a project,
-from brand guidelines to UX Elements and code patterns.
+we wanted better tools for documenting
+the entire front end of a project –
+from brand guidelines to UX patterns and code APIs:
 
-Herman is built as an extension to [SassDoc][SassDoc],
-still in alpha-development,
-with features for documenting and automating
-user-experience and code patterns, such as:
+- Documenting the intersection of languages and styles
+- Written directly in the code,
+  and integrated with code architecture
+- Automated for a document that grows and changes
+  along with the life of your project
 
-- Font specimens
-- Color palettes
-- SVG icon previews
-- Referencing & rendering Nunjucks macros from the Sass docs
-- Displaying pre-and-post compilation code samples
-- Rendering sample components
-- more on the way!
-
-[oddbird]: http://oddbird.net/
-[SassDoc]: http://sassdoc.com/
+Herman is built as an extension to [SassDoc][sassdoc],
+and supports all their core functionality
+with additional support for
+font specimens, color palettes, sizes, SVG icons,
+compiled languages, Nunjucks/Jinja macros, HTML previews,
+and more.
 
 
-Getting Started
----------------
+## Getting Started
 
-```
-yarn add sassdoc-theme-herman
+```bash
+npm install sassdoc sassdoc-theme-herman
 ```
 
 See the [SassDoc documentation](http://sassdoc.com/getting-started/)
-for how to install SassDoc and run it via various build tools.
+to install SassDoc and run it via various build tools.
+Specify `herman` as the theme
+in your SassDoc options:
 
-Herman is a theme for SassDoc,
-so you'll want to specify `herman`
-as the theme in your `sassdoc` options.
-
-
-Rendering `scss` and `nunjucks` examples
-----------------------------------------
-
-If you use an `@example` annotation with the `scss` or `njk` languages,
-Herman will display both the source code of the example
-and its rendered output.
-
-This makes it possible to show examples of markup patterns
-that make use of styles in your Sass.
-
-For example, this:
-
-	// Test Macro
-	// ----------
-	// This is a test.
-	/// @example njk - Basic usage:
-	///  {% import 'macros.j2' as macros %}
-	///  {{ macros.mymacro(1, 2) }}
-	[data-mymacro] {}
-
-will render the `mymacro` macro from the file `macros.j2`
-(which happens to use the `[data-mymacro]` attribute).
-
-In order for this to work for scss, you must include an `includepaths` key in
-your sassdoc configuration `herman.sass` option object. It should be an array
-of places to look for Sass includes, like
-`includepaths: [ path.join(__dirname, 'static/sass') ]`. Further, all of
-the Sass examples will have to be complete and valid. This may require
-including something like `@import 'config/manifest';` at the top of each. If
-you include an `includes` array in your sassdoc configuration `herman.sass`
-option object, those files (relative to the `includepaths`) will always be
-`@import`-ed for `@example scss`. *Note: Included Sass files should not contain
-any CSS output; any output will be displayed along with the @example.*
-
-In order for this to work for nunjucks,
-you must also either specify a `templatepath`
-(the path where nunjucks will look to import templates),
-or a `nunjucksEnv` (a custom nunjucks environment —
-this is particularly useful if your macros contain custom filters)
-in your sassdoc configuration `herman` option object.
-
-Any html (or html-compiled) examples
-will also be rendered in iframes.
+```bash
+sassdoc <src> --theme herman
+```
 
 
-Development
------------
+### SassDoc Comments
 
-To install the necessary Node dependencies, run ``yarn``.
+Currently,
+all SassDoc/Herman annotations are written as Sass comments
+starting with `///` to differentiate documentation
+from other developer comments (`//`).
 
-You can lint the project's JS with ``gulp eslint``
-and run the JS unit tests with ``gulp jstest``.
-You can lint Sass with ``gulp sasslint``
-and run the Sass tests with ``gulp sasstest``.
+```scss
+// This comment will be ignored by Herman
+/// This comment will be rendered in the documentation
+```
 
-To compile and minify the static assets —
-as well as generate the documentation —
-run ``gulp compile``.
+Annotation comments can be free-floating,
+or attached to a particular Sass/CSS object –
+such as a variable, mixin, function, or selector block.
 
-Just running ``gulp`` will perform all of the above tasks.
+```scss
+/// this is a free-floating comment
 
-You can start up a local development server with ``gulp serve``.
-This will also watch for changes to local files
-and automatically perform an appropriate selection of the above tasks
-whenever changes are detected to relevant files.
+/// this comment is attached to the following mixin code-block
+@mixin sample-object { … }
+```
 
-Access the running server at http://localhost:3000.
 
-Refer to the ``gulpfile.js`` source
-and [gulp](http://gulpjs.com/) documentation
-for more info.
+### Herman Annotations
+
+In addition to the core SassDoc annotations,
+our `@icons` annotation allows you to
+display SVG icons from a given folder,
+and we extend the core `@example` annotation
+to display compiled Sass/Nunjucks output
+and render sample components.
+We also provide a `@preview` annotation
+for displaying color-palettes, text and spacing sizes,
+and modular ratios, and a `@font` annotation
+for displaying font-specimens.
+
+[herman]: http://oddbird.net/herman/docs/
+[oddbird]: http://oddbird.net/
+[sassdoc]: http://sassdoc.com/
+
+
+
+## SassDoc Extras
+
+Herman uses a number of SassDoc Extras:
+
+- [Description](http://sassdoc.com/extra-tools/#description-description-descriptionpath)
+- [Markdown](http://sassdoc.com/extra-tools/#markdown-markdown)
+- [Display](http://sassdoc.com/extra-tools/#display-toggle-display)
+- [GroupName](http://sassdoc.com/extra-tools/#groups-aliases-groupname)
+- [ShortcutIcon](http://sassdoc.com/extra-tools/#shortcut-icon-shortcuticon)
+- [Sort](http://sassdoc.com/extra-tools/#sort-sort)
+- [ResolveVariables](http://sassdoc.com/extra-tools/#resolved-variables-resolvevariables)

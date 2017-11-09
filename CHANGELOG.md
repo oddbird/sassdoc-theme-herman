@@ -1,10 +1,13 @@
 # Herman Changelog
 
 
-## UNRELEASED
+## Unreleased
 
 - NEW: Add additional files (parsed as Markdown) with `extraDocs` option –
   [#117](https://github.com/oddbird/sassdoc-theme-herman/issues/117)
+- CHANGE: JSON-export functionality is now built in
+  using the `herman-export` mixin.
+  Sass-json-export integration should continue to work as expected.
 - Updated dependencies.
 - BREAKING: Removed `@macro` annotation; use `@example njk` instead –
   [#82](https://github.com/oddbird/sassdoc-theme-herman/issues/182)

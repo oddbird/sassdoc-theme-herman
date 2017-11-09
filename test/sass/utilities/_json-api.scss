@@ -1,0 +1,25 @@
+// JSON Export Tests
+// =================
+
+
+// Herman Export
+// -------------
+@include describe('herman-export [mixin]') {
+  @include it('Exports JSON-encoded maps') {
+    $map: (
+      1: (a, b, c),
+      'two': 3em,
+      (three four): 'hello "world"',
+    );
+
+    @include assert {
+      @include output {
+        @include herman-export($map);
+      }
+
+      @include expect {
+        /*! json-encode: #{_herman-encode($map)} */
+      }
+    }
+  }
+}

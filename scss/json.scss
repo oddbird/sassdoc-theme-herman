@@ -1,8 +1,12 @@
 // Export Sass to JSON
 // ===================
 
-@import '../node_modules/sass-json-export/stylesheets/sass-json-export';
+
+// Import the utilities and data
 @import 'utilities';
 @import 'config/manifest';
+@import 'samples/manifest';
 
-@include json-encode($herman, comment);
+
+// Export to JSON
+@include herman-export;
