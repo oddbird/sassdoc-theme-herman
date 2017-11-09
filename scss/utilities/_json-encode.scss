@@ -1,0 +1,145 @@
+// Json Encoding
+// =============
+
+
+// JSON Ecode
+// ----------
+/// Encode any Sass value as a JSON-ready string.
+///
+/// @group config_api-utilities
+///
+/// @param {*} $value [$herman] -
+///   Data to be encoded for JSON exporting
+@function _herman-encode($value) {
+  $type: type-of($value);
+
+  @if ($type == 'bool') {
+    @return $value;
+  } @else if ($type == 'null') {
+    @return 'null';
+  } @else if ($type == 'list') {
+    @return _herman-encode-list($value);
+  } @else if ($type == 'map') {
+    @return _herman-encode-map($value);
+  } @else if ($type == 'number') {
+    @return _herman-encode-number($value);
+  }
+
+  @return _herman-quote($value);
+}
+
+
+// Encode List
+// -----------
+/// Encode each item in a Sass list,
+/// and convert to a JSON-ready square-bracketed list.
+///
+/// @group config_api-utilities
+///
+/// @param {list} $list -
+///   List to be encoded for JSON exporting
+@function _herman-encode-list(
+  $list
+) {
+  $str: '';
+
+  @each $item in $list {
+    $str: if($str != '', $str + ', ', $str);
+    $str: $str + _herman-encode($item);
+  }
+
+  @return '[#{$str}]';
+}
+
+
+// Encode Map
+// ----------
+/// Encode each key/value in a Sass map,
+/// and convert to a JSON-ready object.
+///
+/// @group config_api-utilities
+///
+/// @param {map} $map -
+///   Map to be encoded for JSON exporting
+@function _herman-encode-map(
+  $map
+) {
+  $str: '';
+
+  @each $key, $value in $map {
+    $str: if($str != '', $str + ', ', $str);
+    $str: $str + _herman-quote($key) + ': ' + _herman-encode($value);
+  }
+
+  @return '{#{$str}}';
+}
+
+
+// Encode Number
+// -------------
+/// Encode a number for JSON,
+/// adding proof-quotes for length values.
+///
+/// @group config_api-utilities
+///
+/// @param {number} $number -
+///   Number to be encoded for JSON exporting
+@function _herman-encode-number(
+  $number
+) {
+  @if unitless($number) {
+    @return inspect($number);
+  }
+
+  @return _herman-quote($number);
+}
+
+
+// Quote
+// -----
+/// Convert any value to a double-quoted string.
+///
+/// @group config_api-utilities
+/// @access private
+///
+/// @param {*} $value -
+///   The value to inspect and quote.
+@function _herman-quote(
+  $value
+) {
+  $value: inspect($value);
+  $value: _herman-escape-quotes($value);
+  @return '"#{$value}"';
+}
+
+
+// Escape Quotes
+// -------------
+/// Return a string, with internal quotes escaped.
+///
+/// @group config_api-utilities
+/// @access private
+///
+/// @param {string} $string -
+///   The string to be manipulated
+@function _herman-escape-quotes(
+  $string
+) {
+  $return: $string;
+  $old: '"';
+  $new: '\\"';
+  $i: str-index($string, $old);
+  $n: str-length($old);
+
+  @if $string == $old {
+    $return: $new;
+  } @else if $i {
+    $a: if($i > 1, str-slice($string, 1, $i - 1), '');
+    $z: str-slice($string, $i + $n);
+    $z: _herman-escape-quotes($z);
+
+    $return: $a + if($new, $new, '') + $z;
+  }
+
+  @return $return;
+}

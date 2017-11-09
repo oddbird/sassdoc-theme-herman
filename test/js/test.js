@@ -3,8 +3,11 @@
 const assert = require('assert');
 const del = require('del');
 const fs = require('fs');
+const Promise = require('bluebird');
 
 const herman = require('../../');
+
+const access = Promise.promisify(fs.access);
 
 describe('herman', function() {
   before(function() {
@@ -16,12 +19,12 @@ describe('herman', function() {
   });
 
   it('renders herman', function(done) {
-    herman(this.dest, { data: [] }).then(() => {
-      fs.access(`${this.dest}/index.html`, err => {
-        assert.equal(err, undefined);
-
+    herman(this.dest, { data: [] })
+      .then(() => access(`${this.dest}/index.html`))
+      .then(() => {
+        assert.ok(true);
         done();
-      });
-    });
+      })
+      .catch(done);
   });
 });

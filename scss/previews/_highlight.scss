@@ -87,8 +87,8 @@ $hljs-colors: (
   }
 }
 
-[data-sassdoc-page='index'] pre {
-  margin-bottom: size('gutter');
+.text-block pre {
+  margin-bottom: size('shim');
 }
 
 .hljs-comment,

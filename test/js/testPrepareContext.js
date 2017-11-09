@@ -73,6 +73,20 @@ describe('prepareContext', function() {
       .catch(done);
   });
 
+  it('sets extraLinks', function(done) {
+    prepareContext({
+      data: [],
+      herman: {
+        extraLinks: ['http://oddbird.net'],
+      },
+    })
+      .then(ctx => {
+        assert.deepEqual(ctx.extraLinks, ['http://oddbird.net']);
+        done();
+      })
+      .catch(done);
+  });
+
   it('loads a Sass JSON file', function(done) {
     const expected = {
       colors: {

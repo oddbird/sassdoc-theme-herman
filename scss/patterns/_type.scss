@@ -6,31 +6,37 @@
 /// with line-length and typographic styles.
 /// @group style-typography
 .text-block {
-  max-width: 90ch;
+  max-width: 75ch;
 
   h1,
   h2,
   h3,
   h4 {
     color: color('black');
-    margin-bottom: size('shim');
   }
 
   h1 {
     font-size: size('h2');
+    margin-bottom: size('gutter');
+  }
+
+  h2,
+  h3 {
+    margin-top: size('gutter');
   }
 
   h2 {
     font-size: size('h3');
+    margin-bottom: size('half-shim');
   }
 
   p {
-    margin: size('shim') 0 size('gutter');
+    margin: 0 0 size('shim');
   }
 
   ol,
   ul {
-    margin: size('shim') size('gutter') size('gutter');
+    margin: 0 size('gutter') size('shim');
   }
 
   li {

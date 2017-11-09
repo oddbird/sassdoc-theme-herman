@@ -2789,7 +2789,7 @@ html-comment-regex@^1.1.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/html-comment-regex/-/html-comment-regex-1.1.1.tgz#668b93776eaae55ebde8f3ad464b307a4963625e"
 
-html-minifier@^3.3.1, html-minifier@^3.5.6:
+html-minifier@^3.3.1:
   version "3.5.6"
   resolved "https://registry.yarnpkg.com/html-minifier/-/html-minifier-3.5.6.tgz#7e4e661a09999599c7d8e8a2b8d7fb7430bb5c3e"
   dependencies:
@@ -5367,10 +5367,6 @@ sass-graph@^2.2.4:
     lodash "^4.0.0"
     scss-tokenizer "^0.2.3"
     yargs "^7.0.0"
-
-sass-json-export@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/sass-json-export/-/sass-json-export-2.0.0.tgz#3cb85391ae8de9008a7841476d601b8d6ba1141e"
 
 sass-lint@^1.12.0:
   version "1.12.1"

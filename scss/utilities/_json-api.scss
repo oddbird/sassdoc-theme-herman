@@ -1,0 +1,182 @@
+// JSON Export Utilities
+// ---------------------
+
+
+/// ## Exporting Styles to JSON
+///
+/// While many UX patterns will be rendered as HTML components,
+/// there are several abstract style patterns –
+/// like color-palettes and font-specimens –
+/// that never appear as components in the application.
+///
+/// Herman provides several `@preview` annotations
+/// to help visualize these abstract patterns –
+/// but that requires passing the data from your styles
+/// to Herman's templates.
+/// We do that using Sass maps
+/// (`key:value` object variables)
+/// and the `herman-export` mixin
+/// to generate JSON out of Sass variables.
+///
+/// @group api_json-export
+/// @see herman-export
+///
+/// @example scss
+///   @include herman-export;
+
+
+// Herman
+// ------
+/// Use this map to collect and organize
+/// color, font, size, and ratio values
+/// to be exported for Herman.
+///
+/// The `$herman` map should be structured
+/// with top-level keys representing individual sassdoc items.
+/// Top-level values will often be a nested map
+/// of the data to preview.
+/// Use the `herman-add` or `accoutrement-add` mixins
+/// to automatically populate
+/// fonts, colors, sizes, and ratios from existing maps –
+/// or construct your `$herman` map by hand,
+/// following these guidelines…
+///
+/// ### Map structure:
+///
+/// Each type of preview value should be nested inside
+/// a map that describes what type of data is being stored:
+///
+/// ```scss
+/// $herman: (
+///   'colors': (
+///     /* color maps */
+///   );
+///   'sizes': (
+///     /* color maps */
+///   );
+///   'ratios': (
+///     /* color maps */
+///   );
+///   'fonts': (
+///     /* color maps */
+///   );
+/// );
+/// ```
+///
+/// ### Colors:
+///
+/// Each color has an access name and value.
+/// For us, that is often a map-key string,
+/// and Sass hex/rgba output color:
+///
+/// ```
+/// 'brand-colors': (
+///   'brand-orange': '#c75000',
+///   'brand-blue': '#0d7fa5',
+/// )
+/// ```
+///
+/// If you are storing colors in variables,
+/// you may want to use name keys like `$brand-orange`
+/// to represent the proper use of a color.
+///
+/// Color values can be in any valid web-color format –
+/// hex, hsl/a, rgba/a, etc –
+/// converted to a valid JSON string.
+///
+/// ### Sizes & Ratios
+///
+/// Size and ratio data is similar to colors,
+/// organized into top-level groups that may contain
+/// one or more size/ratio key:value pairs:
+///
+/// ```
+/// 'font-ratios': (
+///   'line-height': '1.4',
+///   'minor-seventh': '16/9',
+/// ),
+/// 'text-sizes': (
+///   'root': '18px',
+///   'large': 'calc(1rem + 1.5vw)',
+/// )
+/// ```
+///
+/// Ratio values can be in any valid number,
+/// and size values should be valid CSS lengths –
+/// both converted to a valid JSON string.
+///
+/// ### Fonts:
+///
+/// Each font should have a top-level key of its own,
+/// since font-previews display a single font at a time.
+/// The data map accepts:
+///
+/// - `name`: how the font should be referenced in CSS (if omitted, defaults to top-level key)
+/// - `stack`: optional list of font-stack fallbacks
+/// - `source`: link to more information on the font,
+///    or typekit/googlefonts as useful
+/// - `svgid`: optional suffix value for local SVG font `src`, e.g. `font-file.svg#svgid` (if omitted, defaults to `name`)
+/// - `<variant>`: describe any number of relative paths to locally-hosted
+///   font-files per variant: e.g. `regular`, `bold italic`, etc.
+///
+/// ```
+/// 'body-font': (
+///   'name': 'Source Sans Pro',
+///   'source': 'https://github.com/adobe-fonts/source-sans-pro'
+///   'stack': ('Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'),
+///   'regular': 'sans/sourcesanspro-regular-webfont',
+///   'italic': 'sans/sourcesanspro-italic-webfont',
+/// )
+/// ```
+///
+/// @group api_json-export
+///
+/// @example scss - sample map structure
+///   $herman: (
+///     'colors': (
+///       'brand-colors': (
+///         'brand-orange': '#c75000',
+///         'brand-blue': '#0d7fa5',
+///       ),
+///       'status-colors': (
+///         'go': '#657e1b',
+///         'yield': '#c75000',
+///       ),
+///     ),
+///     'fonts': (
+///       'body-font': (
+///         'name': 'Source Sans Pro',
+///         'stack': ('Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'),
+///         'regular': 'sans/sourcesanspro-regular-webfont',
+///         'italic': 'sans/sourcesanspro-italic-webfont',
+///       ),
+///     ),
+///     'sizes': (
+///       'text-sizes': (
+///         'root': '18px',
+///         'large': 'calc(1rem + 1.5vw)',
+///       ),
+///     ),
+///   );
+$herman: () !default;
+
+
+// Herman Export
+// -------------
+/// Encode a Sass map as a JSON-ready string,
+/// and print to CSS output as a persistent comment.
+///
+/// @group api_json-export
+///
+/// @param {map} $map [$herman] -
+///   Map to be encoded for JSON exporting
+///
+/// @example scss
+///   // Export to JSON
+///   @include herman-export;
+@mixin herman-export(
+  $map: $herman
+) {
+  $json: _herman-encode($map);
+  /*! json-encode: #{$json} */
+}

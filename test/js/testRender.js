@@ -4,9 +4,12 @@ const assert = require('assert');
 const del = require('del');
 const fs = require('fs');
 const path = require('path');
+const Promise = require('bluebird');
 
 const render = require('../../lib/utils/render');
 const { nunjucksEnv } = require('../../lib/utils/templates');
+
+const readFile = Promise.promisify(fs.readFile);
 
 describe('render', function() {
   before(function() {
@@ -21,13 +24,12 @@ describe('render', function() {
     const tpl = path.resolve(__dirname, 'files', 'base.j2');
     const ctx = { name: 'World' };
 
-    render(nunjucksEnv, tpl, this.dest, ctx).then(() => {
-      fs.readFile(this.dest, (err, data) => {
-        assert.equal(err, undefined);
-        assert.equal(data, 'Hello World!');
-
+    render(nunjucksEnv, tpl, this.dest, ctx)
+      .then(() => readFile(this.dest, 'utf-8'))
+      .then(data => {
+        assert.equal(data, 'Hello World!\n');
         done();
-      });
-    });
+      })
+      .catch(done);
   });
 });

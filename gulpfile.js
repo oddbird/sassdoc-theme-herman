@@ -28,7 +28,6 @@ const paths = {
   IMG: 'assets/img/**/*',
   SVG: 'assets/svg/**/*.svg',
   ASSETS_JS_DIR: 'assets/js/',
-  FONTS: 'assets/fonts/**/*',
   DOCS_DIR: 'docs/',
   JS_TESTS_DIR: 'test/js/',
   TEMPLATES_DIR: 'templates/',
@@ -247,36 +246,64 @@ gulp.task('compile', ['sass', 'minify'], () => {
     dest: paths.DOCS_DIR,
     theme: './',
     herman: {
-      subprojects: [
-        'accoutrement-color',
-        'accoutrement-scale',
-        'accoutrement-type',
-        'accoutrement-layout',
-        'accoutrement-init',
+      displayColors: ['hex', 'hsl'],
+      extraDocs: [
+        { name: 'Configuration', path: './CONFIGURATION.md' },
+        { name: 'Changelog', path: './CHANGELOG.md' },
+        { name: 'Contributing', path: './CONTRIBUTING.md' },
       ],
+      extraLinks: [
+        {
+          name: 'Accoutrement-Color',
+          url: 'http://oddbird.net/accoutrement-color/',
+        },
+        {
+          name: 'Accoutrement-Scale',
+          url: 'http://oddbird.net/accoutrement-scale/',
+        },
+        {
+          name: 'Accoutrement-Type',
+          url: 'http://oddbird.net/accoutrement-type/',
+        },
+        {
+          name: 'Accoutrement-Layout',
+          url: 'http://oddbird.net/accoutrement-layout/',
+        },
+        {
+          name: 'Accoutrement-Init',
+          url: 'http://oddbird.net/accoutrement-init/',
+        },
+      ],
+      customCSS: `${paths.DIST_DIR}css/main.css`,
+      minifiedIcons: `${paths.TEMPLATES_DIR}_icons.svg`,
       templatepath: path.join(__dirname, 'templates'),
       sass: {
         jsonfile: `${paths.DIST_DIR}css/json.css`,
-        includepaths: [path.join(__dirname, 'scss')],
+        includepaths: [
+          path.join(__dirname, 'scss'),
+          path.join(__dirname, 'node_modules'),
+        ],
         includes: ['utilities', 'config/manifest'],
       },
-      customCSS: `${paths.DIST_DIR}css/main.css`,
-      minifiedIcons: `${paths.TEMPLATES_DIR}_icons.svg`,
-      displayColors: ['hex', 'hsl'],
-      extraDocs: [{ name: 'Changelog', path: './CHANGELOG.md' }],
     },
     display: {
       alias: true,
     },
     groups: {
-      'api_sass-utilities': 'Sass API',
-      demo_mixins: 'Documenting Mixins & Functions',
-      demo_variables: 'Documenting Variables',
-      'config-colors': '_Config: Colors',
-      'config-scale': '_Config: Sizes',
-      'config-fonts': '_Config: Fonts',
-      'config-utils': '_Config: Utilities',
-      'config-z-index': '_Config: Z-index',
+      'api_json-export': 'Exporting Sass to JSON',
+      'api_sass-accoutrement': 'Accoutrement Integration',
+      demo_colors: 'Color Palettes',
+      demo_fonts: 'Font Specimens',
+      demo_sizes: 'Ratios & Sizes',
+      demo_icons: 'SVG Icons',
+      demo_examples: 'Rendered Examples',
+      'demo_test-sassdoc': 'SassDoc Annotations',
+      'config_api-utilities': '_API Utilities',
+      'config-colors': '_Colors',
+      'config-scale': '_Sizes',
+      'config-fonts': '_Fonts',
+      'config-utils': '_Utilities',
+      'config-z-index': '_Z-index',
       'style-typography': '_Typography',
       'style-icons': '_Icons',
       'style-nav': '_Navigation',
@@ -317,9 +344,11 @@ gulp.task('watch', () => {
       paths.TEMPLATES,
       paths.IMG,
       paths.SVG,
-      paths.FONTS,
       `${paths.TEMPLATES_DIR}_icon_template.lodash`,
       './README.md',
+      './CHANGELOG.md',
+      './CONFIGURATION.md',
+      './CONTRIBUTING.md',
       './package.json',
     ],
     ['compile']
@@ -337,12 +366,6 @@ gulp.task('watch', () => {
 
   gulp.watch('**/.sass-lint.yml', ['sasslint-nofail']);
   gulp.watch('**/.eslintrc.yml', ['eslint-nofail']);
-});
-
-gulp.task('copy-fonts', () => {
-  const dest = `${paths.DIST_DIR}fonts/`;
-
-  return gulp.src(paths.FONTS).pipe(gulp.dest(dest));
 });
 
 gulp.task('jsmin', () => {
@@ -393,4 +416,4 @@ gulp.task('imagemin', () => {
     .pipe(gulp.dest(dest));
 });
 
-gulp.task('minify', ['jsmin', 'svgmin', 'imagemin', 'copy-fonts']);
+gulp.task('minify', ['jsmin', 'svgmin', 'imagemin']);
