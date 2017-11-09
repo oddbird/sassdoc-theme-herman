@@ -29,7 +29,7 @@ const paths = {
   SVG: 'assets/svg/**/*.svg',
   ASSETS_JS_DIR: 'assets/js/',
   DOCS_DIR: 'docs/',
-  JS_TESTS_DIR: 'test/',
+  JS_TESTS_DIR: 'test/js/',
   TEMPLATES_DIR: 'templates/',
   IGNORE: ['!**/.#*', '!**/flycheck_*'],
   init() {
@@ -53,9 +53,8 @@ const paths = {
       '!assets/js/srcdoc-polyfill.min.js',
     ].concat(this.IGNORE);
     this.JS_TESTS_FILES = [
-      `${this.JS_TESTS_DIR}*.js`,
-      `${this.JS_TESTS_DIR}**/*.j2`,
-      `!${this.JS_TESTS_DIR}dest/**/*`,
+      `${this.JS_TESTS_DIR}**/*`,
+      `!${this.JS_TESTS_DIR}dest/**`,
     ].concat(this.IGNORE);
     return this;
   },
@@ -188,7 +187,12 @@ const getJsTestArgs = verbose => {
     all: true,
     'report-dir': './jscov',
   };
-  const args = ['./node_modules/.bin/mocha', '--reporter', mochaReporter];
+  const args = [
+    './node_modules/.bin/mocha',
+    '--reporter',
+    mochaReporter,
+    `${paths.JS_TESTS_DIR}*.js`,
+  ];
   for (const key of Object.keys(obj)) {
     if (Array.isArray(obj[key])) {
       for (const val of obj[key]) {

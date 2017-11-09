@@ -2,7 +2,7 @@
 
 const assert = require('assert');
 
-const parse = require('../lib/utils/parse');
+const parse = require('../../lib/utils/parse');
 
 describe('parse', function() {
   describe('sassJson', function() {

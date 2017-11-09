@@ -5,8 +5,8 @@ const extend = require('extend');
 const path = require('path');
 const sinon = require('sinon');
 
-const renderIframe = require('../lib/renderIframe');
-const { nunjucksEnv } = require('../lib/utils/templates');
+const renderIframe = require('../../lib/renderIframe');
+const { nunjucksEnv } = require('../../lib/utils/templates');
 
 describe('renderIframe', function() {
   describe('example', function() {
@@ -75,7 +75,7 @@ describe('renderIframe', function() {
       this.env = {
         herman: {
           sass: {
-            jsonfile: path.resolve(__dirname, 'templates', 'json.css'),
+            jsonfile: path.resolve(__dirname, 'files', 'json.css'),
           },
         },
         dir: __dirname,
