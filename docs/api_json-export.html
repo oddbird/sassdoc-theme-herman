@@ -90,7 +90,7 @@
       
         
         <li data-sassdoc="nav-item">
-          <a href="api_json-export.html" data-sassdoc-nav="is-active">Exporting Sass to JSON</a>
+          <a href="api_json-export.html" data-sassdoc-nav="is-active">Exporting Sass to<span class="widont">&nbsp;</span>JSON</a>
         </li>
       
         
@@ -237,7 +237,7 @@
       
         
         <li data-sassdoc="nav-item">
-          <a href="api_json-export.html" data-sassdoc-nav="is-active">Exporting Sass to JSON</a>
+          <a href="api_json-export.html" data-sassdoc-nav="is-active">Exporting Sass to<span class="widont">&nbsp;</span>JSON</a>
         </li>
       
         
@@ -383,19 +383,19 @@
 
   
     <div data-item-section="prose" class="text-block">
-      <h2 id="exporting-styles-to-json">Exporting Styles to JSON</h2>
+      <h2 id="exporting-styles-to-json">Exporting Styles to<span class="widont">&nbsp;</span>JSON</h2>
 <p>While many UX patterns will be rendered as HTML components,
 there are several abstract style patterns –
 like color-palettes and font-specimens –
-that never appear as components in the application.</p>
+that never appear as components in the<span class="widont">&nbsp;</span>application.</p>
 <p>Herman provides several <code>@preview</code> annotations
 to help visualize these abstract patterns –
 but that requires passing the data from your styles
-to Herman&#39;s templates.
+to Herman’s templates.
 We do that using Sass maps
 (<code>key:value</code> object variables)
 and the <code>herman-export</code> mixin
-to generate JSON out of Sass variables.</p>
+to generate JSON out of Sass<span class="widont">&nbsp;</span>variables.</p>
 
       
   
@@ -649,7 +649,7 @@ to generate JSON out of Sass variables.</p>
       <div class="text-block">
         <p>Use this map to collect and organize
 color, font, size, and ratio values
-to be exported for Herman.</p>
+to be exported for<span class="widont">&nbsp;</span>Herman.</p>
 <p>The <code>$herman</code> map should be structured
 with top-level keys representing individual sassdoc items.
 Top-level values will often be a nested map
@@ -658,21 +658,21 @@ Use the <code>herman-add</code> or <code>accoutrement-add</code> mixins
 to automatically populate
 fonts, colors, sizes, and ratios from existing maps –
 or construct your <code>$herman</code> map by hand,
-following these guidelines…</p>
+following these<span class="widont">&nbsp;</span>guidelines…</p>
 <h3 id="map-structure-">Map structure:</h3>
 <p>Each type of preview value should be nested inside
-a map that describes what type of data is being stored:</p>
+a map that describes what type of data is being<span class="widont">&nbsp;</span>stored:</p>
 <pre><code class="lang-scss">$herman: (
-  &#39;colors&#39;: (
+  'colors': (
     /* color maps */
   );
-  &#39;sizes&#39;: (
+  'sizes': (
     /* color maps */
   );
-  &#39;ratios&#39;: (
+  'ratios': (
     /* color maps */
   );
-  &#39;fonts&#39;: (
+  'fonts': (
     /* color maps */
   );
 );
@@ -680,53 +680,56 @@ a map that describes what type of data is being stored:</p>
 <h3 id="colors-">Colors:</h3>
 <p>Each color has an access name and value.
 For us, that is often a map-key string,
-and Sass hex/rgba output color:</p>
-<pre><code>&#39;brand-colors&#39;: (
-  &#39;brand-orange&#39;: &#39;#c75000&#39;,
-  &#39;brand-blue&#39;: &#39;#0d7fa5&#39;,
+and Sass hex/rgba output<span class="widont">&nbsp;</span>color:</p>
+<pre><code>'brand-colors': (
+  'brand-orange': '#c75000',
+  'brand-blue': '#0d7fa5',
 )
-</code></pre><p>If you are storing colors in variables,
+</code></pre>
+<p>If you are storing colors in variables,
 you may want to use name keys like <code>$brand-orange</code>
-to represent the proper use of a color.</p>
+to represent the proper use of a<span class="widont">&nbsp;</span>color.</p>
 <p>Color values can be in any valid web-color format –
 hex, hsl/a, rgba/a, etc –
-converted to a valid JSON string.</p>
+converted to a valid JSON<span class="widont">&nbsp;</span>string.</p>
 <h3 id="sizes-ratios">Sizes &amp; Ratios</h3>
 <p>Size and ratio data is similar to colors,
 organized into top-level groups that may contain
-one or more size/ratio key:value pairs:</p>
-<pre><code>&#39;font-ratios&#39;: (
-  &#39;line-height&#39;: &#39;1.4&#39;,
-  &#39;minor-seventh&#39;: &#39;16/9&#39;,
+one or more size/ratio key:value<span class="widont">&nbsp;</span>pairs:</p>
+<pre><code>'font-ratios': (
+  'line-height': '1.4',
+  'minor-seventh': '16/9',
 ),
-&#39;text-sizes&#39;: (
-  &#39;root&#39;: &#39;18px&#39;,
-  &#39;large&#39;: &#39;calc(1rem + 1.5vw)&#39;,
+'text-sizes': (
+  'root': '18px',
+  'large': 'calc(1rem + 1.5vw)',
 )
-</code></pre><p>Ratio values can be in any valid number,
+</code></pre>
+<p>Ratio values can be in any valid number,
 and size values should be valid CSS lengths –
-both converted to a valid JSON string.</p>
+both converted to a valid JSON<span class="widont">&nbsp;</span>string.</p>
 <h3 id="fonts-">Fonts:</h3>
 <p>Each font should have a top-level key of its own,
 since font-previews display a single font at a time.
-The data map accepts:</p>
+The data map<span class="widont">&nbsp;</span>accepts:</p>
 <ul>
-<li><code>name</code>: how the font should be referenced in CSS (if omitted, defaults to top-level key)</li>
-<li><code>stack</code>: optional list of font-stack fallbacks</li>
+<li><code>name</code>: how the font should be referenced in CSS (if omitted, defaults to top-level<span class="widont">&nbsp;</span>key)</li>
+<li><code>stack</code>: optional list of font-stack<span class="widont">&nbsp;</span>fallbacks</li>
 <li><code>source</code>: link to more information on the font,
- or typekit/googlefonts as useful</li>
+or typekit/googlefonts as<span class="widont">&nbsp;</span>useful</li>
 <li><code>svgid</code>: optional suffix value for local SVG font <code>src</code>, e.g. <code>font-file.svg#svgid</code> (if omitted, defaults to <code>name</code>)</li>
 <li><code>&lt;variant&gt;</code>: describe any number of relative paths to locally-hosted
 font-files per variant: e.g. <code>regular</code>, <code>bold italic</code>, etc.</li>
 </ul>
-<pre><code>&#39;body-font&#39;: (
-  &#39;name&#39;: &#39;Source Sans Pro&#39;,
-  &#39;source&#39;: &#39;https://github.com/adobe-fonts/source-sans-pro&#39;
-  &#39;stack&#39;: (&#39;Helvetica Neue&#39;, &#39;Helvetica&#39;, &#39;Arial&#39;, &#39;sans-serif&#39;),
-  &#39;regular&#39;: &#39;sans/sourcesanspro-regular-webfont&#39;,
-  &#39;italic&#39;: &#39;sans/sourcesanspro-italic-webfont&#39;,
+<pre><code>'body-font': (
+  'name': 'Source Sans Pro',
+  'source': 'https://github.com/adobe-fonts/source-sans-pro'
+  'stack': ('Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'),
+  'regular': 'sans/sourcesanspro-regular-webfont',
+  'italic': 'sans/sourcesanspro-italic-webfont',
 )
 </code></pre>
+
         
   
 
@@ -976,7 +979,7 @@ font-files per variant: e.g. <code>regular</code>, <code>bold italic</code>, etc
     
       <div class="text-block">
         <p>Encode a Sass map as a JSON-ready string,
-and print to CSS output as a persistent comment.</p>
+and print to CSS output as a persistent<span class="widont">&nbsp;</span>comment.</p>
 
         
   
@@ -1029,7 +1032,7 @@ and print to CSS output as a persistent comment.</p>
     
       
       <div class="param-details text-block">
-        <p>Map to be encoded for JSON exporting</p>
+        <p>Map to be encoded for JSON<span class="widont">&nbsp;</span>exporting</p>
 
       </div>
     
@@ -1269,7 +1272,7 @@ and print to CSS output as a persistent comment.</p>
         <p>Add a map of colors, fonts, sizes, ratios, etc
 to the <code>$herman</code> map for JSON-export,
 converting values to JSON-ready strings,
-with optional functions/args for compiling raw values.</p>
+with optional functions/args for compiling raw<span class="widont">&nbsp;</span>values.</p>
 
         
   
@@ -1323,8 +1326,8 @@ with optional functions/args for compiling raw values.</p>
       
       <div class="param-details text-block">
         <p>The type of map being added,
-  e.g. <code>colors</code>, <code>fonts</code>,
-  <code>sizes</code>, or <code>ratios</code>.</p>
+e.g. <code>colors</code>, <code>fonts</code>,
+<code>sizes</code>, or <code>ratios</code>.</p>
 
       </div>
     
@@ -1351,9 +1354,9 @@ with optional functions/args for compiling raw values.</p>
     
       
       <div class="param-details text-block">
-        <p>A key name for accessing this data in JSON —
-  should match the variable name,
-  unless <code>key</code> is otherwise set in the <code>@preview</code> annotation</p>
+        <p>A key name for accessing this data in JSON –
+should match the variable name,
+unless <code>key</code> is otherwise set in the <code>@preview</code> annotation</p>
 
       </div>
     
@@ -1380,7 +1383,7 @@ with optional functions/args for compiling raw values.</p>
     
       
       <div class="param-details text-block">
-        <p>A map of name/value pairs</p>
+        <p>A map of name/value<span class="widont">&nbsp;</span>pairs</p>
 
       </div>
     
@@ -1408,7 +1411,7 @@ with optional functions/args for compiling raw values.</p>
       
       <div class="param-details text-block">
         <p>A function to use for compiling values before export,
-  and any additional arguments for the function</p>
+and any additional arguments for the<span class="widont">&nbsp;</span>function</p>
 
       </div>
     
@@ -1433,14 +1436,14 @@ with optional functions/args for compiling raw values.</p>
         <span class="item-name">{CSS output}</span>
       
       
-      <span class="value-type">(code block)</span>
+      <span class="value-type">(code<span class="widont">&nbsp;</span>block)</span>
       
     </h4>
 
     
       
       <div class="param-details text-block">
-        <p>Updated <code>$herman</code> map, ready for JSON export</p>
+        <p>Updated <code>$herman</code> map, ready for JSON<span class="widont">&nbsp;</span>export</p>
 
       </div>
     
@@ -1820,7 +1823,7 @@ with optional functions/args for compiling raw values.</p>
 (with optional arguments)
 and return the compiled map.
 This is used by <code>herman-add</code> and <code>accoutrement-add</code>,
-but can also be accessed directly.</p>
+but can also be accessed<span class="widont">&nbsp;</span>directly.</p>
 
         
   
@@ -1874,7 +1877,7 @@ but can also be accessed directly.</p>
       
       <div class="param-details text-block">
         <p>A sass map with values that need to be compiled,
-  such as Accoutrement Colors or Sizes with adjustments</p>
+such as Accoutrement Colors or Sizes with<span class="widont">&nbsp;</span>adjustments</p>
 
       </div>
     
@@ -1894,7 +1897,7 @@ but can also be accessed directly.</p>
         <span class="item-name">$function:</span>
       
       
-      <span class="value-type">(String | Function)</span>
+      <span class="value-type">(String |<span class="widont">&nbsp;</span>Function)</span>
       
     </h4>
 
@@ -1902,7 +1905,7 @@ but can also be accessed directly.</p>
       
       <div class="param-details text-block">
         <p>The function (or function name) to use in compiling values,
-  such as Accoutrement <code>color</code> and <code>size</code> functions</p>
+such as Accoutrement <code>color</code> and <code>size</code> functions</p>
 
       </div>
     
@@ -1929,7 +1932,7 @@ but can also be accessed directly.</p>
     
       
       <div class="param-details text-block">
-        <p>Pass in any additional arguments for the function</p>
+        <p>Pass in any additional arguments for the<span class="widont">&nbsp;</span>function</p>
 
       </div>
     
@@ -1951,7 +1954,7 @@ but can also be accessed directly.</p>
         <span class="item-name">@return</span>
       
       
-      <span class="value-type">(String | Any)</span>
+      <span class="value-type">(String |<span class="widont">&nbsp;</span>Any)</span>
       
     </h4>
 
@@ -1959,8 +1962,8 @@ but can also be accessed directly.</p>
       
       <div class="param-details text-block">
         <p>An updated map,
-  with values compiled by a third-party function,
-  and converted to json-ready strings</p>
+with values compiled by a third-party function,
+and converted to json-ready<span class="widont">&nbsp;</span>strings</p>
 
       </div>
     

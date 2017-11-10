@@ -14,13 +14,15 @@
     "extend": "^3.0.1",
     "gulp-rename": "^1.2.2",
     "js-yaml": "^3.10.0",
-    "marked": "^0.3.6",
+    "markdown-it": "^8.4.0",
+    "markdown-it-named-headers": "^0.0.4",
     "node-sass": "^4.6.0",
     "nunjucks": "^2.5.2",
     "sassdoc-extras": "^2.4.1",
     "strip-indent": "^2.0.0",
     "through2": "^2.0.3",
     "tinycolor2": "^1.4.1",
+    "typogr": "^0.6.7",
     "vinyl-fs": "^2.4.4"
   },
   "peerDependencies": {

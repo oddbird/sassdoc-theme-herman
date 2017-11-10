@@ -4,15 +4,15 @@
 [![Coverage Status](https://coveralls.io/repos/github/oddbird/sassdoc-theme-herman/badge.svg)](https://coveralls.io/github/oddbird/sassdoc-theme-herman)
 [![Greenkeeper badge](https://badges.greenkeeper.io/oddbird/sassdoc-theme-herman.svg)](https://greenkeeper.io/)
 
-> “**If it’s not documented, it doesn’t exist.**
+> "**If it's not documented, it doesn't exist.**
 > Documentation should become the default,
-> an integrated part of the development process.”
+> an integrated part of the development process."
 >
-> <cite>—Miriam Suzanne</cite>
+> <cite>---Miriam Suzanne</cite>
 
 At [OddBird][oddbird],
 we wanted better tools for documenting
-the entire front end of a project –
+the entire front end of a project --
 from brand guidelines to UX patterns and code APIs:
 
 - Documenting the intersection of languages and styles
@@ -58,7 +58,7 @@ from other developer comments (`//`).
 ```
 
 Annotation comments can be free-floating,
-or attached to a particular Sass/CSS object –
+or attached to a particular Sass/CSS object --
 such as a variable, mixin, function, or selector block.
 
 ```scss
@@ -93,7 +93,6 @@ for displaying font-specimens.
 Herman uses a number of SassDoc Extras:
 
 - [Description](http://sassdoc.com/extra-tools/#description-description-descriptionpath)
-- [Markdown](http://sassdoc.com/extra-tools/#markdown-markdown)
 - [Display](http://sassdoc.com/extra-tools/#display-toggle-display)
 - [GroupName](http://sassdoc.com/extra-tools/#groups-aliases-groupname)
 - [ShortcutIcon](http://sassdoc.com/extra-tools/#shortcut-icon-shortcuticon)

@@ -75,7 +75,7 @@ describe('renderIframe', function() {
       this.env = {
         herman: {
           sass: {
-            jsonfile: path.resolve(__dirname, 'files', 'json.css'),
+            jsonfile: path.resolve(__dirname, 'fixtures', 'css', 'json.css'),
           },
         },
         dir: __dirname,

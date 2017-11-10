@@ -5,12 +5,12 @@
 /// ## Exporting Styles to JSON
 ///
 /// While many UX patterns will be rendered as HTML components,
-/// there are several abstract style patterns –
-/// like color-palettes and font-specimens –
+/// there are several abstract style patterns --
+/// like color-palettes and font-specimens --
 /// that never appear as components in the application.
 ///
 /// Herman provides several `@preview` annotations
-/// to help visualize these abstract patterns –
+/// to help visualize these abstract patterns --
 /// but that requires passing the data from your styles
 /// to Herman's templates.
 /// We do that using Sass maps
@@ -37,9 +37,9 @@
 /// of the data to preview.
 /// Use the `herman-add` or `accoutrement-add` mixins
 /// to automatically populate
-/// fonts, colors, sizes, and ratios from existing maps –
+/// fonts, colors, sizes, and ratios from existing maps --
 /// or construct your `$herman` map by hand,
-/// following these guidelines…
+/// following these guidelines...
 ///
 /// ### Map structure:
 ///
@@ -80,8 +80,8 @@
 /// you may want to use name keys like `$brand-orange`
 /// to represent the proper use of a color.
 ///
-/// Color values can be in any valid web-color format –
-/// hex, hsl/a, rgba/a, etc –
+/// Color values can be in any valid web-color format --
+/// hex, hsl/a, rgba/a, etc --
 /// converted to a valid JSON string.
 ///
 /// ### Sizes & Ratios
@@ -102,7 +102,7 @@
 /// ```
 ///
 /// Ratio values can be in any valid number,
-/// and size values should be valid CSS lengths –
+/// and size values should be valid CSS lengths --
 /// both converted to a valid JSON string.
 ///
 /// ### Fonts:
