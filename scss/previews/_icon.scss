@@ -2,20 +2,20 @@
 // ============
 
 [data-sassdoc='icon-preview'] {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  display: grid;
+  grid-gap: size('gutter');
+  grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
   margin: size('gutter') negative('shim');
 }
 
 [data-sassdoc-icon] {
   color: color('text-light');
-  flex: 1 1 15%;
   margin: size('gutter') size('shim');
   min-width: size('rhythm') * 5;
 
   [data-icon] {
     @include square('h1');
+    margin-bottom: size('shim');
   }
 }
 
@@ -29,8 +29,10 @@
   color: color('text');
   font-weight: bold;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
 [data-sassdoc='icon-path'] {
   @include font-family('code');
+  font-size: size('xxsmall');
 }
