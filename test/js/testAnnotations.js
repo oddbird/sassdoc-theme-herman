@@ -20,34 +20,19 @@ describe('icons annotation', function() {
   beforeEach(function() {
     this.env = {
       logger: { warn: sinon.stub() },
-      herman: {
-        templatepath: path.resolve(__dirname, 'fixtures', 'templates'),
-      },
     };
     this.icons = annotations.icons(this.env);
   });
 
   describe('parse', function() {
-    it('splits on space and colon', function() {
-      assert.deepEqual(this.icons.parse('icons/ foo.j2:name'), {
-        iconsPath: 'icons/',
-        macroFile: 'foo.j2',
-        macroName: 'name',
-      });
+    it('returns argument', function() {
+      assert.equal(this.icons.parse('icons/'), 'icons/');
     });
   });
 
   describe('resolve', function() {
     it('logs errors on bad icon path', function(done) {
-      const data = [
-        {
-          icons: {
-            iconsPath: 'test/js/fixtures/bad_icons',
-            macroFile: 'macros.j2',
-            macroName: 'icon',
-          },
-        },
-      ];
+      const data = [{ icons: 'test/js/fixtures/bad_icons' }];
 
       this.icons
         .resolve(data)
@@ -59,15 +44,7 @@ describe('icons annotation', function() {
     });
 
     it('renders icons', function(done) {
-      const data = [
-        {
-          icons: {
-            iconsPath: 'test/js/fixtures/icons',
-            macroFile: 'macros.j2',
-            macroName: 'icon',
-          },
-        },
-      ];
+      const data = [{ icons: 'test/js/fixtures/icons' }];
 
       this.icons
         .resolve(data)
@@ -76,45 +53,18 @@ describe('icons annotation', function() {
             {
               name: 'ok',
               path: 'test/js/fixtures/icons/ok.svg',
-              rendered: 'rendered ok',
+              rendered:
+                '<svg data-icon="ok"  ><use xlink:href="#icon-ok" />\n  </svg>',
             },
             {
               name: 'warning',
               path: 'test/js/fixtures/icons/warning.svg',
-              rendered: 'rendered warning',
+              rendered:
+                '<svg data-icon="warning"  >' +
+                '<use xlink:href="#icon-warning" />\n  </svg>',
             },
           ]);
           assert.ok(data[0].iframed !== undefined);
-          done();
-        })
-        .catch(done);
-    });
-
-    it("doesn't recreate a customNjkEnv", function(done) {
-      const data = [
-        {
-          icons: {
-            iconsPath: 'test/js/fixtures/icons',
-            macroFile: 'macros.j2',
-            macroName: 'icon',
-          },
-        },
-        {
-          icons: {
-            iconsPath: 'test/js/fixtures/icons',
-            macroFile: 'macros.j2',
-            macroName: 'mymacro',
-          },
-        },
-      ];
-      sinon.spy(nunjucks, 'configure');
-
-      this.icons
-        .resolve(data)
-        .then(() => {
-          sinon.assert.calledOnce(nunjucks.configure);
-
-          nunjucks.configure.restore();
           done();
         })
         .catch(done);
@@ -451,7 +401,7 @@ describe('example annotation', function() {
           example: [
             {
               type: 'html',
-              code: '<html></html>',
+              code: '<div></div>',
             },
           ],
         },

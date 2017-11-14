@@ -3,7 +3,7 @@
 
 /// A data attribute for setting an icon.
 /// @group style-icons
-/// @icons assets/svg/ utility.macros.j2:icon
+/// @icons assets/svg/
 /// @example njk
 ///   {% import 'utility.macros.j2' as utility %}
 ///   {{ utility.icon('menu', size='icon-small') }}

@@ -275,7 +275,7 @@ gulp.task('compile', ['sass', 'minify'], () => {
         },
       ],
       customCSS: `${paths.DIST_DIR}css/main.css`,
-      minifiedIcons: `${paths.TEMPLATES_DIR}_icons.svg`,
+      customHTML: `${paths.TEMPLATES_DIR}_icons.svg`,
       templatepath: path.join(__dirname, 'templates'),
       sass: {
         jsonfile: `${paths.DIST_DIR}css/json.css`,
