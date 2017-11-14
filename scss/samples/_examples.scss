@@ -100,23 +100,24 @@
 /// Example annotations with language set to `njk`
 /// can also be compiled.
 /// In order for this to work,
-/// you must either specify a `templatepath`
+/// you must either specify a `nunjucks.templatepath`
 /// (the path where nunjucks will look to import templates),
-/// or a `nunjucksEnv` (custom environment).
+/// or a `nunjucks.environment` (custom environment).
 /// Using a custom nunjucks environment
 /// is particularly useful if your macros contain custom filters.
 /// Either can be established
 /// in your sassdoc `herman` configuration object:
 ///
-/// ### Setting `templatepath`:
+/// ### Setting `nunjucks.templatepath`:
 ///
 /// ```yaml
 /// # .sassdocrc (yaml)
 /// herman:
-///   templatepath: 'templates'
+///   nunjucks:
+///     templatepath: 'templates'
 /// ```
 ///
-/// ### Setting `nunjucksEnv`:
+/// ### Setting `nunjucks.environment`:
 ///
 /// *This is only possible
 /// if using the [SassDoc Node API][api].*
@@ -132,7 +133,9 @@
 /// sassdoc(src, {
 ///   theme: 'herman',
 ///   herman: {
-///     nunjucksEnv
+///     nunjucks: {
+///       environment: nunjucksEnv
+///     }
 ///   }
 /// });
 /// ```

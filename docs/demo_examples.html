@@ -712,19 +712,20 @@ since all compiled output will be displayed with the <code>@example</code>.</p>
 <p>Example annotations with language set to <code>njk</code>
 can also be compiled.
 In order for this to work,
-you must either specify a <code>templatepath</code>
+you must either specify a <code>nunjucks.templatepath</code>
 (the path where nunjucks will look to import templates),
-or a <code>nunjucksEnv</code> (custom environment).
+or a <code>nunjucks.environment</code> (custom environment).
 Using a custom nunjucks environment
 is particularly useful if your macros contain custom filters.
 Either can be established
 in your sassdoc <code>herman</code> configuration object:</p>
-<h3 id="setting-templatepath-">Setting <code>templatepath</code>:</h3>
+<h3 id="setting-nunjucks-templatepath-">Setting <code>nunjucks.templatepath</code>:</h3>
 <pre><code class="lang-yaml"># .sassdocrc (yaml)
 herman:
-  templatepath: 'templates'
+  nunjucks:
+    templatepath: 'templates'
 </code></pre>
-<h3 id="setting-nunjucksenv-">Setting <code>nunjucksEnv</code>:</h3>
+<h3 id="setting-nunjucks-environment-">Setting <code>nunjucks.environment</code>:</h3>
 <p><em>This is only possible
 if using the <a href="http://sassdoc.com/node/">SassDoc Node<span class="widont">&nbsp;</span>API</a>.</em></p>
 <pre><code class="lang-js">const nunjucks = require('nunjucks');
@@ -735,7 +736,9 @@ const nunjucksEnv = nunjucks.configure('./templates');
 sassdoc(src, {
   theme: 'herman',
   herman: {
-    nunjucksEnv
+    nunjucks: {
+      environment: nunjucksEnv
+    }
   }
 });
 </code></pre>
