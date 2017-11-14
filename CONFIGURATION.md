@@ -12,17 +12,6 @@ herman:
 All relative paths are relative to the SassDoc config file or the `cwd`.
 
 
-## displayColors
-
-- Type: `Array`
-- Default: `['hex', 'rgb', 'hsl']`
-
-Configures which color value formats are shown
-when using the [`@preview color-palette` annotation][color-preview].
-
-[color-preview]: http://oddbird.net/herman/docs/demo_colors.html
-
-
 ## extraDocs
 
 - Type: `Array`
@@ -36,13 +25,25 @@ or a `String` path
 (in which case the filename will be displayed in the navigation).
 
 
-### extraLinks
+## extraLinks
 
 - Type: `Array`
 - Default: `[]`
 
 Add external links to your compiled documentation navigation.
 Each value in the list should be an `Object` with keys `name` and `url`.
+
+
+## displayColors
+
+- Type: `Array`
+- Default: `['hex', 'rgb', 'hsl']`
+
+Configures which color value formats are shown
+when using the [`@preview color-palette` annotation][color-preview].
+Valid options: `hex`, `rgb/rgba`, `hsl/hsla`
+
+[color-preview]: http://oddbird.net/herman/docs/demo_colors.html
 
 
 ## customCSS
@@ -62,7 +63,7 @@ which will be included in the `<head>` of rendered
 - Type: `String`
 - Default: `''`
 
-Custom HTML (or relative path to a file)
+Custom HTML string (or relative path to a file containing valid HTML)
 to include at the top of the generated `<body>` tag
 for all rendered `@example html` and `@example njk` annotations.
 See our [`@example` documentation][example-docs].
@@ -80,26 +81,38 @@ See our [`@example` documentation][example-docs].
 Relative path to a directory containing local font files.
 
 
-## templatepath
+## nunjucks
+
+- Type: `Object`
+- Default: `{}`
+
+Container for the following [Nunjucks][nunjucks]-related options:
+
+[nunjucks]: https://mozilla.github.io/nunjucks/
+
+
+### nunjucks.templatepath
 
 - Type: `String`
 - Default: `''`
 
-*Either `templatepath` or [`nunjucksEnv`](#nunjucksenv)
-is required if using [`@example njk` annotation][example-njk].*
+*Either `nunjucks.templatepath` or
+[`nunjucks.environment`](#nunjucks-environment) is required if using
+[`@example njk` annotation][example-njk].*
 
 Relative path to a directory containing Nunjucks templates.
 
 
-## nunjucksEnv
+### nunjucks.environment
 
 - Type: [Nunjucks `Environment` instance][njk-instance]
 - Default: `undefined`
 
 [njk-instance]: https://mozilla.github.io/nunjucks/api.html#environment
 
-*Either `templatepath` or [`nunjucksEnv`](#nunjucksenv)
-is required if using [`@example njk` annotation][example-njk].*
+*Either [`nunjucks.templatepath`](#nunjucks-templatepath) or
+`nunjucks.environment` is required if using
+[`@example njk` annotation][example-njk].*
 
 [example-njk]: http://oddbird.net/herman/docs/demo_examples.html#compiling-nunjucks
 
@@ -143,8 +156,8 @@ See our [`@example` documentation][example-docs-scss].
 - Type: `Array`
 - Default: `[]`
 
-List of files (relative to any `includepaths`) to `@import`
-for all `@example sass/scss` annotations.
+List of files (relative to any [`sass.includepaths`](#sass-includepaths)) to
+`@import` for all `@example sass/scss` annotations.
 See our [`@example` documentation][example-docs-scss].
 
 [example-docs-scss]: http://oddbird.net/herman/docs/demo_examples.html#compiling-sass-scss

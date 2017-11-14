@@ -10,7 +10,9 @@ describe('getNunjucksEnv', function() {
   it('uses an existing nunjucksEnv first', function() {
     const env = {
       herman: {
-        nunjucksEnv: 'some value',
+        nunjucks: {
+          environment: 'some value',
+        },
       },
     };
     const actual = getNunjucksEnv(null, env, null);
@@ -32,7 +34,9 @@ describe('getNunjucksEnv', function() {
     const configure = sinon.stub(nunjucks, 'configure');
     const env = {
       herman: {
-        templatepath: 'some value',
+        nunjucks: {
+          templatepath: 'some value',
+        },
       },
     };
     // Look for side-effects:

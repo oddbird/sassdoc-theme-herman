@@ -346,7 +346,9 @@ describe('example annotation', function() {
   beforeEach(function() {
     this.env = {
       herman: {
-        templatepath: path.resolve(__dirname, 'fixtures', 'templates'),
+        nunjucks: {
+          templatepath: path.resolve(__dirname, 'fixtures', 'templates'),
+        },
       },
       logger: { warn: sinon.spy() },
     };
@@ -364,7 +366,7 @@ describe('example annotation', function() {
       assert.deepEqual(data, [{ example: [{ type: 'njk' }] }]);
       assert(
         env.logger.warn.calledWith(
-          'Must pass in a templatepath if using Nunjucks @example.'
+          'Must pass in a nunjucks.templatepath if using Nunjucks @example.'
         )
       );
     });
@@ -543,7 +545,7 @@ describe('example annotation', function() {
       nunjucksEnv.addFilter('plus_one', function(val) {
         return val + 1;
       });
-      const env = { herman: { nunjucksEnv } };
+      const env = { herman: { nunjucks: { environment: nunjucksEnv } } };
       const example = annotations.example(env);
       const data = [
         {
