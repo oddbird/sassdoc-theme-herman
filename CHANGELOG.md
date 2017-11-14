@@ -28,6 +28,7 @@
   (only included in rendered `@example` annotations).
 - BREAKING: Nest `templatepath` and `nunjucksEnv` options under new `nunjucks`
   options object: `nunjucks.templatepath` and `nunjucks.environment`.
+- NEW: Add attribution/link to Herman/OddBird in nav footer.
 
 
 ## 1.0.0-alpha.15: 2017-10-30
