@@ -246,7 +246,6 @@ gulp.task('compile', ['sass', 'minify'], () => {
     dest: paths.DOCS_DIR,
     theme: './',
     herman: {
-      displayColors: ['hex', 'hsl'],
       extraDocs: [
         { name: 'Configuration', path: './CONFIGURATION.md' },
         { name: 'Changelog', path: './CHANGELOG.md' },
@@ -274,9 +273,12 @@ gulp.task('compile', ['sass', 'minify'], () => {
           url: 'http://oddbird.net/accoutrement-init/',
         },
       ],
+      displayColors: ['hex', 'hsl'],
       customCSS: `${paths.DIST_DIR}css/main.css`,
-      minifiedIcons: `${paths.TEMPLATES_DIR}_icons.svg`,
-      templatepath: path.join(__dirname, 'templates'),
+      customHTML: `${paths.TEMPLATES_DIR}_icons.svg`,
+      nunjucks: {
+        templatepath: path.join(__dirname, 'templates'),
+      },
       sass: {
         jsonfile: `${paths.DIST_DIR}css/json.css`,
         includepaths: [

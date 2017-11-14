@@ -17,8 +17,8 @@
   {% endif %}
 </head>
 <body class="sassdoc">
-  {% if iconsSvg %}
-    {{ iconsSvg|safe }}
+  {% if customHTML %}
+    {{ customHTML|safe }}
   {% endif %}
   {{ item.rendered|safe }}
 </body>

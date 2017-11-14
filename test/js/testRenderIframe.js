@@ -14,12 +14,9 @@ describe('renderIframe', function() {
       this.env = {
         herman: {
           customCSS: 'dist/css/main.css',
-          minifiedIcons: 'templates/_icons.svg',
+          customHTML: 'templates/_icons.svg',
         },
         dir: __dirname,
-        logger: {
-          warn: sinon.spy(),
-        },
       };
     });
 
@@ -31,12 +28,13 @@ describe('renderIframe', function() {
 
       renderIframe(this.env, item, 'example').then(() => {
         assert.equal(item.iframed, 'some iframed');
-        assert.ok(this.env.iconsSvg);
+        assert.ok(this.env.customHTML);
         assert.deepEqual(this.env.customCSS, {
           path: path.resolve(__dirname, 'dist/css/main.css'),
           url: 'assets/css/custom/main.css',
         });
 
+        nunjucksEnv.render.restore();
         done();
       });
     });
@@ -48,22 +46,57 @@ describe('renderIframe', function() {
 
       renderIframe(this.env, item, 'example').then(() => {
         assert.equal(item.iframed, undefined);
-        assert.equal(this.env.iconsSvg, undefined);
+        assert.equal(this.env.customHTML, undefined);
         assert.equal(this.env.customCSS, undefined);
 
         done();
       });
     });
 
-    it('errors out if env.herman.minifiedIcons is bad', function(done) {
+    it('inserts raw HTML if env.herman.customHTML is bad path', function(done) {
       const env = extend({}, this.env);
-      env.herman.minifiedIcons = 'foo.bar';
+      env.herman.customHTML = 'foo.bar';
       const item = {
         rendered: true,
       };
 
       renderIframe(this.env, item, 'example').then(() => {
-        sinon.assert.calledOnce(env.logger.warn);
+        assert.equal(this.env.customHTML, this.env.herman.customHTML);
+
+        done();
+      });
+    });
+  });
+
+  describe('icon', function() {
+    beforeEach(function() {
+      this.env = {};
+    });
+
+    it('renders', function(done) {
+      sinon.stub(nunjucksEnv, 'render').returns('some iframed');
+      const item = {
+        icons: [{}],
+        iconsPath: path.resolve(__dirname, 'fixtures', 'icons'),
+      };
+
+      renderIframe(this.env, item, 'icon').then(() => {
+        assert.equal(item.iframed, 'some iframed');
+        assert.ok(this.env.iconsSvg);
+
+        nunjucksEnv.render.restore();
+        done();
+      });
+    });
+
+    it("doesn't render if no item.icons", function(done) {
+      const item = {
+        icons: [],
+      };
+
+      renderIframe(this.env, item, 'icon').then(() => {
+        assert.equal(item.iframed, undefined);
+        assert.equal(this.env.iconsSvg, undefined);
 
         done();
       });
@@ -78,7 +111,6 @@ describe('renderIframe', function() {
             jsonfile: path.resolve(__dirname, 'fixtures', 'css', 'json.css'),
           },
         },
-        dir: __dirname,
         logger: {
           warn: sinon.spy(),
         },

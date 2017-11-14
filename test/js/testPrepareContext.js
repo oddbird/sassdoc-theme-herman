@@ -22,7 +22,10 @@ describe('prepareContext', function() {
           undefined: 'General',
         },
         sort: ['group', 'file', 'line', 'access'],
-        herman: { sass: {} },
+        herman: {
+          nunjucks: {},
+          sass: {},
+        },
         description: '<p>foo</p>\n',
         data: [],
         byGroup: {},
