@@ -429,6 +429,12 @@ describe('example annotation', function() {
                 "{% import 'macros.j2' as macros %}\n" +
                 '{{ macros.mymacro(1, 2) }}',
             },
+            {
+              type: 'njk',
+              code:
+                "{% import 'macros.j2' as macros %}\n" +
+                '{{ macros.mymacro(1, 2) }}',
+            },
           ],
         },
       ];
@@ -482,6 +488,61 @@ describe('example annotation', function() {
           assert.equal(
             data[0].example[0].rendered,
             `${data[0].example[0].code}\n`
+          );
+          done();
+        })
+        .catch(done);
+    });
+
+    it('sets env.herman.sass attributes', function(done) {
+      const env = { logger: { warn: sinon.spy() }, herman: { sass: {} } };
+      const example = annotations.example(env);
+      const sassData = '/* just a placeholder */';
+      const data = [
+        {
+          example: [
+            {
+              type: 'scss',
+              code: sassData,
+            },
+          ],
+        },
+      ];
+      example
+        .resolve(data)
+        .then(() => {
+          // renderSass was called with data == sassData
+          // renderSass was called with includePaths = []
+          assert.ok(true);
+          done();
+        })
+        .catch(done);
+    });
+
+    it('reports errors in sass compilation', function(done) {
+      const env = { logger: { warn: sinon.spy() }, herman: { sass: {} } };
+      const example = annotations.example(env);
+      const data = [
+        {
+          example: [
+            {
+              type: 'scss',
+              code: 'this is just some bad sass',
+            },
+          ],
+        },
+      ];
+      example
+        .resolve(data)
+        .then(() => {
+          const errMsg =
+            'Invalid CSS after "...t some bad sass": expected "{", was ""';
+          const sassData = data[0].example[0].code;
+          assert(
+            env.logger.warn.calledWith(
+              `Error compiling @example scss: \n${errMsg}\n${sassData}`
+            ),
+            env.logger.warn.firstCall
           );
           done();
         })
