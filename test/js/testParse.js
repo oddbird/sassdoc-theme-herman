@@ -122,7 +122,8 @@ describe('parse', function() {
       const file = {
         path: `${__dirname}/fixtures/css/main.css`,
         contents:
-          '.foo { background: url(http://foo); background: url(//foo); background: url(data://foo); }',
+          '.foo { background: url(http://foo); background: url(//foo);' +
+          ' background: url(data://foo); }',
       };
       const enc = 'utf-8';
       const env = {
@@ -131,7 +132,8 @@ describe('parse', function() {
       parse.customCSS(file, enc, env);
       const actual = file.contents;
       const expected =
-        '.foo { background: url(http://foo); background: url(//foo); background: url(data://foo); }';
+        '.foo { background: url(http://foo); background: url(//foo);' +
+        ' background: url(data://foo); }';
 
       assert.deepEqual(actual.toString(), expected);
     });
