@@ -43,6 +43,16 @@ describe('icons annotation', function() {
         .catch(done);
     });
 
+    it('bails early if no icons on items', function(done) {
+      this.icons
+        .resolve([{}])
+        .then(() => {
+          assert.ok(true);
+          done();
+        })
+        .catch(done);
+    });
+
     it('renders icons', function(done) {
       const data = [{ icons: 'test/js/fixtures/icons' }];
 
@@ -95,6 +105,17 @@ describe('font annotation', function() {
   });
 
   describe('parse', function() {
+    it('keeps env.fontsHTML if set', function() {
+      const font = annotations.font({
+        fontsHTML: ['<link rel="another-stylesheet">'],
+      });
+      const input =
+        '"key" (variant1, variant2) {format1, format2}\n' +
+        '  <link rel="another-stylesheet">';
+      font.parse(input);
+      assert.equal(this.env.fontsHTML, undefined);
+    });
+
     it('parses options and returns object', function() {
       const input =
         '"key" (variant1, variant2) {format1, format2}\n' +
@@ -191,6 +212,33 @@ describe('font annotation', function() {
             'local fonts.'
         )
       );
+    });
+
+    it('logs an error if missing Sass jsonfile', function(done) {
+      const env = {
+        logger: { warn: sinon.stub() },
+        herman: {
+          fontpath: '/path',
+          sass: {
+            jsonfile: `${__dirname}/no/such/file.json`,
+          },
+        },
+      };
+      annotations
+        .font(env)
+        .resolve(this.data)
+        .then(() => {
+          const errMsg = `ENOENT: no such file or directory, open '${
+            env.herman.sass.jsonfile
+          }'`;
+          assert(
+            env.logger.warn.calledWith(
+              `File not found: ${env.herman.sass.jsonfile}\n${errMsg}`
+            )
+          );
+          done();
+        })
+        .catch(done);
     });
 
     it('adds `@font-face` CSS and localFonts src', function(done) {
