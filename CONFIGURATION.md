@@ -68,6 +68,33 @@ Relative path to a custom CSS file,
 which will be included in the `<head>` of rendered
 [`@example` annotations][example-docs].
 
+**Notes:**
+
+- If your custom CSS includes webfonts
+  which require additional `<script>` or `<style>` tags
+  (e.g. an external Google Fonts stylesheet or Adobe Typekit JavaScript),
+  you must document those fonts with the `@font` annotation
+  (providing the required extra HTML)
+  for them to display properly
+  within rendered `@example` annotations.
+  See our [`@font` documentation][font-docs-webfonts].
+- If your custom CSS contains internal links
+  referenced with `url(...)`
+  (e.g. local fonts or background images),
+  Herman will attempt to copy in those assets
+  so that they are available
+  in your rendered `@example` annotations.
+  This means that the paths must either be absolute,
+  or relative to the location of the CSS file itself.
+  If using Webpack to bundle your Herman `customCSS`,
+  this likely means [disabling the `publicPath` setting][extract-text]
+  for this CSS file (e.g. `publicPath: ''`),
+  or [disabling Webpack's `url()` pre-processing][css-loader] entirely.
+
+[font-docs-webfonts]: http://oddbird.net/herman/docs/demo_fonts.html#displaying-webfonts
+[extract-text]: https://github.com/webpack-contrib/extract-text-webpack-plugin#extract
+[css-loader]: https://github.com/webpack-contrib/css-loader#url
+
 
 ## customHTML
 
@@ -87,9 +114,13 @@ See our [`@example` documentation][example-docs].
 - Type: `String`
 - Default: `''`
 
-*Required if using `@font` annotation with local font files.*
+*Required if using [`@font` annotation][font-docs-local] with local font
+files.*
 
 Relative path to a directory containing local font files.
+See our [`@font` documentation][font-docs-local].
+
+[font-docs-local]: http://oddbird.net/herman/docs/demo_fonts.html#displaying-local-fonts
 
 
 ## nunjucks
@@ -140,7 +171,8 @@ Container for the following sass-related options:
 - Type: `String`
 - Default: `''`
 
-*Required if using `@font` or `@preview` annotations.*
+*Required if using [`@font`][font-docs] or [`@preview`][color-preview]
+annotations.*
 
 Relative path to a `sass-json file`
 (created with the [`herman-export` mixin][export-mixin]).
@@ -149,6 +181,7 @@ The JSON contents will be added under the
 and used to display colors, fonts, ratios, and sizes.
 See [Exporting Styles to JSON][export].
 
+[font-docs]: http://oddbird.net/herman/docs/demo_fonts.html
 [export]: http://oddbird.net/herman/docs/api_json-export.html
 [export-mixin]: http://oddbird.net/herman/docs/api_json-export.html#mixin--herman-export
 

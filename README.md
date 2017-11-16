@@ -84,10 +84,11 @@ display SVG icons from a given folder,
 and we extend the core [`@example` annotation][example-docs]
 to display compiled Sass/Nunjucks output
 and render sample components.
-We also provide a `@preview` annotation
+We also provide a [`@font` annotation][font-docs]
+for displaying font-specimens,
+and a `@preview` annotation
 for displaying [color-palettes][color-preview],
-[text and spacing sizes, and modular ratios][size-preview],
-and a [`@font` annotation][font-docs] for displaying font-specimens.
+[text and spacing sizes, and modular ratios][size-preview].
 
 [herman]: http://oddbird.net/herman/
 [oddbird]: http://oddbird.net/

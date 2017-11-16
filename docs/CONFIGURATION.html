@@ -444,6 +444,29 @@ Valid options: <code>hex</code>, <code>rgb/rgba</code>, <code>hsl/hsla</code></p
 <p>Relative path to a custom CSS file,
 which will be included in the <code>&lt;head&gt;</code> of rendered
 <a href="http://oddbird.net/herman/docs/demo_examples.html"><code>@example</code> annotations</a>.</p>
+<p><strong>Notes:</strong></p>
+<ul>
+<li>If your custom CSS includes webfonts
+which require additional <code>&lt;script&gt;</code> or <code>&lt;style&gt;</code> tags
+(e.g. an external Google Fonts stylesheet or Adobe Typekit JavaScript),
+you must document those fonts with the <code>@font</code> annotation
+(providing the required extra HTML)
+for them to display properly
+within rendered <code>@example</code> annotations.
+See our <a href="http://oddbird.net/herman/docs/demo_fonts.html#displaying-webfonts"><code>@font</code> documentation</a>.</li>
+<li>If your custom CSS contains internal links
+referenced with <code>url(...)</code>
+(e.g. local fonts or background images),
+Herman will attempt to copy in those assets
+so that they are available
+in your rendered <code>@example</code> annotations.
+This means that the paths must either be absolute,
+or relative to the location of the CSS file itself.
+If using Webpack to bundle your Herman <code>customCSS</code>,
+this likely means <a href="https://github.com/webpack-contrib/extract-text-webpack-plugin#extract">disabling the <code>publicPath</code> setting</a>
+for this CSS file (e.g. <code>publicPath: ''</code>),
+or <a href="https://github.com/webpack-contrib/css-loader#url">disabling Webpack’s <code>url()</code> pre-processing</a> entirely.</li>
+</ul>
 <h2 id="customhtml">customHTML</h2>
 <ul>
 <li>Type: <code>String</code></li>
@@ -458,8 +481,9 @@ See our <a href="http://oddbird.net/herman/docs/demo_examples.html"><code>@examp
 <li>Type: <code>String</code></li>
 <li>Default: <code>''</code></li>
 </ul>
-<p><em>Required if using <code>@font</code> annotation with local font<span class="widont">&nbsp;</span>files.</em></p>
-<p>Relative path to a directory containing local font<span class="widont">&nbsp;</span>files.</p>
+<p><em>Required if using <a href="http://oddbird.net/herman/docs/demo_fonts.html#displaying-local-fonts"><code>@font</code> annotation</a> with local font<span class="widont">&nbsp;</span>files.</em></p>
+<p>Relative path to a directory containing local font files.
+See our <a href="http://oddbird.net/herman/docs/demo_fonts.html#displaying-local-fonts"><code>@font</code> documentation</a>.</p>
 <h2 id="nunjucks">nunjucks</h2>
 <ul>
 <li>Type: <code>Object</code></li>
@@ -494,7 +518,8 @@ See our <a href="http://oddbird.net/herman/docs/demo_examples.html"><code>@examp
 <li>Type: <code>String</code></li>
 <li>Default: <code>''</code></li>
 </ul>
-<p><em>Required if using <code>@font</code> or <code>@preview</code> annotations.</em></p>
+<p><em>Required if using <a href="http://oddbird.net/herman/docs/demo_fonts.html"><code>@font</code></a> or <a href="http://oddbird.net/herman/docs/demo_colors.html"><code>@preview</code></a>
+annotations.</em></p>
 <p>Relative path to a <code>sass-json file</code>
 (created with the <a href="http://oddbird.net/herman/docs/api_json-export.html#mixin--herman-export"><code>herman-export</code> mixin</a>).
 The JSON contents will be added under the
