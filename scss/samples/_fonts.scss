@@ -1,0 +1,163 @@
+// Font Specimen Samples
+// =====================
+
+
+/// ## Documenting font specimens
+///
+/// Whether you use webfonts or locally-hosted font files,
+/// you can use Herman to document and display your fonts,
+/// in various formats.
+/// In the end, Herman will need a map
+/// converted to JSON --
+/// but we'll start with individual font families,
+/// and build the export from there.
+///
+/// @group demo_fonts
+
+
+/// ## Displaying webfonts
+///
+/// Each font family will be displayed individually,
+/// using the `@font` annotation:
+///
+/// ```
+/// // @font 'demo-code' (regular, bold)
+/// ```
+///
+/// For remotely-hosted fonts,
+/// the `@font` annotation accepts three arguments:
+///
+/// - The first argument (in single-quotes or double-quotes) is the `key`
+///   that will be used to access the data from JSON,
+///   so it doesn't matter what key is used --
+///   as long as the key given here matches the group-name
+///   used when adding this data to `$herman`.
+/// - The second argument (in parentheses) is an optional list
+///   of font variants to display in the preview.
+///   If omitted, it defaults to any variants
+///   included as keys in the font map itself.
+/// - The third argument (on the following line, nested with two spaces)
+///   is an optional html string --
+///   usually a `<link>` or `<script>` tag
+///   required to use the webfont --
+///   that will be inserted into the rendered iframe `<head>`.
+///
+/// ```
+/// // @font 'demo-code' (regular, bold, bold italic)
+/// //   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" rel="stylesheet">
+/// ```
+///
+/// @font 'demo-code' (regular, bold, bold italic)
+///   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" rel="stylesheet">
+/// @group demo_fonts
+$demo-code: (
+  'name': 'Source Code Pro',
+  'source': 'https://fonts.google.com/specimen/Source+Code+Pro',
+  'stack': ('Consolas', 'Menlo', 'Courier New', monospace, sans-serif),
+);
+
+
+/// ## Displaying local fonts
+///
+/// For locally-hosted fonts,
+/// the `@font` annotation accepts three arguments:
+///
+/// - The first argument (in single-quotes or double-quotes) is the `key`
+///   that will be used to access the data from JSON,
+///   so it doesn't matter what key is used --
+///   as long as the key given here matches the group-name
+///   used when adding this data to `$herman`.
+/// - The second argument (in curly-brackets `{...}`) is a required list
+///   of font file formats to include.
+///   Valid format options are `ttf`, `otf`, `woff`, `woff2`, `svg`, `svgz`, and `eot`.
+/// - The third argument (in parentheses) is an optional list
+///   of font variants to display in the preview.
+///   If omitted, it defaults to all variants
+///   included as keys in the font map itself.
+///
+/// ```
+/// // @font 'demo-local' {woff2, woff, ttf}
+/// ```
+///
+/// In order for this to work,
+/// you must specify a `fontpath`
+/// (the path where Herman will look to import local font files),
+/// in your SassDoc `herman` configuration object.
+///
+/// ```yaml
+/// # .sassdocrc (yaml)
+/// herman:
+///   fontpath: 'fonts/'
+/// ```
+///
+/// @font 'demo-local' {woff2, woff, ttf}
+/// @group demo_fonts
+$demo-local: (
+  'name': 'rockingham',
+  'regular': 'rockingham/rockingham-regular-webfont',
+  'bold': 'rockingham/rockingham-bold-webfont',
+  'italic': 'rockingham/rockingham-italic-webfont',
+  'bold' 'italic': 'rockingham/rockingham-bolditalic-webfont',
+  'stack': 'fantasy',
+);
+
+
+/// ## Add font data to $herman
+///
+/// In order to preview the `$demo-code` and `$demo-local` maps,
+/// we need to export the data to JSON.
+/// That's a two-step process:
+/// first building the export-map,
+/// and then creating a sass file to do the actual export.
+/// We provide shortcuts to help with both.
+///
+/// Use the `herman-add` mixin to add individual data maps
+/// to the global export map.
+///
+/// ```
+///  @include herman-add('font', 'demo-code', $demo-code);
+///  @include herman-add('font', 'demo-local', $demo-local);
+/// ```
+///
+/// - The first argument tells Herman what type of data is being added --
+///   in this case `font`.
+///   Herman will organize the output JSON into subgroups by type.
+/// - The second argument sets a `key` name
+///   for accessing this particular group of ratios or sizes.
+/// - The third argument provides the actual map of data
+///   to be added to the `$herman` export map.
+///
+/// The result is an export map that looks like this:
+///
+/// ```scss
+/// $herman: (
+///   'fonts': (
+///     'demo-code': (
+///       'name': 'Source Code Pro',
+///       'source': 'https://fonts.google.com/specimen/Source+Code+Pro',
+///       'stack': ('Consolas', 'Menlo', 'Courier New', monospace, sans-serif),
+///     ),
+///     'demo-local': (
+///       'name': 'rockingham',
+///       'regular': 'rockingham/rockingham-regular-webfont',
+///       'bold': 'rockingham/rockingham-bold-webfont',
+///       'italic': 'rockingham/rockingham-italic-webfont',
+///       'bold' 'italic': 'rockingham/rockingham-bolditalic-webfont',
+///       'stack': 'fantasy',
+///     ),
+///   ),
+/// );
+/// ```
+///
+/// You can also build that map by hand, if you prefer.
+///
+/// [See the font map documentation for details »][font-docs]
+///
+/// [font-docs]: http://oddbird.net/herman/docs/api_json-export.html#fonts
+///
+/// @see $herman
+/// @see herman-add
+/// @group demo_fonts
+/// @link http://oddbird.net/accoutrement-type Accoutrement-Type
+@include herman-add('font', 'demo-code', $demo-code);
+@include herman-add('font', 'demo-local', $demo-local);

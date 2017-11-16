@@ -25,11 +25,11 @@
 ///
 /// ```scss
 ///  // This is a widget that we use on our site…
-///  // @example scss -
+///  // @example scss
 ///  //   [data-widget] {
 ///  //     @include widget-style;
 ///  //   }
-///  // @example njk -
+///  // @example njk
 ///  //  {% import 'macros.njk' as macros %}
 ///  //  {{ macros.widget(1, 2) }}
 ///  @mixin widget-style { … }
@@ -87,7 +87,7 @@
 ///
 /// @group demo_examples
 ///
-/// @example scss -
+/// @example scss
 ///   .sass {
 ///     &-nesting {
 ///       content: 'Example: Compiling Sass...';
@@ -101,12 +101,14 @@
 /// can also be compiled.
 /// In order for this to work,
 /// you must either specify a `nunjucks.templatepath`
-/// (the path where nunjucks will look to import templates),
-/// or a `nunjucks.environment` (custom environment).
-/// Using a custom nunjucks environment
+/// (the path where Nunjucks will look to import templates),
+/// or a `nunjucks.environment` (custom [Nunjucks environment][njk-instance]).
+/// Using a custom environment
 /// is particularly useful if your macros contain custom filters.
 /// Either can be established
 /// in your sassdoc `herman` configuration object:
+///
+/// [njk-instance]: https://mozilla.github.io/nunjucks/api.html#environment
 ///
 /// ### Setting `nunjucks.templatepath`:
 ///

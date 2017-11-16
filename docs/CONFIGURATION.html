@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <title>sassdoc-theme-herman Documentation</title>
+  <title>Herman Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
@@ -41,7 +41,7 @@
 
 
       <h1 data-sassdoc="project-title">
-        <a href="index.html" rel="home" data-sassdoc="project-name">sassdoc-theme-herman</a>
+        <a href="index.html" rel="home" data-sassdoc="project-name">Herman</a>
         
           <span data-sassdoc="project-version">1.0.0-alpha.15</span>
         
@@ -59,7 +59,7 @@
     <div data-sassdoc="nav-subsection">
       <h3 data-sassdoc="nav-title">
         
-        <a href="index.html" data-sassdoc-nav="is-not-active">sassdoc-theme-herman</a>
+        <a href="index.html" data-sassdoc-nav="is-not-active">Herman</a>
       </h3>
 
       
@@ -90,12 +90,27 @@
       
         
         <li data-sassdoc="nav-item">
-          <a href="api_json-export.html" data-sassdoc-nav="is-not-active">Exporting Sass to<span class="widont">&nbsp;</span>JSON</a>
+          <a href="api_json-export.html" data-sassdoc-nav="is-not-active">Exporting Styles to<span class="widont">&nbsp;</span>JSON</a>
         </li>
       
         
         <li data-sassdoc="nav-item">
           <a href="demo_colors.html" data-sassdoc-nav="is-not-active">Color Palettes</a>
+        </li>
+      
+        
+        <li data-sassdoc="nav-item">
+          <a href="demo_fonts.html" data-sassdoc-nav="is-not-active">Font Specimens</a>
+        </li>
+      
+        
+        <li data-sassdoc="nav-item">
+          <a href="demo_sizes.html" data-sassdoc-nav="is-not-active">Ratios &amp;<span class="widont">&nbsp;</span>Sizes</a>
+        </li>
+      
+        
+        <li data-sassdoc="nav-item">
+          <a href="demo_icons.html" data-sassdoc-nav="is-not-active">SVG Icons</a>
         </li>
       
         
@@ -206,7 +221,7 @@
     <div data-sassdoc="nav-subsection">
       <h3 data-sassdoc="nav-title">
         
-        <a href="index.html" data-sassdoc-nav="is-not-active">sassdoc-theme-herman</a>
+        <a href="index.html" data-sassdoc-nav="is-not-active">Herman</a>
       </h3>
 
       
@@ -237,12 +252,27 @@
       
         
         <li data-sassdoc="nav-item">
-          <a href="api_json-export.html" data-sassdoc-nav="is-not-active">Exporting Sass to<span class="widont">&nbsp;</span>JSON</a>
+          <a href="api_json-export.html" data-sassdoc-nav="is-not-active">Exporting Styles to<span class="widont">&nbsp;</span>JSON</a>
         </li>
       
         
         <li data-sassdoc="nav-item">
           <a href="demo_colors.html" data-sassdoc-nav="is-not-active">Color Palettes</a>
+        </li>
+      
+        
+        <li data-sassdoc="nav-item">
+          <a href="demo_fonts.html" data-sassdoc-nav="is-not-active">Font Specimens</a>
+        </li>
+      
+        
+        <li data-sassdoc="nav-item">
+          <a href="demo_sizes.html" data-sassdoc-nav="is-not-active">Ratios &amp;<span class="widont">&nbsp;</span>Sizes</a>
+        </li>
+      
+        
+        <li data-sassdoc="nav-item">
+          <a href="demo_icons.html" data-sassdoc-nav="is-not-active">SVG Icons</a>
         </li>
       
         
@@ -353,7 +383,7 @@
         
   <nav data-sassdoc-region="breadcrumb">
     
-    <a href="index.html" >sassdoc-theme-herman</a> »
+    <a href="index.html" >Herman</a> »
     <strong>Configuration</strong>
   </nav>
 
@@ -364,9 +394,20 @@
     <h1 id="herman-configuration-options">Herman Configuration Options</h1>
 <p>Nest all Herman-specific options
 under <code>herman</code> object in SassDoc<span class="widont">&nbsp;</span>config.</p>
-<pre><code class="lang-yaml">theme: herman
+<pre><code class="lang-yaml"># .sassdocrc
+theme: herman
 herman:
-  displayColors: &lt;...&gt;
+  extraDocs: [...]
+</code></pre>
+<pre><code class="lang-js">// Node API
+const sassdoc = require('sassdoc');
+
+sassdoc('./scss', {
+  theme: 'herman',
+  herman: {
+    extraDocs: [...]
+  }
+});
 </code></pre>
 <p>All relative paths are relative to the SassDoc config file or the <code>cwd</code>.</p>
 <h2 id="extradocs">extraDocs</h2>
@@ -458,7 +499,8 @@ See our <a href="http://oddbird.net/herman/docs/demo_examples.html"><code>@examp
 (created with the <a href="http://oddbird.net/herman/docs/api_json-export.html#mixin--herman-export"><code>herman-export</code> mixin</a>).
 The JSON contents will be added under the
 <code>sassjson</code> key of the sassdoc context,
-and used to display colors, fonts, ratios, and<span class="widont">&nbsp;</span>sizes.</p>
+and used to display colors, fonts, ratios, and sizes.
+See <a href="http://oddbird.net/herman/docs/api_json-export.html">Exporting Styles to<span class="widont">&nbsp;</span>JSON</a>.</p>
 <h3 id="sass-includepaths">sass.includepaths</h3>
 <ul>
 <li>Type: <code>Array</code></li>

@@ -4,9 +4,22 @@ Nest all Herman-specific options
 under `herman` object in SassDoc config.
 
 ```yaml
+# .sassdocrc
 theme: herman
 herman:
-  displayColors: <...>
+  extraDocs: [...]
+```
+
+```js
+// Node API
+const sassdoc = require('sassdoc');
+
+sassdoc('./scss', {
+  theme: 'herman',
+  herman: {
+    extraDocs: [...]
+  }
+});
 ```
 
 All relative paths are relative to the SassDoc config file or the `cwd`.
@@ -53,9 +66,7 @@ Valid options: `hex`, `rgb/rgba`, `hsl/hsla`
 
 Relative path to a custom CSS file,
 which will be included in the `<head>` of rendered
-[`@example` annotations][example-annotation].
-
-[example-annotation]: http://oddbird.net/herman/docs/demo_examples.html
+[`@example` annotations][example-docs].
 
 
 ## customHTML
@@ -136,7 +147,9 @@ Relative path to a `sass-json file`
 The JSON contents will be added under the
 `sassjson` key of the sassdoc context,
 and used to display colors, fonts, ratios, and sizes.
+See [Exporting Styles to JSON][export].
 
+[export]: http://oddbird.net/herman/docs/api_json-export.html
 [export-mixin]: http://oddbird.net/herman/docs/api_json-export.html#mixin--herman-export
 
 ### sass.includepaths
