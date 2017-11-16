@@ -20,12 +20,9 @@
         <div data-sassdoc-icon="{{ icon.name }}">
           {{ icon.rendered|safe }}
           <div data-sassdoc="icon-info">
+            <div data-sassdoc="icon-path">{{ icon.path }}</div>
             <div data-sassdoc="icon-name">
               {{ icon.name }}<span class="herman-file-extension">.svg</span>
-            </div>
-            <div class="tooltip-panel">
-              <span class="tooltip-label">view path</span>
-              <div data-sassdoc="icon-path" class="herman-tooltip">{{ icon.path }}</div>
             </div>
           </div>
         </div>

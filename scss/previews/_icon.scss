@@ -41,5 +41,8 @@
 
 [data-sassdoc='icon-path'] {
   @include font-family('code');
+  font-size: size('xxsmall');
   text-align: left;
+  white-space: normal;
+  word-break: break-word;
 }
