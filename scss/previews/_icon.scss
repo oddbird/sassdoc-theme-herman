@@ -18,13 +18,13 @@
 
   [data-icon] {
     @include square('h1');
-    margin-bottom: size('shim');
+    margin-bottom: size('gutter');
   }
 }
 
 [data-sassdoc='icon-info'] {
   font-size: size('small');
-  padding: size('half-shim') 0;
+  position: relative;
   white-space: nowrap;
 }
 

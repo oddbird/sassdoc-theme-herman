@@ -5,39 +5,24 @@
 /// Style a tooltip panel
 .herman-tooltip {
   @include contrasted('background');
-  @include position(100% null null size('quarter-shim'));
+  @include position(0 null null 0);
   @include z-index('overlay');
-  filter: drop-shadow(0 0 2px color('light-border'));
   font-size: size('xxsmall');
-  margin-right: size('quarter-shim');
-  margin-top: size('half-shim');
-  padding: size('quarter-shim') size('half-shim');
+  transform: translateY(-85%);
   visibility: hidden;
   white-space: normal;
   width: auto;
   // break long urls into multiple lines
   word-break: break-word;
 
-  &:empty {
-    display: none;
+  #{$focus} {
+    visibility: visible;
   }
-
-  @include after('') {
-    @include position(null null 100% size('half-shim'));
-    @include square(0);
-    border: transparent solid size('half-shim');
-    border-bottom-color: color('background');
-    // filter shadow creeps out if we don't slightly overlap elements
-    transform: translateY(1px);
-  }
-}
-
-.tooltip-panel {
-  position: relative;
 }
 
 .tooltip-label {
   color: color('action');
+  cursor: pointer;
   font-size: size('xxsmall');
 
   #{$focus} {
