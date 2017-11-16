@@ -12,7 +12,7 @@
   "dependencies": {
     "bluebird": "^3.5.1",
     "extend": "^3.0.1",
-    "gulp-imagemin": "^3.4.0",
+    "gulp-imagemin": "^4.0.0",
     "gulp-rename": "^1.2.2",
     "gulp-svg-symbols": "^2.0.2",
     "html": "^1.0.0",
