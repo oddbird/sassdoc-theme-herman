@@ -1,7 +1,9 @@
 # Herman Configuration Options
 
 Nest all Herman-specific options
-under `herman` object in SassDoc config.
+under `herman` object in [SassDoc config][sdconfig].
+
+[sdconfig]: http://sassdoc.com/configuration/
 
 ```yaml
 # .sassdocrc
@@ -37,6 +39,10 @@ and `name` (displayed in the compiled documentation navigation),
 or a `String` path
 (in which case the filename will be displayed in the navigation).
 
+This is useful for including additional documents,
+such as a changelog, quickstart guide,
+or instructions for contributing.
+
 
 ## extraLinks
 
@@ -45,6 +51,9 @@ or a `String` path
 
 Add external links to your compiled documentation navigation.
 Each value in the list should be an `Object` with keys `name` and `url`.
+
+This is useful for linking to additional documentation
+for dependencies or other third-party integrations.
 
 
 ## displayColors
@@ -105,6 +114,8 @@ Custom HTML string (or relative path to a file containing valid HTML)
 to include at the top of the generated `<body>` tag
 for all rendered `@example html` and `@example njk` annotations.
 See our [`@example` documentation][example-docs].
+This is particularly useful for including svg sprite sheets
+in example output.
 
 [example-docs]: http://oddbird.net/herman/docs/demo_examples.html
 
@@ -166,6 +177,7 @@ Relative path to a directory containing Nunjucks templates.
 
 Container for the following sass-related options:
 
+
 ### sass.jsonfile
 
 - Type: `String`
@@ -185,17 +197,19 @@ See [Exporting Styles to JSON][export].
 [export]: http://oddbird.net/herman/docs/api_json-export.html
 [export-mixin]: http://oddbird.net/herman/docs/api_json-export.html#mixin--herman-export
 
+
 ### sass.includepaths
 
 - Type: `Array`
 - Default: `[]`
 
-Array of paths used to attempt to resolve `@import` declarations.
+Array of paths used to resolve `@import` declarations.
 Passed through to [node-sass] when
 compiling `@example sass/scss` annotations.
 See our [`@example` documentation][example-docs-scss].
 
 [node-sass]: https://github.com/sass/node-sass/#includepaths
+
 
 ### sass.includes
 
@@ -205,5 +219,11 @@ See our [`@example` documentation][example-docs-scss].
 List of files (relative to any [`sass.includepaths`](#sass-includepaths)) to
 `@import` for all `@example sass/scss` annotations.
 See our [`@example` documentation][example-docs-scss].
+
+This is useful for including any global
+Sass configuration and toolkit files
+that may be used by any example.
+It's best to avoid files with output CSS,
+as that output will be displayed in every single Sass example.
 
 [example-docs-scss]: http://oddbird.net/herman/docs/demo_examples.html#compiling-sass-scss

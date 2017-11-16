@@ -393,7 +393,7 @@
   <div class="text-block">
     <h1 id="herman-configuration-options">Herman Configuration Options</h1>
 <p>Nest all Herman-specific options
-under <code>herman</code> object in SassDoc<span class="widont">&nbsp;</span>config.</p>
+under <code>herman</code> object in <a href="http://sassdoc.com/configuration/">SassDoc<span class="widont">&nbsp;</span>config</a>.</p>
 <pre><code class="lang-yaml"># .sassdocrc
 theme: herman
 herman:
@@ -421,6 +421,9 @@ with keys <code>path</code> (relative path to the local file)
 and <code>name</code> (displayed in the compiled documentation navigation),
 or a <code>String</code> path
 (in which case the filename will be displayed in the<span class="widont">&nbsp;</span>navigation).</p>
+<p>This is useful for including additional documents,
+such as a changelog, quickstart guide,
+or instructions for<span class="widont">&nbsp;</span>contributing.</p>
 <h2 id="extralinks">extraLinks</h2>
 <ul>
 <li>Type: <code>Array</code></li>
@@ -428,6 +431,8 @@ or a <code>String</code> path
 </ul>
 <p>Add external links to your compiled documentation navigation.
 Each value in the list should be an <code>Object</code> with keys <code>name</code> and <code>url</code>.</p>
+<p>This is useful for linking to additional documentation
+for dependencies or other third-party<span class="widont">&nbsp;</span>integrations.</p>
 <h2 id="displaycolors">displayColors</h2>
 <ul>
 <li>Type: <code>Array</code></li>
@@ -475,7 +480,9 @@ or <a href="https://github.com/webpack-contrib/css-loader#url">disabling Webpack
 <p>Custom HTML string (or relative path to a file containing valid HTML)
 to include at the top of the generated <code>&lt;body&gt;</code> tag
 for all rendered <code>@example html</code> and <code>@example njk</code> annotations.
-See our <a href="http://oddbird.net/herman/docs/demo_examples.html"><code>@example</code> documentation</a>.</p>
+See our <a href="http://oddbird.net/herman/docs/demo_examples.html"><code>@example</code> documentation</a>.
+This is particularly useful for including svg sprite sheets
+in example<span class="widont">&nbsp;</span>output.</p>
 <h2 id="fontpath">fontpath</h2>
 <ul>
 <li>Type: <code>String</code></li>
@@ -531,7 +538,7 @@ See <a href="http://oddbird.net/herman/docs/api_json-export.html">Exporting Styl
 <li>Type: <code>Array</code></li>
 <li>Default: <code>[]</code></li>
 </ul>
-<p>Array of paths used to attempt to resolve <code>@import</code> declarations.
+<p>Array of paths used to resolve <code>@import</code> declarations.
 Passed through to <a href="https://github.com/sass/node-sass/#includepaths">node-sass</a> when
 compiling <code>@example sass/scss</code> annotations.
 See our <a href="http://oddbird.net/herman/docs/demo_examples.html#compiling-sass-scss"><code>@example</code> documentation</a>.</p>
@@ -543,6 +550,11 @@ See our <a href="http://oddbird.net/herman/docs/demo_examples.html#compiling-sas
 <p>List of files (relative to any <a href="#sass-includepaths"><code>sass.includepaths</code></a>) to
 <code>@import</code> for all <code>@example sass/scss</code> annotations.
 See our <a href="http://oddbird.net/herman/docs/demo_examples.html#compiling-sass-scss"><code>@example</code> documentation</a>.</p>
+<p>This is useful for including any global
+Sass configuration and toolkit files
+that may be used by any example.
+It’s best to avoid files with output CSS,
+as that output will be displayed in every single Sass<span class="widont">&nbsp;</span>example.</p>
 
   </div>
 
