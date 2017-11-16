@@ -675,5 +675,13 @@ describe('name annotation', function() {
 
       assert.deepEqual(data, { context: { name: 'foo', origName: 'bar' } });
     });
+
+    it('does nothing if no item.name', function() {
+      const data = { context: { name: 'bar' } };
+
+      this.name.autofill(data);
+
+      assert.deepEqual(data, { context: { name: 'bar' } });
+    });
   });
 });
