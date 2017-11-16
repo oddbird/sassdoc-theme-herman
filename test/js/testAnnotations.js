@@ -44,10 +44,11 @@ describe('icons annotation', function() {
     });
 
     it('bails early if no icons on items', function(done) {
+      const data = [{}];
       this.icons
-        .resolve([{}])
+        .resolve(data)
         .then(() => {
-          assert.ok(true);
+          assert.deepEqual(data, [{}]);
           done();
         })
         .catch(done);
@@ -106,14 +107,15 @@ describe('font annotation', function() {
 
   describe('parse', function() {
     it('keeps env.fontsHTML if set', function() {
-      const font = annotations.font({
+      const env = {
         fontsHTML: ['<link rel="another-stylesheet">'],
-      });
+      };
+      const font = annotations.font(env);
       const input =
         '"key" (variant1, variant2) {format1, format2}\n' +
         '  <link rel="another-stylesheet">';
       font.parse(input);
-      assert.equal(this.env.fontsHTML, undefined);
+      assert.deepEqual(env.fontsHTML, ['<link rel="another-stylesheet">']);
     });
 
     it('parses options and returns object', function() {
@@ -494,33 +496,12 @@ describe('example annotation', function() {
         .catch(done);
     });
 
-    it('sets env.herman.sass attributes', function(done) {
-      const env = { logger: { warn: sinon.spy() }, herman: { sass: {} } };
-      const example = annotations.example(env);
-      const sassData = '/* just a placeholder */';
-      const data = [
-        {
-          example: [
-            {
-              type: 'scss',
-              code: sassData,
-            },
-          ],
-        },
-      ];
-      example
-        .resolve(data)
-        .then(() => {
-          // renderSass was called with data == sassData
-          // renderSass was called with includePaths = []
-          assert.ok(true);
-          done();
-        })
-        .catch(done);
-    });
-
     it('reports errors in sass compilation', function(done) {
-      const env = { logger: { warn: sinon.spy() }, herman: { sass: {} } };
+      const env = extend(true, {}, this.env, {
+        herman: {
+          sass: {},
+        },
+      });
       const example = annotations.example(env);
       const data = [
         {
@@ -538,11 +519,10 @@ describe('example annotation', function() {
           const errMsg =
             'Invalid CSS after "...t some bad sass": expected "{", was ""';
           const sassData = data[0].example[0].code;
-          assert(
-            env.logger.warn.calledWith(
-              `Error compiling @example scss: \n${errMsg}\n${sassData}`
-            ),
-            env.logger.warn.firstCall
+          sinon.assert.calledOnce(this.env.logger.warn);
+          sinon.assert.calledWith(
+            this.env.logger.warn,
+            `Error compiling @example scss: \n${errMsg}\n${sassData}`
           );
           done();
         })

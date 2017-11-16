@@ -41,20 +41,20 @@ describe('parse', function() {
         formats: ['italic'],
       };
       const data = {
-        'italic 100': true,
+        'italic 100': 'font/path',
       };
       const actual = parse.localFont(font, data);
       const expected = [
         {
           ctx: {
-            dest_path: 'assets/fonts/true',
+            dest_path: 'assets/fonts/font/path',
             family: undefined,
             formats: ['italic'],
             style: 'italic',
             svgid: undefined,
             weight: '100',
           },
-          src_path: true,
+          src_path: 'font/path',
         },
       ];
 
@@ -63,16 +63,19 @@ describe('parse', function() {
   });
 
   describe('customCSS', function() {
+    beforeEach(function() {
+      this.enc = 'utf-8';
+      this.env = {
+        dir: __dirname,
+      };
+    });
+
     it('handles relative URLs', function() {
       const file = {
         path: `${__dirname}/fixtures/css/main.css`,
         contents: '.foo { background: url("foo.png"); }',
       };
-      const enc = 'utf-8';
-      const env = {
-        dir: __dirname,
-      };
-      parse.customCSS(file, enc, env);
+      parse.customCSS(file, this.enc, this.env);
       const actual = file.contents;
       const expected =
         '.foo { background: url("../../custom/fixtures/css/foo.png"); }';
@@ -85,11 +88,7 @@ describe('parse', function() {
         path: `${__dirname}/fixtures/css/main.css`,
         contents: '.foo { background: url(foo.png); }',
       };
-      const enc = 'utf-8';
-      const env = {
-        dir: __dirname,
-      };
-      parse.customCSS(file, enc, env);
+      parse.customCSS(file, this.enc, this.env);
       const actual = file.contents;
       const expected =
         '.foo { background: url(../../custom/fixtures/css/foo.png); }';
@@ -100,36 +99,29 @@ describe('parse', function() {
     it('uses localFonts', function() {
       const file = {
         path: `${__dirname}/fixtures/css/main.css`,
-        contents: '.foo { background: url(foo.png); }',
+        contents: '.foo { @font-face { src: url(../../myfonts/font.ttf); }}',
       };
-      const enc = 'utf-8';
-      const env = {
-        dir: __dirname,
-        localFonts: [`${__dirname}/fixtures/css/foo.png`],
+      const env = Object.assign(this.env, {
+        localFonts: [`${__dirname}/myfonts/font.ttf`],
         herman: {
-          fontpath: '',
+          fontpath: 'myfonts/',
         },
-      };
-      parse.customCSS(file, enc, env);
+      });
+      parse.customCSS(file, this.enc, env);
       const actual = file.contents;
-      const expected =
-        '.foo { background: url(../../fonts/fixtures/css/foo.png); }';
+      const expected = '.foo { @font-face { src: url(../../fonts/font.ttf); }}';
 
       assert.deepEqual(actual.toString(), expected);
     });
 
-    it('skips absolute URLs', function() {
+    it('skips external URLs', function() {
       const file = {
         path: `${__dirname}/fixtures/css/main.css`,
         contents:
           '.foo { background: url(http://foo); background: url(//foo);' +
           ' background: url(data://foo); }',
       };
-      const enc = 'utf-8';
-      const env = {
-        dir: __dirname,
-      };
-      parse.customCSS(file, enc, env);
+      parse.customCSS(file, this.enc, this.env);
       const actual = file.contents;
       const expected =
         '.foo { background: url(http://foo); background: url(//foo);' +
