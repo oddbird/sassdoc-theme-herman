@@ -3,9 +3,12 @@
 
 [data-sassdoc='icon-preview'] {
   display: grid;
-  grid-gap: size('gutter');
-  grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   margin: size('gutter') negative('shim');
+
+  @include above('page') {
+    grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+  }
 }
 
 [data-sassdoc-icon] {
@@ -28,11 +31,15 @@
 [data-sassdoc='icon-name'] {
   color: color('text');
   font-weight: bold;
-  text-transform: uppercase;
   white-space: nowrap;
+}
+
+.herman-file-extension {
+  font-size: size('xsmall');
+  font-weight: normal;
 }
 
 [data-sassdoc='icon-path'] {
   @include font-family('code');
-  font-size: size('xxsmall');
+  text-align: center;
 }

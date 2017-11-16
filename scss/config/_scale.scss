@@ -39,7 +39,7 @@ $text-sizes: (
   'base': calc(%s + %s) ('small-rem', 0.5vw),
   'small': calc(%s + %s) ('small-rem', 0.25vw),
   'xsmall': calc(%s + %s) ('xsmall-rem', 0.25vw),
-  'xxsmall': calc(%s + %s) ('xsmall-rem', 0.025vw),
+  'xxsmall': calc(%s + %s) ('xsmall-rem', 0.01vw),
   'code': 'xsmall',
   'small-code': calc(%s + %s) ('base-rem' ('times': 0.675), 0.25vw),
 
