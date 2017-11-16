@@ -209,5 +209,28 @@ window.Herman = (function base(Herman, $) {
     $(window).on('resize', fitIframesToContent);
   };
 
+  function filterSiblings(selector, filter) {
+    $(`${selector} ~ section`).each((idx, node) => {
+      if (filter !== '') {
+        if (node.id.includes(filter)) {
+          $(node).show();
+        } else {
+          $(node).hide();
+        }
+      } else {
+        $(node).show();
+      }
+    });
+  }
+  Herman.initializePageFilters = function initializePageFilters() {
+    $('#page-filter').submit(function(event) {
+      event.preventDefault();
+      return false;
+    });
+    $('#page-filter input').keyup(function() {
+      filterSiblings('#page-filter', $('#page-filter input').val());
+    });
+  };
+
   return Herman;
 })(window.Herman || {}, window.jQuery);

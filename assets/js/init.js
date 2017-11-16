@@ -5,6 +5,7 @@ window.Herman = (function init(Herman, $) {
     Herman.initializeToggles();
     Herman.initializeTabs();
     Herman.initializeIframes();
+    Herman.initializePageFilters();
   });
 
   return Herman;
