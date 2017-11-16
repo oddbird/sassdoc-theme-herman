@@ -90,8 +90,8 @@
     Rendered font specimen iframe content.
 #}
 {% macro font_specimen(name, data, iframed) %}
-  <div data-sassdoc-font="{{ name }}">
-    <h3 data-sassdoc="font-type">
+  {% call show.item_section('font-specimen', 'Font Preview') %}
+    <h4 data-sassdoc="font-type">
       {{ utility.link_if(
         content=data.name or name,
         url=data.source,
@@ -99,7 +99,7 @@
       ) }}
 
       (<code>{{ name }}</code>)
-    </h3>
+    </h4>
 
     <div data-sassdoc="font-stack">
       <b>Stack:</b>
@@ -115,7 +115,7 @@
     {% if iframed %}
       <iframe class="render-specimen" srcdoc="{{ iframed }}" width="100%" height="0"></iframe>
     {% endif %}
-  </div>
+  {% endcall %}
 {% endmacro %}
 
 
