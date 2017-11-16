@@ -43,6 +43,17 @@ describe('icons annotation', function() {
         .catch(done);
     });
 
+    it('bails early if no icons on items', function(done) {
+      const data = [{}];
+      this.icons
+        .resolve(data)
+        .then(() => {
+          assert.deepEqual(data, [{}]);
+          done();
+        })
+        .catch(done);
+    });
+
     it('renders icons', function(done) {
       const data = [{ icons: 'test/js/fixtures/icons' }];
 
@@ -95,6 +106,18 @@ describe('font annotation', function() {
   });
 
   describe('parse', function() {
+    it('keeps env.fontsHTML if set', function() {
+      const env = {
+        fontsHTML: ['<link rel="another-stylesheet">'],
+      };
+      const font = annotations.font(env);
+      const input =
+        '"key" (variant1, variant2) {format1, format2}\n' +
+        '  <link rel="another-stylesheet">';
+      font.parse(input);
+      assert.deepEqual(env.fontsHTML, ['<link rel="another-stylesheet">']);
+    });
+
     it('parses options and returns object', function() {
       const input =
         '"key" (variant1, variant2) {format1, format2}\n' +
@@ -191,6 +214,33 @@ describe('font annotation', function() {
             'local fonts.'
         )
       );
+    });
+
+    it('logs an error if missing Sass jsonfile', function(done) {
+      const env = {
+        logger: { warn: sinon.stub() },
+        herman: {
+          fontpath: '/path',
+          sass: {
+            jsonfile: `${__dirname}/no/such/file.json`,
+          },
+        },
+      };
+      annotations
+        .font(env)
+        .resolve(this.data)
+        .then(() => {
+          const errMsg = `ENOENT: no such file or directory, open '${
+            env.herman.sass.jsonfile
+          }'`;
+          assert(
+            env.logger.warn.calledWith(
+              `File not found: ${env.herman.sass.jsonfile}\n${errMsg}`
+            )
+          );
+          done();
+        })
+        .catch(done);
     });
 
     it('adds `@font-face` CSS and localFonts src', function(done) {
@@ -381,6 +431,12 @@ describe('example annotation', function() {
                 "{% import 'macros.j2' as macros %}\n" +
                 '{{ macros.mymacro(1, 2) }}',
             },
+            {
+              type: 'njk',
+              code:
+                "{% import 'macros.j2' as macros %}\n" +
+                '{{ macros.mymacro(1, 2) }}',
+            },
           ],
         },
       ];
@@ -434,6 +490,39 @@ describe('example annotation', function() {
           assert.equal(
             data[0].example[0].rendered,
             `${data[0].example[0].code}\n`
+          );
+          done();
+        })
+        .catch(done);
+    });
+
+    it('reports errors in sass compilation', function(done) {
+      const env = extend(true, {}, this.env, {
+        herman: {
+          sass: {},
+        },
+      });
+      const example = annotations.example(env);
+      const data = [
+        {
+          example: [
+            {
+              type: 'scss',
+              code: 'this is just some bad sass',
+            },
+          ],
+        },
+      ];
+      example
+        .resolve(data)
+        .then(() => {
+          const errMsg =
+            'Invalid CSS after "...t some bad sass": expected "{", was ""';
+          const sassData = data[0].example[0].code;
+          sinon.assert.calledOnce(this.env.logger.warn);
+          sinon.assert.calledWith(
+            this.env.logger.warn,
+            `Error compiling @example scss: \n${errMsg}\n${sassData}`
           );
           done();
         })
@@ -585,6 +674,14 @@ describe('name annotation', function() {
       this.name.autofill(data);
 
       assert.deepEqual(data, { context: { name: 'foo', origName: 'bar' } });
+    });
+
+    it('does nothing if no item.name', function() {
+      const data = { context: { name: 'bar' } };
+
+      this.name.autofill(data);
+
+      assert.deepEqual(data, { context: { name: 'bar' } });
     });
   });
 });
