@@ -5,12 +5,12 @@
 /// Style a tooltip panel
 .herman-tooltip {
   @include contrasted('background');
-  @include position(102% null null 0);
+  @include position(100% null null size('quarter-shim'));
   @include z-index('overlay');
-  filter: drop-shadow(0 0 2px color('border'));
+  filter: drop-shadow(0 0 2px color('light-border'));
   font-size: size('xxsmall');
+  margin-top: size('half-shim');
   padding: size('quarter-shim') size('half-shim');
-  margin-top: size('quarter-shim');
   visibility: hidden;
   width: auto;
 
