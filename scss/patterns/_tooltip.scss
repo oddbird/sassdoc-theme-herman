@@ -9,10 +9,14 @@
   @include z-index('overlay');
   filter: drop-shadow(0 0 2px color('light-border'));
   font-size: size('xxsmall');
+  margin-right: size('quarter-shim');
   margin-top: size('half-shim');
   padding: size('quarter-shim') size('half-shim');
   visibility: hidden;
+  white-space: normal;
   width: auto;
+  // break long urls into multiple lines
+  word-break: break-word;
 
   &:empty {
     display: none;

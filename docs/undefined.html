@@ -441,10 +441,14 @@
   @include z-index(&#39;overlay&#39;);
   filter: drop-shadow(0 0 2px color(&#39;light-border&#39;));
   font-size: size(&#39;xxsmall&#39;);
+  margin-right: size(&#39;quarter-shim&#39;);
   margin-top: size(&#39;half-shim&#39;);
   padding: size(&#39;quarter-shim&#39;) size(&#39;half-shim&#39;);
   visibility: hidden;
+  white-space: normal;
   width: auto;
+  // break long urls into multiple lines
+  word-break: break-word;
 
   &amp;:empty {
     display: none;
