@@ -421,7 +421,7 @@ converted to JSON –
 but we’ll start with individual ratios/sizes,
 and build the export from<span class="widont">&nbsp;</span>there.</p>
 <p>Let’s start with a ratio and two<span class="widont">&nbsp;</span>sizes:</p>
-<pre><code>$herman-ratio: 1.4;
+<pre><code class="lang-scss">$herman-ratio: 1.4;
 $root: 18px;
 $xlarge: 28px;
 </code></pre>
@@ -580,7 +580,7 @@ to organize different types of ratios –
 text, spacing, etc.
 Each map will be displayed individually,
 using the <code>@preview ratios</code> annotation:</p>
-<pre><code>// @preview ratios; count: 4
+<pre><code class="lang-scss">// @preview ratios; count: 4
 </code></pre>
 <p>The <code>ratios</code> preview accepts an optional <code>count</code> argument (defaults to <code>6</code>) –
 the number of ratio calculations to display,
@@ -814,14 +814,14 @@ you can build these maps out of existing variables,
 or use a tool like our [Accoutrement-Scale][scale]
 to store and access sizes
 directly in a Herman-friendly<span class="widont">&nbsp;</span>map.</p>
-<pre><code>$demo-sizes: (
+<pre><code class="lang-scss">$demo-sizes: (
   'root': $root,
   'xlarge': $xlarge
 );
 </code></pre>
 <p>Each map will be displayed individually,
 using the <code>@preview sizes</code> annotation:</p>
-<pre><code>// @preview sizes; style: ruler
+<pre><code class="lang-scss">// @preview sizes; style: ruler
 </code></pre>
 <p>The <code>sizes</code> preview accepts an optional <code>style</code> argument
 (defaulting to <code>text</code>),
@@ -1006,7 +1006,7 @@ we also need to <a href="http://oddbird.net/herman/docs/api_json-export.html">ex
 or use the provided <code>herman-add</code> mixin
 to combine existing maps into the proper structure.
 <a href="http://oddbird.net/herman/docs/api_json-export.html#sizes-ratios">See the size/ratio map documentation for details<span class="widont">&nbsp;</span>»</a></p>
-<pre><code> @include herman-add('ratios', 'demo-ratios', $demo-ratios);
+<pre><code class="lang-scss"> @include herman-add('ratios', 'demo-ratios', $demo-ratios);
  @include herman-add('sizes', 'demo-sizes', $demo-sizes);
 </code></pre>
 <p>If your map needs to be parsed or compiled before export,

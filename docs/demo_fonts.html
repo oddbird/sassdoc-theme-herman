@@ -424,7 +424,7 @@ one hosted on a CDN, and the other hosted locally.
 Then we can build the export from<span class="widont">&nbsp;</span>there.</p>
 <p>Each font family will be displayed individually,
 using the <code>@font</code> annotation:</p>
-<pre><code>// @font 'my-font' (regular, bold)
+<pre><code class="lang-scss">// @font 'my-font' (regular, bold)
 </code></pre>
 <p>Let’s look at a few<span class="widont">&nbsp;</span>examples…</p>
 
@@ -585,7 +585,8 @@ usually a <code>&lt;link&gt;</code> or <code>&lt;script&gt;</code> tag
 required to use the webfont.
 This code will be inserted
 into the rendered iframe <code>&lt;head&gt;</code>
-for all <a href="http://oddbird.net/herman/docs/demo_examples.html">Herman examples</a>,
+for this font preview
+and all <a href="http://oddbird.net/herman/docs/demo_examples.html">Herman examples</a>,
 making your webfont available to other<span class="widont">&nbsp;</span>components.</li>
 </ul>
 <p>We’ve stored this data in a map,
@@ -1053,7 +1054,7 @@ of font variants to display in the preview.
 If omitted, it defaults to all variants
 included as keys in the font map<span class="widont">&nbsp;</span>itself.</li>
 </ul>
-<pre><code>// @font 'demo-local' {woff2, woff, ttf}
+<pre><code class="lang-scss">// @font 'demo-local' {woff2, woff, ttf}
 </code></pre>
 <p>In order for this to work,
 you must specify a <code>fontpath</code>

@@ -65,8 +65,11 @@
 /// in your sassdoc `herman.sass` configuration object --
 /// an array of places to look for Sass includes:
 ///
-/// ```
-/// includepaths: ['static/sass', 'node_modules']
+/// ```yaml
+/// herman:
+///   includepaths:
+///     - 'static/sass'
+///     - 'node_modules'
 /// ```
 ///
 /// You can also set an array of default `includes`
@@ -77,8 +80,11 @@
 /// # .sassdocrc (yaml)
 /// herman:
 ///   sass:
-///     includepaths: ['static/sass']
-///     includes: ['utilities', 'config/manifest']
+///     includepaths:
+///       - 'static/sass'
+///     includes:
+///       - 'utilities'
+///       - 'config/manifest'
 /// ```
 ///
 /// Generally, included Sass files should not contain

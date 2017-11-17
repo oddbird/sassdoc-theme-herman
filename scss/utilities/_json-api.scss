@@ -69,7 +69,7 @@
 /// For us, that is often a map-key string,
 /// and Sass hex/rgba output color:
 ///
-/// ```
+/// ```scss
 /// 'brand-colors': (
 ///   'brand-orange': '#c75000',
 ///   'brand-blue': '#0d7fa5',
@@ -90,7 +90,7 @@
 /// organized into top-level groups that may contain
 /// one or more size/ratio key:value pairs:
 ///
-/// ```
+/// ```scss
 /// 'font-ratios': (
 ///   'line-height': '1.4',
 ///   'minor-seventh': '16/9',
@@ -119,7 +119,7 @@
 /// - `<variant>`: describe any number of relative paths to locally-hosted
 ///   font-files per variant: e.g. `regular`, `bold italic`, etc.
 ///
-/// ```
+/// ```scss
 /// 'body-font': (
 ///   'name': 'Source Sans Pro',
 ///   'source': 'https://github.com/adobe-fonts/source-sans-pro'

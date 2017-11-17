@@ -711,7 +711,7 @@ a map that describes what type of data is being<span class="widont">&nbsp;</span
 <p>Each color has an access name and value.
 For us, that is often a map-key string,
 and Sass hex/rgba output<span class="widont">&nbsp;</span>color:</p>
-<pre><code>'brand-colors': (
+<pre><code class="lang-scss">'brand-colors': (
   'brand-orange': '#c75000',
   'brand-blue': '#0d7fa5',
 )
@@ -726,7 +726,7 @@ converted to a valid JSON<span class="widont">&nbsp;</span>string.</p>
 <p>Size and ratio data is similar to colors,
 organized into top-level groups that may contain
 one or more size/ratio key:value<span class="widont">&nbsp;</span>pairs:</p>
-<pre><code>'font-ratios': (
+<pre><code class="lang-scss">'font-ratios': (
   'line-height': '1.4',
   'minor-seventh': '16/9',
 ),
@@ -751,7 +751,7 @@ or typekit/googlefonts as<span class="widont">&nbsp;</span>useful</li>
 <li><code>&lt;variant&gt;</code>: describe any number of relative paths to locally-hosted
 font-files per variant: e.g. <code>regular</code>, <code>bold italic</code>, etc.</li>
 </ul>
-<pre><code>'body-font': (
+<pre><code class="lang-scss">'body-font': (
   'name': 'Source Sans Pro',
   'source': 'https://github.com/adobe-fonts/source-sans-pro'
   'stack': ('Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'),

@@ -16,7 +16,7 @@
 /// Each font family will be displayed individually,
 /// using the `@font` annotation:
 ///
-/// ```
+/// ```scss
 /// // @font 'my-font' (regular, bold)
 /// ```
 ///
@@ -45,7 +45,8 @@
 ///   required to use the webfont.
 ///   This code will be inserted
 ///   into the rendered iframe `<head>`
-///   for all [Herman examples][examples],
+///   for this font preview
+///   and all [Herman examples][examples],
 ///   making your webfont available to other components.
 ///
 /// [examples]: http://oddbird.net/herman/docs/demo_examples.html
@@ -91,7 +92,7 @@ $demo-cdn: (
 ///   If omitted, it defaults to all variants
 ///   included as keys in the font map itself.
 ///
-/// ```
+/// ```scss
 /// // @font 'demo-local' {woff2, woff, ttf}
 /// ```
 ///

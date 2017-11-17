@@ -15,7 +15,7 @@
 ///
 /// Let's start with a ratio and two sizes:
 ///
-/// ```
+/// ```scss
 /// $herman-ratio: 1.4;
 /// $root: 18px;
 /// $xlarge: 28px;
@@ -54,7 +54,7 @@ $xlarge: 28px;
 /// Each map will be displayed individually,
 /// using the `@preview ratios` annotation:
 ///
-/// ```
+/// ```scss
 /// // @preview ratios; count: 4
 /// ```
 ///
@@ -79,7 +79,7 @@ $demo-ratios: (
 /// to store and access sizes
 /// directly in a Herman-friendly map.
 ///
-/// ```
+/// ```scss
 /// $demo-sizes: (
 ///   'root': $root,
 ///   'xlarge': $xlarge
@@ -89,7 +89,7 @@ $demo-ratios: (
 /// Each map will be displayed individually,
 /// using the `@preview sizes` annotation:
 ///
-/// ```
+/// ```scss
 /// // @preview sizes; style: ruler
 /// ```
 ///
@@ -119,7 +119,7 @@ $demo-sizes: (
 /// to combine existing maps into the proper structure.
 /// [See the size/ratio map documentation for details »][size-docs]
 ///
-/// ```
+/// ```scss
 ///  @include herman-add('ratios', 'demo-ratios', $demo-ratios);
 ///  @include herman-add('sizes', 'demo-sizes', $demo-sizes);
 /// ```

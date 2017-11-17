@@ -567,7 +567,10 @@ In order for this to work with Sass/Scss,
 you must set an <code>includepaths</code> key
 in your sassdoc <code>herman.sass</code> configuration object –
 an array of places to look for Sass<span class="widont">&nbsp;</span>includes:</p>
-<pre><code>includepaths: ['static/sass', 'node_modules']
+<pre><code class="lang-yaml">herman:
+  includepaths:
+    - 'static/sass'
+    - 'node_modules'
 </code></pre>
 <p>You can also set an array of default <code>includes</code>
 (relative to any <code>includepaths</code>)
@@ -575,8 +578,11 @@ to include for all Sass<span class="widont">&nbsp;</span>examples:</p>
 <pre><code class="lang-yaml"># .sassdocrc (yaml)
 herman:
   sass:
-    includepaths: ['static/sass']
-    includes: ['utilities', 'config/manifest']
+    includepaths:
+      - 'static/sass'
+    includes:
+      - 'utilities'
+      - 'config/manifest'
 </code></pre>
 <p>Generally, included Sass files should not contain
 any CSS output of their own,

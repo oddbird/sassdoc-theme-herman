@@ -422,7 +422,7 @@ converted to JSON –
 but we’ll start with individual colors,
 and build the export from<span class="widont">&nbsp;</span>there.</p>
 <p>For this demo, we’ve defined two brand<span class="widont">&nbsp;</span>colors:</p>
-<pre><code>$brand-blue: hsl(195, 85%, 35%);
+<pre><code class="lang-scss">$brand-blue: hsl(195, 85%, 35%);
 $brand-pink: hsl(330, 85%, 48%);
 </code></pre>
 
@@ -574,7 +574,7 @@ to organize different palettes –
 primary, secondary, button-colors, etc.
 Each map will be displayed individually,
 using the <code>@preview color-palette</code> annotation:</p>
-<pre><code>// @preview color-palette
+<pre><code class="lang-scss">// @preview color-palette
 </code></pre>
 <p>The <code>color-palette</code> preview accepts an optional <code>key</code> argument,
 which defaults to the map-variable name.
@@ -582,14 +582,17 @@ That key will be used to access the data from JSON,
 so it doesn’t matter what key is used,
 as long as the key given here matches the group-name
 used when adding this data to <code>$herman</code>.</p>
-<pre><code>// @preview color-palette; key: my-colors
+<pre><code class="lang-scss">// @preview color-palette; key: my-colors
 </code></pre>
 <p>By default, our color palettes display
 <code>name</code>, <code>hex</code>, <code>rgb(a)</code>, and <code>hsl(a)</code> for every color.
 You can change what color values are shown
 in the SassDoc/Herman configuration
 using the <code>herman.displayColors</code> option:</p>
-<pre><code>displayColors: ['hex', 'hsl']
+<pre><code class="lang-yaml">herman:
+  displayColors:
+    - hex
+    - hsl
 </code></pre>
 
         
@@ -760,7 +763,7 @@ and then creating a sass file to do the actual export.
 We provide shortcuts to help with<span class="widont">&nbsp;</span>both.</p>
 <p>Use the <code>herman-add</code> mixin to add individual data maps
 to the global export<span class="widont">&nbsp;</span>map.</p>
-<pre><code> @include herman-add('colors', 'demo-colors', $demo-colors);
+<pre><code class="lang-scss"> @include herman-add('colors', 'demo-colors', $demo-colors);
 </code></pre>
 <ul>
 <li>The first argument tells Herman what type of data is being added –
@@ -931,7 +934,7 @@ to be added to the <code>$herman</code> export map.</li>
 where the values need to be parsed and compiled
 before they can be exported to Herman.
 Using <a href="http://oddbird.net/accoutrement-color">accoutrement-color</a>, our maps look like<span class="widont">&nbsp;</span>this:</p>
-<pre><code>$demo-noncolors: (
+<pre><code class="lang-scss">$demo-noncolors: (
   'light-gray': 'brand-blue' ('tint': 80%, 'desaturate': 80%),
   'gray': 'brand-blue' ('desaturate': 80%),
   'black': 'brand-blue' ('shade': 30%, 'desaturate': 80%),
@@ -947,13 +950,13 @@ for calling a function on each value of the map.
 Pass in a function name (Sass 3.4-),
 or first-class function (Sass 3.5+)
 along with any additional arguments that function might<span class="widont">&nbsp;</span>need:</p>
-<pre><code> $color-function: get-function('color');
+<pre><code class="lang-scss"> $color-function: get-function('color');
  @include herman-add('colors', demo-noncolors, $demo-noncolors, $color-function, $args…);
 </code></pre>
 <p>The <code>color</code> function will be called on each value
 before adding it to our <code>$herman</code> map.
 The call happens in this<span class="widont">&nbsp;</span>format:</p>
-<pre><code>'color-name': color($value, $args…),
+<pre><code class="lang-scss">'color-name': color($value, $args…),
 </code></pre>
 
       
