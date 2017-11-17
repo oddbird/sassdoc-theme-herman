@@ -13,16 +13,18 @@
 <body>
   {% if iconsSvg %}
     {{ iconsSvg|safe }}
+    <h3 class="item-subtitle">File Path</h3>
+    <div data-sassdoc="icon-path">{{ icon.path }}</div>
   {% endif %}
   {% if item.icons %}
     <div data-sassdoc="icon-preview">
+
       {% for icon in item.icons %}
         <div data-sassdoc-icon="{{ icon.name }}">
           {{ icon.rendered|safe }}
           <div data-sassdoc="icon-info">
-            <div data-sassdoc="icon-path">{{ icon.path }}</div>
             <div data-sassdoc="icon-name">
-              {{ icon.name }}<span class="herman-file-extension">.svg</span>
+              <strong>{{ icon.name }}</strong>.svg
             </div>
           </div>
         </div>

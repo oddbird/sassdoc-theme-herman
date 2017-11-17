@@ -3,46 +3,26 @@
 
 [data-sassdoc='icon-preview'] {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   margin: size('gutter') negative('shim');
-
-  @include above('page') {
-    grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
-  }
 }
 
 [data-sassdoc-icon] {
-  color: color('text-light');
   margin: size('gutter') size('shim');
   min-width: size('rhythm') * 5;
 
   [data-icon] {
     @include square('h1');
-    margin-bottom: size('gutter');
+    margin-bottom: size('shim');
   }
 }
 
 [data-sassdoc='icon-info'] {
-  font-size: size('small');
-  position: relative;
-  white-space: nowrap;
-}
-
-[data-sassdoc='icon-name'] {
-  color: color('text');
-  font-weight: bold;
-  white-space: nowrap;
-}
-
-.herman-file-extension {
   font-size: size('xsmall');
-  font-weight: normal;
 }
 
 [data-sassdoc='icon-path'] {
   @include font-family('code');
-  font-size: size('xxsmall');
-  text-align: left;
   white-space: normal;
   word-break: break-word;
 }
