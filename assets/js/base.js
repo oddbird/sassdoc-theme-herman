@@ -209,5 +209,11 @@ window.Herman = (function base(Herman, $) {
     $(window).on('resize', fitIframesToContent);
   };
 
+  Herman.initializeTipue = function initializeTipue() {
+    $('#tipue_search_input').tipuesearch({
+      mode: 'live',
+    });
+  };
+
   return Herman;
 })(window.Herman || {}, window.jQuery);

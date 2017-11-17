@@ -1,10 +1,23 @@
 {% extends 'base.j2' %}
 
 {% block main %}
+  <script>
+    window.tipuesearch_pages = {{ pagesToIndex|safe }};
+  </script>
   <div class="text-block">
     From here you can search these documents. Enter your search words into the
     box below and click "search". Note that the search function will
     automatically search for all of the words. Pages containing fewer words
     won't appear in the result list.
   </div>
+  <form action="search.html">
+      <div class="tipue_search_left">
+          <img src="tipuesearch/search.png" class="tipue_search_icon">
+      </div>
+      <div class="tipue_search_right">
+          <input type="text" name="q" id="tipue_search_input" pattern=".{3,}" title="At least 3 characters" required>
+      </div>
+      <div style="clear: both;"></div>
+  </form>
+  <div id="tipue_search_content"></div>
 {% endblock %}
