@@ -135,30 +135,55 @@ describe('prepareContext', function() {
       },
       context: {
         type: 'unknown',
-        name: 'Test\nItem',
         line: {
           start: 10,
           end: 15,
         },
       },
-      group: [],
+      file: {},
+      group: ['test'],
       access: 'public',
     };
-    const expected = extend({}, item, {
+    const item2 = {
+      commentRange: {
+        start: 0,
+        end: 5,
+      },
       context: {
-        type: 'prose',
+        name: 'Test\nItem',
         line: {
-          start: 0,
-          end: 5,
+          start: 6,
+          end: 7,
         },
       },
-      groupName: {},
-    });
+      file: {},
+      group: ['test'],
+      access: 'public',
+    };
+    const expected = [
+      extend({}, item, {
+        context: {
+          type: 'prose',
+          line: {
+            start: 0,
+            end: 5,
+          },
+        },
+        groupName: {
+          test: 'test',
+        },
+      }),
+      extend({}, item2, {
+        groupName: {
+          test: 'test',
+        },
+      }),
+    ];
     prepareContext({
-      data: [item],
+      data: [item, item2],
     })
       .then(ctx => {
-        assert.deepEqual(ctx.data[0], expected);
+        assert.deepEqual(ctx.data, expected);
         done();
       })
       .catch(done);

@@ -54,7 +54,7 @@ jobs:
             gulp jstest
       - run:
           name: Check JS Test Coverage
-          command: nyc check-coverage --statements=80 --functions=80 --branches=80 --lines=80
+          command: nyc check-coverage --statements=100 --functions=100 --branches=100 --lines=100
       - deploy:
           name: Update yarn.lock [greenkeeper]
           command: |

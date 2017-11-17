@@ -1,7 +1,7 @@
 'use strict';
 
 const prepareContext = require('./lib/prepareContext');
-const renderHerman = require('./lib/renderHerman');
+const { renderHerman } = require('./lib/renderHerman');
 
 const example = require('./lib/annotations/example');
 const font = require('./lib/annotations/font');

@@ -356,7 +356,7 @@ gulp.task('watch', () => {
     ['compile']
   );
 
-  gulp.watch(paths.JS_TESTS_FILES, ['jstest-nofail']);
+  gulp.watch([paths.JS_TESTS_FILES, paths.SRC_JS], ['jstest-nofail']);
 
   gulp.watch(paths.SASS, ev => {
     if (ev.type === 'added' || ev.type === 'changed') {
