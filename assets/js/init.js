@@ -5,7 +5,10 @@ window.Herman = (function init(Herman, $) {
     Herman.initializeToggles();
     Herman.initializeTabs();
     Herman.initializeIframes();
-    Herman.initializeSearch();
+
+    $('#tipue_search_input').tipuesearch({
+      mode: 'live',
+    });
   });
 
   return Herman;
