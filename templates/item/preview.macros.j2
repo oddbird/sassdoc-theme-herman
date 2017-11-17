@@ -282,6 +282,9 @@
 
 {% macro icons(item) %}
   {% if item.icons and item.icons|length and item.iframed %}
+    {% call show.item_section('icon-path', 'Icon Path') %}
+      <div data-sassdoc="icon-path">{{ item.iconsPath }}</div>
+    {% endcall %}
     {% call show.item_section('icon-preview', 'Icon Preview') %}
       <iframe class="render-icons" srcdoc="{{ item.iframed }}" width="100%" height="0"></iframe>
     {% endcall %}
