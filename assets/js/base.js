@@ -209,25 +209,22 @@ window.Herman = (function base(Herman, $) {
     $(window).on('resize', fitIframesToContent);
   };
 
-  function filterSiblings(selector, filter) {
+  const filterSiblings = function(selector, filter) {
     $(`${selector} ~ section`).each((idx, node) => {
-      if (filter !== '') {
-        if (node.id.includes(filter)) {
-          $(node).show();
-        } else {
-          $(node).hide();
-        }
-      } else {
+      if (filter === '' || node.id.includes(filter)) {
         $(node).show();
+      } else {
+        $(node).hide();
       }
     });
-  }
+  };
+
   Herman.initializePageFilters = function initializePageFilters() {
-    $('#page-filter').submit(function(event) {
+    $('#page-filter').submit(event => {
       event.preventDefault();
       return false;
     });
-    $('#page-filter input').keyup(function() {
+    $('#page-filter input').keyup(() => {
       filterSiblings('#page-filter', $('#page-filter input').val());
     });
   };
