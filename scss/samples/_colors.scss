@@ -14,7 +14,7 @@
 ///
 /// For this demo, we've defined two brand colors:
 ///
-/// ```
+/// ```scss
 /// $brand-blue: hsl(195, 85%, 35%);
 /// $brand-pink: hsl(330, 85%, 48%);
 /// ```
@@ -40,19 +40,19 @@ $brand-pink: hsl(330, 85%, 48%);
 /// Each map will be displayed individually,
 /// using the `@preview color-palette` annotation:
 ///
-/// ```
-/// /// @preview color-palette
+/// ```scss
+/// // @preview color-palette
 /// ```
 ///
-/// The color-palette preview accepts an optional `key` argument,
+/// The `color-palette` preview accepts an optional `key` argument,
 /// which defaults to the map-variable name.
 /// That key will be used to access the data from JSON,
 /// so it doesn't matter what key is used,
 /// as long as the key given here matches the group-name
 /// used when adding this data to `$herman`.
 ///
-/// ```
-/// /// @preview color-palette; key: my-colors
+/// ```scss
+/// // @preview color-palette; key: my-colors
 /// ```
 ///
 /// By default, our color palettes display
@@ -61,8 +61,11 @@ $brand-pink: hsl(330, 85%, 48%);
 /// in the SassDoc/Herman configuration
 /// using the `herman.displayColors` option:
 ///
-/// ```
-/// displayColors: ['hex', 'hsl']
+/// ```yaml
+/// herman:
+///   displayColors:
+///     - hex
+///     - hsl
 /// ```
 ///
 /// @preview color-palette
@@ -85,8 +88,8 @@ $demo-colors: (
 /// Use the `herman-add` mixin to add individual data maps
 /// to the global export map.
 ///
-/// ```
-/// /// @include herman-add('colors', 'demo-colors', $demo-colors);
+/// ```scss
+///  @include herman-add('colors', 'demo-colors', $demo-colors);
 /// ```
 ///
 /// - The first argument tells Herman what type of data is being added --
@@ -117,6 +120,10 @@ $demo-colors: (
 ///
 /// You can also build that map by hand, if you prefer.
 ///
+/// [See the color map documentation for details »][color-docs]
+///
+/// [color-docs]: http://oddbird.net/herman/docs/api_json-export.html#colors
+///
 /// @see $herman
 /// @see herman-add
 /// @group demo_colors
@@ -139,7 +146,7 @@ $demo-noncolors: (
 ///
 /// [ac]: http://oddbird.net/accoutrement-color
 ///
-/// ```
+/// ```scss
 /// $demo-noncolors: (
 ///   'light-gray': 'brand-blue' ('tint': 80%, 'desaturate': 80%),
 ///   'gray': 'brand-blue' ('desaturate': 80%),
@@ -158,7 +165,7 @@ $demo-noncolors: (
 /// or first-class function (Sass 3.5+)
 /// along with any additional arguments that function might need:
 ///
-/// ```
+/// ```scss
 ///  $color-function: get-function('color');
 ///  @include herman-add('colors', demo-noncolors, $demo-noncolors, $color-function, $args…);
 /// ```
@@ -167,10 +174,11 @@ $demo-noncolors: (
 /// before adding it to our `$herman` map.
 /// The call happens in this format:
 ///
-/// ```
+/// ```scss
 /// 'color-name': color($value, $args…),
 /// ```
 ///
 /// @preview color-palette; key: demo-noncolors
 /// @group demo_colors
+/// @link http://oddbird.net/accoutrement-color Accoutrement-Color
 @include herman-add('colors', 'demo-noncolors', $demo-noncolors, 'color');

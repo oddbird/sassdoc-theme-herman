@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <title>sassdoc-theme-herman Documentation</title>
+  <title>Configuration | Herman Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
@@ -45,7 +45,7 @@
 
 
       <h1 data-sassdoc="project-title">
-        <a href="index.html" rel="home" data-sassdoc="project-name">sassdoc-theme-herman</a>
+        <a href="index.html" rel="home" data-sassdoc="project-name">Herman</a>
         
           <span data-sassdoc="project-version">1.0.0-alpha.15</span>
         
@@ -63,7 +63,7 @@
     <div data-sassdoc="nav-subsection">
       <h3 data-sassdoc="nav-title">
         
-        <a href="index.html" data-sassdoc-nav="is-not-active">sassdoc-theme-herman</a>
+        <a href="index.html" data-sassdoc-nav="is-not-active">Herman</a>
       </h3>
 
       
@@ -94,12 +94,27 @@
       
         
         <li data-sassdoc="nav-item">
-          <a href="api_json-export.html" data-sassdoc-nav="is-not-active">Exporting Sass to<span class="widont">&nbsp;</span>JSON</a>
+          <a href="api_json-export.html" data-sassdoc-nav="is-not-active">Exporting Styles to<span class="widont">&nbsp;</span>JSON</a>
         </li>
       
         
         <li data-sassdoc="nav-item">
           <a href="demo_colors.html" data-sassdoc-nav="is-not-active">Color Palettes</a>
+        </li>
+      
+        
+        <li data-sassdoc="nav-item">
+          <a href="demo_fonts.html" data-sassdoc-nav="is-not-active">Font Specimens</a>
+        </li>
+      
+        
+        <li data-sassdoc="nav-item">
+          <a href="demo_sizes.html" data-sassdoc-nav="is-not-active">Ratios &amp;<span class="widont">&nbsp;</span>Sizes</a>
+        </li>
+      
+        
+        <li data-sassdoc="nav-item">
+          <a href="demo_icons.html" data-sassdoc-nav="is-not-active">SVG Icons</a>
         </li>
       
         
@@ -219,7 +234,7 @@
     <div data-sassdoc="nav-subsection">
       <h3 data-sassdoc="nav-title">
         
-        <a href="index.html" data-sassdoc-nav="is-not-active">sassdoc-theme-herman</a>
+        <a href="index.html" data-sassdoc-nav="is-not-active">Herman</a>
       </h3>
 
       
@@ -250,12 +265,27 @@
       
         
         <li data-sassdoc="nav-item">
-          <a href="api_json-export.html" data-sassdoc-nav="is-not-active">Exporting Sass to<span class="widont">&nbsp;</span>JSON</a>
+          <a href="api_json-export.html" data-sassdoc-nav="is-not-active">Exporting Styles to<span class="widont">&nbsp;</span>JSON</a>
         </li>
       
         
         <li data-sassdoc="nav-item">
           <a href="demo_colors.html" data-sassdoc-nav="is-not-active">Color Palettes</a>
+        </li>
+      
+        
+        <li data-sassdoc="nav-item">
+          <a href="demo_fonts.html" data-sassdoc-nav="is-not-active">Font Specimens</a>
+        </li>
+      
+        
+        <li data-sassdoc="nav-item">
+          <a href="demo_sizes.html" data-sassdoc-nav="is-not-active">Ratios &amp;<span class="widont">&nbsp;</span>Sizes</a>
+        </li>
+      
+        
+        <li data-sassdoc="nav-item">
+          <a href="demo_icons.html" data-sassdoc-nav="is-not-active">SVG Icons</a>
         </li>
       
         
@@ -375,7 +405,7 @@
         
   <nav data-sassdoc-region="breadcrumb">
     
-    <a href="index.html" >sassdoc-theme-herman</a> »
+    <a href="index.html" >Herman</a> »
     <strong>Configuration</strong>
   </nav>
 
@@ -385,10 +415,21 @@
   <div class="text-block">
     <h1 id="herman-configuration-options">Herman Configuration Options</h1>
 <p>Nest all Herman-specific options
-under <code>herman</code> object in SassDoc<span class="widont">&nbsp;</span>config.</p>
-<pre><code class="lang-yaml">theme: herman
+under <code>herman</code> object in <a href="http://sassdoc.com/configuration/">SassDoc<span class="widont">&nbsp;</span>config</a>.</p>
+<pre><code class="lang-yaml"># .sassdocrc
+theme: herman
 herman:
-  displayColors: &lt;...&gt;
+  extraDocs: [...]
+</code></pre>
+<pre><code class="lang-js">// Node API
+const sassdoc = require('sassdoc');
+
+sassdoc('./scss', {
+  theme: 'herman',
+  herman: {
+    extraDocs: [...]
+  }
+});
 </code></pre>
 <p>All relative paths are relative to the SassDoc config file or the <code>cwd</code>.</p>
 <h2 id="extradocs">extraDocs</h2>
@@ -402,6 +443,9 @@ with keys <code>path</code> (relative path to the local file)
 and <code>name</code> (displayed in the compiled documentation navigation),
 or a <code>String</code> path
 (in which case the filename will be displayed in the<span class="widont">&nbsp;</span>navigation).</p>
+<p>This is useful for including additional documents,
+such as a changelog, quickstart guide,
+or instructions for<span class="widont">&nbsp;</span>contributing.</p>
 <h2 id="extralinks">extraLinks</h2>
 <ul>
 <li>Type: <code>Array</code></li>
@@ -409,6 +453,8 @@ or a <code>String</code> path
 </ul>
 <p>Add external links to your compiled documentation navigation.
 Each value in the list should be an <code>Object</code> with keys <code>name</code> and <code>url</code>.</p>
+<p>This is useful for linking to additional documentation
+for dependencies or other third-party<span class="widont">&nbsp;</span>integrations.</p>
 <h2 id="displaycolors">displayColors</h2>
 <ul>
 <li>Type: <code>Array</code></li>
@@ -425,6 +471,29 @@ Valid options: <code>hex</code>, <code>rgb/rgba</code>, <code>hsl/hsla</code></p
 <p>Relative path to a custom CSS file,
 which will be included in the <code>&lt;head&gt;</code> of rendered
 <a href="http://oddbird.net/herman/docs/demo_examples.html"><code>@example</code> annotations</a>.</p>
+<p><strong>Notes:</strong></p>
+<ul>
+<li>If your custom CSS includes webfonts
+which require additional <code>&lt;script&gt;</code> or <code>&lt;style&gt;</code> tags
+(e.g. an external Google Fonts stylesheet or Adobe Typekit JavaScript),
+you must document those fonts with the <code>@font</code> annotation
+(providing the required extra HTML)
+for them to display properly
+within rendered <code>@example</code> annotations.
+See our <a href="http://oddbird.net/herman/docs/demo_fonts.html#displaying-webfonts"><code>@font</code> documentation</a>.</li>
+<li>If your custom CSS contains internal links
+referenced with <code>url(...)</code>
+(e.g. local fonts or background images),
+Herman will attempt to copy in those assets
+so that they are available
+in your rendered <code>@example</code> annotations.
+This means that the paths must either be absolute,
+or relative to the location of the CSS file itself.
+If using Webpack to bundle your Herman <code>customCSS</code>,
+this likely means <a href="https://github.com/webpack-contrib/extract-text-webpack-plugin#extract">disabling the <code>publicPath</code> setting</a>
+for this CSS file (e.g. <code>publicPath: ''</code>),
+or <a href="https://github.com/webpack-contrib/css-loader#url">disabling Webpack’s <code>url()</code> pre-processing</a> entirely.</li>
+</ul>
 <h2 id="customhtml">customHTML</h2>
 <ul>
 <li>Type: <code>String</code></li>
@@ -433,14 +502,17 @@ which will be included in the <code>&lt;head&gt;</code> of rendered
 <p>Custom HTML string (or relative path to a file containing valid HTML)
 to include at the top of the generated <code>&lt;body&gt;</code> tag
 for all rendered <code>@example html</code> and <code>@example njk</code> annotations.
-See our <a href="http://oddbird.net/herman/docs/demo_examples.html"><code>@example</code> documentation</a>.</p>
+See our <a href="http://oddbird.net/herman/docs/demo_examples.html"><code>@example</code> documentation</a>.
+This is particularly useful for including svg sprite sheets
+in example<span class="widont">&nbsp;</span>output.</p>
 <h2 id="fontpath">fontpath</h2>
 <ul>
 <li>Type: <code>String</code></li>
 <li>Default: <code>''</code></li>
 </ul>
-<p><em>Required if using <code>@font</code> annotation with local font<span class="widont">&nbsp;</span>files.</em></p>
-<p>Relative path to a directory containing local font<span class="widont">&nbsp;</span>files.</p>
+<p><em>Required if using <a href="http://oddbird.net/herman/docs/demo_fonts.html#displaying-local-fonts"><code>@font</code> annotation</a> with local font<span class="widont">&nbsp;</span>files.</em></p>
+<p>Relative path to a directory containing local font files.
+See our <a href="http://oddbird.net/herman/docs/demo_fonts.html#displaying-local-fonts"><code>@font</code> documentation</a>.</p>
 <h2 id="nunjucks">nunjucks</h2>
 <ul>
 <li>Type: <code>Object</code></li>
@@ -475,18 +547,20 @@ See our <a href="http://oddbird.net/herman/docs/demo_examples.html"><code>@examp
 <li>Type: <code>String</code></li>
 <li>Default: <code>''</code></li>
 </ul>
-<p><em>Required if using <code>@font</code> or <code>@preview</code> annotations.</em></p>
+<p><em>Required if using <a href="http://oddbird.net/herman/docs/demo_fonts.html"><code>@font</code></a> or <a href="http://oddbird.net/herman/docs/demo_colors.html"><code>@preview</code></a>
+annotations.</em></p>
 <p>Relative path to a <code>sass-json file</code>
 (created with the <a href="http://oddbird.net/herman/docs/api_json-export.html#mixin--herman-export"><code>herman-export</code> mixin</a>).
 The JSON contents will be added under the
 <code>sassjson</code> key of the sassdoc context,
-and used to display colors, fonts, ratios, and<span class="widont">&nbsp;</span>sizes.</p>
+and used to display colors, fonts, ratios, and sizes.
+See <a href="http://oddbird.net/herman/docs/api_json-export.html">Exporting Styles to<span class="widont">&nbsp;</span>JSON</a>.</p>
 <h3 id="sass-includepaths">sass.includepaths</h3>
 <ul>
 <li>Type: <code>Array</code></li>
 <li>Default: <code>[]</code></li>
 </ul>
-<p>Array of paths used to attempt to resolve <code>@import</code> declarations.
+<p>Array of paths used to resolve <code>@import</code> declarations.
 Passed through to <a href="https://github.com/sass/node-sass/#includepaths">node-sass</a> when
 compiling <code>@example sass/scss</code> annotations.
 See our <a href="http://oddbird.net/herman/docs/demo_examples.html#compiling-sass-scss"><code>@example</code> documentation</a>.</p>
@@ -498,6 +572,11 @@ See our <a href="http://oddbird.net/herman/docs/demo_examples.html#compiling-sas
 <p>List of files (relative to any <a href="#sass-includepaths"><code>sass.includepaths</code></a>) to
 <code>@import</code> for all <code>@example sass/scss</code> annotations.
 See our <a href="http://oddbird.net/herman/docs/demo_examples.html#compiling-sass-scss"><code>@example</code> documentation</a>.</p>
+<p>This is useful for including any global
+Sass configuration and toolkit files
+that may be used by any example.
+It’s best to avoid files with output CSS,
+as that output will be displayed in every single Sass<span class="widont">&nbsp;</span>example.</p>
 
   </div>
 
