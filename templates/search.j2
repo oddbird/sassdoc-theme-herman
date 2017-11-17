@@ -1,22 +1,21 @@
 {% extends 'base.j2' %}
 
 {% block main %}
+  <script>
+    window.searchData = {{ searchData|safe }};
+  </script>
   <div class="text-block">
-      From here you can search these documents. Enter your search words into
-      the box below and click "search". Note that the search function will
-      automatically search for all of the words. Pages containing fewer words
-      won't appear in the result list.
+    From here you can search these documents. Enter your search words into the
+    box below and click "search". Note that the search function will
+    automatically search for all of the words. Pages containing fewer words
+    won't appear in the result list.
   </div>
   <div>
-      <form action="" method="get">
-          <input name="search" placeholder="Search...">
-          <input type="submit">
-      </form>
+    <form action="" method="get">
+      <input name="search" placeholder="Search...">
+      <input type="submit">
+    </form>
   </div>
-  <div class="text-block">
-    Raw search data:
-    <pre>
-    {{ searchData|safe }}
-    </pre>
-  </div>
+  <ul id="search-results">
+  </ul>
 {% endblock %}

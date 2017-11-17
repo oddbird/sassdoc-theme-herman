@@ -209,5 +209,32 @@ window.Herman = (function base(Herman, $) {
     $(window).on('resize', fitIframesToContent);
   };
 
+  function qs(key) {
+    const parsedKey = key.replace(/[*+?^$.\[\]{}()|\\\/]/g, '\\$&');
+    const match = location.search.match(
+      new RegExp(`[?&]${parsedKey}=([^&]+)(&|$)`)
+    );
+    return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+  }
+
+  function getMatchingResults(searchString, searchData) {
+    return searchData.filter(page => page.description.includes(searchString));
+  }
+
+  function getExcerpt(match) {
+    console.log(match);
+    return '<a href="/">Whoops</a>';
+  }
+
+  Herman.initializeSearch = function initializeSearch() {
+    const searchString = qs('search');
+    if (searchString && window.searchData) {
+      const matches = getMatchingResults(searchString, window.searchData);
+      matches.forEach(match => {
+        $('#search-results').append(`<li>${getExcerpt(match)}</li>`);
+      });
+    }
+  };
+
   return Herman;
 })(window.Herman || {}, window.jQuery);
