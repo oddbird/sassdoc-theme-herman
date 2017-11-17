@@ -4,7 +4,7 @@
 [data-sassdoc='icon-preview'] {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  margin: size('gutter') negative('shim');
+  margin: 0 negative('shim');
 }
 
 [data-sassdoc-icon] {
