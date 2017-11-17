@@ -20,8 +20,9 @@
         <div data-sassdoc-icon="{{ icon.name }}">
           {{ icon.rendered|safe }}
           <div data-sassdoc="icon-info">
-            <div data-sassdoc="icon-name">{{ icon.name }}</div>
-            <div data-sassdoc="icon-path">{{ icon.path }}</div>
+            <div data-sassdoc="icon-name">
+              <strong>{{ icon.name }}</strong>.svg
+            </div>
           </div>
         </div>
       {% endfor %}
