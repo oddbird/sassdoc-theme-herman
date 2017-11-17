@@ -21,8 +21,9 @@
   font-size: size('xsmall');
 }
 
-[data-sassdoc='icon-path'] {
-  @include font-family('code');
-  color: color('text-light');
-  font-size: size('xsmall');
+[data-item-section='icon-preview'] {
+  .item-subtitle-supplement {
+    @include font-family('code');
+    font-size: size('small-code');
+  }
 }
