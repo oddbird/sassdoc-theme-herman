@@ -51,6 +51,10 @@
           <a href="{{ groupName }}.html" data-sassdoc-nav="{{ activeNav }}">{{ groups[groupName] }}</a>
         </li>
       {% endfor %}
+      <li>
+        {% set activeNav = 'is-active' if (activeGroup == "search") else 'is-not-active' %}
+        <a href="search.html" data-sassdoc-nav="{{ activeNav }}">Search</a>
+      </li>
     </ul>
 
     {# External Links #}
