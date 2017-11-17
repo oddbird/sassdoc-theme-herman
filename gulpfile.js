@@ -31,6 +31,7 @@ const paths = {
   DOCS_DIR: 'docs/',
   JS_TESTS_DIR: 'test/js/',
   TEMPLATES_DIR: 'templates/',
+  FONTS_DIR: 'fonts/',
   IGNORE: ['!**/.#*', '!**/flycheck_*'],
   init() {
     this.TEMPLATES = [`${this.TEMPLATES_DIR}**/*.j2`].concat(this.IGNORE);
@@ -276,6 +277,7 @@ gulp.task('compile', ['sass', 'minify'], () => {
       displayColors: ['hex', 'hsl'],
       customCSS: `${paths.DIST_DIR}css/main.css`,
       customHTML: `${paths.TEMPLATES_DIR}_icons.svg`,
+      fontpath: paths.FONTS_DIR,
       nunjucks: {
         templatepath: path.join(__dirname, 'templates'),
       },
@@ -292,7 +294,7 @@ gulp.task('compile', ['sass', 'minify'], () => {
       alias: true,
     },
     groups: {
-      'api_json-export': 'Exporting Sass to JSON',
+      'api_json-export': 'Exporting Styles to JSON',
       'api_sass-accoutrement': 'Accoutrement Integration',
       demo_colors: 'Color Palettes',
       demo_fonts: 'Font Specimens',

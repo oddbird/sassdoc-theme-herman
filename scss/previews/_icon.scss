@@ -5,7 +5,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  margin: size('gutter') negative('shim');
+  margin: 0 negative('shim');
 }
 
 [data-sassdoc-icon] {

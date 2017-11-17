@@ -12,19 +12,6 @@
 // Size Preview
 // ------------
 
-[data-sassdoc='size-demos'] {
-  margin-bottom: size('gutter');
-}
-
-[data-sassdoc='size-details'] {
-  @include font-family('code');
-  font-size: size('small');
-}
-
-[data-sassdoc='size-value'] {
-  color: color('text-light');
-}
-
 [data-size-demo] {
   margin-bottom: size('shim');
 }
