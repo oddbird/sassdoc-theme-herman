@@ -32,7 +32,7 @@ describe('icons annotation', function() {
 
   describe('resolve', function() {
     it('logs errors on bad icon path', function(done) {
-      const data = [{ icons: 'test/js/fixtures/bad_icons' }];
+      const data = [{ icons: 'test/js/fixtures/bad_icons/' }];
 
       this.icons
         .resolve(data)
