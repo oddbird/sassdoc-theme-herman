@@ -63,13 +63,13 @@ describe('icons annotation', function() {
           assert.deepEqual(data[0].icons, [
             {
               name: 'ok',
-              path: 'test/js/fixtures/icons/ok.svg',
+              path: 'test/js/fixtures/icons/',
               rendered:
                 '<svg data-icon="ok"  ><use xlink:href="#icon-ok" />\n  </svg>',
             },
             {
               name: 'warning',
-              path: 'test/js/fixtures/icons/warning.svg',
+              path: 'test/js/fixtures/icons/',
               rendered:
                 '<svg data-icon="warning"  >' +
                 '<use xlink:href="#icon-warning" />\n  </svg>',
