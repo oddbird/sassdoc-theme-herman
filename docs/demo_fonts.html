@@ -708,32 +708,34 @@ and our <a href="http://oddbird.net/accoutrement-type/">Accoutrement-Type</a><sp
       
   
   
+  
+
+  
+  
 
   <div data-item-section="font-specimen">
     <h3 class="item-subtitle">Font Preview</h3>
     
-    <h4 data-sassdoc="font-type">
-      <a href="https://fonts.google.com/specimen/Source+Code+Pro" data-sassdoc="font-name">Source Code Pro</a>
-
-      (<code>demo-cdn</code>)
+    
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <a href="https://fonts.google.com/specimen/Source+Code+Pro" class="item-name">Source Code Pro</a>
+      
+      
+      <span class="value-type">(demo-cdn)</span>
+      
     </h4>
 
-    <div data-sassdoc="font-stack">
-      <b>Stack:</b>
+    
       
-        
-          Consolas,
-        
-          Menlo,
-        
-          Courier New,
-        
-          monospace,
-        
-          sans-serif
-        
-      
-    </div>
+      <div class="param-details text-block">
+        <code><strong>font-family</strong>: &#39;Source Code Pro&#39;, &#39;Consolas&#39;, &#39;Menlo&#39;, &#39;Courier New&#39;, monospace, sans-serif;</code>
+      </div>
+    
+  </div>
+
 
     
       <iframe class="render-specimen" srcdoc="
@@ -1125,22 +1127,34 @@ herman:
       
   
   
+  
+
+  
+  
 
   <div data-item-section="font-specimen">
     <h3 class="item-subtitle">Font Preview</h3>
     
-    <h4 data-sassdoc="font-type">
-      <span data-sassdoc="font-name">rockingham</span>
-
-      (<code>demo-local</code>)
+    
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">rockingham</span>
+      
+      
+      <span class="value-type">(demo-local)</span>
+      
     </h4>
 
-    <div data-sassdoc="font-stack">
-      <b>Stack:</b>
+    
       
-        fantasy
-      
-    </div>
+      <div class="param-details text-block">
+        <code><strong>font-family</strong>: &#39;rockingham&#39;, fantasy;</code>
+      </div>
+    
+  </div>
+
 
     
       <iframe class="render-specimen" srcdoc="
@@ -1460,46 +1474,16 @@ herman:
     <div data-item-section="prose" class="text-block">
       <h2 id="add-font-data-to-herman">Add font data to<span class="widont">&nbsp;</span>$herman</h2>
 <p>In order to preview the <code>$demo-cdn</code> and <code>$demo-local</code> maps,
-we need to export the data to JSON.
-That’s a two-step process:
-first building the export-map,
-and then creating a sass file to do the actual export.
-We provide shortcuts to help with<span class="widont">&nbsp;</span>both.</p>
-<p>Use the <code>herman-add</code> mixin to add individual data maps
-to the global export<span class="widont">&nbsp;</span>map.</p>
-<pre><code> @include herman-add('font', 'demo-cdn', $demo-cdn);
+we also need to <a href="http://oddbird.net/herman/docs/api_json-export.html">export the data to<span class="widont">&nbsp;</span>JSON</a>.</p>
+<p>You can add data to the <code>$herman</code> export-map by hand,
+or use the provided <code>herman-add</code> mixin
+to combine existing maps into the proper structure.
+<a href="http://oddbird.net/herman/docs/api_json-export.html#fonts">See the font map documentation for<span class="widont">&nbsp;</span>details</a>.</p>
+<pre><code class="lang-scss"> @include herman-add('font', 'demo-code', $demo-code);
  @include herman-add('font', 'demo-local', $demo-local);
 </code></pre>
-<ul>
-<li>The first argument tells Herman what type of data is being added –
-in this case <code>font</code>.
-Herman will organize the output JSON into subgroups by<span class="widont">&nbsp;</span>type.</li>
-<li>The second argument sets a <code>key</code> name
-for accessing the correct font<span class="widont">&nbsp;</span>data.</li>
-<li>The third argument provides the actual map of data
-to be added to the <code>$herman</code> export map.</li>
-</ul>
-<p>The result is an export map that looks like<span class="widont">&nbsp;</span>this:</p>
-<pre><code class="lang-scss">$herman: (
-  'fonts': (
-    'demo-cdn': (
-      'name': 'Source Code Pro',
-      'source': 'https://fonts.google.com/specimen/Source+Code+Pro',
-      'stack': ('Consolas', 'Menlo', 'Courier New', monospace, sans-serif),
-    ),
-    'demo-local': (
-      'name': 'rockingham',
-      'regular': 'rockingham/rockingham-regular-webfont',
-      'bold': 'rockingham/rockingham-bold-webfont',
-      'italic': 'rockingham/rockingham-italic-webfont',
-      'bold' 'italic': 'rockingham/rockingham-bolditalic-webfont',
-      'stack': 'fantasy',
-    ),
-  ),
-);
-</code></pre>
-<p>You can also build that map by hand, if you<span class="widont">&nbsp;</span>prefer.</p>
-<p><a href="http://oddbird.net/herman/docs/api_json-export.html#fonts">See the font map documentation for details<span class="widont">&nbsp;</span>»</a></p>
+<p>After adding your data to the <code>$herman</code> map,
+it can be converted to JSON using <code>herman-export</code>.</p>
 
       
   
@@ -1599,6 +1583,31 @@ to be added to the <code>$herman</code> export map.</li>
       
         <a href="
   api_json-export.html#mixin--herman-add" class="item-name">herman-add()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+      
+        
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@mixin</span>
+      
+        <a href="
+  api_json-export.html#mixin--herman-export" class="item-name">herman-export()</a>
       
       
       

@@ -121,58 +121,27 @@ $demo-local: (
 /// ## Add font data to $herman
 ///
 /// In order to preview the `$demo-cdn` and `$demo-local` maps,
-/// we need to export the data to JSON.
-/// That's a two-step process:
-/// first building the export-map,
-/// and then creating a sass file to do the actual export.
-/// We provide shortcuts to help with both.
+/// we also need to [export the data to JSON][export].
 ///
-/// Use the `herman-add` mixin to add individual data maps
-/// to the global export map.
+/// You can add data to the `$herman` export-map by hand,
+/// or use the provided `herman-add` mixin
+/// to combine existing maps into the proper structure.
+/// [See the font map documentation for details][font-docs].
 ///
-/// ```
-///  @include herman-add('font', 'demo-cdn', $demo-cdn);
+/// ```scss
+///  @include herman-add('font', 'demo-code', $demo-code);
 ///  @include herman-add('font', 'demo-local', $demo-local);
 /// ```
 ///
-/// - The first argument tells Herman what type of data is being added --
-///   in this case `font`.
-///   Herman will organize the output JSON into subgroups by type.
-/// - The second argument sets a `key` name
-///   for accessing the correct font data.
-/// - The third argument provides the actual map of data
-///   to be added to the `$herman` export map.
+/// After adding your data to the `$herman` map,
+/// it can be converted to JSON using `herman-export`.
 ///
-/// The result is an export map that looks like this:
-///
-/// ```scss
-/// $herman: (
-///   'fonts': (
-///     'demo-cdn': (
-///       'name': 'Source Code Pro',
-///       'source': 'https://fonts.google.com/specimen/Source+Code+Pro',
-///       'stack': ('Consolas', 'Menlo', 'Courier New', monospace, sans-serif),
-///     ),
-///     'demo-local': (
-///       'name': 'rockingham',
-///       'regular': 'rockingham/rockingham-regular-webfont',
-///       'bold': 'rockingham/rockingham-bold-webfont',
-///       'italic': 'rockingham/rockingham-italic-webfont',
-///       'bold' 'italic': 'rockingham/rockingham-bolditalic-webfont',
-///       'stack': 'fantasy',
-///     ),
-///   ),
-/// );
-/// ```
-///
-/// You can also build that map by hand, if you prefer.
-///
-/// [See the font map documentation for details »][font-docs]
-///
+/// [export]: http://oddbird.net/herman/docs/api_json-export.html
 /// [font-docs]: http://oddbird.net/herman/docs/api_json-export.html#fonts
 ///
 /// @see $herman
 /// @see herman-add
+/// @see herman-export
 /// @group demo_fonts
 /// @link http://oddbird.net/accoutrement-type Accoutrement-Type
 @include herman-add('font', 'demo-cdn', $demo-cdn);

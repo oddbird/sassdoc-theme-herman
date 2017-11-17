@@ -563,23 +563,28 @@ $xlarge: 28px;
     
       <div class="text-block">
         <h2 id="preview-ratios">Preview ratios</h2>
-<p>In order to export our ratios and sizes to Herman,
+<p>In order to export our ratios to Herman,
 we’ll want to combine them into maps
 of name/value pairs.
 Sass does not provide any shortcuts for automating this step,
-or removing the<span class="widont">&nbsp;</span>duplication.</p>
+or removing the duplication,
+but you can use a tool like our <a href="http://oddbird.net/accoutrement-scale/">Accoutrement-Scale</a>
+to store and access ratios
+directly in a Herman-friendly<span class="widont">&nbsp;</span>map.</p>
+<pre><code class="lang-scss">$demo-ratios: (
+  'herman-ratio': $herman-ratio
+);
+</code></pre>
 <p>Create as many maps as you like
-to organize different types of ratios/sizes –
-text, spacing, patterns, etc.
+to organize different types of ratios –
+text, spacing, etc.
 Each map will be displayed individually,
-using the <code>@preview ratios</code> and <code>@preview sizes</code> annotations:</p>
-<pre><code>// @preview ratios
+using the <code>@preview ratios</code> annotation:</p>
+<pre><code>// @preview ratios; count: 4
 </code></pre>
 <p>The <code>ratios</code> preview accepts an optional <code>count</code> argument (defaults to <code>6</code>) –
 the number of ratio calculations to display,
 up to a maximum of <code>10</code>.</p>
-<pre><code>// @preview ratios; count: 4
-</code></pre>
 
         
   
@@ -643,50 +648,70 @@ up to a maximum of <code>10</code>.</p>
     
       
   
-    <div data-sassdoc="ratio-preview">
-      <div data-sassdoc="ratio-name">
-        herman-ratio:
-        <code>1.4</code>
-      </div>
-
-      
-
-      <div data-sassdoc="ratio-demos">
-        
-        
-          
-          <span data-sassdoc="ratio-demo" style="font-size: 1em;">
-            1
-          </span>
-        
-          
-          <span data-sassdoc="ratio-demo" style="font-size: 1.4em;">
-            1.4
-          </span>
-        
-          
-          <span data-sassdoc="ratio-demo" style="font-size: 1.9599999999999997em;">
-            1.96
-          </span>
-        
-          
-          <span data-sassdoc="ratio-demo" style="font-size: 2.7439999999999993em;">
-            2.74
-          </span>
-        
-          
-          <span data-sassdoc="ratio-demo" style="font-size: 3.841599999999999em;">
-            3.84
-          </span>
-        
-          
-          <span data-sassdoc="ratio-demo" style="font-size: 5.378239999999998em;">
-            5.38
-          </span>
-        
-      </div>
-    </div>
   
+
+  <div data-item-section="ratio-preview">
+    <h3 class="item-subtitle">Ratio Preview</h3>
+    
+    
+      <div data-sassdoc="ratio-preview">
+        
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">herman-ratio:</span>
+      
+      <span class="item-value">1.4</span>
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+
+        <div data-sassdoc="ratio-demos">
+          
+          
+            
+            <span data-sassdoc="ratio-demo" style="font-size: 1em;">
+              1
+            </span>
+          
+            
+            <span data-sassdoc="ratio-demo" style="font-size: 1.4em;">
+              1.4
+            </span>
+          
+            
+            <span data-sassdoc="ratio-demo" style="font-size: 1.9599999999999997em;">
+              1.96
+            </span>
+          
+            
+            <span data-sassdoc="ratio-demo" style="font-size: 2.7439999999999993em;">
+              2.74
+            </span>
+          
+            
+            <span data-sassdoc="ratio-demo" style="font-size: 3.841599999999999em;">
+              3.84
+            </span>
+          
+            
+            <span data-sassdoc="ratio-demo" style="font-size: 5.378239999999998em;">
+              5.38
+            </span>
+          
+        </div>
+      </div>
+    
+  
+  </div>
+
 
     
 
@@ -782,17 +807,30 @@ up to a maximum of <code>10</code>.</p>
     
       <div class="text-block">
         <h2 id="preview-sizes">Preview sizes</h2>
-<pre><code>// @preview sizes
+<p>Similar to ratios,
+sizes can be combined into any number of maps
+to preview with Herman.
+you can build these maps out of existing variables,
+or use a tool like our [Accoutrement-Scale][scale]
+to store and access sizes
+directly in a Herman-friendly<span class="widont">&nbsp;</span>map.</p>
+<pre><code>$demo-sizes: (
+  'root': $root,
+  'xlarge': $xlarge
+);
 </code></pre>
-<p>The <code>sizes</code> preview accepts an optional <code>style</code> argument (defaults to <code>text</code>),
+<p>Each map will be displayed individually,
+using the <code>@preview sizes</code> annotation:</p>
+<pre><code>// @preview sizes; style: ruler
+</code></pre>
+<p>The <code>sizes</code> preview accepts an optional <code>style</code> argument
+(defaulting to <code>text</code>),
 which specifies the type of output to<span class="widont">&nbsp;</span>display:</p>
 <ul>
 <li><code>text</code>: Displays a sentence of lorem-ipsum text at the given<span class="widont">&nbsp;</span>size.</li>
 <li><code>ruler</code>: Displays a pattern of shapes spaced at the given<span class="widont">&nbsp;</span>size.</li>
-<li><code>output-only</code>: Displays calculated sizes<span class="widont">&nbsp;</span>only.</li>
+<li><code>output-only</code>: Displays values only, without<span class="widont">&nbsp;</span>demonstration.</li>
 </ul>
-<pre><code>// @preview sizes; style: ruler
-</code></pre>
 
         
   
@@ -855,13 +893,29 @@ which specifies the type of output to<span class="widont">&nbsp;</span>display:<
 
     
       
-  <div data-sassdoc="size-demos">
+  
+  
+
+  <div data-item-section="size-preview">
+    <h3 class="item-subtitle">Size Previews</h3>
     
-      <div data-sassdoc="size-demo">
-        <div data-sassdoc="size-details">
-          <b data-sassdoc="size-name">root:</b>
-          <span data-sassdoc="size-value">18px</span>
-        </div>
+    
+      <div data-sassdoc="size-preview">
+        
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">root:</span>
+      
+      <span class="item-value">18px</span>
+      
+      
+    </h4>
+
+    
+  </div>
+
 
         
         
@@ -879,11 +933,22 @@ which specifies the type of output to<span class="widont">&nbsp;</span>display:<
         
       </div>
     
-      <div data-sassdoc="size-demo">
-        <div data-sassdoc="size-details">
-          <b data-sassdoc="size-name">xlarge:</b>
-          <span data-sassdoc="size-value">28px</span>
-        </div>
+      <div data-sassdoc="size-preview">
+        
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">xlarge:</span>
+      
+      <span class="item-value">28px</span>
+      
+      
+    </h4>
+
+    
+  </div>
+
 
         
         
@@ -901,7 +966,9 @@ which specifies the type of output to<span class="widont">&nbsp;</span>display:<
         
       </div>
     
+  
   </div>
+
 
     
 
@@ -934,42 +1001,18 @@ which specifies the type of output to<span class="widont">&nbsp;</span>display:<
     <div data-item-section="prose" class="text-block">
       <h2 id="add-ratio-size-data-to-herman">Add ratio/size data to<span class="widont">&nbsp;</span>$herman</h2>
 <p>In order to preview the <code>$demo-ratios</code> and <code>$demo-sizes</code> maps,
-we need to export the data to JSON.
-That’s a two-step process:
-first building the export-map,
-and then creating a sass file to do the actual export.
-We provide shortcuts to help with<span class="widont">&nbsp;</span>both.</p>
-<p>Use the <code>herman-add</code> mixin to add individual data maps
-to the global export<span class="widont">&nbsp;</span>map.</p>
+we also need to <a href="http://oddbird.net/herman/docs/api_json-export.html">export the data to<span class="widont">&nbsp;</span>JSON</a>.</p>
+<p>You can add data to the <code>$herman</code> export-map by hand,
+or use the provided <code>herman-add</code> mixin
+to combine existing maps into the proper structure.
+<a href="http://oddbird.net/herman/docs/api_json-export.html#sizes-ratios">See the size/ratio map documentation for details<span class="widont">&nbsp;</span>»</a></p>
 <pre><code> @include herman-add('ratios', 'demo-ratios', $demo-ratios);
  @include herman-add('sizes', 'demo-sizes', $demo-sizes);
 </code></pre>
-<ul>
-<li>The first argument tells Herman what type of data is being added –
-in this case <code>ratios</code> or <code>sizes</code>.
-Herman will organize the output JSON into subgroups by<span class="widont">&nbsp;</span>type.</li>
-<li>The second argument sets a <code>key</code> name
-for accessing this particular group of ratios or<span class="widont">&nbsp;</span>sizes.</li>
-<li>The third argument provides the actual map of data
-to be added to the <code>$herman</code> export map.</li>
-</ul>
-<p>The result is an export map that looks like<span class="widont">&nbsp;</span>this:</p>
-<pre><code class="lang-scss">$herman: (
-  'ratios': (
-    'demo-ratios': (
-      'herman-ratio': 1.4,
-    ),
-  ),
-  'sizes': (
-    'demo-sizes': (
-      'root': '18px',
-      'xlarge': '28px',
-    ),
-  ),
-);
-</code></pre>
-<p>You can also build that map by hand, if you<span class="widont">&nbsp;</span>prefer.</p>
-<p><a href="http://oddbird.net/herman/docs/api_json-export.html#sizes-ratios">See the size/ratio map documentation for details<span class="widont">&nbsp;</span>»</a></p>
+<p>If your map needs to be parsed or compiled before export,
+you can pass additional compilation functions and arguments to <code>herman-add</code>.
+Once your data is all stored in the <code>$herman</code> map,
+it can be converted to JSON using <code>herman-export</code>.</p>
 
       
   
@@ -1069,6 +1112,31 @@ to be added to the <code>$herman</code> export map.</li>
       
         <a href="
   api_json-export.html#mixin--herman-add" class="item-name">herman-add()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+      
+        
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@mixin</span>
+      
+        <a href="
+  api_json-export.html#mixin--herman-export" class="item-name">herman-export()</a>
       
       
       

@@ -31,29 +31,36 @@ $xlarge: 28px;
 
 /// ## Preview ratios
 ///
-/// In order to export our ratios and sizes to Herman,
+/// In order to export our ratios to Herman,
 /// we'll want to combine them into maps
 /// of name/value pairs.
 /// Sass does not provide any shortcuts for automating this step,
-/// or removing the duplication.
+/// or removing the duplication,
+/// but you can use a tool like our [Accoutrement-Scale][scale]
+/// to store and access ratios
+/// directly in a Herman-friendly map.
+///
+/// [scale]: http://oddbird.net/accoutrement-scale/
+///
+/// ```scss
+/// $demo-ratios: (
+///   'herman-ratio': $herman-ratio
+/// );
+/// ```
 ///
 /// Create as many maps as you like
-/// to organize different types of ratios/sizes --
-/// text, spacing, patterns, etc.
+/// to organize different types of ratios --
+/// text, spacing, etc.
 /// Each map will be displayed individually,
-/// using the `@preview ratios` and `@preview sizes` annotations:
+/// using the `@preview ratios` annotation:
 ///
 /// ```
-/// // @preview ratios
+/// // @preview ratios; count: 4
 /// ```
 ///
 /// The `ratios` preview accepts an optional `count` argument (defaults to `6`) --
 /// the number of ratio calculations to display,
 /// up to a maximum of `10`.
-///
-/// ```
-/// // @preview ratios; count: 4
-/// ```
 ///
 /// @preview ratios
 /// @group demo_sizes
@@ -64,20 +71,35 @@ $demo-ratios: (
 
 /// ## Preview sizes
 ///
+/// Similar to ratios,
+/// sizes can be combined into any number of maps
+/// to preview with Herman.
+/// you can build these maps out of existing variables,
+/// or use a tool like our [Accoutrement-Scale][scale]
+/// to store and access sizes
+/// directly in a Herman-friendly map.
+///
 /// ```
-/// // @preview sizes
+/// $demo-sizes: (
+///   'root': $root,
+///   'xlarge': $xlarge
+/// );
 /// ```
 ///
-/// The `sizes` preview accepts an optional `style` argument (defaults to `text`),
-/// which specifies the type of output to display:
-///
-/// - `text`: Displays a sentence of lorem-ipsum text at the given size.
-/// - `ruler`: Displays a pattern of shapes spaced at the given size.
-/// - `output-only`: Displays calculated sizes only.
+/// Each map will be displayed individually,
+/// using the `@preview sizes` annotation:
 ///
 /// ```
 /// // @preview sizes; style: ruler
 /// ```
+///
+/// The `sizes` preview accepts an optional `style` argument
+/// (defaulting to `text`),
+/// which specifies the type of output to display:
+///
+/// - `text`: Displays a sentence of lorem-ipsum text at the given size.
+/// - `ruler`: Displays a pattern of shapes spaced at the given size.
+/// - `output-only`: Displays values only, without demonstration.
 ///
 /// @preview sizes
 /// @group demo_sizes
@@ -90,54 +112,29 @@ $demo-sizes: (
 /// ## Add ratio/size data to $herman
 ///
 /// In order to preview the `$demo-ratios` and `$demo-sizes` maps,
-/// we need to export the data to JSON.
-/// That's a two-step process:
-/// first building the export-map,
-/// and then creating a sass file to do the actual export.
-/// We provide shortcuts to help with both.
+/// we also need to [export the data to JSON][export].
 ///
-/// Use the `herman-add` mixin to add individual data maps
-/// to the global export map.
+/// You can add data to the `$herman` export-map by hand,
+/// or use the provided `herman-add` mixin
+/// to combine existing maps into the proper structure.
+/// [See the size/ratio map documentation for details »][size-docs]
 ///
 /// ```
 ///  @include herman-add('ratios', 'demo-ratios', $demo-ratios);
 ///  @include herman-add('sizes', 'demo-sizes', $demo-sizes);
 /// ```
 ///
-/// - The first argument tells Herman what type of data is being added --
-///   in this case `ratios` or `sizes`.
-///   Herman will organize the output JSON into subgroups by type.
-/// - The second argument sets a `key` name
-///   for accessing this particular group of ratios or sizes.
-/// - The third argument provides the actual map of data
-///   to be added to the `$herman` export map.
+/// If your map needs to be parsed or compiled before export,
+/// you can pass additional compilation functions and arguments to `herman-add`.
+/// Once your data is all stored in the `$herman` map,
+/// it can be converted to JSON using `herman-export`.
 ///
-/// The result is an export map that looks like this:
-///
-/// ```scss
-/// $herman: (
-///   'ratios': (
-///     'demo-ratios': (
-///       'herman-ratio': 1.4,
-///     ),
-///   ),
-///   'sizes': (
-///     'demo-sizes': (
-///       'root': '18px',
-///       'xlarge': '28px',
-///     ),
-///   ),
-/// );
-/// ```
-///
-/// You can also build that map by hand, if you prefer.
-///
-/// [See the size/ratio map documentation for details »][size-docs]
-///
+/// [export]: http://oddbird.net/herman/docs/api_json-export.html
 /// [size-docs]: http://oddbird.net/herman/docs/api_json-export.html#sizes-ratios
 ///
 /// @see $herman
 /// @see herman-add
+/// @see herman-export
 /// @group demo_sizes
 /// @link http://oddbird.net/accoutrement-scale Accoutrement-Scale
 @include herman-add('ratios', 'demo-ratios', $demo-ratios);
