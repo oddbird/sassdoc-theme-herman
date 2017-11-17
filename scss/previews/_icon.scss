@@ -23,6 +23,6 @@
 
 [data-sassdoc='icon-path'] {
   @include font-family('code');
-  white-space: normal;
-  word-break: break-word;
+  color: color('text-light');
+  font-size: size('xsmall');
 }
