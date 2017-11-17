@@ -41,7 +41,7 @@
 /// or construct your `$herman` map by hand,
 /// following these guidelines...
 ///
-/// ### Map structure:
+/// ### Map structure
 ///
 /// Each type of preview value should be nested inside
 /// a map that describes what type of data is being stored:
@@ -63,13 +63,13 @@
 /// );
 /// ```
 ///
-/// ### Colors:
+/// ### Colors
 ///
 /// Each color has an access name and value.
 /// For us, that is often a map-key string,
 /// and Sass hex/rgba output color:
 ///
-/// ```
+/// ```scss
 /// 'brand-colors': (
 ///   'brand-orange': '#c75000',
 ///   'brand-blue': '#0d7fa5',
@@ -90,7 +90,7 @@
 /// organized into top-level groups that may contain
 /// one or more size/ratio key:value pairs:
 ///
-/// ```
+/// ```scss
 /// 'font-ratios': (
 ///   'line-height': '1.4',
 ///   'minor-seventh': '16/9',
@@ -105,21 +105,21 @@
 /// and size values should be valid CSS lengths --
 /// both converted to a valid JSON string.
 ///
-/// ### Fonts:
+/// ### Fonts
 ///
 /// Each font should have a top-level key of its own,
 /// since font-previews display a single font at a time.
 /// The data map accepts:
 ///
 /// - `name`: how the font should be referenced in CSS (if omitted, defaults to top-level key)
-/// - `stack`: optional list of font-stack fallbacks
+/// - `stack`: optional string or list of font-stack fallbacks
 /// - `source`: link to more information on the font,
 ///    or typekit/googlefonts as useful
 /// - `svgid`: optional suffix value for local SVG font `src`, e.g. `font-file.svg#svgid` (if omitted, defaults to `name`)
 /// - `<variant>`: describe any number of relative paths to locally-hosted
 ///   font-files per variant: e.g. `regular`, `bold italic`, etc.
 ///
-/// ```
+/// ```scss
 /// 'body-font': (
 ///   'name': 'Source Sans Pro',
 ///   'source': 'https://github.com/adobe-fonts/source-sans-pro'

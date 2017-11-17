@@ -1,0 +1,22 @@
+// SVG Icon Samples
+// ================
+
+
+/// ## Documenting SVG icons
+///
+/// Given a folder of individual SVG icon files,
+/// you can use Herman to document and display your full icon set.
+///
+/// ```scss
+/// // @icons assets/svg/
+/// ```
+///
+/// The `icons` annotation accepts one argument --
+/// a path to a directory containing icon svg files.
+/// Each icon will be rendered
+/// along with the filename and path.
+///
+/// Herman doesn't have many icons to preview...
+///
+/// @icons assets/svg/
+/// @group demo_icons

@@ -1,16 +1,9 @@
 // Font Specimen
 // =============
 
-[data-sassdoc-font] {
-  margin: size('spacer') 0 size('gutter');
-}
-
-
-// Family
-// ------
 
 [data-sassdoc='font-type'] {
-  font-size: size('h3');
+  font-size: size('base');
   font-weight: bold;
 }
 

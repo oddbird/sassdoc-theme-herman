@@ -6,9 +6,59 @@ const fs = require('fs');
 const Promise = require('bluebird');
 
 const prepareContext = require('../../lib/prepareContext');
-const renderHerman = require('../../lib/renderHerman');
+const { renderHerman, makeNunjucksColors } = require('../../lib/renderHerman');
 
 const access = Promise.promisify(fs.access);
+
+describe('makeNunjucksColors', function() {
+  before(function() {
+    this.colors = makeNunjucksColors({
+      herman: {
+        displayColors: undefined,
+      },
+    });
+  });
+
+  it('exits early on invalid colors', function() {
+    const actual = this.colors('not a color');
+    assert.equal(actual, undefined);
+  });
+
+  it('switches on formats', function() {
+    const actual = this.colors('#fefced');
+    const expected = {
+      hex: '#fefced',
+      rgb: 'rgb(254, 252, 237)',
+      hsl: 'hsl(53, 89%, 96%)',
+    };
+    assert.deepEqual(actual, expected);
+  });
+
+  it('handles rgba and hsla', function() {
+    const colors = makeNunjucksColors({
+      herman: {
+        displayColors: ['rgba', 'hsla'],
+      },
+    });
+    const actual = colors('#fefced');
+    const expected = {
+      rgb: 'rgb(254, 252, 237)',
+      hsl: 'hsl(53, 89%, 96%)',
+    };
+    assert.deepEqual(actual, expected);
+  });
+
+  it('passes on unknown format', function() {
+    const colors = makeNunjucksColors({
+      herman: {
+        displayColors: ['blorble'],
+      },
+    });
+    const actual = colors('#fefced');
+    const expected = {};
+    assert.deepEqual(actual, expected);
+  });
+});
 
 describe('renderHerman', function() {
   before(function() {
