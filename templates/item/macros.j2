@@ -1,11 +1,15 @@
 {% import 'utility.macros.j2' as utility %}
 
 
-{% macro item_section(slug, title=none) %}
+{% macro item_section(slug, title=none, supplement=none) %}
   {% set title = title if title else slug %}
-
   <div data-item-section="{{ slug }}">
-    <h3 class="item-subtitle">{{ title }}</h3>
+    <h3 class="item-subtitle">
+      {{ title }}
+      {% if supplement %}
+        <span class="item-subtitle-supplement">{{ supplement }}</span>
+      {% endif %}
+    </h3>
     {{ caller() }}
   </div>
 {% endmacro %}

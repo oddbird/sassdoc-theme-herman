@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <title>sassdoc-theme-herman Documentation</title>
+  <title>Herman Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
@@ -41,7 +41,7 @@
 
 
       <h1 data-sassdoc="project-title">
-        <a href="index.html" rel="home" data-sassdoc="project-name">sassdoc-theme-herman</a>
+        <a href="index.html" rel="home" data-sassdoc="project-name">Herman</a>
         
           <span data-sassdoc="project-version">1.0.0-alpha.15</span>
         
@@ -59,7 +59,7 @@
     <div data-sassdoc="nav-subsection">
       <h3 data-sassdoc="nav-title">
         
-        <a href="index.html" data-sassdoc-nav="is-active">sassdoc-theme-herman</a>
+        <a href="index.html" data-sassdoc-nav="is-active">Herman</a>
       </h3>
 
       
@@ -90,12 +90,27 @@
       
         
         <li data-sassdoc="nav-item">
-          <a href="api_json-export.html" data-sassdoc-nav="is-not-active">Exporting Sass to<span class="widont">&nbsp;</span>JSON</a>
+          <a href="api_json-export.html" data-sassdoc-nav="is-not-active">Exporting Styles to<span class="widont">&nbsp;</span>JSON</a>
         </li>
       
         
         <li data-sassdoc="nav-item">
           <a href="demo_colors.html" data-sassdoc-nav="is-not-active">Color Palettes</a>
+        </li>
+      
+        
+        <li data-sassdoc="nav-item">
+          <a href="demo_fonts.html" data-sassdoc-nav="is-not-active">Font Specimens</a>
+        </li>
+      
+        
+        <li data-sassdoc="nav-item">
+          <a href="demo_sizes.html" data-sassdoc-nav="is-not-active">Ratios &amp;<span class="widont">&nbsp;</span>Sizes</a>
+        </li>
+      
+        
+        <li data-sassdoc="nav-item">
+          <a href="demo_icons.html" data-sassdoc-nav="is-not-active">SVG Icons</a>
         </li>
       
         
@@ -210,7 +225,7 @@
     <div data-sassdoc="nav-subsection">
       <h3 data-sassdoc="nav-title">
         
-        <a href="index.html" data-sassdoc-nav="is-active">sassdoc-theme-herman</a>
+        <a href="index.html" data-sassdoc-nav="is-active">Herman</a>
       </h3>
 
       
@@ -241,12 +256,27 @@
       
         
         <li data-sassdoc="nav-item">
-          <a href="api_json-export.html" data-sassdoc-nav="is-not-active">Exporting Sass to<span class="widont">&nbsp;</span>JSON</a>
+          <a href="api_json-export.html" data-sassdoc-nav="is-not-active">Exporting Styles to<span class="widont">&nbsp;</span>JSON</a>
         </li>
       
         
         <li data-sassdoc="nav-item">
           <a href="demo_colors.html" data-sassdoc-nav="is-not-active">Color Palettes</a>
+        </li>
+      
+        
+        <li data-sassdoc="nav-item">
+          <a href="demo_fonts.html" data-sassdoc-nav="is-not-active">Font Specimens</a>
+        </li>
+      
+        
+        <li data-sassdoc="nav-item">
+          <a href="demo_sizes.html" data-sassdoc-nav="is-not-active">Ratios &amp;<span class="widont">&nbsp;</span>Sizes</a>
+        </li>
+      
+        
+        <li data-sassdoc="nav-item">
+          <a href="demo_icons.html" data-sassdoc-nav="is-not-active">SVG Icons</a>
         </li>
       
         
@@ -380,7 +410,7 @@
 
 
   <div class="text-block">
-    <h1 id="herman-a-sassdoc-theme-"><a href="http://oddbird.net/herman/docs/">Herman</a> [a <a href="http://sassdoc.com/">SassDoc</a><span class="widont">&nbsp;</span>theme]</h1>
+    <h1 id="herman-a-sassdoc-theme-"><a href="http://oddbird.net/herman/">Herman</a> [a <a href="http://sassdoc.com/">SassDoc</a><span class="widont">&nbsp;</span>theme]</h1>
 <p><a href="https://circleci.com/gh/oddbird/sassdoc-theme-herman"><img src="https://circleci.com/gh/oddbird/sassdoc-theme-herman.svg?style=svg" alt="CircleCI"></a>
 <a href="https://coveralls.io/github/oddbird/sassdoc-theme-herman"><img src="https://coveralls.io/repos/github/oddbird/sassdoc-theme-herman/badge.svg" alt="Coverage Status"></a>
 <a href="https://greenkeeper.io/"><img src="https://badges.greenkeeper.io/oddbird/sassdoc-theme-herman.svg" alt="Greenkeeper badge"></a></p>
@@ -404,8 +434,9 @@ along with the life of your<span class="widont">&nbsp;</span>project</li>
 <p>Herman is built as an extension to <a href="http://sassdoc.com/">SassDoc</a>,
 and supports all their core functionality
 with additional support for
-font specimens, color palettes, sizes, SVG icons,
-compiled languages, Nunjucks/Jinja macros, HTML previews,
+<a href="http://oddbird.net/herman/docs/demo_fonts.html">font specimens</a>, <a href="http://oddbird.net/herman/docs/demo_colors.html">color palettes</a>,
+<a href="http://oddbird.net/herman/docs/demo_sizes.html">sizes and ratios</a>, <a href="http://oddbird.net/herman/docs/demo_icons.html">SVG icons</a>,
+<a href="http://oddbird.net/herman/docs/demo_examples.html">compiled languages</a>, Nunjucks/Jinja macros, HTML previews,
 and<span class="widont">&nbsp;</span>more.</p>
 <h2 id="getting-started">Getting Started</h2>
 <pre><code class="lang-bash">npm install sassdoc sassdoc-theme-herman
@@ -434,15 +465,17 @@ such as a variable, mixin, function, or selector<span class="widont">&nbsp;</spa
 </code></pre>
 <h3 id="herman-annotations">Herman Annotations</h3>
 <p>In addition to the core SassDoc annotations,
-our <code>@icons</code> annotation allows you to
+our <a href="http://oddbird.net/herman/docs/demo_icons.html"><code>@icons</code> annotation</a> allows you to
 display SVG icons from a given folder,
-and we extend the core <code>@example</code> annotation
+and we extend the core <a href="http://oddbird.net/herman/docs/demo_examples.html"><code>@example</code> annotation</a>
 to display compiled Sass/Nunjucks output
 and render sample components.
-We also provide a <code>@preview</code> annotation
-for displaying color-palettes, text and spacing sizes,
-and modular ratios, and a <code>@font</code> annotation
-for displaying<span class="widont">&nbsp;</span>font-specimens.</p>
+We also provide a <a href="http://oddbird.net/herman/docs/demo_fonts.html"><code>@font</code> annotation</a>
+for displaying font-specimens,
+and a <code>@preview</code> annotation
+for displaying <a href="http://oddbird.net/herman/docs/demo_colors.html">color-palettes</a>,
+<a href="http://oddbird.net/herman/docs/demo_sizes.html">text and spacing sizes, and modular<span class="widont">&nbsp;</span>ratios</a>.</p>
+<p><a href="http://oddbird.net/herman/docs/CONFIGURATION.html">See the full documentation for details<span class="widont">&nbsp;</span>»</a></p>
 <h2 id="sassdoc-extras">SassDoc Extras</h2>
 <p>Herman uses a number of SassDoc<span class="widont">&nbsp;</span>Extras:</p>
 <ul>

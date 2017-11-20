@@ -1,4 +1,4 @@
-{% import 'utility.macros.j2' as utility %}
+{% import 'item/annotation.macros.j2' as annotation %}
 {% import 'item/macros.j2' as show %}
 
 
@@ -90,33 +90,24 @@
     Rendered font specimen iframe content.
 #}
 {% macro font_specimen(name, data, iframed) %}
-  <div data-sassdoc-font="{{ name }}">
-    <h3 data-sassdoc="font-type">
-      {{ utility.link_if(
-        content=data.name or name,
-        url=data.source,
-        attrs={'data-sassdoc': 'font-name'}
-      ) }}
+  {% set family = [data.name or name, data.stack]|join(',') %}
+  {% set family = '<strong>font-family</strong>: ' + font_names(family) + ';' %}
+  {% set family = '<code>' + family + '</code>' %}
 
-      (<code>{{ name }}</code>)
-    </h3>
-
-    <div data-sassdoc="font-stack">
-      <b>Stack:</b>
-      {% if data.stack|isString %}
-        {{ data.stack }}
-      {% else %}
-        {% for item in data.stack %}
-          {{ item }}{% if not loop.last %},{% endif %}
-        {% endfor %}
-      {% endif %}
-    </div>
+  {% call show.item_section('font-specimen', 'Font Preview') %}
+    {{ annotation.param_list(
+      name=data.name or name,
+      url=data.source,
+      value_type=name if (name != data.name),
+      description=family
+    ) }}
 
     {% if iframed %}
       <iframe class="render-specimen" srcdoc="{{ iframed }}" width="100%" height="0"></iframe>
     {% endif %}
-  </div>
+  {% endcall %}
 {% endmacro %}
+
 
 
 {#
@@ -230,48 +221,50 @@
 
 
 {% macro ratios(data, args) %}
-  {% for name, value in data %}
-    <div data-sassdoc="ratio-preview">
-      <div data-sassdoc="ratio-name">
-        {{ name }}:
-        <code>{{ value }}</code>
-      </div>
+  {% call show.item_section('ratio-preview', 'Ratio Preview') %}
+    {% for name, value in data %}
+      <div data-sassdoc="ratio-preview">
+        {{ annotation.param_list(
+          name=name + ':',
+          value=value
+        ) }}
 
-      {% set counts = {
-        '1': 1,
-        '2': 2,
-        '3': 3,
-        '4': 4,
-        '5': 5,
-        '6': 6,
-        '7': 7,
-        '8': 8,
-        '9': 9,
-        '10': 10
-      } %}
+        {% set counts = {
+          '1': 1,
+          '2': 2,
+          '3': 3,
+          '4': 4,
+          '5': 5,
+          '6': 6,
+          '7': 7,
+          '8': 8,
+          '9': 9,
+          '10': 10
+        } %}
 
-      <div data-sassdoc="ratio-demos">
-        {% set count = counts[args.count] or 6 %}
-        {% for demo in range(count) %}
-          {% set demo = 1 * (value ** demo) if (value != 'linear') else (demo + 1) %}
-          <span data-sassdoc="ratio-demo" style="font-size: {{ demo + 'em' }};">
-            {{ demo|round(2) }}
-          </span>
-        {% endfor %}
+        <div data-sassdoc="ratio-demos">
+          {% set count = counts[args.count] or 6 %}
+          {% for demo in range(count) %}
+            {% set demo = 1 * (value ** demo) if (value != 'linear') else (demo + 1) %}
+            <span data-sassdoc="ratio-demo" style="font-size: {{ demo + 'em' }};">
+              {{ demo|round(2) }}
+            </span>
+          {% endfor %}
+        </div>
       </div>
-    </div>
-  {% endfor %}
+    {% endfor %}
+  {% endcall %}
 {% endmacro %}
 
 
 {% macro sizes(data, args) %}
-  <div data-sassdoc="size-demos">
+  {% call show.item_section('size-preview', 'Size Previews') %}
     {% for name, value in data %}
-      <div data-sassdoc="size-demo">
-        <div data-sassdoc="size-details">
-          <b data-sassdoc="size-name">{{ name }}:</b>
-          <span data-sassdoc="size-value">{{ value }}</span>
-        </div>
+      <div data-sassdoc="size-preview">
+        {{ annotation.param_list(
+          name=name + ':',
+          value=value
+        ) }}
 
         {% set style = args.style or 'text' %}
         {% if style != 'output-only' %}
@@ -283,12 +276,14 @@
         {% endif %}
       </div>
     {% endfor %}
-  </div>
+  {% endcall %}
 {% endmacro %}
 
 
 {% macro icons(item) %}
   {% if item.icons and item.icons|length and item.iframed %}
-    <iframe class="render-icons" srcdoc="{{ item.iframed }}" width="100%" height="0"></iframe>
+    {% call show.item_section('icon-preview', 'Icon Previews: ', item.iconsPath) %}
+      <iframe class="render-icons" srcdoc="{{ item.iframed }}" width="100%" height="0"></iframe>
+    {% endcall %}
   {% endif %}
 {% endmacro %}

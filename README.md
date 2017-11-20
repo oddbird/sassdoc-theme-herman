@@ -24,9 +24,16 @@ from brand guidelines to UX patterns and code APIs:
 Herman is built as an extension to [SassDoc][sassdoc],
 and supports all their core functionality
 with additional support for
-font specimens, color palettes, sizes, SVG icons,
-compiled languages, Nunjucks/Jinja macros, HTML previews,
+[font specimens][font-docs], [color palettes][color-preview],
+[sizes and ratios][size-preview], [SVG icons][icon-docs],
+[compiled languages][example-docs], Nunjucks/Jinja macros, HTML previews,
 and more.
+
+[font-docs]: http://oddbird.net/herman/docs/demo_fonts.html
+[color-preview]: http://oddbird.net/herman/docs/demo_colors.html
+[size-preview]: http://oddbird.net/herman/docs/demo_sizes.html
+[icon-docs]: http://oddbird.net/herman/docs/demo_icons.html
+[example-docs]: http://oddbird.net/herman/docs/demo_examples.html
 
 
 ## Getting Started
@@ -72,20 +79,24 @@ such as a variable, mixin, function, or selector block.
 ### Herman Annotations
 
 In addition to the core SassDoc annotations,
-our `@icons` annotation allows you to
+our [`@icons` annotation][icon-docs] allows you to
 display SVG icons from a given folder,
-and we extend the core `@example` annotation
+and we extend the core [`@example` annotation][example-docs]
 to display compiled Sass/Nunjucks output
 and render sample components.
-We also provide a `@preview` annotation
-for displaying color-palettes, text and spacing sizes,
-and modular ratios, and a `@font` annotation
-for displaying font-specimens.
+We also provide a [`@font` annotation][font-docs]
+for displaying font-specimens,
+and a `@preview` annotation
+for displaying [color-palettes][color-preview],
+[text and spacing sizes, and modular ratios][size-preview].
 
-[herman]: http://oddbird.net/herman/docs/
+[herman]: http://oddbird.net/herman/
 [oddbird]: http://oddbird.net/
 [sassdoc]: http://sassdoc.com/
 
+[See the full documentation for details »][docs]
+
+[docs]: http://oddbird.net/herman/docs/CONFIGURATION.html
 
 
 ## SassDoc Extras

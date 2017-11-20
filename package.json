@@ -1,5 +1,6 @@
 {
   "name": "sassdoc-theme-herman",
+  "title": "Herman",
   "description": "An Odd SassDoc theme.",
   "version": "1.0.0-alpha.15",
   "homepage": "http://oddbird.net/herman/",
@@ -12,14 +13,14 @@
   "dependencies": {
     "bluebird": "^3.5.1",
     "extend": "^3.0.1",
-    "gulp-imagemin": "^3.4.0",
+    "gulp-imagemin": "^4.0.0",
     "gulp-rename": "^1.2.2",
     "gulp-svg-symbols": "^2.0.2",
     "html": "^1.0.0",
     "js-yaml": "^3.10.0",
     "markdown-it": "^8.4.0",
     "markdown-it-named-headers": "^0.0.4",
-    "node-sass": "^4.6.0",
+    "node-sass": "^4.7.1",
     "nunjucks": "^2.5.2",
     "sassdoc-extras": "^2.4.1",
     "strip-indent": "^2.0.0",
@@ -42,7 +43,7 @@
     "coveralls": "^3.0.0",
     "del": "^3.0.0",
     "eslint": "^4.10.0",
-    "eslint-config-prettier": "^2.7.0",
+    "eslint-config-prettier": "^2.8.0",
     "eslint-plugin-prettier": "^2.3.1",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^4.0.0",
@@ -61,7 +62,7 @@
     "nyc": "^11.3.0",
     "prettier": "^1.7.4",
     "sass-true": "^3.0.2",
-    "sassdoc": "^2.4.0",
+    "sassdoc": "^2.5.0",
     "sinon": "^4.1.1"
   },
   "resolutions": {

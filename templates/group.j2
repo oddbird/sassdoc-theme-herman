@@ -2,6 +2,8 @@
 
 {% import 'utility.macros.j2' as utility %}
 
+{% block title %}{{ pageTitle }} | {{ super() }}{% endblock %}
+
 {% block breadcrumb %}
   <nav data-sassdoc-region="breadcrumb">
     {% set project_title = package.title or package.name or 'Herman' %}

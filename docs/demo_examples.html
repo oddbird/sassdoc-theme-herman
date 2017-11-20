@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <title>sassdoc-theme-herman Documentation</title>
+  <title>Rendered Examples | Herman Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
@@ -41,7 +41,7 @@
 
 
       <h1 data-sassdoc="project-title">
-        <a href="index.html" rel="home" data-sassdoc="project-name">sassdoc-theme-herman</a>
+        <a href="index.html" rel="home" data-sassdoc="project-name">Herman</a>
         
           <span data-sassdoc="project-version">1.0.0-alpha.15</span>
         
@@ -59,7 +59,7 @@
     <div data-sassdoc="nav-subsection">
       <h3 data-sassdoc="nav-title">
         
-        <a href="index.html" data-sassdoc-nav="is-not-active">sassdoc-theme-herman</a>
+        <a href="index.html" data-sassdoc-nav="is-not-active">Herman</a>
       </h3>
 
       
@@ -90,12 +90,27 @@
       
         
         <li data-sassdoc="nav-item">
-          <a href="api_json-export.html" data-sassdoc-nav="is-not-active">Exporting Sass to<span class="widont">&nbsp;</span>JSON</a>
+          <a href="api_json-export.html" data-sassdoc-nav="is-not-active">Exporting Styles to<span class="widont">&nbsp;</span>JSON</a>
         </li>
       
         
         <li data-sassdoc="nav-item">
           <a href="demo_colors.html" data-sassdoc-nav="is-not-active">Color Palettes</a>
+        </li>
+      
+        
+        <li data-sassdoc="nav-item">
+          <a href="demo_fonts.html" data-sassdoc-nav="is-not-active">Font Specimens</a>
+        </li>
+      
+        
+        <li data-sassdoc="nav-item">
+          <a href="demo_sizes.html" data-sassdoc-nav="is-not-active">Ratios &amp;<span class="widont">&nbsp;</span>Sizes</a>
+        </li>
+      
+        
+        <li data-sassdoc="nav-item">
+          <a href="demo_icons.html" data-sassdoc-nav="is-not-active">SVG Icons</a>
         </li>
       
         
@@ -210,7 +225,7 @@
     <div data-sassdoc="nav-subsection">
       <h3 data-sassdoc="nav-title">
         
-        <a href="index.html" data-sassdoc-nav="is-not-active">sassdoc-theme-herman</a>
+        <a href="index.html" data-sassdoc-nav="is-not-active">Herman</a>
       </h3>
 
       
@@ -241,12 +256,27 @@
       
         
         <li data-sassdoc="nav-item">
-          <a href="api_json-export.html" data-sassdoc-nav="is-not-active">Exporting Sass to<span class="widont">&nbsp;</span>JSON</a>
+          <a href="api_json-export.html" data-sassdoc-nav="is-not-active">Exporting Styles to<span class="widont">&nbsp;</span>JSON</a>
         </li>
       
         
         <li data-sassdoc="nav-item">
           <a href="demo_colors.html" data-sassdoc-nav="is-not-active">Color Palettes</a>
+        </li>
+      
+        
+        <li data-sassdoc="nav-item">
+          <a href="demo_fonts.html" data-sassdoc-nav="is-not-active">Font Specimens</a>
+        </li>
+      
+        
+        <li data-sassdoc="nav-item">
+          <a href="demo_sizes.html" data-sassdoc-nav="is-not-active">Ratios &amp;<span class="widont">&nbsp;</span>Sizes</a>
+        </li>
+      
+        
+        <li data-sassdoc="nav-item">
+          <a href="demo_icons.html" data-sassdoc-nav="is-not-active">SVG Icons</a>
         </li>
       
         
@@ -361,7 +391,7 @@
         
   <nav data-sassdoc-region="breadcrumb">
     
-    <a href="index.html" >sassdoc-theme-herman</a> »
+    <a href="index.html" >Herman</a> »
     <strong>Rendered Examples</strong>
   </nav>
 
@@ -410,11 +440,11 @@ along with the compiled output
 Both Sass &amp; Nunjucks examples
 allow you to import external<span class="widont">&nbsp;</span>partials:</p>
 <pre><code class="lang-scss"> // This is a widget that we use on our site…
- // @example scss -
+ // @example scss
  //   [data-widget] {
  //     @include widget-style;
  //   }
- // @example njk -
+ // @example njk
  //  {% import 'macros.njk' as macros %}
  //  {{ macros.widget(1, 2) }}
  @mixin widget-style { … }
@@ -460,9 +490,11 @@ with an API for supporting additional<span class="widont">&nbsp;</span>languages
 
     
   
-
   <div data-item-section="related">
-    <h3 class="item-subtitle">related</h3>
+    <h3 class="item-subtitle">
+      related
+      
+    </h3>
     
       
         
@@ -545,7 +577,10 @@ In order for this to work with Sass/Scss,
 you must set an <code>includepaths</code> key
 in your sassdoc <code>herman.sass</code> configuration object –
 an array of places to look for Sass<span class="widont">&nbsp;</span>includes:</p>
-<pre><code>includepaths: ['static/sass', 'node_modules']
+<pre><code class="lang-yaml">herman:
+  includepaths:
+    - 'static/sass'
+    - 'node_modules'
 </code></pre>
 <p>You can also set an array of default <code>includes</code>
 (relative to any <code>includepaths</code>)
@@ -553,8 +588,11 @@ to include for all Sass<span class="widont">&nbsp;</span>examples:</p>
 <pre><code class="lang-yaml"># .sassdocrc (yaml)
 herman:
   sass:
-    includepaths: ['static/sass']
-    includes: ['utilities', 'config/manifest']
+    includepaths:
+      - 'static/sass'
+    includes:
+      - 'utilities'
+      - 'config/manifest'
 </code></pre>
 <p>Generally, included Sass files should not contain
 any CSS output of their own,
@@ -721,9 +759,9 @@ since all compiled output will be displayed with the <code>@example</code>.</p>
 can also be compiled.
 In order for this to work,
 you must either specify a <code>nunjucks.templatepath</code>
-(the path where nunjucks will look to import templates),
-or a <code>nunjucks.environment</code> (custom environment).
-Using a custom nunjucks environment
+(the path where Nunjucks will look to import templates),
+or a <code>nunjucks.environment</code> (custom <a href="https://mozilla.github.io/nunjucks/api.html#environment">Nunjucks environment</a>).
+Using a custom environment
 is particularly useful if your macros contain custom filters.
 Either can be established
 in your sassdoc <code>herman</code> configuration object:</p>
@@ -776,6 +814,125 @@ sassdoc(src, {
 
 
   
+  
+    
+
+    <div data-item-section="examples">
+      <h3 class="item-subtitle">Example</h3>
+
+      
+        
+  
+  
+
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <div class="example">
+    <div class="example-code">
+      
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            njk
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre data-sassdoc="hljs"><code class="lang-jinja">{% import &#39;utility.macros.j2&#39; as utility %}
+
+{{ utility.link_if(&#39;This is a link&#39;, &#39;#0&#39;) }}&lt;br /&gt;
+{{ utility.link_if(&#39;This is not a link&#39;, none) }}</code></pre>
+    </div>
+  
+
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            html
+          </span>
+
+          
+            <span class='code-description'>
+              compiled
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre data-sassdoc="hljs"><code class="lang-html">&lt;a href=&quot;#0&quot;&gt;This is a link&lt;/a&gt;
+&lt;br /&gt;
+&lt;span&gt;This is not a link&lt;/span&gt;</code></pre>
+    </div>
+  
+
+    </div>
+
+    
+      <div class="example-render">
+        <iframe class="render-example" srcdoc="&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot; /&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+
+  &lt;title&gt;example&lt;/title&gt;
+
+  
+    &lt;!-- Custom Font HTML --&gt;
+    
+&lt;link href=&quot;https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700,700i&quot; rel=&quot;stylesheet&quot;&gt;
+&lt;link href=&quot;https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700&quot; rel=&quot;stylesheet&quot;&gt;
+  
+
+  
+    &lt;!-- Custom CSS --&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;assets/css/custom/main.css&quot; /&gt;
+  
+&lt;/head&gt;
+&lt;body class=&quot;sassdoc&quot;&gt;
+  
+    &lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; hidden&gt;
+  &lt;symbol id=&quot;icon-menu&quot; viewBox=&quot;0 0 24 28&quot;&gt;
+    &lt;title&gt;menu icon&lt;/title&gt;
+    &lt;path d=&quot;M24 21v2c0 .547-.453 1-1 1H1c-.547 0-1-.453-1-1v-2c0-.547.453-1 1-1h22c.547 0 1 .453 1 1zm0-8v2c0 .547-.453 1-1 1H1c-.547 0-1-.453-1-1v-2c0-.547.453-1 1-1h22c.547 0 1 .453 1 1zm0-8v2c0 .547-.453 1-1 1H1c-.547 0-1-.453-1-1V5c0-.547.453-1 1-1h22c.547 0 1 .453 1 1z&quot;/&gt;
+  &lt;/symbol&gt;
+&lt;/svg&gt;
+  
+  &lt;a href=&quot;#0&quot;&gt;This is a link&lt;/a&gt;
+&lt;br /&gt;
+&lt;span&gt;This is not a link&lt;/span&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+" width="100%" height="0"></iframe>
+      </div>
+    
+  </div>
+
+      
+    </div>
   
 
 
