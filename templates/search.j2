@@ -1,23 +1,22 @@
 {% extends 'base.j2' %}
 
+{% block title %}Search | {{ super() }}{% endblock %}
+
+{% block breadcrumb %}
+  <nav data-sassdoc-region="breadcrumb">
+    {% set project_title = package.title or package.name or 'Herman' %}
+    {{ utility.link_if(project_title, 'index.html') }} »
+    <strong>Search</strong>
+  </nav>
+{% endblock %}
+
 {% block main %}
-  <script>
+  <script type="text/javascript">
     window.tipuesearch_pages = {{ pagesToIndex|safe }};
   </script>
-  <div class="text-block">
-    From here you can search these documents. Enter your search words into the
-    box below and click "search". Note that the search function will
-    automatically search for all of the words. Pages containing fewer words
-    won't appear in the result list.
-  </div>
-  <form action="search.html">
-      <div class="tipue_search_left">
-          <img src="tipuesearch/search.png" class="tipue_search_icon">
-      </div>
-      <div class="tipue_search_right">
-          <input type="text" name="q" id="tipue_search_input" pattern=".{3,}" title="At least 3 characters" required>
-      </div>
-      <div style="clear: both;"></div>
+
+  <form>
+    <input type="text" name="q" id="tipue_search_input">
   </form>
   <div id="tipue_search_content"></div>
 {% endblock %}

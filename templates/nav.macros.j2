@@ -30,17 +30,21 @@
         <a href="index.html" data-sassdoc-nav="{{ activeNav }}">{{ project }}</a>
       </h3>
 
-      {# Markdown Files, e.g. Changelog, Getting Started #}
-      {% if extraDocs and extraDocs|length %}
-        <ul>
+      <ul>
+        <li data-sassdoc="nav-item">
+          {% set activeNav = 'is-active' if (activeGroup == 'search') else 'is-not-active' %}
+          <a href="search.html" data-sassdoc-nav="{{ activeNav }}">Search</a>
+        </li>
+        {# Markdown Files, e.g. Changelog, Getting Started #}
+        {% if extraDocs and extraDocs|length %}
           {% for extraDoc in extraDocs %}
             {% set activeNav = 'is-active' if (activeGroup == extraDoc.filename) else 'is-not-active' %}
             <li data-sassdoc="nav-item">
               <a href="{{ extraDoc.filename }}.html" data-sassdoc-nav="{{ activeNav }}">{{ extraDoc.name }}</a>
             </li>
           {% endfor %}
-        </ul>
-      {% endif %}
+        {% endif %}
+      </ul>
     </div>
 
     {# Generated Sass Docs #}
@@ -51,10 +55,6 @@
           <a href="{{ groupName }}.html" data-sassdoc-nav="{{ activeNav }}">{{ groups[groupName] }}</a>
         </li>
       {% endfor %}
-      <li>
-        {% set activeNav = 'is-active' if (activeGroup == "search") else 'is-not-active' %}
-        <a href="search.html" data-sassdoc-nav="{{ activeNav }}">Search</a>
-      </li>
     </ul>
 
     {# External Links #}

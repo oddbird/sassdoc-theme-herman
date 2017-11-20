@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <title>Herman Documentation</title>
+  <title>Search | Herman Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
@@ -62,9 +62,13 @@
         <a href="index.html" data-sassdoc-nav="is-not-active">Herman</a>
       </h3>
 
-      
-      
-        <ul>
+      <ul>
+        <li data-sassdoc="nav-item">
+          
+          <a href="search.html" data-sassdoc-nav="is-active">Search</a>
+        </li>
+        
+        
           
             
             <li data-sassdoc="nav-item">
@@ -81,8 +85,8 @@
               <a href="CONTRIBUTING.html" data-sassdoc-nav="is-not-active">Contributing</a>
             </li>
           
-        </ul>
-      
+        
+      </ul>
     </div>
 
     
@@ -178,10 +182,6 @@
           <a href="style-code.html" data-sassdoc-nav="is-not-active">_Code Blocks</a>
         </li>
       
-      <li>
-        
-        <a href="search.html" data-sassdoc-nav="is-active">Search</a>
-      </li>
     </ul>
 
     
@@ -228,9 +228,13 @@
         <a href="index.html" data-sassdoc-nav="is-not-active">Herman</a>
       </h3>
 
-      
-      
-        <ul>
+      <ul>
+        <li data-sassdoc="nav-item">
+          
+          <a href="search.html" data-sassdoc-nav="is-active">Search</a>
+        </li>
+        
+        
           
             
             <li data-sassdoc="nav-item">
@@ -247,8 +251,8 @@
               <a href="CONTRIBUTING.html" data-sassdoc-nav="is-not-active">Contributing</a>
             </li>
           
-        </ul>
-      
+        
+      </ul>
     </div>
 
     
@@ -344,10 +348,6 @@
           <a href="style-code.html" data-sassdoc-nav="is-not-active">_Code Blocks</a>
         </li>
       
-      <li>
-        
-        <a href="search.html" data-sassdoc-nav="is-active">Search</a>
-      </li>
     </ul>
 
     
@@ -389,26 +389,21 @@
 
       <main role="main">
         
+  <nav data-sassdoc-region="breadcrumb">
+    
+    <a href="index.html" >Herman</a> »
+    <strong>Search</strong>
+  </nav>
+
 
         <div data-sassdoc-region="main" data-sassdoc-page="search">
           
-  <script>
-    window.tipuesearch_pages = ["http://localhost:3000/","http://localhost:3000/CONFIGURATION.html","http://localhost:3000/CHANGELOG.html","http://localhost:3000/CONTRIBUTING.html","http://localhost:3000/api_json-export.html","http://localhost:3000/demo_colors.html","http://localhost:3000/demo_fonts.html","http://localhost:3000/demo_sizes.html","http://localhost:3000/demo_icons.html","http://localhost:3000/demo_examples.html","http://localhost:3000/demo_test-sassdoc.html","http://localhost:3000/config_api-utilities.html","http://localhost:3000/config-colors.html","http://localhost:3000/config-scale.html","http://localhost:3000/config-fonts.html","http://localhost:3000/config-utils.html","http://localhost:3000/config-z-index.html","http://localhost:3000/style-typography.html","http://localhost:3000/style-icons.html","http://localhost:3000/style-nav.html","http://localhost:3000/style-sections.html","http://localhost:3000/style-code.html"];
+  <script type="text/javascript">
+    window.tipuesearch_pages = ["/","/api_json-export.html","/demo_colors.html","/demo_fonts.html","/demo_sizes.html","/demo_icons.html","/demo_examples.html","/demo_test-sassdoc.html","/config_api-utilities.html","/config-colors.html","/config-scale.html","/config-fonts.html","/config-utils.html","/config-z-index.html","/style-typography.html","/style-icons.html","/style-nav.html","/style-sections.html","/style-code.html","/CONFIGURATION.html","/CHANGELOG.html","/CONTRIBUTING.html"];
   </script>
-  <div class="text-block">
-    From here you can search these documents. Enter your search words into the
-    box below and click "search". Note that the search function will
-    automatically search for all of the words. Pages containing fewer words
-    won't appear in the result list.
-  </div>
-  <form action="search.html">
-      <div class="tipue_search_left">
-          <img src="tipuesearch/search.png" class="tipue_search_icon">
-      </div>
-      <div class="tipue_search_right">
-          <input type="text" name="q" id="tipue_search_input" pattern=".{3,}" title="At least 3 characters" required>
-      </div>
-      <div style="clear: both;"></div>
+
+  <form>
+    <input type="text" name="q" id="tipue_search_input">
   </form>
   <div id="tipue_search_content"></div>
 
@@ -417,12 +412,12 @@
     </div>
   </div>
 
-  <script type="text/javascript" src="assets/js/jquery-3.2.1.min.js"></script>
-  <script type="text/javascript" src="assets/js/srcdoc-polyfill.min.js"></script>
-  <script type="text/javascript" src="assets/js/highlight.js"></script>
+  <script type="text/javascript" src="assets/js/vendor/jquery-3.2.1.js"></script>
+  <script type="text/javascript" src="assets/js/vendor/srcdoc-polyfill.js"></script>
+  <script type="text/javascript" src="assets/js/vendor/highlight.js"></script>
+  <script type="text/javascript" src="assets/js/vendor/tipuesearch_set.js"></script>
+  <script type="text/javascript" src="assets/js/vendor/tipuesearch.js"></script>
   <script type="text/javascript" src="assets/js/base.js"></script>
   <script type="text/javascript" src="assets/js/init.js"></script>
-  <script type="text/javascript" src="assets/js/tipuesearch_set.js"></script>
-  <script type="text/javascript" src="assets/js/tipuesearch.min.js"></script>
 </body>
 </html>
