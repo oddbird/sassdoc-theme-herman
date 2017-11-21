@@ -1,0 +1,15 @@
+{% extends 'base.j2' %}
+
+{% block title %}Search Results | {{ super() }}{% endblock %}
+
+{% block breadcrumb %}
+  <nav data-sassdoc-region="breadcrumb">
+    {% set project_title = package.title or package.name or 'Herman' %}
+    {{ utility.link_if(project_title, 'index.html') }} »
+    <strong>Search Results</strong>
+  </nav>
+{% endblock %}
+
+{% block main %}
+  <div id="tipue_search_content"></div>
+{% endblock %}

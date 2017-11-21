@@ -209,5 +209,13 @@ window.Herman = (function base(Herman, $) {
     $(window).on('resize', fitIframesToContent);
   };
 
+  Herman.initializeTipue = function initializeTipue() {
+    $('#tipue_search_input').tipuesearch({
+      mode: 'live',
+      liveContent: '[data-sassdoc-region="main"]',
+      liveDescription: '[data-sassdoc-region="main"]',
+    });
+  };
+
   return Herman;
 })(window.Herman || {}, window.jQuery);

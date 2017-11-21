@@ -49,9 +49,7 @@ const paths = {
       `${this.JS_TESTS_DIR}*.js`,
       'gulpfile.js',
       'index.js',
-      '!assets/js/highlight.js',
-      '!assets/js/jquery-3.1.1.slim.js',
-      '!assets/js/srcdoc-polyfill.min.js',
+      '!assets/js/vendor/**/*',
     ].concat(this.IGNORE);
     this.JS_TESTS_FILES = [
       `${this.JS_TESTS_DIR}**/*`,
