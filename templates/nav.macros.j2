@@ -23,6 +23,9 @@
   expanded=false
 ) %}
   <nav role="navigation" data-nav-menu="{{ size }}" {{ utility.toggle_target(['nav', size]|join('-'), expanded=expanded)}}>
+    <form action="/search.html">
+      <input type="text" name="q" id="tipue_search_input" placeholder="Search…">
+    </form>
 
     <div data-sassdoc="nav-subsection">
       <h3 data-sassdoc="nav-title">
@@ -30,21 +33,17 @@
         <a href="index.html" data-sassdoc-nav="{{ activeNav }}">{{ project }}</a>
       </h3>
 
-      <ul>
-        <li data-sassdoc="nav-item">
-          {% set activeNav = 'is-active' if (activeGroup == 'search') else 'is-not-active' %}
-          <a href="search.html" data-sassdoc-nav="{{ activeNav }}">Search</a>
-        </li>
-        {# Markdown Files, e.g. Changelog, Getting Started #}
-        {% if extraDocs and extraDocs|length %}
+      {# Markdown Files, e.g. Changelog, Getting Started #}
+      {% if extraDocs and extraDocs|length %}
+        <ul>
           {% for extraDoc in extraDocs %}
             {% set activeNav = 'is-active' if (activeGroup == extraDoc.filename) else 'is-not-active' %}
             <li data-sassdoc="nav-item">
               <a href="{{ extraDoc.filename }}.html" data-sassdoc-nav="{{ activeNav }}">{{ extraDoc.name }}</a>
             </li>
           {% endfor %}
-        {% endif %}
-      </ul>
+        </ul>
+      {% endif %}
     </div>
 
     {# Generated Sass Docs #}
