@@ -2,9 +2,13 @@
 // =================
 
 
+// Small Menu
+// ----------
+
 [data-nav-menu='small'] {
   @include position(0 null);
   box-shadow: 0 0 size('half-shim') color('shadow');
+  display: flex;
   transform: translatex(-102%);
   transition: transform 0.4s;
   width: 100%;
@@ -15,12 +19,12 @@
 
   @include below('nav-small') {
     align-content: flex-start;
-    display: flex;
-    flex-direction: row;
     flex-wrap: wrap;
   }
 
   @include above('nav-small') {
+    align-items: stretch;
+    flex-direction: column;
     width: auto;
   }
 
@@ -29,8 +33,15 @@
   }
 }
 
+
+// Large Menu
+// ----------
+
 [data-nav-menu='large'] {
-  flex: 0 1 0;
+  align-items: stretch;
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
   margin-left: -100%;
   transition: margin-left 0.4s;
 
@@ -42,6 +53,10 @@
     display: none;
   }
 }
+
+
+// Toggles
+// -------
 
 [data-nav-toggle='small'] {
   @include above('page') {
@@ -56,7 +71,7 @@
 }
 
 [data-nav-toggle] {
-  fill: color('theme-dark');
+  color: color('theme-dark');
   padding: size('half-shim');
 
   @include above('page') {
@@ -64,11 +79,21 @@
     padding-right:  size('shim');
   }
 
-  #{$focus} {
-    fill: color('focus');
+  &:focus,
+  &:hover {
+    color: color('action');
+    outline: 0;
+  }
+
+  &:active {
+    color: color('focus');
+    outline: 0;
   }
 }
 
+
+// Nav Items
+// ---------
 
 [data-sassdoc='nav-item'] {
   list-style: none;
@@ -83,8 +108,10 @@
   }
 }
 
+
 // Nav Titles
 // ----------
+
 [data-sassdoc='nav-title'] {
   font-weight: bold;
   margin-bottom: size('shim');
@@ -94,8 +121,14 @@
 
 // Nav Subsections
 // ---------------
+
 [data-sassdoc='nav-subsection'] {
+  flex: 0 0 auto;
   padding: size('shim') 0;
+
+  &:last-of-type {
+    flex: 1 0 auto;
+  }
 
   & + & {
     border-top: 1px solid color('theme-light');
@@ -153,5 +186,41 @@
         transition-delay: 0s;
       }
     }
+  }
+}
+
+
+// Footer Credit
+// -------------
+
+.footer-credit {
+  @include clearfix;
+  border-top: 1px solid color('theme-light');
+  flex: 0 0 auto;
+  font-size: size('xsmall');
+  line-height: size('rhythm');
+  padding-top: size('shim');
+
+  a {
+    #{$link} {
+      color: color('background');
+      font-weight: bold;
+      text-decoration-color: transparent;
+    }
+
+    #{$focus} {
+      text-decoration-color: currentColor;
+    }
+  }
+
+  [data-icon] {
+    float: left;
+    margin-right: size('half-shim');
+  }
+
+  span {
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
   }
 }

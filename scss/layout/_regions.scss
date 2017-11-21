@@ -9,6 +9,7 @@
 
 // App
 // ---
+
 [data-sassdoc-region='app'] {
   display: flex;
   flex-direction: column;
@@ -29,8 +30,10 @@
   }
 }
 
+
 // Navigation
 // ----------
+
 [data-nav-menu] {
   @include contrasted('theme-dark');
   @include z-index('sidebar');
@@ -53,6 +56,7 @@
 
 // Page
 // ----
+
 [role='main'] {
   @include z-index('main');
   width: 100%;

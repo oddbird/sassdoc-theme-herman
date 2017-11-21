@@ -29,16 +29,18 @@
 }
 
 .project-link {
-  border: 1px solid color('theme-dark');
-  border-radius: size('gutter');
-  font-size: size('small');
-  line-height: 1.6;
-  padding: size('half-shim') size('gutter');
-  text-align: center;
-  transition: background-color 0.4s;
+  #{$link} {
+    border: 1px solid color('action');
+    border-radius: size('gutter');
+    font-size: size('small');
+    line-height: 1.6;
+    padding: size('half-shim') size('gutter');
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.4s;
+  }
 
   #{$focus} {
-    @include contrasted('theme-dark');
-    text-decoration: none;
+    @include contrasted('action');
   }
 }
