@@ -212,6 +212,8 @@ window.Herman = (function base(Herman, $) {
   Herman.initializeTipue = function initializeTipue() {
     $('#tipue_search_input').tipuesearch({
       mode: 'live',
+      liveContent: 'main',
+      liveDescription: 'main',
     });
   };
 
