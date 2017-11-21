@@ -61,7 +61,7 @@
 .color-name,
 .color-value {
   display: block;
-  padding: size('half-shim');
+  margin-top: size('quarter-shim');
 }
 
 .color-name-option {
@@ -70,10 +70,5 @@
 
 .color-value {
   color: color('text-light');
-  font-size: size('small-code');
   white-space: nowrap;
-
-  & + & {
-    margin-top: size('half-shim');
-  }
 }

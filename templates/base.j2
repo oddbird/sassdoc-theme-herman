@@ -19,7 +19,7 @@
   {% import 'nav.macros.j2' as nav %}
 
   <div data-sassdoc-region="app">
-    <header role="banner" data-sassdoc-region="banner">
+    <header data-sassdoc-region="banner">
       {{ nav.toggles() }}
 
       <h1 data-sassdoc="project-title">
@@ -40,10 +40,10 @@
         extraLinks=extraLinks
       ) }}
 
-      <main role="main">
+      <main data-sassdoc-region="main">
         {% block breadcrumb %}{% endblock %}
 
-        <div data-sassdoc-region="main" data-sassdoc-page="{% block page_slug %}{{ activeGroup or 'index' }}{% endblock %}">
+        <div data-sassdoc-page="{% block page_slug %}{{ activeGroup or 'index' }}{% endblock %}">
           {% block main %}{% endblock %}
         </div>
       </main>

@@ -2,15 +2,15 @@
 // ===========
 
 .item {
-  margin-bottom: size('double-spacer');
+  margin-bottom: size('spacer');
 }
 
 [data-item-section] {
-  margin-bottom: size('double-gutter');
+  margin-bottom: size('gutter');
 }
 
 [data-item-section='header'] {
-  margin: size('gutter') 0;
+  margin-bottom: size('shim');
 }
 
 .item-title {

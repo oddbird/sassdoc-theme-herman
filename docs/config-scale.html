@@ -28,7 +28,7 @@
   
 
   <div data-sassdoc-region="app">
-    <header role="banner" data-sassdoc-region="banner">
+    <header data-sassdoc-region="banner">
       
   
   <button data-nav-toggle="small" data-toggle="button" aria-controls="nav-small" aria-pressed="false" data-toggle-synced="false">
@@ -58,7 +58,7 @@
 
   
     
-  <nav role="navigation" data-nav-menu="small" data-toggle="target" id="nav-small" data-target-id="nav-small" aria-expanded="false" data-auto-closing="false" data-auto-closing-on-any-click="false">
+  <nav data-nav-menu="small" data-toggle="target" id="nav-small" data-target-id="nav-small" aria-expanded="false" data-auto-closing="false" data-auto-closing-on-any-click="false">
 
     <div data-sassdoc="nav-subsection">
       <h3 data-sassdoc="nav-title">
@@ -220,18 +220,30 @@
     
 
     <aside class="footer-credit">
-      
+      <a href="http://oddbird.net/herman/" class="footer-icon">
+        
   <svg data-icon="logo" data-icon-size="footer-logo" ><use xlink:href="#icon-logo" />
   </svg>
 
-      <span>Documented with <a href="http://oddbird.net/herman/">Herman</a></span>
-      <span>by <a href="http://oddbird.net/">OddBird</a></span>
+      </a>
+      <span>
+        Documented with
+        <a href="http://oddbird.net/herman/" class="footer-link">
+          Herman
+        </a>
+      </span>
+      <span>
+        by
+        <a href="http://oddbird.net/" class="footer-link">
+          OddBird
+        </a>
+      </span>
     </aside>
   </nav>
 
   
     
-  <nav role="navigation" data-nav-menu="large" data-toggle="target" id="nav-large" data-target-id="nav-large" aria-expanded="true" data-auto-closing="false" data-auto-closing-on-any-click="false">
+  <nav data-nav-menu="large" data-toggle="target" id="nav-large" data-target-id="nav-large" aria-expanded="true" data-auto-closing="false" data-auto-closing-on-any-click="false">
 
     <div data-sassdoc="nav-subsection">
       <h3 data-sassdoc="nav-title">
@@ -393,19 +405,31 @@
     
 
     <aside class="footer-credit">
-      
+      <a href="http://oddbird.net/herman/" class="footer-icon">
+        
   <svg data-icon="logo" data-icon-size="footer-logo" ><use xlink:href="#icon-logo" />
   </svg>
 
-      <span>Documented with <a href="http://oddbird.net/herman/">Herman</a></span>
-      <span>by <a href="http://oddbird.net/">OddBird</a></span>
+      </a>
+      <span>
+        Documented with
+        <a href="http://oddbird.net/herman/" class="footer-link">
+          Herman
+        </a>
+      </span>
+      <span>
+        by
+        <a href="http://oddbird.net/" class="footer-link">
+          OddBird
+        </a>
+      </span>
     </aside>
   </nav>
 
   
 
 
-      <main role="main">
+      <main data-sassdoc-region="main">
         
   <nav data-sassdoc-region="breadcrumb">
     
@@ -414,7 +438,7 @@
   </nav>
 
 
-        <div data-sassdoc-region="main" data-sassdoc-page="config-scale">
+        <div data-sassdoc-page="config-scale">
           
   
     
@@ -756,13 +780,12 @@ for creating text rhythm and<span class="widont">&nbsp;</span>modular-scales.</p
   &#39;base&#39;: calc(%s + %s) (&#39;small-rem&#39;, 0.5vw),
   &#39;small&#39;: calc(%s + %s) (&#39;small-rem&#39;, 0.25vw),
   &#39;xsmall&#39;: calc(%s + %s) (&#39;xsmall-rem&#39;, 0.25vw),
-  &#39;code&#39;: &#39;xsmall&#39;,
-  &#39;small-code&#39;: calc(%s + %s) (&#39;base-rem&#39; (&#39;times&#39;: 0.675), 0.25vw),
 
   &#39;h1&#39;: calc(%s + %s) (&#39;base-rem&#39;, 2.5vw),
   &#39;h2&#39;: calc(%s + %s) (&#39;base-rem&#39;, 2vw),
   &#39;h3&#39;: &#39;large&#39;,
   &#39;quote&#39;: &#39;medium&#39;,
+  &#39;pre&#39;: &#39;xsmall&#39;,
 );</code></pre>
     </div>
   
@@ -1228,72 +1251,6 @@ for creating text rhythm and<span class="widont">&nbsp;</span>modular-scales.</p
     <h4 class="param-title">
       
       
-        <span class="item-name">code:</span>
-      
-      <span class="item-value">calc(.75rem +<span class="widont">&nbsp;</span>.25vw)</span>
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-        
-          <div data-size-demo="text" style="font-size: calc(.75rem + .25vw);">
-            
-              
-  
-    <span data-specimen-lorem="title">
-      Pack my box with five dozen liquor&nbsp;jugs.
-    </span>
-  
-
-            
-          </div>
-        
-      </div>
-    
-      <div data-sassdoc="size-preview">
-        
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">small-code:</span>
-      
-      <span class="item-value">calc(.675rem +<span class="widont">&nbsp;</span>.25vw)</span>
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-        
-          <div data-size-demo="text" style="font-size: calc(.675rem + .25vw);">
-            
-              
-  
-    <span data-specimen-lorem="title">
-      Pack my box with five dozen liquor&nbsp;jugs.
-    </span>
-  
-
-            
-          </div>
-        
-      </div>
-    
-      <div data-sassdoc="size-preview">
-        
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
         <span class="item-name">h1:</span>
       
       <span class="item-value">calc(1rem +<span class="widont">&nbsp;</span>2.5vw)</span>
@@ -1420,6 +1377,39 @@ for creating text rhythm and<span class="widont">&nbsp;</span>modular-scales.</p
         
       </div>
     
+      <div data-sassdoc="size-preview">
+        
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">pre:</span>
+      
+      <span class="item-value">calc(.75rem +<span class="widont">&nbsp;</span>.25vw)</span>
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+        
+          <div data-size-demo="text" style="font-size: calc(.75rem + .25vw);">
+            
+              
+  
+    <span data-specimen-lorem="title">
+      Pack my box with five dozen liquor&nbsp;jugs.
+    </span>
+  
+
+            
+          </div>
+        
+      </div>
+    
   
   </div>
 
@@ -1498,10 +1488,10 @@ for creating text rhythm and<span class="widont">&nbsp;</span>modular-scales.</p
       <pre data-sassdoc="hljs"><code class="lang-scss">$spacing-sizes: (
   &#39;rhythm&#39;: &#39;root&#39; (&#39;herman&#39;: 1, &#39;convert-units&#39;: &#39;rem&#39;),
   &#39;gutter&#39;: &#39;rhythm&#39;,
+
   &#39;flex-gutter&#39;: calc(%s + %s) (&#39;shim&#39;, 2.5vw),
-  &#39;double-gutter&#39;: &#39;gutter&#39; (&#39;times&#39;: 2),
   &#39;spacer&#39;: &#39;gutter&#39; (&#39;times&#39;: 3),
-  &#39;double-spacer&#39;: &#39;spacer&#39; (&#39;times&#39;: 2),
+
   &#39;shim&#39;: &#39;gutter&#39; (&#39;times&#39;: 0.5),
   &#39;half-shim&#39;: &#39;shim&#39; (&#39;times&#39;: 0.5),
   &#39;quarter-shim&#39;: &#39;shim&#39; (&#39;times&#39;: 0.25)
@@ -1715,31 +1705,6 @@ for creating text rhythm and<span class="widont">&nbsp;</span>modular-scales.</p
     <h4 class="param-title">
       
       
-        <span class="item-name">double-gutter:</span>
-      
-      <span class="item-value">2.8rem</span>
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-        
-          <div data-size-demo="ruler" style="font-size: 2.8rem;">
-            
-          </div>
-        
-      </div>
-    
-      <div data-sassdoc="size-preview">
-        
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
         <span class="item-name">spacer:</span>
       
       <span class="item-value">4.2rem</span>
@@ -1754,31 +1719,6 @@ for creating text rhythm and<span class="widont">&nbsp;</span>modular-scales.</p
         
         
           <div data-size-demo="ruler" style="font-size: 4.2rem;">
-            
-          </div>
-        
-      </div>
-    
-      <div data-sassdoc="size-preview">
-        
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">double-spacer:</span>
-      
-      <span class="item-value">8.4rem</span>
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-        
-          <div data-size-demo="ruler" style="font-size: 8.4rem;">
             
           </div>
         

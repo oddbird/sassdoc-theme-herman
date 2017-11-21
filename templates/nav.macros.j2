@@ -22,7 +22,7 @@
   extraLinks,
   expanded=false
 ) %}
-  <nav role="navigation" data-nav-menu="{{ size }}" {{ utility.toggle_target(['nav', size]|join('-'), expanded=expanded)}}>
+  <nav data-nav-menu="{{ size }}" {{ utility.toggle_target(['nav', size]|join('-'), expanded=expanded)}}>
 
     <div data-sassdoc="nav-subsection">
       <h3 data-sassdoc="nav-title">
@@ -73,9 +73,21 @@
     {% endif %}
 
     <aside class="footer-credit">
-      {{ utility.icon('logo', size='footer-logo') }}
-      <span>Documented with <a href="http://oddbird.net/herman/">Herman</a></span>
-      <span>by <a href="http://oddbird.net/">OddBird</a></span>
+      <a href="http://oddbird.net/herman/" class="footer-icon">
+        {{ utility.icon('logo', size='footer-logo') }}
+      </a>
+      <span>
+        Documented with
+        <a href="http://oddbird.net/herman/" class="footer-link">
+          Herman
+        </a>
+      </span>
+      <span>
+        by
+        <a href="http://oddbird.net/" class="footer-link">
+          OddBird
+        </a>
+      </span>
     </aside>
   </nav>
 {% endmacro %}

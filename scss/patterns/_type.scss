@@ -2,6 +2,55 @@
 // =================
 
 
+// Links
+// -----
+
+[href] {
+  #{$link} {
+    color: color('action');
+    text-decoration-color: color('underline');
+    text-decoration-skip: ink;
+    transition: text-decoration-color 350ms, color 300ms;
+  }
+
+  #{$focus} {
+    color: color('focus');
+    text-decoration-color: currentColor;
+  }
+}
+
+
+// Code
+// ----
+
+pre {
+  font-size: size('pre');
+}
+
+pre,
+code {
+  @include font-family('code');
+}
+
+code {
+  color: color('code');
+
+  pre & {
+    background-color: transparent;
+    border-radius: 0;
+    box-shadow: none;
+    display: block;
+    padding: 0;
+  }
+}
+
+.visually-hidden {
+  @include is-hidden;
+}
+
+
+// Text Blocks
+// -----------
 /// Style a block of rendered html-text,
 /// with line-length and typographic styles.
 /// @group style-typography

@@ -28,7 +28,7 @@
   
 
   <div data-sassdoc-region="app">
-    <header role="banner" data-sassdoc-region="banner">
+    <header data-sassdoc-region="banner">
       
   
   <button data-nav-toggle="small" data-toggle="button" aria-controls="nav-small" aria-pressed="false" data-toggle-synced="false">
@@ -58,7 +58,7 @@
 
   
     
-  <nav role="navigation" data-nav-menu="small" data-toggle="target" id="nav-small" data-target-id="nav-small" aria-expanded="false" data-auto-closing="false" data-auto-closing-on-any-click="false">
+  <nav data-nav-menu="small" data-toggle="target" id="nav-small" data-target-id="nav-small" aria-expanded="false" data-auto-closing="false" data-auto-closing-on-any-click="false">
 
     <div data-sassdoc="nav-subsection">
       <h3 data-sassdoc="nav-title">
@@ -220,18 +220,30 @@
     
 
     <aside class="footer-credit">
-      
+      <a href="http://oddbird.net/herman/" class="footer-icon">
+        
   <svg data-icon="logo" data-icon-size="footer-logo" ><use xlink:href="#icon-logo" />
   </svg>
 
-      <span>Documented with <a href="http://oddbird.net/herman/">Herman</a></span>
-      <span>by <a href="http://oddbird.net/">OddBird</a></span>
+      </a>
+      <span>
+        Documented with
+        <a href="http://oddbird.net/herman/" class="footer-link">
+          Herman
+        </a>
+      </span>
+      <span>
+        by
+        <a href="http://oddbird.net/" class="footer-link">
+          OddBird
+        </a>
+      </span>
     </aside>
   </nav>
 
   
     
-  <nav role="navigation" data-nav-menu="large" data-toggle="target" id="nav-large" data-target-id="nav-large" aria-expanded="true" data-auto-closing="false" data-auto-closing-on-any-click="false">
+  <nav data-nav-menu="large" data-toggle="target" id="nav-large" data-target-id="nav-large" aria-expanded="true" data-auto-closing="false" data-auto-closing-on-any-click="false">
 
     <div data-sassdoc="nav-subsection">
       <h3 data-sassdoc="nav-title">
@@ -393,19 +405,31 @@
     
 
     <aside class="footer-credit">
-      
+      <a href="http://oddbird.net/herman/" class="footer-icon">
+        
   <svg data-icon="logo" data-icon-size="footer-logo" ><use xlink:href="#icon-logo" />
   </svg>
 
-      <span>Documented with <a href="http://oddbird.net/herman/">Herman</a></span>
-      <span>by <a href="http://oddbird.net/">OddBird</a></span>
+      </a>
+      <span>
+        Documented with
+        <a href="http://oddbird.net/herman/" class="footer-link">
+          Herman
+        </a>
+      </span>
+      <span>
+        by
+        <a href="http://oddbird.net/" class="footer-link">
+          OddBird
+        </a>
+      </span>
     </aside>
   </nav>
 
   
 
 
-      <main role="main">
+      <main data-sassdoc-region="main">
         
   <nav data-sassdoc-region="breadcrumb">
     
@@ -414,7 +438,7 @@
   </nav>
 
 
-        <div data-sassdoc-region="main" data-sassdoc-page="config-colors">
+        <div data-sassdoc-page="config-colors">
           
   
     
@@ -1432,17 +1456,19 @@ give a quick sense of progress, warning, or<span class="widont">&nbsp;</span>err
   &#39;background&#39;: #fff,
   &#39;text&#39;: &#39;black&#39;,
   &#39;text-light&#39;: &#39;gray&#39;,
-  &#39;border&#39;: &#39;gray&#39;,
-  &#39;light-border&#39;: &#39;light-gray&#39;,
-  &#39;callout&#39;: &#39;light-gray&#39;,
-  &#39;overlay&#39;: &#39;callout&#39; (&#39;rgba&#39;: 0.9),
-  &#39;shadow&#39;: &#39;gray&#39; (&#39;rgba&#39;: 0.5),
+
   &#39;action&#39;: &#39;brand-pink&#39; (&#39;shade&#39;: 25%),
   &#39;focus&#39;: &#39;brand-pink&#39;,
-  &#39;active&#39;: &#39;action&#39;,
-  &#39;underline&#39;: &#39;brand-blue&#39; (&#39;tint&#39;: 70%),
+  &#39;underline&#39;: &#39;callout&#39;,
+
+  &#39;border&#39;: &#39;gray&#39;,
+  &#39;light-border&#39;: &#39;light-gray&#39;,
+  &#39;shadow&#39;: &#39;gray&#39; (&#39;rgba&#39;: 0.5),
+
+  &#39;callout&#39;: &#39;theme-light&#39;,
   &#39;slight&#39;: &#39;light-gray&#39; (&#39;tint&#39;: 90%),
-  &#39;code&#39;: hsl(196, 23%, 45%),
+
+  &#39;code&#39;: &#39;theme-dark&#39;,
   &#39;code-shadow&#39;: &#39;code&#39; (rgba: 0.2),
 );</code></pre>
     </div>
@@ -1583,7 +1609,9 @@ to a sitewide<span class="widont">&nbsp;</span>theme.</p>
           <div class="color-info">
             <strong class="color-name">
               
-                <span class="color-name-option">theme-dark</span>
+                <span class="color-name-option">theme-dark,&nbsp;</span>
+              
+                <span class="color-name-option">code</span>
               
             </strong>
             
@@ -1611,7 +1639,11 @@ to a sitewide<span class="widont">&nbsp;</span>theme.</p>
           <div class="color-info">
             <strong class="color-name">
               
-                <span class="color-name-option">theme-light</span>
+                <span class="color-name-option">theme-light,&nbsp;</span>
+              
+                <span class="color-name-option">underline,&nbsp;</span>
+              
+                <span class="color-name-option">callout</span>
               
             </strong>
             
@@ -1720,100 +1752,12 @@ to a sitewide<span class="widont">&nbsp;</span>theme.</p>
         <div class="color-preview">
           <div class="color-swatch">
             <div class="transparency-grid"></div>
-            <div class="color-overlay" style="background-color: #dedede;"></div>
-          </div>
-          <div class="color-info">
-            <strong class="color-name">
-              
-                <span class="color-name-option">light-border,&nbsp;</span>
-              
-                <span class="color-name-option">callout</span>
-              
-            </strong>
-            
-            
-              
-                
-                  <code class="color-value">#dedede</code>
-                
-              
-                
-              
-                
-                  <code class="color-value">hsl(0, 0%, 87%)</code>
-                
-              
-            
-          </div>
-        </div>
-      
-        <div class="color-preview">
-          <div class="color-swatch">
-            <div class="transparency-grid"></div>
-            <div class="color-overlay" style="background-color: rgba(222, 222, 222, 0.9);"></div>
-          </div>
-          <div class="color-info">
-            <strong class="color-name">
-              
-                <span class="color-name-option">overlay</span>
-              
-            </strong>
-            
-            
-              
-                
-                  <code class="color-value">#dedede</code>
-                
-              
-                
-              
-                
-                  <code class="color-value">hsla(0, 0%, 87%, 0.9)</code>
-                
-              
-            
-          </div>
-        </div>
-      
-        <div class="color-preview">
-          <div class="color-swatch">
-            <div class="transparency-grid"></div>
-            <div class="color-overlay" style="background-color: rgba(85, 91, 94, 0.5);"></div>
-          </div>
-          <div class="color-info">
-            <strong class="color-name">
-              
-                <span class="color-name-option">shadow</span>
-              
-            </strong>
-            
-            
-              
-                
-                  <code class="color-value">#555b5e</code>
-                
-              
-                
-              
-                
-                  <code class="color-value">hsla(200, 5%, 35%, 0.5)</code>
-                
-              
-            
-          </div>
-        </div>
-      
-        <div class="color-preview">
-          <div class="color-swatch">
-            <div class="transparency-grid"></div>
             <div class="color-overlay" style="background-color: #aa0e5c;"></div>
           </div>
           <div class="color-info">
             <strong class="color-name">
               
-                <span class="color-name-option">action,&nbsp;</span>
-              
-                <span class="color-name-option">active</span>
+                <span class="color-name-option">action</span>
               
             </strong>
             
@@ -1864,25 +1808,53 @@ to a sitewide<span class="widont">&nbsp;</span>theme.</p>
         <div class="color-preview">
           <div class="color-swatch">
             <div class="transparency-grid"></div>
-            <div class="color-overlay" style="background-color: #b7d9e4;"></div>
+            <div class="color-overlay" style="background-color: #dedede;"></div>
           </div>
           <div class="color-info">
             <strong class="color-name">
               
-                <span class="color-name-option">underline</span>
+                <span class="color-name-option">light-border</span>
               
             </strong>
             
             
               
                 
-                  <code class="color-value">#b7d9e4</code>
+                  <code class="color-value">#dedede</code>
                 
               
                 
               
                 
-                  <code class="color-value">hsl(195, 45%, 81%)</code>
+                  <code class="color-value">hsl(0, 0%, 87%)</code>
+                
+              
+            
+          </div>
+        </div>
+      
+        <div class="color-preview">
+          <div class="color-swatch">
+            <div class="transparency-grid"></div>
+            <div class="color-overlay" style="background-color: rgba(85, 91, 94, 0.5);"></div>
+          </div>
+          <div class="color-info">
+            <strong class="color-name">
+              
+                <span class="color-name-option">shadow</span>
+              
+            </strong>
+            
+            
+              
+                
+                  <code class="color-value">#555b5e</code>
+                
+              
+                
+              
+                
+                  <code class="color-value">hsla(200, 5%, 35%, 0.5)</code>
                 
               
             
@@ -1920,35 +1892,7 @@ to a sitewide<span class="widont">&nbsp;</span>theme.</p>
         <div class="color-preview">
           <div class="color-swatch">
             <div class="transparency-grid"></div>
-            <div class="color-overlay" style="background-color: #587f8d;"></div>
-          </div>
-          <div class="color-info">
-            <strong class="color-name">
-              
-                <span class="color-name-option">code</span>
-              
-            </strong>
-            
-            
-              
-                
-                  <code class="color-value">#587f8d</code>
-                
-              
-                
-              
-                
-                  <code class="color-value">hsl(196, 23%, 45%)</code>
-                
-              
-            
-          </div>
-        </div>
-      
-        <div class="color-preview">
-          <div class="color-swatch">
-            <div class="transparency-grid"></div>
-            <div class="color-overlay" style="background-color: rgba(88, 127, 141, 0.2);"></div>
+            <div class="color-overlay" style="background-color: rgba(13, 127, 165, 0.2);"></div>
           </div>
           <div class="color-info">
             <strong class="color-name">
@@ -1960,13 +1904,13 @@ to a sitewide<span class="widont">&nbsp;</span>theme.</p>
             
               
                 
-                  <code class="color-value">#587f8d</code>
+                  <code class="color-value">#0d7fa5</code>
                 
               
                 
               
                 
-                  <code class="color-value">hsla(196, 23%, 45%, 0.2)</code>
+                  <code class="color-value">hsla(195, 85%, 35%, 0.2)</code>
                 
               
             

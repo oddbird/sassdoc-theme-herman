@@ -80,17 +80,19 @@ $theme-colors: (
   'background': #fff,
   'text': 'black',
   'text-light': 'gray',
-  'border': 'gray',
-  'light-border': 'light-gray',
-  'callout': 'light-gray',
-  'overlay': 'callout' ('rgba': 0.9),
-  'shadow': 'gray' ('rgba': 0.5),
+
   'action': 'brand-pink' ('shade': 25%),
   'focus': 'brand-pink',
-  'active': 'action',
-  'underline': 'brand-blue' ('tint': 70%),
+  'underline': 'callout',
+
+  'border': 'gray',
+  'light-border': 'light-gray',
+  'shadow': 'gray' ('rgba': 0.5),
+
+  'callout': 'theme-light',
   'slight': 'light-gray' ('tint': 90%),
-  'code': hsl(196, 23%, 45%),
+
+  'code': 'theme-dark',
   'code-shadow': 'code' (rgba: 0.2),
 );
 

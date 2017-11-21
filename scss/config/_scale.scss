@@ -39,13 +39,12 @@ $text-sizes: (
   'base': calc(%s + %s) ('small-rem', 0.5vw),
   'small': calc(%s + %s) ('small-rem', 0.25vw),
   'xsmall': calc(%s + %s) ('xsmall-rem', 0.25vw),
-  'code': 'xsmall',
-  'small-code': calc(%s + %s) ('base-rem' ('times': 0.675), 0.25vw),
 
   'h1': calc(%s + %s) ('base-rem', 2.5vw),
   'h2': calc(%s + %s) ('base-rem', 2vw),
   'h3': 'large',
   'quote': 'medium',
+  'pre': 'xsmall',
 );
 
 @include config('sizes', 'text-sizes', $text-sizes);
@@ -62,10 +61,10 @@ $text-sizes: (
 $spacing-sizes: (
   'rhythm': 'root' ('herman': 1, 'convert-units': 'rem'),
   'gutter': 'rhythm',
+
   'flex-gutter': calc(%s + %s) ('shim', 2.5vw),
-  'double-gutter': 'gutter' ('times': 2),
   'spacer': 'gutter' ('times': 3),
-  'double-spacer': 'spacer' ('times': 2),
+
   'shim': 'gutter' ('times': 0.5),
   'half-shim': 'shim' ('times': 0.5),
   'quarter-shim': 'shim' ('times': 0.25)
