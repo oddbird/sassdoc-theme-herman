@@ -19,11 +19,6 @@
 
   &,
   #{$link} {
-    color: color('theme-dark');
-  }
-
-  #{$focus} {
-    color: color('focus');
     text-decoration: none;
   }
 }
