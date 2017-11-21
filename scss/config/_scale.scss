@@ -87,10 +87,11 @@ $pattern-sizes: (
   'border': 8px,
   'page': 50rem,
 
-  'nav-small': 21rem,
-  'nav-medium': 32rem,
+  'page-break': 50em,
+  'nav-small': 21em,
+  'nav-medium': 32em,
+  'nav-large': 65em,
 
-  'project-link-nav': 36rem,
   'specimen': 'rhythm' ('times': 3),
   'color-preview': calc(15em + 0.25vw), // trial and error…
   'color-swatch': 'rhythm' ('times': 4),

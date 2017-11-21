@@ -5,21 +5,22 @@
 // Small Menu
 // ----------
 
-[data-nav-menu='small'] {
-  @include position(0 null);
-  box-shadow: 0 0 size('half-shim') color('shadow');
+[data-nav-menu] {
+  #{--nav-breakpoint}: size('nav-large');
+  align-content: flex-start;
   display: flex;
-  transform: translatex(-102%);
-  transition: transform 0.4s;
+  flex-wrap: wrap;
   width: 100%;
 
-  &[aria-expanded='true'] {
-    transform: translatex(0);
-  }
+  @include below('nav-large') {
+    @include position(0 null 0 0);
+    box-shadow: 0 0 size('half-shim') color('shadow');
+    transform: translateX(-102%);
+    transition: transform 0.4s;
 
-  @include below('nav-small') {
-    align-content: flex-start;
-    flex-wrap: wrap;
+    &[aria-expanded='true'] {
+      transform: translateX(0);
+    }
   }
 
   @include above('nav-small') {
@@ -28,29 +29,8 @@
     width: auto;
   }
 
-  @include above('page') {
-    display: none;
-  }
-}
-
-
-// Large Menu
-// ----------
-
-[data-nav-menu='large'] {
-  align-items: stretch;
-  display: flex;
-  flex: 0 0 auto;
-  flex-direction: column;
-  margin-left: -100%;
-  transition: margin-left 0.4s;
-
-  &[aria-expanded='true'] {
-    margin-left: 0;
-  }
-
-  @include below('page') {
-    display: none;
+  @include above('nav-large') {
+    flex: 0 0 auto;
   }
 }
 
@@ -58,25 +38,17 @@
 // Toggles
 // -------
 
-[data-nav-toggle='small'] {
-  @include above('page') {
-    display: none;
-  }
-}
-
-[data-nav-toggle='large'] {
-  @include below('page') {
-    display: none;
-  }
-}
-
 [data-nav-toggle] {
   color: color('theme-dark');
   padding: size('half-shim');
 
-  @include above('page') {
+  @include above('page-break') {
     padding-left: size('shim');
     padding-right:  size('shim');
+  }
+
+  @include above('nav-large') {
+    display: none;
   }
 
   &:focus,
