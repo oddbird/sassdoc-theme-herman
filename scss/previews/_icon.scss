@@ -2,35 +2,28 @@
 // ============
 
 [data-sassdoc='icon-preview'] {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   margin: 0 negative('shim');
 }
 
 [data-sassdoc-icon] {
-  color: color('text-light');
-  flex: 1 1 15%;
   margin: size('gutter') size('shim');
   min-width: size('rhythm') * 5;
 
   [data-icon] {
     @include square('h1');
+    margin-bottom: size('shim');
   }
 }
 
 [data-sassdoc='icon-info'] {
-  font-size: size('small');
-  padding: size('half-shim') 0;
-  white-space: nowrap;
+  font-size: size('xsmall');
 }
 
-[data-sassdoc='icon-name'] {
-  color: color('text');
-  font-weight: bold;
-  text-transform: uppercase;
-}
-
-[data-sassdoc='icon-path'] {
-  @include font-family('code');
+[data-item-section='icon-preview'] {
+  .item-subtitle-supplement {
+    @include font-family('code');
+    font-size: size('small-code');
+  }
 }

@@ -282,7 +282,7 @@
 
 {% macro icons(item) %}
   {% if item.icons and item.icons|length and item.iframed %}
-    {% call show.item_section('icon-preview', 'Icon Preview') %}
+    {% call show.item_section('icon-preview', 'Icon Previews: ', item.iconsPath) %}
       <iframe class="render-icons" srcdoc="{{ item.iframed }}" width="100%" height="0"></iframe>
     {% endcall %}
   {% endif %}
