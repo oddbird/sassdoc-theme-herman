@@ -15,12 +15,14 @@
 [href] {
   #{$link} {
     color: color('action');
-    text-decoration: none;
+    text-decoration-color: color('underline');
+    text-decoration-skip: ink;
+    transition: text-decoration-color 350ms, color 300ms;
   }
 
   #{$focus} {
     color: color('focus');
-    text-decoration: underline;
+    text-decoration-color: currentColor;
   }
 }
 

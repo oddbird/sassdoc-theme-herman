@@ -28,6 +28,10 @@
   (only included in rendered `@example` annotations).
 - BREAKING: Nest `templatepath` and `nunjucksEnv` options under new `nunjucks`
   options object: `nunjucks.templatepath` and `nunjucks.environment`.
+- NEW: Add attribution/link to Herman/OddBird in nav footer --
+  [#154](https://github.com/oddbird/sassdoc-theme-herman/issues/154)
+- CHANGE: Use Herman logo for favicon. --
+  [#155](https://github.com/oddbird/sassdoc-theme-herman/issues/155)
 - NEW: Add site-wide search --
   [#28](https://github.com/oddbird/sassdoc-theme-herman/issues/28)
 

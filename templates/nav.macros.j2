@@ -47,14 +47,16 @@
     </div>
 
     {# Generated Sass Docs #}
-    <ul data-sassdoc="nav-subsection">
-      {% for groupName, group in byGroup %}
-        {% set activeNav = 'is-active' if (activeGroup == groupName) else 'is-not-active' %}
-        <li data-sassdoc="nav-item">
-          <a href="{{ groupName }}.html" data-sassdoc-nav="{{ activeNav }}">{{ groups[groupName] }}</a>
-        </li>
-      {% endfor %}
-    </ul>
+    <div data-sassdoc="nav-subsection">
+      <ul>
+        {% for groupName, group in byGroup %}
+          {% set activeNav = 'is-active' if (activeGroup == groupName) else 'is-not-active' %}
+          <li data-sassdoc="nav-item">
+            <a href="{{ groupName }}.html" data-sassdoc-nav="{{ activeNav }}">{{ groups[groupName] }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
 
     {# External Links #}
     {% if extraLinks and extraLinks|length %}
@@ -72,6 +74,12 @@
         </ul>
       </div>
     {% endif %}
+
+    <aside class="footer-credit">
+      {{ utility.icon('logo', size='footer-logo') }}
+      <span>Documented with <a href="http://oddbird.net/herman/">Herman</a></span>
+      <span>by <a href="http://oddbird.net/">OddBird</a></span>
+    </aside>
   </nav>
 {% endmacro %}
 

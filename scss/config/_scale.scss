@@ -96,6 +96,7 @@ $pattern-sizes: (
   'color-swatch': 'rhythm' ('times': 4),
   'icon': 28px,
   'nav-underline': 4px,
+  'footer-logo': 'rhythm' ('times': 2),
 );
 
 @include config('sizes', 'pattern-sizes', $pattern-sizes);

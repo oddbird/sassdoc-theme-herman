@@ -27,6 +27,7 @@ $brand-colors: (
 
 @include config('colors', 'brand-colors', $brand-colors);
 
+
 // Neutral Colors
 // --------------
 /// Use these neutral colors
@@ -84,10 +85,10 @@ $theme-colors: (
   'callout': 'light-gray',
   'overlay': 'callout' ('rgba': 0.9),
   'shadow': 'gray' ('rgba': 0.5),
-  'action': 'theme-dark',
-  'focus': 'action' ('shade': 25%),
+  'action': 'brand-pink' ('shade': 25%),
+  'focus': 'brand-pink',
   'active': 'action',
-  'accent': 'brand-pink',
+  'underline': 'brand-blue' ('tint': 70%),
   'slight': 'light-gray' ('tint': 90%),
   'code': hsl(196, 23%, 45%),
   'code-shadow': 'code' (rgba: 0.2),

@@ -1,6 +1,10 @@
 // Icons
 // =====
 
+[data-icon] {
+  fill: currentColor;
+}
+
 /// A data attribute for setting an icon.
 /// @group style-icons
 /// @icons assets/svg/
@@ -9,4 +13,9 @@
 ///   {{ utility.icon('menu', size='icon-small') }}
 [data-icon-size='icon-small'] {
   @include square('icon');
+}
+
+
+[data-icon-size='footer-logo'] {
+  @include square('footer-logo');
 }
