@@ -6,7 +6,7 @@
 }
 
 [data-item-section] {
-  margin-bottom: size('gutter');
+  margin-bottom: size('gutter-plus');
 }
 
 [data-item-section='header'] {
@@ -14,7 +14,7 @@
 }
 
 .item-title {
-  font-size: size('h3');
+  font-size: size('h2');
 }
 
 .item-subtitle {

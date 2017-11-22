@@ -2,6 +2,12 @@
 // ==============
 
 
+/// # Herman Config: Sizes
+/// @group config-scale
+/// @link http://oddbird.net/accoutrement-scale/docs/
+///   Accoutrement Scale
+
+
 // Text Ratios
 // -----------
 /// A set of standard ratios
@@ -9,8 +15,6 @@
 ///
 /// @group config-scale
 /// @preview ratios
-/// @link http://oddbird.net/accoutrement-scale/docs/
-///   Accoutrement Scale
 $text-ratios: (
   'herman': 1.4
 );
@@ -24,25 +28,25 @@ $text-ratios: (
 ///
 /// @group config-scale
 /// @preview sizes
-/// @link http://oddbird.net/accoutrement-scale/docs/
-///   Accoutrement Scale
 $text-sizes: (
   'root': 18px,
+  'rel-root': calc(16px + 0.625),
 
   'large-rem': 20px ('convert-units': 'rem'),
   'base-rem': 'root' ('convert-units': 'rem'),
   'small-rem': 16px ('convert-units': 'rem'),
   'xsmall-rem': 'base-rem' ('times': 0.75),
 
+  'xlarge': calc(%s + %s) ('base-rem', 2vw),
   'large': calc(%s + %s) ('base-rem', 1vw),
   'medium': calc(%s + %s) ('base-rem', 0.5vw),
   'base': calc(%s + %s) ('small-rem', 0.5vw),
   'small': calc(%s + %s) ('small-rem', 0.25vw),
   'xsmall': calc(%s + %s) ('xsmall-rem', 0.25vw),
 
-  'h1': calc(%s + %s) ('base-rem', 2.5vw),
-  'h2': calc(%s + %s) ('base-rem', 2vw),
-  'h3': 'large',
+  'h1': 'xlarge',
+  'h2': 'large',
+  'h3': 'medium',
   'quote': 'medium',
   'pre': 'xsmall',
 );
@@ -56,14 +60,14 @@ $text-sizes: (
 ///
 /// @group config-scale
 /// @preview sizes; style: ruler
-/// @link http://oddbird.net/accoutrement-scale/docs/
-///   Accoutrement Scale
 $spacing-sizes: (
   'rhythm': 'root' ('herman': 1, 'convert-units': 'rem'),
   'gutter': 'rhythm',
+  'gutter-minus': 'gutter' ('times': 0.75),
+  'gutter-plus': 'gutter' ('times': 1.5),
 
   'flex-gutter': calc(%s + %s) ('shim', 2.5vw),
-  'spacer': 'gutter' ('times': 3),
+  'spacer': calc(%s + %s) ('gutter' ('times': 3), 2.5vw),
 
   'shim': 'gutter' ('times': 0.5),
   'half-shim': 'shim' ('times': 0.5),
@@ -80,8 +84,6 @@ $spacing-sizes: (
 ///
 /// @group config-scale
 /// @preview sizes; style: output-only
-/// @link http://oddbird.net/accoutrement-scale/docs/
-///   Accoutrement Scale
 $pattern-sizes: (
   'border': 8px,
   'page': 50rem,

@@ -44,12 +44,12 @@
 
 
 
-      <h1 data-sassdoc="project-title">
+      <div data-sassdoc="project-title">
         <a href="index.html" rel="home" data-sassdoc="project-name">Herman</a>
         
           <span data-sassdoc="project-version">1.0.0-alpha.15</span>
         
-      </h1>
+      </div>
     </header>
 
     <div data-sassdoc-region="container">
@@ -453,6 +453,117 @@
 
 
 
+<section class="item" >
+  
+    
+  
+  
+  
+  
+
+  
+    <div data-item-section="prose" class="text-block">
+      <h1 id="herman-config-sizes">Herman Config: Sizes</h1>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+
+    
+  
+  <div data-item-section="related">
+    <h3 class="item-subtitle">
+      related
+      
+    </h3>
+    
+      
+        
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <a href="http://oddbird.net/accoutrement-scale/docs/" class="item-name">Accoutrement Scale</a>
+      
+      
+      
+      <span class="item-note">[external]</span>
+    </h4>
+
+    
+  </div>
+
+
+      
+
+      
+    
+  </div>
+
+  
+  
+  
+  
+    
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
 <section class="item" id="variable--text-ratios">
   
     
@@ -561,42 +672,6 @@ for creating text rhythm and<span class="widont">&nbsp;</span>modular-scales.</p
   
   
 
-
-  
-
-    
-  
-  <div data-item-section="related">
-    <h3 class="item-subtitle">
-      related
-      
-    </h3>
-    
-      
-        
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <a href="http://oddbird.net/accoutrement-scale/docs/" class="item-name">Accoutrement Scale</a>
-      
-      
-      
-      <span class="item-note">[external]</span>
-    </h4>
-
-    
-  </div>
-
-
-      
-
-      
-    
-  </div>
 
   
   
@@ -769,21 +844,23 @@ for creating text rhythm and<span class="widont">&nbsp;</span>modular-scales.</p
       
       <pre data-sassdoc="hljs"><code class="lang-scss">$text-sizes: (
   &#39;root&#39;: 18px,
+  &#39;rel-root&#39;: calc(16px + 0.625),
 
   &#39;large-rem&#39;: 20px (&#39;convert-units&#39;: &#39;rem&#39;),
   &#39;base-rem&#39;: &#39;root&#39; (&#39;convert-units&#39;: &#39;rem&#39;),
   &#39;small-rem&#39;: 16px (&#39;convert-units&#39;: &#39;rem&#39;),
   &#39;xsmall-rem&#39;: &#39;base-rem&#39; (&#39;times&#39;: 0.75),
 
+  &#39;xlarge&#39;: calc(%s + %s) (&#39;base-rem&#39;, 2vw),
   &#39;large&#39;: calc(%s + %s) (&#39;base-rem&#39;, 1vw),
   &#39;medium&#39;: calc(%s + %s) (&#39;base-rem&#39;, 0.5vw),
   &#39;base&#39;: calc(%s + %s) (&#39;small-rem&#39;, 0.5vw),
   &#39;small&#39;: calc(%s + %s) (&#39;small-rem&#39;, 0.25vw),
   &#39;xsmall&#39;: calc(%s + %s) (&#39;xsmall-rem&#39;, 0.25vw),
 
-  &#39;h1&#39;: calc(%s + %s) (&#39;base-rem&#39;, 2.5vw),
-  &#39;h2&#39;: calc(%s + %s) (&#39;base-rem&#39;, 2vw),
-  &#39;h3&#39;: &#39;large&#39;,
+  &#39;h1&#39;: &#39;xlarge&#39;,
+  &#39;h2&#39;: &#39;large&#39;,
+  &#39;h3&#39;: &#39;medium&#39;,
   &#39;quote&#39;: &#39;medium&#39;,
   &#39;pre&#39;: &#39;xsmall&#39;,
 );</code></pre>
@@ -839,42 +916,6 @@ for creating text rhythm and<span class="widont">&nbsp;</span>modular-scales.</p
   
   
 
-
-  
-
-    
-  
-  <div data-item-section="related">
-    <h3 class="item-subtitle">
-      related
-      
-    </h3>
-    
-      
-        
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <a href="http://oddbird.net/accoutrement-scale/docs/" class="item-name">Accoutrement Scale</a>
-      
-      
-      
-      <span class="item-note">[external]</span>
-    </h4>
-
-    
-  </div>
-
-
-      
-
-      
-    
-  </div>
 
   
   
@@ -935,6 +976,39 @@ for creating text rhythm and<span class="widont">&nbsp;</span>modular-scales.</p
         
         
           <div data-size-demo="text" style="font-size: 18px;">
+            
+              
+  
+    <span data-specimen-lorem="title">
+      Pack my box with five dozen liquor&nbsp;jugs.
+    </span>
+  
+
+            
+          </div>
+        
+      </div>
+    
+      <div data-sassdoc="size-preview">
+        
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">rel-root:</span>
+      
+      <span class="item-value">calc(16px +<span class="widont">&nbsp;</span>0.625)</span>
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+        
+          <div data-size-demo="text" style="font-size: calc(16px + 0.625);">
             
               
   
@@ -1067,6 +1141,39 @@ for creating text rhythm and<span class="widont">&nbsp;</span>modular-scales.</p
         
         
           <div data-size-demo="text" style="font-size: 0.75rem;">
+            
+              
+  
+    <span data-specimen-lorem="title">
+      Pack my box with five dozen liquor&nbsp;jugs.
+    </span>
+  
+
+            
+          </div>
+        
+      </div>
+    
+      <div data-sassdoc="size-preview">
+        
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">xlarge:</span>
+      
+      <span class="item-value">calc(1rem +<span class="widont">&nbsp;</span>2vw)</span>
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+        
+          <div data-size-demo="text" style="font-size: calc(1rem + 2vw);">
             
               
   
@@ -1253,39 +1360,6 @@ for creating text rhythm and<span class="widont">&nbsp;</span>modular-scales.</p
       
         <span class="item-name">h1:</span>
       
-      <span class="item-value">calc(1rem +<span class="widont">&nbsp;</span>2.5vw)</span>
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-        
-          <div data-size-demo="text" style="font-size: calc(1rem + 2.5vw);">
-            
-              
-  
-    <span data-specimen-lorem="title">
-      Pack my box with five dozen liquor&nbsp;jugs.
-    </span>
-  
-
-            
-          </div>
-        
-      </div>
-    
-      <div data-sassdoc="size-preview">
-        
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">h2:</span>
-      
       <span class="item-value">calc(1rem +<span class="widont">&nbsp;</span>2vw)</span>
       
       
@@ -1317,7 +1391,7 @@ for creating text rhythm and<span class="widont">&nbsp;</span>modular-scales.</p
     <h4 class="param-title">
       
       
-        <span class="item-name">h3:</span>
+        <span class="item-name">h2:</span>
       
       <span class="item-value">calc(1rem +<span class="widont">&nbsp;</span>1vw)</span>
       
@@ -1331,6 +1405,39 @@ for creating text rhythm and<span class="widont">&nbsp;</span>modular-scales.</p
         
         
           <div data-size-demo="text" style="font-size: calc(1rem + 1vw);">
+            
+              
+  
+    <span data-specimen-lorem="title">
+      Pack my box with five dozen liquor&nbsp;jugs.
+    </span>
+  
+
+            
+          </div>
+        
+      </div>
+    
+      <div data-sassdoc="size-preview">
+        
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">h3:</span>
+      
+      <span class="item-value">calc(1rem +<span class="widont">&nbsp;</span>.5vw)</span>
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+        
+          <div data-size-demo="text" style="font-size: calc(1rem + .5vw);">
             
               
   
@@ -1488,9 +1595,11 @@ for creating text rhythm and<span class="widont">&nbsp;</span>modular-scales.</p
       <pre data-sassdoc="hljs"><code class="lang-scss">$spacing-sizes: (
   &#39;rhythm&#39;: &#39;root&#39; (&#39;herman&#39;: 1, &#39;convert-units&#39;: &#39;rem&#39;),
   &#39;gutter&#39;: &#39;rhythm&#39;,
+  &#39;gutter-minus&#39;: &#39;gutter&#39; (&#39;times&#39;: 0.75),
+  &#39;gutter-plus&#39;: &#39;gutter&#39; (&#39;times&#39;: 1.5),
 
   &#39;flex-gutter&#39;: calc(%s + %s) (&#39;shim&#39;, 2.5vw),
-  &#39;spacer&#39;: &#39;gutter&#39; (&#39;times&#39;: 3),
+  &#39;spacer&#39;: calc(%s + %s) (&#39;gutter&#39; (&#39;times&#39;: 3), 2.5vw),
 
   &#39;shim&#39;: &#39;gutter&#39; (&#39;times&#39;: 0.5),
   &#39;half-shim&#39;: &#39;shim&#39; (&#39;times&#39;: 0.5),
@@ -1548,42 +1657,6 @@ for creating text rhythm and<span class="widont">&nbsp;</span>modular-scales.</p
   
   
 
-
-  
-
-    
-  
-  <div data-item-section="related">
-    <h3 class="item-subtitle">
-      related
-      
-    </h3>
-    
-      
-        
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <a href="http://oddbird.net/accoutrement-scale/docs/" class="item-name">Accoutrement Scale</a>
-      
-      
-      
-      <span class="item-note">[external]</span>
-    </h4>
-
-    
-  </div>
-
-
-      
-
-      
-    
-  </div>
 
   
   
@@ -1680,6 +1753,56 @@ for creating text rhythm and<span class="widont">&nbsp;</span>modular-scales.</p
     <h4 class="param-title">
       
       
+        <span class="item-name">gutter-minus:</span>
+      
+      <span class="item-value">1.05rem</span>
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+        
+          <div data-size-demo="ruler" style="font-size: 1.05rem;">
+            
+          </div>
+        
+      </div>
+    
+      <div data-sassdoc="size-preview">
+        
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">gutter-plus:</span>
+      
+      <span class="item-value">2.1rem</span>
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+        
+          <div data-size-demo="ruler" style="font-size: 2.1rem;">
+            
+          </div>
+        
+      </div>
+    
+      <div data-sassdoc="size-preview">
+        
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
         <span class="item-name">flex-gutter:</span>
       
       <span class="item-value">calc(.7rem +<span class="widont">&nbsp;</span>2.5vw)</span>
@@ -1707,7 +1830,7 @@ for creating text rhythm and<span class="widont">&nbsp;</span>modular-scales.</p
       
         <span class="item-name">spacer:</span>
       
-      <span class="item-value">4.2rem</span>
+      <span class="item-value">calc(4.2rem +<span class="widont">&nbsp;</span>2.5vw)</span>
       
       
     </h4>
@@ -1718,7 +1841,7 @@ for creating text rhythm and<span class="widont">&nbsp;</span>modular-scales.</p
 
         
         
-          <div data-size-demo="ruler" style="font-size: 4.2rem;">
+          <div data-size-demo="ruler" style="font-size: calc(4.2rem + 2.5vw);">
             
           </div>
         
@@ -1942,42 +2065,6 @@ that can be applied to various<span class="widont">&nbsp;</span>components.</p>
   
   
 
-
-  
-
-    
-  
-  <div data-item-section="related">
-    <h3 class="item-subtitle">
-      related
-      
-    </h3>
-    
-      
-        
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <a href="http://oddbird.net/accoutrement-scale/docs/" class="item-name">Accoutrement Scale</a>
-      
-      
-      
-      <span class="item-note">[external]</span>
-    </h4>
-
-    
-  </div>
-
-
-      
-
-      
-    
-  </div>
 
   
   

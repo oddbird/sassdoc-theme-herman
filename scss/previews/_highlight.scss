@@ -5,6 +5,11 @@
 // sass-lint:disable force-element-nesting, class-name-format, indentation
 
 
+/// # Herman Code-Block Styles
+/// @group style-code
+/// @link https://highlightjs.org/ Highlight.JS
+
+
 // hljs colors
 // -----------
 /// A map of colors for code-highlighting
@@ -87,9 +92,6 @@ $hljs-colors: (
   }
 }
 
-.text-block pre {
-  margin-bottom: size('shim');
-}
 
 .hljs-comment,
 .hljs-quote {

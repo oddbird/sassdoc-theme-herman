@@ -22,12 +22,12 @@
     <header data-sassdoc-region="banner">
       {{ nav.toggles() }}
 
-      <h1 data-sassdoc="project-title">
+      <div data-sassdoc="project-title">
         <a href="index.html" rel="home" data-sassdoc="project-name">{{ project_title }}</a>
         {% if package.version %}
           <span data-sassdoc="project-version">{{ package.version }}</span>
         {% endif %}
-      </h1>
+      </div>
     </header>
 
     <div data-sassdoc-region="container">

@@ -44,12 +44,12 @@
 
 
 
-      <h1 data-sassdoc="project-title">
+      <div data-sassdoc="project-title">
         <a href="index.html" rel="home" data-sassdoc="project-name">Herman</a>
         
           <span data-sassdoc="project-version">1.0.0-alpha.15</span>
         
-      </h1>
+      </div>
     </header>
 
     <div data-sassdoc-region="container">
@@ -453,6 +453,81 @@
 
 
 
+<section class="item" >
+  
+    
+  
+  
+  
+  
+
+  
+    <div data-item-section="prose" class="text-block">
+      <h1 id="herman-typography">Herman Typography</h1>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
 <section class="item" id="css--.text-block">
   
     
@@ -506,42 +581,60 @@
       
       
       <pre data-sassdoc="hljs"><code class="lang-scss">.text-block {
-  max-width: 75ch;
+  max-width: 80ch;
 
   h1,
   h2,
   h3,
   h4 {
     color: color(&#39;black&#39;);
+
+    + h2,
+    + h3 {
+      margin-top: 0;
+    }
   }
 
   h1 {
-    font-size: size(&#39;h2&#39;);
-    margin-bottom: size(&#39;gutter&#39;);
+    font-size: size(&#39;h1&#39;);
+    margin-bottom: size(&#39;shim&#39;);
   }
 
   h2,
   h3 {
-    margin-top: size(&#39;gutter&#39;);
+    margin-top: size(&#39;gutter-plus&#39;);
+  }
+
+  &gt; h2,
+  &gt; h3 {
+    &amp;:first-child {
+      margin-top: 0;
+    }
   }
 
   h2 {
-    font-size: size(&#39;h3&#39;);
-    margin-bottom: size(&#39;half-shim&#39;);
+    font-size: size(&#39;h2&#39;);
+    margin-bottom: size(&#39;shim&#39;);
   }
 
-  p {
-    margin: 0 0 size(&#39;shim&#39;);
+  h3 {
+    font-size: size(&#39;h3&#39;);
+    margin-bottom: size(&#39;shim&#39;);
+  }
+
+  p,
+  pre {
+    margin-bottom: size(&#39;gutter-minus&#39;);
   }
 
   ol,
   ul {
-    margin: 0 size(&#39;gutter&#39;) size(&#39;shim&#39;);
+    margin: 0 size(&#39;gutter&#39;) size(&#39;gutter-minus&#39;);
   }
 
   li {
     &gt; p {
-      margin: size(&#39;half-shim&#39;) 0;
+      margin: size(&#39;shim&#39;) 0;
     }
   }
 
@@ -555,11 +648,11 @@
     }
 
     &gt; :nth-last-child(2) {
-      margin-bottom: size(&#39;shim&#39;);
+      margin-bottom: size(&#39;gutter-minus&#39;);
     }
 
     &gt; :last-child {
-      margin-top: size(&#39;shim&#39;);
+      margin-top: size(&#39;gutter-minus&#39;);
     }
 
     cite {

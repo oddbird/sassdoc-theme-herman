@@ -4,6 +4,6 @@
 :root {
   @include font-family('sans');
   font-size: size('root');
-  font-size: calc(#{size('root')} + 0.25vw); //sass-lint:disable-line no-duplicate-properties
+  font-size: size('rel-root'); //sass-lint:disable-line no-duplicate-properties
   line-height: ratio('herman');
 }

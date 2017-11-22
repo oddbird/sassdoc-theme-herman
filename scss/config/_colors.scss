@@ -2,6 +2,12 @@
 // ==============
 
 
+/// # Herman Config: Color Palettes
+/// @group config-colors
+/// @link http://oddbird.net/accoutrement-color/docs/
+///   Accoutrement Color
+
+
 // Brand Colors
 // ------------
 /// We use bright primary colors for the main brand,
@@ -9,8 +15,6 @@
 ///
 /// @preview color-palette
 /// @group config-colors
-/// @link http://oddbird.net/accoutrement-color/docs/
-///   Accoutrement Color
 ///
 /// @type map
 /// @prop {Color | String | List} '<color-name>' -
@@ -35,8 +39,6 @@ $brand-colors: (
 ///
 /// @preview color-palette
 /// @group config-colors
-/// @link http://oddbird.net/accoutrement-color/docs/
-///   Accoutrement Color
 $neutral-colors: (
   'light-gray': 'brand-blue' ('tint': 80%, 'desaturate': 80%),
   'gray': 'brand-blue' ('desaturate': 80%),
@@ -53,8 +55,6 @@ $neutral-colors: (
 ///
 /// @preview color-palette
 /// @group config-colors
-/// @link http://oddbird.net/accoutrement-color/docs/
-///   Accoutrement Color
 $status-colors: (
   'go': hsl(75, 65%, 30%),
   'yield': 'brand-orange',
@@ -71,8 +71,6 @@ $status-colors: (
 ///
 /// @preview color-palette
 /// @group config-colors
-/// @link http://oddbird.net/accoutrement-color/docs/
-///   Accoutrement Color
 $theme-colors: (
   'theme-dark': 'brand-blue',
   'theme-light': 'brand-blue' ('tint': 80%),
@@ -90,7 +88,7 @@ $theme-colors: (
   'shadow': 'gray' ('rgba': 0.5),
 
   'callout': 'theme-light',
-  'slight': 'light-gray' ('tint': 90%),
+  'slight': 'callout' ('tint': 90%),
 
   'code': 'theme-dark',
   'code-shadow': 'code' (rgba: 0.2),
@@ -106,8 +104,6 @@ $theme-colors: (
 ///
 /// @preview color-palette
 /// @group config-colors
-/// @link http://oddbird.net/accoutrement-color/docs/
-///   Accoutrement Color
 $system-colors: (
   'contrast-light': 'background',
   'contrast-dark': 'text',
