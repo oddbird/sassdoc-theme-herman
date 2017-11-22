@@ -22,17 +22,22 @@
   color: color('text-light');
   font-size: size('small');
   font-weight: normal;
-  letter-spacing: 0.05em;
   margin-bottom: size('shim');
+}
+
+.item-subtitle-main {
+  letter-spacing: 0.05em;
   text-transform: uppercase;
+
+  &:not(:last-child) {
+    @include after(': ');
+  }
 }
 
 .item-subtitle-supplement {
-  color: color('text');
-  font-size: size('xsmall');
+  @include font-family('code');
   letter-spacing: 0;
   padding-left: size('half-shim');
-  text-transform: lowercase;
 }
 
 .item-type,
