@@ -5,11 +5,11 @@ var colno = null;
 var output = "";
 try {
 var parentTemplate = null;
-output += "<li>\n  <h3><a href=\"";
+output += "<li class=\"search-result text-block\">\n  <h2><a href=\"";
 output += runtime.suppressValue(runtime.contextOrFrameLookup(context, frame, "url"), env.opts.autoescape);
 output += "\" data-result-field=\"title\">";
 output += runtime.suppressValue(runtime.contextOrFrameLookup(context, frame, "title"), env.opts.autoescape);
-output += "</a></h3>\n  <div data-result-field=\"text\">";
+output += "</a></h2>\n  <div data-result-field=\"text\">";
 output += runtime.suppressValue(runtime.contextOrFrameLookup(context, frame, "text"), env.opts.autoescape);
 output += "</div>\n</li>\n";
 if(parentTemplate) {

@@ -5,13 +5,13 @@ var colno = null;
 var output = "";
 try {
 var parentTemplate = null;
-output += "<h2>\"";
+output += "<h1 class=\"search-heading\">\n  <span class=\"search-term\">";
 output += runtime.suppressValue(runtime.contextOrFrameLookup(context, frame, "term"), env.opts.autoescape);
-output += "\": ";
+output += "</span>:\n  ";
 output += runtime.suppressValue(runtime.contextOrFrameLookup(context, frame, "count") || "No", env.opts.autoescape);
-output += " results</h2>\n\n";
+output += " results\n</h1>\n\n";
 if(runtime.contextOrFrameLookup(context, frame, "count")) {
-output += "\n  <ul class=\"js-search-results\"></ul>\n";
+output += "\n  <ul class=\"js-search-results search-results\"></ul>\n";
 ;
 }
 output += "\n";
