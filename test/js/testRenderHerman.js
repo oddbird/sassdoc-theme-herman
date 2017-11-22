@@ -218,19 +218,12 @@ describe('renderHerman', function() {
       .catch(done);
   });
 
-  it('renders search page', function(done) {
+  it('generates search data', function(done) {
     prepareContext({
       data: [],
-      extraDocs: [
-        {
-          filename: 'simple',
-          name: 'simple',
-          text: '<h1 id="a-simple-file">A simple file</h1>\n',
-        },
-      ],
     })
       .then(ctx => renderHerman(this.dest, ctx))
-      .then(() => access(`${this.dest}/search.html`))
+      .then(() => access(`${this.dest}/search-data.json`))
       .then(() => {
         assert.ok(true);
         done();

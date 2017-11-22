@@ -9,6 +9,7 @@ const gulp = require('gulp');
 const gutil = require('gulp-util');
 const imagemin = require('gulp-imagemin');
 const mocha = require('gulp-spawn-mocha');
+const nunjucks = require('gulp-nunjucks');
 const path = require('path');
 const prettier = require('gulp-prettier-plugin');
 const rename = require('gulp-rename');
@@ -42,6 +43,8 @@ const paths = {
       `${this.ASSETS_JS_DIR}**/*.js`,
       'lib/**/*.js',
       'index.js',
+      `!${this.ASSETS_JS_DIR}vendor/**/*`,
+      `!${this.ASSETS_JS_DIR}templates/**/*`,
     ].concat(this.IGNORE);
     this.ALL_JS = [
       `${this.ASSETS_JS_DIR}**/*.js`,
@@ -49,7 +52,8 @@ const paths = {
       `${this.JS_TESTS_DIR}*.js`,
       'gulpfile.js',
       'index.js',
-      '!assets/js/vendor/**/*',
+      `!${this.ASSETS_JS_DIR}vendor/**/*`,
+      `!${this.ASSETS_JS_DIR}templates/**/*`,
     ].concat(this.IGNORE);
     this.JS_TESTS_FILES = [
       `${this.JS_TESTS_DIR}**/*`,
@@ -239,7 +243,7 @@ gulp.task('browser-sync', cb => {
 
 // SassDoc compilation.
 // See: http://sassdoc.com/customising-the-view/
-gulp.task('compile', ['sass', 'minify'], () => {
+gulp.task('compile', ['sass', 'minify', 'precompile-templates'], () => {
   const config = {
     verbose: true,
     dest: paths.DOCS_DIR,
@@ -419,3 +423,10 @@ gulp.task('imagemin', () => {
 });
 
 gulp.task('minify', ['jsmin', 'svgmin', 'imagemin']);
+
+gulp.task('precompile-templates', () =>
+  gulp
+    .src(`${paths.TEMPLATES_DIR}client/**/*.j2`)
+    .pipe(nunjucks.precompile())
+    .pipe(gulp.dest(`${paths.ASSETS_JS_DIR}templates/`))
+);

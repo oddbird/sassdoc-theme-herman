@@ -174,7 +174,7 @@ window.Herman = (function base(Herman, $) {
       const tabs = getAllTabsInGroup(tab);
       const idx = tabs.index(tab);
       let targetIdx = idx;
-      switch (evt.keyCode) {
+      switch (evt.which) {
         case KEYCODES.LEFT:
           targetIdx = idx > 0 ? idx - 1 : idx;
           break;
@@ -189,6 +189,8 @@ window.Herman = (function base(Herman, $) {
       }
     });
   };
+
+  Herman.getUrlParams = () => window.deparam(window.location.search.substr(1));
 
   Herman.initializeIframes = function initializeIframes() {
     const fitIframeToContent = function(iframe) {
@@ -209,12 +211,107 @@ window.Herman = (function base(Herman, $) {
     $(window).on('resize', fitIframesToContent);
   };
 
-  Herman.initializeTipue = function initializeTipue() {
-    $('#tipue_search_input').tipuesearch({
-      mode: 'live',
-      liveContent: '[data-sassdoc-region="main"]',
-      liveDescription: '[data-sassdoc-region="main"]',
-    });
+  const showResults = function(results, val) {
+    let matches = $();
+    if (results && results.length) {
+      for (const res of results) {
+        const doc = Herman.searchStore[res.ref];
+        const highlight = {
+          title: [],
+          text: [],
+        };
+        Object.keys(res.matchData.metadata).forEach(term => {
+          Object.keys(res.matchData.metadata[term]).forEach(fieldName => {
+            const pos = res.matchData.metadata[term][fieldName].position.map(
+              p => ({
+                start: p[0],
+                length: p[1],
+              })
+            );
+            const field = fieldName === 'title' ? 'title' : 'text';
+            highlight[field] = highlight[field].concat(pos);
+          });
+        });
+        const obj = {
+          url: `/${res.ref}`,
+          title: doc.title,
+          text: highlight.text.length ? doc.text : '',
+        };
+        const el = $(window.nunjucks.render('search_result.j2', obj));
+        el.find(`[data-result-field="title"]`).markRanges(highlight.title);
+        if (highlight.text.length) {
+          const textEl = el.find(`[data-result-field="text"]`);
+          textEl.markRanges(highlight.text, {
+            done: () => {
+              textEl.get(0).childNodes.forEach(node => {
+                const hasPrev = node.previousSibling !== null;
+                const hasNext = node.nextSibling !== null;
+                const isText = node.nodeName === '#text';
+                if (isText) {
+                  const text = node.nodeValue.split(' ');
+                  if (hasPrev && hasNext) {
+                    if (text.length > 30) {
+                      text.splice(15, text.length - 30, '…');
+                    }
+                  } else if (hasNext) {
+                    if (text.length > 15) {
+                      text.splice(0, text.length - 15, '…');
+                    }
+                  } else if (hasPrev) {
+                    if (text.length > 15) {
+                      text.splice(15, text.length - 15, '…');
+                    }
+                  }
+                  node.nodeValue = text.join(' ');
+                }
+              });
+            },
+          });
+        }
+        matches = matches.add(el);
+      }
+    }
+    const tpl = $(
+      window.nunjucks.render('search_results.j2', {
+        term: val,
+        count: matches.length,
+      })
+    );
+    tpl.filter('.js-search-results').html(matches);
+    $('[data-sassdoc-region="main"]').html(tpl);
+  };
+
+  const doSearch = function(data, val) {
+    Herman.searchStore = data.store;
+    const idx = window.lunr.Index.load(data.idx);
+    const results = idx.search(val);
+    showResults(results, val);
+  };
+
+  Herman.getSearchData = function getSearchData() {
+    const params = Herman.getUrlParams();
+    const hasFuse = typeof window.Fuse !== undefined;
+    const hasNunjucks = typeof window.nunjucks !== undefined;
+    if (params && params.q && hasFuse && hasNunjucks) {
+      let request = new XMLHttpRequest();
+      request.open('GET', '/search-data.json', true);
+
+      request.onreadystatechange = function onreadystatechange() {
+        if (this.readyState === 4) {
+          let data;
+          if (this.status >= 200 && this.status < 400) {
+            try {
+              data = JSON.parse(this.responseText);
+            } catch (e) {
+              // swallow error
+            }
+          }
+          doSearch(data, params.q);
+        }
+      };
+      request.send();
+      request = null;
+    }
   };
 
   return Herman;

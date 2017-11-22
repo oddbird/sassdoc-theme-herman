@@ -24,7 +24,7 @@
 ) %}
   <nav role="navigation" data-nav-menu="{{ size }}" {{ utility.toggle_target(['nav', size]|join('-'), expanded=expanded)}}>
     <form action="/search.html">
-      <input type="text" name="q" id="tipue_search_input" placeholder="Search…">
+      <input type="text" name="q" placeholder="Search…" required minlength="3">
     </form>
 
     <div data-sassdoc="nav-subsection">

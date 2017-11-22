@@ -58,7 +58,7 @@
     
   <nav role="navigation" data-nav-menu="small" data-toggle="target" id="nav-small" data-target-id="nav-small" aria-expanded="false" data-auto-closing="false" data-auto-closing-on-any-click="false">
     <form action="/search.html">
-      <input type="text" name="q" id="tipue_search_input" placeholder="Search…">
+      <input type="text" name="q" placeholder="Search…" required minlength="3">
     </form>
 
     <div data-sassdoc="nav-subsection">
@@ -234,7 +234,7 @@
     
   <nav role="navigation" data-nav-menu="large" data-toggle="target" id="nav-large" data-target-id="nav-large" aria-expanded="true" data-auto-closing="false" data-auto-closing-on-any-click="false">
     <form action="/search.html">
-      <input type="text" name="q" id="tipue_search_input" placeholder="Search…">
+      <input type="text" name="q" placeholder="Search…" required minlength="3">
     </form>
 
     <div data-sassdoc="nav-subsection">
@@ -631,14 +631,11 @@ with line-length and typographic<span class="widont">&nbsp;</span>styles.</p>
     </div>
   </div>
 
-  <script type="text/javascript">
-    window.tipuesearch_pages = ["/","/api_json-export.html","/demo_colors.html","/demo_fonts.html","/demo_sizes.html","/demo_icons.html","/demo_examples.html","/demo_test-sassdoc.html","/config_api-utilities.html","/config-colors.html","/config-scale.html","/config-fonts.html","/config-utils.html","/config-z-index.html","/style-typography.html","/style-icons.html","/style-nav.html","/style-sections.html","/style-code.html","/CONFIGURATION.html","/CHANGELOG.html","/CONTRIBUTING.html"];
-  </script>
-  <script type="text/javascript" src="assets/js/vendor/jquery-3.2.1.js"></script>
+  <script type="text/javascript" src="assets/js/vendor/jquery-3.2.1.slim.js"></script>
   <script type="text/javascript" src="assets/js/vendor/srcdoc-polyfill.js"></script>
   <script type="text/javascript" src="assets/js/vendor/highlight.js"></script>
-  <script type="text/javascript" src="assets/js/vendor/tipuesearch_set.js"></script>
-  <script type="text/javascript" src="assets/js/vendor/tipuesearch.js"></script>
+  <script type="text/javascript" src="assets/js/vendor/jquery-deparam.js"></script>
+  
   <script type="text/javascript" src="assets/js/base.js"></script>
   <script type="text/javascript" src="assets/js/init.js"></script>
 </body>
