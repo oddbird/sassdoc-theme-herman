@@ -14,7 +14,7 @@
     color: color('action');
     text-decoration-color: color('underline');
     text-decoration-skip: ink;
-    transition: text-decoration-color 350ms, color 300ms;
+    transition: text-decoration-color 250ms, color 200ms;
   }
 
   #{$focus} {
@@ -37,13 +37,14 @@ code {
 }
 
 code {
-  color: color('code');
+  font-weight: bold;
 
   pre & {
     background-color: transparent;
     border-radius: 0;
     box-shadow: none;
     display: block;
+    font-weight: normal;
     padding: 0;
   }
 }
@@ -66,6 +67,16 @@ code {
   h3,
   h4 {
     color: color('black');
+
+    a {
+      #{$link} {
+        text-decoration-color: transparent;
+      }
+
+      #{$focus} {
+        text-decoration-color: currentColor;
+      }
+    }
 
     + h2,
     + h3 {
@@ -97,6 +108,7 @@ code {
 
   h3 {
     font-size: size('h3');
+    font-weight: normal;
     margin-bottom: size('shim');
   }
 

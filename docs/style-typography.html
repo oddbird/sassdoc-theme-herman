@@ -589,6 +589,16 @@
   h4 {
     color: color(&#39;black&#39;);
 
+    a {
+      #{$link} {
+        text-decoration-color: transparent;
+      }
+
+      #{$focus} {
+        text-decoration-color: currentColor;
+      }
+    }
+
     + h2,
     + h3 {
       margin-top: 0;
@@ -619,6 +629,7 @@
 
   h3 {
     font-size: size(&#39;h3&#39;);
+    font-weight: normal;
     margin-bottom: size(&#39;shim&#39;);
   }
 

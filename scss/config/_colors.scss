@@ -80,8 +80,8 @@ $theme-colors: (
   'text-light': 'gray',
 
   'action': 'brand-pink' ('shade': 25%),
-  'focus': 'brand-pink',
-  'underline': 'callout',
+  'focus': 'theme-dark',
+  'underline': 'action' ('tint': 75%),
 
   'border': 'gray',
   'light-border': 'light-gray',
