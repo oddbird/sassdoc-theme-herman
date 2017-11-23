@@ -40,20 +40,16 @@ const paths = {
     this.ASSETS_JS = [`${this.ASSETS_JS_DIR}**/*.js`].concat(this.IGNORE);
     this.SRC_JS = ['lib/**/*.js', 'index.js'].concat(this.IGNORE);
     this.CLIENT_JS = [
-      `${this.ASSETS_JS_DIR}**/*.js`,
+      `${this.ASSETS_JS_DIR}*.js`,
       'lib/**/*.js',
       'index.js',
-      `!${this.ASSETS_JS_DIR}vendor/**/*`,
-      `!${this.ASSETS_JS_DIR}templates/**/*`,
     ].concat(this.IGNORE);
     this.ALL_JS = [
-      `${this.ASSETS_JS_DIR}**/*.js`,
+      `${this.ASSETS_JS_DIR}*.js`,
       'lib/**/*.js',
       `${this.JS_TESTS_DIR}*.js`,
       'gulpfile.js',
       'index.js',
-      `!${this.ASSETS_JS_DIR}vendor/**/*`,
-      `!${this.ASSETS_JS_DIR}templates/**/*`,
     ].concat(this.IGNORE);
     this.JS_TESTS_FILES = [
       `${this.JS_TESTS_DIR}**/*`,
@@ -243,7 +239,7 @@ gulp.task('browser-sync', cb => {
 
 // SassDoc compilation.
 // See: http://sassdoc.com/customising-the-view/
-gulp.task('compile', ['sass', 'minify', 'precompile-templates'], () => {
+gulp.task('compile', ['sass', 'minify'], () => {
   const config = {
     verbose: true,
     dest: paths.DOCS_DIR,
@@ -374,14 +370,12 @@ gulp.task('watch', () => {
   gulp.watch('**/.eslintrc.yml', ['eslint-nofail']);
 });
 
-gulp.task('jsmin', () => {
-  const dest = `${paths.DIST_DIR}js/`;
-
-  return gulp
+gulp.task('jsmin', ['precompile-templates'], () =>
+  gulp
     .src(paths.ASSETS_JS)
     .pipe(uglify())
-    .pipe(gulp.dest(dest));
-});
+    .pipe(gulp.dest(`${paths.DIST_DIR}js/`))
+);
 
 gulp.task('svg-clean', cb => {
   del(`${paths.TEMPLATES_DIR}_icons.svg`).then(() => {
@@ -406,10 +400,8 @@ gulp.task('svgmin', ['svg-clean'], () =>
     .pipe(gulp.dest(paths.TEMPLATES_DIR))
 );
 
-gulp.task('imagemin', () => {
-  const dest = `${paths.DIST_DIR}img/`;
-
-  return gulp
+gulp.task('imagemin', () =>
+  gulp
     .src(paths.IMG)
     .pipe(
       imagemin([
@@ -419,8 +411,8 @@ gulp.task('imagemin', () => {
         imagemin.svgo(),
       ])
     )
-    .pipe(gulp.dest(dest));
-});
+    .pipe(gulp.dest(`${paths.DIST_DIR}img/`))
+);
 
 gulp.task('minify', ['jsmin', 'svgmin', 'imagemin']);
 
