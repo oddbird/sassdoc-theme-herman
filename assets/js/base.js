@@ -190,7 +190,13 @@ window.Herman = (function base(Herman, $) {
     });
   };
 
-  Herman.getUrlParams = () => window.deparam(window.location.search.substr(1));
+  Herman.getUrlParams = () => {
+    let params = {};
+    if (typeof window.deparam !== 'undefined') {
+      params = window.deparam(window.location.search.substr(1));
+    }
+    return params;
+  };
 
   Herman.initializeIframes = function initializeIframes() {
     const fitIframeToContent = function(iframe) {
