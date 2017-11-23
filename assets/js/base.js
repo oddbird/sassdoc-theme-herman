@@ -291,9 +291,9 @@ window.Herman = (function base(Herman, $) {
 
   Herman.getSearchData = function getSearchData() {
     const params = Herman.getUrlParams();
-    const hasFuse = typeof window.Fuse !== undefined;
-    const hasNunjucks = typeof window.nunjucks !== undefined;
-    if (params && params.q && hasFuse && hasNunjucks) {
+    const hasLunr = typeof window.lunr !== 'undefined';
+    const hasNunjucks = typeof window.nunjucks !== 'undefined';
+    if (params && params.q && hasLunr && hasNunjucks) {
       let request = new XMLHttpRequest();
       request.open('GET', '/search-data.json', true);
 
