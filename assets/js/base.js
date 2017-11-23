@@ -216,34 +216,46 @@ window.Herman = (function base(Herman, $) {
     if (results && results.length) {
       for (const res of results) {
         const doc = Herman.searchStore[res.ref];
-        const highlight = {
+        const toMark = {
           title: [],
           contents: [],
         };
         Object.keys(res.matchData.metadata).forEach(term => {
           Object.keys(res.matchData.metadata[term]).forEach(fieldName => {
+            // For each term found in each field, store position of matches
             const pos = res.matchData.metadata[term][fieldName].position.map(
               p => ({
                 start: p[0],
                 length: p[1],
               })
             );
+            // @@@ Temporary solution until fieldname bug is fixed:
+            // https://github.com/olivernn/lunr.js/issues/320
             const field = fieldName === 'title' ? 'title' : 'contents';
-            highlight[field] = highlight[field].concat(pos);
+            toMark[field] = toMark[field].concat(pos);
           });
         });
+        if (!(toMark.title.length || toMark.contents.length)) {
+          return;
+        }
         const obj = {
           url: `/${res.ref}`,
           title: doc.title,
-          contents: highlight.contents.length ? doc.contents : '',
+          contents: toMark.contents.length ? doc.contents : '',
         };
+        // Render search result template
         const el = $(window.nunjucks.render('search_result.j2', obj));
-        el.find(`[data-result-field="title"]`).markRanges(highlight.title);
-        if (highlight.contents.length) {
+        if (toMark.title.length) {
+          // Highlight matches in `title` field
+          el.find(`[data-result-field="title"]`).markRanges(toMark.title);
+        }
+        if (toMark.contents.length) {
           const textEl = el.find(`[data-result-field="contents"]`);
-          highlight.contents.sort((a, b) => a.start - b.start);
-          textEl.markRanges(highlight.contents.slice(0, 5), {
+          toMark.contents.sort((a, b) => a.start - b.start);
+          // Highlight first 5 matches in `contents` field
+          textEl.markRanges(toMark.contents.slice(0, 5), {
             done: () => {
+              // Truncate text not within 15 words of a match
               textEl.get(0).childNodes.forEach(node => {
                 const hasPrev = node.previousSibling !== null;
                 const hasNext = node.nextSibling !== null;
@@ -269,6 +281,7 @@ window.Herman = (function base(Herman, $) {
             },
           });
         }
+        // Add search result template to set of results
         matches = matches.add(el);
       }
     }
@@ -283,7 +296,9 @@ window.Herman = (function base(Herman, $) {
   };
 
   const doSearch = function(data, val) {
+    // Grab doc store from data
     Herman.searchStore = data.store;
+    // Initialize Lunr index from precompiled data
     const idx = window.lunr.Index.load(data.idx);
     const results = idx.search(val);
     showResults(results, val);
@@ -293,25 +308,28 @@ window.Herman = (function base(Herman, $) {
     const params = Herman.getUrlParams();
     const hasLunr = typeof window.lunr !== 'undefined';
     const hasNunjucks = typeof window.nunjucks !== 'undefined';
+    // Only fetch search data if on search results page with query term
     if (params && params.q && hasLunr && hasNunjucks) {
-      let request = new XMLHttpRequest();
+      const request = new XMLHttpRequest();
       request.open('GET', '/search-data.json', true);
 
-      request.onreadystatechange = function onreadystatechange() {
-        if (this.readyState === 4) {
-          let data;
-          if (this.status >= 200 && this.status < 400) {
-            try {
-              data = JSON.parse(this.responseText);
-            } catch (e) {
-              // swallow error
-            }
+      request.onload = function onload() {
+        let data;
+        if (this.status >= 200 && this.status < 400) {
+          try {
+            data = JSON.parse(this.responseText);
+          } catch (e) {
+            // swallow error
           }
-          doSearch(data, params.q);
         }
+        doSearch(data, params.q);
       };
+
+      request.onerror = function onerror() {
+        doSearch(undefined, params.q);
+      };
+
       request.send();
-      request = null;
     }
   };
 

@@ -14,6 +14,7 @@ const readFile = Promise.promisify(fs.readFile);
 describe('render', function() {
   before(function() {
     this.dest = `${__dirname}/dest/base.html`;
+    this.tpl = path.resolve(__dirname, 'fixtures', 'templates', 'base.j2');
   });
 
   afterEach(function() {
@@ -21,16 +22,36 @@ describe('render', function() {
   });
 
   it('renders nunjucks tpl as a string', function(done) {
-    const tpl = path.resolve(__dirname, 'fixtures', 'templates', 'base.j2');
     const ctx = { name: 'World' };
 
-    render(nunjucksEnv, tpl, this.dest, ctx)
+    render(nunjucksEnv, this.tpl, this.dest, ctx)
       .then(() => readFile(this.dest, 'utf-8'))
       .then(data => {
-        assert.equal(
-          data,
-          '<p>I say: Hello<span class="widont">&nbsp;</span>World!</p>\n'
+        assert.ok(data.includes('<title>Title | Herman Documentation</title>'));
+        assert.ok(
+          data.includes(
+            '<p>I say: Hello<span class="widont">&nbsp;</span>World!</p>'
+          )
         );
+        done();
+      })
+      .catch(done);
+  });
+
+  it('adds doc data to "rendered" array', function(done) {
+    const ctx = { name: 'World' };
+    const rendered = [];
+    const expected = [
+      {
+        filename: 'base.html',
+        title: 'Title',
+        contents: 'I say: Hello World!',
+      },
+    ];
+
+    render(nunjucksEnv, this.tpl, this.dest, ctx, rendered)
+      .then(() => {
+        assert.deepEqual(rendered, expected);
         done();
       })
       .catch(done);
