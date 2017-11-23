@@ -218,7 +218,7 @@ window.Herman = (function base(Herman, $) {
         const doc = Herman.searchStore[res.ref];
         const highlight = {
           title: [],
-          text: [],
+          contents: [],
         };
         Object.keys(res.matchData.metadata).forEach(term => {
           Object.keys(res.matchData.metadata[term]).forEach(fieldName => {
@@ -228,20 +228,21 @@ window.Herman = (function base(Herman, $) {
                 length: p[1],
               })
             );
-            const field = fieldName === 'title' ? 'title' : 'text';
+            const field = fieldName === 'title' ? 'title' : 'contents';
             highlight[field] = highlight[field].concat(pos);
           });
         });
         const obj = {
           url: `/${res.ref}`,
           title: doc.title,
-          text: highlight.text.length ? doc.text : '',
+          contents: highlight.contents.length ? doc.contents : '',
         };
         const el = $(window.nunjucks.render('search_result.j2', obj));
         el.find(`[data-result-field="title"]`).markRanges(highlight.title);
-        if (highlight.text.length) {
-          const textEl = el.find(`[data-result-field="text"]`);
-          textEl.markRanges(highlight.text, {
+        if (highlight.contents.length) {
+          const textEl = el.find(`[data-result-field="contents"]`);
+          highlight.contents.sort((a, b) => a.start - b.start);
+          textEl.markRanges(highlight.contents.slice(0, 5), {
             done: () => {
               textEl.get(0).childNodes.forEach(node => {
                 const hasPrev = node.previousSibling !== null;
