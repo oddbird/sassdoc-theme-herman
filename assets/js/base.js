@@ -215,34 +215,35 @@ window.Herman = (function base(Herman, $) {
     let matches = $();
     if (results && results.length) {
       for (const res of results) {
-        const doc = Herman.searchStore[res.ref];
-        const highlight = {
-          title: [],
-          contents: [],
-        };
-        Object.keys(res.matchData.metadata).forEach(term => {
-          Object.keys(res.matchData.metadata[term]).forEach(fieldName => {
-            const pos = res.matchData.metadata[term][fieldName].position.map(
-              p => ({
-                start: p[0],
-                length: p[1],
-              })
-            );
-            const field = fieldName === 'title' ? 'title' : 'contents';
-            highlight[field] = highlight[field].concat(pos);
-          });
-        });
+        if (!(res.matches && res.matches.length)) {
+          return;
+        }
+        const toMark = {};
+        for (const match of res.matches) {
+          if (match.indices && match.indices.length) {
+            const pos = match.indices.map(p => ({
+              start: p[0],
+              length: p[1] - p[0] + 1,
+            }));
+            toMark[match.key] = pos;
+          }
+        }
+        if (!(toMark.title || toMark.contents)) {
+          return;
+        }
         const obj = {
-          url: `/${res.ref}`,
-          title: doc.title,
-          contents: highlight.contents.length ? doc.contents : '',
+          url: `/${res.item.filename}`,
+          title: res.item.title,
+          contents: toMark.contents ? res.item.contents : '',
         };
         const el = $(window.nunjucks.render('search_result.j2', obj));
-        el.find(`[data-result-field="title"]`).markRanges(highlight.title);
-        if (highlight.contents.length) {
+        if (toMark.title) {
+          el.find(`[data-result-field="title"]`).markRanges(toMark.title);
+        }
+        if (toMark.contents) {
           const textEl = el.find(`[data-result-field="contents"]`);
-          highlight.contents.sort((a, b) => a.start - b.start);
-          textEl.markRanges(highlight.contents.slice(0, 5), {
+          toMark.contents.sort((a, b) => a.start - b.start);
+          textEl.markRanges(toMark.contents.slice(0, 5), {
             done: () => {
               textEl.get(0).childNodes.forEach(node => {
                 const hasPrev = node.previousSibling !== null;
@@ -283,17 +284,27 @@ window.Herman = (function base(Herman, $) {
   };
 
   const doSearch = function(data, val) {
-    Herman.searchStore = data.store;
-    const idx = window.lunr.Index.load(data.idx);
-    const results = idx.search(val);
+    const opts = {
+      shouldSort: true,
+      tokenize: true,
+      matchAllTokens: true,
+      includeMatches: true,
+      threshold: 0.2,
+      location: 0,
+      distance: 1000,
+      minMatchCharLength: 3,
+      keys: ['title', 'contents'],
+    };
+    const fuse = new window.Fuse(data, opts);
+    const results = fuse.search(val);
     showResults(results, val);
   };
 
   Herman.getSearchData = function getSearchData() {
     const params = Herman.getUrlParams();
-    const hasLunr = typeof window.lunr !== 'undefined';
+    const hasFuse = typeof window.Fuse !== 'undefined';
     const hasNunjucks = typeof window.nunjucks !== 'undefined';
-    if (params && params.q && hasLunr && hasNunjucks) {
+    if (params && params.q && hasFuse && hasNunjucks) {
       let request = new XMLHttpRequest();
       request.open('GET', '/search-data.json', true);
 
