@@ -526,7 +526,7 @@ $brand-pink: hsl(330, 85%, 48%);
   
   
 
-  <header data-item-section="header">
+  <div data-item-section="header">
     <h2 class="item-title">
       
         <span class="item-type"></span>
@@ -544,13 +544,10 @@ $brand-pink: hsl(330, 85%, 48%);
     
   
 
-  </header>
 
     
     
-
-    <div data-item-section="source">
-      
+    
   
 
   
@@ -574,7 +571,6 @@ $brand-pink: hsl(330, 85%, 48%);
     </div>
   
 
-    </div>
     
   
   
@@ -582,21 +578,16 @@ $brand-pink: hsl(330, 85%, 48%);
   
 
   
-    
-  
-  <div data-item-section="summary">
-    <h3 class="item-subtitle">
-      Description
-      
-    </h3>
-    
-      <div class="text-block">
-        <h2 id="preview-color-maps-as-palettes">Preview color maps as<span class="widont">&nbsp;</span>palettes</h2>
+    <div class="text-block">
+      <h2 id="preview-color-maps-as-palettes">Preview color maps as<span class="widont">&nbsp;</span>palettes</h2>
 <p>In order to export our colors to Herman,
 we’ll want to combine them into a map
 of name/value pairs.
 Sass does not provide any shortcuts for automating this step,
-or removing the<span class="widont">&nbsp;</span>duplication.</p>
+or removing the duplication,
+but you can use a tool like our <a href="http://oddbird.net/accoutrement-color/">Accoutrement-Color</a>
+to store and access colors
+directly in a Herman-friendly<span class="widont">&nbsp;</span>map.</p>
 <p>Create as many maps as you like
 to organize different palettes –
 primary, secondary, button-colors, etc.
@@ -623,24 +614,23 @@ using the <code>herman.displayColors</code> option:</p>
     - hsl
 </code></pre>
 
-        
+      
   
 
-        
+      
   
 
-        
+      
   
 
-      </div>
-    
+    </div>
+  
+
   </div>
 
   
 
   
-
-  
   
   
   
@@ -684,13 +674,15 @@ using the <code>herman.displayColors</code> option:</p>
 
     
       
-  
   
   <div data-item-section="color-palette">
-    <h3 class="item-subtitle">
-      Color Preview
-      
-    </h3>
+    
+      <h3 class="item-subtitle">
+        Color Previews
+        
+      </h3>
+    
+
     
     <div class="color-palette">
       
@@ -853,12 +845,14 @@ to be added to the <code>$herman</code> export map.</li>
   
 
     
-  
   <div data-item-section="related">
-    <h3 class="item-subtitle">
-      related
-      
-    </h3>
+    
+      <h3 class="item-subtitle">
+        Related
+        
+      </h3>
+    
+
     
       
 
@@ -977,19 +971,11 @@ and compile actual colors based on our map notation.
 In order to export real color data to Herman,
 we want to run every value in our map
 through the color function before exporting.
-<code>herman-add</code> accepts a final variable-length argument
-for calling a function on each value of the map.
-Pass in a function name (Sass 3.4-),
+<code>herman-add</code> accepts additional arguments at the end,
+for passing each map-value through a function.
+Provide a function name (Sass 3.4-),
 or first-class function (Sass 3.5+)
-along with any additional arguments that function might<span class="widont">&nbsp;</span>need:</p>
-<pre><code class="lang-scss"> $color-function: get-function('color');
- @include herman-add('colors', demo-noncolors, $demo-noncolors, $color-function, $args…);
-</code></pre>
-<p>The <code>color</code> function will be called on each value
-before adding it to our <code>$herman</code> map.
-The call happens in this<span class="widont">&nbsp;</span>format:</p>
-<pre><code class="lang-scss">'color-name': color($value, $args…),
-</code></pre>
+along with any additional arguments required for that<span class="widont">&nbsp;</span>function.</p>
 
       
   
@@ -1017,17 +1003,108 @@ The call happens in this<span class="widont">&nbsp;</span>format:</p>
 
   
   
+    
+
+    <div data-item-section="examples">
+      <h3 class="item-subtitle">Example</h3>
+
+      
+        
+  
+  
+
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <div class="example">
+    <div class="example-code">
+      
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre data-sassdoc="hljs"><code class="lang-scss">$herman: ();
+$demo-noncolors: (
+  &#39;light-gray&#39;: &#39;brand-blue&#39; (&#39;tint&#39;: 80%, &#39;desaturate&#39;: 80%),
+  &#39;gray&#39;: &#39;brand-blue&#39; (&#39;desaturate&#39;: 80%),
+  &#39;black&#39;: &#39;brand-blue&#39; (&#39;shade&#39;: 30%, &#39;desaturate&#39;: 80%),
+);
+
+@include herman-add(
+  &#39;colors&#39;, &#39;demo-noncolors&#39;, $demo-noncolors,
+  &#39;color&#39; // function
+);
+
+/* #{$herman} */</code></pre>
+    </div>
+  
+
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+            <span class='code-description'>
+              compiled
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre data-sassdoc="hljs"><code class="lang-css">/* (&quot;colors&quot;: (&quot;demo-noncolors&quot;: (&quot;light-gray&quot;: #dedede, &quot;gray&quot;: #555b5e, &quot;black&quot;: #3b4042))) */
+</code></pre>
+    </div>
+  
+
+    </div>
+
+    
+  </div>
+
+      
+    </div>
+  
 
 
   
 
     
-  
   <div data-item-section="related">
-    <h3 class="item-subtitle">
-      related
-      
-    </h3>
+    
+      <h3 class="item-subtitle">
+        Related
+        
+      </h3>
+    
+
     
       
         
@@ -1086,12 +1163,14 @@ The call happens in this<span class="widont">&nbsp;</span>format:</p>
     
       
   
-  
   <div data-item-section="color-palette">
-    <h3 class="item-subtitle">
-      Color Preview
-      
-    </h3>
+    
+      <h3 class="item-subtitle">
+        Color Previews
+        
+      </h3>
+    
+
     
     <div class="color-palette">
       

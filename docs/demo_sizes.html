@@ -440,10 +440,9 @@
   
     <div data-item-section="prose" class="text-block">
       <h2 id="documenting-ratios-and-sizes">Documenting ratios and<span class="widont">&nbsp;</span>sizes</h2>
-<p>In addition to documenting <a href="demo_colors.html">colors</a>,
+<p>In addition to documenting colors and fonts,
 you can use Herman to document and display ratios and sizes.
-In the end, Herman will need a map
-converted to JSON –
+In the end, Herman will need a map –
 but we’ll start with individual ratios/sizes,
 and build the export from<span class="widont">&nbsp;</span>there.</p>
 <p>Let’s start with a ratio and two<span class="widont">&nbsp;</span>sizes:</p>
@@ -526,7 +525,7 @@ $xlarge: 28px;
   
   
 
-  <header data-item-section="header">
+  <div data-item-section="header">
     <h2 class="item-title">
       
         <span class="item-type"></span>
@@ -544,13 +543,10 @@ $xlarge: 28px;
     
   
 
-  </header>
 
     
     
-
-    <div data-item-section="source">
-      
+    
   
 
   
@@ -573,7 +569,6 @@ $xlarge: 28px;
     </div>
   
 
-    </div>
     
   
   
@@ -581,16 +576,8 @@ $xlarge: 28px;
   
 
   
-    
-  
-  <div data-item-section="summary">
-    <h3 class="item-subtitle">
-      Description
-      
-    </h3>
-    
-      <div class="text-block">
-        <h2 id="preview-ratios">Preview ratios</h2>
+    <div class="text-block">
+      <h2 id="preview-ratios">Preview ratios</h2>
 <p>In order to export our ratios to Herman,
 we’ll want to combine them into maps
 of name/value pairs.
@@ -614,24 +601,23 @@ using the <code>@preview ratios</code> annotation:</p>
 the number of ratio calculations to display,
 up to a maximum of <code>10</code>.</p>
 
-        
+      
   
 
-        
+      
   
 
-        
+      
   
 
-      </div>
-    
+    </div>
+  
+
   </div>
 
   
 
   
-
-  
   
   
   
@@ -675,13 +661,15 @@ up to a maximum of <code>10</code>.</p>
 
     
       
-  
   
   <div data-item-section="ratio-preview">
-    <h3 class="item-subtitle">
-      Ratio Preview
-      
-    </h3>
+    
+      <h3 class="item-subtitle">
+        Ratio Previews
+        
+      </h3>
+    
+
     
     
       <div data-sassdoc="ratio-preview">
@@ -773,7 +761,7 @@ up to a maximum of <code>10</code>.</p>
   
   
 
-  <header data-item-section="header">
+  <div data-item-section="header">
     <h2 class="item-title">
       
         <span class="item-type"></span>
@@ -791,13 +779,10 @@ up to a maximum of <code>10</code>.</p>
     
   
 
-  </header>
 
     
     
-
-    <div data-item-section="source">
-      
+    
   
 
   
@@ -821,7 +806,6 @@ up to a maximum of <code>10</code>.</p>
     </div>
   
 
-    </div>
     
   
   
@@ -829,21 +813,13 @@ up to a maximum of <code>10</code>.</p>
   
 
   
-    
-  
-  <div data-item-section="summary">
-    <h3 class="item-subtitle">
-      Description
-      
-    </h3>
-    
-      <div class="text-block">
-        <h2 id="preview-sizes">Preview sizes</h2>
+    <div class="text-block">
+      <h2 id="preview-sizes">Preview sizes</h2>
 <p>Similar to ratios,
 sizes can be combined into any number of maps
 to preview with Herman.
 you can build these maps out of existing variables,
-or use a tool like our [Accoutrement-Scale][scale]
+or use a tool like our <a href="http://oddbird.net/accoutrement-scale/">Accoutrement-Scale</a>
 to store and access sizes
 directly in a Herman-friendly<span class="widont">&nbsp;</span>map.</p>
 <pre><code class="lang-scss">$demo-sizes: (
@@ -864,24 +840,23 @@ which specifies the type of output to<span class="widont">&nbsp;</span>display:<
 <li><code>output-only</code>: Displays values only, without<span class="widont">&nbsp;</span>demonstration.</li>
 </ul>
 
-        
+      
   
 
-        
+      
   
 
-        
+      
   
 
-      </div>
-    
+    </div>
+  
+
   </div>
 
   
 
   
-
-  
   
   
   
@@ -925,13 +900,15 @@ which specifies the type of output to<span class="widont">&nbsp;</span>display:<
 
     
       
-  
   
   <div data-item-section="size-preview">
-    <h3 class="item-subtitle">
-      Size Previews
-      
-    </h3>
+    
+      <h3 class="item-subtitle">
+        Size Previews
+        
+      </h3>
+    
+
     
     
       <div data-sassdoc="size-preview">
@@ -1079,12 +1056,14 @@ it can be converted to JSON using <code>herman-export</code>.</p>
   
 
     
-  
   <div data-item-section="related">
-    <h3 class="item-subtitle">
-      related
-      
-    </h3>
+    
+      <h3 class="item-subtitle">
+        Related
+        
+      </h3>
+    
+
     
       
         

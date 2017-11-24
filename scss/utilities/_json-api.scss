@@ -9,10 +9,9 @@
 /// like color-palettes and font-specimens --
 /// that never appear as components in the application.
 ///
-/// Herman provides several `@preview` annotations
-/// to help visualize these abstract patterns --
-/// but that requires passing the data from your styles
-/// to Herman's templates.
+/// Herman provides several annotations
+/// to help visualize these abstract patterns,
+/// but they require access to the raw Sass data.
 /// We do that using Sass maps
 /// (`key:value` object variables)
 /// and the `herman-export` mixin
@@ -22,29 +21,35 @@
 /// @see herman-export
 ///
 /// @example scss
-///   @include herman-export;
+///   $herman: (
+///     'colors': (
+///       'brand-colors': (
+///         'brand-orange': #c75000,
+///         'brand-blue': #0d7fa5,
+///       ),
+///     ),
+///   );
+///
+///   @include herman-export($herman);
 
 
 // Herman
 // ------
-/// Use this map to collect and organize
-/// color, font, size, and ratio values
-/// to be exported for Herman.
+/// Use the `$herman` map variable to collect and organize
+/// color, font, size, and ratio values for export.
 ///
 /// The `$herman` map should be structured
-/// with top-level keys representing individual sassdoc items.
-/// Top-level values will often be a nested map
-/// of the data to preview.
-/// Use the `herman-add` or `accoutrement-add` mixins
-/// to automatically populate
+/// with top-level keys for each type of data,
+/// and nested maps of the individual items to preview.
+/// Use the `herman-add` mixin to automatically populate
 /// fonts, colors, sizes, and ratios from existing maps --
 /// or construct your `$herman` map by hand,
 /// following these guidelines...
 ///
 /// ### Map structure
 ///
-/// Each type of preview value should be nested inside
-/// a map that describes what type of data is being stored:
+/// Each type of preview value should be nested
+/// under a key that describes what type of data is being stored:
 ///
 /// ```scss
 /// $herman: (
@@ -66,44 +71,40 @@
 /// ### Colors
 ///
 /// Each color has an access name and value.
-/// For us, that is often a map-key string,
-/// and Sass hex/rgba output color:
+/// The key will be used to identify the correct data
+/// for a given color-palette,
+/// and the data includes color name:value pairs,
+/// both in string format.
 ///
-/// ```scss
+/// ```
 /// 'brand-colors': (
-///   'brand-orange': '#c75000',
-///   'brand-blue': '#0d7fa5',
+///   'brand-orange': #c75000,
+///   'brand-blue': #0d7fa5,
 /// )
 /// ```
 ///
-/// If you are storing colors in variables,
-/// you may want to use name keys like `$brand-orange`
-/// to represent the proper use of a color.
-///
 /// Color values can be in any valid web-color format --
-/// hex, hsl/a, rgba/a, etc --
-/// converted to a valid JSON string.
+/// hex, hsl/a, rgba/a, etc.
 ///
 /// ### Sizes & Ratios
 ///
 /// Size and ratio data is similar to colors,
 /// organized into top-level groups that may contain
-/// one or more size/ratio key:value pairs:
+/// one or more key:value pairs:
 ///
-/// ```scss
+/// ```
 /// 'font-ratios': (
-///   'line-height': '1.4',
-///   'minor-seventh': '16/9',
+///   'line-height': 1.4,
+///   'minor-seventh': 16/9,
 /// ),
 /// 'text-sizes': (
-///   'root': '18px',
-///   'large': 'calc(1rem + 1.5vw)',
+///   'root': 18px,
+///   'large': calc(1rem + 1.5vw),
 /// )
 /// ```
 ///
 /// Ratio values can be in any valid number,
-/// and size values should be valid CSS lengths --
-/// both converted to a valid JSON string.
+/// and size values should be valid CSS lengths.
 ///
 /// ### Fonts
 ///
@@ -119,7 +120,7 @@
 /// - `<variant>`: describe any number of relative paths to locally-hosted
 ///   font-files per variant: e.g. `regular`, `bold italic`, etc.
 ///
-/// ```scss
+/// ```
 /// 'body-font': (
 ///   'name': 'Source Sans Pro',
 ///   'source': 'https://github.com/adobe-fonts/source-sans-pro'
