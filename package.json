@@ -2,7 +2,7 @@
   "name": "sassdoc-theme-herman",
   "title": "Herman",
   "description": "An Odd SassDoc theme.",
-  "version": "1.0.0-alpha.15",
+  "version": "1.0.0-rc.1",
   "homepage": "http://oddbird.net/herman/",
   "keywords": [
     "sassdoc-theme"
@@ -30,7 +30,7 @@
     "vinyl-fs": "^2.4.4"
   },
   "peerDependencies": {
-    "sassdoc": "^2.4.0"
+    "sassdoc": "^2.5.0"
   },
   "devDependencies": {
     "accoutrement-color": "^2.2.2",
