@@ -2,8 +2,7 @@
 
 
 {% macro toggle() %}
-  <button data-nav-toggle
-    {{ utility.toggle_button('nav', button='true') }}>
+  <button data-nav-toggle {{ utility.toggle_button('nav', button='true') }}>
     {{ utility.icon('menu', 'menu', size='icon-small') }}
   </button>
 {% endmacro %}
@@ -17,8 +16,7 @@
   extraDocs,
   extraLinks
 ) %}
-  <nav data-nav-menu
-    {{ utility.toggle_target('nav')}}>
+  <nav data-nav-menu {{ utility.toggle_target('nav')}}>
 
     <div data-sassdoc="nav-subsection">
       <h3 data-sassdoc="nav-title">
