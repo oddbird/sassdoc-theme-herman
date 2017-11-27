@@ -4,6 +4,7 @@ yarn-error.log
 .sass-cache/
 .cache/
 jscov/
+coverage/
 .nyc_output/
 test/js/dest/
 *.DS_Store
