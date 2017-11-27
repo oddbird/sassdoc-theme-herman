@@ -218,7 +218,7 @@ gulp.task('jstest-nofail', cb => {
 gulp.task('clienttest', done => {
   new Server(
     {
-      configFile: __dirname + '/karma.conf.js',
+      configFile: path.join(__dirname, '/karma.conf.js'),
       singleRun: true,
     },
     done
