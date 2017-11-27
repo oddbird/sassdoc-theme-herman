@@ -32,6 +32,9 @@
   [#154](https://github.com/oddbird/sassdoc-theme-herman/issues/154)
 - CHANGE: Use Herman logo for favicon. --
   [#155](https://github.com/oddbird/sassdoc-theme-herman/issues/155)
+- BREAKING: Remove `@preview` annotation, split it into distinct `@colors`,
+  `@sizes`, `@ratios` annotations. --
+  [#206](https://github.com/oddbird/sassdoc-theme-herman/issues/206)
 
 
 ## 1.0.0-alpha.15: 2017-10-30

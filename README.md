@@ -86,7 +86,7 @@ to display compiled Sass/Nunjucks output
 and render sample components.
 We also provide a [`@font` annotation][font-docs]
 for displaying font-specimens,
-and a `@preview` annotation
+and `@colors`, `@sizes`, and `@ratios` annotations
 for displaying [color-palettes][color-preview],
 [text and spacing sizes, and modular ratios][size-preview].
 
