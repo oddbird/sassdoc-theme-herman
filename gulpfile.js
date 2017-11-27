@@ -15,6 +15,7 @@ const rename = require('gulp-rename');
 const sass = require('gulp-sass');
 const sassdoc = require('sassdoc');
 const sasslint = require('gulp-sass-lint');
+const Server = require('karma').Server;
 const sourcemaps = require('gulp-sourcemaps');
 const svg = require('gulp-svg-symbols');
 const uglify = require('gulp-uglify-es').default;
@@ -214,7 +215,17 @@ gulp.task('jstest-nofail', cb => {
   spawnTask('./node_modules/.bin/nyc', getJsTestArgs(), cb, false);
 });
 
-gulp.task('test', ['sasstest', 'jstest']);
+gulp.task('clienttest', done => {
+  new Server(
+    {
+      configFile: __dirname + '/karma.conf.js',
+      singleRun: true,
+    },
+    done
+  ).start();
+});
+
+gulp.task('test', ['sasstest', 'jstest', 'clienttest']);
 
 gulp.task('browser-sync', cb => {
   browserSync.init(
