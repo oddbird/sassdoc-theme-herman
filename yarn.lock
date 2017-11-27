@@ -3940,6 +3940,10 @@ just-extend@^1.1.26:
   version "1.1.27"
   resolved "https://registry.yarnpkg.com/just-extend/-/just-extend-1.1.27.tgz#ec6e79410ff914e472652abfa0e603c03d60e905"
 
+karma-chai-sinon@^0.1.5:
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/karma-chai-sinon/-/karma-chai-sinon-0.1.5.tgz#5c392ca95247818951d6b57902f02c36e803753a"
+
 karma-chai@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/karma-chai/-/karma-chai-0.1.0.tgz#bee5ad40400517811ae34bb945f762909108b79a"
@@ -6309,6 +6313,10 @@ sigmund@~1.0.0:
 signal-exit@^3.0.0, signal-exit@^3.0.1, signal-exit@^3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.2.tgz#b5fdc08f1287ea1178628e415e25132b73646c6d"
+
+sinon-chai@^2.14.0:
+  version "2.14.0"
+  resolved "https://registry.yarnpkg.com/sinon-chai/-/sinon-chai-2.14.0.tgz#da7dd4cc83cd6a260b67cca0f7a9fdae26a1205d"
 
 sinon@^4.1.1:
   version "4.1.2"
