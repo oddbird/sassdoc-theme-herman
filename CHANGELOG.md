@@ -1,7 +1,7 @@
 # Herman Changelog
 
 
-## Unreleased
+## 1.0.0-rc.1: 2017-11-24
 
 - NEW: Add additional files (parsed as Markdown) with `extraDocs` option --
   [#117](https://github.com/oddbird/sassdoc-theme-herman/issues/117)
