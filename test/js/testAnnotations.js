@@ -9,7 +9,9 @@ const sinon = require('sinon');
 /* eslint-disable global-require */
 const annotations = {
   icons: require('../../lib/annotations/icons'),
-  preview: require('../../lib/annotations/preview'),
+  colors: require('../../lib/annotations/colors'),
+  sizes: require('../../lib/annotations/sizes'),
+  ratios: require('../../lib/annotations/ratios'),
   font: require('../../lib/annotations/font'),
   example: require('../../lib/annotations/example'),
   name: require('../../lib/annotations/name'),
@@ -83,14 +85,46 @@ describe('icons annotation', function() {
   });
 });
 
-describe('preview annotation', function() {
+describe('colors annotation', function() {
   before(function() {
-    this.preview = annotations.preview();
+    this.colors = annotations.colors();
   });
 
   describe('parse', function() {
     it('parses CSS-like options and returns object', function() {
-      assert.deepEqual(this.preview.parse(' sizes; foo : bar ; baz ;'), {
+      assert.deepEqual(this.colors.parse(' sizes; foo : bar ; baz ;'), {
+        type: 'sizes',
+        foo: 'bar',
+        baz: null,
+      });
+    });
+  });
+});
+
+describe('sizes annotation', function() {
+  before(function() {
+    this.sizes = annotations.sizes();
+  });
+
+  describe('parse', function() {
+    it('parses CSS-like options and returns object', function() {
+      assert.deepEqual(this.sizes.parse(' sizes; foo : bar ; baz ;'), {
+        type: 'sizes',
+        foo: 'bar',
+        baz: null,
+      });
+    });
+  });
+});
+
+describe('ratios annotation', function() {
+  before(function() {
+    this.ratios = annotations.ratios();
+  });
+
+  describe('parse', function() {
+    it('parses CSS-like options and returns object', function() {
+      assert.deepEqual(this.ratios.parse(' sizes; foo : bar ; baz ;'), {
         type: 'sizes',
         foo: 'bar',
         baz: null,
