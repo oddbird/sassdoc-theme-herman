@@ -1,0 +1,8 @@
+<h1 class="search-heading">
+  <span class="search-term">{{ term }}</span>:
+  {{ count or 'No' }} results
+</h1>
+
+{% if count %}
+  <ul class="js-search-results search-results"></ul>
+{% endif %}

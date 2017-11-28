@@ -1,0 +1,20 @@
+{% extends 'base.njk' %}
+
+{% import 'utility.macros.njk' as utility %}
+
+{% block title %}{{ pageTitle }} | {{ super() }}{% endblock %}
+
+{% block breadcrumb %}
+  <nav data-sassdoc-region="breadcrumb">
+    {% set project_title = package.title or package.name or 'Herman' %}
+    {{ utility.link_if(project_title, 'index.html') }} »
+    <strong>{{ pageTitle }}</strong>
+  </nav>
+{% endblock %}
+
+{% block main %}
+  {% for item in items %}
+    {% set type = item.context.type %}
+    {% include 'item/_item.njk' %}
+  {% endfor %}
+{% endblock %}

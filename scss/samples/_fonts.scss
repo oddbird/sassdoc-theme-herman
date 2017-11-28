@@ -4,14 +4,20 @@
 
 /// ## Documenting fonts & displaying specimens
 ///
-/// Whether you use a webfont CDN like Typkit and Google Fonts,
+/// Whether you use a webfont CDN like Typekit/Google Fonts,
 /// or locally-hosted font files,
 /// Herman can document and display your font-specimens.
-/// In the end, Herman will need a map
-/// converted to JSON --
+/// In order to do that, Herman will need a JSON map of font data --
 /// but we'll start with individual font families,
 /// one hosted on a CDN, and the other hosted locally.
-/// Then we can build the export from there.
+/// Then we can build and export.
+///
+/// We store all font data in maps,
+/// with the syntax used by both Herman (for JSON exporting)
+/// and our [Accoutrement-Type][type] toolkit.
+/// [See the font map documentation for details »][font-docs]
+///
+/// [font-docs]: http://oddbird.net/herman/docs/api_json-export.html#fonts
 ///
 /// Each font family will be displayed individually,
 /// using the `@font` annotation:
@@ -29,6 +35,11 @@
 ///
 /// For remotely-hosted fonts,
 /// the `@font` annotation accepts three arguments:
+///
+/// ```scss
+/// // @font 'font-key' (list of, variants, to show)
+/// //   <any html required for import>
+/// ```
 ///
 /// - The first argument (in single-quotes or double-quotes) is the `key`
 ///   that will be used to access the data from JSON,
@@ -50,10 +61,6 @@
 ///   making your webfont available to other components.
 ///
 /// [examples]: http://oddbird.net/herman/docs/demo_examples.html
-///
-/// We've stored this data in a map,
-/// with the syntax used by both Herman (for JSON exporting)
-/// and our [Accoutrement-Type][type] toolkit.
 ///
 /// [type]: http://oddbird.net/accoutrement-type/
 ///

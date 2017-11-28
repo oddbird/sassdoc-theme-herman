@@ -1,0 +1,17 @@
+{% extends 'base.njk' %}
+
+{% import 'utility.macros.njk' as utility %}
+
+{% block title %}Search Results | {{ super() }}{% endblock %}
+
+{% block breadcrumb %}
+  <nav data-sassdoc-region="breadcrumb">
+    {% set project_title = package.title or package.name or 'Herman' %}
+    {{ utility.link_if(project_title, 'index.html') }} »
+    <strong>Search Results</strong>
+  </nav>
+{% endblock %}
+
+{% block extrajs %}
+  <script type="text/javascript" src="assets/webpack/search.min.js"></script>
+{% endblock %}

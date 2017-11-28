@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,22 +12,17 @@
   <link href="assets/img/favicon.ico" rel="shortcut icon">
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
 
-  <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="stylesheet" href="assets/webpack/app_styles.min.css" />
 </head>
 <body>
-
   <svg xmlns="http://www.w3.org/2000/svg" hidden>
   <symbol id="icon-logo" viewBox="0 0 16 16">
-    <title>logo icon</title>
     <path d="M.2 8L0 7.8v-.2C.8 6.9 1.9 5.9 2.7 5l.4.3c-.5.8-1.1 1.6-1.8 2.3 1 1.2 1 1.3 1.7 2.4l-.4.3c-.4-.4-.5-.6-1-1C1 8.6 1.1 8.7.2 8zM13 10c.6-1.1.7-1.1 1.7-2.4-.6-.6-1.3-1.5-1.7-2.3l.3-.3c.8.8 1.8 1.8 2.7 2.6v.2l-.8.7c-.3.3-1.2 1.1-1.8 1.7L13 10z"/><path d="M2.6 13.1H3c.9 0 1.1-.2 1.1-1.4V4.2c0-1.1-.2-1.4-1.1-1.4h-.4v-.6h4.5v.7h-.3c-.9 0-1.1.2-1.1 1.4v3.2h4.6V4.2c0-1.1-.2-1.4-1.1-1.4h-.3v-.6h4.5v.7H13c-.9 0-1.1.2-1.1 1.4v7.5c0 1.1.2 1.4 1.1 1.4h.4v.7H8.9v-.7h.3c.9 0 1.1-.2 1.1-1.4V8.2H5.7v3.5c0 1.1.2 1.4 1.1 1.4h.3v.7H2.6v-.7z"/>
   </symbol>
   <symbol id="icon-menu" viewBox="0 0 24 28">
-    <title>menu icon</title>
     <path d="M24 21v2c0 .547-.453 1-1 1H1c-.547 0-1-.453-1-1v-2c0-.547.453-1 1-1h22c.547 0 1 .453 1 1zm0-8v2c0 .547-.453 1-1 1H1c-.547 0-1-.453-1-1v-2c0-.547.453-1 1-1h22c.547 0 1 .453 1 1zm0-8v2c0 .547-.453 1-1 1H1c-.547 0-1-.453-1-1V5c0-.547.453-1 1-1h22c.547 0 1 .453 1 1z"/>
   </symbol>
 </svg>
-  
-  
 
   <div data-sassdoc-region="app">
     <header role="banner" data-sassdoc-region="banner">
@@ -59,6 +56,9 @@
   
     
   <nav role="navigation" data-nav-menu="small" data-toggle="target" id="nav-small" data-target-id="nav-small" aria-expanded="false" data-auto-closing="false" data-auto-closing-on-any-click="false">
+    <form action="/search.html">
+      <input type="text" name="q" placeholder="Search…" required minlength="3">
+    </form>
 
     <div data-sassdoc="nav-subsection">
       <h3 data-sassdoc="nav-title">
@@ -232,6 +232,9 @@
   
     
   <nav role="navigation" data-nav-menu="large" data-toggle="target" id="nav-large" data-target-id="nav-large" aria-expanded="true" data-auto-closing="false" data-auto-closing-on-any-click="false">
+    <form action="/search.html">
+      <input type="text" name="q" placeholder="Search…" required minlength="3">
+    </form>
 
     <div data-sassdoc="nav-subsection">
       <h3 data-sassdoc="nav-title">
@@ -440,7 +443,7 @@
   
   
 
-  <header data-item-section="header">
+  <div data-item-section="header">
     <h2 class="item-title">
       
         <span class="item-type"></span>
@@ -460,13 +463,10 @@
     
   
 
-  </header>
 
     
     
-
-    <div data-item-section="source">
-      
+    
   
 
   
@@ -491,7 +491,6 @@
     </div>
   
 
-    </div>
     
   
   
@@ -499,36 +498,27 @@
   
 
   
-    
-  
-  <div data-item-section="summary">
-    <h3 class="item-subtitle">
-      Description
-      
-    </h3>
-    
-      <div class="text-block">
-        <p>We use bright primary colors for the main brand,
+    <div class="text-block">
+      <p>We use bright primary colors for the main brand,
 everything else is based on these<span class="widont">&nbsp;</span>colors.</p>
 
-        
+      
   
 
-        
+      
   
 
-        
+      
   
 
-      </div>
-    
+    </div>
+  
+
   </div>
 
   
 
   
-
-  
   
   
   
@@ -537,12 +527,14 @@ everything else is based on these<span class="widont">&nbsp;</span>colors.</p>
 
   
     
-  
   <div data-item-section="property">
-    <h3 class="item-subtitle">
-      Map Properties
-      
-    </h3>
+    
+      <h3 class="item-subtitle">
+        Map Properties
+        
+      </h3>
+    
+
     
       
         
@@ -602,12 +594,14 @@ followed by an optional map of adjustments
   
 
     
-  
   <div data-item-section="related">
-    <h3 class="item-subtitle">
-      related
-      
-    </h3>
+    
+      <h3 class="item-subtitle">
+        Related
+        
+      </h3>
+    
+
     
       
         
@@ -666,12 +660,14 @@ followed by an optional map of adjustments
     
       
   
-  
   <div data-item-section="color-palette">
-    <h3 class="item-subtitle">
-      Color Preview
-      
-    </h3>
+    
+      <h3 class="item-subtitle">
+        Color Previews
+        
+      </h3>
+    
+
     
     <div class="color-palette">
       
@@ -794,7 +790,7 @@ followed by an optional map of adjustments
   
   
 
-  <header data-item-section="header">
+  <div data-item-section="header">
     <h2 class="item-title">
       
         <span class="item-type"></span>
@@ -812,13 +808,10 @@ followed by an optional map of adjustments
     
   
 
-  </header>
 
     
     
-
-    <div data-item-section="source">
-      
+    
   
 
   
@@ -843,7 +836,6 @@ followed by an optional map of adjustments
     </div>
   
 
-    </div>
     
   
   
@@ -851,36 +843,27 @@ followed by an optional map of adjustments
   
 
   
-    
-  
-  <div data-item-section="summary">
-    <h3 class="item-subtitle">
-      Description
-      
-    </h3>
-    
-      <div class="text-block">
-        <p>Use these neutral colors
+    <div class="text-block">
+      <p>Use these neutral colors
 to create structure and hierarchy in the<span class="widont">&nbsp;</span>document.</p>
 
-        
+      
   
 
-        
+      
   
 
-        
+      
   
 
-      </div>
-    
+    </div>
+  
+
   </div>
 
   
 
   
-
-  
   
   
   
@@ -897,12 +880,14 @@ to create structure and hierarchy in the<span class="widont">&nbsp;</span>docume
   
 
     
-  
   <div data-item-section="related">
-    <h3 class="item-subtitle">
-      related
-      
-    </h3>
+    
+      <h3 class="item-subtitle">
+        Related
+        
+      </h3>
+    
+
     
       
         
@@ -961,12 +946,14 @@ to create structure and hierarchy in the<span class="widont">&nbsp;</span>docume
     
       
   
-  
   <div data-item-section="color-palette">
-    <h3 class="item-subtitle">
-      Color Preview
-      
-    </h3>
+    
+      <h3 class="item-subtitle">
+        Color Previews
+        
+      </h3>
+    
+
     
     <div class="color-palette">
       
@@ -1089,7 +1076,7 @@ to create structure and hierarchy in the<span class="widont">&nbsp;</span>docume
   
   
 
-  <header data-item-section="header">
+  <div data-item-section="header">
     <h2 class="item-title">
       
         <span class="item-type"></span>
@@ -1107,13 +1094,10 @@ to create structure and hierarchy in the<span class="widont">&nbsp;</span>docume
     
   
 
-  </header>
 
     
     
-
-    <div data-item-section="source">
-      
+    
   
 
   
@@ -1138,7 +1122,6 @@ to create structure and hierarchy in the<span class="widont">&nbsp;</span>docume
     </div>
   
 
-    </div>
     
   
   
@@ -1146,36 +1129,27 @@ to create structure and hierarchy in the<span class="widont">&nbsp;</span>docume
   
 
   
-    
-  
-  <div data-item-section="summary">
-    <h3 class="item-subtitle">
-      Description
-      
-    </h3>
-    
-      <div class="text-block">
-        <p>These status colors for UI elements
+    <div class="text-block">
+      <p>These status colors for UI elements
 give a quick sense of progress, warning, or<span class="widont">&nbsp;</span>errors.</p>
 
-        
+      
   
 
-        
+      
   
 
-        
+      
   
 
-      </div>
-    
+    </div>
+  
+
   </div>
 
   
 
   
-
-  
   
   
   
@@ -1192,12 +1166,14 @@ give a quick sense of progress, warning, or<span class="widont">&nbsp;</span>err
   
 
     
-  
   <div data-item-section="related">
-    <h3 class="item-subtitle">
-      related
-      
-    </h3>
+    
+      <h3 class="item-subtitle">
+        Related
+        
+      </h3>
+    
+
     
       
         
@@ -1256,12 +1232,14 @@ give a quick sense of progress, warning, or<span class="widont">&nbsp;</span>err
     
       
   
-  
   <div data-item-section="color-palette">
-    <h3 class="item-subtitle">
-      Color Preview
-      
-    </h3>
+    
+      <h3 class="item-subtitle">
+        Color Previews
+        
+      </h3>
+    
+
     
     <div class="color-palette">
       
@@ -1384,7 +1362,7 @@ give a quick sense of progress, warning, or<span class="widont">&nbsp;</span>err
   
   
 
-  <header data-item-section="header">
+  <div data-item-section="header">
     <h2 class="item-title">
       
         <span class="item-type"></span>
@@ -1402,13 +1380,10 @@ give a quick sense of progress, warning, or<span class="widont">&nbsp;</span>err
     
   
 
-  </header>
 
     
     
-
-    <div data-item-section="source">
-      
+    
   
 
   
@@ -1448,7 +1423,6 @@ give a quick sense of progress, warning, or<span class="widont">&nbsp;</span>err
     </div>
   
 
-    </div>
     
   
   
@@ -1456,36 +1430,27 @@ give a quick sense of progress, warning, or<span class="widont">&nbsp;</span>err
   
 
   
-    
-  
-  <div data-item-section="summary">
-    <h3 class="item-subtitle">
-      Description
-      
-    </h3>
-    
-      <div class="text-block">
-        <p>Applying the brand and accent colors
+    <div class="text-block">
+      <p>Applying the brand and accent colors
 to a sitewide<span class="widont">&nbsp;</span>theme.</p>
 
-        
+      
   
 
-        
+      
   
 
-        
+      
   
 
-      </div>
-    
+    </div>
+  
+
   </div>
 
   
 
   
-
-  
   
   
   
@@ -1502,12 +1467,14 @@ to a sitewide<span class="widont">&nbsp;</span>theme.</p>
   
 
     
-  
   <div data-item-section="related">
-    <h3 class="item-subtitle">
-      related
-      
-    </h3>
+    
+      <h3 class="item-subtitle">
+        Related
+        
+      </h3>
+    
+
     
       
         
@@ -1566,12 +1533,14 @@ to a sitewide<span class="widont">&nbsp;</span>theme.</p>
     
       
   
-  
   <div data-item-section="color-palette">
-    <h3 class="item-subtitle">
-      Color Preview
-      
-    </h3>
+    
+      <h3 class="item-subtitle">
+        Color Previews
+        
+      </h3>
+    
+
     
     <div class="color-palette">
       
@@ -2008,7 +1977,7 @@ to a sitewide<span class="widont">&nbsp;</span>theme.</p>
   
   
 
-  <header data-item-section="header">
+  <div data-item-section="header">
     <h2 class="item-title">
       
         <span class="item-type"></span>
@@ -2026,13 +1995,10 @@ to a sitewide<span class="widont">&nbsp;</span>theme.</p>
     
   
 
-  </header>
 
     
     
-
-    <div data-item-section="source">
-      
+    
   
 
   
@@ -2056,7 +2022,6 @@ to a sitewide<span class="widont">&nbsp;</span>theme.</p>
     </div>
   
 
-    </div>
     
   
   
@@ -2064,36 +2029,27 @@ to a sitewide<span class="widont">&nbsp;</span>theme.</p>
   
 
   
-    
-  
-  <div data-item-section="summary">
-    <h3 class="item-subtitle">
-      Description
-      
-    </h3>
-    
-      <div class="text-block">
-        <p>Colors used by accoutrement-color
+    <div class="text-block">
+      <p>Colors used by accoutrement-color
 to calculate contrast<span class="widont">&nbsp;</span>ratios.</p>
 
-        
+      
   
 
-        
+      
   
 
-        
+      
   
 
-      </div>
-    
+    </div>
+  
+
   </div>
 
   
 
   
-
-  
   
   
   
@@ -2110,12 +2066,14 @@ to calculate contrast<span class="widont">&nbsp;</span>ratios.</p>
   
 
     
-  
   <div data-item-section="related">
-    <h3 class="item-subtitle">
-      related
-      
-    </h3>
+    
+      <h3 class="item-subtitle">
+        Related
+        
+      </h3>
+    
+
     
       
         
@@ -2174,12 +2132,14 @@ to calculate contrast<span class="widont">&nbsp;</span>ratios.</p>
     
       
   
-  
   <div data-item-section="color-palette">
-    <h3 class="item-subtitle">
-      Color Preview
-      
-    </h3>
+    
+      <h3 class="item-subtitle">
+        Color Previews
+        
+      </h3>
+    
+
     
     <div class="color-palette">
       
@@ -2257,10 +2217,8 @@ to calculate contrast<span class="widont">&nbsp;</span>ratios.</p>
     </div>
   </div>
 
-  <script type="text/javascript" src="assets/js/jquery-3.1.1.slim.js"></script>
-  <script type="text/javascript" src="assets/js/srcdoc-polyfill.min.js"></script>
-  <script type="text/javascript" src="assets/js/highlight.js"></script>
-  <script type="text/javascript" src="assets/js/base.js"></script>
-  <script type="text/javascript" src="assets/js/init.js"></script>
+  <script type="text/javascript" src="assets/webpack/vendor.min.js"></script>
+  <script type="text/javascript" src="assets/webpack/app.min.js"></script>
+  
 </body>
 </html>
