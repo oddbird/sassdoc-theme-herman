@@ -8,26 +8,26 @@
   Call the requested previews with the appropriate JSON data.
 #}
 {% macro show_previews(data, item) %}
-  {% if data and item %}
-    {% set args = item.font or item.colors or item.ratios or item.sizes %}
-    {% set key = args.key or item.context.origName or item.context.name %}
+  {% if data and item -%}
+    {%- set args = item.font or item.colors or item.ratios or item.sizes -%}
+    {%- set key = args.key or item.context.origName or item.context.name -%}
 
-    {% if item.font %}
+    {%- if item.font %}
       {{ font_specimen(key, data.fonts[key], item.iframed) }}
-    {% endif %}
+    {% endif -%}
 
-    {% if item.colors %}
+    {%- if item.colors %}
       {{ color_palette(data.colors[key]) }}
-    {% endif %}
+    {% endif -%}
 
-    {% if item.ratios %}
+    {%- if item.ratios %}
       {{ ratios(data.ratios[key], args) }}
-    {% endif %}
+    {% endif -%}
 
-    {% if item.sizes %}
+    {%- if item.sizes %}
       {{ sizes(data.sizes[key], args) }}
-    {% endif %}
-  {% endif %}
+    {%- endif -%}
+  {%- endif %}
 {% endmacro %}
 
 
