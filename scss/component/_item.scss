@@ -10,7 +10,10 @@
 }
 
 [data-item-section='header'] {
-  margin-bottom: size('shim');
+  .code-block,
+  .text-block {
+    margin-bottom: size('shim');
+  }
 }
 
 .item-title {
@@ -84,20 +87,17 @@
   }
 }
 
-.summary-subtitle {
-  color: color('text-light');
-  margin: size('gutter') 0 size('half-shim');
-}
-
 
 // Requires
 // --------
 .requires-wrapper {
   @include above('nav-medium') {
     display: flex;
+    margin-bottom: size('gutter-plus');
 
     [data-item-section] {
       flex: 1 1 40%;
+      margin-bottom: 0;
       max-width: 100%;
 
       &:first-child {

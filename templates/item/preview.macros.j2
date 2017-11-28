@@ -44,7 +44,7 @@
   Display color palettes based on JSON map output.
 #}
 {% macro color_palette(data) %}
-  {% call show.item_section('color-palette', 'Color Preview') %}
+  {% call show.item_section('color-palette', 'Color Previews') %}
     <div class="color-palette">
       {% for value, items in data|list|groupby('value') %}
         <div class="color-preview">
@@ -225,7 +225,7 @@
 
 
 {% macro ratios(data, args) %}
-  {% call show.item_section('ratio-preview', 'Ratio Preview') %}
+  {% call show.item_section('ratio-preview', 'Ratio Previews') %}
     {% for name, value in data %}
       <div data-sassdoc="ratio-preview">
         {{ annotation.param_list(

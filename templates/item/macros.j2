@@ -2,14 +2,16 @@
 
 
 {% macro item_section(slug, title=none, supplement=none) %}
-  {% set title = title if title else slug %}
   <div data-item-section="{{ slug }}">
-    <h3 class="item-subtitle">
-      <span class="item-subtitle-main">{{ title }}</span>
-      {% if supplement %}
-        <span class="item-subtitle-supplement">{{ supplement|safe }}</span>
-      {% endif %}
-    </h3>
+    {% if title or supplement %}
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">{{ title }}</span>
+        {% if supplement %}
+          <span class="item-subtitle-supplement">{{ supplement|safe }}</span>
+        {% endif %}
+      </h3>
+    {% endif %}
+
     {{ caller() }}
   </div>
 {% endmacro %}
@@ -24,7 +26,7 @@
   {% set note = private or deprecate or none %}
   {% set note = [private, deprecate]|join(' -- ') if (private and deprecate) else note %}
 
-  <header data-item-section="header">
+  <div data-item-section="header">
     <h2 class="item-title">
       {% if display_type %}
         <span class="item-type">{{ display_type }}</span>
@@ -49,7 +51,10 @@
       type=type,
       display=display
       ) }}
-  </header>
+
+    {{ source(item, type) }}
+    {{ summary(item) }}
+  </div>
 {% endmacro %}
 
 
@@ -138,10 +143,7 @@
   {%- if not ((type == 'mixin') or (type == 'function')) -%}
     {% set code = scss_variable(item) if (type == 'variable') else none %}
     {% set code = scss_css(item) if (type == 'css') else code %}
-
-    <div data-item-section="source">
-      {{ utility.code_block(language='scss', content=code|escape|safe) }}
-    </div>
+    {{ utility.code_block(language='scss', content=code|escape|safe) }}
   {%- endif -%}
 {% endmacro %}
 
@@ -153,14 +155,12 @@
   {% set deprecation = item.deprecated %}
 
   {% if content or origin or by or deprecation %}
-    {% call item_section('summary', 'Description') %}
-      <div class="text-block">
-        {{ content|safe }}
-        {{ since(origin) }}
-        {{ authors(by) }}
-        {{ deprecated(deprecation) }}
-      </div>
-    {% endcall %}
+    <div class="text-block">
+      {{ content|safe }}
+      {{ since(origin) }}
+      {{ authors(by) }}
+      {{ deprecated(deprecation) }}
+    </div>
   {% endif %}
 {% endmacro %}
 
@@ -169,7 +169,7 @@
   {% if (data.length) %}
     {% set title = 'Authors' if (data.length > 1) else 'Author' %}
     <section class="summary-subsection">
-      <h4 class="summary-subtitle">{{ title }}:</h4>
+      <h3 class="summary-subtitle">{{ title }}:</h3>
       <ul class="subsection-details">
         {% for author in data %}
           <li>{{ author|safe }}</li>
@@ -183,7 +183,7 @@
 {% macro deprecated(data) %}
   {% if data and (data != '') %}
     <section class="summary-subsection">
-      <h4 class="summary-subtitle">DEPRECATED:</h4>
+      <h3 class="summary-subtitle">DEPRECATED:</h3>
       <div class="subsection-details">{{ data|safe }}</div>
     </section>
   {% endif %}
@@ -194,7 +194,7 @@
   {% if (data.length) %}
     {% for item in data %}
       <section class="summary-subsection">
-        <h4 class="summary-subtitle">Since <code>{{ item.version }}</code>:</h4>
+        <h3 class="summary-subtitle">Since <code>{{ item.version }}</code>:</h3>
         <div class="subsection-details">{{ item.description|safe }}</div>
       </section>
     {% endfor %}
