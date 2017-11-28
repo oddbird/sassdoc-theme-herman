@@ -4,10 +4,9 @@
 
 /// ## Documenting ratios and sizes
 ///
-/// In addition to documenting [colors][color-preview],
+/// In addition to documenting colors and fonts,
 /// you can use Herman to document and display ratios and sizes.
-/// In the end, Herman will need a map
-/// converted to JSON --
+/// In the end, Herman will need a map --
 /// but we'll start with individual ratios/sizes,
 /// and build the export from there.
 ///
@@ -78,6 +77,8 @@ $demo-ratios: (
 /// or use a tool like our [Accoutrement-Scale][scale]
 /// to store and access sizes
 /// directly in a Herman-friendly map.
+///
+/// [scale]: http://oddbird.net/accoutrement-scale/
 ///
 /// ```scss
 /// $demo-sizes: (
