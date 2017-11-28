@@ -1,6 +1,17 @@
 # Herman Changelog
 
 
+## Unreleased
+
+- NEW: Add site-wide search --
+  [#28](https://github.com/oddbird/sassdoc-theme-herman/issues/28)
+- CHANGE: Bundle static assets with Webpack; precompile JS with Babel --
+  [#205](https://github.com/oddbird/sassdoc-theme-herman/issues/205)
+- BREAKING: Remove `@preview` annotation, split it into distinct `@colors`,
+  `@sizes`, `@ratios` annotations. --
+  [#206](https://github.com/oddbird/sassdoc-theme-herman/issues/206)
+
+
 ## 1.0.0-rc.1: 2017-11-24
 
 - NEW: Add additional files (parsed as Markdown) with `extraDocs` option --
@@ -32,13 +43,6 @@
   [#154](https://github.com/oddbird/sassdoc-theme-herman/issues/154)
 - CHANGE: Use Herman logo for favicon. --
   [#155](https://github.com/oddbird/sassdoc-theme-herman/issues/155)
-- NEW: Add site-wide search --
-  [#28](https://github.com/oddbird/sassdoc-theme-herman/issues/28)
-- CHANGE: Bundle static assets with Webpack; precompile JS with Babel --
-  [#205](https://github.com/oddbird/sassdoc-theme-herman/issues/205)
-- BREAKING: Remove `@preview` annotation, split it into distinct `@colors`,
-  `@sizes`, `@ratios` annotations. --
-  [#206](https://github.com/oddbird/sassdoc-theme-herman/issues/206)
 
 
 ## 1.0.0-alpha.15: 2017-10-30
