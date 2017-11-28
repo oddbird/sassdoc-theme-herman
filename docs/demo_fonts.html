@@ -444,14 +444,17 @@
   
     <div data-item-section="prose" class="text-block">
       <h2 id="documenting-fonts-displaying-specimens">Documenting fonts &amp; displaying<span class="widont">&nbsp;</span>specimens</h2>
-<p>Whether you use a webfont CDN like Typkit and Google Fonts,
+<p>Whether you use a webfont CDN like Typekit/Google Fonts,
 or locally-hosted font files,
 Herman can document and display your font-specimens.
-In the end, Herman will need a map
-converted to JSON –
+In order to do that, Herman will need a JSON map of font data –
 but we’ll start with individual font families,
 one hosted on a CDN, and the other hosted locally.
-Then we can build the export from<span class="widont">&nbsp;</span>there.</p>
+Then we can build and<span class="widont">&nbsp;</span>export.</p>
+<p>We store all font data in maps,
+with the syntax used by both Herman (for JSON exporting)
+and our [Accoutrement-Type][type] toolkit.
+<a href="http://oddbird.net/herman/docs/api_json-export.html#fonts">See the font map documentation for details<span class="widont">&nbsp;</span>»</a></p>
 <p>Each font family will be displayed individually,
 using the <code>@font</code> annotation:</p>
 <pre><code class="lang-scss">// @font 'my-font' (regular, bold)
@@ -532,7 +535,7 @@ using the <code>@font</code> annotation:</p>
   
   
 
-  <header data-item-section="header">
+  <div data-item-section="header">
     <h2 class="item-title">
       
         <span class="item-type"></span>
@@ -550,13 +553,10 @@ using the <code>@font</code> annotation:</p>
     
   
 
-  </header>
 
     
     
-
-    <div data-item-section="source">
-      
+    
   
 
   
@@ -581,7 +581,6 @@ using the <code>@font</code> annotation:</p>
     </div>
   
 
-    </div>
     
   
   
@@ -589,18 +588,13 @@ using the <code>@font</code> annotation:</p>
   
 
   
-    
-  
-  <div data-item-section="summary">
-    <h3 class="item-subtitle">
-      Description
-      
-    </h3>
-    
-      <div class="text-block">
-        <h2 id="displaying-cdn-hosted-webfonts">Displaying CDN-hosted webfonts</h2>
+    <div class="text-block">
+      <h2 id="displaying-cdn-hosted-webfonts">Displaying CDN-hosted webfonts</h2>
 <p>For remotely-hosted fonts,
 the <code>@font</code> annotation accepts three<span class="widont">&nbsp;</span>arguments:</p>
+<pre><code class="lang-scss">// @font 'font-key' (list of, variants, to show)
+//   &lt;any html required for import&gt;
+</code></pre>
 <ul>
 <li>The first argument (in single-quotes or double-quotes) is the <code>key</code>
 that will be used to access the data from JSON,
@@ -621,24 +615,20 @@ for this font preview
 and all <a href="http://oddbird.net/herman/docs/demo_examples.html">Herman examples</a>,
 making your webfont available to other<span class="widont">&nbsp;</span>components.</li>
 </ul>
-<p>We’ve stored this data in a map,
-with the syntax used by both Herman (for JSON exporting)
-and our <a href="http://oddbird.net/accoutrement-type/">Accoutrement-Type</a><span class="widont">&nbsp;</span>toolkit.</p>
 
-        
+      
   
 
-        
+      
   
 
-        
+      
   
 
-      </div>
-    
+    </div>
+  
+
   </div>
-
-  
 
   
 
@@ -744,12 +734,14 @@ and our <a href="http://oddbird.net/accoutrement-type/">Accoutrement-Type</a><sp
   
 
   
-  
   <div data-item-section="font-specimen">
-    <h3 class="item-subtitle">
-      Font Preview
-      
-    </h3>
+    
+      <h3 class="item-subtitle">
+        Font Preview
+        
+      </h3>
+    
+
     
     
   <div class="param-list">
@@ -1001,7 +993,7 @@ and our <a href="http://oddbird.net/accoutrement-type/">Accoutrement-Type</a><sp
   
   
 
-  <header data-item-section="header">
+  <div data-item-section="header">
     <h2 class="item-title">
       
         <span class="item-type"></span>
@@ -1019,13 +1011,10 @@ and our <a href="http://oddbird.net/accoutrement-type/">Accoutrement-Type</a><sp
     
   
 
-  </header>
 
     
     
-
-    <div data-item-section="source">
-      
+    
   
 
   
@@ -1053,7 +1042,6 @@ and our <a href="http://oddbird.net/accoutrement-type/">Accoutrement-Type</a><sp
     </div>
   
 
-    </div>
     
   
   
@@ -1061,16 +1049,8 @@ and our <a href="http://oddbird.net/accoutrement-type/">Accoutrement-Type</a><sp
   
 
   
-    
-  
-  <div data-item-section="summary">
-    <h3 class="item-subtitle">
-      Description
-      
-    </h3>
-    
-      <div class="text-block">
-        <h2 id="displaying-local-fonts">Displaying local fonts</h2>
+    <div class="text-block">
+      <h2 id="displaying-local-fonts">Displaying local fonts</h2>
 <p>For locally-hosted fonts,
 the <code>@font</code> annotation accepts three<span class="widont">&nbsp;</span>arguments:</p>
 <ul>
@@ -1101,24 +1081,23 @@ herman:
   fontpath: 'fonts/'
 </code></pre>
 
-        
+      
   
 
-        
+      
   
 
-        
+      
   
 
-      </div>
-    
+    </div>
+  
+
   </div>
 
   
 
   
-
-  
   
   
   
@@ -1166,13 +1145,15 @@ herman:
   
   
 
-  
   
   <div data-item-section="font-specimen">
-    <h3 class="item-subtitle">
-      Font Preview
-      
-    </h3>
+    
+      <h3 class="item-subtitle">
+        Font Preview
+        
+      </h3>
+    
+
     
     
   <div class="param-list">
@@ -1555,12 +1536,14 @@ it can be converted to JSON using <code>herman-export</code>.</p>
   
 
     
-  
   <div data-item-section="related">
-    <h3 class="item-subtitle">
-      related
-      
-    </h3>
+    
+      <h3 class="item-subtitle">
+        Related
+        
+      </h3>
+    
+
     
       
         
