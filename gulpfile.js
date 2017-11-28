@@ -9,6 +9,7 @@ const gulp = require('gulp');
 const gutil = require('gulp-util');
 const imagemin = require('gulp-imagemin');
 const mocha = require('gulp-spawn-mocha');
+const nunjucks = require('gulp-nunjucks');
 const path = require('path');
 const prettier = require('gulp-prettier-plugin');
 const rename = require('gulp-rename');
@@ -39,19 +40,16 @@ const paths = {
     this.ASSETS_JS = [`${this.ASSETS_JS_DIR}**/*.js`].concat(this.IGNORE);
     this.SRC_JS = ['lib/**/*.js', 'index.js'].concat(this.IGNORE);
     this.CLIENT_JS = [
-      `${this.ASSETS_JS_DIR}**/*.js`,
+      `${this.ASSETS_JS_DIR}*.js`,
       'lib/**/*.js',
       'index.js',
     ].concat(this.IGNORE);
     this.ALL_JS = [
-      `${this.ASSETS_JS_DIR}**/*.js`,
+      `${this.ASSETS_JS_DIR}*.js`,
       'lib/**/*.js',
       `${this.JS_TESTS_DIR}*.js`,
       'gulpfile.js',
       'index.js',
-      '!assets/js/highlight.js',
-      '!assets/js/jquery-3.1.1.slim.js',
-      '!assets/js/srcdoc-polyfill.min.js',
     ].concat(this.IGNORE);
     this.JS_TESTS_FILES = [
       `${this.JS_TESTS_DIR}**/*`,
@@ -372,14 +370,12 @@ gulp.task('watch', () => {
   gulp.watch('**/.eslintrc.yml', ['eslint-nofail']);
 });
 
-gulp.task('jsmin', () => {
-  const dest = `${paths.DIST_DIR}js/`;
-
-  return gulp
+gulp.task('jsmin', ['precompile-templates'], () =>
+  gulp
     .src(paths.ASSETS_JS)
     .pipe(uglify())
-    .pipe(gulp.dest(dest));
-});
+    .pipe(gulp.dest(`${paths.DIST_DIR}js/`))
+);
 
 gulp.task('svg-clean', cb => {
   del(`${paths.TEMPLATES_DIR}_icons.svg`).then(() => {
@@ -404,10 +400,8 @@ gulp.task('svgmin', ['svg-clean'], () =>
     .pipe(gulp.dest(paths.TEMPLATES_DIR))
 );
 
-gulp.task('imagemin', () => {
-  const dest = `${paths.DIST_DIR}img/`;
-
-  return gulp
+gulp.task('imagemin', () =>
+  gulp
     .src(paths.IMG)
     .pipe(
       imagemin([
@@ -417,7 +411,14 @@ gulp.task('imagemin', () => {
         imagemin.svgo(),
       ])
     )
-    .pipe(gulp.dest(dest));
-});
+    .pipe(gulp.dest(`${paths.DIST_DIR}img/`))
+);
 
 gulp.task('minify', ['jsmin', 'svgmin', 'imagemin']);
+
+gulp.task('precompile-templates', () =>
+  gulp
+    .src(`${paths.TEMPLATES_DIR}client/**/*.j2`)
+    .pipe(nunjucks.precompile())
+    .pipe(gulp.dest(`${paths.ASSETS_JS_DIR}templates/`))
+);

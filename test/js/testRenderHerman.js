@@ -217,4 +217,17 @@ describe('renderHerman', function() {
       })
       .catch(done);
   });
+
+  it('generates search data', function(done) {
+    prepareContext({
+      data: [],
+    })
+      .then(ctx => renderHerman(this.dest, ctx))
+      .then(() => access(`${this.dest}/search-data.json`))
+      .then(() => {
+        assert.ok(true);
+        done();
+      })
+      .catch(done);
+  });
 });
