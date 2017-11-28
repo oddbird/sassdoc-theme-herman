@@ -2,6 +2,18 @@
 // =================
 
 
+::selection {
+  background-color: color('callout');
+}
+
+
+mark {
+  background-color: color('callout');
+  display: inline-block;
+  padding: 0 size('quarter-shim');
+}
+
+
 /// Style a block of rendered html-text,
 /// with line-length and typographic styles.
 /// @group style-typography

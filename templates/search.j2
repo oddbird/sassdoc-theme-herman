@@ -1,0 +1,20 @@
+{% extends 'base.j2' %}
+
+{% block title %}Search Results | {{ super() }}{% endblock %}
+
+{% block breadcrumb %}
+  <nav data-sassdoc-region="breadcrumb">
+    {% set project_title = package.title or package.name or 'Herman' %}
+    {{ utility.link_if(project_title, 'index.html') }} »
+    <strong>Search Results</strong>
+  </nav>
+{% endblock %}
+
+{% block extrajs %}
+  <script type="text/javascript" src="assets/js/vendor/lunr.js"></script>
+  <script type="text/javascript" src="assets/js/vendor/jquery-deparam.js"></script>
+  <script type="text/javascript" src="assets/js/vendor/jquery.mark.js"></script>
+  <script type="text/javascript" src="assets/js/vendor/nunjucks-slim.js"></script>
+  <script type="text/javascript" src="assets/js/templates/search_result.js"></script>
+  <script type="text/javascript" src="assets/js/templates/search_results.js"></script>
+{% endblock %}
