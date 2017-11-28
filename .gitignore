@@ -10,3 +10,4 @@ test/js/dest/
 *~
 .livereload
 *.orig
+dist/

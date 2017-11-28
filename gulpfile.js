@@ -1,6 +1,7 @@
+/* eslint-disable global-require */
+
 'use strict';
 
-const autoprefixer = require('gulp-autoprefixer');
 const browserSync = require('browser-sync').create();
 const chalk = require('chalk');
 const del = require('del');
@@ -12,12 +13,9 @@ const mocha = require('gulp-spawn-mocha');
 const path = require('path');
 const prettier = require('gulp-prettier-plugin');
 const rename = require('gulp-rename');
-const sass = require('gulp-sass');
-const sassdoc = require('sassdoc');
 const sasslint = require('gulp-sass-lint');
-const sourcemaps = require('gulp-sourcemaps');
 const svg = require('gulp-svg-symbols');
-const uglify = require('gulp-uglify-es').default;
+const webpack = require('webpack');
 const { spawn } = require('child_process');
 
 // Theme and project specific paths.
@@ -31,27 +29,22 @@ const paths = {
   DOCS_DIR: 'docs/',
   JS_TESTS_DIR: 'test/js/',
   TEMPLATES_DIR: 'templates/',
-  FONTS_DIR: 'fonts/',
   IGNORE: ['!**/.#*', '!**/flycheck_*'],
   init() {
-    this.TEMPLATES = [`${this.TEMPLATES_DIR}**/*.j2`].concat(this.IGNORE);
-    this.SASS = [`${this.SASS_DIR}**/*.scss`].concat(this.IGNORE);
-    this.ASSETS_JS = [`${this.ASSETS_JS_DIR}**/*.js`].concat(this.IGNORE);
-    this.SRC_JS = ['lib/**/*.js', 'index.js'].concat(this.IGNORE);
-    this.CLIENT_JS = [
-      `${this.ASSETS_JS_DIR}**/*.js`,
-      'lib/**/*.js',
-      'index.js',
+    this.TEMPLATES = [
+      `${this.TEMPLATES_DIR}**/*.njk`,
+      `!${this.TEMPLATES_DIR}client/*.njk`,
     ].concat(this.IGNORE);
+    this.SASS = [`${this.SASS_DIR}**/*.scss`].concat(this.IGNORE);
+    this.SRC_JS = ['lib/**/*.js', 'index.js'].concat(this.IGNORE);
     this.ALL_JS = [
-      `${this.ASSETS_JS_DIR}**/*.js`,
+      `${this.ASSETS_JS_DIR}*.js`,
       'lib/**/*.js',
       `${this.JS_TESTS_DIR}*.js`,
       'gulpfile.js',
       'index.js',
-      '!assets/js/highlight.js',
-      '!assets/js/jquery-3.1.1.slim.js',
-      '!assets/js/srcdoc-polyfill.min.js',
+      '*.js',
+      '.*.js',
     ].concat(this.IGNORE);
     this.JS_TESTS_FILES = [
       `${this.JS_TESTS_DIR}**/*`,
@@ -156,22 +149,6 @@ gulp.task('sasslint', () => sasslintTask(paths.SASS, true));
 
 gulp.task('sasslint-nofail', () => sasslintTask(paths.SASS));
 
-gulp.task('sass', () =>
-  gulp
-    .src(paths.SASS)
-    .pipe(sourcemaps.init())
-    .pipe(sass({ outputStyle: 'compressed' }))
-    .on('error', onError)
-    .pipe(
-      autoprefixer({
-        browsers: ['last 2 versions'],
-        cascade: false,
-      })
-    )
-    .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest(`${paths.DIST_DIR}css/`))
-);
-
 gulp.task('sasstest', () =>
   gulp.src(`${paths.SASS_TESTS_DIR}test_sass.js`, { read: false }).pipe(mocha())
 );
@@ -239,94 +216,9 @@ gulp.task('browser-sync', cb => {
   );
 });
 
-// SassDoc compilation.
-// See: http://sassdoc.com/customising-the-view/
-gulp.task('compile', ['sass', 'minify'], () => {
-  const config = {
-    verbose: true,
-    dest: paths.DOCS_DIR,
-    theme: './',
-    herman: {
-      extraDocs: [
-        { name: 'Configuration', path: './CONFIGURATION.md' },
-        { name: 'Changelog', path: './CHANGELOG.md' },
-        { name: 'Contributing', path: './CONTRIBUTING.md' },
-      ],
-      extraLinks: [
-        {
-          name: 'Accoutrement-Color',
-          url: 'http://oddbird.net/accoutrement-color/',
-        },
-        {
-          name: 'Accoutrement-Scale',
-          url: 'http://oddbird.net/accoutrement-scale/',
-        },
-        {
-          name: 'Accoutrement-Type',
-          url: 'http://oddbird.net/accoutrement-type/',
-        },
-        {
-          name: 'Accoutrement-Layout',
-          url: 'http://oddbird.net/accoutrement-layout/',
-        },
-        {
-          name: 'Accoutrement-Init',
-          url: 'http://oddbird.net/accoutrement-init/',
-        },
-      ],
-      displayColors: ['hex', 'hsl'],
-      customCSS: `${paths.DIST_DIR}css/main.css`,
-      customHTML: `${paths.TEMPLATES_DIR}_icons.svg`,
-      fontpath: paths.FONTS_DIR,
-      nunjucks: {
-        templatepath: path.join(__dirname, 'templates'),
-      },
-      sass: {
-        jsonfile: `${paths.DIST_DIR}css/json.css`,
-        includepaths: [
-          path.join(__dirname, 'scss'),
-          path.join(__dirname, 'node_modules'),
-        ],
-        includes: ['utilities', 'config/manifest'],
-      },
-    },
-    display: {
-      alias: true,
-    },
-    groups: {
-      'api_json-export': 'Exporting Styles to JSON',
-      'api_sass-accoutrement': 'Accoutrement Integration',
-      demo_colors: 'Color Palettes',
-      demo_fonts: 'Font Specimens',
-      demo_sizes: 'Ratios & Sizes',
-      demo_icons: 'SVG Icons',
-      demo_examples: 'Rendered Examples',
-      'demo_test-sassdoc': 'SassDoc Annotations',
-      'config_api-utilities': '_API Utilities',
-      'config-colors': '_Colors',
-      'config-scale': '_Sizes',
-      'config-fonts': '_Fonts',
-      'config-utils': '_Utilities',
-      'config-z-index': '_Z-index',
-      'style-typography': '_Typography',
-      'style-icons': '_Icons',
-      'style-nav': '_Navigation',
-      'style-sections': '_Sections',
-      'style-code': '_Code Blocks',
-    },
-    // Disable cache to enable live-reloading.
-    // Usefull for some template engines (e.g. Swig).
-    cache: false,
-  };
+gulp.task('default', ['webpack', 'eslint', 'sasslint', 'test']);
 
-  const stream = sassdoc(config);
-  gulp.src(path.join(`${paths.SASS_DIR}**/*.scss`)).pipe(stream);
-
-  // Wait for documentation to be fully generated (not just parsed)
-  return stream.promise;
-});
-
-gulp.task('default', ['compile', 'eslint', 'sasslint', 'test']);
+gulp.task('compile', ['webpack']);
 
 gulp.task('serve', ['watch', 'browser-sync']);
 
@@ -340,14 +232,12 @@ gulp.task('dev', [
   'watch',
 ]);
 
-gulp.task('watch', () => {
+gulp.task('watch', ['webpack-watch'], () => {
+  // run webpack to compile static assets
   gulp.watch(
     [
-      paths.CLIENT_JS,
-      paths.SASS,
-      paths.TEMPLATES,
-      paths.IMG,
       paths.SVG,
+      paths.TEMPLATES,
       `${paths.TEMPLATES_DIR}_icon_template.lodash`,
       './README.md',
       './CHANGELOG.md',
@@ -355,7 +245,7 @@ gulp.task('watch', () => {
       './CONTRIBUTING.md',
       './package.json',
     ],
-    ['compile']
+    ['webpack']
   );
 
   gulp.watch([paths.JS_TESTS_FILES, paths.SRC_JS], ['jstest-nofail']);
@@ -370,15 +260,6 @@ gulp.task('watch', () => {
 
   gulp.watch('**/.sass-lint.yml', ['sasslint-nofail']);
   gulp.watch('**/.eslintrc.yml', ['eslint-nofail']);
-});
-
-gulp.task('jsmin', () => {
-  const dest = `${paths.DIST_DIR}js/`;
-
-  return gulp
-    .src(paths.ASSETS_JS)
-    .pipe(uglify())
-    .pipe(gulp.dest(dest));
 });
 
 gulp.task('svg-clean', cb => {
@@ -420,4 +301,38 @@ gulp.task('imagemin', () => {
     .pipe(gulp.dest(dest));
 });
 
-gulp.task('minify', ['jsmin', 'svgmin', 'imagemin']);
+gulp.task('minify', ['svgmin', 'imagemin']);
+
+const webpackOnBuild = done => (err, stats) => {
+  if (err) {
+    gutil.log(chalk.red(err.stack || err));
+    if (err.details) {
+      gutil.log(chalk.red(err.details));
+    }
+  }
+
+  if (err || stats.hasErrors() || stats.hasWarnings()) {
+    gutil.beep();
+  }
+
+  gutil.log(
+    stats.toString({
+      colors: true,
+      chunks: false,
+    })
+  );
+
+  if (done) {
+    done(err);
+  }
+};
+
+gulp.task('webpack', ['minify'], cb => {
+  const webpackConfig = require('./webpack.config');
+  webpack(webpackConfig).run(webpackOnBuild(cb));
+});
+
+gulp.task('webpack-watch', ['minify'], () => {
+  const webpackConfig = require('./webpack.config');
+  webpack(webpackConfig).watch(300, webpackOnBuild());
+});

@@ -1,0 +1,23 @@
+// Forms
+// =====
+
+
+::placeholder {
+  color: currentColor;
+  opacity: 0.5;
+}
+
+
+input {
+  border: 1px solid color('light-border');
+  color: inherit;
+  font-size: size('xsmall');
+  margin-bottom: size('half-shim');
+  padding: size('quarter-shim') size('half-shim');
+  width: 100%;
+
+  &:focus {
+    border-color: currentColor;
+    outline: 0;
+  }
+}
