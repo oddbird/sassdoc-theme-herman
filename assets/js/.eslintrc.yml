@@ -1,6 +1,7 @@
 # http://eslint.org/docs/rules/
 
 parserOptions:
+  sourceType: module
   ecmaFeatures:
     impliedStrict: true
 env:
