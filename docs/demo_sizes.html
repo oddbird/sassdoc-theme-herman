@@ -501,6 +501,17 @@ $xlarge: 28px;
 
   
   
+    
+    
+
+    
+
+    
+
+    
+
+    
+  
 
 </section>
 
@@ -597,10 +608,11 @@ directly in a Herman-friendly<span class="widont">&nbsp;</span>map.</p>
 to organize different types of ratios –
 text, spacing, etc.
 Each map will be displayed individually,
-using the <code>@preview ratios</code> annotation:</p>
-<pre><code class="lang-scss">// @preview ratios; count: 4
+using the <code>@ratios</code> annotation:</p>
+<pre><code class="lang-scss">// @ratios count: 4
 </code></pre>
-<p>The <code>ratios</code> preview accepts an optional <code>count</code> argument (defaults to <code>6</code>) –
+<p>The <code>@ratios</code> annotation
+accepts an optional <code>count</code> argument (defaults to <code>6</code>) –
 the number of ratio calculations to display,
 up to a maximum of <code>10</code>.</p>
 
@@ -652,6 +664,89 @@ up to a maximum of <code>10</code>.</p>
   
 
   
+  
+    
+    
+
+    
+
+    
+
+    
+      
+  
+  <div data-item-section="ratio-preview">
+    
+      <h3 class="item-subtitle">
+        Ratio Previews
+        
+      </h3>
+    
+
+    
+    
+      <div data-sassdoc="ratio-preview">
+        
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">herman-ratio:</span>
+      
+      <span class="item-value">1.4</span>
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+
+        <div data-sassdoc="ratio-demos">
+          
+          
+            
+            <span data-sassdoc="ratio-demo" style="font-size: 1em;">
+              1
+            </span>
+          
+            
+            <span data-sassdoc="ratio-demo" style="font-size: 1.4em;">
+              1.4
+            </span>
+          
+            
+            <span data-sassdoc="ratio-demo" style="font-size: 1.9599999999999997em;">
+              1.96
+            </span>
+          
+            
+            <span data-sassdoc="ratio-demo" style="font-size: 2.7439999999999993em;">
+              2.74
+            </span>
+          
+            
+            <span data-sassdoc="ratio-demo" style="font-size: 3.841599999999999em;">
+              3.84
+            </span>
+          
+            
+            <span data-sassdoc="ratio-demo" style="font-size: 5.378239999999998em;">
+              5.38
+            </span>
+          
+        </div>
+      </div>
+    
+  
+  </div>
+
+
+    
+
+    
   
 
 </section>
@@ -747,10 +842,10 @@ directly in a Herman-friendly<span class="widont">&nbsp;</span>map.</p>
 );
 </code></pre>
 <p>Each map will be displayed individually,
-using the <code>@preview sizes</code> annotation:</p>
-<pre><code class="lang-scss">// @preview sizes; style: ruler
+using the <code>@sizes</code> annotation:</p>
+<pre><code class="lang-scss">// @sizes style: ruler
 </code></pre>
-<p>The <code>sizes</code> preview accepts an optional <code>style</code> argument
+<p>The <code>@sizes</code> annotation accepts an optional <code>style</code> argument
 (defaulting to <code>text</code>),
 which specifies the type of output to<span class="widont">&nbsp;</span>display:</p>
 <ul>
@@ -807,6 +902,100 @@ which specifies the type of output to<span class="widont">&nbsp;</span>display:<
   
 
   
+  
+    
+    
+
+    
+
+    
+
+    
+
+    
+      
+  
+  <div data-item-section="size-preview">
+    
+      <h3 class="item-subtitle">
+        Size Previews
+        
+      </h3>
+    
+
+    
+    
+      <div data-sassdoc="size-preview">
+        
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">root:</span>
+      
+      <span class="item-value">18px</span>
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+        
+          <div data-size-demo="text" style="font-size: 18px;">
+            
+              
+  
+    <span data-specimen-lorem="title">
+      Pack my box with five dozen liquor&nbsp;jugs.
+    </span>
+  
+
+            
+          </div>
+        
+      </div>
+    
+      <div data-sassdoc="size-preview">
+        
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">xlarge:</span>
+      
+      <span class="item-value">28px</span>
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+        
+          <div data-size-demo="text" style="font-size: 28px;">
+            
+              
+  
+    <span data-specimen-lorem="title">
+      Pack my box with five dozen liquor&nbsp;jugs.
+    </span>
+  
+
+            
+          </div>
+        
+      </div>
+    
+  
+  </div>
+
+
+    
   
 
 </section>
@@ -1008,6 +1197,17 @@ it can be converted to JSON using <code>herman-export</code>.</p>
   
 
   
+  
+    
+    
+
+    
+
+    
+
+    
+
+    
   
 
 </section>

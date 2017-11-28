@@ -7,7 +7,7 @@
 /// We use bright primary colors for the main brand,
 /// everything else is based on these colors.
 ///
-/// @preview color-palette
+/// @colors
 /// @group config-colors
 /// @link http://oddbird.net/accoutrement-color/docs/
 ///   Accoutrement Color
@@ -33,7 +33,7 @@ $brand-colors: (
 /// Use these neutral colors
 /// to create structure and hierarchy in the document.
 ///
-/// @preview color-palette
+/// @colors
 /// @group config-colors
 /// @link http://oddbird.net/accoutrement-color/docs/
 ///   Accoutrement Color
@@ -51,7 +51,7 @@ $neutral-colors: (
 /// These status colors for UI elements
 /// give a quick sense of progress, warning, or errors.
 ///
-/// @preview color-palette
+/// @colors
 /// @group config-colors
 /// @link http://oddbird.net/accoutrement-color/docs/
 ///   Accoutrement Color
@@ -69,7 +69,7 @@ $status-colors: (
 /// Applying the brand and accent colors
 /// to a sitewide theme.
 ///
-/// @preview color-palette
+/// @colors
 /// @group config-colors
 /// @link http://oddbird.net/accoutrement-color/docs/
 ///   Accoutrement Color
@@ -102,7 +102,7 @@ $theme-colors: (
 /// Colors used by accoutrement-color
 /// to calculate contrast ratios.
 ///
-/// @preview color-palette
+/// @colors
 /// @group config-colors
 /// @link http://oddbird.net/accoutrement-color/docs/
 ///   Accoutrement Color

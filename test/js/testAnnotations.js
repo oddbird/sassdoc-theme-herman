@@ -93,7 +93,6 @@ describe('colors annotation', function() {
   describe('parse', function() {
     it('parses CSS-like options and returns object', function() {
       assert.deepEqual(this.colors.parse('foo : bar ; baz ;'), {
-        type: 'color-palette',
         foo: 'bar',
         baz: null,
       });
@@ -109,7 +108,6 @@ describe('sizes annotation', function() {
   describe('parse', function() {
     it('parses CSS-like options and returns object', function() {
       assert.deepEqual(this.sizes.parse('foo : bar ; baz ;'), {
-        type: 'sizes',
         foo: 'bar',
         baz: null,
       });
@@ -125,7 +123,6 @@ describe('ratios annotation', function() {
   describe('parse', function() {
     it('parses CSS-like options and returns object', function() {
       assert.deepEqual(this.ratios.parse('foo : bar ; baz ;'), {
-        type: 'ratios',
         foo: 'bar',
         baz: null,
       });

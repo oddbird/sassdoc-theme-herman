@@ -10,4 +10,5 @@ test/js/dest/
 *~
 .livereload
 *.orig
-dist/
+*.css.map
+*.js.map

@@ -502,6 +502,17 @@ $brand-pink: hsl(330, 85%, 48%);
 
   
   
+    
+    
+
+    
+
+    
+
+    
+
+    
+  
 
 </section>
 
@@ -595,16 +606,16 @@ directly in a Herman-friendly<span class="widont">&nbsp;</span>map.</p>
 to organize different palettes –
 primary, secondary, button-colors, etc.
 Each map will be displayed individually,
-using the <code>@preview color-palette</code> annotation:</p>
-<pre><code class="lang-scss">// @preview color-palette
+using the <code>@colors</code> annotation:</p>
+<pre><code class="lang-scss">// @colors
 </code></pre>
-<p>The <code>color-palette</code> preview accepts an optional <code>key</code> argument,
+<p>The <code>@colors</code> annotation accepts an optional <code>key</code> argument,
 which defaults to the map-variable name.
 That key will be used to access the data from JSON,
 so it doesn’t matter what key is used,
 as long as the key given here matches the group-name
 used when adding this data to <code>$herman</code>.</p>
-<pre><code class="lang-scss">// @preview color-palette; key: my-colors
+<pre><code class="lang-scss">// @colors key: my-colors
 </code></pre>
 <p>By default, our color palettes display
 <code>name</code>, <code>hex</code>, <code>rgb(a)</code>, and <code>hsl(a)</code> for every color.
@@ -666,6 +677,92 @@ using the <code>herman.displayColors</code> option:</p>
 
   
   
+    
+    
+
+    
+
+    
+      
+  
+  <div data-item-section="color-palette">
+    
+      <h3 class="item-subtitle">
+        Color Previews
+        
+      </h3>
+    
+
+    
+    <div class="color-palette">
+      
+        <div class="color-preview">
+          <div class="color-swatch">
+            <div class="transparency-grid"></div>
+            <div class="color-overlay" style="background-color: #0d7fa5;"></div>
+          </div>
+          <div class="color-info">
+            <strong class="color-name">
+              
+                <span class="color-name-option">brand-blue</span>
+              
+            </strong>
+            
+            
+              
+                
+                  <code class="color-value">#0d7fa5</code>
+                
+              
+                
+              
+                
+                  <code class="color-value">hsl(195, 85%, 35%)</code>
+                
+              
+            
+          </div>
+        </div>
+      
+        <div class="color-preview">
+          <div class="color-swatch">
+            <div class="transparency-grid"></div>
+            <div class="color-overlay" style="background-color: #e2127a;"></div>
+          </div>
+          <div class="color-info">
+            <strong class="color-name">
+              
+                <span class="color-name-option">brand-pink</span>
+              
+            </strong>
+            
+            
+              
+                
+                  <code class="color-value">#e2127a</code>
+                
+              
+                
+              
+                
+                  <code class="color-value">hsl(330, 85%, 48%)</code>
+                
+              
+            
+          </div>
+        </div>
+      
+    </div>
+  
+  </div>
+
+
+    
+
+    
+
+    
+  
 
 </section>
 
@@ -713,7 +810,7 @@ so colors defined in Sass can be accessed in<span class="widont">&nbsp;</span>Ja
 <li>The second argument sets a <code>key</code> name
 for accessing this particular group of colors.
 The <code>herman-add</code> key should match
-the key provided to <code>@preview color-palette</code>.</li>
+the key provided to <code>@colors</code>.</li>
 <li>The third argument provides the actual map of data
 to be added to the <code>$herman</code> export map.</li>
 </ul>
@@ -844,6 +941,17 @@ to be added to the <code>$herman</code> export map.</li>
   
 
   
+  
+    
+    
+
+    
+
+    
+
+    
+
+    
   
 
 </section>
@@ -1066,6 +1174,120 @@ $demo-noncolors: (
   
 
   
+  
+    
+    
+
+    
+
+    
+      
+  
+  <div data-item-section="color-palette">
+    
+      <h3 class="item-subtitle">
+        Color Previews
+        
+      </h3>
+    
+
+    
+    <div class="color-palette">
+      
+        <div class="color-preview">
+          <div class="color-swatch">
+            <div class="transparency-grid"></div>
+            <div class="color-overlay" style="background-color: #dedede;"></div>
+          </div>
+          <div class="color-info">
+            <strong class="color-name">
+              
+                <span class="color-name-option">light-gray</span>
+              
+            </strong>
+            
+            
+              
+                
+                  <code class="color-value">#dedede</code>
+                
+              
+                
+              
+                
+                  <code class="color-value">hsl(0, 0%, 87%)</code>
+                
+              
+            
+          </div>
+        </div>
+      
+        <div class="color-preview">
+          <div class="color-swatch">
+            <div class="transparency-grid"></div>
+            <div class="color-overlay" style="background-color: #555b5e;"></div>
+          </div>
+          <div class="color-info">
+            <strong class="color-name">
+              
+                <span class="color-name-option">gray</span>
+              
+            </strong>
+            
+            
+              
+                
+                  <code class="color-value">#555b5e</code>
+                
+              
+                
+              
+                
+                  <code class="color-value">hsl(200, 5%, 35%)</code>
+                
+              
+            
+          </div>
+        </div>
+      
+        <div class="color-preview">
+          <div class="color-swatch">
+            <div class="transparency-grid"></div>
+            <div class="color-overlay" style="background-color: #3b4042;"></div>
+          </div>
+          <div class="color-info">
+            <strong class="color-name">
+              
+                <span class="color-name-option">black</span>
+              
+            </strong>
+            
+            
+              
+                
+                  <code class="color-value">#3b4042</code>
+                
+              
+                
+              
+                
+                  <code class="color-value">hsl(197, 6%, 25%)</code>
+                
+              
+            
+          </div>
+        </div>
+      
+    </div>
+  
+  </div>
+
+
+    
+
+    
+
+    
   
 
 </section>

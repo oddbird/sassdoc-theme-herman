@@ -8,31 +8,25 @@
   Call the requested previews with the appropriate JSON data.
 #}
 {% macro show_previews(data, item) %}
-  {% if data and item and (item.preview or item.font) %}
-    {% set args = item.preview or item.font %}
-    {% set type = args.type if item.preview else 'font' %}
+  {% if data and item %}
+    {% set args = item.font or item.colors or item.ratios or item.sizes %}
     {% set key = args.key or item.context.origName or item.context.name %}
 
-    {% set preview_options = {
-      'color-palette': 'colors',
-      'font': 'fonts',
-      'ratios': 'ratios',
-      'sizes': 'sizes'
-    } %}
-
-    {% set data_type = preview_options[type] %}
-    {% set data = data[data_type][key] %}
-
-    {% if type == 'color-palette' %}
-      {{ color_palette(data) }}
-    {% elif type == 'font' %}
-      {{ font_specimen(key, data, item.iframed) }}
-    {% elif type == 'ratios' %}
-      {{ ratios(data, args) }}
-    {% elif type == 'sizes' %}
-      {{ sizes(data, args) }}
+    {% if item.font %}
+      {{ font_specimen(key, data.fonts[key], item.iframed) }}
     {% endif %}
 
+    {% if item.colors %}
+      {{ color_palette(data.colors[key]) }}
+    {% endif %}
+
+    {% if item.ratios %}
+      {{ ratios(data.ratios[key], args) }}
+    {% endif %}
+
+    {% if item.sizes %}
+      {{ sizes(data.sizes[key], args) }}
+    {% endif %}
   {% endif %}
 {% endmacro %}
 

@@ -51,17 +51,18 @@ $xlarge: 28px;
 /// to organize different types of ratios --
 /// text, spacing, etc.
 /// Each map will be displayed individually,
-/// using the `@preview ratios` annotation:
+/// using the `@ratios` annotation:
 ///
 /// ```scss
-/// // @preview ratios; count: 4
+/// // @ratios count: 4
 /// ```
 ///
-/// The `ratios` preview accepts an optional `count` argument (defaults to `6`) --
+/// The `@ratios` annotation
+/// accepts an optional `count` argument (defaults to `6`) --
 /// the number of ratio calculations to display,
 /// up to a maximum of `10`.
 ///
-/// @preview ratios
+/// @ratios
 /// @group demo_sizes
 $demo-ratios: (
   'herman-ratio': $herman-ratio
@@ -88,13 +89,13 @@ $demo-ratios: (
 /// ```
 ///
 /// Each map will be displayed individually,
-/// using the `@preview sizes` annotation:
+/// using the `@sizes` annotation:
 ///
 /// ```scss
-/// // @preview sizes; style: ruler
+/// // @sizes style: ruler
 /// ```
 ///
-/// The `sizes` preview accepts an optional `style` argument
+/// The `@sizes` annotation accepts an optional `style` argument
 /// (defaulting to `text`),
 /// which specifies the type of output to display:
 ///
@@ -102,7 +103,7 @@ $demo-ratios: (
 /// - `ruler`: Displays a pattern of shapes spaced at the given size.
 /// - `output-only`: Displays values only, without demonstration.
 ///
-/// @preview sizes
+/// @sizes
 /// @group demo_sizes
 $demo-sizes: (
   'root': $root,
