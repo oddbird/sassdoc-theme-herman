@@ -34,6 +34,8 @@
   [#155](https://github.com/oddbird/sassdoc-theme-herman/issues/155)
 - NEW: Add site-wide search --
   [#28](https://github.com/oddbird/sassdoc-theme-herman/issues/28)
+- CHANGE: Bundle static assets with Webpack; precompile JS with Babel --
+  [#205](https://github.com/oddbird/sassdoc-theme-herman/issues/205)
 
 
 ## 1.0.0-alpha.15: 2017-10-30

@@ -1,7 +1,9 @@
 # http://eslint.org/docs/rules/
 
 root: true
+parser: babel-eslint
 parserOptions:
+  sourceType: module
   ecmaVersion: 2015
 env:
   es6: true
