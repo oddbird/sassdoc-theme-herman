@@ -10,7 +10,7 @@
 /// A data attribute for setting an icon.
 /// @group style-icons
 /// @example njk
-///   {% import 'utility.macros.j2' as utility %}
+///   {% import 'utility.macros.njk' as utility %}
 ///   {{ utility.icon('menu', size='icon-small') }}
 [data-icon] {
   fill: currentColor;

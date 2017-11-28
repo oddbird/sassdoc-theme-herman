@@ -151,7 +151,7 @@
 /// @group demo_examples
 ///
 /// @example njk
-///   {% import 'utility.macros.j2' as utility %}
+///   {% import 'utility.macros.njk' as utility %}
 ///
 ///   {{ utility.link_if('This is a link', '#0') }}<br />
 ///   {{ utility.link_if('This is not a link', none) }}

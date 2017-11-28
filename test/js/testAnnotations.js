@@ -428,13 +428,13 @@ describe('example annotation', function() {
             {
               type: 'njk',
               code:
-                "{% import 'macros.j2' as macros %}\n" +
+                "{% import 'macros.njk' as macros %}\n" +
                 '{{ macros.mymacro(1, 2) }}',
             },
             {
               type: 'njk',
               code:
-                "{% import 'macros.j2' as macros %}\n" +
+                "{% import 'macros.njk' as macros %}\n" +
                 '{{ macros.mymacro(1, 2) }}',
             },
           ],
@@ -611,7 +611,7 @@ describe('example annotation', function() {
             {
               type: 'njk',
               code:
-                "{% import 'macros.j2' as macros %}\n" +
+                "{% import 'macros.njk' as macros %}\n" +
                 '{{ macros.mymacro(1, 2) }}',
             },
           ],
@@ -642,7 +642,7 @@ describe('example annotation', function() {
             {
               type: 'njk',
               code:
-                "{% import 'macros.j2' as macros %}\n" +
+                "{% import 'macros.njk' as macros %}\n" +
                 '{{ macros.macro_with_custom_filter(5) }}',
             },
           ],

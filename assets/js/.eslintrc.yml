@@ -1,9 +1,11 @@
 # http://eslint.org/docs/rules/
 
+parserOptions:
+  sourceType: module
+  ecmaFeatures:
+    impliedStrict: true
 env:
   browser: true
+  commonjs: true
+  jquery: true
   node: false
-rules:
-  strict:
-    - 2
-    - function
