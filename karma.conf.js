@@ -1,10 +1,37 @@
-// Karma configuration
-// Generated on Mon Nov 27 2017 11:43:35 GMT-0700 (MST)
+/* eslint-disable no-process-env */
+
+'use strict';
+
+process.env.BABEL_ENV = 'test';
 
 const extend = require('extend');
+const webpack = require('webpack');
+// Use extend instead of Object.assign to do a deep merge,
+// because we're modifying nested properties on the new object.
 const webpackConf = extend(true, {}, require('./webpack.config.js'));
 
-module.exports = function karma(config) {
+Reflect.deleteProperty(webpackConf.entry, 'app_styles');
+Reflect.deleteProperty(webpackConf.entry, 'styleguide_json');
+webpackConf.plugins = [
+  new webpack.WatchIgnorePlugin([
+    /flycheck_/,
+    /\.#/,
+    /#$/,
+    // don't watch the context directories we add in test/js/index.js; see
+    // https://github.com/webpack/webpack/issues/2156
+    /test\/js\/app$/,
+    /assets\/js\/assets$/,
+  ]),
+  new webpack.ProvidePlugin({
+    $: 'jquery',
+    jQuery: 'jquery',
+    'window.jQuery': 'jquery',
+    'root.jQuery': 'jquery',
+  }),
+  new webpack.LoaderOptionsPlugin({ debug: true }),
+];
+
+module.exports = config => {
   config.set({
     // base path that will be used to resolve all patterns (eg. files, exclude)
     basePath: '',
@@ -13,32 +40,45 @@ module.exports = function karma(config) {
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
     frameworks: ['mocha', 'chai-sinon'],
 
+    client: { mocha: { ui: 'bdd' } },
+
     // list of files / patterns to load in the browser
-    files: [
-      'assets/js/vendor/highlight.js',
-      'assets/js/base.js',
-      'assets/js/init.js',
-      'test/clientjs/**/*.js',
-    ],
+    files: ['test/clientjs/index.js'],
 
     // list of files to exclude
     exclude: [],
 
     // preprocess matching files before serving them to the browser
-    // available preprocessors:
     // https://npmjs.org/browse/keyword/karma-preprocessor
-    preprocessors: {
-      'test/clientjs/**/*.js': ['webpack'],
-      'assets/js/**/*.js': ['webpack'],
-      'assets/js/base.js': ['webpack', 'coverage'],
-    },
+    preprocessors: { 'test/clientjs/index.js': ['webpack', 'sourcemap'] },
 
     webpack: webpackConf,
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress', 'coverage'],
+    reporters: ['dots', 'mocha', 'coverage'],
+
+    // reporter options
+    mochaReporter: {
+      output: 'minimal',
+      showDiff: true,
+    },
+
+    coverageReporter: {
+      dir: 'jscov/client/',
+      reporters: [
+        { type: 'html', subdir: '.' },
+        { type: 'json', subdir: '.' },
+        { type: 'text' },
+      ],
+      instrumenterOptions: { istanbul: { noCompact: true } },
+    },
+
+    // results will be saved as $outputDir/$browserName.xml
+    junitReporter: { outputDir: 'jscov/client/' },
+
+    webpackMiddleware: { noInfo: true },
 
     // web server port
     port: 9876,
@@ -47,26 +87,19 @@ module.exports = function karma(config) {
     colors: true,
 
     // level of logging
-    // possible values:
-    // config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN ||
-    // config.LOG_INFO || config.LOG_DEBUG
-    logLevel: config.LOG_INFO,
+    // possible values: config.LOG_DISABLE, config.LOG_ERROR, config.LOG_WARN,
+    // config.LOG_INFO, config.LOG_DEBUG
+    logLevel: 'WARN',
 
-    // enable / disable watching file and executing tests whenever any file
-    // changes
-    autoWatch: true,
+    // enable/disable watching file and executing tests whenever a file changes
+    autoWatch: false,
 
     // start these browsers
-    // available browser launchers:
-    // https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome'],
+    // available launchers: https://npmjs.org/browse/keyword/karma-launcher
+    browsers: ['ChromeHeadless'],
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
     singleRun: true,
-
-    // Concurrency level
-    // how many browser should be started simultaneous
-    concurrency: Infinity,
   });
 };

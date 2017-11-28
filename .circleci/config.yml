@@ -43,18 +43,22 @@ jobs:
           name: Run JS Tests [node latest]
           command: |
             gulp jstest
-            yarn coveralls
+            nyc check-coverage --statements=100 --functions=100 --branches=100 --lines=100
+            nyc report --reporter=text-lcov | coveralls
       - run:
-          name: Run Tests [node 6]
+          name: Run Client JS Tests & Check Coverage
+          command: |
+            gulp clienttest-check-coverage
+            nyc report --reporter=text-lcov --temp-directory ./jscov/client/ | coveralls
+      - run:
+          name: Run JS Tests [node 6]
           command: |
             export NVM_DIR="$HOME/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
             nvm install 6.2.2
             yarn install --force
             gulp jstest
-      - run:
-          name: Check JS Test Coverage
-          command: nyc check-coverage --statements=100 --functions=100 --branches=100 --lines=100
+            nyc check-coverage --statements=100 --functions=100 --branches=100 --lines=100
       - deploy:
           name: Update yarn.lock [greenkeeper]
           command: |

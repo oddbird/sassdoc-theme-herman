@@ -1,0 +1,20 @@
+# http://eslint.org/docs/rules/
+
+parserOptions:
+  sourceType: module
+  ecmaFeatures:
+    impliedStrict: true
+env:
+  browser: true
+  commonjs: true
+  jquery: true
+  mocha: true
+  node: false
+globals:
+  chai: true
+  expect: true
+  sinon: true
+rules:
+  func-names: 0
+  no-unused-expressions: 0
+  prefer-arrow-callback: 0

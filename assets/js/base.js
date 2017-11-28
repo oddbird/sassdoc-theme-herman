@@ -1,22 +1,3 @@
-// Store keycode variables for easier readability
-const KEYCODES = {
-  SPACE: 32,
-  ENTER: 13,
-  TAB: 9,
-  ESC: 27,
-  BACKSPACE: 8,
-  SHIFT: 16,
-  CTRL: 17,
-  ALT: 18,
-  CAPS: 20,
-  LEFT: 37,
-  UP: 38,
-  RIGHT: 39,
-  DOWN: 40,
-  DELETE: 46,
-  COMMA: 44,
-};
-
 export const initializeToggles = () => {
   const body = $('body');
 
@@ -123,67 +104,6 @@ export const initializeToggles = () => {
     openTargets.each((index, target) => {
       autoClose($(evt.target), $(target));
     });
-  });
-};
-
-export const initializeTabs = () => {
-  const body = $('body');
-
-  const getAllTabsInGroup = tab => {
-    const group = tab.attr('data-tab-group');
-    return $(`[role="tab"][data-tab-group="${group}"]`);
-  };
-
-  const getAllPanelsInGroup = tab => {
-    const group = tab.attr('data-tab-group');
-    return $(`[role="tabpanel"][data-tab-group="${group}"]`);
-  };
-
-  const showPanel = tab => {
-    const tabs = getAllTabsInGroup(tab);
-    const panels = getAllPanelsInGroup(tab);
-    const panel = panels.filter(`[aria-labelledby="${tab.attr('id')}"]`);
-    tab.attr({ tabindex: 0, 'aria-selected': true });
-    tabs
-      .not(tab)
-      .attr('tabindex', -1)
-      .removeAttr('aria-selected');
-    panel.removeAttr('aria-hidden').trigger('visible');
-    panels.not(panel).attr('aria-hidden', true);
-    tab.trigger('tab:active');
-  };
-
-  body.on('tabs:close', '[role="tab"]', function cb() {
-    const tab = $(this);
-    const tabs = getAllTabsInGroup(tab);
-    const panels = getAllPanelsInGroup(tab);
-    tabs.attr('tabindex', -1).removeAttr('aria-selected');
-    panels.attr('aria-hidden', true);
-  });
-
-  body.on('click', '[role="tab"]', function cb(evt) {
-    evt.preventDefault();
-    showPanel($(this));
-  });
-
-  body.on('keydown', '[role="tab"]', function cb(evt) {
-    const tab = $(this);
-    const tabs = getAllTabsInGroup(tab);
-    const idx = tabs.index(tab);
-    let targetIdx = idx;
-    switch (evt.which) {
-      case KEYCODES.LEFT:
-        targetIdx = idx > 0 ? idx - 1 : idx;
-        break;
-      case KEYCODES.RIGHT:
-        targetIdx = idx + 1;
-        break;
-    }
-    const target = tabs.eq(targetIdx);
-    if (idx !== targetIdx && target.length) {
-      showPanel(target);
-      target.focus();
-    }
   });
 };
 
