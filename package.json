@@ -94,11 +94,11 @@
       "prettier --write",
       "git add"
     ],
-    "assets/js/{base,init}.js": [
+    "assets/js/{base,init,search}.js": [
       "prettier --write",
       "git add"
     ],
-    "{gulpfile,index,.babelrc}.js": [
+    "{gulpfile,index,.babelrc,postcss.config,sass-json-loader,webpack.config}.js": [
       "prettier --write",
       "git add"
     ]
