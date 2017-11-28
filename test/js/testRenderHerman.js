@@ -125,7 +125,7 @@ describe('renderHerman', function() {
       },
     })
       .then(ctx => renderHerman(this.dest, ctx))
-      .then(() => access(`${this.dest}/assets/css/custom/main.css`))
+      .then(() => access(`${this.dest}/assets/custom/main.css`))
       .then(() => {
         assert.ok(true);
         done();
