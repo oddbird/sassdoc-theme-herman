@@ -174,7 +174,7 @@ window.Herman = (function base(Herman, $) {
       const tabs = getAllTabsInGroup(tab);
       const idx = tabs.index(tab);
       let targetIdx = idx;
-      switch (evt.keyCode) {
+      switch (evt.which) {
         case KEYCODES.LEFT:
           targetIdx = idx > 0 ? idx - 1 : idx;
           break;
@@ -188,6 +188,14 @@ window.Herman = (function base(Herman, $) {
         target.focus();
       }
     });
+  };
+
+  Herman.getUrlParams = () => {
+    let params = {};
+    if (typeof window.deparam !== 'undefined') {
+      params = window.deparam(window.location.search.substr(1));
+    }
+    return params;
   };
 
   Herman.initializeIframes = function initializeIframes() {
@@ -207,6 +215,128 @@ window.Herman = (function base(Herman, $) {
       fitIframeToContent(this);
     });
     $(window).on('resize', fitIframesToContent);
+  };
+
+  const showResults = function(results, val) {
+    let matches = $();
+    if (results && results.length) {
+      for (const res of results) {
+        const doc = Herman.searchStore[res.ref];
+        const toMark = {
+          title: [],
+          contents: [],
+        };
+        Object.keys(res.matchData.metadata).forEach(term => {
+          Object.keys(res.matchData.metadata[term]).forEach(fieldName => {
+            // For each term found in each field, store position of matches
+            const pos = res.matchData.metadata[term][fieldName].position.map(
+              p => ({
+                start: p[0],
+                length: p[1],
+              })
+            );
+            // @@@ Temporary solution until fieldname bug is fixed:
+            // https://github.com/olivernn/lunr.js/issues/320
+            const field = fieldName === 'title' ? 'title' : 'contents';
+            toMark[field] = toMark[field].concat(pos);
+          });
+        });
+        if (!(toMark.title.length || toMark.contents.length)) {
+          return;
+        }
+        const obj = {
+          url: `/${res.ref}`,
+          title: doc.title,
+          contents: toMark.contents.length ? doc.contents : '',
+        };
+        // Render search result template
+        const el = $(window.nunjucks.render('search_result.j2', obj));
+        if (toMark.title.length) {
+          // Highlight matches in `title` field
+          el.find(`[data-result-field="title"]`).markRanges(toMark.title);
+        }
+        if (toMark.contents.length) {
+          const textEl = el.find(`[data-result-field="contents"]`);
+          toMark.contents.sort((a, b) => a.start - b.start);
+          // Highlight first 5 matches in `contents` field
+          textEl.markRanges(toMark.contents.slice(0, 5), {
+            done: () => {
+              // Truncate text not within 15 words of a match
+              textEl.get(0).childNodes.forEach(node => {
+                const hasPrev = node.previousSibling !== null;
+                const hasNext = node.nextSibling !== null;
+                const isText = node.nodeName === '#text';
+                if (isText) {
+                  const text = node.nodeValue.split(' ');
+                  if (hasPrev && hasNext) {
+                    if (text.length > 30) {
+                      text.splice(15, text.length - 30, '…');
+                    }
+                  } else if (hasNext) {
+                    if (text.length > 15) {
+                      text.splice(0, text.length - 15, '…');
+                    }
+                  } else if (hasPrev) {
+                    if (text.length > 15) {
+                      text.splice(15, text.length - 15, '…');
+                    }
+                  }
+                  node.nodeValue = text.join(' ');
+                }
+              });
+            },
+          });
+        }
+        // Add search result template to set of results
+        matches = matches.add(el);
+      }
+    }
+    const tpl = $(
+      window.nunjucks.render('search_results.j2', {
+        term: val,
+        count: matches.length,
+      })
+    );
+    tpl.filter('.js-search-results').html(matches);
+    $('[data-sassdoc-page]').html(tpl);
+  };
+
+  const doSearch = function(data, val) {
+    // Grab doc store from data
+    Herman.searchStore = data.store;
+    // Initialize Lunr index from precompiled data
+    const idx = window.lunr.Index.load(data.idx);
+    const results = idx.search(val);
+    showResults(results, val);
+  };
+
+  Herman.getSearchData = function getSearchData() {
+    const params = Herman.getUrlParams();
+    const hasLunr = typeof window.lunr !== 'undefined';
+    const hasNunjucks = typeof window.nunjucks !== 'undefined';
+    // Only fetch search data if on search results page with query term
+    if (params && params.q && hasLunr && hasNunjucks) {
+      const request = new XMLHttpRequest();
+      request.open('GET', '/search-data.json', true);
+
+      request.onload = function onload() {
+        let data;
+        if (this.status >= 200 && this.status < 400) {
+          try {
+            data = JSON.parse(this.responseText);
+          } catch (e) {
+            // swallow error
+          }
+        }
+        doSearch(data, params.q);
+      };
+
+      request.onerror = function onerror() {
+        doSearch(undefined, params.q);
+      };
+
+      request.send();
+    }
   };
 
   return Herman;

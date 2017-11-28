@@ -19,6 +19,10 @@
     normalize-path "^2.0.1"
     through2 "^2.0.3"
 
+"@types/node@*":
+  version "8.0.53"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-8.0.53.tgz#396b35af826fa66aad472c8cb7b8d5e277f4e6d8"
+
 abbrev@1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/abbrev/-/abbrev-1.1.1.tgz#f8f2c887ad10bf67f634f005b6987fed3179aac8"
@@ -771,6 +775,17 @@ cheerio@^0.22.0:
     lodash.reduce "^4.4.0"
     lodash.reject "^4.4.0"
     lodash.some "^4.4.0"
+
+cheerio@^1.0.0-rc.2:
+  version "1.0.0-rc.2"
+  resolved "https://registry.yarnpkg.com/cheerio/-/cheerio-1.0.0-rc.2.tgz#4b9f53a81b27e4d5dac31c0ffd0cfa03cc6830db"
+  dependencies:
+    css-select "~1.2.0"
+    dom-serializer "~0.1.0"
+    entities "~1.1.1"
+    htmlparser2 "^3.9.1"
+    lodash "^4.15.0"
+    parse5 "^3.0.1"
 
 chokidar@1.7.0, chokidar@^1.6.0:
   version "1.7.0"
@@ -2645,6 +2660,14 @@ gulp-imagemin@^4.0.0:
     imagemin-optipng "^5.2.1"
     imagemin-svgo "^6.0.0"
 
+gulp-nunjucks@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/gulp-nunjucks/-/gulp-nunjucks-3.0.0.tgz#77cb31d61632a1ae10d2e1f8c0a8cf82659fcf47"
+  dependencies:
+    gulp-util "^3.0.0"
+    nunjucks "^3.0.0"
+    through2 "^2.0.0"
+
 gulp-prettier-plugin@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/gulp-prettier-plugin/-/gulp-prettier-plugin-1.1.0.tgz#31befd7d51f62fdd060f6fe8e32aea4f264c9fb9"
@@ -4230,7 +4253,7 @@ lodash@^3.10.1:
   version "3.10.1"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-3.10.1.tgz#5bf45e8e49ba4189e17d482789dfd15bd140b7b6"
 
-lodash@^4.0.0, lodash@^4.11.1, lodash@^4.17.4, lodash@^4.3.0, lodash@~4.17.4:
+lodash@^4.0.0, lodash@^4.11.1, lodash@^4.15.0, lodash@^4.17.4, lodash@^4.3.0, lodash@~4.17.4:
   version "4.17.4"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
 
@@ -4326,6 +4349,10 @@ lru-queue@0.1:
   resolved "https://registry.yarnpkg.com/lru-queue/-/lru-queue-0.1.0.tgz#2738bd9f0d3cf4f84490c5736c48699ac632cda3"
   dependencies:
     es5-ext "~0.10.2"
+
+lunr@^2.1.4:
+  version "2.1.4"
+  resolved "https://registry.yarnpkg.com/lunr/-/lunr-2.1.4.tgz#52be0a9d068321909a7fb46575620e24417d5591"
 
 make-dir@^1.0.0:
   version "1.1.0"
@@ -4813,7 +4840,7 @@ number-is-nan@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/number-is-nan/-/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
 
-nunjucks@^2.5.2:
+nunjucks@^2.5.2, nunjucks@^3.0.0:
   version "2.5.2"
   resolved "https://registry.yarnpkg.com/nunjucks/-/nunjucks-2.5.2.tgz#ea7d346e785b8a4874666c3cca9e18c577fba22c"
   dependencies:
@@ -5150,6 +5177,12 @@ parse-json@^3.0.0:
 parse-passwd@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/parse-passwd/-/parse-passwd-1.0.0.tgz#6d5b934a456993b23d37f40a382d6f1666a8e5c6"
+
+parse5@^3.0.1:
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/parse5/-/parse5-3.0.3.tgz#042f792ffdd36851551cf4e9e066b3874ab45b5c"
+  dependencies:
+    "@types/node" "*"
 
 parsejson@0.0.3:
   version "0.0.3"

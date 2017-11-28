@@ -5,6 +5,17 @@
 /// # Herman Typography
 /// @group style-typography
 
+::selection {
+  background-color: color('callout');
+}
+
+
+mark {
+  background-color: color('callout');
+  display: inline-block;
+  padding: 0 size('quarter-shim');
+}
+
 
 // Links
 // -----
