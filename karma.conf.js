@@ -1,9 +1,11 @@
 // Karma configuration
 // Generated on Mon Nov 27 2017 11:43:35 GMT-0700 (MST)
 
-module.exports = function(config) {
-  config.set({
+const extend = require('extend');
+const webpackConf = extend(true, {}, require('./webpack.config.js'));
 
+module.exports = function karma(config) {
+  config.set({
     // base path that will be used to resolve all patterns (eg. files, exclude)
     basePath: '',
 
@@ -13,23 +15,27 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      "assets/js/jquery-3.1.1.slim.js",
-      "assets/js/srcdoc-polyfill.min.js",
-      "assets/js/highlight.js",
-      "assets/js/base.js",
-      "assets/js/init.js",
-      'test/clientjs/**/*.js'
+      'assets/js/jquery-3.1.1.slim.js',
+      'assets/js/srcdoc-polyfill.min.js',
+      'assets/js/highlight.js',
+      'assets/js/base.js',
+      'assets/js/init.js',
+      'test/clientjs/**/*.js',
     ],
 
     // list of files to exclude
-    exclude: [
-    ],
+    exclude: [],
 
     // preprocess matching files before serving them to the browser
-    // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
+    // available preprocessors:
+    // https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'assets/js/base.js': 'coverage',
+      'test/clientjs/**/*.js': ['webpack'],
+      'assets/js/**/*.js': ['webpack'],
+      'assets/js/base.js': ['coverage', 'webpack'],
     },
+
+    webpack: webpackConf,
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
@@ -43,14 +49,18 @@ module.exports = function(config) {
     colors: true,
 
     // level of logging
-    // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
+    // possible values:
+    // config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN ||
+    // config.LOG_INFO || config.LOG_DEBUG
     logLevel: config.LOG_INFO,
 
-    // enable / disable watching file and executing tests whenever any file changes
+    // enable / disable watching file and executing tests whenever any file
+    // changes
     autoWatch: true,
 
     // start these browsers
-    // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
+    // available browser launchers:
+    // https://npmjs.org/browse/keyword/karma-launcher
     browsers: ['Chrome'],
 
     // Continuous Integration mode
@@ -59,6 +69,6 @@ module.exports = function(config) {
 
     // Concurrency level
     // how many browser should be started simultaneous
-    concurrency: Infinity
-  })
-}
+    concurrency: Infinity,
+  });
+};
