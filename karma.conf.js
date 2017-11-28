@@ -15,9 +15,7 @@ module.exports = function karma(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'assets/js/jquery-3.1.1.slim.js',
-      'assets/js/srcdoc-polyfill.min.js',
-      'assets/js/highlight.js',
+      'assets/js/vendor/highlight.js',
       'assets/js/base.js',
       'assets/js/init.js',
       'test/clientjs/**/*.js',
@@ -32,7 +30,7 @@ module.exports = function karma(config) {
     preprocessors: {
       'test/clientjs/**/*.js': ['webpack'],
       'assets/js/**/*.js': ['webpack'],
-      'assets/js/base.js': ['coverage', 'webpack'],
+      'assets/js/base.js': ['webpack', 'coverage'],
     },
 
     webpack: webpackConf,

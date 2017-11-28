@@ -2,10 +2,12 @@
 
 describe('initializeToggles', function() {
   beforeEach(function() {
-    const id = (this.id = 'some-id');
+    this.id = 'some-id';
     var fixture =
-      `<button aria-controls="${id}" data-toggle="button">show panel</button>` +
-      `<nav data-toggle="target" data-target-id="${id}"></nav>`;
+      `<button aria-controls="${
+        this.id
+      }" data-toggle="button">show panel</button>` +
+      `<nav data-toggle="target" data-target-id="${this.id}"></nav>`;
 
     document.body.insertAdjacentHTML('afterbegin', fixture);
   });
