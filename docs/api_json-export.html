@@ -259,10 +259,9 @@
 there are several abstract style patterns –
 like color-palettes and font-specimens –
 that never appear as components in the<span class="widont">&nbsp;</span>application.</p>
-<p>Herman provides several <code>@preview</code> annotations
-to help visualize these abstract patterns –
-but that requires passing the data from your styles
-to Herman’s templates.
+<p>Herman provides several annotations
+to help visualize these abstract patterns,
+but they require access to the raw Sass data.
 We do that using Sass maps
 (<code>key:value</code> object variables)
 and the <code>herman-export</code> mixin
@@ -334,7 +333,16 @@ to generate JSON out of Sass<span class="widont">&nbsp;</span>variables.</p>
 
       
       
-      <pre data-sassdoc="hljs"><code class="lang-scss">@include herman-export;</code></pre>
+      <pre data-sassdoc="hljs"><code class="lang-scss">$herman: (
+  &#39;colors&#39;: (
+    &#39;brand-colors&#39;: (
+      &#39;brand-orange&#39;: #c75000,
+      &#39;brand-blue&#39;: #0d7fa5,
+    ),
+  ),
+);
+
+@include herman-export($herman);</code></pre>
     </div>
   
 
@@ -358,7 +366,7 @@ to generate JSON out of Sass<span class="widont">&nbsp;</span>variables.</p>
 
       
       
-      <pre data-sassdoc="hljs"><code class="lang-css">/*! json-encode: {&quot;colors&quot;: {&quot;brand-colors&quot;: {&quot;brand-orange&quot;: &quot;#c75000&quot;, &quot;brand-blue&quot;: &quot;#0d7fa5&quot;, &quot;brand-pink&quot;: &quot;#e2127a&quot;}, &quot;neutral-colors&quot;: {&quot;light-gray&quot;: &quot;#dedede&quot;, &quot;gray&quot;: &quot;#555b5e&quot;, &quot;black&quot;: &quot;#3b4042&quot;}, &quot;status-colors&quot;: {&quot;go&quot;: &quot;#657e1b&quot;, &quot;yield&quot;: &quot;#c75000&quot;, &quot;stop&quot;: &quot;#ec1313&quot;}, &quot;theme-colors&quot;: {&quot;theme-dark&quot;: &quot;#0d7fa5&quot;, &quot;theme-light&quot;: &quot;#cfe5ed&quot;, &quot;background&quot;: &quot;#fff&quot;, &quot;text&quot;: &quot;#3b4042&quot;, &quot;text-light&quot;: &quot;#555b5e&quot;, &quot;border&quot;: &quot;#555b5e&quot;, &quot;light-border&quot;: &quot;#dedede&quot;, &quot;callout&quot;: &quot;#dedede&quot;, &quot;overlay&quot;: &quot;rgba(222, 222, 222, 0.9)&quot;, &quot;shadow&quot;: &quot;rgba(85, 91, 94, 0.5)&quot;, &quot;action&quot;: &quot;#aa0e5c&quot;, &quot;focus&quot;: &quot;#e2127a&quot;, &quot;active&quot;: &quot;#aa0e5c&quot;, &quot;underline&quot;: &quot;#b7d9e4&quot;, &quot;slight&quot;: &quot;#fcfcfc&quot;, &quot;code&quot;: &quot;#587f8d&quot;, &quot;code-shadow&quot;: &quot;rgba(88, 127, 141, 0.2)&quot;}, &quot;system-colors&quot;: {&quot;contrast-light&quot;: &quot;#fff&quot;, &quot;contrast-dark&quot;: &quot;#3b4042&quot;}}, &quot;ratios&quot;: {&quot;text-ratios&quot;: {&quot;herman&quot;: 1.4}}, &quot;sizes&quot;: {&quot;text-sizes&quot;: {&quot;root&quot;: &quot;18px&quot;, &quot;large-rem&quot;: &quot;1.11111rem&quot;, &quot;base-rem&quot;: &quot;1rem&quot;, &quot;small-rem&quot;: &quot;0.88889rem&quot;, &quot;xsmall-rem&quot;: &quot;0.75rem&quot;, &quot;large&quot;: &quot;calc(1rem + 1vw)&quot;, &quot;medium&quot;: &quot;calc(1rem + 0.5vw)&quot;, &quot;base&quot;: &quot;calc(0.88889rem + 0.5vw)&quot;, &quot;small&quot;: &quot;calc(0.88889rem + 0.25vw)&quot;, &quot;xsmall&quot;: &quot;calc(0.75rem + 0.25vw)&quot;, &quot;code&quot;: &quot;calc(0.75rem + 0.25vw)&quot;, &quot;small-code&quot;: &quot;calc(0.675rem + 0.25vw)&quot;, &quot;h1&quot;: &quot;calc(1rem + 2.5vw)&quot;, &quot;h2&quot;: &quot;calc(1rem + 2vw)&quot;, &quot;h3&quot;: &quot;calc(1rem + 1vw)&quot;, &quot;quote&quot;: &quot;calc(1rem + 0.5vw)&quot;}, &quot;spacing-sizes&quot;: {&quot;rhythm&quot;: &quot;1.4rem&quot;, &quot;gutter&quot;: &quot;1.4rem&quot;, &quot;flex-gutter&quot;: &quot;calc(0.7rem + 2.5vw)&quot;, &quot;double-gutter&quot;: &quot;2.8rem&quot;, &quot;spacer&quot;: &quot;4.2rem&quot;, &quot;double-spacer&quot;: &quot;8.4rem&quot;, &quot;shim&quot;: &quot;0.7rem&quot;, &quot;half-shim&quot;: &quot;0.35rem&quot;, &quot;quarter-shim&quot;: &quot;0.175rem&quot;}, &quot;pattern-sizes&quot;: {&quot;border&quot;: &quot;8px&quot;, &quot;page&quot;: &quot;50rem&quot;, &quot;page-break&quot;: &quot;50em&quot;, &quot;nav-small&quot;: &quot;21em&quot;, &quot;nav-medium&quot;: &quot;32em&quot;, &quot;nav-large&quot;: &quot;65em&quot;, &quot;specimen&quot;: &quot;4.2rem&quot;, &quot;color-preview&quot;: &quot;calc(15em + 0.25vw)&quot;, &quot;color-swatch&quot;: &quot;5.6rem&quot;, &quot;icon&quot;: &quot;28px&quot;, &quot;nav-underline&quot;: &quot;4px&quot;, &quot;footer-logo&quot;: &quot;2.8rem&quot;}}, &quot;fonts&quot;: {&quot;sans&quot;: {&quot;name&quot;: &quot;Source Sans Pro&quot;, &quot;source&quot;: &quot;https://fonts.google.com/specimen/Source+Sans+Pro&quot;, &quot;stack&quot;: [&quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, &quot;Arial&quot;, &quot;sans-serif&quot;]}, &quot;code&quot;: {&quot;name&quot;: &quot;Source Code Pro&quot;, &quot;source&quot;: &quot;https://fonts.google.com/specimen/Source+Code+Pro&quot;, &quot;stack&quot;: [&quot;Consolas&quot;, &quot;Menlo&quot;, &quot;Monaco&quot;, &quot;Lucida Console&quot;, &quot;Liberation Mono&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Bitstream Vera Sans Mono&quot;, &quot;Courier New&quot;, &quot;monospace&quot;, &quot;sans-serif&quot;]}}} */
+      <pre data-sassdoc="hljs"><code class="lang-css">/*! json-encode: {&quot;colors&quot;: {&quot;brand-colors&quot;: {&quot;brand-orange&quot;: &quot;#c75000&quot;, &quot;brand-blue&quot;: &quot;#0d7fa5&quot;}}} */
 </code></pre>
     </div>
   
@@ -376,12 +384,14 @@ to generate JSON out of Sass<span class="widont">&nbsp;</span>variables.</p>
   
 
     
-  
   <div data-item-section="related">
-    <h3 class="item-subtitle">
-      related
-      
-    </h3>
+    
+      <h3 class="item-subtitle">
+        Related
+        
+      </h3>
+    
+
     
       
 
@@ -460,7 +470,7 @@ to generate JSON out of Sass<span class="widont">&nbsp;</span>variables.</p>
   
   
 
-  <header data-item-section="header">
+  <div data-item-section="header">
     <h2 class="item-title">
       
         <span class="item-type"></span>
@@ -478,13 +488,10 @@ to generate JSON out of Sass<span class="widont">&nbsp;</span>variables.</p>
     
   
 
-  </header>
 
     
     
-
-    <div data-item-section="source">
-      
+    
   
 
   
@@ -505,7 +512,6 @@ to generate JSON out of Sass<span class="widont">&nbsp;</span>variables.</p>
     </div>
   
 
-    </div>
     
   
   
@@ -513,30 +519,19 @@ to generate JSON out of Sass<span class="widont">&nbsp;</span>variables.</p>
   
 
   
-    
-  
-  <div data-item-section="summary">
-    <h3 class="item-subtitle">
-      Description
-      
-    </h3>
-    
-      <div class="text-block">
-        <p>Use this map to collect and organize
-color, font, size, and ratio values
-to be exported for<span class="widont">&nbsp;</span>Herman.</p>
+    <div class="text-block">
+      <p>Use the <code>$herman</code> map variable to collect and organize
+color, font, size, and ratio values for<span class="widont">&nbsp;</span>export.</p>
 <p>The <code>$herman</code> map should be structured
-with top-level keys representing individual sassdoc items.
-Top-level values will often be a nested map
-of the data to preview.
-Use the <code>herman-add</code> or <code>accoutrement-add</code> mixins
-to automatically populate
+with top-level keys for each type of data,
+and nested maps of the individual items to preview.
+Use the <code>herman-add</code> mixin to automatically populate
 fonts, colors, sizes, and ratios from existing maps –
 or construct your <code>$herman</code> map by hand,
 following these<span class="widont">&nbsp;</span>guidelines…</p>
 <h3 id="map-structure">Map structure</h3>
-<p>Each type of preview value should be nested inside
-a map that describes what type of data is being<span class="widont">&nbsp;</span>stored:</p>
+<p>Each type of preview value should be nested
+under a key that describes what type of data is being<span class="widont">&nbsp;</span>stored:</p>
 <pre><code class="lang-scss">$herman: (
   'colors': (
     /* color maps */
@@ -554,35 +549,32 @@ a map that describes what type of data is being<span class="widont">&nbsp;</span
 </code></pre>
 <h3 id="colors">Colors</h3>
 <p>Each color has an access name and value.
-For us, that is often a map-key string,
-and Sass hex/rgba output<span class="widont">&nbsp;</span>color:</p>
+The key will be used to identify the correct data
+for a given color-palette,
+and the data includes color <code>name:value</code> pairs,
+both in string<span class="widont">&nbsp;</span>format.</p>
 <pre><code class="lang-scss">'brand-colors': (
-  'brand-orange': '#c75000',
-  'brand-blue': '#0d7fa5',
+  'brand-orange': #c75000,
+  'brand-blue': #0d7fa5,
 )
 </code></pre>
-<p>If you are storing colors in variables,
-you may want to use name keys like <code>$brand-orange</code>
-to represent the proper use of a<span class="widont">&nbsp;</span>color.</p>
 <p>Color values can be in any valid web-color format –
-hex, hsl/a, rgba/a, etc –
-converted to a valid JSON<span class="widont">&nbsp;</span>string.</p>
+hex, hsl/a, rgba/a,<span class="widont">&nbsp;</span>etc.</p>
 <h3 id="sizes-ratios">Sizes &amp; Ratios</h3>
 <p>Size and ratio data is similar to colors,
 organized into top-level groups that may contain
-one or more size/ratio key:value<span class="widont">&nbsp;</span>pairs:</p>
+one or more <code>name:value</code> pairs:</p>
 <pre><code class="lang-scss">'font-ratios': (
-  'line-height': '1.4',
-  'minor-seventh': '16/9',
+  'line-height': 1.4,
+  'minor-seventh': 16/9,
 ),
 'text-sizes': (
-  'root': '18px',
-  'large': 'calc(1rem + 1.5vw)',
+  'root': 18px,
+  'large': calc(1rem + 1.5vw),
 )
 </code></pre>
 <p>Ratio values can be in any valid number,
-and size values should be valid CSS lengths –
-both converted to a valid JSON<span class="widont">&nbsp;</span>string.</p>
+and size values should be valid CSS<span class="widont">&nbsp;</span>lengths.</p>
 <h3 id="fonts">Fonts</h3>
 <p>Each font should have a top-level key of its own,
 since font-previews display a single font at a time.
@@ -605,20 +597,19 @@ font-files per variant: e.g. <code>regular</code>, <code>bold italic</code>, etc
 )
 </code></pre>
 
-        
+      
   
 
-        
+      
   
 
-        
+      
   
 
-      </div>
-    
+    </div>
+  
+
   </div>
-
-  
 
   
 
@@ -725,12 +716,14 @@ font-files per variant: e.g. <code>regular</code>, <code>bold italic</code>, etc
     
   
     
-  
-  <div data-item-section="used by">
-    <h3 class="item-subtitle">
-      used by
-      
-    </h3>
+  <div data-item-section="used-by">
+    
+      <h3 class="item-subtitle">
+        Used By
+        
+      </h3>
+    
+
     
       
       
@@ -820,7 +813,7 @@ font-files per variant: e.g. <code>regular</code>, <code>bold italic</code>, etc
   
   
 
-  <header data-item-section="header">
+  <div data-item-section="header">
     <h2 class="item-title">
       
         <span class="item-type">@mixin</span>
@@ -838,7 +831,6 @@ font-files per variant: e.g. <code>regular</code>, <code>bold italic</code>, etc
     
   
 
-  </header>
 
     
     
@@ -848,36 +840,27 @@ font-files per variant: e.g. <code>regular</code>, <code>bold italic</code>, etc
   
 
   
-    
-  
-  <div data-item-section="summary">
-    <h3 class="item-subtitle">
-      Description
-      
-    </h3>
-    
-      <div class="text-block">
-        <p>Encode a Sass map as a JSON-ready string,
+    <div class="text-block">
+      <p>Encode a Sass map as a JSON-ready string,
 and print to CSS output as a persistent<span class="widont">&nbsp;</span>comment.</p>
 
-        
+      
   
 
-        
+      
   
 
-        
+      
   
 
-      </div>
-    
+    </div>
+  
+
   </div>
 
   
 
   
-
-  
   
   
   
@@ -886,12 +869,14 @@ and print to CSS output as a persistent<span class="widont">&nbsp;</span>comment
 
   
     
-  
   <div data-item-section="parameter">
-    <h3 class="item-subtitle">
-      Parameters
-      
-    </h3>
+    
+      <h3 class="item-subtitle">
+        Parameters
+        
+      </h3>
+    
+
     
       
         
@@ -1028,12 +1013,14 @@ and print to CSS output as a persistent<span class="widont">&nbsp;</span>comment
   
     
     
-  
   <div data-item-section="requires">
-    <h3 class="item-subtitle">
-      requires
-      
-    </h3>
+    
+      <h3 class="item-subtitle">
+        Requires
+        
+      </h3>
+    
+
     
       
       
@@ -1117,7 +1104,7 @@ and print to CSS output as a persistent<span class="widont">&nbsp;</span>comment
   
   
 
-  <header data-item-section="header">
+  <div data-item-section="header">
     <h2 class="item-title">
       
         <span class="item-type">@mixin</span>
@@ -1135,7 +1122,6 @@ and print to CSS output as a persistent<span class="widont">&nbsp;</span>comment
     
   
 
-  </header>
 
     
     
@@ -1145,38 +1131,29 @@ and print to CSS output as a persistent<span class="widont">&nbsp;</span>comment
   
 
   
-    
-  
-  <div data-item-section="summary">
-    <h3 class="item-subtitle">
-      Description
-      
-    </h3>
-    
-      <div class="text-block">
-        <p>Add a map of colors, fonts, sizes, ratios, etc
+    <div class="text-block">
+      <p>Add a map of colors, fonts, sizes, ratios, etc
 to the <code>$herman</code> map for JSON-export,
 converting values to JSON-ready strings,
 with optional functions/args for compiling raw<span class="widont">&nbsp;</span>values.</p>
 
-        
+      
   
 
-        
+      
   
 
-        
+      
   
 
-      </div>
-    
+    </div>
+  
+
   </div>
 
   
 
   
-
-  
   
   
   
@@ -1185,12 +1162,14 @@ with optional functions/args for compiling raw<span class="widont">&nbsp;</span>
 
   
     
-  
   <div data-item-section="parameter">
-    <h3 class="item-subtitle">
-      Parameters &amp;<span class="widont">&nbsp;</span>Output
-      
-    </h3>
+    
+      <h3 class="item-subtitle">
+        Parameters &amp;<span class="widont">&nbsp;</span>Output
+        
+      </h3>
+    
+
     
       
         
@@ -1440,12 +1419,14 @@ and any additional arguments for the<span class="widont">&nbsp;</span>function</
     <div class="requires-wrapper">
       
     
-  
   <div data-item-section="requires">
-    <h3 class="item-subtitle">
-      requires
-      
-    </h3>
+    
+      <h3 class="item-subtitle">
+        Requires
+        
+      </h3>
+    
+
     
       
       
@@ -1579,12 +1560,14 @@ and any additional arguments for the<span class="widont">&nbsp;</span>function</
       
   
     
-  
-  <div data-item-section="used by">
-    <h3 class="item-subtitle">
-      used by
-      
-    </h3>
+  <div data-item-section="used-by">
+    
+      <h3 class="item-subtitle">
+        Used By
+        
+      </h3>
+    
+
     
       
       
@@ -1675,7 +1658,7 @@ and any additional arguments for the<span class="widont">&nbsp;</span>function</
   
   
 
-  <header data-item-section="header">
+  <div data-item-section="header">
     <h2 class="item-title">
       
         <span class="item-type">@function</span>
@@ -1693,7 +1676,6 @@ and any additional arguments for the<span class="widont">&nbsp;</span>function</
     
   
 
-  </header>
 
     
     
@@ -1703,39 +1685,30 @@ and any additional arguments for the<span class="widont">&nbsp;</span>function</
   
 
   
-    
-  
-  <div data-item-section="summary">
-    <h3 class="item-subtitle">
-      Description
-      
-    </h3>
-    
-      <div class="text-block">
-        <p>Pass the values of any map through a given function
+    <div class="text-block">
+      <p>Pass the values of any map through a given function
 (with optional arguments)
 and return the compiled map.
 This is used by <code>herman-add</code> and <code>accoutrement-add</code>,
 but can also be accessed<span class="widont">&nbsp;</span>directly.</p>
 
-        
+      
   
 
-        
+      
   
 
-        
+      
   
 
-      </div>
-    
+    </div>
+  
+
   </div>
 
   
 
   
-
-  
   
   
   
@@ -1744,12 +1717,14 @@ but can also be accessed<span class="widont">&nbsp;</span>directly.</p>
 
   
     
-  
   <div data-item-section="parameter">
-    <h3 class="item-subtitle">
-      Parameters &amp;<span class="widont">&nbsp;</span>Return
-      
-    </h3>
+    
+      <h3 class="item-subtitle">
+        Parameters &amp;<span class="widont">&nbsp;</span>Return
+        
+      </h3>
+    
+
     
       
         
@@ -1972,12 +1947,14 @@ and converted to json-ready<span class="widont">&nbsp;</span>strings</p>
     
   
     
-  
-  <div data-item-section="used by">
-    <h3 class="item-subtitle">
-      used by
-      
-    </h3>
+  <div data-item-section="used-by">
+    
+      <h3 class="item-subtitle">
+        Used By
+        
+      </h3>
+    
+
     
       
       

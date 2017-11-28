@@ -141,7 +141,7 @@
 {# @require annotation #}
 {% macro requires(item, display_private=false) -%}
   {% if (item.require|length) %}
-    {% call show.item_section('requires') %}
+    {% call show.item_section('requires', 'Requires') %}
       {% set prev = '' %}
       {% for req in item.require %}
         {% set name = req.name if req.name else req.item.context.name %}
@@ -183,7 +183,7 @@
 {# @require backlink list #}
 {% macro used_by(list, display_private=false, display_alias=false) %}
   {% if list %}
-    {% call show.item_section('used by') %}
+    {% call show.item_section('used-by', 'Used By') %}
       {% set prev = '' %}
       {% for req in list %}
         {% set check = [req.context.name|string, req.context.type|string]|join %}
@@ -220,7 +220,7 @@
 {% macro related(item, display_private=false) -%}
   {% if (item.link.length) or (item.see.length) %}
 
-    {% call show.item_section('related') %}
+    {% call show.item_section('related', 'Related') %}
       {% for link in item.link %}
         {{ link_item(link) }}
       {% endfor %}
