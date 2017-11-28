@@ -12,12 +12,14 @@
   },
   "dependencies": {
     "bluebird": "^3.5.1",
+    "cheerio": "^1.0.0-rc.2",
     "extend": "^3.0.1",
     "gulp-imagemin": "^4.0.0",
     "gulp-rename": "^1.2.2",
     "gulp-svg-symbols": "^2.0.2",
     "html": "^1.0.0",
     "js-yaml": "^3.10.0",
+    "lunr": "^2.1.4",
     "markdown-it": "^8.4.0",
     "markdown-it-named-headers": "^0.0.4",
     "node-sass": "^4.7.1",
@@ -33,40 +35,55 @@
     "sassdoc": "^2.5.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.0.0-beta.32",
+    "@babel/polyfill": "^7.0.0-beta.32",
+    "@babel/preset-env": "^7.0.0-beta.32",
     "accoutrement-color": "^2.2.2",
     "accoutrement-init": "^1.1.2",
     "accoutrement-layout": "^3.0.2",
     "accoutrement-scale": "^5.0.1",
     "accoutrement-type": "^3.1.0",
+    "autoprefixer": "^7.1.6",
+    "babel-eslint": "^8.0.2",
+    "babel-loader": "^8.0.0-beta.0",
+    "babel-minify-webpack-plugin": "^0.2.0",
     "browser-sync": "^2.18.13",
     "chalk": "^2.3.0",
     "coveralls": "^3.0.0",
+    "css-loader": "^0.28.7",
     "del": "^3.0.0",
     "eslint": "^4.10.0",
     "eslint-config-prettier": "^2.8.0",
     "eslint-plugin-prettier": "^2.3.1",
+    "extract-text-webpack-plugin": "^3.0.2",
     "gulp": "^3.9.1",
-    "gulp-autoprefixer": "^4.0.0",
     "gulp-eslint": "^4.0.0",
     "gulp-prettier-plugin": "^1.1.0",
-    "gulp-sass": "^3.1.0",
     "gulp-sass-lint": "^1.3.4",
-    "gulp-sourcemaps": "^2.6.1",
     "gulp-spawn-mocha": "^4.0.1",
-    "gulp-uglify-es": "^0.1.3",
     "gulp-util": "^3.0.8",
     "husky": "^0.14.3",
     "istanbul": "^0.4.5",
+    "jinja-loader": "^0.0.8",
+    "jquery": "^3.2.1",
+    "jquery-deparam": "^0.5.3",
     "lint-staged": "^5.0.0",
+    "mark.js": "^8.11.0",
     "mocha": "^4.0.1",
     "nyc": "^11.3.0",
+    "postcss-loader": "^2.0.9",
     "prettier": "^1.7.4",
+    "sass-loader": "^6.0.6",
     "sass-true": "^3.0.2",
     "sassdoc": "^2.5.0",
-    "sinon": "^4.1.1"
+    "sinon": "^4.1.1",
+    "srcdoc-polyfill": "^1.0.0",
+    "webpack": "^3.8.1"
   },
   "resolutions": {
-    "nunjucks": "^2.5.2"
+    "browserslist": "^2.9.1",
+    "nunjucks": "^2.5.2",
+    "webpack-sources": "1.0.1"
   },
   "scripts": {
     "precommit": "lint-staged",
@@ -77,11 +94,11 @@
       "prettier --write",
       "git add"
     ],
-    "assets/js/{base,init}.js": [
+    "assets/js/{base,init,search}.js": [
       "prettier --write",
       "git add"
     ],
-    "{gulpfile,index}.js": [
+    "{gulpfile,index,.babelrc,postcss.config,sass-json-loader,webpack.config}.js": [
       "prettier --write",
       "git add"
     ]

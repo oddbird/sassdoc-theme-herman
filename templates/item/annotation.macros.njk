@@ -1,0 +1,280 @@
+{% import 'utility.macros.njk' as utility %}
+{% import 'item/macros.njk' as show %}
+
+
+{# Parameter list template #}
+{% macro param_list(name=none, url=none, item_type=none, value=none, value_type=none, note=none, description=none) %}
+  <div class="param-list">
+    <h4 class="param-title">
+      {% if item_type and (item_type != '') -%}
+        <span class="item-type">{{ item_type }}</span>
+      {%- endif %}
+      {% if name %}
+        {{ utility.link_if(
+          content=name,
+          url=url,
+          attrs={'class': 'item-name'}
+          ) }}
+      {% endif %}
+      {% if value -%}
+        <span class="item-value">{{ value }}</span>
+      {%- endif %}
+      {% if value_type -%}
+        <span class="value-type">({{ value_type }})</span>
+      {%- endif %}
+      {% if note -%}
+        <span class="item-note">[{{ note }}]</span>
+      {%- endif %}
+    </h4>
+
+    {% if description %}
+      {% set description = ['<p>', description, '</p>']|join if not ('</' in description) else description %}
+      <div class="param-details text-block">
+        {{ description|safe }}
+      </div>
+    {% endif %}
+  </div>
+{% endmacro %}
+
+
+{# @param & @prop groups #}
+{% macro param_or_prop(params_data, props_data, content_data, return_data, output_data, throw_data) %}
+  {% set data = params_data or props_data %}
+  {% set type = 'property' if (data == props_data) else 'parameter' %}
+  {% set header = 'Map Properties' if (data == props_data) else 'Parameters' %}
+  {% set header = [header, ' & Output']|join if output_data else header %}
+  {% set header = [header, ' & Return']|join if return_data or (throw_data.length) else header %}
+
+  {% if data or content_data or output_data or return_data or (throw_data.length) %}
+    {% call show.item_section(type, header) %}
+      {% for item in data %}
+        {{ param(name, item, type) }}
+      {% endfor %}
+
+      {{ content(content_data) }}
+      {{ return(return_data) }}
+      {{ output(output_data) }}
+      {{ throw(throw_data) }}
+    {% endcall %}
+  {% endif %}
+{% endmacro %}
+
+
+{# @param & @prop items #}
+{% macro param(name, item, type) %}
+  {% set name = ['$', item.name, ':']|join if (type == 'parameter') else item.name %}
+  {% set name = [item.name, ':']|join if (type == 'property') else name %}
+
+  {{ param_list(
+    name=name,
+    value=item.default,
+    value_type=item.type,
+    description=item.description
+    ) }}
+{% endmacro %}
+
+
+{# @return annotation #}
+{% macro return(data) %}
+  {% if data %}
+    {{ param_list(
+      name='@return',
+      value_type=data.type,
+      description=data.description
+      ) }}
+  {% endif %}
+{% endmacro %}
+
+
+{# @output annotation #}
+{% macro output(data) %}
+  {% if data %}
+    {{ param_list(
+      name='{CSS output}',
+      value_type='code block',
+      description=data
+      ) }}
+  {% endif %}
+{% endmacro %}
+
+
+{# @content annotation #}
+{% macro content(data) %}
+  {% if data %}
+    {{ param_list(
+      name='@content',
+      value_type='code block',
+      description=data
+      ) }}
+  {% endif %}
+{% endmacro %}
+
+
+{# @throw annotation #}
+{% macro throw(data) %}
+  {% if (data.length) %}
+    {% for item in data %}
+      {{ param_list(
+        name='@error',
+        description=item
+        ) }}
+    {% endfor %}
+  {% endif %}
+{% endmacro %}
+
+
+{# Group require and used-by in a single block #}
+{% macro require_or_used(item, display_private=false, display_alias=false) %}
+  {# Add a wrapper if we have both #}
+  {% if (item.require|length) and item.usedBy %}
+    <div class="requires-wrapper">
+      {{ requires(item, display_private) }}
+      {{ used_by(item.usedBy, display_private, display_alias) }}
+    </div>
+  {% else %}
+    {{ requires(item, display_private) }}
+    {{ used_by(item.usedBy, display_private, display_alias) }}
+  {% endif %}
+{% endmacro %}
+
+
+{# @require annotation #}
+{% macro requires(item, display_private=false) -%}
+  {% if (item.require|length) %}
+    {% call show.item_section('requires', 'Requires') %}
+      {% set prev = '' %}
+      {% for req in item.require %}
+        {% set name = req.name if req.name else req.item.context.name %}
+        {% set type = req.type if req.type else (req.item.context.type or none) %}
+        {% set check = [name|string, type|string]|join %}
+
+        {% if not (check in prev) %}
+          {% set prev = [prev, ', ', check]|join if (prev != '') else check %}
+          {{ require_item(req, display_private) }}
+        {% endif %}
+      {% endfor %}
+    {% endcall %}
+  {% endif %}
+{%- endmacro %}
+
+
+{# @require items #}
+{% macro require_item(req, display_private=false) %}
+  {% set require_name = show.format_name(req.name, req.type) %}
+  {% set require_type = show.format_type(req.type) %}
+  {% set is_hidden = true if (req.item.access == 'private' and not display_private) else false %}
+  {% set require_url = none if is_hidden else show.get_link(req.name, req.type, req.item.group) %}
+  {% set require_url = req.url if req.url else require_url %}
+  {% set value_type = req.item.type if (req.type == 'variable') else none %}
+  {% set note = 'private' if (req.item.access == 'private') else none %}
+  {% set note = 'external' if req.external else note %}
+
+  {{ param_list(
+    name=require_name,
+    url=require_url,
+    item_type=require_type,
+    value_type=value_type,
+    note=note,
+    description=req.description
+    ) }}
+{% endmacro %}
+
+
+{# @require backlink list #}
+{% macro used_by(list, display_private=false, display_alias=false) %}
+  {% if list %}
+    {% call show.item_section('used-by', 'Used By') %}
+      {% set prev = '' %}
+      {% for req in list %}
+        {% set check = [req.context.name|string, req.context.type|string]|join %}
+
+        {% if not (check in prev) %}
+          {% set prev = [prev, ', ', check]|join if (prev != '') else check %}
+          {{ used_item(req, display_private, display_alias) }}
+        {% endif %}
+      {% endfor %}
+    {% endcall %}
+  {% endif %}
+{% endmacro %}
+
+
+{# @require backlink item #}
+{% macro used_item(req, display_private=false, display_alias=false) %}
+  {% set require_name = show.format_name(req.context.name, req.context.type) %}
+  {% set require_type = show.format_type(req.context.type) %}
+  {% set is_hidden = true if (req.access == 'private' and not display_private) else false %}
+  {% set is_hidden = true if (req.alias and not display_alias) else is_hidden %}
+  {% set require_url = none if is_hidden else show.get_link(req.context.name, req.context.type, req.group) %}
+  {% set note = 'private' if (req.access == 'private') else none %}
+
+  {{ param_list(
+    name=require_name,
+    url=require_url,
+    item_type=require_type,
+    note=note
+    ) }}
+{% endmacro %}
+
+
+{# @link and @see annotations #}
+{% macro related(item, display_private=false) -%}
+  {% if (item.link.length) or (item.see.length) %}
+
+    {% call show.item_section('related', 'Related') %}
+      {% for link in item.link %}
+        {{ link_item(link) }}
+      {% endfor %}
+
+      {% for see in item.see %}
+        {{ see_item(see, display_private) }}
+      {% endfor %}
+    {% endcall %}
+  {% endif %}
+{%- endmacro %}
+
+
+{# @link items #}
+{% macro link_item(link) %}
+  {% set note = 'external' if ('://' in link.url) else none %}
+
+  {{ param_list(
+    name=link.caption or link.url,
+    url=link.url,
+    note=note
+    ) }}
+{% endmacro %}
+
+
+{# @see items #}
+{% macro see_item(item, display_private=false) %}
+  {% set private = (item.access == 'private') and (not display_private) %}
+  {% set url = show.get_link(item.context.name, item.context.type, item.group) if not private else none %}
+  {% set name = show.format_name(item.context.name, item.context.type) %}
+  {% set type = show.format_type(item.context.type) %}
+  {% set note = 'private' if private else none %}
+
+  {{ param_list(
+    name=name,
+    url=url,
+    item_type=type,
+    value_type=value_type,
+    note=note,
+    description=item.context.description
+    ) }}
+{% endmacro %}
+
+
+{# @todo annotation #}
+{% macro todo(item) %}
+  {% if (item.todo.length) %}
+    {% call show.item_section('todo', 'To-do List') %}
+      <ul>
+        {% for todo in item.todo %}
+          <li data-sassdoc="todo-item">
+            {{ todo|safe }}
+          </li>
+        {% endfor %}
+      </ul>
+    {% endcall %}
+  {% endif %}
+{% endmacro %}

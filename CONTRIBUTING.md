@@ -3,7 +3,7 @@
 Thanks for contributing to Herman development!
 
 Feature requests and bug reports
-can be filed on [github][github]:
+can be filed on [GitHub][github]:
 
 - Write a title that summarizes the specific problem
   or feature request
@@ -20,7 +20,7 @@ with new features or bug-fixes:
 - Follow the development guide below to get Herman running locally
 - Write tests and documentation as necessary,
   and make sure all tests are passing
-- Open a pull request on [github][github]
+- Open a pull request on [GitHub][github]
 
 We love having more people involved in the project,
 and everyone is welcome.

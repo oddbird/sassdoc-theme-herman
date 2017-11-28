@@ -1,0 +1,56 @@
+{% import 'nav.macros.njk' as nav %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  {% set project_title = package.title or package.name or 'Herman' %}
+  <title>{% block title %}{{ project_title }} Documentation{% endblock %}</title>
+
+  <link href="{{ shortcutIcon.url }}" rel="shortcut icon">
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
+
+  <link rel="stylesheet" href="assets/webpack/app_styles.min.css" />
+</head>
+<body>
+  {% include '_icons.svg' %}
+
+  <div data-sassdoc-region="app">
+    <header role="banner" data-sassdoc-region="banner">
+      {{ nav.toggles() }}
+
+      <h1 data-sassdoc="project-title">
+        <a href="index.html" rel="home" data-sassdoc="project-name">{{ project_title }}</a>
+        {% if package.version %}
+          <span data-sassdoc="project-version">{{ package.version }}</span>
+        {% endif %}
+      </h1>
+    </header>
+
+    <div data-sassdoc-region="container">
+      {{ nav.menus(
+        project=project_title,
+        groups=groups,
+        byGroup=byGroup,
+        activeGroup=activeGroup,
+        extraDocs=extraDocs,
+        extraLinks=extraLinks
+      ) }}
+
+      <main role="main">
+        {% block breadcrumb %}{% endblock %}
+
+        <div data-sassdoc-region="main" data-sassdoc-page="{% block page_slug %}{{ activeGroup or 'index' }}{% endblock %}">
+          {% block main %}{% endblock %}
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="assets/webpack/vendor.min.js"></script>
+  <script type="text/javascript" src="assets/webpack/app.min.js"></script>
+  {% block extrajs %}{% endblock %}
+</body>
+</html>
