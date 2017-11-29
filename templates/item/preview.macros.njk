@@ -22,7 +22,7 @@
     {% endif -%}
 
     {%- if item.ratios %}
-      {{ ratios(data.ratios[key], args) }}
+      {{ ratios(data.ratios[key]) }}
     {% endif -%}
 
     {%- if item.sizes %}
@@ -229,7 +229,7 @@
 {% endmacro %}
 
 
-{% macro ratios(data, args) %}
+{% macro ratios(data) %}
   {% for name, value in data %}
     {% call show.item_section(
       slug='ratio-preview',
