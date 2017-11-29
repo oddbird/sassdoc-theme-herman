@@ -278,8 +278,7 @@
           ) }}
       {% endfor %}
     {% else %}
-      {# @@@ Sort by values? #}
-      {% for value, items in data|list|sort(attr='value')|groupby('value') %}
+      {% for value, items in data|list|sort(attribute='value')|groupby('value') %}
         {% set name = items|join(', ', 'key') %}
         {{ size_ruler_row(name, value, value) }}
       {% endfor %}
@@ -308,8 +307,7 @@
 
 
 {% macro size_output(data, style) %}
-  {# @@@ Sort by values? #}
-  {% for value, items in data|list|groupby('value') %}
+  {% for value, items in data|list|sort(attribute='value')|groupby('value') %}
     <div class="size-output">
       <h4 class="size-heading">
         {% set name = items|join(', ', 'key') %}

@@ -109,8 +109,8 @@ $demo-ratios: (
 ///   defaulting to `text`,
 ///   which specifies the type of output to display:
 ///
-///   - `text`: Displays a sentence of lorem-ipsum text at the given size.
-///   - `ruler`: Displays a pattern of shapes spaced at the given size.
+///   - `text`: Displays a sentence of lorem-ipsum text for each given size.
+///   - `ruler`: Displays horizontal bars of the given sizes.
 ///   - `output-only`: Displays values only, without demonstration.
 ///
 /// @sizes
