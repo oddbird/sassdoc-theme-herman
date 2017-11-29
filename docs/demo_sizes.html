@@ -473,7 +473,7 @@ In the end, Herman will need a map –
 but we’ll start with individual ratios/sizes,
 and build the export from<span class="widont">&nbsp;</span>there.</p>
 <p>Let’s start with a ratio and two<span class="widont">&nbsp;</span>sizes:</p>
-<pre><code class="lang-scss">$herman-ratio: 1.4;
+<pre><code class="lang-scss">$line-height-ratio: 1.4;
 $root: 18px;
 $xlarge: 28px;
 </code></pre>
@@ -591,7 +591,7 @@ $xlarge: 28px;
       
       
       <pre data-sassdoc="hljs"><code class="lang-scss">$demo-ratios: (
-  &#39;herman-ratio&#39;: $herman-ratio
+  &#39;line-height&#39;: $line-height-ratio
 );</code></pre>
     </div>
   
@@ -614,7 +614,7 @@ but you can use a tool like our <a href="http://oddbird.net/accoutrement-scale/"
 to store and access ratios
 directly in a Herman-friendly<span class="widont">&nbsp;</span>map.</p>
 <pre><code class="lang-scss">$demo-ratios: (
-  'herman-ratio': $herman-ratio
+  'line-height': $line-height-ratio
 );
 </code></pre>
 <p>Create as many maps as you like
@@ -680,74 +680,159 @@ up to a maximum of <code>10</code>.</p>
   
       
   
+    
   <div data-item-section="ratio-preview">
     
       <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Ratio Previews</span>
+        <span class="item-subtitle-main">Ratio</span>
+        
+          <span class="item-subtitle-supplement">line-height<span class="widont">&nbsp;</span>(1.4)</span>
         
       </h3>
     
 
     
-    
-      <div data-sassdoc="ratio-preview">
-        
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">herman-ratio:</span>
-      
-      <span class="item-value">1.4</span>
-      
-      
-    </h4>
-
-    
-  </div>
-
+      <table class="ratio-demos">
+        <tr class="ratio-table-head is-hidden">
+          <th class="ratio-step">Step</th>
+          <th class="ratio-value">Value</th>
+          <td class="ratio-viz"></td>
+        </tr>
 
         
-
-        <div data-sassdoc="ratio-demos">
+        
+        
           
           
-            
-            <span data-sassdoc="ratio-demo" style="font-size: 1em;">
+          <tr class="ratio-demo">
+            <td class="ratio-step">
+              -3
+            </td>
+            <td class="ratio-value">
+              <code>
+                0.36
+              </code>
+            </td>
+            <td class="ratio-viz">
+              <span class="ratio-bar" style="width: 1.8221574344023328em;">
+                &nbsp;
+              </span>
+            </td>
+          </tr>
+        
+          
+          
+          <tr class="ratio-demo">
+            <td class="ratio-step">
+              -2
+            </td>
+            <td class="ratio-value">
+              <code>
+                0.51
+              </code>
+            </td>
+            <td class="ratio-viz">
+              <span class="ratio-bar" style="width: 2.551020408163266em;">
+                &nbsp;
+              </span>
+            </td>
+          </tr>
+        
+          
+          
+          <tr class="ratio-demo">
+            <td class="ratio-step">
+              -1
+            </td>
+            <td class="ratio-value">
+              <code>
+                0.71
+              </code>
+            </td>
+            <td class="ratio-viz">
+              <span class="ratio-bar" style="width: 3.5714285714285716em;">
+                &nbsp;
+              </span>
+            </td>
+          </tr>
+        
+          
+          
+          <tr class="ratio-demo ratio-zero">
+            <td class="ratio-step">
+              —
+            </td>
+            <td class="ratio-value">
+              <code>
+                base
+              </code>
+            </td>
+            <td class="ratio-viz">
+              <span class="ratio-bar" style="width: 5em;">
+                &nbsp;
+              </span>
+            </td>
+          </tr>
+        
+          
+          
+          <tr class="ratio-demo">
+            <td class="ratio-step">
               1
-            </span>
+            </td>
+            <td class="ratio-value">
+              <code>
+                1.4
+              </code>
+            </td>
+            <td class="ratio-viz">
+              <span class="ratio-bar" style="width: 7em;">
+                &nbsp;
+              </span>
+            </td>
+          </tr>
+        
           
-            
-            <span data-sassdoc="ratio-demo" style="font-size: 1.4em;">
-              1.4
-            </span>
           
-            
-            <span data-sassdoc="ratio-demo" style="font-size: 1.9599999999999997em;">
-              1.96
-            </span>
+          <tr class="ratio-demo">
+            <td class="ratio-step">
+              2
+            </td>
+            <td class="ratio-value">
+              <code>
+                1.96
+              </code>
+            </td>
+            <td class="ratio-viz">
+              <span class="ratio-bar" style="width: 9.799999999999999em;">
+                &nbsp;
+              </span>
+            </td>
+          </tr>
+        
           
-            
-            <span data-sassdoc="ratio-demo" style="font-size: 2.7439999999999993em;">
-              2.74
-            </span>
           
-            
-            <span data-sassdoc="ratio-demo" style="font-size: 3.841599999999999em;">
-              3.84
-            </span>
-          
-            
-            <span data-sassdoc="ratio-demo" style="font-size: 5.378239999999998em;">
-              5.38
-            </span>
-          
-        </div>
-      </div>
+          <tr class="ratio-demo">
+            <td class="ratio-step">
+              3
+            </td>
+            <td class="ratio-value">
+              <code>
+                2.74
+              </code>
+            </td>
+            <td class="ratio-viz">
+              <span class="ratio-bar" style="width: 13.719999999999997em;">
+                &nbsp;
+              </span>
+            </td>
+          </tr>
+        
+      </table>
     
-  
   </div>
 
+  
 
     
 

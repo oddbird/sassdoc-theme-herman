@@ -15,7 +15,7 @@
 /// Let's start with a ratio and two sizes:
 ///
 /// ```scss
-/// $herman-ratio: 1.4;
+/// $line-height-ratio: 1.4;
 /// $root: 18px;
 /// $xlarge: 28px;
 /// ```
@@ -23,7 +23,7 @@
 /// @group demo_sizes
 
 
-$herman-ratio: 1.4;
+$line-height-ratio: 1.4;
 $root: 18px;
 $xlarge: 28px;
 
@@ -43,7 +43,7 @@ $xlarge: 28px;
 ///
 /// ```scss
 /// $demo-ratios: (
-///   'herman-ratio': $herman-ratio
+///   'line-height': $line-height-ratio
 /// );
 /// ```
 ///
@@ -65,7 +65,7 @@ $xlarge: 28px;
 /// @ratios
 /// @group demo_sizes
 $demo-ratios: (
-  'herman-ratio': $herman-ratio
+  'line-height': $line-height-ratio
 );
 
 

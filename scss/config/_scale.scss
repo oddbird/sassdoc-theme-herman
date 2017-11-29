@@ -16,7 +16,7 @@
 /// @group config-scale
 /// @ratios
 $text-ratios: (
-  'herman': 1.4
+  'line-height': 1.4
 );
 
 @include config('ratios', 'text-ratios', $text-ratios);
@@ -61,7 +61,7 @@ $text-sizes: (
 /// @group config-scale
 /// @sizes style: ruler
 $spacing-sizes: (
-  'rhythm': 'root' ('herman': 1, 'convert-units': 'rem'),
+  'rhythm': 'root' ('line-height': 1, 'convert-units': 'rem'),
   'gutter': 'rhythm',
   'gutter-minus': 'gutter' ('times': 0.75),
   'gutter-plus': 'gutter' ('times': 1.5),

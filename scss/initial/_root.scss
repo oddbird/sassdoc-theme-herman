@@ -7,3 +7,8 @@
   font-size: size('rel-root'); //sass-lint:disable-line no-duplicate-properties
   line-height: ratio('herman');
 }
+
+
+.is-hidden {
+  @include is-hidden;
+}

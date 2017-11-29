@@ -1,11 +1,59 @@
 // Ratio Preview
 // =============
 
-[data-sassdoc='ratio-demos'] {
-  line-height: 1.2;
-  overflow-x: auto;
-  padding: size('half-shim');
-  white-space: nowrap;
+.ratio-demos {
+  width: 100%;
+
+  @include below('nav-medium') {
+    display: block;
+
+    tr {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    td {
+      display: block;
+      text-align: left;
+    }
+  }
+}
+
+.ratio-step,
+.ratio-value {
+  flex: 0 1 5ch;
+  padding: size('quarter-shim') size('shim');
+
+  @include below('nav-medium') {
+    padding-bottom: 0;
+  }
+}
+
+.ratio-step {
+  text-align: right;
+}
+
+.ratio-viz {
+  padding: size('quarter-shim') size('shim');
+  width: 100%;
+
+  @include below('nav-medium') {
+    padding-bottom: size('half-shim');
+  }
+}
+
+.ratio-zero {
+  background-color: color('callout');
+
+  .ratio-bar {
+    background-color: color('action');
+  }
+}
+
+.ratio-bar {
+  background-color: color('border');
+  border-radius: size('quarter-shim');
+  display: inline-block;
 }
 
 
