@@ -76,19 +76,3 @@
 {% macro toggle_close(id) -%}
   data-toggle="close" aria-controls="{{ id }}"
 {%- endmacro %}
-
-
-{# Tabbed elements (see `static/js/app/base.js`) #}
-{% macro tab(id, group, content=none, active=false) %}
-  {%- set content = caller() if caller else content -%}
-  <a href="#panel-{{ id }}" class="example-tab" id="tab-{{ id }}" role="tab" data-tab-group="{{ group }}" data-contents="{{ id }}" aria-controls="panel-{{ id }}"{% if active %} aria-selected="true" tabindex="0"{% else %} tabindex="-1"{% endif %}>
-    {{ content }}
-  </a>
-{% endmacro %}
-
-{% macro tab_panel(id, group, content=none, active=false) %}
-  {%- set content = caller() if caller else content -%}
-  <div class="example-panel" id="panel-{{ id }}" role="tabpanel" data-tab-group="{{ group }}" aria-labelledby="tab-{{ id }}" aria-hidden="{{ 'false' if active else 'true' }}">
-    {{ content|safe }}
-  </div>
-{% endmacro %}

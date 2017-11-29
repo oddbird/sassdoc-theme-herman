@@ -2,11 +2,6 @@
 // =============
 
 
-[data-sassdoc='font-type'] {
-  font-size: size('base');
-  font-weight: bold;
-}
-
 [data-sassdoc='font-stack'] {
   @include font-family('code');
   font-size: size('small');

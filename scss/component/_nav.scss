@@ -1,6 +1,9 @@
 // Navigation Styles
 // =================
 
+/// # Herman Navigation Component
+/// @group style-nav
+
 
 // Small Menu
 // ----------
@@ -69,7 +72,7 @@
 
 [data-sassdoc='nav-item'] {
   list-style: none;
-  margin-bottom: size('shim');
+  margin: size('half-shim') 0;
 
   @include below('nav-small') {
     width: 50%;
@@ -86,7 +89,7 @@
 
 [data-sassdoc='nav-title'] {
   font-weight: bold;
-  margin-bottom: size('shim');
+  margin: size('half-shim') 0;
   width: 100%;
 }
 
@@ -96,7 +99,7 @@
 
 [data-sassdoc='nav-subsection'] {
   flex: 0 0 auto;
-  padding: size('shim') 0;
+  padding-bottom: size('gutter');
 
   &:last-of-type {
     flex: 1 0 auto;
@@ -104,6 +107,7 @@
 
   & + & {
     border-top: 1px solid color('theme-light');
+    padding-top: size('gutter');
   }
 }
 
@@ -171,24 +175,7 @@
   flex: 0 0 auto;
   font-size: size('xsmall');
   line-height: size('rhythm');
-  padding-top: size('shim');
-
-  a {
-    #{$link} {
-      color: color('background');
-      font-weight: bold;
-      text-decoration-color: transparent;
-    }
-
-    #{$focus} {
-      text-decoration-color: currentColor;
-    }
-  }
-
-  [data-icon] {
-    float: left;
-    margin-right: size('half-shim');
-  }
+  padding-top: size('gutter');
 
   span {
     display: block;
@@ -196,3 +183,26 @@
     white-space: nowrap;
   }
 }
+
+
+.footer-icon {
+  #{$link} {
+    color: inherit;
+    float: left;
+    margin-right: size('half-shim');
+  }
+}
+
+
+.footer-link {
+  #{$link} {
+    color: color('background');
+    font-weight: bold;
+    text-decoration-color: transparent;
+  }
+
+  #{$focus} {
+    text-decoration-color: currentColor;
+  }
+}
+

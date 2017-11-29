@@ -2,6 +2,9 @@
 // =================
 
 
+/// # Herman Typography
+/// @group style-typography
+
 ::selection {
   background-color: color('callout');
 }
@@ -14,46 +17,125 @@ mark {
 }
 
 
+// Links
+// -----
+
+[href] {
+  #{$link} {
+    color: color('action');
+    text-decoration-color: color('underline');
+    text-decoration-skip: ink;
+    transition: text-decoration-color 250ms, color 200ms;
+  }
+
+  #{$focus} {
+    color: color('focus');
+    text-decoration-color: currentColor;
+  }
+}
+
+
+// Code
+// ----
+
+pre {
+  font-size: size('pre');
+}
+
+pre,
+code {
+  @include font-family('code');
+}
+
+code {
+  font-weight: bolder;
+
+  pre & {
+    background-color: transparent;
+    border-radius: 0;
+    box-shadow: none;
+    display: block;
+    font-weight: normal;
+    padding: 0;
+  }
+}
+
+.visually-hidden {
+  @include is-hidden;
+}
+
+
+// Text Blocks
+// -----------
 /// Style a block of rendered html-text,
 /// with line-length and typographic styles.
 /// @group style-typography
 .text-block {
-  max-width: 75ch;
+  max-width: 80ch;
 
   h1,
   h2,
   h3,
   h4 {
     color: color('black');
+
+    a {
+      #{$link} {
+        text-decoration-color: transparent;
+      }
+
+      #{$focus} {
+        text-decoration-color: currentColor;
+      }
+    }
+
+    + h2,
+    + h3 {
+      margin-top: 0;
+    }
   }
 
   h1 {
-    font-size: size('h2');
-    margin-bottom: size('gutter');
+    font-size: size('h1');
+    margin-bottom: size('shim');
   }
 
   h2,
   h3 {
-    margin-top: size('gutter');
+    margin-top: size('gutter-plus');
+  }
+
+  > h2,
+  > h3 {
+    &:first-child {
+      margin-top: 0;
+    }
   }
 
   h2 {
-    font-size: size('h3');
-    margin-bottom: size('half-shim');
+    font-size: size('h2');
+    margin-bottom: size('shim');
   }
 
-  p {
-    margin: 0 0 size('shim');
+  h3 {
+    font-size: size('h3');
+    font-weight: normal;
+    margin-bottom: size('shim');
+  }
+
+  p,
+  pre {
+    margin-bottom: size('gutter-minus');
   }
 
   ol,
   ul {
-    margin: 0 size('gutter') size('shim');
+    margin: 0 size('gutter') size('gutter-minus');
   }
 
   li {
     > p {
-      margin: size('half-shim') 0;
+      margin: size('shim') 0;
     }
   }
 
@@ -67,11 +149,11 @@ mark {
     }
 
     > :nth-last-child(2) {
-      margin-bottom: size('shim');
+      margin-bottom: size('gutter-minus');
     }
 
     > :last-child {
-      margin-top: size('shim');
+      margin-top: size('gutter-minus');
     }
 
     cite {

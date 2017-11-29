@@ -43,7 +43,7 @@
 }
 
 [data-sassdoc-region='breadcrumb'] {
-  background: color('theme-light');
+  background: color('callout');
   padding: size('shim') size('flex-gutter');
 
   a,
@@ -57,7 +57,7 @@
 // Page
 // ----
 
-[role='main'] {
+[data-sassdoc-region='main'] {
   @include z-index('main');
   width: 100%;
 
@@ -66,7 +66,7 @@
   }
 }
 
-[data-sassdoc-region='main'] {
-  padding: size('gutter') size('flex-gutter');
+[data-sassdoc-page] {
+  padding: size('flex-gutter');
   position: relative;
 }

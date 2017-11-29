@@ -10,7 +10,7 @@
   <title>_Typography | Herman Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
-  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
 
   <link rel="stylesheet" href="assets/webpack/app_styles.min.css" />
 </head>
@@ -25,7 +25,7 @@
 </svg>
 
   <div data-sassdoc-region="app">
-    <header role="banner" data-sassdoc-region="banner">
+    <header data-sassdoc-region="banner">
       
   <button data-nav-toggle data-toggle="button" aria-controls="nav" aria-pressed="false" data-toggle-synced="false">
     
@@ -35,12 +35,12 @@
   </button>
 
 
-      <h1 data-sassdoc="project-title">
+      <div data-sassdoc="project-title">
         <a href="index.html" rel="home" data-sassdoc="project-name">Herman</a>
         
           <span data-sassdoc="project-version">1.0.0-rc.1</span>
         
-      </h1>
+      </div>
     </header>
 
     <div data-sassdoc-region="container">
@@ -210,17 +210,29 @@
     
 
     <aside class="footer-credit">
-      
+      <a href="http://oddbird.net/herman/" class="footer-icon">
+        
   <svg data-icon="logo" data-icon-size="footer-logo" ><use xlink:href="#icon-logo" />
   </svg>
 
-      <span>Documented with <a href="http://oddbird.net/herman/">Herman</a></span>
-      <span>by <a href="http://oddbird.net/">OddBird</a></span>
+      </a>
+      <span>
+        Documented with
+        <a href="http://oddbird.net/herman/" class="footer-link">
+          Herman
+        </a>
+      </span>
+      <span>
+        by
+        <a href="http://oddbird.net/" class="footer-link">
+          OddBird
+        </a>
+      </span>
     </aside>
   </nav>
 
 
-      <main role="main">
+      <main data-sassdoc-region="main">
         
   <nav data-sassdoc-region="breadcrumb">
     
@@ -229,8 +241,83 @@
   </nav>
 
 
-        <div data-sassdoc-region="main" data-sassdoc-page="style-typography">
+        <div data-sassdoc-page="style-typography">
           
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" >
+  
+    
+  
+  
+  
+  
+
+  
+    <div data-item-section="prose" class="text-block">
+      <h1 id="herman-typography">Herman Typography</h1>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
   
     
     
@@ -294,42 +381,71 @@
       
       
       <pre data-sassdoc="hljs"><code class="lang-scss">.text-block {
-  max-width: 75ch;
+  max-width: 80ch;
 
   h1,
   h2,
   h3,
   h4 {
     color: color(&#39;black&#39;);
+
+    a {
+      #{$link} {
+        text-decoration-color: transparent;
+      }
+
+      #{$focus} {
+        text-decoration-color: currentColor;
+      }
+    }
+
+    + h2,
+    + h3 {
+      margin-top: 0;
+    }
   }
 
   h1 {
-    font-size: size(&#39;h2&#39;);
-    margin-bottom: size(&#39;gutter&#39;);
+    font-size: size(&#39;h1&#39;);
+    margin-bottom: size(&#39;shim&#39;);
   }
 
   h2,
   h3 {
-    margin-top: size(&#39;gutter&#39;);
+    margin-top: size(&#39;gutter-plus&#39;);
+  }
+
+  &gt; h2,
+  &gt; h3 {
+    &amp;:first-child {
+      margin-top: 0;
+    }
   }
 
   h2 {
-    font-size: size(&#39;h3&#39;);
-    margin-bottom: size(&#39;half-shim&#39;);
+    font-size: size(&#39;h2&#39;);
+    margin-bottom: size(&#39;shim&#39;);
   }
 
-  p {
-    margin: 0 0 size(&#39;shim&#39;);
+  h3 {
+    font-size: size(&#39;h3&#39;);
+    font-weight: normal;
+    margin-bottom: size(&#39;shim&#39;);
+  }
+
+  p,
+  pre {
+    margin-bottom: size(&#39;gutter-minus&#39;);
   }
 
   ol,
   ul {
-    margin: 0 size(&#39;gutter&#39;) size(&#39;shim&#39;);
+    margin: 0 size(&#39;gutter&#39;) size(&#39;gutter-minus&#39;);
   }
 
   li {
     &gt; p {
-      margin: size(&#39;half-shim&#39;) 0;
+      margin: size(&#39;shim&#39;) 0;
     }
   }
 
@@ -343,11 +459,11 @@
     }
 
     &gt; :nth-last-child(2) {
-      margin-bottom: size(&#39;shim&#39;);
+      margin-bottom: size(&#39;gutter-minus&#39;);
     }
 
     &gt; :last-child {
-      margin-top: size(&#39;shim&#39;);
+      margin-top: size(&#39;gutter-minus&#39;);
     }
 
     cite {

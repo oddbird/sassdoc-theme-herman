@@ -10,7 +10,7 @@
   <title>Font Specimens | Herman Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
-  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
 
   <link rel="stylesheet" href="assets/webpack/app_styles.min.css" />
 </head>
@@ -25,7 +25,7 @@
 </svg>
 
   <div data-sassdoc-region="app">
-    <header role="banner" data-sassdoc-region="banner">
+    <header data-sassdoc-region="banner">
       
   <button data-nav-toggle data-toggle="button" aria-controls="nav" aria-pressed="false" data-toggle-synced="false">
     
@@ -35,12 +35,12 @@
   </button>
 
 
-      <h1 data-sassdoc="project-title">
+      <div data-sassdoc="project-title">
         <a href="index.html" rel="home" data-sassdoc="project-name">Herman</a>
         
           <span data-sassdoc="project-version">1.0.0-rc.1</span>
         
-      </h1>
+      </div>
     </header>
 
     <div data-sassdoc-region="container">
@@ -210,17 +210,29 @@
     
 
     <aside class="footer-credit">
-      
+      <a href="http://oddbird.net/herman/" class="footer-icon">
+        
   <svg data-icon="logo" data-icon-size="footer-logo" ><use xlink:href="#icon-logo" />
   </svg>
 
-      <span>Documented with <a href="http://oddbird.net/herman/">Herman</a></span>
-      <span>by <a href="http://oddbird.net/">OddBird</a></span>
+      </a>
+      <span>
+        Documented with
+        <a href="http://oddbird.net/herman/" class="footer-link">
+          Herman
+        </a>
+      </span>
+      <span>
+        by
+        <a href="http://oddbird.net/" class="footer-link">
+          OddBird
+        </a>
+      </span>
     </aside>
   </nav>
 
 
-      <main role="main">
+      <main data-sassdoc-region="main">
         
   <nav data-sassdoc-region="breadcrumb">
     
@@ -229,7 +241,7 @@
   </nav>
 
 
-        <div data-sassdoc-region="main" data-sassdoc-page="demo_fonts">
+        <div data-sassdoc-page="demo_fonts">
           
   
     
@@ -254,7 +266,7 @@
 
   
     <div data-item-section="prose" class="text-block">
-      <h2 id="documenting-fonts-displaying-specimens">Documenting fonts &amp; displaying<span class="widont">&nbsp;</span>specimens</h2>
+      <h1 id="documenting-fonts">Documenting fonts</h1>
 <p>Whether you use a webfont CDN like Typekit/Google Fonts,
 or locally-hosted font files,
 Herman can document and display your font-specimens.
@@ -542,38 +554,45 @@ making your webfont available to other<span class="widont">&nbsp;</span>componen
       
   
   
-  
 
   
   <div data-item-section="font-specimen">
     
       <h3 class="item-subtitle">
-        Font Preview
+        <span class="item-subtitle-main">Font Preview</span>
+        
+          <span class="item-subtitle-supplement"><a href="https://fonts.google.com/specimen/Source+Code+Pro" >Source Code Pro</a><span class="widont">&nbsp;</span>(demo-cdn)</span>
         
       </h3>
     
 
     
-    
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <a href="https://fonts.google.com/specimen/Source+Code+Pro" class="item-name">Source Code Pro</a>
-      
-      
-      <span class="value-type">(demo-cdn)</span>
-      
-    </h4>
 
     
       
-      <div class="param-details text-block">
-        <code><strong>font-family</strong>: &#39;Source Code Pro&#39;, &#39;Consolas&#39;, &#39;Menlo&#39;, &#39;Courier New&#39;, monospace, sans-serif;</code>
-      </div>
-    
-  </div>
+      
+      
+  
 
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre data-sassdoc="hljs"><code class="lang-css">font-family: &#39;Source Code Pro&#39;, &#39;Consolas&#39;, &#39;Menlo&#39;, &#39;Courier New&#39;, monospace, sans-serif;</code></pre>
+    </div>
+  
+
+    
 
     
       <iframe class="render-specimen" srcdoc="
@@ -587,7 +606,7 @@ making your webfont available to other<span class="widont">&nbsp;</span>componen
   &lt;title&gt;fonts&lt;/title&gt;
 
   &lt;!-- Herman styles and fonts --&gt;
-  &lt;link href=&quot;https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700|Source+Sans+Pro:400,400i,700,700i&quot; rel=&quot;stylesheet&quot;&gt;
+  &lt;link href=&quot;https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i&quot; rel=&quot;stylesheet&quot;&gt;
   &lt;link rel=&quot;stylesheet&quot; href=&quot;assets/webpack/app_styles.min.css&quot; /&gt;
 
   
@@ -954,38 +973,45 @@ herman:
       
   
   
-  
 
   
   <div data-item-section="font-specimen">
     
       <h3 class="item-subtitle">
-        Font Preview
+        <span class="item-subtitle-main">Font Preview</span>
+        
+          <span class="item-subtitle-supplement"><span >rockingham</span><span class="widont">&nbsp;</span>(demo-local)</span>
         
       </h3>
     
 
     
-    
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">rockingham</span>
-      
-      
-      <span class="value-type">(demo-local)</span>
-      
-    </h4>
 
     
       
-      <div class="param-details text-block">
-        <code><strong>font-family</strong>: &#39;rockingham&#39;, fantasy;</code>
-      </div>
-    
-  </div>
+      
+      
+  
 
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre data-sassdoc="hljs"><code class="lang-css">font-family: &#39;rockingham&#39;, fantasy;</code></pre>
+    </div>
+  
+
+    
 
     
       <iframe class="render-specimen" srcdoc="
@@ -999,7 +1025,7 @@ herman:
   &lt;title&gt;fonts&lt;/title&gt;
 
   &lt;!-- Herman styles and fonts --&gt;
-  &lt;link href=&quot;https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700|Source+Sans+Pro:400,400i,700,700i&quot; rel=&quot;stylesheet&quot;&gt;
+  &lt;link href=&quot;https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i&quot; rel=&quot;stylesheet&quot;&gt;
   &lt;link rel=&quot;stylesheet&quot; href=&quot;assets/webpack/app_styles.min.css&quot; /&gt;
 
   
@@ -1350,7 +1376,7 @@ it can be converted to JSON using <code>herman-export</code>.</p>
   <div data-item-section="related">
     
       <h3 class="item-subtitle">
-        Related
+        <span class="item-subtitle-main">Related</span>
         
       </h3>
     
