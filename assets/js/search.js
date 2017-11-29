@@ -25,7 +25,7 @@ const nunjucksEnv = new nunjucks.Environment(new PrecompiledLoader());
 
 let searchStore;
 
-const getUrlParams = () => deparam(window.location.search.substr(1));
+export const getUrlParams = () => deparam(window.location.search.substr(1));
 
 const getSearchResultsByField = matches => {
   const results = {
@@ -88,7 +88,7 @@ const highlightSearchResult = (el, results) => {
   }
 };
 
-const showResults = (matches, val) => {
+export const showResults = (matches, val) => {
   let results = $();
   if (matches && matches.length) {
     for (const match of matches) {
@@ -120,7 +120,7 @@ const showResults = (matches, val) => {
   $('[data-sassdoc-region="main"]').html(resultsTpl);
 };
 
-const doSearch = (data, val) => {
+export const doSearch = (data, val) => {
   // Grab doc store from data
   searchStore = data && data.store;
   // Initialize Lunr index from precompiled data
@@ -129,7 +129,7 @@ const doSearch = (data, val) => {
   showResults(matches, val);
 };
 
-const getSearchData = () => {
+export const getSearchData = () => {
   const params = getUrlParams();
   // Only fetch search data if on search results page with query term
   if (params && params.q) {
