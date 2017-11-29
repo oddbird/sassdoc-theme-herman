@@ -480,7 +480,7 @@ and our [Accoutrement-Type][type] toolkit.
 <a href="http://oddbird.net/herman/docs/api_json-export.html#fonts">See the font map documentation for details<span class="widont">&nbsp;</span>»</a></p>
 <p>Each font family will be displayed individually,
 using the <code>@font</code> annotation:</p>
-<pre><code class="lang-scss">// @font 'my-font' (regular, bold)
+<pre><code class="lang-scss">// @font my-font (regular, bold)
 </code></pre>
 <p>Let’s look at a few<span class="widont">&nbsp;</span>examples…</p>
 
@@ -615,12 +615,13 @@ using the <code>@font</code> annotation:</p>
       <h2 id="displaying-cdn-hosted-webfonts">Displaying CDN-hosted webfonts</h2>
 <p>For remotely-hosted fonts,
 the <code>@font</code> annotation accepts three<span class="widont">&nbsp;</span>arguments:</p>
-<pre><code class="lang-scss">// @font 'font-key' (list of, variants, to show)
+<pre><code class="lang-scss">// @font font-key (list of, variants, to show)
 //   &lt;any html required for import&gt;
 </code></pre>
 <ul>
-<li>The first argument (in single-quotes or double-quotes) is the <code>key</code>
-that will be used to access the data from JSON,
+<li>The first argument is an optional <code>key</code>
+which defaults to the map-variable name.
+That key will be used to access the data from JSON,
 so it doesn’t matter what key is used –
 as long as the key given here matches the group-name
 used when adding this data to <code>$herman</code>.</li>
@@ -707,7 +708,7 @@ making your webfont available to other<span class="widont">&nbsp;</span>componen
 
       
       
-      <pre data-sassdoc="hljs"><code class="lang-scss">// @font &#39;demo-cdn&#39; (regular, bold, bold italic)
+      <pre data-sassdoc="hljs"><code class="lang-scss">// @font demo-cdn (regular, bold, bold italic)
 //   &lt;link href=&quot;https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700&quot; rel=&quot;stylesheet&quot;&gt;</code></pre>
     </div>
   
@@ -809,12 +810,6 @@ making your webfont available to other<span class="widont">&nbsp;</span>componen
 &lt;body class=&quot;sassdoc&quot;&gt;
   
   
-  
-  
-    
-      
-  
-  
 
   
 
@@ -864,8 +859,6 @@ making your webfont available to other<span class="widont">&nbsp;</span>componen
     &lt;/div&gt;
   
 
-    
-      
   
   
 
@@ -917,8 +910,6 @@ making your webfont available to other<span class="widont">&nbsp;</span>componen
     &lt;/div&gt;
   
 
-    
-      
   
   
 
@@ -971,9 +962,6 @@ making your webfont available to other<span class="widont">&nbsp;</span>componen
 &lt;/div&gt;
       &lt;/div&gt;
     &lt;/div&gt;
-  
-
-    
   
 &lt;/body&gt;
 &lt;/html&gt;
@@ -1072,8 +1060,9 @@ making your webfont available to other<span class="widont">&nbsp;</span>componen
 <p>For locally-hosted fonts,
 the <code>@font</code> annotation accepts three<span class="widont">&nbsp;</span>arguments:</p>
 <ul>
-<li>The first argument (in single-quotes or double-quotes) is the <code>key</code>
-that will be used to access the data from JSON,
+<li>The first argument is an optional <code>key</code>
+which defaults to the map-variable name.
+That key will be used to access the data from JSON,
 so it doesn’t matter what key is used –
 as long as the key given here matches the group-name
 used when adding this data to <code>$herman</code>.</li>
@@ -1088,7 +1077,7 @@ of font variants to display in the preview.
 If omitted, it defaults to all variants
 included as keys in the font map<span class="widont">&nbsp;</span>itself.</li>
 </ul>
-<pre><code class="lang-scss">// @font 'demo-local' {woff2, woff, ttf}
+<pre><code class="lang-scss">// @font demo-local {woff2, woff, ttf}
 </code></pre>
 <p>In order for this to work,
 you must specify a <code>fontpath</code>
@@ -1238,12 +1227,6 @@ herman:
 &lt;body class=&quot;sassdoc&quot;&gt;
   
   
-  
-  
-    
-      
-  
-  
 
   
 
@@ -1261,8 +1244,6 @@ herman:
   
   
 
-    
-      
   
   
 
@@ -1316,8 +1297,6 @@ herman:
     &lt;/div&gt;
   
 
-    
-      
   
   
 
@@ -1371,8 +1350,6 @@ herman:
     &lt;/div&gt;
   
 
-    
-      
   
   
 
@@ -1426,8 +1403,6 @@ herman:
     &lt;/div&gt;
   
 
-    
-      
   
   
 
@@ -1447,8 +1422,6 @@ herman:
   
   
 
-    
-      
   
   
 
@@ -1466,9 +1439,6 @@ herman:
   
 
   
-  
-
-    
   
 &lt;/body&gt;
 &lt;/html&gt;

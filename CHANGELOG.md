@@ -10,6 +10,8 @@
 - BREAKING: Remove `@preview` annotation, split it into distinct `@colors`,
   `@sizes`, `@ratios` annotations. --
   [#206](https://github.com/oddbird/sassdoc-theme-herman/issues/206)
+- Change: `@font` annotation accepts font name (first argument) without
+  being wrapped in `'` or `"`.
 
 
 ## 1.0.0-rc.1: 2017-11-24
