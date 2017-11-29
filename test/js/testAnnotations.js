@@ -91,10 +91,9 @@ describe('colors annotation', function() {
   });
 
   describe('parse', function() {
-    it('parses CSS-like options and returns object', function() {
-      assert.deepEqual(this.colors.parse('foo : bar ; baz ;'), {
-        foo: 'bar',
-        baz: null,
+    it('parses string and returns object', function() {
+      assert.deepEqual(this.colors.parse('foo-bar'), {
+        key: 'foo-bar',
       });
     });
   });
@@ -106,10 +105,19 @@ describe('sizes annotation', function() {
   });
 
   describe('parse', function() {
-    it('parses CSS-like options and returns object', function() {
-      assert.deepEqual(this.sizes.parse('foo : bar ; baz ;'), {
-        foo: 'bar',
-        baz: null,
+    it('parses options and returns object', function() {
+      const input = 'key-thing {style}';
+      assert.deepEqual(this.sizes.parse(input), {
+        key: 'key-thing',
+        style: 'style',
+      });
+    });
+
+    it('uses defaults if no arguments', function() {
+      const input = '';
+      assert.deepEqual(this.sizes.parse(input), {
+        key: '',
+        style: '',
       });
     });
   });
@@ -121,10 +129,9 @@ describe('ratios annotation', function() {
   });
 
   describe('parse', function() {
-    it('parses CSS-like options and returns object', function() {
-      assert.deepEqual(this.ratios.parse('foo : bar ; baz ;'), {
-        foo: 'bar',
-        baz: null,
+    it('parses string and returns object', function() {
+      assert.deepEqual(this.ratios.parse('foo-bar'), {
+        key: 'foo-bar',
       });
     });
   });

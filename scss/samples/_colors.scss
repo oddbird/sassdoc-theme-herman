@@ -49,7 +49,7 @@ $brand-pink: hsl(330, 85%, 48%);
 /// // @colors
 /// ```
 ///
-/// The `@colors` annotation accepts an optional `key` argument,
+/// The `@colors` annotation accepts an optional one-word key argument,
 /// which defaults to the map-variable name.
 /// That key will be used to access the data from JSON,
 /// so it doesn't matter what key is used,
@@ -57,7 +57,7 @@ $brand-pink: hsl(330, 85%, 48%);
 /// used when adding this data to `$herman`.
 ///
 /// ```scss
-/// // @colors key: my-colors
+/// // @colors my-colors
 /// ```
 ///
 /// By default, our color palettes display
@@ -170,7 +170,7 @@ $demo-noncolors: (
 /// or first-class function (Sass 3.5+)
 /// along with any additional arguments required for that function.
 ///
-/// @colors key: demo-noncolors
+/// @colors demo-noncolors
 /// @example scss
 ///   $herman: ();
 ///   $demo-noncolors: (

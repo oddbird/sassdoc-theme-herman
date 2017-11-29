@@ -54,13 +54,15 @@ $xlarge: 28px;
 /// using the `@ratios` annotation:
 ///
 /// ```scss
-/// // @ratios count: 4
+/// // @ratios my-ratios
 /// ```
 ///
-/// The `@ratios` annotation
-/// accepts an optional `count` argument (defaults to `6`) --
-/// the number of ratio calculations to display,
-/// up to a maximum of `10`.
+/// The `@ratios` annotation accepts an optional one-word key argument,
+/// which defaults to the map-variable name.
+/// That key will be used to access the data from JSON,
+/// so it doesn't matter what key is used,
+/// as long as the key given here matches the group-name
+/// used when adding this data to `$herman`.
 ///
 /// @ratios
 /// @group demo_sizes
@@ -92,16 +94,24 @@ $demo-ratios: (
 /// using the `@sizes` annotation:
 ///
 /// ```scss
-/// // @sizes style: ruler
+/// // @sizes {ruler}
 /// ```
 ///
-/// The `@sizes` annotation accepts an optional `style` argument
-/// (defaulting to `text`),
-/// which specifies the type of output to display:
+/// The `@sizes` annotation accepts two optional arguments:
 ///
-/// - `text`: Displays a sentence of lorem-ipsum text at the given size.
-/// - `ruler`: Displays a pattern of shapes spaced at the given size.
-/// - `output-only`: Displays values only, without demonstration.
+/// - An optional one-word key argument,
+///   which defaults to the map-variable name.
+///   That key will be used to access the data from JSON,
+///   so it doesn't matter what key is used,
+///   as long as the key given here matches the group-name
+///   used when adding this data to `$herman`.
+/// - An optional `style` argument (in curly-brackets `{...}`),
+///   defaulting to `text`,
+///   which specifies the type of output to display:
+///
+///   - `text`: Displays a sentence of lorem-ipsum text at the given size.
+///   - `ruler`: Displays a pattern of shapes spaced at the given size.
+///   - `output-only`: Displays values only, without demonstration.
 ///
 /// @sizes
 /// @group demo_sizes

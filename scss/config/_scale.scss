@@ -59,7 +59,7 @@ $text-sizes: (
 /// A set of standard spacing sizes.
 ///
 /// @group config-scale
-/// @sizes style: ruler
+/// @sizes {ruler}
 $spacing-sizes: (
   'rhythm': 'root' ('line-height': 1, 'convert-units': 'rem'),
   'gutter': 'rhythm',
@@ -83,7 +83,7 @@ $spacing-sizes: (
 /// that can be applied to various components.
 ///
 /// @group config-scale
-/// @sizes style: output-only
+/// @sizes {output-only}
 $pattern-sizes: (
   'border': 8px,
   'page': 50rem,

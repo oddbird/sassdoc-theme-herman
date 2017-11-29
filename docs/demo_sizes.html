@@ -622,12 +622,14 @@ to organize different types of ratios –
 text, spacing, etc.
 Each map will be displayed individually,
 using the <code>@ratios</code> annotation:</p>
-<pre><code class="lang-scss">// @ratios count: 4
+<pre><code class="lang-scss">// @ratios my-ratios
 </code></pre>
-<p>The <code>@ratios</code> annotation
-accepts an optional <code>count</code> argument (defaults to <code>6</code>) –
-the number of ratio calculations to display,
-up to a maximum of <code>10</code>.</p>
+<p>The <code>@ratios</code> annotation accepts an optional one-word key argument,
+which defaults to the map-variable name.
+That key will be used to access the data from JSON,
+so it doesn’t matter what key is used,
+as long as the key given here matches the group-name
+used when adding this data to <code>$herman</code>.</p>
 
       
   
@@ -962,15 +964,28 @@ directly in a Herman-friendly<span class="widont">&nbsp;</span>map.</p>
 </code></pre>
 <p>Each map will be displayed individually,
 using the <code>@sizes</code> annotation:</p>
-<pre><code class="lang-scss">// @sizes style: ruler
+<pre><code class="lang-scss">// @sizes {ruler}
 </code></pre>
-<p>The <code>@sizes</code> annotation accepts an optional <code>style</code> argument
-(defaulting to <code>text</code>),
+<p>The <code>@sizes</code> annotation accepts two optional<span class="widont">&nbsp;</span>arguments:</p>
+<ul>
+<li>
+<p>An optional one-word key argument,
+which defaults to the map-variable name.
+That key will be used to access the data from JSON,
+so it doesn’t matter what key is used,
+as long as the key given here matches the group-name
+used when adding this data to <code>$herman</code>.</p>
+</li>
+<li>
+<p>An optional <code>style</code> argument (in curly-brackets <code>{...}</code>),
+defaulting to <code>text</code>,
 which specifies the type of output to<span class="widont">&nbsp;</span>display:</p>
 <ul>
 <li><code>text</code>: Displays a sentence of lorem-ipsum text at the given<span class="widont">&nbsp;</span>size.</li>
 <li><code>ruler</code>: Displays a pattern of shapes spaced at the given<span class="widont">&nbsp;</span>size.</li>
 <li><code>output-only</code>: Displays values only, without<span class="widont">&nbsp;</span>demonstration.</li>
+</ul>
+</li>
 </ul>
 
       

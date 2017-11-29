@@ -41,7 +41,7 @@
 /// //   <any html required for import>
 /// ```
 ///
-/// - The first argument is an optional `key`
+/// - The first argument is an optional one-word key
 ///   which defaults to the map-variable name.
 ///   That key will be used to access the data from JSON,
 ///   so it doesn't matter what key is used --
@@ -84,7 +84,7 @@ $demo-cdn: (
 /// For locally-hosted fonts,
 /// the `@font` annotation accepts three arguments:
 ///
-/// - The first argument is an optional `key`
+/// - The first argument is an optional one-word key
 ///   which defaults to the map-variable name.
 ///   That key will be used to access the data from JSON,
 ///   so it doesn't matter what key is used --

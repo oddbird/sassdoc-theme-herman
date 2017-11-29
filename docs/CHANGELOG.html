@@ -454,7 +454,11 @@
 <li>BREAKING: Remove <code>@preview</code> annotation, split it into distinct <code>@colors</code>,
 <code>@sizes</code>, <code>@ratios</code> annotations. –
 <a href="https://github.com/oddbird/sassdoc-theme-herman/issues/206">#206</a></li>
-<li>Change: <code>@font</code> annotation accepts font name (first argument) without
+<li>BREAKING: Remove <code>count</code> argument from <code>@ratios</code> annotation.</li>
+<li>BREAKING: <code>@colors</code>, <code>@ratios</code>, and <code>@sizes</code> annotations accept optional
+one-word key argument instead of semicolon-separated <code>key:value</code> arguments.
+<code>@sizes</code> still accepts <code>style</code> argument, now in curly-brackets (<code>{...}</code>).</li>
+<li>CHANGE: <code>@font</code> annotation accepts font name (first argument) without
 being wrapped in <code>'</code> or <code>&quot;</code>.</li>
 </ul>
 <h2 id="1-0-0-rc-1-2017-11-24">1.0.0-rc.1: 2017-11-24</h2>
