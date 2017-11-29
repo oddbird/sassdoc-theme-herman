@@ -113,12 +113,35 @@ $demo-ratios: (
 ///   - `ruler`: Displays horizontal bars of the given sizes.
 ///   - `output-only`: Displays values only, without demonstration.
 ///
-/// @sizes
 /// @group demo_sizes
 $demo-sizes: (
   'root': $root,
   'xlarge': $xlarge
 );
+
+
+/// ### Text Sizes
+/// ```scss
+/// // @sizes demo-sizes {text}
+/// ```
+/// @sizes demo-sizes {text}
+/// @group demo_sizes
+
+
+/// ### Size Rulers
+/// ```scss
+/// // @sizes demo-sizes {ruler}
+/// ```
+/// @sizes demo-sizes {ruler}
+/// @group demo_sizes
+
+
+/// ### Name/Value Only
+/// ```scss
+/// // @sizes demo-sizes {output-only}
+/// ```
+/// @sizes demo-sizes {output-only}
+/// @group demo_sizes
 
 
 /// ## Add ratio/size data to $herman

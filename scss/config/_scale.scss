@@ -30,7 +30,7 @@ $text-ratios: (
 /// @sizes
 $text-sizes: (
   'root': 18px,
-  'rel-root': calc(16px + 0.625),
+  'rel-root': calc(16px + 0.125vw),
 
   'large-rem': 20px ('convert-units': 'rem'),
   'base-rem': 'root' ('convert-units': 'rem'),
