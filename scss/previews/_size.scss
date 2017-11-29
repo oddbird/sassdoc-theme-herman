@@ -1,7 +1,11 @@
 // Ratio Preview
 // =============
 
-.ratio-demos {
+
+// Rulers
+// ------
+
+.rulers {
   width: 100%;
 
   @include below('nav-medium') {
@@ -19,21 +23,22 @@
   }
 }
 
-.ratio-step,
-.ratio-value {
+.ruler-name,
+.ruler-value {
   flex: 0 1 5ch;
   padding: size('quarter-shim') size('shim');
+  white-space: nowrap;
 
   @include below('nav-medium') {
     padding-bottom: 0;
   }
 }
 
-.ratio-step {
+.ruler-name {
   text-align: right;
 }
 
-.ratio-viz {
+.ruler-viz {
   padding: size('quarter-shim') size('shim');
   width: 100%;
 
@@ -42,36 +47,37 @@
   }
 }
 
-.ratio-zero {
-  background-color: color('callout');
-
-  .ratio-bar {
-    background-color: color('action');
-  }
-}
-
-.ratio-bar {
+.ruler-bar {
   background-color: color('border');
   border-radius: size('quarter-shim');
   display: inline-block;
 }
 
 
-// Size Preview
-// ------------
+// Ratios
+// ------
 
-[data-size-demo] {
+.ratio-base {
+  background-color: color('callout');
+
+  .ruler-bar {
+    background-color: color('action');
+  }
+}
+
+
+// Sizes
+// -----
+
+.size-output {
   margin-bottom: size('shim');
 }
 
-[data-size-demo='text'] {
-  overflow: hidden;
-  padding: size('half-shim');
-  white-space: nowrap;
+.size-heading {
+  @include font-family('code');
+  font-weight: normal;
 }
 
-[data-size-demo='ruler'] {
-  background: linear-gradient(to right, currentColor 50%, transparent 50%);
-  background-size: 2em auto;
-  height: 1em;
+.size-text {
+  margin-bottom: size('gutter-minus');
 }

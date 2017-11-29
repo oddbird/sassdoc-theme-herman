@@ -236,35 +236,7 @@
       title='Ratio',
       supplement=name + ' (' + value + ')'
     ) %}
-      <table class="ratio-demos">
-        <tr class="ratio-table-head is-hidden">
-          <th class="ratio-step">Step</th>
-          <th class="ratio-value">Value</th>
-          <td class="ratio-viz"></td>
-        </tr>
-
-        {% set start = 5 %}
-        {% set count = range(1, 7) if (value == 'linear') else range(-3, 4) %}
-        {% for step in count %}
-          {% set result = (1 * step) if (value == 'linear') else (1 * (value ** step)) %}
-          {% set width = (start * step) if (value == 'linear') else (start * (value ** step)) %}
-          <tr class="ratio-demo{% if result == 1 %} ratio-zero{% endif %}">
-            <td class="ratio-step">
-              {{ '—' if ( result == 1 ) else step }}
-            </td>
-            <td class="ratio-value">
-              <code>
-                {{ 'base' if ( result == 1 ) else result|round(2) }}
-              </code>
-            </td>
-            <td class="ratio-viz">
-              <span class="ratio-bar" style="width: {{ width + 'em' }};">
-                &nbsp;
-              </span>
-            </td>
-          </tr>
-        {% endfor %}
-      </table>
+      {{ size_ruler(data, is_ratio=true) }}
     {% endcall %}
   {% endfor %}
 {% endmacro %}
@@ -272,24 +244,86 @@
 
 {% macro sizes(data, args) %}
   {% call show.item_section('size-preview', 'Size Previews') %}
-    {% for name, value in data %}
-      <div data-sassdoc="size-preview">
-        {{ annotation.param_list(
-          name=name + ':',
-          value=value
-        ) }}
+    {% set style = args.style or 'text' %}
 
-        {% set style = args.style or 'text' %}
-        {% if style != 'output-only' %}
-          <div data-size-demo="{{ style }}" style="font-size: {{ value }};">
-            {% if style == 'text' %}
-              {{ lorem('title') }}
-            {% endif %}
-          </div>
-        {% endif %}
-      </div>
-    {% endfor %}
+    {% if style == 'ruler' %}
+      {{ size_ruler(data) }}
+    {% else %}
+      {{ size_output(data, style) }}
+    {% endif %}
   {% endcall %}
+{% endmacro %}
+
+
+{% macro size_ruler(data, is_ratio=false) %}
+  <table class="rulers">
+    <tr class="is-hidden">
+      <th class="ruler-name">{{ 'Step' if is_ratio else 'Name' }}</th>
+      <th class="ruler-value">Value</th>
+      <td class="ruler-viz"></td>
+    </tr>
+
+    {% if is_ratio %}
+      {% set start = 5 %}
+      {% set count = range(1, 7) if (value == 'linear') else range(-3, 4) %}
+      {% for step in count %}
+        {% set result = (1 * step) if (value == 'linear') else (1 * (value ** step)) %}
+        {% set width = (start * step) if (value == 'linear') else (start * (value ** step)) %}
+        {% set width = width + 'em' %}
+
+        {{ size_ruler_row(
+          name='—' if ( result == 1 ) else step,
+          value='base' if ( result == 1 ) else result|round(2),
+          width=width
+          ) }}
+      {% endfor %}
+    {% else %}
+      {# @@@ Sort by values? #}
+      {% for value, items in data|list|sort(attr='value')|groupby('value') %}
+        {% set name = items|join(', ', 'key') %}
+        {{ size_ruler_row(name, value, value) }}
+      {% endfor %}
+    {% endif %}
+  </table>
+{% endmacro %}
+
+
+{% macro size_ruler_row(name, value, width) %}
+  <tr class="ruler{% if value == 'base' %} ratio-base{% endif %}">
+    <td class="ruler-name">
+      {{ name }}
+    </td>
+    <td class="ruler-value">
+      <code>
+        {{ value }}
+      </code>
+    </td>
+    <td class="ruler-viz">
+      <span class="ruler-bar" style="width: {{ width }};">
+        &nbsp;
+      </span>
+    </td>
+  </tr>
+{% endmacro %}
+
+
+{% macro size_output(data, style) %}
+  {# @@@ Sort by values? #}
+  {% for value, items in data|list|groupby('value') %}
+    <div class="size-output">
+      <h4 class="size-heading">
+        {% set name = items|join(', ', 'key') %}
+        <span>{{ name }}</span>:
+        <code>{{ value }}</code>
+      </h4>
+
+      {% if style == 'text' %}
+        <div class="size-text" style="font-size: {{ value }};">
+          {{ lorem('title') }}
+        </div>
+      {% endif %}
+    </div>
+  {% endfor %}
 {% endmacro %}
 
 
