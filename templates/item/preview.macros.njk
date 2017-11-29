@@ -1,3 +1,4 @@
+{% import 'utility.macros.njk' as utility %}
 {% import 'item/annotation.macros.njk' as annotation %}
 {% import 'item/macros.njk' as show %}
 
@@ -84,17 +85,20 @@
     Rendered font specimen iframe content.
 #}
 {% macro font_specimen(name, data, iframed) %}
-  {% set family = [data.name or name, data.stack]|join(',') %}
-  {% set family = '<strong>font-family</strong>: ' + font_names(family) + ';' %}
-  {% set family = '<code>' + family + '</code>' %}
+  {% set supplement = utility.link_if(data.name or name, data.source) %}
+  {% set supplement = supplement + ' (' + name + ')' if (data.name and data.name != name) else supplement %}
 
-  {% call show.item_section('font-specimen', 'Font Preview') %}
-    {{ annotation.param_list(
-      name=data.name or name,
-      url=data.source,
-      value_type=name if (name != data.name),
-      description=family
-    ) }}
+  {% call show.item_section(
+    slug='font-specimen',
+    title='Font Preview',
+    supplement=supplement
+    ) %}
+
+    {% if data.stack %}
+      {% set family = [data.name or name, data.stack]|join(',') %}
+      {% set family = 'font-family: ' + font_names(family) + ';' %}
+      {{ utility.code_block(language='css', content=family|safe) }}
+    {% endif %}
 
     {% if iframed %}
       <iframe class="render-specimen" srcdoc="{{ iframed }}" width="100%" height="0"></iframe>
@@ -124,7 +128,18 @@
 {% macro specimen_variant(family, option, data=none, path=none) %}
   {# Local variables for parsing variants in the data #}
   {% set weight_options = [
-    '100', '200', '300', '400', '500', '600', '700', '800', '900', 'bold'
+    '100',
+    '200',
+    '300',
+    '400',
+    '500',
+    '600',
+    '700',
+    '800',
+    '900',
+    'bold',
+    'bolder',
+    'lighter'
   ] %}
 
   {% set style_options = [
@@ -276,7 +291,11 @@
 
 {% macro icons(item) %}
   {% if item.icons and item.icons|length and item.iframed %}
-    {% call show.item_section('icon-preview', 'Icon Previews: ', item.iconsPath) %}
+    {% call show.item_section(
+      slug='icon-preview',
+      title='Icon Previews',
+      supplement=item.iconsPath
+    ) %}
       <iframe class="render-icons" srcdoc="{{ item.iframed }}" width="100%" height="0"></iframe>
     {% endcall %}
   {% endif %}

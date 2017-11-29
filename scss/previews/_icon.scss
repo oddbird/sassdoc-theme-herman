@@ -20,10 +20,3 @@
 [data-sassdoc='icon-info'] {
   font-size: size('xsmall');
 }
-
-[data-item-section='icon-preview'] {
-  .item-subtitle-supplement {
-    @include font-family('code');
-    font-size: size('small-code');
-  }
-}

@@ -10,7 +10,7 @@
   <title>SassDoc Annotations | Herman Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
-  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
 
   <link rel="stylesheet" href="assets/webpack/app_styles.min.css" />
 </head>
@@ -25,7 +25,7 @@
 </svg>
 
   <div data-sassdoc-region="app">
-    <header role="banner" data-sassdoc-region="banner">
+    <header data-sassdoc-region="banner">
       
   
   <button data-nav-toggle="small" data-toggle="button" aria-controls="nav-small" aria-pressed="false" data-toggle-synced="false">
@@ -41,12 +41,12 @@
 
 
 
-      <h1 data-sassdoc="project-title">
+      <div data-sassdoc="project-title">
         <a href="index.html" rel="home" data-sassdoc="project-name">Herman</a>
         
           <span data-sassdoc="project-version">1.0.0-rc.1</span>
         
-      </h1>
+      </div>
     </header>
 
     <div data-sassdoc-region="container">
@@ -55,7 +55,7 @@
 
   
     
-  <nav role="navigation" data-nav-menu="small" data-toggle="target" id="nav-small" data-target-id="nav-small" aria-expanded="false" data-auto-closing="false" data-auto-closing-on-any-click="false">
+  <nav data-nav-menu="small" data-toggle="target" id="nav-small" data-target-id="nav-small" aria-expanded="false" data-auto-closing="false" data-auto-closing-on-any-click="false">
     <form action="/search.html">
       <input type="text" name="q" placeholder="Search…" required minlength="3">
     </form>
@@ -220,18 +220,30 @@
     
 
     <aside class="footer-credit">
-      
+      <a href="http://oddbird.net/herman/" class="footer-icon">
+        
   <svg data-icon="logo" data-icon-size="footer-logo" ><use xlink:href="#icon-logo" />
   </svg>
 
-      <span>Documented with <a href="http://oddbird.net/herman/">Herman</a></span>
-      <span>by <a href="http://oddbird.net/">OddBird</a></span>
+      </a>
+      <span>
+        Documented with
+        <a href="http://oddbird.net/herman/" class="footer-link">
+          Herman
+        </a>
+      </span>
+      <span>
+        by
+        <a href="http://oddbird.net/" class="footer-link">
+          OddBird
+        </a>
+      </span>
     </aside>
   </nav>
 
   
     
-  <nav role="navigation" data-nav-menu="large" data-toggle="target" id="nav-large" data-target-id="nav-large" aria-expanded="true" data-auto-closing="false" data-auto-closing-on-any-click="false">
+  <nav data-nav-menu="large" data-toggle="target" id="nav-large" data-target-id="nav-large" aria-expanded="true" data-auto-closing="false" data-auto-closing-on-any-click="false">
     <form action="/search.html">
       <input type="text" name="q" placeholder="Search…" required minlength="3">
     </form>
@@ -396,19 +408,31 @@
     
 
     <aside class="footer-credit">
-      
+      <a href="http://oddbird.net/herman/" class="footer-icon">
+        
   <svg data-icon="logo" data-icon-size="footer-logo" ><use xlink:href="#icon-logo" />
   </svg>
 
-      <span>Documented with <a href="http://oddbird.net/herman/">Herman</a></span>
-      <span>by <a href="http://oddbird.net/">OddBird</a></span>
+      </a>
+      <span>
+        Documented with
+        <a href="http://oddbird.net/herman/" class="footer-link">
+          Herman
+        </a>
+      </span>
+      <span>
+        by
+        <a href="http://oddbird.net/" class="footer-link">
+          OddBird
+        </a>
+      </span>
     </aside>
   </nav>
 
   
 
 
-      <main role="main">
+      <main data-sassdoc-region="main">
         
   <nav data-sassdoc-region="breadcrumb">
     
@@ -417,8 +441,87 @@
   </nav>
 
 
-        <div data-sassdoc-region="main" data-sassdoc-page="demo_test-sassdoc">
+        <div data-sassdoc-page="demo_test-sassdoc">
           
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" >
+  
+    
+  
+  
+  
+  
+
+  
+    <div data-item-section="prose" class="text-block">
+      <h1 id="sassdoc-annotations">SassDoc Annotations</h1>
+<p>Herman supports all the core
+<a href="http://sassdoc.com/annotations/">SassDoc annotations</a>.
+This page includes samples of every core annotation type,
+so you can see what they look like in<span class="widont">&nbsp;</span>Herman.</p>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
   
     
     
@@ -550,7 +653,7 @@ ferrove finis longave, pignus duros<span class="widont">&nbsp;</span>nubifer!</p
   <div data-item-section="parameter">
     
       <h3 class="item-subtitle">
-        Parameters &amp;<span class="widont">&nbsp;</span>Return
+        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
         
       </h3>
     
@@ -798,7 +901,7 @@ ferrove finis longave, pignus duros<span class="widont">&nbsp;</span>nubifer!</p
   <div data-item-section="related">
     
       <h3 class="item-subtitle">
-        Related
+        <span class="item-subtitle-main">Related</span>
         
       </h3>
     
@@ -866,7 +969,7 @@ ferrove finis longave, pignus duros<span class="widont">&nbsp;</span>nubifer!</p
   <div data-item-section="used-by">
     
       <h3 class="item-subtitle">
-        Used By
+        <span class="item-subtitle-main">Used By</span>
         
       </h3>
     
@@ -949,7 +1052,7 @@ ferrove finis longave, pignus duros<span class="widont">&nbsp;</span>nubifer!</p
   <div data-item-section="todo">
     
       <h3 class="item-subtitle">
-        To-do List
+        <span class="item-subtitle-main">To-do List</span>
         
       </h3>
     
@@ -1096,7 +1199,7 @@ ferrove finis longave, pignus duros<span class="widont">&nbsp;</span>nubifer!</p
   <div data-item-section="requires">
     
       <h3 class="item-subtitle">
-        Requires
+        <span class="item-subtitle-main">Requires</span>
         
       </h3>
     
@@ -1274,7 +1377,7 @@ ferrove finis longave, pignus duros<span class="widont">&nbsp;</span>nubifer!</p
   <div data-item-section="requires">
     
       <h3 class="item-subtitle">
-        Requires
+        <span class="item-subtitle-main">Requires</span>
         
       </h3>
     
@@ -1483,7 +1586,7 @@ Prose blocks can also include examples, and other<span class="widont">&nbsp;</sp
   <div data-item-section="related">
     
       <h3 class="item-subtitle">
-        Related
+        <span class="item-subtitle-main">Related</span>
         
       </h3>
     
@@ -1621,7 +1724,7 @@ a generated element <code>:before</code> the element it is used<span class="wido
   <div data-item-section="parameter">
     
       <h3 class="item-subtitle">
-        Parameters &amp;<span class="widont">&nbsp;</span>Output
+        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Output</span>
         
       </h3>
     
@@ -1980,7 +2083,7 @@ in your <a href="http://sassdoc.com/configuration/">SassDoc<span class="widont">
   <div data-item-section="used-by">
     
       <h3 class="item-subtitle">
-        Used By
+        <span class="item-subtitle-main">Used By</span>
         
       </h3>
     
@@ -2187,7 +2290,7 @@ in your <a href="http://sassdoc.com/configuration/">SassDoc<span class="widont">
   <div data-item-section="requires">
     
       <h3 class="item-subtitle">
-        Requires
+        <span class="item-subtitle-main">Requires</span>
         
       </h3>
     
@@ -2240,7 +2343,7 @@ in your <a href="http://sassdoc.com/configuration/">SassDoc<span class="widont">
   <div data-item-section="used-by">
     
       <h3 class="item-subtitle">
-        Used By
+        <span class="item-subtitle-main">Used By</span>
         
       </h3>
     
@@ -2408,7 +2511,7 @@ in your <a href="http://sassdoc.com/configuration/">SassDoc<span class="widont">
   <div data-item-section="property">
     
       <h3 class="item-subtitle">
-        Map Properties
+        <span class="item-subtitle-main">Map Properties</span>
         
       </h3>
     
@@ -2501,7 +2604,7 @@ in your <a href="http://sassdoc.com/configuration/">SassDoc<span class="widont">
   <div data-item-section="requires">
     
       <h3 class="item-subtitle">
-        Requires
+        <span class="item-subtitle-main">Requires</span>
         
       </h3>
     

@@ -117,7 +117,7 @@ const showResults = (matches, val) => {
     })
   );
   resultsTpl.filter('.js-search-results').html(results);
-  $('[data-sassdoc-region="main"]').html(resultsTpl);
+  $('[data-sassdoc-page]').html(resultsTpl);
 };
 
 const doSearch = (data, val) => {
