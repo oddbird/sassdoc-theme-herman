@@ -2,22 +2,22 @@
 // ===========
 
 .item {
-  margin-bottom: size('double-spacer');
+  margin-bottom: size('spacer');
 }
 
 [data-item-section] {
-  margin-bottom: size('double-gutter');
+  margin-bottom: size('gutter-plus');
 }
 
 [data-item-section='header'] {
   .code-block,
   .text-block {
-    margin: size('gutter') 0;
+    margin-bottom: size('shim');
   }
 }
 
 .item-title {
-  font-size: size('h3');
+  font-size: size('h2');
 }
 
 .item-subtitle {
@@ -25,17 +25,22 @@
   color: color('text-light');
   font-size: size('small');
   font-weight: normal;
-  letter-spacing: 0.05em;
   margin-bottom: size('shim');
+}
+
+.item-subtitle-main {
+  letter-spacing: 0.05em;
   text-transform: uppercase;
+
+  &:not(:last-child) {
+    @include after(': ');
+  }
 }
 
 .item-subtitle-supplement {
-  color: color('text');
-  font-size: size('xsmall');
+  @include font-family('code');
   letter-spacing: 0;
   padding-left: size('half-shim');
-  text-transform: lowercase;
 }
 
 .item-type,
@@ -62,7 +67,7 @@
 
 .alias-title {
   font-style: normal;
-  font-weight: bold;
+  font-weight: bolder;
 }
 
 .param-list {
@@ -88,7 +93,7 @@
 .requires-wrapper {
   @include above('nav-medium') {
     display: flex;
-    margin-bottom: size('double-gutter');
+    margin-bottom: size('gutter-plus');
 
     [data-item-section] {
       flex: 1 1 40%;
