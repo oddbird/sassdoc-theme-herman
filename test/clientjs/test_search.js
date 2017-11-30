@@ -6,26 +6,12 @@ import * as search from 'search';
 
 describe('search', function() {
   describe('getSearchData', function() {
-    before(function() {
-      this.xhr = sinon.useFakeXMLHttpRequest();
-      var requests = (this.requests = []);
-
-      this.xhr.onCreate = function(xhr) {
-        requests.push(xhr);
-      };
-    });
-
-    after(function() {
-      this.xhr.restore();
-    });
-
     beforeEach(function() {
       this.href = window.location.href;
       window.history.replaceState(null, document.title, '/?q=test');
     });
 
     afterEach(function() {
-      this.requests = [];
       window.history.replaceState(null, document.title, this.href);
     });
 
@@ -44,8 +30,8 @@ describe('search', function() {
   describe('doSearch', function() {
     it('searches an index', function() {
       sinon.spy(lunr.Index, 'load');
-      sinon.spy(search, 'showResults');
-      doSearch({ store: 'store', idx: '' });
+      // sinon.spy(search, 'showResults');
+      search.doSearch({ store: 'store', idx: '' });
     });
   });
 });

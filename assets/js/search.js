@@ -121,12 +121,14 @@ export const showResults = (matches, val) => {
 };
 
 export const doSearch = (data, val) => {
-  // Grab doc store from data
-  searchStore = data && data.store;
-  // Initialize Lunr index from precompiled data
-  const idx = lunr.Index.load(data.idx);
-  const matches = idx.search(val);
-  showResults(matches, val);
+  if (data && data.store && data.idx && val) {
+    // Grab doc store from data
+    searchStore = data && data.store;
+    // Initialize Lunr index from precompiled data
+    const idx = lunr.Index.load(data.idx);
+    const matches = idx.search(val);
+    showResults(matches, val);
+  }
 };
 
 export const getSearchData = () => {
