@@ -14,9 +14,9 @@
 /// for creating text rhythm and modular-scales.
 ///
 /// @group config-scale
-/// @preview ratios
+/// @ratios
 $text-ratios: (
-  'herman': 1.4
+  'line-height': 1.4
 );
 
 @include config('ratios', 'text-ratios', $text-ratios);
@@ -27,10 +27,10 @@ $text-ratios: (
 /// A set of standard text sizes.
 ///
 /// @group config-scale
-/// @preview sizes
+/// @sizes
 $text-sizes: (
   'root': 18px,
-  'rel-root': calc(16px + 0.625),
+  'rel-root': calc(16px + 0.125vw),
 
   'large-rem': 20px ('convert-units': 'rem'),
   'base-rem': 'root' ('convert-units': 'rem'),
@@ -59,9 +59,9 @@ $text-sizes: (
 /// A set of standard spacing sizes.
 ///
 /// @group config-scale
-/// @preview sizes; style: ruler
+/// @sizes {ruler}
 $spacing-sizes: (
-  'rhythm': 'root' ('herman': 1, 'convert-units': 'rem'),
+  'rhythm': 'root' ('line-height': 1, 'convert-units': 'rem'),
   'gutter': 'rhythm',
   'gutter-minus': 'gutter' ('times': 0.75),
   'gutter-plus': 'gutter' ('times': 1.5),
@@ -83,7 +83,7 @@ $spacing-sizes: (
 /// that can be applied to various components.
 ///
 /// @group config-scale
-/// @preview sizes; style: output-only
+/// @sizes {output-only}
 $pattern-sizes: (
   'border': 8px,
   'page': 50rem,

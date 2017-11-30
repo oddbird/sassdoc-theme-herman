@@ -619,7 +619,7 @@
       
       
       <pre data-sassdoc="hljs"><code class="lang-scss">$text-ratios: (
-  &#39;herman&#39;: 1.4
+  &#39;line-height&#39;: 1.4
 );</code></pre>
     </div>
   
@@ -684,90 +684,195 @@ for creating text rhythm and<span class="widont">&nbsp;</span>modular-scales.</p
 
   
   
-    
-    
-    
-
-    
-
-    
-    
-
-    
       
   
+    
   <div data-item-section="ratio-preview">
     
       <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Ratio Previews</span>
+        <span class="item-subtitle-main">Ratio</span>
+        
+          <span class="item-subtitle-supplement">line-height<span class="widont">&nbsp;</span>(1.4)</span>
         
       </h3>
     
 
     
+      
+  <table class="rulers">
+    <tr class="is-hidden">
+      <th class="ruler-name">Step</th>
+      <th class="ruler-value">Value</th>
+      <td class="ruler-viz"></td>
+    </tr>
+
     
-      <div data-sassdoc="ratio-preview">
+      
+      
+      
         
-  <div class="param-list">
-    <h4 class="param-title">
+        
+        
+
+        
+  <tr class="ruler">
+    <td class="ruler-name">
+      -3
+    </td>
+    <td class="ruler-value">
+      <code>
+        0.36
+      </code>
+    </td>
+    <td class="ruler-viz">
+      <span class="ruler-bar" style="width: 1.8221574344023328em;">
+        &nbsp;
+      </span>
+    </td>
+  </tr>
+
       
+        
+        
+        
+
+        
+  <tr class="ruler">
+    <td class="ruler-name">
+      -2
+    </td>
+    <td class="ruler-value">
+      <code>
+        0.51
+      </code>
+    </td>
+    <td class="ruler-viz">
+      <span class="ruler-bar" style="width: 2.551020408163266em;">
+        &nbsp;
+      </span>
+    </td>
+  </tr>
+
       
-        <span class="item-name">herman:</span>
+        
+        
+        
+
+        
+  <tr class="ruler">
+    <td class="ruler-name">
+      -1
+    </td>
+    <td class="ruler-value">
+      <code>
+        0.71
+      </code>
+    </td>
+    <td class="ruler-viz">
+      <span class="ruler-bar" style="width: 3.5714285714285716em;">
+        &nbsp;
+      </span>
+    </td>
+  </tr>
+
       
-      <span class="item-value">1.4</span>
+        
+        
+        
+
+        
+  <tr class="ruler ratio-base">
+    <td class="ruler-name">
+      —
+    </td>
+    <td class="ruler-value">
+      <code>
+        base
+      </code>
+    </td>
+    <td class="ruler-viz">
+      <span class="ruler-bar" style="width: 5em;">
+        &nbsp;
+      </span>
+    </td>
+  </tr>
+
       
+        
+        
+        
+
+        
+  <tr class="ruler">
+    <td class="ruler-name">
+      1
+    </td>
+    <td class="ruler-value">
+      <code>
+        1.4
+      </code>
+    </td>
+    <td class="ruler-viz">
+      <span class="ruler-bar" style="width: 7em;">
+        &nbsp;
+      </span>
+    </td>
+  </tr>
+
       
-    </h4>
+        
+        
+        
+
+        
+  <tr class="ruler">
+    <td class="ruler-name">
+      2
+    </td>
+    <td class="ruler-value">
+      <code>
+        1.96
+      </code>
+    </td>
+    <td class="ruler-viz">
+      <span class="ruler-bar" style="width: 9.799999999999999em;">
+        &nbsp;
+      </span>
+    </td>
+  </tr>
+
+      
+        
+        
+        
+
+        
+  <tr class="ruler">
+    <td class="ruler-name">
+      3
+    </td>
+    <td class="ruler-value">
+      <code>
+        2.74
+      </code>
+    </td>
+    <td class="ruler-viz">
+      <span class="ruler-bar" style="width: 13.719999999999997em;">
+        &nbsp;
+      </span>
+    </td>
+  </tr>
+
+      
+    
+  </table>
 
     
   </div>
 
-
-        
-
-        <div data-sassdoc="ratio-demos">
-          
-          
-            
-            <span data-sassdoc="ratio-demo" style="font-size: 1em;">
-              1
-            </span>
-          
-            
-            <span data-sassdoc="ratio-demo" style="font-size: 1.4em;">
-              1.4
-            </span>
-          
-            
-            <span data-sassdoc="ratio-demo" style="font-size: 1.9599999999999997em;">
-              1.96
-            </span>
-          
-            
-            <span data-sassdoc="ratio-demo" style="font-size: 2.7439999999999993em;">
-              2.74
-            </span>
-          
-            
-            <span data-sassdoc="ratio-demo" style="font-size: 3.841599999999999em;">
-              3.84
-            </span>
-          
-            
-            <span data-sassdoc="ratio-demo" style="font-size: 5.378239999999998em;">
-              5.38
-            </span>
-          
-        </div>
-      </div>
-    
   
-  </div>
-
 
     
-
-  
 
 </section>
 
@@ -835,7 +940,7 @@ for creating text rhythm and<span class="widont">&nbsp;</span>modular-scales.</p
       
       <pre data-sassdoc="hljs"><code class="lang-scss">$text-sizes: (
   &#39;root&#39;: 18px,
-  &#39;rel-root&#39;: calc(16px + 0.625),
+  &#39;rel-root&#39;: calc(16px + 0.125vw),
 
   &#39;large-rem&#39;: 20px (&#39;convert-units&#39;: &#39;rem&#39;),
   &#39;base-rem&#39;: &#39;root&#39; (&#39;convert-units&#39;: &#39;rem&#39;),
@@ -917,16 +1022,6 @@ for creating text rhythm and<span class="widont">&nbsp;</span>modular-scales.</p
 
   
   
-    
-    
-    
-
-    
-
-    
-    
-
-    
       
   
   <div data-item-section="size-preview">
@@ -939,574 +1034,256 @@ for creating text rhythm and<span class="widont">&nbsp;</span>modular-scales.</p
 
     
     
-      <div data-sassdoc="size-preview">
-        
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">root:</span>
-      
-      <span class="item-value">18px</span>
-      
-      
-    </h4>
 
     
-  </div>
-
-
+      
+  
+    <div class="size-output">
+      <h4 class="size-heading">
         
-        
-          <div data-size-demo="text" style="font-size: 18px;">
-            
-              
+        <span>root</span>:
+        <code>18px</code>
+      </h4>
+
+      
+        <div class="size-text" style="font-size: 18px;">
+          
   
     <span data-specimen-lorem="title">
       Pack my box with five dozen liquor&nbsp;jugs.
     </span>
   
 
-            
-          </div>
+        </div>
+      
+    </div>
+  
+    <div class="size-output">
+      <h4 class="size-heading">
         
-      </div>
-    
-      <div data-sassdoc="size-preview">
-        
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">rel-root:</span>
-      
-      <span class="item-value">calc(16px +<span class="widont">&nbsp;</span>0.625)</span>
-      
-      
-    </h4>
+        <span>rel-root</span>:
+        <code>calc(16px + 0.125vw)</code>
+      </h4>
 
-    
-  </div>
-
-
-        
-        
-          <div data-size-demo="text" style="font-size: calc(16px + 0.625);">
-            
-              
+      
+        <div class="size-text" style="font-size: calc(16px + 0.125vw);">
+          
   
     <span data-specimen-lorem="title">
       Pack my box with five dozen liquor&nbsp;jugs.
     </span>
   
 
-            
-          </div>
+        </div>
+      
+    </div>
+  
+    <div class="size-output">
+      <h4 class="size-heading">
         
-      </div>
-    
-      <div data-sassdoc="size-preview">
-        
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">large-rem:</span>
-      
-      <span class="item-value">1.11111rem</span>
-      
-      
-    </h4>
+        <span>large-rem</span>:
+        <code>1.11111rem</code>
+      </h4>
 
-    
-  </div>
-
-
-        
-        
-          <div data-size-demo="text" style="font-size: 1.11111rem;">
-            
-              
+      
+        <div class="size-text" style="font-size: 1.11111rem;">
+          
   
     <span data-specimen-lorem="title">
       Pack my box with five dozen liquor&nbsp;jugs.
     </span>
   
 
-            
-          </div>
+        </div>
+      
+    </div>
+  
+    <div class="size-output">
+      <h4 class="size-heading">
         
-      </div>
-    
-      <div data-sassdoc="size-preview">
-        
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">base-rem:</span>
-      
-      <span class="item-value">1rem</span>
-      
-      
-    </h4>
+        <span>base-rem</span>:
+        <code>1rem</code>
+      </h4>
 
-    
-  </div>
-
-
-        
-        
-          <div data-size-demo="text" style="font-size: 1rem;">
-            
-              
+      
+        <div class="size-text" style="font-size: 1rem;">
+          
   
     <span data-specimen-lorem="title">
       Pack my box with five dozen liquor&nbsp;jugs.
     </span>
   
 
-            
-          </div>
+        </div>
+      
+    </div>
+  
+    <div class="size-output">
+      <h4 class="size-heading">
         
-      </div>
-    
-      <div data-sassdoc="size-preview">
-        
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">small-rem:</span>
-      
-      <span class="item-value">0.88889rem</span>
-      
-      
-    </h4>
+        <span>small-rem</span>:
+        <code>0.88889rem</code>
+      </h4>
 
-    
-  </div>
-
-
-        
-        
-          <div data-size-demo="text" style="font-size: 0.88889rem;">
-            
-              
+      
+        <div class="size-text" style="font-size: 0.88889rem;">
+          
   
     <span data-specimen-lorem="title">
       Pack my box with five dozen liquor&nbsp;jugs.
     </span>
   
 
-            
-          </div>
+        </div>
+      
+    </div>
+  
+    <div class="size-output">
+      <h4 class="size-heading">
         
-      </div>
-    
-      <div data-sassdoc="size-preview">
-        
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">xsmall-rem:</span>
-      
-      <span class="item-value">0.75rem</span>
-      
-      
-    </h4>
+        <span>xsmall-rem</span>:
+        <code>0.75rem</code>
+      </h4>
 
-    
-  </div>
-
-
-        
-        
-          <div data-size-demo="text" style="font-size: 0.75rem;">
-            
-              
+      
+        <div class="size-text" style="font-size: 0.75rem;">
+          
   
     <span data-specimen-lorem="title">
       Pack my box with five dozen liquor&nbsp;jugs.
     </span>
   
 
-            
-          </div>
+        </div>
+      
+    </div>
+  
+    <div class="size-output">
+      <h4 class="size-heading">
         
-      </div>
-    
-      <div data-sassdoc="size-preview">
-        
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">xlarge:</span>
-      
-      <span class="item-value">calc(1rem +<span class="widont">&nbsp;</span>2vw)</span>
-      
-      
-    </h4>
+        <span>xlarge, h1</span>:
+        <code>calc(1rem + 2vw)</code>
+      </h4>
 
-    
-  </div>
-
-
-        
-        
-          <div data-size-demo="text" style="font-size: calc(1rem + 2vw);">
-            
-              
+      
+        <div class="size-text" style="font-size: calc(1rem + 2vw);">
+          
   
     <span data-specimen-lorem="title">
       Pack my box with five dozen liquor&nbsp;jugs.
     </span>
   
 
-            
-          </div>
+        </div>
+      
+    </div>
+  
+    <div class="size-output">
+      <h4 class="size-heading">
         
-      </div>
-    
-      <div data-sassdoc="size-preview">
-        
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">large:</span>
-      
-      <span class="item-value">calc(1rem +<span class="widont">&nbsp;</span>1vw)</span>
-      
-      
-    </h4>
+        <span>large, h2</span>:
+        <code>calc(1rem + 1vw)</code>
+      </h4>
 
-    
-  </div>
-
-
-        
-        
-          <div data-size-demo="text" style="font-size: calc(1rem + 1vw);">
-            
-              
+      
+        <div class="size-text" style="font-size: calc(1rem + 1vw);">
+          
   
     <span data-specimen-lorem="title">
       Pack my box with five dozen liquor&nbsp;jugs.
     </span>
   
 
-            
-          </div>
+        </div>
+      
+    </div>
+  
+    <div class="size-output">
+      <h4 class="size-heading">
         
-      </div>
-    
-      <div data-sassdoc="size-preview">
-        
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">medium:</span>
-      
-      <span class="item-value">calc(1rem +<span class="widont">&nbsp;</span>0.5vw)</span>
-      
-      
-    </h4>
+        <span>medium, h3, quote</span>:
+        <code>calc(1rem + 0.5vw)</code>
+      </h4>
 
-    
-  </div>
-
-
-        
-        
-          <div data-size-demo="text" style="font-size: calc(1rem + 0.5vw);">
-            
-              
+      
+        <div class="size-text" style="font-size: calc(1rem + 0.5vw);">
+          
   
     <span data-specimen-lorem="title">
       Pack my box with five dozen liquor&nbsp;jugs.
     </span>
   
 
-            
-          </div>
+        </div>
+      
+    </div>
+  
+    <div class="size-output">
+      <h4 class="size-heading">
         
-      </div>
-    
-      <div data-sassdoc="size-preview">
-        
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">base:</span>
-      
-      <span class="item-value">calc(0.88889rem +<span class="widont">&nbsp;</span>0.5vw)</span>
-      
-      
-    </h4>
+        <span>base</span>:
+        <code>calc(0.88889rem + 0.5vw)</code>
+      </h4>
 
-    
-  </div>
-
-
-        
-        
-          <div data-size-demo="text" style="font-size: calc(0.88889rem + 0.5vw);">
-            
-              
+      
+        <div class="size-text" style="font-size: calc(0.88889rem + 0.5vw);">
+          
   
     <span data-specimen-lorem="title">
       Pack my box with five dozen liquor&nbsp;jugs.
     </span>
   
 
-            
-          </div>
+        </div>
+      
+    </div>
+  
+    <div class="size-output">
+      <h4 class="size-heading">
         
-      </div>
-    
-      <div data-sassdoc="size-preview">
-        
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">small:</span>
-      
-      <span class="item-value">calc(0.88889rem +<span class="widont">&nbsp;</span>0.25vw)</span>
-      
-      
-    </h4>
+        <span>small</span>:
+        <code>calc(0.88889rem + 0.25vw)</code>
+      </h4>
 
-    
-  </div>
-
-
-        
-        
-          <div data-size-demo="text" style="font-size: calc(0.88889rem + 0.25vw);">
-            
-              
+      
+        <div class="size-text" style="font-size: calc(0.88889rem + 0.25vw);">
+          
   
     <span data-specimen-lorem="title">
       Pack my box with five dozen liquor&nbsp;jugs.
     </span>
   
 
-            
-          </div>
+        </div>
+      
+    </div>
+  
+    <div class="size-output">
+      <h4 class="size-heading">
         
-      </div>
-    
-      <div data-sassdoc="size-preview">
-        
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">xsmall:</span>
-      
-      <span class="item-value">calc(0.75rem +<span class="widont">&nbsp;</span>0.25vw)</span>
-      
-      
-    </h4>
+        <span>xsmall, pre</span>:
+        <code>calc(0.75rem + 0.25vw)</code>
+      </h4>
 
-    
-  </div>
-
-
-        
-        
-          <div data-size-demo="text" style="font-size: calc(0.75rem + 0.25vw);">
-            
-              
+      
+        <div class="size-text" style="font-size: calc(0.75rem + 0.25vw);">
+          
   
     <span data-specimen-lorem="title">
       Pack my box with five dozen liquor&nbsp;jugs.
     </span>
   
 
-            
-          </div>
-        
-      </div>
-    
-      <div data-sassdoc="size-preview">
-        
-  <div class="param-list">
-    <h4 class="param-title">
+        </div>
       
-      
-        <span class="item-name">h1:</span>
-      
-      <span class="item-value">calc(1rem +<span class="widont">&nbsp;</span>2vw)</span>
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-        
-          <div data-size-demo="text" style="font-size: calc(1rem + 2vw);">
-            
-              
-  
-    <span data-specimen-lorem="title">
-      Pack my box with five dozen liquor&nbsp;jugs.
-    </span>
+    </div>
   
 
-            
-          </div>
-        
-      </div>
-    
-      <div data-sassdoc="size-preview">
-        
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">h2:</span>
-      
-      <span class="item-value">calc(1rem +<span class="widont">&nbsp;</span>1vw)</span>
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-        
-          <div data-size-demo="text" style="font-size: calc(1rem + 1vw);">
-            
-              
-  
-    <span data-specimen-lorem="title">
-      Pack my box with five dozen liquor&nbsp;jugs.
-    </span>
-  
-
-            
-          </div>
-        
-      </div>
-    
-      <div data-sassdoc="size-preview">
-        
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">h3:</span>
-      
-      <span class="item-value">calc(1rem +<span class="widont">&nbsp;</span>0.5vw)</span>
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-        
-          <div data-size-demo="text" style="font-size: calc(1rem + 0.5vw);">
-            
-              
-  
-    <span data-specimen-lorem="title">
-      Pack my box with five dozen liquor&nbsp;jugs.
-    </span>
-  
-
-            
-          </div>
-        
-      </div>
-    
-      <div data-sassdoc="size-preview">
-        
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">quote:</span>
-      
-      <span class="item-value">calc(1rem +<span class="widont">&nbsp;</span>0.5vw)</span>
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-        
-          <div data-size-demo="text" style="font-size: calc(1rem + 0.5vw);">
-            
-              
-  
-    <span data-specimen-lorem="title">
-      Pack my box with five dozen liquor&nbsp;jugs.
-    </span>
-  
-
-            
-          </div>
-        
-      </div>
-    
-      <div data-sassdoc="size-preview">
-        
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">pre:</span>
-      
-      <span class="item-value">calc(0.75rem +<span class="widont">&nbsp;</span>0.25vw)</span>
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-        
-          <div data-size-demo="text" style="font-size: calc(0.75rem + 0.25vw);">
-            
-              
-  
-    <span data-specimen-lorem="title">
-      Pack my box with five dozen liquor&nbsp;jugs.
-    </span>
-  
-
-            
-          </div>
-        
-      </div>
     
   
   </div>
 
 
-    
-
-  
 
 </section>
 
@@ -1573,7 +1350,7 @@ for creating text rhythm and<span class="widont">&nbsp;</span>modular-scales.</p
       
       
       <pre data-sassdoc="hljs"><code class="lang-scss">$spacing-sizes: (
-  &#39;rhythm&#39;: &#39;root&#39; (&#39;herman&#39;: 1, &#39;convert-units&#39;: &#39;rem&#39;),
+  &#39;rhythm&#39;: &#39;root&#39; (&#39;line-height&#39;: 1, &#39;convert-units&#39;: &#39;rem&#39;),
   &#39;gutter&#39;: &#39;rhythm&#39;,
   &#39;gutter-minus&#39;: &#39;gutter&#39; (&#39;times&#39;: 0.75),
   &#39;gutter-plus&#39;: &#39;gutter&#39; (&#39;times&#39;: 1.5),
@@ -1647,16 +1424,6 @@ for creating text rhythm and<span class="widont">&nbsp;</span>modular-scales.</p
 
   
   
-    
-    
-    
-
-    
-
-    
-    
-
-    
       
   
   <div data-item-section="size-preview">
@@ -1669,238 +1436,178 @@ for creating text rhythm and<span class="widont">&nbsp;</span>modular-scales.</p
 
     
     
-      <div data-sassdoc="size-preview">
-        
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">rhythm:</span>
-      
-      <span class="item-value">1.4rem</span>
-      
-      
-    </h4>
 
     
-  </div>
-
-
-        
-        
-          <div data-size-demo="ruler" style="font-size: 1.4rem;">
-            
-          </div>
-        
-      </div>
-    
-      <div data-sassdoc="size-preview">
-        
-  <div class="param-list">
-    <h4 class="param-title">
       
-      
-        <span class="item-name">gutter:</span>
-      
-      <span class="item-value">1.4rem</span>
-      
-      
-    </h4>
+  <table class="rulers">
+    <tr class="is-hidden">
+      <th class="ruler-name">Name</th>
+      <th class="ruler-value">Value</th>
+      <td class="ruler-viz"></td>
+    </tr>
 
     
-  </div>
+      
+        
+        
+  <tr class="ruler">
+    <td class="ruler-name">
+      rhythm, gutter
+    </td>
+    <td class="ruler-value">
+      <code>
+        1.4rem
+      </code>
+    </td>
+    <td class="ruler-viz">
+      <span class="ruler-bar" style="width: 1.4rem;">
+        &nbsp;
+      </span>
+    </td>
+  </tr>
 
+      
+        
+        
+  <tr class="ruler">
+    <td class="ruler-name">
+      gutter-minus
+    </td>
+    <td class="ruler-value">
+      <code>
+        1.05rem
+      </code>
+    </td>
+    <td class="ruler-viz">
+      <span class="ruler-bar" style="width: 1.05rem;">
+        &nbsp;
+      </span>
+    </td>
+  </tr>
 
+      
         
         
-          <div data-size-demo="ruler" style="font-size: 1.4rem;">
-            
-          </div>
+  <tr class="ruler">
+    <td class="ruler-name">
+      gutter-plus
+    </td>
+    <td class="ruler-value">
+      <code>
+        2.1rem
+      </code>
+    </td>
+    <td class="ruler-viz">
+      <span class="ruler-bar" style="width: 2.1rem;">
+        &nbsp;
+      </span>
+    </td>
+  </tr>
+
+      
         
-      </div>
+        
+  <tr class="ruler">
+    <td class="ruler-name">
+      flex-gutter
+    </td>
+    <td class="ruler-value">
+      <code>
+        calc(0.7rem + 2.5vw)
+      </code>
+    </td>
+    <td class="ruler-viz">
+      <span class="ruler-bar" style="width: calc(0.7rem + 2.5vw);">
+        &nbsp;
+      </span>
+    </td>
+  </tr>
+
+      
+        
+        
+  <tr class="ruler">
+    <td class="ruler-name">
+      spacer
+    </td>
+    <td class="ruler-value">
+      <code>
+        calc(4.2rem + 2.5vw)
+      </code>
+    </td>
+    <td class="ruler-viz">
+      <span class="ruler-bar" style="width: calc(4.2rem + 2.5vw);">
+        &nbsp;
+      </span>
+    </td>
+  </tr>
+
+      
+        
+        
+  <tr class="ruler">
+    <td class="ruler-name">
+      shim
+    </td>
+    <td class="ruler-value">
+      <code>
+        0.7rem
+      </code>
+    </td>
+    <td class="ruler-viz">
+      <span class="ruler-bar" style="width: 0.7rem;">
+        &nbsp;
+      </span>
+    </td>
+  </tr>
+
+      
+        
+        
+  <tr class="ruler">
+    <td class="ruler-name">
+      half-shim
+    </td>
+    <td class="ruler-value">
+      <code>
+        0.35rem
+      </code>
+    </td>
+    <td class="ruler-viz">
+      <span class="ruler-bar" style="width: 0.35rem;">
+        &nbsp;
+      </span>
+    </td>
+  </tr>
+
+      
+        
+        
+  <tr class="ruler">
+    <td class="ruler-name">
+      quarter-shim
+    </td>
+    <td class="ruler-value">
+      <code>
+        0.175rem
+      </code>
+    </td>
+    <td class="ruler-viz">
+      <span class="ruler-bar" style="width: 0.175rem;">
+        &nbsp;
+      </span>
+    </td>
+  </tr>
+
+      
     
-      <div data-sassdoc="size-preview">
-        
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">gutter-minus:</span>
-      
-      <span class="item-value">1.05rem</span>
-      
-      
-    </h4>
+  </table>
 
-    
-  </div>
-
-
-        
-        
-          <div data-size-demo="ruler" style="font-size: 1.05rem;">
-            
-          </div>
-        
-      </div>
-    
-      <div data-sassdoc="size-preview">
-        
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">gutter-plus:</span>
-      
-      <span class="item-value">2.1rem</span>
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-        
-          <div data-size-demo="ruler" style="font-size: 2.1rem;">
-            
-          </div>
-        
-      </div>
-    
-      <div data-sassdoc="size-preview">
-        
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">flex-gutter:</span>
-      
-      <span class="item-value">calc(0.7rem +<span class="widont">&nbsp;</span>2.5vw)</span>
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-        
-          <div data-size-demo="ruler" style="font-size: calc(0.7rem + 2.5vw);">
-            
-          </div>
-        
-      </div>
-    
-      <div data-sassdoc="size-preview">
-        
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">spacer:</span>
-      
-      <span class="item-value">calc(4.2rem +<span class="widont">&nbsp;</span>2.5vw)</span>
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-        
-          <div data-size-demo="ruler" style="font-size: calc(4.2rem + 2.5vw);">
-            
-          </div>
-        
-      </div>
-    
-      <div data-sassdoc="size-preview">
-        
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">shim:</span>
-      
-      <span class="item-value">0.7rem</span>
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-        
-          <div data-size-demo="ruler" style="font-size: 0.7rem;">
-            
-          </div>
-        
-      </div>
-    
-      <div data-sassdoc="size-preview">
-        
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">half-shim:</span>
-      
-      <span class="item-value">0.35rem</span>
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-        
-          <div data-size-demo="ruler" style="font-size: 0.35rem;">
-            
-          </div>
-        
-      </div>
-    
-      <div data-sassdoc="size-preview">
-        
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">quarter-shim:</span>
-      
-      <span class="item-value">0.175rem</span>
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-        
-          <div data-size-demo="ruler" style="font-size: 0.175rem;">
-            
-          </div>
-        
-      </div>
     
   
   </div>
 
 
-    
-
-  
 
 </section>
 
@@ -2044,16 +1751,6 @@ that can be applied to various<span class="widont">&nbsp;</span>components.</p>
 
   
   
-    
-    
-    
-
-    
-
-    
-    
-
-    
       
   
   <div data-item-section="size-preview">
@@ -2066,244 +1763,126 @@ that can be applied to various<span class="widont">&nbsp;</span>components.</p>
 
     
     
-      <div data-sassdoc="size-preview">
-        
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">border:</span>
-      
-      <span class="item-value">8px</span>
-      
-      
-    </h4>
 
     
-  </div>
-
-
+      
+  
+    <div class="size-output">
+      <h4 class="size-heading">
         
-        
-      </div>
-    
-      <div data-sassdoc="size-preview">
-        
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">page:</span>
-      
-      <span class="item-value">50rem</span>
-      
-      
-    </h4>
+        <span>border</span>:
+        <code>8px</code>
+      </h4>
 
-    
-  </div>
-
-
+      
+    </div>
+  
+    <div class="size-output">
+      <h4 class="size-heading">
         
-        
-      </div>
-    
-      <div data-sassdoc="size-preview">
-        
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">nav-small:</span>
-      
-      <span class="item-value">21rem</span>
-      
-      
-    </h4>
+        <span>page</span>:
+        <code>50rem</code>
+      </h4>
 
-    
-  </div>
-
-
+      
+    </div>
+  
+    <div class="size-output">
+      <h4 class="size-heading">
         
-        
-      </div>
-    
-      <div data-sassdoc="size-preview">
-        
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">nav-medium:</span>
-      
-      <span class="item-value">32rem</span>
-      
-      
-    </h4>
+        <span>nav-small</span>:
+        <code>21rem</code>
+      </h4>
 
-    
-  </div>
-
-
+      
+    </div>
+  
+    <div class="size-output">
+      <h4 class="size-heading">
         
-        
-      </div>
-    
-      <div data-sassdoc="size-preview">
-        
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">project-link-nav:</span>
-      
-      <span class="item-value">36rem</span>
-      
-      
-    </h4>
+        <span>nav-medium</span>:
+        <code>32rem</code>
+      </h4>
 
-    
-  </div>
-
-
+      
+    </div>
+  
+    <div class="size-output">
+      <h4 class="size-heading">
         
-        
-      </div>
-    
-      <div data-sassdoc="size-preview">
-        
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">specimen:</span>
-      
-      <span class="item-value">4.2rem</span>
-      
-      
-    </h4>
+        <span>project-link-nav</span>:
+        <code>36rem</code>
+      </h4>
 
-    
-  </div>
-
-
+      
+    </div>
+  
+    <div class="size-output">
+      <h4 class="size-heading">
         
-        
-      </div>
-    
-      <div data-sassdoc="size-preview">
-        
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">color-preview:</span>
-      
-      <span class="item-value">calc(15em +<span class="widont">&nbsp;</span>0.25vw)</span>
-      
-      
-    </h4>
+        <span>specimen</span>:
+        <code>4.2rem</code>
+      </h4>
 
-    
-  </div>
-
-
+      
+    </div>
+  
+    <div class="size-output">
+      <h4 class="size-heading">
         
-        
-      </div>
-    
-      <div data-sassdoc="size-preview">
-        
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">color-swatch:</span>
-      
-      <span class="item-value">5.6rem</span>
-      
-      
-    </h4>
+        <span>color-preview</span>:
+        <code>calc(15em + 0.25vw)</code>
+      </h4>
 
-    
-  </div>
-
-
+      
+    </div>
+  
+    <div class="size-output">
+      <h4 class="size-heading">
         
-        
-      </div>
-    
-      <div data-sassdoc="size-preview">
-        
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">icon:</span>
-      
-      <span class="item-value">28px</span>
-      
-      
-    </h4>
+        <span>color-swatch</span>:
+        <code>5.6rem</code>
+      </h4>
 
-    
-  </div>
-
-
+      
+    </div>
+  
+    <div class="size-output">
+      <h4 class="size-heading">
         
-        
-      </div>
-    
-      <div data-sassdoc="size-preview">
-        
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">nav-underline:</span>
-      
-      <span class="item-value">4px</span>
-      
-      
-    </h4>
+        <span>icon</span>:
+        <code>28px</code>
+      </h4>
 
-    
-  </div>
-
-
-        
-        
-      </div>
-    
-      <div data-sassdoc="size-preview">
-        
-  <div class="param-list">
-    <h4 class="param-title">
       
-      
-        <span class="item-name">footer-logo:</span>
-      
-      <span class="item-value">2.8rem</span>
-      
-      
-    </h4>
-
-    
-  </div>
-
-
+    </div>
+  
+    <div class="size-output">
+      <h4 class="size-heading">
         
+        <span>nav-underline</span>:
+        <code>4px</code>
+      </h4>
+
+      
+    </div>
+  
+    <div class="size-output">
+      <h4 class="size-heading">
         
-      </div>
+        <span>footer-logo</span>:
+        <code>2.8rem</code>
+      </h4>
+
+      
+    </div>
+  
+
     
   
   </div>
 
 
-    
-
-  
 
 </section>
 

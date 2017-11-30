@@ -25,26 +25,28 @@
   {% endif %}
 </head>
 <body class="sassdoc">
-  {% set key = item.font.key or item.context.origName or item.context.name %}
-  {% set data = sassjson.fonts[key] %}
-  {% set family = [data.name or key, data.stack]|join(',') %}
-  {% if item.font.variants and item.font.variants|length %}
-    {% for option in item.font.variants %}
-      {{ preview.specimen_variant(
-        family=family,
-        option=option,
-        data=data,
-        path=data[option]
-      ) }}
-    {% endfor %}
-  {% else %}
-    {% for option, path in data %}
-      {{ preview.specimen_variant(
-        family=family,
-        option=option,
-        path=path
-      ) }}
-    {% endfor %}
-  {% endif %}
+  {%- set key = item.font.key or item.context.origName or item.context.name -%}
+  {%- set data = sassjson.fonts[key] -%}
+  {%- if data -%}
+    {%- set family = [data.name or key, data.stack]|join(',') -%}
+    {%- if item.font.variants and item.font.variants|length -%}
+      {%- for option in item.font.variants -%}
+        {{ preview.specimen_variant(
+          family=family,
+          option=option,
+          data=data,
+          path=data[option]
+        ) }}
+      {%- endfor -%}
+    {%- else -%}
+      {%- for option, path in data -%}
+        {{ preview.specimen_variant(
+          family=family,
+          option=option,
+          path=path
+        ) }}
+      {%- endfor -%}
+    {%- endif -%}
+  {%- endif -%}
 </body>
 </html>

@@ -619,16 +619,16 @@ directly in a Herman-friendly<span class="widont">&nbsp;</span>map.</p>
 to organize different palettes –
 primary, secondary, button-colors, etc.
 Each map will be displayed individually,
-using the <code>@preview color-palette</code> annotation:</p>
-<pre><code class="lang-scss">// @preview color-palette
+using the <code>@colors</code> annotation:</p>
+<pre><code class="lang-scss">// @colors
 </code></pre>
-<p>The <code>color-palette</code> preview accepts an optional <code>key</code> argument,
+<p>The <code>@colors</code> annotation accepts an optional one-word key argument,
 which defaults to the map-variable name.
 That key will be used to access the data from JSON,
 so it doesn’t matter what key is used,
 as long as the key given here matches the group-name
 used when adding this data to <code>$herman</code>.</p>
-<pre><code class="lang-scss">// @preview color-palette; key: my-colors
+<pre><code class="lang-scss">// @colors my-colors
 </code></pre>
 <p>By default, our color palettes display
 <code>name</code>, <code>hex</code>, <code>rgb(a)</code>, and <code>hsl(a)</code> for every color.
@@ -690,16 +690,6 @@ using the <code>herman.displayColors</code> option:</p>
 
   
   
-    
-    
-    
-
-    
-
-    
-    
-
-    
       
   
   <div data-item-section="color-palette">
@@ -776,8 +766,6 @@ using the <code>herman.displayColors</code> option:</p>
 
     
 
-  
-
 </section>
 
   
@@ -824,7 +812,7 @@ so colors defined in Sass can be accessed in<span class="widont">&nbsp;</span>Ja
 <li>The second argument sets a <code>key</code> name
 for accessing this particular group of colors.
 The <code>herman-add</code> key should match
-the key provided to <code>@preview color-palette</code>.</li>
+the key provided to <code>@colors</code>.</li>
 <li>The third argument provides the actual map of data
 to be added to the <code>$herman</code> export map.</li>
 </ul>
@@ -1033,7 +1021,9 @@ along with any additional arguments required for that<span class="widont">&nbsp;
     
 
     <div data-item-section="examples">
-      <h3 class="item-subtitle">Example</h3>
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Example</span>
+      </h3>
 
       
         
@@ -1178,16 +1168,6 @@ $demo-noncolors: (
 
   
   
-    
-    
-    
-
-    
-
-    
-    
-
-    
       
   
   <div data-item-section="color-palette">
@@ -1291,8 +1271,6 @@ $demo-noncolors: (
 
 
     
-
-  
 
 </section>
 

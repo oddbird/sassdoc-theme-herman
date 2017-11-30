@@ -23,7 +23,7 @@
 /// using the `@font` annotation:
 ///
 /// ```scss
-/// // @font 'my-font' (regular, bold)
+/// // @font my-font (regular, bold)
 /// ```
 ///
 /// Let's look at a few examples…
@@ -37,12 +37,13 @@
 /// the `@font` annotation accepts three arguments:
 ///
 /// ```scss
-/// // @font 'font-key' (list of, variants, to show)
+/// // @font font-key (list of, variants, to show)
 /// //   <any html required for import>
 /// ```
 ///
-/// - The first argument (in single-quotes or double-quotes) is the `key`
-///   that will be used to access the data from JSON,
+/// - The first argument is an optional one-word key
+///   which defaults to the map-variable name.
+///   That key will be used to access the data from JSON,
 ///   so it doesn't matter what key is used --
 ///   as long as the key given here matches the group-name
 ///   used when adding this data to `$herman`.
@@ -65,10 +66,10 @@
 /// [type]: http://oddbird.net/accoutrement-type/
 ///
 /// @example scss
-///   // @font 'demo-cdn' (regular, bold, bold italic)
+///   // @font demo-cdn (regular, bold, bold italic)
 ///   //   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" rel="stylesheet">
 ///
-/// @font 'demo-cdn' (regular, bold, bold italic)
+/// @font (regular, bold, bold italic)
 ///   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" rel="stylesheet">
 /// @group demo_fonts
 $demo-cdn: (
@@ -83,8 +84,9 @@ $demo-cdn: (
 /// For locally-hosted fonts,
 /// the `@font` annotation accepts three arguments:
 ///
-/// - The first argument (in single-quotes or double-quotes) is the `key`
-///   that will be used to access the data from JSON,
+/// - The first argument is an optional one-word key
+///   which defaults to the map-variable name.
+///   That key will be used to access the data from JSON,
 ///   so it doesn't matter what key is used --
 ///   as long as the key given here matches the group-name
 ///   used when adding this data to `$herman`.
@@ -100,7 +102,7 @@ $demo-cdn: (
 ///   included as keys in the font map itself.
 ///
 /// ```scss
-/// // @font 'demo-local' {woff2, woff, ttf}
+/// // @font demo-local {woff2, woff, ttf}
 /// ```
 ///
 /// In order for this to work,
@@ -114,7 +116,7 @@ $demo-cdn: (
 ///   fontpath: 'fonts/'
 /// ```
 ///
-/// @font 'demo-local' {woff2, woff, ttf}
+/// @font {woff2, woff, ttf}
 /// @group demo_fonts
 $demo-local: (
   'name': 'rockingham',
