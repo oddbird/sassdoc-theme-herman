@@ -9,10 +9,10 @@
 // ----------
 
 [data-nav-menu] {
-  align-content: flex-start;
+  align-items: stretch;
   display: flex;
-  flex-wrap: wrap;
-  width: 100%;
+  flex-direction: column;
+  width: auto;
 
   @include below('nav-large') {
     @include position(0 null 0 0);
@@ -23,12 +23,6 @@
     &[aria-expanded='true'] {
       transform: translateX(0);
     }
-  }
-
-  @include above('nav-small') {
-    align-items: stretch;
-    flex-direction: column;
-    width: auto;
   }
 
   @include above('nav-large') {
