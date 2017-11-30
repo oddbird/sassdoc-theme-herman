@@ -66,7 +66,7 @@
 
 {# Toggle collapsible elements (see `static/js/app/base.js`) #}
 {% macro toggle_button(id, expanded=false, button=false, synced=false) -%}
-  data-toggle="button" aria-controls="{{ id }}" aria-pressed="{{ 'true' if expanded else 'false' }}"{% if not button %} role="button"{% endif %} data-toggle-synced="{{ 'true' if synced else 'false' }}"
+  data-toggle="button" aria-controls="{{ id }}" aria-pressed="{{ 'true' if expanded else 'false' }}"{% if button %} type="button"{% else %} role="button"{% endif %} data-toggle-synced="{{ 'true' if synced else 'false' }}"
 {%- endmacro %}
 
 {% macro toggle_target(id, expanded=false, auto_closing=false, auto_closing_on_any_click=false, auto_closing_exception=none) -%}

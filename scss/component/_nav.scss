@@ -35,7 +35,7 @@
 // -------
 
 [data-nav-toggle] {
-  color: color('theme-dark');
+  color: color('action');
   padding: size('half-shim');
 
   @include above('page-break') {
@@ -48,12 +48,9 @@
   }
 
   &:focus,
-  &:hover {
-    color: color('action');
-    outline: 0;
-  }
-
-  &:active {
+  &:hover,
+  &:active,
+  &[aria-pressed='true'] {
     color: color('focus');
     outline: 0;
   }
