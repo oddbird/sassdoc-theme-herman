@@ -21,9 +21,13 @@ const PrecompiledLoader = nunjucks.Loader.extend({
     path: name,
   }),
 });
-const nunjucksEnv = new nunjucks.Environment(new PrecompiledLoader());
+export const nunjucksEnv = new nunjucks.Environment(new PrecompiledLoader());
 
 let searchStore;
+
+export const setSearchStore = val => {
+  searchStore = val;
+};
 
 export const getUrlParams = () => deparam(window.location.search.substr(1));
 
