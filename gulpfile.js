@@ -216,26 +216,6 @@ gulp.task('clienttest', cb => {
   ).start();
 });
 
-gulp.task('clienttest-check-coverage', cb => {
-  new KarmaServer(
-    {
-      configFile: path.join(__dirname, 'karma.conf.js'),
-      reporters: ['dots', 'mocha', 'coverage', 'junit'],
-      coverageReporter: {
-        check: {
-          global: {
-            statements: 100,
-            branches: 100,
-            functions: 100,
-            lines: 100,
-          },
-        },
-      },
-    },
-    karmaOnBuild(cb)
-  ).start();
-});
-
 // Use karma watcher instead of gulp watcher for tests
 gulp.task('clienttest-watch', () => {
   new KarmaServer({
