@@ -10,7 +10,7 @@
   <title>Ratios &amp; Sizes | Herman Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
-  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
 
   <link rel="stylesheet" href="assets/webpack/app_styles.min.css" />
 </head>
@@ -25,7 +25,7 @@
 </svg>
 
   <div data-sassdoc-region="app">
-    <header role="banner" data-sassdoc-region="banner">
+    <header data-sassdoc-region="banner">
       
   
   <button data-nav-toggle="small" data-toggle="button" aria-controls="nav-small" aria-pressed="false" data-toggle-synced="false">
@@ -41,12 +41,12 @@
 
 
 
-      <h1 data-sassdoc="project-title">
+      <div data-sassdoc="project-title">
         <a href="index.html" rel="home" data-sassdoc="project-name">Herman</a>
         
           <span data-sassdoc="project-version">1.0.0-rc.1</span>
         
-      </h1>
+      </div>
     </header>
 
     <div data-sassdoc-region="container">
@@ -55,7 +55,7 @@
 
   
     
-  <nav role="navigation" data-nav-menu="small" data-toggle="target" id="nav-small" data-target-id="nav-small" aria-expanded="false" data-auto-closing="false" data-auto-closing-on-any-click="false">
+  <nav data-nav-menu="small" data-toggle="target" id="nav-small" data-target-id="nav-small" aria-expanded="false" data-auto-closing="false" data-auto-closing-on-any-click="false">
     <form action="/search.html">
       <input type="text" name="q" placeholder="Search…" required minlength="3">
     </form>
@@ -220,18 +220,30 @@
     
 
     <aside class="footer-credit">
-      
+      <a href="http://oddbird.net/herman/" class="footer-icon">
+        
   <svg data-icon="logo" data-icon-size="footer-logo" ><use xlink:href="#icon-logo" />
   </svg>
 
-      <span>Documented with <a href="http://oddbird.net/herman/">Herman</a></span>
-      <span>by <a href="http://oddbird.net/">OddBird</a></span>
+      </a>
+      <span>
+        Documented with
+        <a href="http://oddbird.net/herman/" class="footer-link">
+          Herman
+        </a>
+      </span>
+      <span>
+        by
+        <a href="http://oddbird.net/" class="footer-link">
+          OddBird
+        </a>
+      </span>
     </aside>
   </nav>
 
   
     
-  <nav role="navigation" data-nav-menu="large" data-toggle="target" id="nav-large" data-target-id="nav-large" aria-expanded="true" data-auto-closing="false" data-auto-closing-on-any-click="false">
+  <nav data-nav-menu="large" data-toggle="target" id="nav-large" data-target-id="nav-large" aria-expanded="true" data-auto-closing="false" data-auto-closing-on-any-click="false">
     <form action="/search.html">
       <input type="text" name="q" placeholder="Search…" required minlength="3">
     </form>
@@ -396,19 +408,31 @@
     
 
     <aside class="footer-credit">
-      
+      <a href="http://oddbird.net/herman/" class="footer-icon">
+        
   <svg data-icon="logo" data-icon-size="footer-logo" ><use xlink:href="#icon-logo" />
   </svg>
 
-      <span>Documented with <a href="http://oddbird.net/herman/">Herman</a></span>
-      <span>by <a href="http://oddbird.net/">OddBird</a></span>
+      </a>
+      <span>
+        Documented with
+        <a href="http://oddbird.net/herman/" class="footer-link">
+          Herman
+        </a>
+      </span>
+      <span>
+        by
+        <a href="http://oddbird.net/" class="footer-link">
+          OddBird
+        </a>
+      </span>
     </aside>
   </nav>
 
   
 
 
-      <main role="main">
+      <main data-sassdoc-region="main">
         
   <nav data-sassdoc-region="breadcrumb">
     
@@ -417,7 +441,7 @@
   </nav>
 
 
-        <div data-sassdoc-region="main" data-sassdoc-page="demo_sizes">
+        <div data-sassdoc-page="demo_sizes">
           
   
     
@@ -442,14 +466,14 @@
 
   
     <div data-item-section="prose" class="text-block">
-      <h2 id="documenting-ratios-and-sizes">Documenting ratios and<span class="widont">&nbsp;</span>sizes</h2>
+      <h1 id="documenting-ratios-sizes">Documenting ratios &amp;<span class="widont">&nbsp;</span>sizes</h1>
 <p>In addition to documenting colors and fonts,
 you can use Herman to document and display ratios and sizes.
 In the end, Herman will need a map –
 but we’ll start with individual ratios/sizes,
 and build the export from<span class="widont">&nbsp;</span>there.</p>
 <p>Let’s start with a ratio and two<span class="widont">&nbsp;</span>sizes:</p>
-<pre><code class="lang-scss">$herman-ratio: 1.4;
+<pre><code class="lang-scss">$line-height-ratio: 1.4;
 $root: 18px;
 $xlarge: 28px;
 </code></pre>
@@ -567,7 +591,7 @@ $xlarge: 28px;
       
       
       <pre data-sassdoc="hljs"><code class="lang-scss">$demo-ratios: (
-  &#39;herman-ratio&#39;: $herman-ratio
+  &#39;line-height&#39;: $line-height-ratio
 );</code></pre>
     </div>
   
@@ -590,19 +614,22 @@ but you can use a tool like our <a href="http://oddbird.net/accoutrement-scale/"
 to store and access ratios
 directly in a Herman-friendly<span class="widont">&nbsp;</span>map.</p>
 <pre><code class="lang-scss">$demo-ratios: (
-  'herman-ratio': $herman-ratio
+  'line-height': $line-height-ratio
 );
 </code></pre>
 <p>Create as many maps as you like
 to organize different types of ratios –
 text, spacing, etc.
 Each map will be displayed individually,
-using the <code>@preview ratios</code> annotation:</p>
-<pre><code class="lang-scss">// @preview ratios; count: 4
+using the <code>@ratios</code> annotation:</p>
+<pre><code class="lang-scss">// @ratios my-ratios
 </code></pre>
-<p>The <code>ratios</code> preview accepts an optional <code>count</code> argument (defaults to <code>6</code>) –
-the number of ratio calculations to display,
-up to a maximum of <code>10</code>.</p>
+<p>The <code>@ratios</code> annotation accepts an optional one-word key argument,
+which defaults to the map-variable name.
+That key will be used to access the data from JSON,
+so it doesn’t matter what key is used,
+as long as the key given here matches the group-name
+used when adding this data to <code>$herman</code>.</p>
 
       
   
@@ -653,90 +680,195 @@ up to a maximum of <code>10</code>.</p>
 
   
   
-    
-    
-    
-
-    
-
-    
-    
-
-    
       
   
+    
   <div data-item-section="ratio-preview">
     
       <h3 class="item-subtitle">
-        Ratio Previews
+        <span class="item-subtitle-main">Ratio</span>
+        
+          <span class="item-subtitle-supplement">line-height<span class="widont">&nbsp;</span>(1.4)</span>
         
       </h3>
     
 
     
+      
+  <table class="rulers">
+    <tr class="is-hidden">
+      <th class="ruler-name">Step</th>
+      <th class="ruler-value">Value</th>
+      <td class="ruler-viz"></td>
+    </tr>
+
     
-      <div data-sassdoc="ratio-preview">
+      
+      
+      
         
-  <div class="param-list">
-    <h4 class="param-title">
+        
+        
+
+        
+  <tr class="ruler">
+    <td class="ruler-name">
+      -3
+    </td>
+    <td class="ruler-value">
+      <code>
+        0.36
+      </code>
+    </td>
+    <td class="ruler-viz">
+      <span class="ruler-bar" style="width: 1.8221574344023328em;">
+        &nbsp;
+      </span>
+    </td>
+  </tr>
+
       
+        
+        
+        
+
+        
+  <tr class="ruler">
+    <td class="ruler-name">
+      -2
+    </td>
+    <td class="ruler-value">
+      <code>
+        0.51
+      </code>
+    </td>
+    <td class="ruler-viz">
+      <span class="ruler-bar" style="width: 2.551020408163266em;">
+        &nbsp;
+      </span>
+    </td>
+  </tr>
+
       
-        <span class="item-name">herman-ratio:</span>
+        
+        
+        
+
+        
+  <tr class="ruler">
+    <td class="ruler-name">
+      -1
+    </td>
+    <td class="ruler-value">
+      <code>
+        0.71
+      </code>
+    </td>
+    <td class="ruler-viz">
+      <span class="ruler-bar" style="width: 3.5714285714285716em;">
+        &nbsp;
+      </span>
+    </td>
+  </tr>
+
       
-      <span class="item-value">1.4</span>
+        
+        
+        
+
+        
+  <tr class="ruler ratio-base">
+    <td class="ruler-name">
+      —
+    </td>
+    <td class="ruler-value">
+      <code>
+        base
+      </code>
+    </td>
+    <td class="ruler-viz">
+      <span class="ruler-bar" style="width: 5em;">
+        &nbsp;
+      </span>
+    </td>
+  </tr>
+
       
+        
+        
+        
+
+        
+  <tr class="ruler">
+    <td class="ruler-name">
+      1
+    </td>
+    <td class="ruler-value">
+      <code>
+        1.4
+      </code>
+    </td>
+    <td class="ruler-viz">
+      <span class="ruler-bar" style="width: 7em;">
+        &nbsp;
+      </span>
+    </td>
+  </tr>
+
       
-    </h4>
+        
+        
+        
+
+        
+  <tr class="ruler">
+    <td class="ruler-name">
+      2
+    </td>
+    <td class="ruler-value">
+      <code>
+        1.96
+      </code>
+    </td>
+    <td class="ruler-viz">
+      <span class="ruler-bar" style="width: 9.799999999999999em;">
+        &nbsp;
+      </span>
+    </td>
+  </tr>
+
+      
+        
+        
+        
+
+        
+  <tr class="ruler">
+    <td class="ruler-name">
+      3
+    </td>
+    <td class="ruler-value">
+      <code>
+        2.74
+      </code>
+    </td>
+    <td class="ruler-viz">
+      <span class="ruler-bar" style="width: 13.719999999999997em;">
+        &nbsp;
+      </span>
+    </td>
+  </tr>
+
+      
+    
+  </table>
 
     
   </div>
 
-
-        
-
-        <div data-sassdoc="ratio-demos">
-          
-          
-            
-            <span data-sassdoc="ratio-demo" style="font-size: 1em;">
-              1
-            </span>
-          
-            
-            <span data-sassdoc="ratio-demo" style="font-size: 1.4em;">
-              1.4
-            </span>
-          
-            
-            <span data-sassdoc="ratio-demo" style="font-size: 1.9599999999999997em;">
-              1.96
-            </span>
-          
-            
-            <span data-sassdoc="ratio-demo" style="font-size: 2.7439999999999993em;">
-              2.74
-            </span>
-          
-            
-            <span data-sassdoc="ratio-demo" style="font-size: 3.841599999999999em;">
-              3.84
-            </span>
-          
-            
-            <span data-sassdoc="ratio-demo" style="font-size: 5.378239999999998em;">
-              5.38
-            </span>
-          
-        </div>
-      </div>
-    
   
-  </div>
-
 
     
-
-  
 
 </section>
 
@@ -831,16 +963,29 @@ directly in a Herman-friendly<span class="widont">&nbsp;</span>map.</p>
 );
 </code></pre>
 <p>Each map will be displayed individually,
-using the <code>@preview sizes</code> annotation:</p>
-<pre><code class="lang-scss">// @preview sizes; style: ruler
+using the <code>@sizes</code> annotation:</p>
+<pre><code class="lang-scss">// @sizes {ruler}
 </code></pre>
-<p>The <code>sizes</code> preview accepts an optional <code>style</code> argument
-(defaulting to <code>text</code>),
+<p>The <code>@sizes</code> annotation accepts two optional<span class="widont">&nbsp;</span>arguments:</p>
+<ul>
+<li>
+<p>An optional one-word key argument,
+which defaults to the map-variable name.
+That key will be used to access the data from JSON,
+so it doesn’t matter what key is used,
+as long as the key given here matches the group-name
+used when adding this data to <code>$herman</code>.</p>
+</li>
+<li>
+<p>An optional <code>style</code> argument (in curly-brackets <code>{...}</code>),
+defaulting to <code>text</code>,
 which specifies the type of output to<span class="widont">&nbsp;</span>display:</p>
 <ul>
-<li><code>text</code>: Displays a sentence of lorem-ipsum text at the given<span class="widont">&nbsp;</span>size.</li>
-<li><code>ruler</code>: Displays a pattern of shapes spaced at the given<span class="widont">&nbsp;</span>size.</li>
+<li><code>text</code>: Displays a sentence of lorem-ipsum text for each given<span class="widont">&nbsp;</span>size.</li>
+<li><code>ruler</code>: Displays horizontal bars of the given<span class="widont">&nbsp;</span>sizes.</li>
 <li><code>output-only</code>: Displays values only, without<span class="widont">&nbsp;</span>demonstration.</li>
+</ul>
+</li>
 </ul>
 
       
@@ -892,101 +1037,411 @@ which specifies the type of output to<span class="widont">&nbsp;</span>display:<
 
   
   
-    
+
+</section>
+
+  
     
     
 
-    
 
-    
-    
 
+
+
+
+
+
+
+
+<section class="item" >
+  
     
+  
+  
+  
+  
+
+  
+    <div data-item-section="prose" class="text-block">
+      <h3 id="text-sizes">Text Sizes</h3>
+<pre><code class="lang-scss">// @sizes demo-sizes {text}
+</code></pre>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
       
   
   <div data-item-section="size-preview">
     
       <h3 class="item-subtitle">
-        Size Previews
+        <span class="item-subtitle-main">Size Previews</span>
         
       </h3>
     
 
     
     
-      <div data-sassdoc="size-preview">
-        
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">root:</span>
-      
-      <span class="item-value">18px</span>
-      
-      
-    </h4>
 
     
-  </div>
-
-
+      
+  
+    <div class="size-output">
+      <h4 class="size-heading">
         
-        
-          <div data-size-demo="text" style="font-size: 18px;">
-            
-              
+        <span>root</span>:
+        <code>18px</code>
+      </h4>
+
+      
+        <div class="size-text" style="font-size: 18px;">
+          
   
     <span data-specimen-lorem="title">
       Pack my box with five dozen liquor&nbsp;jugs.
     </span>
   
 
-            
-          </div>
+        </div>
+      
+    </div>
+  
+    <div class="size-output">
+      <h4 class="size-heading">
         
-      </div>
-    
-      <div data-sassdoc="size-preview">
-        
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">xlarge:</span>
-      
-      <span class="item-value">28px</span>
-      
-      
-    </h4>
+        <span>xlarge</span>:
+        <code>28px</code>
+      </h4>
 
-    
-  </div>
-
-
-        
-        
-          <div data-size-demo="text" style="font-size: 28px;">
-            
-              
+      
+        <div class="size-text" style="font-size: 28px;">
+          
   
     <span data-specimen-lorem="title">
       Pack my box with five dozen liquor&nbsp;jugs.
     </span>
   
 
-            
-          </div>
-        
-      </div>
+        </div>
+      
+    </div>
+  
+
     
   
   </div>
 
 
-    
+
+</section>
 
   
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" >
+  
+    
+  
+  
+  
+  
+
+  
+    <div data-item-section="prose" class="text-block">
+      <h3 id="size-rulers">Size Rulers</h3>
+<pre><code class="lang-scss">// @sizes demo-sizes {ruler}
+</code></pre>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+      
+  
+  <div data-item-section="size-preview">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Size Previews</span>
+        
+      </h3>
+    
+
+    
+    
+
+    
+      
+  <table class="rulers">
+    <tr class="is-hidden">
+      <th class="ruler-name">Name</th>
+      <th class="ruler-value">Value</th>
+      <td class="ruler-viz"></td>
+    </tr>
+
+    
+      
+        
+        
+  <tr class="ruler">
+    <td class="ruler-name">
+      root
+    </td>
+    <td class="ruler-value">
+      <code>
+        18px
+      </code>
+    </td>
+    <td class="ruler-viz">
+      <span class="ruler-bar" style="width: 18px;">
+        &nbsp;
+      </span>
+    </td>
+  </tr>
+
+      
+        
+        
+  <tr class="ruler">
+    <td class="ruler-name">
+      xlarge
+    </td>
+    <td class="ruler-value">
+      <code>
+        28px
+      </code>
+    </td>
+    <td class="ruler-viz">
+      <span class="ruler-bar" style="width: 28px;">
+        &nbsp;
+      </span>
+    </td>
+  </tr>
+
+      
+    
+  </table>
+
+    
+  
+  </div>
+
+
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" >
+  
+    
+  
+  
+  
+  
+
+  
+    <div data-item-section="prose" class="text-block">
+      <h3 id="name-value-only">Name/Value Only</h3>
+<pre><code class="lang-scss">// @sizes demo-sizes {output-only}
+</code></pre>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+      
+  
+  <div data-item-section="size-preview">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Size Previews</span>
+        
+      </h3>
+    
+
+    
+    
+
+    
+      
+  
+    <div class="size-output">
+      <h4 class="size-heading">
+        
+        <span>root</span>:
+        <code>18px</code>
+      </h4>
+
+      
+    </div>
+  
+    <div class="size-output">
+      <h4 class="size-heading">
+        
+        <span>xlarge</span>:
+        <code>28px</code>
+      </h4>
+
+      
+    </div>
+  
+
+    
+  
+  </div>
+
+
 
 </section>
 
@@ -1062,7 +1517,7 @@ it can be converted to JSON using <code>herman-export</code>.</p>
   <div data-item-section="related">
     
       <h3 class="item-subtitle">
-        Related
+        <span class="item-subtitle-main">Related</span>
         
       </h3>
     

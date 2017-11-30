@@ -325,7 +325,7 @@ gulp.task('svg-clean', cb => {
   });
 });
 
-gulp.task('svgmin', ['svg-clean'], () =>
+gulp.task('svgmin', () =>
   gulp
     .src(paths.SVG)
     .pipe(imagemin([imagemin.svgo()]))

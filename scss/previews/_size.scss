@@ -1,29 +1,83 @@
 // Ratio Preview
 // =============
 
-[data-sassdoc='ratio-demos'] {
-  line-height: 1.2;
-  overflow-x: auto;
-  padding: size('half-shim');
+
+// Rulers
+// ------
+
+.rulers {
+  width: 100%;
+
+  @include below('nav-medium') {
+    display: block;
+
+    tr {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    td {
+      display: block;
+      text-align: left;
+    }
+  }
+}
+
+.ruler-name,
+.ruler-value {
+  flex: 0 1 5ch;
+  padding: size('quarter-shim') size('shim');
   white-space: nowrap;
+
+  @include below('nav-medium') {
+    padding-bottom: 0;
+  }
+}
+
+.ruler-name {
+  text-align: right;
+}
+
+.ruler-viz {
+  padding: size('quarter-shim') size('shim');
+  width: 100%;
+
+  @include below('nav-medium') {
+    padding-bottom: size('half-shim');
+  }
+}
+
+.ruler-bar {
+  background-color: color('border');
+  border-radius: size('quarter-shim');
+  display: inline-block;
 }
 
 
-// Size Preview
-// ------------
+// Ratios
+// ------
 
-[data-size-demo] {
+.ratio-base {
+  background-color: color('callout');
+
+  .ruler-bar {
+    background-color: color('action');
+  }
+}
+
+
+// Sizes
+// -----
+
+.size-output {
   margin-bottom: size('shim');
 }
 
-[data-size-demo='text'] {
-  overflow: hidden;
-  padding: size('half-shim');
-  white-space: nowrap;
+.size-heading {
+  @include font-family('code');
+  font-weight: normal;
 }
 
-[data-size-demo='ruler'] {
-  background: linear-gradient(to right, currentColor 50%, transparent 50%);
-  background-size: 2em auto;
-  height: 1em;
+.size-text {
+  margin-bottom: size('gutter-minus');
 }

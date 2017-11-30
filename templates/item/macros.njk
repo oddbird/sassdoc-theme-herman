@@ -5,9 +5,9 @@
   <div data-item-section="{{ slug }}">
     {% if title or supplement %}
       <h3 class="item-subtitle">
-        {{ title }}
+        <span class="item-subtitle-main">{{ title }}</span>
         {% if supplement %}
-          <span class="item-subtitle-supplement">{{ supplement }}</span>
+          <span class="item-subtitle-supplement">{{ supplement|safe }}</span>
         {% endif %}
       </h3>
     {% endif %}

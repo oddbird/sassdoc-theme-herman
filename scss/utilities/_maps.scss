@@ -18,7 +18,7 @@
 /// @param {String} $key -
 ///   A key name for accessing this data in JSON --
 ///   should match the variable name,
-///   unless `key` is otherwise set in the `@preview` annotation
+///   unless `key` is otherwise set in the `@font`/`@colors`/`@ratios`/`@sizes` annotation
 /// @param {Map} $map -
 ///   A map of name/value pairs
 /// @param {Arglist} $args… -
