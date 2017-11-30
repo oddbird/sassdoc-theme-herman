@@ -38,7 +38,6 @@ SassdocPlugin.prototype.apply = compiler => {
     const cssPath = css ? path.join(outputPath, css) : undefined;
     const jsonPath = json ? path.join(outputPath, json) : undefined;
     sassdoc('./scss/**/*.scss', {
-      verbose: true,
       dest: sassdocPath,
       theme: __dirname,
       herman: {
@@ -234,5 +233,5 @@ module.exports = {
       },
     ],
   },
-  devtool: 'source-map',
+  devtool: 'cheap-module-source-map',
 };

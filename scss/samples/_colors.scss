@@ -43,13 +43,13 @@ $brand-pink: hsl(330, 85%, 48%);
 /// to organize different palettes --
 /// primary, secondary, button-colors, etc.
 /// Each map will be displayed individually,
-/// using the `@preview color-palette` annotation:
+/// using the `@colors` annotation:
 ///
 /// ```scss
-/// // @preview color-palette
+/// // @colors
 /// ```
 ///
-/// The `color-palette` preview accepts an optional `key` argument,
+/// The `@colors` annotation accepts an optional one-word key argument,
 /// which defaults to the map-variable name.
 /// That key will be used to access the data from JSON,
 /// so it doesn't matter what key is used,
@@ -57,7 +57,7 @@ $brand-pink: hsl(330, 85%, 48%);
 /// used when adding this data to `$herman`.
 ///
 /// ```scss
-/// // @preview color-palette; key: my-colors
+/// // @colors my-colors
 /// ```
 ///
 /// By default, our color palettes display
@@ -73,7 +73,7 @@ $brand-pink: hsl(330, 85%, 48%);
 ///     - hsl
 /// ```
 ///
-/// @preview color-palette
+/// @colors
 /// @group demo_colors
 $demo-colors: (
   'brand-blue': $brand-blue,
@@ -106,7 +106,7 @@ $demo-colors: (
 /// - The second argument sets a `key` name
 ///   for accessing this particular group of colors.
 ///   The `herman-add` key should match
-///   the key provided to `@preview color-palette`.
+///   the key provided to `@colors`.
 /// - The third argument provides the actual map of data
 ///   to be added to the `$herman` export map.
 ///
@@ -170,7 +170,7 @@ $demo-noncolors: (
 /// or first-class function (Sass 3.5+)
 /// along with any additional arguments required for that function.
 ///
-/// @preview color-palette; key: demo-noncolors
+/// @colors demo-noncolors
 /// @example scss
 ///   $herman: ();
 ///   $demo-noncolors: (

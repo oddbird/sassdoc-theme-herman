@@ -9,7 +9,9 @@ const sinon = require('sinon');
 /* eslint-disable global-require */
 const annotations = {
   icons: require('../../lib/annotations/icons'),
-  preview: require('../../lib/annotations/preview'),
+  colors: require('../../lib/annotations/colors'),
+  sizes: require('../../lib/annotations/sizes'),
+  ratios: require('../../lib/annotations/ratios'),
   font: require('../../lib/annotations/font'),
   example: require('../../lib/annotations/example'),
   name: require('../../lib/annotations/name'),
@@ -83,17 +85,53 @@ describe('icons annotation', function() {
   });
 });
 
-describe('preview annotation', function() {
+describe('colors annotation', function() {
   before(function() {
-    this.preview = annotations.preview();
+    this.colors = annotations.colors();
   });
 
   describe('parse', function() {
-    it('parses CSS-like options and returns object', function() {
-      assert.deepEqual(this.preview.parse(' sizes; foo : bar ; baz ;'), {
-        type: 'sizes',
-        foo: 'bar',
-        baz: null,
+    it('parses string and returns object', function() {
+      assert.deepEqual(this.colors.parse('foo-bar'), {
+        key: 'foo-bar',
+      });
+    });
+  });
+});
+
+describe('sizes annotation', function() {
+  before(function() {
+    this.sizes = annotations.sizes();
+  });
+
+  describe('parse', function() {
+    it('parses options and returns object', function() {
+      const input = 'key-thing {style}';
+      assert.deepEqual(this.sizes.parse(input), {
+        key: 'key-thing',
+        style: 'style',
+      });
+    });
+
+    it('uses defaults if no arguments', function() {
+      const input = '';
+      assert.deepEqual(this.sizes.parse(input), {
+        key: '',
+        style: '',
+      });
+    });
+  });
+});
+
+describe('ratios annotation', function() {
+  before(function() {
+    this.ratios = annotations.ratios();
+  });
+
+  describe('parse', function() {
+    it('parses string and returns object', function() {
+      assert.deepEqual(this.ratios.parse('foo-bar'), {
+        key: 'foo-bar',
       });
     });
   });
@@ -112,7 +150,7 @@ describe('font annotation', function() {
       };
       const font = annotations.font(env);
       const input =
-        '"key" (variant1, variant2) {format1, format2}\n' +
+        'key (variant1, variant2) {format1, format2}\n' +
         '  <link rel="another-stylesheet">';
       font.parse(input);
       assert.deepEqual(env.fontsHTML, ['<link rel="another-stylesheet">']);
@@ -120,10 +158,10 @@ describe('font annotation', function() {
 
     it('parses options and returns object', function() {
       const input =
-        '"key" (variant1, variant2) {format1, format2}\n' +
+        'key-thing {format1, format2} (variant1, variant2)\n' +
         '  <link rel="stylesheet">';
       assert.deepEqual(this.font.parse(input), {
-        key: 'key',
+        key: 'key-thing',
         variants: ['variant1', 'variant2'],
         formats: ['format1', 'format2'],
         html: '<link rel="stylesheet">',
@@ -131,10 +169,10 @@ describe('font annotation', function() {
       assert.equal(this.env.fontsHTML, '\n<link rel="stylesheet">');
     });
 
-    it('skips if no linebreak', function() {
-      const input = '"key" (variant1, variant2) {format1, format2}';
+    it('skips HTML if no linebreak', function() {
+      const input = '"key-thing" (variant1, variant2) {format1, format2}';
       assert.deepEqual(this.font.parse(input), {
-        key: 'key',
+        key: 'key-thing',
         variants: ['variant1', 'variant2'],
         formats: ['format1', 'format2'],
         html: '',
@@ -145,7 +183,7 @@ describe('font annotation', function() {
     it('appends obj.html to existing fontsHTML', function() {
       this.env.fontsHTML = '\n<link rel="stylesheet">';
       const input =
-        '"key" (variant1, variant2) {format1, format2}\n' +
+        "'key' (variant1, variant2) {format1, format2}\n" +
         '  <link rel="another-stylesheet">';
       assert.deepEqual(this.font.parse(input), {
         key: 'key',
@@ -159,16 +197,10 @@ describe('font annotation', function() {
       );
     });
 
-    it('returns undefined if no keyBits', function() {
-      const input = '';
-      assert.deepEqual(this.font.parse(input), undefined);
-      assert.equal(this.env.fontsHTML, undefined);
-    });
-
     it("doesn't set variants or formats if not appropriate bits", function() {
-      const input = '"key"';
+      const input = '';
       assert.deepEqual(this.font.parse(input), {
-        key: 'key',
+        key: '',
         variants: [],
         formats: [],
         html: '',
@@ -337,6 +369,8 @@ describe('font annotation', function() {
           font: {
             formats: ['woff'],
           },
+          context: {},
+          name: 'foo',
         },
       ];
 

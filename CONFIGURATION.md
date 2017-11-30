@@ -62,7 +62,7 @@ for dependencies or other third-party integrations.
 - Default: `['hex', 'rgb', 'hsl']`
 
 Configures which color value formats are shown
-when using the [`@preview color-palette` annotation][color-preview].
+when using the [`@colors` annotation][color-preview].
 Valid options: `hex`, `rgb/rgba`, `hsl/hsla`
 
 [color-preview]: http://oddbird.net/herman/docs/demo_colors.html
@@ -183,7 +183,7 @@ Container for the following sass-related options:
 - Type: `String`
 - Default: `''`
 
-*Required if using [`@font`][font-docs] or [`@preview`][color-preview]
+*Required if using [`@font`][font-docs] or [`@colors`][color-preview]
 annotations.*
 
 Relative path to a `sass-json file`
