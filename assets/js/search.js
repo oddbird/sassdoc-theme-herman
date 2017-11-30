@@ -12,15 +12,15 @@ nunjucks.installJinjaCompat();
 // asynchronously, some templates might be added to the `window` global after
 // that. To avoid this issue, we need a loader that checks the `window` object
 // every time.
-const PrecompiledLoader = nunjucks.Loader.extend({
-  getSource: name => ({
-    src: {
-      type: 'code',
-      obj: window.nunjucksPrecompiled[name],
-    },
-    path: name,
-  }),
+//
+export const getSource = name => ({
+  src: {
+    type: 'code',
+    obj: window.nunjucksPrecompiled[name],
+  },
+  path: name,
 });
+const PrecompiledLoader = nunjucks.Loader.extend({ getSource });
 export const nunjucksEnv = new nunjucks.Environment(new PrecompiledLoader());
 
 let searchStore;
@@ -52,7 +52,7 @@ const getSearchResultsByField = matches => {
   return results;
 };
 
-const highlightSearchResult = (el, results) => {
+export const highlightSearchResult = (el, results) => {
   if (results.title.length) {
     // Highlight matches in `title` field
     const titleEl = el.find('[data-result-field="title"]').get(0);
