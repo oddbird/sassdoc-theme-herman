@@ -1,3 +1,5 @@
+import sassConfig from '!json-loader!sassjson!sass-loader!../../scss/json.scss';
+
 // Store keycode variables for easier readability
 const KEYCODES = {
   SPACE: 32,
@@ -204,4 +206,31 @@ export const initializeIframes = () => {
     fitIframeToContent(this);
   });
   $(window).on('resize', fitIframesToContent);
+};
+
+export const initializeNav = () => {
+  const breakpoint =
+    sassConfig &&
+    sassConfig.sizes &&
+    sassConfig.sizes['pattern-sizes'] &&
+    sassConfig.sizes['pattern-sizes']['nav-large'];
+
+  if (breakpoint) {
+    const nav = $('#nav');
+    const btn = $('[aria-controls="nav"]');
+    const mql = window.matchMedia(`(min-width: ${breakpoint})`);
+
+    const screenTest = e => {
+      if (e.matches) {
+        /* the viewport is wider than the breakpoint */
+        nav.attr('aria-expanded', 'true');
+      } else {
+        /* the viewport is narrower than the breakpoint */
+        nav.attr('aria-expanded', btn.attr('aria-pressed'));
+      }
+    };
+
+    screenTest(mql);
+    mql.addListener(screenTest);
+  }
 };

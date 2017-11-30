@@ -130,7 +130,13 @@ module.exports = {
   // define all the entry point bundles
   entry: {
     app: './init',
-    vendor: ['jquery', 'srcdoc-polyfill', 'vendor/highlight'],
+    vendor: [
+      'jquery',
+      'srcdoc-polyfill',
+      'vendor/highlight',
+      'matchmedia-polyfill',
+      'matchmedia-polyfill/matchMedia.addListener',
+    ],
     search: './search',
     app_styles: ['main.scss'],
     styleguide_json: ['json.scss'],

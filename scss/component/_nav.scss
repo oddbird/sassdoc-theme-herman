@@ -9,7 +9,6 @@
 // ----------
 
 [data-nav-menu] {
-  #{--nav-breakpoint}: size('nav-large');
   align-content: flex-start;
   display: flex;
   flex-wrap: wrap;
