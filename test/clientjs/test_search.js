@@ -27,10 +27,9 @@ describe('search', function() {
         '<div>' +
           '<span data-result-field="title">This is a title</span>' +
           '<span data-result-field="contents">' +
-          'This <em>is</em> a long test that has lots of words in it and ' +
-          'similar things ' +
-          'and so on just to mix things up? Maybe it should be a lot longer, ' +
-          "so we can get to <em>the</em> length minimum we're aiming for." +
+          'This is a long test that has lots of words in it and similar ' +
+          'things and so on just to mix things up? Maybe it should be a ' +
+          "lot longer, so we can get to the length minimum we're aiming for." +
           '</span>' +
           '</div>'
       );
@@ -38,26 +37,62 @@ describe('search', function() {
 
     it('sets no mark on the title if no title', function() {
       const title = [];
-      const contents = [
-        {
-          start: 4,
-          length: 3,
-        },
-      ];
+      const contents = [{ start: 4, length: 3 }];
       search.highlightSearchResult(this.el, { title, contents });
-      // @@@ test if no mark?
+      const titleEl = this.el.find('[data-result-field="title"]').get(0);
+      const textEl = this.el.find('[data-result-field="contents"]').get(0);
+      expect(titleEl.childNodes.length).to.equal(1);
+      expect(textEl.childNodes.length).to.be.above(1);
     });
 
     it('sets no mark on the contents if no contents', function() {
-      const title = [
-        {
-          start: 2,
-          length: 3,
-        },
-      ];
+      const title = [{ start: 2, length: 3 }];
       const contents = [];
       search.highlightSearchResult(this.el, { title, contents });
-      // @@@ test if no mark?
+      const titleEl = this.el.find('[data-result-field="title"]').get(0);
+      const textEl = this.el.find('[data-result-field="contents"]').get(0);
+      expect(titleEl.childNodes.length).to.be.above(1);
+      expect(textEl.childNodes.length).to.equal(1);
+    });
+
+    it('handles hasPrev', function() {
+      const title = [];
+      const contents = [{ start: 16, length: 6 }];
+      const el = $(
+        '<div>' +
+          '<span data-result-field="title"></span>' +
+          '<span data-result-field="contents">' +
+          'Test test test test test test test. ' +
+          'Test test test test test test test. ' +
+          'Test test test test test test test. ' +
+          '</span>' +
+          '</div>'
+      );
+      search.highlightSearchResult(el, { title, contents });
+      const textEl = el.find('[data-result-field="contents"]').get(0);
+      expect(textEl.textContent).to.contain('…');
+    });
+
+    it('handles hasNext', function() {
+      const title = [];
+      const contents = [{ start: 34, length: 4 }];
+      const el = $(
+        '<div>' +
+          '<span data-result-field="title"></span>' +
+          '<span data-result-field="contents">' +
+          'a b c d e f g ' +
+          'h i j k l m n ' +
+          'o p q r s t u ' +
+          'v w x y z a b ' +
+          'c d e f g h i ' +
+          'j k l m n o p ' +
+          'q r s t u v w ' +
+          '</span>' +
+          '</div>'
+      );
+      search.highlightSearchResult(el, { title, contents });
+      const textEl = el.find('[data-result-field="contents"]').get(0);
+      expect(textEl.textContent).to.contain('…');
     });
   });
 
@@ -114,10 +149,7 @@ describe('search', function() {
 
     it('renders each search match', function() {
       search.setSearchStore({
-        'some-key': {
-          title: 'A doc',
-          contents: 'Some contents',
-        },
+        'some-key': { title: 'A doc', contents: 'Some contents' },
       });
       search.showResults(
         [
@@ -133,6 +165,27 @@ describe('search', function() {
                   title: { position: [1, 2] },
                   contents: { position: [2, 3] },
                 },
+              },
+            },
+          },
+        ],
+        'val'
+      );
+      expect(this.nunjucksRender).to.have.been.called;
+    });
+
+    it('falls back to empty-string contents if necessary', function() {
+      search.setSearchStore({
+        'some-key': { title: 'A doc', contents: 'Some contents' },
+      });
+      search.showResults(
+        [
+          {
+            ref: 'some-key',
+            matchData: {
+              metadata: {
+                term1: { title: { position: [1, 2] } },
+                term2: { title: { position: [1, 2] } },
               },
             },
           },
