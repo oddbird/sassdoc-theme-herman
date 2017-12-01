@@ -59,22 +59,6 @@ describe('search', function() {
       search.highlightSearchResult(this.el, { title, contents });
       // @@@ test if no mark?
     });
-
-    // it('does other things with non-text nodes', function() {
-    //   const title = [
-    //     {
-    //       start: 2,
-    //       length: 3,
-    //     },
-    //   ];
-    //   const contents = [
-    //     {
-    //       start: 4,
-    //       length: 3,
-    //     },
-    //   ];
-    //   search.highlightSearchResult(this.el, { title, contents });
-    // });
   });
 
   describe('getSearchData', function() {
@@ -96,6 +80,26 @@ describe('search', function() {
       window.history.replaceState(null, document.title, '/');
       search.getSearchData();
       expect(this.requests.length).to.equal(0);
+    });
+
+    it('handles responses', function() {
+      this.server.respondWith('GET', '/search-data.json', [
+        200,
+        {
+          'Content-Type': 'application/json',
+        },
+        '{ "idx": 12, "store": "Hey there" }',
+      ]);
+      const indexSearch = sinon.stub();
+      const indexLoad = sinon.stub(lunr.Index, 'load');
+      indexLoad.returns({ search: indexSearch });
+      this.server.respondImmediately = true;
+      search.getSearchData();
+      try {
+        expect(indexSearch).to.have.been.calledOnceWith('test');
+      } finally {
+        indexLoad.restore();
+      }
     });
   });
 
