@@ -1,6 +1,11 @@
 # Herman Changelog
 
 
+## 1.0.0-rc.3: 2017-11-30
+
+- BUGFIX: Correct for overzealous npm-ignoring (fixes missing scss utilities).
+
+
 ## 1.0.0-rc.2: 2017-11-30
 
 - NEW: Add site-wide search --
