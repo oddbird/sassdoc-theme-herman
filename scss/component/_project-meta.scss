@@ -8,7 +8,7 @@
   margin-left: 0;
   margin-right: 0;
 
-  @include below('project-link-nav') {
+  @include below('page-break') {
     margin-bottom: size('shim');
   }
 }
@@ -19,12 +19,6 @@
 
   & + & {
     margin-left: size('shim');
-  }
-}
-
-.project-link-start {
-  @include below('project-link-nav') {
-    margin-right: auto;
   }
 }
 

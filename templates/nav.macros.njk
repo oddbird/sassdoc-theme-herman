@@ -1,28 +1,22 @@
 {% import 'utility.macros.njk' as utility %}
 
 
-{% macro toggle(size, expanded=false) %}
-  <button data-nav-toggle="{{ size }}" {{ utility.toggle_button(['nav', size]|join('-'), button='true', expanded=expanded) }}>{{ utility.icon('menu', 'menu', size='icon-small') }}</button>
-{% endmacro %}
-
-
-{% macro toggles() %}
-  {{ toggle('small') }}
-  {{ toggle('large', true) }}
+{% macro toggle() %}
+  <button data-nav-toggle {{ utility.toggle_button('nav', button='true') }}>
+    {{ utility.icon('menu', 'menu', size='icon-small') }}
+  </button>
 {% endmacro %}
 
 
 {% macro menu(
-  size,
   project,
   groups,
   byGroup,
   activeGroup,
   extraDocs,
-  extraLinks,
-  expanded=false
+  extraLinks
 ) %}
-  <nav data-nav-menu="{{ size }}" {{ utility.toggle_target(['nav', size]|join('-'), expanded=expanded)}}>
+  <nav data-nav-menu {{ utility.toggle_target('nav')}}>
     <form action="/search.html">
       <input type="text" name="q" placeholder="Search…" required minlength="3">
     </form>
@@ -93,32 +87,4 @@
       </span>
     </aside>
   </nav>
-{% endmacro %}
-
-
-{% macro menus(
-  project,
-  groups,
-  byGroup,
-  activeGroup,
-  extraDocs,
-  extraLinks
-) %}
-  {% set menu_expanded = {
-    'small': false,
-    'large': true
-  } %}
-
-  {% for size, expanded in menu_expanded %}
-    {{ menu(
-      size=size,
-      project=project,
-      groups=groups,
-      byGroup=byGroup,
-      activeGroup=activeGroup,
-      extraDocs=extraDocs,
-      extraLinks=extraLinks,
-      expanded=expanded
-    ) }}
-  {% endfor %}
 {% endmacro %}

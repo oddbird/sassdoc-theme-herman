@@ -66,11 +66,11 @@
 
 {# Toggle collapsible elements (see `static/js/app/base.js`) #}
 {% macro toggle_button(id, expanded=false, button=false, synced=false) -%}
-  data-toggle="button" aria-controls="{{ id }}" aria-pressed="{{ 'true' if expanded else 'false' }}"{% if not button %} role="button"{% endif %} data-toggle-synced="{{ 'true' if synced else 'false' }}"
+  data-toggle="button" aria-controls="{{ id }}" aria-pressed="{{ 'true' if expanded else 'false' }}"{% if button %} type="button"{% else %} role="button"{% endif %} data-toggle-synced="{{ 'true' if synced else 'false' }}"
 {%- endmacro %}
 
-{% macro toggle_target(id, expanded=false, auto_closing=false, auto_closing_on_any_click=false) -%}
-  data-toggle="target" id="{{ id }}" data-target-id="{{ id }}" aria-expanded="{{ 'true' if expanded else 'false' }}" data-auto-closing="{{ 'true' if auto_closing else 'false' }}" data-auto-closing-on-any-click="{{ 'true' if auto_closing_on_any_click else 'false' }}"
+{% macro toggle_target(id, expanded=false, auto_closing=false, auto_closing_on_any_click=false, auto_closing_exception=none) -%}
+  data-toggle="target" id="{{ id }}" data-target-id="{{ id }}" aria-expanded="{{ 'true' if expanded else 'false' }}" data-auto-closing="{{ 'true' if (auto_closing or auto_closing_on_any_click) else 'false' }}" data-auto-closing-on-any-click="{{ 'true' if auto_closing_on_any_click else 'false' }}"{% if auto_closing_exception %} data-auto-closing-exception="{{ auto_closing_exception }}"{% endif %}
 {%- endmacro %}
 
 {% macro toggle_close(id) -%}
