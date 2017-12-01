@@ -217,3 +217,18 @@ describe('initializeToggles', function() {
     otherToggle.remove();
   });
 });
+
+describe('initializeIframes', function() {
+  it('triggers callbacks on window resize', function() {
+    const srcUrl = '';
+    const iframe = $(
+      `<iframe src="${srcUrl}" height="20" width="20"></iframe>`
+    );
+    iframe.appendTo('body');
+    base.initializeIframes();
+    iframe.trigger('load');
+    $(window).trigger('resize');
+    // @@@ This is not a very useful or informative assertion:
+    expect(iframe.get(0).height).to.equal('20');
+  });
+});
