@@ -4,6 +4,7 @@
 ## Unreleased
 
 - BUGFIX: Fix broken site-search action attribute.
+- CHANGE: Hide Herman watermark if SassDoc `display.watermark` is `false`.
 
 
 ## 1.0.0-rc.3: 2017-11-30

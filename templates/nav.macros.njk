@@ -14,7 +14,8 @@
   byGroup,
   activeGroup,
   extraDocs,
-  extraLinks
+  extraLinks,
+  watermark=true
 ) %}
   <nav data-nav-menu {{ utility.toggle_target('nav')}}>
     <form action="search.html">
@@ -69,22 +70,24 @@
       </div>
     {% endif %}
 
-    <aside class="footer-credit">
-      <a href="http://oddbird.net/herman/" class="footer-icon">
-        {{ utility.icon('logo', size='footer-logo') }}
-      </a>
-      <span>
-        Documented with
-        <a href="http://oddbird.net/herman/" class="footer-link">
-          Herman
+    {% if watermark %}
+      <aside class="footer-credit">
+        <a href="http://oddbird.net/herman/" class="footer-icon">
+          {{ utility.icon('logo', size='footer-logo') }}
         </a>
-      </span>
-      <span>
-        by
-        <a href="http://oddbird.net/" class="footer-link">
-          OddBird
-        </a>
-      </span>
-    </aside>
+        <span>
+          Documented with
+          <a href="http://oddbird.net/herman/" class="footer-link">
+            Herman
+          </a>
+        </span>
+        <span>
+          by
+          <a href="http://oddbird.net/" class="footer-link">
+            OddBird
+          </a>
+        </span>
+      </aside>
+    {% endif %}
   </nav>
 {% endmacro %}
