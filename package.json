@@ -18,7 +18,6 @@
     "gulp-rename": "^1.2.2",
     "gulp-svg-symbols": "^2.0.2",
     "html": "^1.0.0",
-    "js-yaml": "^3.10.0",
     "lunr": "^2.1.4",
     "markdown-it": "^8.4.0",
     "markdown-it-named-headers": "^0.0.4",
