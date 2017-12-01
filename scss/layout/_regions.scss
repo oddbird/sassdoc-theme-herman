@@ -25,7 +25,7 @@
   flex: 1 1 auto;
   position: relative;
 
-  @include above('page') {
+  @include above('page-break') {
     justify-content: flex-end;
   }
 }
@@ -61,7 +61,7 @@
   @include z-index('main');
   width: 100%;
 
-  @include above('page') {
+  @include above('page-break') {
     overflow: hidden;
   }
 }

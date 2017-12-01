@@ -3,17 +3,27 @@
 
 ## Unreleased
 
+- BUGFIX: Fix broken site-search action attribute.
+
+
+## 1.0.0-rc.3: 2017-11-30
+
+- BUGFIX: Correct for overzealous npm-ignoring (fixes missing scss utilities).
+
+
+## 1.0.0-rc.2: 2017-11-30
+
 - NEW: Add site-wide search --
   [#28](https://github.com/oddbird/sassdoc-theme-herman/issues/28)
 - CHANGE: Bundle static assets with Webpack; precompile JS with Babel --
   [#205](https://github.com/oddbird/sassdoc-theme-herman/issues/205)
 - BREAKING: Remove `@preview` annotation, split it into distinct `@colors`,
-  `@sizes`, `@ratios` annotations. --
+  `@sizes`, `@ratios` annotations. `@colors`, `@ratios`, and `@sizes`
+  annotations accept optional one-word key argument instead of
+  semicolon-separated `key:value` arguments. `@sizes` still accepts `style`
+  argument, now in curly-brackets (`{...}`). `count` argument removed from
+  `@ratios` annotation --
   [#206](https://github.com/oddbird/sassdoc-theme-herman/issues/206)
-- BREAKING: Remove `count` argument from `@ratios` annotation.
-- BREAKING: `@colors`, `@ratios`, and `@sizes` annotations accept optional
-  one-word key argument instead of semicolon-separated `key:value` arguments.
-  `@sizes` still accepts `style` argument, now in curly-brackets (`{...}`).
 - CHANGE: `@font` annotation accepts font name (first argument) without
   being wrapped in `'` or `"`.
 

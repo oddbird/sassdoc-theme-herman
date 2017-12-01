@@ -258,6 +258,7 @@ gulp.task('default', ['webpack', 'eslint', 'sasslint', 'test']);
 gulp.task('compile', ['webpack']);
 
 gulp.task('serve', ['watch', 'browser-sync']);
+gulp.task('quick-serve', ['webpack', 'browser-sync']);
 
 // Development task.
 // While working on a theme.

@@ -1,5 +1,3 @@
-import sinon from 'sinon';
-
 import lunr from 'lunr';
 
 import * as search from 'search';

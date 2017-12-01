@@ -10,17 +10,16 @@ const webpack = require('webpack');
 // because we're modifying nested properties on the new object.
 const webpackConf = extend(true, {}, require('./webpack.config.js'));
 
-Reflect.deleteProperty(webpackConf.entry, 'app_styles');
-Reflect.deleteProperty(webpackConf.entry, 'styleguide_json');
+Reflect.deleteProperty(webpackConf, 'entry');
 webpackConf.plugins = [
   new webpack.WatchIgnorePlugin([
     /flycheck_/,
     /\.#/,
     /#$/,
-    // don't watch the context directories we add in test/js/index.js; see
+    // don't watch the context directories we add in test/clientjs/index.js; see
     // https://github.com/webpack/webpack/issues/2156
-    /test\/js\/app$/,
-    /assets\/js\/assets$/,
+    /test\/clientjs\/test_.*\.js$/,
+    /assets\/js/,
   ]),
   new webpack.ProvidePlugin({
     $: 'jquery',

@@ -5,17 +5,17 @@
 const env = process.env.BABEL_ENV;
 const plugins = [];
 if (env === 'test') {
-  plugins.push(['istanbul', { include: ['assets/js/!(init).js'] }]);
+  plugins.push(['istanbul', { include: ['assets/js/*!(init).js'] }]);
 }
 
 module.exports = {
   plugins,
   presets: [
     [
-      '@babel/env',
+      '@babel/preset-env',
       {
         modules: false,
-        useBuiltIns: 'entry',
+        useBuiltIns: 'usage',
         exclude: ['transform-regenerator'],
       },
     ],

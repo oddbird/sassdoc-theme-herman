@@ -19,7 +19,7 @@
 
   <div data-sassdoc-region="app">
     <header data-sassdoc-region="banner">
-      {{ nav.toggles() }}
+      {{ nav.toggle() }}
 
       <div data-sassdoc="project-title">
         <a href="index.html" rel="home" data-sassdoc="project-name">{{ project_title }}</a>
@@ -30,7 +30,7 @@
     </header>
 
     <div data-sassdoc-region="container">
-      {{ nav.menus(
+      {{ nav.menu(
         project=project_title,
         groups=groups,
         byGroup=byGroup,
