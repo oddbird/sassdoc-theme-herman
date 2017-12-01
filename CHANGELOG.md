@@ -1,6 +1,11 @@
 # Herman Changelog
 
 
+## Unreleased
+
+- BUGFIX: Fix broken site-search action attribute.
+
+
 ## 1.0.0-rc.3: 2017-11-30
 
 - BUGFIX: Correct for overzealous npm-ignoring (fixes missing scss utilities).
