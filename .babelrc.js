@@ -3,10 +3,10 @@
 module.exports = {
   presets: [
     [
-      '@babel/env',
+      '@babel/preset-env',
       {
         modules: false,
-        useBuiltIns: 'entry',
+        useBuiltIns: 'usage',
         exclude: ['transform-regenerator'],
       },
     ],
