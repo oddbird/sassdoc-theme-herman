@@ -12,15 +12,7 @@ const webpackConf = extend(true, {}, require('./webpack.config.js'));
 
 Reflect.deleteProperty(webpackConf, 'entry');
 webpackConf.plugins = [
-  new webpack.WatchIgnorePlugin([
-    /flycheck_/,
-    /\.#/,
-    /#$/,
-    // don't watch the context directories we add in test/clientjs/index.js; see
-    // https://github.com/webpack/webpack/issues/2156
-    /test\/clientjs\/test_.*\.js$/,
-    /assets\/js/,
-  ]),
+  new webpack.WatchIgnorePlugin([/flycheck_/, /\.#/, /#$/]),
   new webpack.ProvidePlugin({
     $: 'jquery',
     jQuery: 'jquery',

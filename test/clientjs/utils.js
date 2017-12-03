@@ -34,7 +34,6 @@ before(function() {
 
 beforeEach(function() {
   this.xhr = sinon.useFakeXMLHttpRequest();
-  this.server = sinon.fakeServer.create();
   this.requests = [];
   this.xhr.onCreate = req => {
     this.requests.push(req);
@@ -45,7 +44,6 @@ beforeEach(function() {
 afterEach(function() {
   this.xhr.restore();
   this.clock.restore();
-  this.server.restore();
   $(window).off('resize');
   $('body').off('click toggle:close toggle:open target:close target:open');
 });

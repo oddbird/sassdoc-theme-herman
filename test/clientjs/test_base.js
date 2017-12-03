@@ -220,15 +220,73 @@ describe('initializeToggles', function() {
 
 describe('initializeIframes', function() {
   it('triggers callbacks on window resize', function() {
-    const srcUrl = '';
-    const iframe = $(
-      `<iframe src="${srcUrl}" height="20" width="20"></iframe>`
-    );
+    sinon.stub($.fn, 'outerHeight').returns(30);
+    const iframe = $('<iframe height="20">');
     iframe.appendTo('body');
     base.initializeIframes();
+
+    expect(iframe.get(0).height).to.equal('30');
+    expect($.fn.outerHeight).to.have.been.calledOnceWithExactly(true);
+
     iframe.trigger('load');
+
+    expect($.fn.outerHeight).to.have.been.calledTwice;
+
     $(window).trigger('resize');
-    // @@@ This is not a very useful or informative assertion:
-    expect(iframe.get(0).height).to.equal('20');
+
+    expect($.fn.outerHeight).to.have.been.calledThrice;
+
+    iframe.remove();
+    $.fn.outerHeight.restore();
+  });
+});
+
+describe('initializeNav', function() {
+  beforeEach(function() {
+    this.mql = {
+      addListener: sinon.spy(),
+      matches: true,
+    };
+    sinon.stub(window, 'matchMedia').returns(this.mql);
+    this.nav = $('<div id="nav">').appendTo('body');
+    this.btn = $('<div aria-controls="nav" aria-pressed="false">').appendTo(
+      'body'
+    );
+  });
+
+  afterEach(function() {
+    window.matchMedia.restore();
+    this.nav.remove();
+    this.btn.remove();
+  });
+
+  describe('viewport wider than breakpoint', function() {
+    it('sets nav aria-expanded "true"', function() {
+      base.initializeNav();
+      expect(this.nav).to.have.attr('aria-expanded', 'true');
+    });
+  });
+
+  describe('viewport narrower than breakpoint', function() {
+    it('sets nav aria-expanded to match btn aria-pressed', function() {
+      this.mql.matches = false;
+      base.initializeNav();
+      expect(this.nav).to.have.attr('aria-expanded', 'false');
+    });
+  });
+
+  describe('viewport width changes', function() {
+    it('updates nav aria-expanded', function() {
+      base.initializeNav();
+
+      expect(this.nav).to.have.attr('aria-expanded', 'true');
+      expect(window.matchMedia).to.have.been.calledOnce;
+      expect(window.matchMedia.args[0][0]).to.contain('(min-width:');
+      expect(this.mql.addListener).to.have.been.calledOnce;
+
+      this.mql.addListener.args[0][0]({ matches: false });
+
+      expect(this.nav).to.have.attr('aria-expanded', 'false');
+    });
   });
 });

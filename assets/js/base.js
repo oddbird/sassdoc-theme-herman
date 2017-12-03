@@ -111,6 +111,7 @@ export const initializeToggles = () => {
 
 export const initializeIframes = () => {
   const fitIframeToContent = iframe => {
+    /* istanbul ignore else */
     if (iframe.contentWindow.document.body) {
       iframe.height = $(iframe.contentWindow.document).outerHeight(true);
     }
@@ -135,6 +136,7 @@ export const initializeNav = () => {
     sassConfig.sizes['pattern-sizes'] &&
     sassConfig.sizes['pattern-sizes']['nav-large'];
 
+  /* istanbul ignore else */
   if (breakpoint) {
     const nav = $('#nav');
     const btn = $('[aria-controls="nav"]');

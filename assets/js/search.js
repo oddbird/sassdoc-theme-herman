@@ -29,6 +29,8 @@ export const setSearchStore = val => {
   searchStore = val;
 };
 
+export const getSearchStore = () => searchStore;
+
 export const getUrlParams = () => deparam(window.location.search.substr(1));
 
 const getSearchResultsByField = matches => {
@@ -93,22 +95,21 @@ export const showResults = (matches, val) => {
   let results = $();
   if (matches && matches.length) {
     for (const match of matches) {
-      const doc = searchStore[match.ref];
+      const doc = getSearchStore()[match.ref];
       const toMark = getSearchResultsByField(match.matchData.metadata);
-      if (!(toMark.title.length || toMark.contents.length)) {
-        return;
+      if (toMark.title.length || toMark.contents.length) {
+        const tplCtx = {
+          url: `/${match.ref}`,
+          title: doc.title,
+          contents: toMark.contents.length ? doc.contents : '',
+        };
+        // Render search result template
+        const el = $(nunjucksEnv.render('search_result.njk', tplCtx));
+        // Highlight matches in search result text
+        highlightSearchResult(el, toMark);
+        // Add search result template to set of results
+        results = results.add(el);
       }
-      const tplCtx = {
-        url: `/${match.ref}`,
-        title: doc.title,
-        contents: toMark.contents.length ? doc.contents : '',
-      };
-      // Render search result template
-      const el = $(nunjucksEnv.render('search_result.njk', tplCtx));
-      // Highlight matches in search result text
-      highlightSearchResult(el, toMark);
-      // Add search result template to set of results
-      results = results.add(el);
     }
   }
   const resultsTpl = $(
@@ -124,7 +125,7 @@ export const showResults = (matches, val) => {
 export const doSearch = (data, val) => {
   if (data && data.store && data.idx && val) {
     // Grab doc store from data
-    searchStore = data && data.store;
+    setSearchStore(data && data.store);
     // Initialize Lunr index from precompiled data
     const idx = lunr.Index.load(data.idx);
     const matches = idx.search(val);
@@ -159,6 +160,7 @@ export const getSearchData = () => {
   }
 };
 
+/* istanbul ignore next */
 $(() => {
   getSearchData();
 });
