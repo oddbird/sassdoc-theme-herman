@@ -43,10 +43,7 @@ const getSearchResultsByField = matches => {
         start: p[0],
         length: p[1],
       }));
-      // @@@ Temporary solution until fieldname bug is fixed:
-      // https://github.com/olivernn/lunr.js/issues/320
-      const field = fieldName === 'title' ? 'title' : 'contents';
-      results[field] = results[field].concat(pos);
+      results[fieldName] = results[fieldName].concat(pos);
     });
   });
   return results;
