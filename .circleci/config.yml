@@ -13,9 +13,6 @@ jobs:
           name: Install Dependencies
           command: yarn
       - run:
-          name: Set $PATH
-          command: echo 'export PATH=~/herman/node_modules/.bin:$PATH' >> $BASH_ENV
-      - run:
           name: Check that yarn.lock matches package.json
           command: |
             if [[ ! "${CIRCLE_BRANCH}" =~ greenkeeper\/.* ]]; then
@@ -37,15 +34,15 @@ jobs:
       - run:
           name: Install Dependencies
           command: yarn
-      - run:
-          name: Set $PATH
-          command: echo 'export PATH=~/herman/node_modules/.bin:$PATH' >> $BASH_ENV
 
   lint:
     working_directory: ~/herman
     docker:
       - image: circleci/node:8-browsers
     steps:
+      - run:
+          name: Set $PATH
+          command: echo 'export PATH=~/herman/node_modules/.bin:$PATH' >> $BASH_ENV
       - run:
           name: Lint JS
           command: gulp eslint
@@ -59,6 +56,9 @@ jobs:
       - image: circleci/node:8-browsers
     steps:
       - run:
+          name: Set $PATH
+          command: echo 'export PATH=~/herman/node_modules/.bin:$PATH' >> $BASH_ENV
+      - run:
           name: Test Sass
           command: gulp sasstest
 
@@ -67,6 +67,9 @@ jobs:
     docker:
       - image: circleci/node:8-browsers
     steps:
+      - run:
+          name: Set $PATH
+          command: echo 'export PATH=~/herman/node_modules/.bin:$PATH' >> $BASH_ENV
       - run:
           name: Run JS Tests
           command: gulp jstest
@@ -83,6 +86,9 @@ jobs:
       - image: circleci/node:8-browsers
     steps:
       - run:
+          name: Set $PATH
+          command: echo 'export PATH=~/herman/node_modules/.bin:$PATH' >> $BASH_ENV
+      - run:
           name: Run Client JS Tests & Check Coverage
           command: gulp clienttest
       - run:
@@ -97,6 +103,9 @@ jobs:
     docker:
       - image: node:6
     steps:
+      - run:
+          name: Set $PATH
+          command: echo 'export PATH=~/herman/node_modules/.bin:$PATH' >> $BASH_ENV
       - run:
           name: Run JS Tests [node 6]
           command: gulp jstest
