@@ -1,5 +1,6 @@
 version: 2
 jobs:
+
   build:
     working_directory: ~/herman
     docker:
@@ -22,50 +23,95 @@ jobs:
               echo ">> yarn.lock is out of date, run \"yarn\""
               exit 1
             fi
-      - run:
-          name: Install NVM
-          command: wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
       - save_cache:
           key: herman-{{ .Branch }}-{{ checksum "yarn.lock" }}
           paths:
             - "~/.cache/yarn"
-            - "~/.nvm"
+
+  build-node-6:
+    working_directory: ~/herman
+    docker:
+      - image: node:6
+    steps:
+      - checkout
+      - run:
+          name: Install Dependencies
+          command: yarn
+      - run:
+          name: Set $PATH
+          command: echo 'export PATH=~/herman/node_modules/.bin:$PATH' >> $BASH_ENV
+
+  lint:
+    working_directory: ~/herman
+    docker:
+      - image: circleci/node:8-browsers
+    steps:
       - run:
           name: Lint JS
           command: gulp eslint
       - run:
           name: Lint Sass
           command: gulp sasslint
+
+  test-sass:
+    working_directory: ~/herman
+    docker:
+      - image: circleci/node:8-browsers
+    steps:
       - run:
           name: Test Sass
           command: gulp sasstest
+
+  test-src:
+    working_directory: ~/herman
+    docker:
+      - image: circleci/node:8-browsers
+    steps:
       - run:
-          name: Run JS Tests [node latest]
-          command: |
-            gulp jstest
-      - run:
-          name: Run Client JS Tests & Check Coverage
-          command: |
-            gulp clienttest
+          name: Run JS Tests
+          command: gulp jstest
       - run:
           name: Report Test Coverage
-          command: |
-            nyc report --reporter=text-lcov | coveralls
-            nyc report --reporter=text-lcov --temp-directory ./jscov/client/ | coveralls
+          command: nyc report --reporter=text-lcov | coveralls
       - run:
           name: Check Test Coverage
-          command: |
-            nyc check-coverage --statements=100 --functions=100 --branches=100 --lines=100
-            nyc check-coverage --temp-directory ./jscov/client/ --statements=100 --functions=100 --branches=100 --lines=100
+          command: nyc check-coverage --statements=100 --functions=100 --branches=100 --lines=100
+
+  test-client:
+    working_directory: ~/herman
+    docker:
+      - image: circleci/node:8-browsers
+    steps:
+      - run:
+          name: Run Client JS Tests & Check Coverage
+          command: gulp clienttest
+      - run:
+          name: Report Test Coverage
+          command: nyc report --reporter=text-lcov --temp-directory ./jscov/client/ | coveralls
+      - run:
+          name: Check Test Coverage
+          command: nyc check-coverage --temp-directory ./jscov/client/ --statements=100 --functions=100 --branches=100 --lines=100
+
+  test-src-node-6:
+    working_directory: ~/herman
+    docker:
+      - image: node:6
+    steps:
       - run:
           name: Run JS Tests [node 6]
-          command: |
-            export NVM_DIR="$HOME/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-            nvm install 6.2.2
-            yarn install --force
-            gulp jstest
-            nyc check-coverage --statements=100 --functions=100 --branches=100 --lines=100
+          command: gulp jstest
+      - run:
+          name: Report Test Coverage [node 6]
+          command: nyc report --reporter=text-lcov | coveralls
+      - run:
+          name: Check Test Coverage [node 6]
+          command: nyc check-coverage --statements=100 --functions=100 --branches=100 --lines=100
+
+  deploy:
+    working_directory: ~/herman
+    docker:
+      - image: circleci/node:8-browsers
+    steps:
       - deploy:
           name: Update yarn.lock [greenkeeper]
           command: |
@@ -79,3 +125,32 @@ jobs:
           destination: js-reports
       - store_test_results:
           path: jscov
+
+workflows:
+  version: 2
+  build-test-and-deploy:
+    jobs:
+      - build
+      - build-node-6
+      - lint
+          requires:
+            - build
+      - test-sass:
+          requires:
+            - build
+      - test-src:
+          requires:
+            - build
+      - test-client:
+          requires:
+            - build
+      - test-src-node-6:
+          requires:
+            - build-node-6
+      - deploy:
+          requires:
+            - lint
+            - test-sass
+            - test-src
+            - test-client
+            - test-src-node-6
