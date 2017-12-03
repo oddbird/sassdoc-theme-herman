@@ -28,6 +28,14 @@ jobs:
           key: herman-node-modules-{{ checksum "yarn.lock" }}
           paths:
             - "~/herman/node_modules"
+      - deploy:
+          name: Update yarn.lock [greenkeeper]
+          command: |
+            if [[ "${CIRCLE_BRANCH}" =~ greenkeeper\/.* ]]; then
+              yarn global add greenkeeper-lockfile@1 --prefix ~/.yarn
+              ~/.yarn/bin/greenkeeper-lockfile-update
+              ~/.yarn/bin/greenkeeper-lockfile-upload
+            fi
 
   build-node-6:
     working_directory: ~/herman
@@ -54,6 +62,7 @@ jobs:
     docker:
       - image: circleci/node:8-browsers
     steps:
+      - checkout
       - restore_cache:
           key: herman-node-modules-{{ checksum "yarn.lock" }}
       - run:
@@ -71,6 +80,7 @@ jobs:
     docker:
       - image: circleci/node:8-browsers
     steps:
+      - checkout
       - restore_cache:
           key: herman-node-modules-{{ checksum "yarn.lock" }}
       - run:
@@ -85,6 +95,7 @@ jobs:
     docker:
       - image: circleci/node:8-browsers
     steps:
+      - checkout
       - restore_cache:
           key: herman-node-modules-{{ checksum "yarn.lock" }}
       - run:
@@ -99,12 +110,18 @@ jobs:
       - run:
           name: Check Test Coverage
           command: nyc check-coverage --statements=100 --functions=100 --branches=100 --lines=100
+      - store_artifacts:
+          path: jscov
+          destination: js-reports
+      - store_test_results:
+          path: jscov
 
   test-client:
     working_directory: ~/herman
     docker:
       - image: circleci/node:8-browsers
     steps:
+      - checkout
       - restore_cache:
           key: herman-node-modules-{{ checksum "yarn.lock" }}
       - run:
@@ -119,12 +136,18 @@ jobs:
       - run:
           name: Check Test Coverage
           command: nyc check-coverage --temp-directory ./jscov/client/ --statements=100 --functions=100 --branches=100 --lines=100
+      - store_artifacts:
+          path: jscov
+          destination: js-reports
+      - store_test_results:
+          path: jscov
 
   test-src-node-6:
     working_directory: ~/herman
     docker:
       - image: node:6
     steps:
+      - checkout
       - restore_cache:
           key: herman-node6-modules-{{ checksum "yarn.lock" }}
       - run:
@@ -139,20 +162,6 @@ jobs:
       - run:
           name: Check Test Coverage [node 6]
           command: nyc check-coverage --statements=100 --functions=100 --branches=100 --lines=100
-
-  deploy:
-    working_directory: ~/herman
-    docker:
-      - image: circleci/node:8-browsers
-    steps:
-      - deploy:
-          name: Update yarn.lock [greenkeeper]
-          command: |
-            if [[ "${CIRCLE_BRANCH}" =~ greenkeeper\/.* ]]; then
-              yarn global add greenkeeper-lockfile@1 --prefix ~/.yarn
-              ~/.yarn/bin/greenkeeper-lockfile-update
-              ~/.yarn/bin/greenkeeper-lockfile-upload
-            fi
       - store_artifacts:
           path: jscov
           destination: js-reports
@@ -180,10 +189,3 @@ workflows:
       - test-src-node-6:
           requires:
             - build-node-6
-      - deploy:
-          requires:
-            - lint
-            - test-sass
-            - test-src
-            - test-client
-            - test-src-node-6
