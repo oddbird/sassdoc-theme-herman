@@ -132,7 +132,7 @@ workflows:
     jobs:
       - build
       - build-node-6
-      - lint
+      - lint:
           requires:
             - build
       - test-sass:
