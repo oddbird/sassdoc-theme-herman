@@ -138,7 +138,7 @@ export const getSearchData = () => {
   // Only fetch search data if on search results page with query term
   if (params && params.q) {
     const request = new XMLHttpRequest();
-    request.open('GET', '/search-data.json', true);
+    request.open('GET', 'search-data.json', true);
 
     request.onload = function onload() {
       let data;

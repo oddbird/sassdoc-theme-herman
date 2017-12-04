@@ -216,7 +216,7 @@ describe('search', function() {
 
     it('handles 200 response', function() {
       search.getSearchData();
-      this.respondTo('/search-data.json', 200, {
+      this.respondTo('search-data.json', 200, {
         idx: 'lunr index',
         store: 'Hey there',
       });
@@ -228,7 +228,7 @@ describe('search', function() {
 
     it('does not search on 404', function() {
       search.getSearchData();
-      this.respondTo('/search-data.json', 404);
+      this.respondTo('search-data.json', 404);
 
       expect(search.getSearchStore()).to.be.undefined;
       expect(this.indexLoad).not.to.have.been.called;
@@ -237,7 +237,7 @@ describe('search', function() {
 
     it('does not search on xhr error', function() {
       search.getSearchData();
-      this.getRequest('GET', '/search-data.json').error();
+      this.getRequest('GET', 'search-data.json').error();
 
       expect(search.getSearchStore()).to.be.undefined;
       expect(this.indexLoad).not.to.have.been.called;

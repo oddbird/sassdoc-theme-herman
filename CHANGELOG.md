@@ -1,6 +1,11 @@
 # Herman Changelog
 
 
+## 1.0.0-rc.5: 2017-12-04
+
+- BUGFIX: Fix fetching site-search JSON file.
+
+
 ## 1.0.0-rc.4: 2017-12-04
 
 - BUGFIX: Fix broken site-search action attribute.
