@@ -130,10 +130,6 @@ jobs:
       - run:
           name: Run Client JS Tests & Check Coverage
           command: gulp clienttest
-      # Do not report multiple times to coveralls: https://github.com/nickmerwin/node-coveralls/issues/176
-      # - run:
-      #     name: Report Test Coverage
-      #     command: nyc report --reporter=text-lcov --temp-directory ./jscov/client/ | coveralls
       - run:
           name: Check Test Coverage
           command: nyc check-coverage --temp-directory ./jscov/client/
@@ -157,10 +153,6 @@ jobs:
       - run:
           name: Run JS Tests [node 6]
           command: gulp jstest
-      # Do not report multiple times to coveralls: https://github.com/nickmerwin/node-coveralls/issues/176
-      # - run:
-      #     name: Report Test Coverage [node 6]
-      #     command: nyc report --reporter=text-lcov | coveralls
       - run:
           name: Check Test Coverage [node 6]
           command: nyc check-coverage
@@ -172,7 +164,7 @@ jobs:
 
 workflows:
   version: 2
-  build-test-and-deploy:
+  build-and-test:
     jobs:
       - build
       - build-node-6
