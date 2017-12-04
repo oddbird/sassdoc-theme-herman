@@ -1,7 +1,7 @@
 # Herman Changelog
 
 
-## Unreleased
+## 1.0.0-rc.4: 2017-12-04
 
 - BUGFIX: Fix broken site-search action attribute.
 - CHANGE: Hide Herman watermark if SassDoc `display.watermark` is `false`.
