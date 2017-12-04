@@ -192,10 +192,15 @@ describe('search', function() {
     beforeEach(function() {
       this.href = window.location.href;
       window.history.replaceState(null, document.title, '/?q=test');
+      this.indexSearch = sinon.stub();
+      this.indexLoad = sinon.stub(lunr.Index, 'load');
+      this.indexLoad.returns({ search: this.indexSearch });
     });
 
     afterEach(function() {
       window.history.replaceState(null, document.title, this.href);
+      this.indexLoad.restore();
+      search.setSearchStore();
     });
 
     it('only searches with a q in the query string', function() {
@@ -210,9 +215,6 @@ describe('search', function() {
     });
 
     it('handles 200 response', function() {
-      const indexSearch = sinon.stub();
-      const indexLoad = sinon.stub(lunr.Index, 'load');
-      indexLoad.returns({ search: indexSearch });
       search.getSearchData();
       this.respondTo('/search-data.json', 200, {
         idx: 'lunr index',
@@ -220,39 +222,26 @@ describe('search', function() {
       });
 
       expect(search.getSearchStore()).to.equal('Hey there');
-      expect(indexLoad).to.have.been.calledOnceWith('lunr index');
-      expect(indexSearch).to.have.been.calledOnceWith('test');
-
-      indexLoad.restore();
-      search.setSearchStore();
+      expect(this.indexLoad).to.have.been.calledOnceWith('lunr index');
+      expect(this.indexSearch).to.have.been.calledOnceWith('test');
     });
 
     it('does not search on 404', function() {
-      const indexSearch = sinon.stub();
-      const indexLoad = sinon.stub(lunr.Index, 'load');
-      indexLoad.returns({ search: indexSearch });
       search.getSearchData();
       this.respondTo('/search-data.json', 404);
 
       expect(search.getSearchStore()).to.be.undefined;
-      expect(indexLoad).not.to.have.been.called;
-      expect(indexSearch).not.to.have.been.called;
-
-      indexLoad.restore();
+      expect(this.indexLoad).not.to.have.been.called;
+      expect(this.indexSearch).not.to.have.been.called;
     });
 
     it('does not search on xhr error', function() {
-      const indexSearch = sinon.stub();
-      const indexLoad = sinon.stub(lunr.Index, 'load');
-      indexLoad.returns({ search: indexSearch });
       search.getSearchData();
       this.getRequest('GET', '/search-data.json').error();
 
       expect(search.getSearchStore()).to.be.undefined;
-      expect(indexLoad).not.to.have.been.called;
-      expect(indexSearch).not.to.have.been.called;
-
-      indexLoad.restore();
+      expect(this.indexLoad).not.to.have.been.called;
+      expect(this.indexSearch).not.to.have.been.called;
     });
   });
 });

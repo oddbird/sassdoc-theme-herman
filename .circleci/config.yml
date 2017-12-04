@@ -109,7 +109,7 @@ jobs:
           command: nyc report --reporter=text-lcov | coveralls
       - run:
           name: Check Test Coverage
-          command: nyc check-coverage --statements=100 --functions=100 --branches=100 --lines=100
+          command: nyc check-coverage
       - store_artifacts:
           path: jscov
           destination: js-reports
@@ -136,7 +136,7 @@ jobs:
       #     command: nyc report --reporter=text-lcov --temp-directory ./jscov/client/ | coveralls
       - run:
           name: Check Test Coverage
-          command: nyc check-coverage --temp-directory ./jscov/client/ --statements=100 --functions=100 --branches=100 --lines=100
+          command: nyc check-coverage --temp-directory ./jscov/client/
       - store_artifacts:
           path: jscov
           destination: js-reports
@@ -163,7 +163,7 @@ jobs:
       #     command: nyc report --reporter=text-lcov | coveralls
       - run:
           name: Check Test Coverage [node 6]
-          command: nyc check-coverage --statements=100 --functions=100 --branches=100 --lines=100
+          command: nyc check-coverage
       - store_artifacts:
           path: jscov
           destination: js-reports

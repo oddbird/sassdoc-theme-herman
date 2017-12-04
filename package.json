@@ -100,6 +100,11 @@
   "scripts": {
     "precommit": "lint-staged"
   },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/oddbird/sassdoc-theme-herman.git"
+  },
   "lint-staged": {
     "{lib/,test/}**/*.js": [
       "prettier --write",
@@ -113,10 +118,5 @@
       "prettier --write",
       "git add"
     ]
-  },
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/oddbird/sassdoc-theme-herman.git"
   }
 }

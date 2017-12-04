@@ -225,19 +225,21 @@ describe('initializeIframes', function() {
     iframe.appendTo('body');
     base.initializeIframes();
 
-    expect(iframe.get(0).height).to.equal('30');
-    expect($.fn.outerHeight).to.have.been.calledOnceWithExactly(true);
+    try {
+      expect(iframe.get(0).height).to.equal('30');
+      expect($.fn.outerHeight).to.have.been.calledOnceWithExactly(true);
 
-    iframe.trigger('load');
+      iframe.trigger('load');
 
-    expect($.fn.outerHeight).to.have.been.calledTwice;
+      expect($.fn.outerHeight).to.have.been.calledTwice;
 
-    $(window).trigger('resize');
+      $(window).trigger('resize');
 
-    expect($.fn.outerHeight).to.have.been.calledThrice;
-
-    iframe.remove();
-    $.fn.outerHeight.restore();
+      expect($.fn.outerHeight).to.have.been.calledThrice;
+    } finally {
+      iframe.remove();
+      $.fn.outerHeight.restore();
+    }
   });
 });
 
