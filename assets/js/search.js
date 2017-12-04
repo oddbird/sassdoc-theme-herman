@@ -99,7 +99,7 @@ export const showResults = (matches, val) => {
       const toMark = getSearchResultsByField(match.matchData.metadata);
       if (toMark.title.length || toMark.contents.length) {
         const tplCtx = {
-          url: `/${match.ref}`,
+          url: match.ref,
           title: doc.title,
           contents: toMark.contents.length ? doc.contents : '',
         };
