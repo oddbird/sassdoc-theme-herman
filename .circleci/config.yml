@@ -1,19 +1,17 @@
 version: 2
 jobs:
+
   build:
     working_directory: ~/herman
     docker:
-      - image: node:8
+      - image: circleci/node:8-browsers
     steps:
       - checkout
       - restore_cache:
-          key: herman-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          key: herman-{{ checksum "yarn.lock" }}
       - run:
           name: Install Dependencies
           command: yarn
-      - run:
-          name: Set $PATH
-          command: echo 'export PATH=~/herman/node_modules/.bin:$PATH' >> $BASH_ENV
       - run:
           name: Check that yarn.lock matches package.json
           command: |
@@ -22,39 +20,14 @@ jobs:
               echo ">> yarn.lock is out of date, run \"yarn\""
               exit 1
             fi
-      - run:
-          name: Install NVM
-          command: wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
       - save_cache:
-          key: herman-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          key: herman-{{ checksum "yarn.lock" }}
           paths:
             - "~/.cache/yarn"
-            - "~/.nvm"
-      - run:
-          name: Lint JS
-          command: gulp eslint
-      - run:
-          name: Lint Sass
-          command: gulp sasslint
-      - run:
-          name: Test Sass
-          command: gulp sasstest
-      - run:
-          name: Run JS Tests [node latest]
-          command: |
-            gulp jstest
-            yarn coveralls
-      - run:
-          name: Run Tests [node 6]
-          command: |
-            export NVM_DIR="$HOME/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-            nvm install 6.2.2
-            yarn install --force
-            gulp jstest
-      - run:
-          name: Check JS Test Coverage
-          command: nyc check-coverage --statements=100 --functions=100 --branches=100 --lines=100
+      - save_cache:
+          key: herman-node-modules-{{ checksum "yarn.lock" }}
+          paths:
+            - "~/herman/node_modules"
       - deploy:
           name: Update yarn.lock [greenkeeper]
           command: |
@@ -63,8 +36,150 @@ jobs:
               ~/.yarn/bin/greenkeeper-lockfile-update
               ~/.yarn/bin/greenkeeper-lockfile-upload
             fi
+
+  build-node-6:
+    working_directory: ~/herman
+    docker:
+      - image: node:6
+    steps:
+      - checkout
+      - restore_cache:
+          key: herman-node6-{{ checksum "yarn.lock" }}
+      - run:
+          name: Install Dependencies
+          command: yarn
+      - save_cache:
+          key: herman-node6-{{ checksum "yarn.lock" }}
+          paths:
+            - "~/.cache/yarn"
+      - save_cache:
+          key: herman-node6-modules-{{ checksum "yarn.lock" }}
+          paths:
+            - "~/herman/node_modules"
+
+  lint:
+    working_directory: ~/herman
+    docker:
+      - image: circleci/node:8-browsers
+    steps:
+      - checkout
+      - restore_cache:
+          key: herman-node-modules-{{ checksum "yarn.lock" }}
+      - run:
+          name: Set $PATH
+          command: echo 'export PATH=~/herman/node_modules/.bin:$PATH' >> $BASH_ENV
+      - run:
+          name: Lint JS
+          command: gulp eslint
+      - run:
+          name: Lint Sass
+          command: gulp sasslint
+
+  test-sass:
+    working_directory: ~/herman
+    docker:
+      - image: circleci/node:8-browsers
+    steps:
+      - checkout
+      - restore_cache:
+          key: herman-node-modules-{{ checksum "yarn.lock" }}
+      - run:
+          name: Set $PATH
+          command: echo 'export PATH=~/herman/node_modules/.bin:$PATH' >> $BASH_ENV
+      - run:
+          name: Test Sass
+          command: gulp sasstest
+
+  test-src:
+    working_directory: ~/herman
+    docker:
+      - image: circleci/node:8-browsers
+    steps:
+      - checkout
+      - restore_cache:
+          key: herman-node-modules-{{ checksum "yarn.lock" }}
+      - run:
+          name: Set $PATH
+          command: echo 'export PATH=~/herman/node_modules/.bin:$PATH' >> $BASH_ENV
+      - run:
+          name: Run JS Tests
+          command: gulp jstest
+      - run:
+          name: Report Test Coverage
+          command: nyc report --reporter=text-lcov | coveralls
+      - run:
+          name: Check Test Coverage
+          command: nyc check-coverage
       - store_artifacts:
           path: jscov
           destination: js-reports
       - store_test_results:
           path: jscov
+
+  test-client:
+    working_directory: ~/herman
+    docker:
+      - image: circleci/node:8-browsers
+    steps:
+      - checkout
+      - restore_cache:
+          key: herman-node-modules-{{ checksum "yarn.lock" }}
+      - run:
+          name: Set $PATH
+          command: echo 'export PATH=~/herman/node_modules/.bin:$PATH' >> $BASH_ENV
+      - run:
+          name: Run Client JS Tests & Check Coverage
+          command: gulp clienttest
+      - run:
+          name: Check Test Coverage
+          command: nyc check-coverage --temp-directory ./jscov/client/
+      - store_artifacts:
+          path: jscov
+          destination: js-reports
+      - store_test_results:
+          path: jscov
+
+  test-src-node-6:
+    working_directory: ~/herman
+    docker:
+      - image: node:6
+    steps:
+      - checkout
+      - restore_cache:
+          key: herman-node6-modules-{{ checksum "yarn.lock" }}
+      - run:
+          name: Set $PATH
+          command: echo 'export PATH=~/herman/node_modules/.bin:$PATH' >> $BASH_ENV
+      - run:
+          name: Run JS Tests [node 6]
+          command: gulp jstest
+      - run:
+          name: Check Test Coverage [node 6]
+          command: nyc check-coverage
+      - store_artifacts:
+          path: jscov
+          destination: js-reports
+      - store_test_results:
+          path: jscov
+
+workflows:
+  version: 2
+  build-and-test:
+    jobs:
+      - build
+      - build-node-6
+      - lint:
+          requires:
+            - build
+      - test-sass:
+          requires:
+            - build
+      - test-src:
+          requires:
+            - build
+      - test-client:
+          requires:
+            - build
+      - test-src-node-6:
+          requires:
+            - build-node-6

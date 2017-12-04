@@ -7,7 +7,6 @@ $(() => {
 
   hljs.initHighlighting();
   base.initializeToggles();
-  base.initializeTabs();
   base.initializeIframes();
   base.initializeNav();
 });

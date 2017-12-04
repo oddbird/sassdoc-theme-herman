@@ -12,20 +12,26 @@ nunjucks.installJinjaCompat();
 // asynchronously, some templates might be added to the `window` global after
 // that. To avoid this issue, we need a loader that checks the `window` object
 // every time.
-const PrecompiledLoader = nunjucks.Loader.extend({
-  getSource: name => ({
-    src: {
-      type: 'code',
-      obj: window.nunjucksPrecompiled[name],
-    },
-    path: name,
-  }),
+//
+export const getSource = name => ({
+  src: {
+    type: 'code',
+    obj: window.nunjucksPrecompiled[name],
+  },
+  path: name,
 });
-const nunjucksEnv = new nunjucks.Environment(new PrecompiledLoader());
+const PrecompiledLoader = nunjucks.Loader.extend({ getSource });
+export const nunjucksEnv = new nunjucks.Environment(new PrecompiledLoader());
 
 let searchStore;
 
-const getUrlParams = () => deparam(window.location.search.substr(1));
+export const setSearchStore = val => {
+  searchStore = val;
+};
+
+export const getSearchStore = () => searchStore;
+
+export const getUrlParams = () => deparam(window.location.search.substr(1));
 
 const getSearchResultsByField = matches => {
   const results = {
@@ -45,7 +51,7 @@ const getSearchResultsByField = matches => {
   return results;
 };
 
-const highlightSearchResult = (el, results) => {
+export const highlightSearchResult = (el, results) => {
   if (results.title.length) {
     // Highlight matches in `title` field
     const titleEl = el.find('[data-result-field="title"]').get(0);
@@ -85,26 +91,25 @@ const highlightSearchResult = (el, results) => {
   }
 };
 
-const showResults = (matches, val) => {
+export const showResults = (matches, val) => {
   let results = $();
   if (matches && matches.length) {
     for (const match of matches) {
-      const doc = searchStore[match.ref];
+      const doc = getSearchStore()[match.ref];
       const toMark = getSearchResultsByField(match.matchData.metadata);
-      if (!(toMark.title.length || toMark.contents.length)) {
-        return;
+      if (toMark.title.length || toMark.contents.length) {
+        const tplCtx = {
+          url: `/${match.ref}`,
+          title: doc.title,
+          contents: toMark.contents.length ? doc.contents : '',
+        };
+        // Render search result template
+        const el = $(nunjucksEnv.render('search_result.njk', tplCtx));
+        // Highlight matches in search result text
+        highlightSearchResult(el, toMark);
+        // Add search result template to set of results
+        results = results.add(el);
       }
-      const tplCtx = {
-        url: `/${match.ref}`,
-        title: doc.title,
-        contents: toMark.contents.length ? doc.contents : '',
-      };
-      // Render search result template
-      const el = $(nunjucksEnv.render('search_result.njk', tplCtx));
-      // Highlight matches in search result text
-      highlightSearchResult(el, toMark);
-      // Add search result template to set of results
-      results = results.add(el);
     }
   }
   const resultsTpl = $(
@@ -117,16 +122,18 @@ const showResults = (matches, val) => {
   $('[data-sassdoc-page]').html(resultsTpl);
 };
 
-const doSearch = (data, val) => {
-  // Grab doc store from data
-  searchStore = data && data.store;
-  // Initialize Lunr index from precompiled data
-  const idx = lunr.Index.load(data.idx);
-  const matches = idx.search(val);
-  showResults(matches, val);
+export const doSearch = (data, val) => {
+  if (data && data.store && data.idx && val) {
+    // Grab doc store from data
+    setSearchStore(data && data.store);
+    // Initialize Lunr index from precompiled data
+    const idx = lunr.Index.load(data.idx);
+    const matches = idx.search(val);
+    showResults(matches, val);
+  }
 };
 
-const getSearchData = () => {
+export const getSearchData = () => {
   const params = getUrlParams();
   // Only fetch search data if on search results page with query term
   if (params && params.q) {
@@ -153,6 +160,7 @@ const getSearchData = () => {
   }
 };
 
+/* istanbul ignore next */
 $(() => {
   getSearchData();
 });

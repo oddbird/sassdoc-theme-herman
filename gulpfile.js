@@ -9,6 +9,7 @@ const eslint = require('gulp-eslint');
 const gulp = require('gulp');
 const gutil = require('gulp-util');
 const imagemin = require('gulp-imagemin');
+const KarmaServer = require('karma').Server;
 const mocha = require('gulp-mocha');
 const path = require('path');
 const prettier = require('gulp-prettier-plugin');
@@ -28,6 +29,7 @@ const paths = {
   ASSETS_JS_DIR: 'assets/js/',
   DOCS_DIR: 'docs/',
   JS_TESTS_DIR: 'test/js/',
+  CLIENT_JS_TESTS_DIR: 'test/clientjs/',
   TEMPLATES_DIR: 'templates/',
   IGNORE: ['!**/.#*', '!**/flycheck_*'],
   init() {
@@ -41,6 +43,7 @@ const paths = {
       `${this.ASSETS_JS_DIR}*.js`,
       'lib/**/*.js',
       `${this.JS_TESTS_DIR}*.js`,
+      `${this.CLIENT_JS_TESTS_DIR}**/*.js`,
       'gulpfile.js',
       'index.js',
       '*.js',
@@ -163,7 +166,7 @@ const getJsTestArgs = verbose => {
     reporter: covReporters,
     cache: true,
     all: true,
-    'report-dir': './jscov',
+    'report-dir': './jscov/src/',
   };
   const args = [
     './node_modules/.bin/mocha',
@@ -191,7 +194,41 @@ gulp.task('jstest-nofail', cb => {
   spawnTask('./node_modules/.bin/nyc', getJsTestArgs(), cb, false);
 });
 
-gulp.task('test', ['sasstest', 'jstest']);
+const karmaOnBuild = done => exitCode => {
+  if (exitCode) {
+    gutil.beep();
+    done(
+      new gutil.PluginError('karma', {
+        name: 'KarmaError',
+        message: `Failed with exit code: ${exitCode}`,
+      })
+    );
+  } else {
+    done();
+  }
+  process.exit(exitCode); // eslint-disable-line no-process-exit
+};
+
+gulp.task('clienttest', cb => {
+  new KarmaServer(
+    { configFile: path.join(__dirname, 'karma.conf.js') },
+    karmaOnBuild(cb)
+  ).start();
+});
+
+// Use karma watcher instead of gulp watcher for tests
+gulp.task('clienttest-watch', () => {
+  new KarmaServer({
+    configFile: path.join(__dirname, 'karma.conf.js'),
+    autoWatch: true,
+    singleRun: false,
+    coverageReporter: {
+      reporters: [{ type: 'html', subdir: '.' }, { type: 'text-summary' }],
+    },
+  }).start();
+});
+
+gulp.task('test', ['sasstest', 'jstest', 'clienttest']);
 
 gulp.task('browser-sync', cb => {
   browserSync.init(
@@ -233,7 +270,7 @@ gulp.task('dev', [
   'watch',
 ]);
 
-gulp.task('watch', ['webpack-watch'], () => {
+gulp.task('watch', ['clienttest-watch', 'webpack-watch'], () => {
   // run webpack to compile static assets
   gulp.watch(
     [

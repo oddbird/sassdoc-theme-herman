@@ -16,6 +16,11 @@
     "todo": [
       "Todo description"
     ],
+    "example": [{
+      "type": "scss",
+      "code": "text",
+      "description": "Example description"
+    }],
     "parameter": [
       {
         "type": "String",
@@ -26,8 +31,19 @@
         "type": "String",
         "name": "two",
         "description": "Param \"two\" -- description"
+      },
+      {
+        "type": "String",
+        "name": "three"
       }
     ],
+    "property": [{
+      "type": "Map",
+      "description": "Property description"
+    }],
+    "since": [{
+      "description": "Since description"
+    }],
     "throw": [
       "Throws description"
     ],
