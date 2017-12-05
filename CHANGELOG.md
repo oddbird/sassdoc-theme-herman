@@ -1,6 +1,16 @@
 # Herman Changelog
 
 
+## Unreleased
+
+- NEW: Support SassDoc [`googleAnalytics`][googleAnalytics] and
+  [`trackingCode`][trackingCode] options --
+  [#215](https://github.com/oddbird/sassdoc-theme-herman/issues/215)
+
+[googleAnalytics]: http://sassdoc.com/customising-the-view/#google-analytics
+[trackingCode]: http://sassdoc.com/customising-the-view/#tracking-code
+
+
 ## 1.0.0-rc.6: 2017-12-04
 
 - BUGFIX: Fix search result page links.
