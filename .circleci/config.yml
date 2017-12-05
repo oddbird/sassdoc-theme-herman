@@ -90,7 +90,7 @@ jobs:
           name: Test Sass
           command: gulp sasstest
 
-  test-src:
+  test-js:
     working_directory: ~/herman
     docker:
       - image: circleci/node:8-browsers
@@ -105,41 +105,30 @@ jobs:
           name: Run JS Tests
           command: gulp jstest
       - run:
-          name: Report Test Coverage
-          command: nyc report --reporter=text-lcov | coveralls
-      - run:
-          name: Check Test Coverage
-          command: nyc check-coverage
-      - store_artifacts:
-          path: jscov
-          destination: js-reports
-      - store_test_results:
-          path: jscov
-
-  test-client:
-    working_directory: ~/herman
-    docker:
-      - image: circleci/node:8-browsers
-    steps:
-      - checkout
-      - restore_cache:
-          key: herman-node-modules-{{ checksum "yarn.lock" }}
-      - run:
-          name: Set $PATH
-          command: echo 'export PATH=~/herman/node_modules/.bin:$PATH' >> $BASH_ENV
-      - run:
-          name: Run Client JS Tests & Check Coverage
+          name: Run Client JS Tests
           command: gulp clienttest
       - run:
+          name: Report Test Coverage
+          command: |
+            nyc report --reporter=text-lcov | coveralls
+            nyc report --reporter=text-lcov --temp-directory ./jscov/client/ | coveralls
+          environment:
+            COVERALLS_PARALLEL: 'true'
+      - run:
           name: Check Test Coverage
-          command: nyc check-coverage --temp-directory ./jscov/client/
+          command: |
+            nyc check-coverage
+            nyc check-coverage --temp-directory ./jscov/client/
+      - deploy:
+          name: Notify Coveralls
+          command: curl -k "https://coveralls.io/webhook?repo_token=${COVERALLS_REPO_TOKEN}" -d "payload[build_number]=${CIRCLE_BUILD_NUM}&payload[status]=done"
       - store_artifacts:
           path: jscov
           destination: js-reports
       - store_test_results:
           path: jscov
 
-  test-src-node-6:
+  test-node-6:
     working_directory: ~/herman
     docker:
       - image: node:6
@@ -174,12 +163,9 @@ workflows:
       - test-sass:
           requires:
             - build
-      - test-src:
+      - test-js:
           requires:
             - build
-      - test-client:
-          requires:
-            - build
-      - test-src-node-6:
+      - test-node-6:
           requires:
             - build-node-6
