@@ -28,7 +28,7 @@
     "through2": "^2.0.3",
     "tinycolor2": "^1.4.1",
     "typogr": "^0.6.7",
-    "vinyl-fs": "^2.4.4"
+    "vinyl-fs": "^3.0.0"
   },
   "peerDependencies": {
     "sassdoc": "^2.5.0"
