@@ -95,6 +95,7 @@
   },
   "resolutions": {
     "browserslist": "^2.9.1",
+    "cdocparser": "github:jgerigmeyer/CDocParser#preserve-nested-comments",
     "nunjucks": "^2.5.2"
   },
   "scripts": {

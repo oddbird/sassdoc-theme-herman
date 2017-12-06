@@ -286,7 +286,7 @@ and our [Accoutrement-Type][type] toolkit.
 <a href="http://oddbird.net/herman/docs/api_json-export.html#fonts">See the font map documentation for details<span class="widont">&nbsp;</span>»</a></p>
 <p>Each font family will be displayed individually,
 using the <code>@font</code> annotation:</p>
-<pre><code class="lang-scss">// @font my-font (regular, bold)
+<pre><code class="lang-scss">/// @font my-font (regular, bold)
 </code></pre>
 <p>Let’s look at a few<span class="widont">&nbsp;</span>examples…</p>
 
@@ -421,8 +421,8 @@ using the <code>@font</code> annotation:</p>
       <h2 id="displaying-cdn-hosted-webfonts">Displaying CDN-hosted webfonts</h2>
 <p>For remotely-hosted fonts,
 the <code>@font</code> annotation accepts three<span class="widont">&nbsp;</span>arguments:</p>
-<pre><code class="lang-scss">// @font font-key (list of, variants, to show)
-//   &lt;any html required for import&gt;
+<pre><code class="lang-scss">/// @font font-key (list of, variants, to show)
+///   &lt;any html required for import&gt;
 </code></pre>
 <ul>
 <li>The first argument is an optional one-word key
@@ -885,7 +885,7 @@ of font variants to display in the preview.
 If omitted, it defaults to all variants
 included as keys in the font map<span class="widont">&nbsp;</span>itself.</li>
 </ul>
-<pre><code class="lang-scss">// @font demo-local {woff2, woff, ttf}
+<pre><code class="lang-scss">/// @font demo-local {woff2, woff, ttf}
 </code></pre>
 <p>In order for this to work,
 you must specify a <code>fontpath</code>
