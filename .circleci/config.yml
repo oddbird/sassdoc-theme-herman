@@ -8,10 +8,25 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: herman-{{ checksum "yarn.lock" }}
+          keys:
+            - herman-yarn-{{ checksum "yarn.lock" }}
+            - herman-yarn-
+      - run:
+          name: Update yarn.lock [greenkeeper]
+          command: |
+            if [[ "${CIRCLE_BRANCH}" =~ greenkeeper\/.* ]]; then
+              yarn global add greenkeeper-lockfile@1 --prefix ~/.yarn
+              ~/.yarn/bin/greenkeeper-lockfile-update
+            fi
       - run:
           name: Install Dependencies
           command: yarn
+      - run:
+          name: Upload yarn.lock [greenkeeper]
+          command: |
+            if [[ "${CIRCLE_BRANCH}" =~ greenkeeper\/.* ]]; then
+              ~/.yarn/bin/greenkeeper-lockfile-upload
+            fi
       - run:
           name: Check that yarn.lock matches package.json
           command: |
@@ -21,21 +36,13 @@ jobs:
               exit 1
             fi
       - save_cache:
-          key: herman-{{ checksum "yarn.lock" }}
+          key: herman-yarn-{{ checksum "yarn.lock" }}
           paths:
             - "~/.cache/yarn"
       - save_cache:
           key: herman-node-modules-{{ checksum "yarn.lock" }}
           paths:
             - "~/herman/node_modules"
-      - deploy:
-          name: Update yarn.lock [greenkeeper]
-          command: |
-            if [[ "${CIRCLE_BRANCH}" =~ greenkeeper\/.* ]]; then
-              yarn global add greenkeeper-lockfile@1 --prefix ~/.yarn
-              ~/.yarn/bin/greenkeeper-lockfile-update
-              ~/.yarn/bin/greenkeeper-lockfile-upload
-            fi
 
   build-node-6:
     working_directory: ~/herman
@@ -44,7 +51,9 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: herman-node6-{{ checksum "yarn.lock" }}
+          keys:
+            - herman-node6-{{ checksum "yarn.lock" }}
+            - herman-node6-
       - run:
           name: Install Dependencies
           command: yarn
@@ -64,7 +73,9 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: herman-node-modules-{{ checksum "yarn.lock" }}
+          keys:
+            - herman-node-modules-{{ checksum "yarn.lock" }}
+            - herman-node-modules-
       - run:
           name: Set $PATH
           command: echo 'export PATH=~/herman/node_modules/.bin:$PATH' >> $BASH_ENV
@@ -82,7 +93,9 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: herman-node-modules-{{ checksum "yarn.lock" }}
+          keys:
+            - herman-node-modules-{{ checksum "yarn.lock" }}
+            - herman-node-modules-
       - run:
           name: Set $PATH
           command: echo 'export PATH=~/herman/node_modules/.bin:$PATH' >> $BASH_ENV
@@ -97,7 +110,9 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: herman-node-modules-{{ checksum "yarn.lock" }}
+          keys:
+            - herman-node-modules-{{ checksum "yarn.lock" }}
+            - herman-node-modules-
       - run:
           name: Set $PATH
           command: echo 'export PATH=~/herman/node_modules/.bin:$PATH' >> $BASH_ENV
@@ -135,7 +150,9 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: herman-node6-modules-{{ checksum "yarn.lock" }}
+          keys:
+            - herman-node6-modules-{{ checksum "yarn.lock" }}
+            - herman-node6-modules-
       - run:
           name: Set $PATH
           command: echo 'export PATH=~/herman/node_modules/.bin:$PATH' >> $BASH_ENV
