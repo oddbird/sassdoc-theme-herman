@@ -228,7 +228,7 @@ gulp.task('clienttest-watch', () => {
   }).start();
 });
 
-gulp.task('test', ['sasstest', 'jstest', 'clienttest']);
+gulp.task('test', ['sasstest', 'jstest']);
 
 gulp.task('browser-sync', cb => {
   browserSync.init(

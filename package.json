@@ -28,7 +28,7 @@
     "through2": "^2.0.3",
     "tinycolor2": "^1.4.1",
     "typogr": "^0.6.7",
-    "vinyl-fs": "^2.4.4"
+    "vinyl-fs": "^3.0.0"
   },
   "peerDependencies": {
     "sassdoc": "^2.5.0"
@@ -42,7 +42,7 @@
     "accoutrement-layout": "^3.0.2",
     "accoutrement-scale": "^5.0.1",
     "accoutrement-type": "^3.1.0",
-    "autoprefixer": "^7.1.6",
+    "autoprefixer": "^7.2.1",
     "babel-eslint": "^8.0.3",
     "babel-loader": "8.0.0-beta.0",
     "babel-minify-webpack-plugin": "^0.2.0",
@@ -84,18 +84,18 @@
     "mocha": "^4.0.1",
     "nyc": "^11.3.0",
     "postcss-loader": "^2.0.9",
-    "prettier": "^1.7.4",
+    "prettier": "^1.9.1",
     "sass-loader": "^6.0.6",
     "sass-true": "^3.0.2",
     "sassdoc": "^2.5.0",
     "sinon": "^4.1.1",
     "sinon-chai": "^2.14.0",
     "srcdoc-polyfill": "^1.0.0",
-    "webpack": "^3.9.1"
+    "webpack": "^3.10.0"
   },
   "resolutions": {
-    "browserslist": "^2.9.1",
     "cdocparser": "github:jgerigmeyer/CDocParser#preserve-nested-comments",
+    "browserslist": ">=2.4.0",
     "nunjucks": "^2.5.2"
   },
   "scripts": {
