@@ -77,8 +77,7 @@ describe('parse', function() {
       };
       parse.customCSS(file, this.enc, this.env);
       const actual = file.contents;
-      const expected =
-        '.foo { background: url("../../custom/fixtures/css/foo.png"); }';
+      const expected = '.foo { background: url("./fixtures/css/foo.png"); }';
 
       assert.deepEqual(actual.toString(), expected);
     });
@@ -90,8 +89,7 @@ describe('parse', function() {
       };
       parse.customCSS(file, this.enc, this.env);
       const actual = file.contents;
-      const expected =
-        '.foo { background: url(../../custom/fixtures/css/foo.png); }';
+      const expected = '.foo { background: url(./fixtures/css/foo.png); }';
 
       assert.deepEqual(actual.toString(), expected);
     });
@@ -109,7 +107,7 @@ describe('parse', function() {
       });
       parse.customCSS(file, this.enc, env);
       const actual = file.contents;
-      const expected = '.foo { @font-face { src: url(../../fonts/font.ttf); }}';
+      const expected = '.foo { @font-face { src: url(../fonts/font.ttf); }}';
 
       assert.deepEqual(actual.toString(), expected);
     });
