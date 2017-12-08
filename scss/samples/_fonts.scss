@@ -23,7 +23,7 @@
 /// using the `@font` annotation:
 ///
 /// ```scss
-/// // @font my-font (regular, bold)
+/// /// @font my-font (regular, bold)
 /// ```
 ///
 /// Let's look at a few examples…
@@ -37,8 +37,8 @@
 /// the `@font` annotation accepts three arguments:
 ///
 /// ```scss
-/// // @font font-key (list of, variants, to show)
-/// //   <any html required for import>
+/// /// @font font-key (list of, variants, to show)
+/// ///   <any html required for import>
 /// ```
 ///
 /// - The first argument is an optional one-word key
@@ -102,7 +102,7 @@ $demo-cdn: (
 ///   included as keys in the font map itself.
 ///
 /// ```scss
-/// // @font demo-local {woff2, woff, ttf}
+/// /// @font demo-local {woff2, woff, ttf}
 /// ```
 ///
 /// In order for this to work,

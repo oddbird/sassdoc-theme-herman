@@ -46,7 +46,7 @@ $brand-pink: hsl(330, 85%, 48%);
 /// using the `@colors` annotation:
 ///
 /// ```scss
-/// // @colors
+/// /// @colors
 /// ```
 ///
 /// The `@colors` annotation accepts an optional one-word key argument,
@@ -57,7 +57,7 @@ $brand-pink: hsl(330, 85%, 48%);
 /// used when adding this data to `$herman`.
 ///
 /// ```scss
-/// // @colors my-colors
+/// /// @colors my-colors
 /// ```
 ///
 /// By default, our color palettes display

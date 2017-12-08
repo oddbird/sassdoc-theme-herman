@@ -1640,12 +1640,13 @@ caw@^1.0.1:
     object-assign "^3.0.0"
     tunnel-agent "^0.4.0"
 
-cdocparser@^0.13.0:
-  version "0.13.0"
-  resolved "https://registry.yarnpkg.com/cdocparser/-/cdocparser-0.13.0.tgz#1ba98a1e1e1668e2bfb35d41761e9e4645d731ba"
+cdocparser@^0.13.0, "cdocparser@github:jgerigmeyer/CDocParser#preserve-nested-comments":
+  version "0.14.0"
+  resolved "https://codeload.github.com/jgerigmeyer/CDocParser/tar.gz/069dc00757c3494a7912fff309caab6c93bd2404"
   dependencies:
     escape-string-regexp "^1.0.2"
     lodash.assign "^2.4.1"
+    lodash.union "^3.1.0"
     strip-indent "^1.0.0"
 
 center-align@^0.1.1:
@@ -5656,13 +5657,42 @@ lodash._basecreatewrapper@~2.4.1:
     lodash._slice "~2.4.1"
     lodash.isobject "~2.4.1"
 
+lodash._baseflatten@^3.0.0:
+  version "3.1.4"
+  resolved "https://registry.yarnpkg.com/lodash._baseflatten/-/lodash._baseflatten-3.1.4.tgz#0770ff80131af6e34f3b511796a7ba5214e65ff7"
+  dependencies:
+    lodash.isarguments "^3.0.0"
+    lodash.isarray "^3.0.0"
+
+lodash._baseindexof@^3.0.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/lodash._baseindexof/-/lodash._baseindexof-3.1.0.tgz#fe52b53a1c6761e42618d654e4a25789ed61822c"
+
 lodash._basetostring@^3.0.0:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/lodash._basetostring/-/lodash._basetostring-3.0.1.tgz#d1861d877f824a52f669832dcaf3ee15566a07d5"
 
+lodash._baseuniq@^3.0.0:
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/lodash._baseuniq/-/lodash._baseuniq-3.0.3.tgz#2123fa0db2d69c28d5beb1c1f36d61522a740234"
+  dependencies:
+    lodash._baseindexof "^3.0.0"
+    lodash._cacheindexof "^3.0.0"
+    lodash._createcache "^3.0.0"
+
 lodash._basevalues@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/lodash._basevalues/-/lodash._basevalues-3.0.0.tgz#5b775762802bde3d3297503e26300820fdf661b7"
+
+lodash._cacheindexof@^3.0.0:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/lodash._cacheindexof/-/lodash._cacheindexof-3.0.2.tgz#3dc69ac82498d2ee5e3ce56091bafd2adc7bde92"
+
+lodash._createcache@^3.0.0:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/lodash._createcache/-/lodash._createcache-3.1.2.tgz#56d6a064017625e79ebca6b8018e17440bdcf093"
+  dependencies:
+    lodash._getnative "^3.0.0"
 
 lodash._createwrapper@~2.4.1:
   version "2.4.1"
@@ -5935,6 +5965,14 @@ lodash.templatesettings@^3.0.0:
   dependencies:
     lodash._reinterpolate "^3.0.0"
     lodash.escape "^3.0.0"
+
+lodash.union@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/lodash.union/-/lodash.union-3.1.0.tgz#a4a3066fc15d6a7f8151cce9bdfe63dce7f5bcff"
+  dependencies:
+    lodash._baseflatten "^3.0.0"
+    lodash._baseuniq "^3.0.0"
+    lodash.restparam "^3.0.0"
 
 lodash.uniq@^4.5.0:
   version "4.5.0"

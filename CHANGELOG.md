@@ -6,6 +6,8 @@
 - NEW: Support SassDoc [`googleAnalytics`][googleAnalytics] and
   [`trackingCode`][trackingCode] options --
   [#215](https://github.com/oddbird/sassdoc-theme-herman/issues/215)
+- CHANGE: Use forked version of CDocParser preserving `///` within comments --
+  [#212](https://github.com/oddbird/sassdoc-theme-herman/issues/212)
 
 [googleAnalytics]: http://sassdoc.com/customising-the-view/#google-analytics
 [trackingCode]: http://sassdoc.com/customising-the-view/#tracking-code

@@ -94,6 +94,7 @@
     "webpack": "^3.10.0"
   },
   "resolutions": {
+    "cdocparser": "github:jgerigmeyer/CDocParser#preserve-nested-comments",
     "browserslist": ">=2.4.0",
     "nunjucks": "^2.5.2"
   },

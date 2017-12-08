@@ -54,7 +54,7 @@ $xlarge: 28px;
 /// using the `@ratios` annotation:
 ///
 /// ```scss
-/// // @ratios my-ratios
+/// /// @ratios my-ratios
 /// ```
 ///
 /// The `@ratios` annotation accepts an optional one-word key argument,
@@ -94,7 +94,7 @@ $demo-ratios: (
 /// using the `@sizes` annotation:
 ///
 /// ```scss
-/// // @sizes {ruler}
+/// /// @sizes {ruler}
 /// ```
 ///
 /// The `@sizes` annotation accepts two optional arguments:
@@ -122,7 +122,7 @@ $demo-sizes: (
 
 /// ### Text Sizes
 /// ```scss
-/// // @sizes demo-sizes {text}
+/// /// @sizes demo-sizes {text}
 /// ```
 /// @sizes demo-sizes {text}
 /// @group demo_sizes
@@ -130,7 +130,7 @@ $demo-sizes: (
 
 /// ### Size Rulers
 /// ```scss
-/// // @sizes demo-sizes {ruler}
+/// /// @sizes demo-sizes {ruler}
 /// ```
 /// @sizes demo-sizes {ruler}
 /// @group demo_sizes
@@ -138,7 +138,7 @@ $demo-sizes: (
 
 /// ### Name/Value Only
 /// ```scss
-/// // @sizes demo-sizes {output-only}
+/// /// @sizes demo-sizes {output-only}
 /// ```
 /// @sizes demo-sizes {output-only}
 /// @group demo_sizes
