@@ -1,78 +1,68 @@
 // Navigation Styles
 // =================
 
+/// # Herman Navigation Component
+/// @group style-nav
 
-[data-nav-menu='small'] {
-  @include position(0 null);
-  box-shadow: 0 0 size('half-shim') color('shadow');
-  transform: translatex(-102%);
-  transition: transform 0.4s;
-  width: 100%;
 
-  &[aria-expanded='true'] {
-    transform: translatex(0);
+// Small Menu
+// ----------
+
+[data-nav-menu] {
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  width: auto;
+
+  @include below('nav-large') {
+    @include position(0 null 0 0);
+    box-shadow: 0 0 size('half-shim') color('shadow');
+    transform: translateX(-102%);
+    transition: transform 0.4s;
+
+    &[aria-expanded='true'] {
+      transform: translateX(0);
+    }
   }
 
-  @include below('nav-small') {
-    align-content: flex-start;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-
-  @include above('nav-small') {
-    width: auto;
-  }
-
-  @include above('page') {
-    display: none;
-  }
-}
-
-[data-nav-menu='large'] {
-  flex: 0 1 0;
-  margin-left: -100%;
-  transition: margin-left 0.4s;
-
-  &[aria-expanded='true'] {
-    margin-left: 0;
-  }
-
-  @include below('page') {
-    display: none;
+  @include above('nav-large') {
+    flex: 0 0 auto;
   }
 }
 
-[data-nav-toggle='small'] {
-  @include above('page') {
-    display: none;
-  }
-}
 
-[data-nav-toggle='large'] {
-  @include below('page') {
-    display: none;
-  }
-}
+// Toggles
+// -------
 
 [data-nav-toggle] {
-  fill: color('theme-dark');
+  color: color('action');
   padding: size('half-shim');
 
-  @include above('page') {
+  @include above('page-break') {
     padding-left: size('shim');
     padding-right:  size('shim');
   }
 
-  #{$focus} {
-    fill: color('focus');
+  @include above('nav-large') {
+    display: none;
+  }
+
+  &:focus,
+  &:hover,
+  &:active,
+  &[aria-pressed='true'] {
+    color: color('focus');
+    outline: 0;
   }
 }
 
 
+// Nav Items
+// ---------
+
 [data-sassdoc='nav-item'] {
   list-style: none;
-  margin-bottom: size('shim');
+  margin: size('half-shim') 0;
 
   @include below('nav-small') {
     width: 50%;
@@ -83,22 +73,31 @@
   }
 }
 
+
 // Nav Titles
 // ----------
+
 [data-sassdoc='nav-title'] {
   font-weight: bold;
-  margin-bottom: size('shim');
+  margin: size('half-shim') 0;
   width: 100%;
 }
 
 
 // Nav Subsections
 // ---------------
+
 [data-sassdoc='nav-subsection'] {
-  padding: size('shim') 0;
+  flex: 0 0 auto;
+  padding-bottom: size('gutter');
+
+  &:last-of-type {
+    flex: 1 0 auto;
+  }
 
   & + & {
     border-top: 1px solid color('theme-light');
+    padding-top: size('gutter');
   }
 }
 
@@ -155,3 +154,45 @@
     }
   }
 }
+
+
+// Footer Credit
+// -------------
+
+.footer-credit {
+  @include clearfix;
+  border-top: 1px solid color('theme-light');
+  flex: 0 0 auto;
+  font-size: size('xsmall');
+  line-height: size('rhythm');
+  padding-top: size('gutter');
+
+  span {
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+}
+
+
+.footer-icon {
+  #{$link} {
+    color: inherit;
+    float: left;
+    margin-right: size('half-shim');
+  }
+}
+
+
+.footer-link {
+  #{$link} {
+    color: color('background');
+    font-weight: bold;
+    text-decoration-color: transparent;
+  }
+
+  #{$focus} {
+    text-decoration-color: currentColor;
+  }
+}
+

@@ -1,0 +1,39 @@
+{% import 'item/annotation.macros.njk' as annotation %}
+{% import 'item/example.macros.njk' as example %}
+{% import 'item/macros.njk' as show %}
+{% import 'item/preview.macros.njk' as preview %}
+{% import 'utility.macros.njk' as utility %}
+
+{% set slug = item.context.name %}
+{% set id = [type, slug]|join('--')|urlencode if (type and slug) else '' %}
+{% set display_private = display and display.access and ('private' in display.access) %}
+{% set display_alias = display and display.alias %}
+
+<section class="item" {{ utility.attr_if('id', id) }}>
+  {% if type == 'prose' %}
+    {{ show.prose(item) }}
+  {% else %}
+    {{ show.heading(item, type, id, display) }}
+  {% endif %}
+
+  {{ annotation.param_or_prop(
+    params_data=item.parameter,
+    props_data=item.property,
+    content_data=item.content,
+    return_data=item.return,
+    output_data=item.output,
+    throw_data=item.throw
+    ) }}
+
+  {{ example.list(item.example) }}
+
+  {{ annotation.related(item, display_private) }}
+  {{ annotation.require_or_used(item, display_private, display_alias) }}
+  {{ annotation.todo(item) }}
+
+  {{ preview.icons(item) }}
+  {{ preview.show_previews(
+    data=sassjson,
+    item=item
+  ) }}
+</section>

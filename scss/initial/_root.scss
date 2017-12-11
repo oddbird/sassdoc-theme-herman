@@ -4,52 +4,11 @@
 :root {
   @include font-family('sans');
   font-size: size('root');
-  font-size: calc(size('root') + 0.25vw); //sass-lint:disable-line no-duplicate-properties
+  font-size: size('rel-root'); //sass-lint:disable-line no-duplicate-properties
   line-height: ratio('herman');
 }
 
 
-// Links
-// -----
-
-[href] {
-  #{$link} {
-    color: color('action');
-    text-decoration: none;
-  }
-
-  #{$focus} {
-    color: color('focus');
-    text-decoration: underline;
-  }
-}
-
-
-// Code
-// ----
-pre,
-code {
-  @include font-family('code');
-  font-size: size('code');
-}
-
-code {
-  background-color: color('slight');
-  border-radius: 3px;
-  box-shadow: 0 0 size('half-shim') color('code-shadow') inset;
-  color: color('code');
-  display: inline-block;
-  padding: 0 size('half-shim');
-
-  pre & {
-    background-color: transparent;
-    border-radius: 0;
-    box-shadow: none;
-    display: block;
-    padding: 0;
-  }
-}
-
-.visually-hidden {
+.is-hidden {
   @include is-hidden;
 }

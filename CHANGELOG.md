@@ -3,6 +3,57 @@
 
 ## Unreleased
 
+- NEW: Support SassDoc [`googleAnalytics`][googleAnalytics] and
+  [`trackingCode`][trackingCode] options --
+  [#215](https://github.com/oddbird/sassdoc-theme-herman/issues/215)
+- CHANGE: Use forked version of CDocParser preserving `///` within comments --
+  [#212](https://github.com/oddbird/sassdoc-theme-herman/issues/212)
+- BUGFIX: Fix paths to custom assets referenced from `customCSS`.
+
+[googleAnalytics]: http://sassdoc.com/customising-the-view/#google-analytics
+[trackingCode]: http://sassdoc.com/customising-the-view/#tracking-code
+
+
+## 1.0.0-rc.6: 2017-12-04
+
+- BUGFIX: Fix search result page links.
+
+
+## 1.0.0-rc.5: 2017-12-04
+
+- BUGFIX: Fix fetching site-search JSON file.
+
+
+## 1.0.0-rc.4: 2017-12-04
+
+- BUGFIX: Fix broken site-search action attribute.
+- CHANGE: Hide Herman watermark if SassDoc `display.watermark` is `false`.
+
+
+## 1.0.0-rc.3: 2017-11-30
+
+- BUGFIX: Correct for overzealous npm-ignoring (fixes missing scss utilities).
+
+
+## 1.0.0-rc.2: 2017-11-30
+
+- NEW: Add site-wide search --
+  [#28](https://github.com/oddbird/sassdoc-theme-herman/issues/28)
+- CHANGE: Bundle static assets with Webpack; precompile JS with Babel --
+  [#205](https://github.com/oddbird/sassdoc-theme-herman/issues/205)
+- BREAKING: Remove `@preview` annotation, split it into distinct `@colors`,
+  `@sizes`, `@ratios` annotations. `@colors`, `@ratios`, and `@sizes`
+  annotations accept optional one-word key argument instead of
+  semicolon-separated `key:value` arguments. `@sizes` still accepts `style`
+  argument, now in curly-brackets (`{...}`). `count` argument removed from
+  `@ratios` annotation --
+  [#206](https://github.com/oddbird/sassdoc-theme-herman/issues/206)
+- CHANGE: `@font` annotation accepts font name (first argument) without
+  being wrapped in `'` or `"`.
+
+
+## 1.0.0-rc.1: 2017-11-24
+
 - NEW: Add additional files (parsed as Markdown) with `extraDocs` option --
   [#117](https://github.com/oddbird/sassdoc-theme-herman/issues/117)
 - CHANGE: JSON-export functionality is now built in
@@ -28,6 +79,10 @@
   (only included in rendered `@example` annotations).
 - BREAKING: Nest `templatepath` and `nunjucksEnv` options under new `nunjucks`
   options object: `nunjucks.templatepath` and `nunjucks.environment`.
+- NEW: Add attribution/link to Herman/OddBird in nav footer --
+  [#154](https://github.com/oddbird/sassdoc-theme-herman/issues/154)
+- CHANGE: Use Herman logo for favicon. --
+  [#155](https://github.com/oddbird/sassdoc-theme-herman/issues/155)
 
 
 ## 1.0.0-alpha.15: 2017-10-30

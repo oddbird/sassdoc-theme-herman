@@ -1,12 +1,13 @@
-window.Herman = (function init(Herman, $) {
-  'use strict';
-  $(() => {
-    window.hljs.initHighlighting();
-    Herman.initializeToggles();
-    Herman.initializeTabs();
-    Herman.initializeIframes();
-    Herman.initializePageFilters();
-  });
+import hljs from 'vendor/highlight';
 
-  return Herman;
-})(window.Herman || {}, window.jQuery);
+import * as base from './base';
+
+$(() => {
+  window.$ = $;
+
+  hljs.initHighlighting();
+  base.initializeToggles();
+  base.initializeIframes();
+  base.initializeNav();
+  base.initializePageFilters();
+});

@@ -62,7 +62,7 @@ for dependencies or other third-party integrations.
 - Default: `['hex', 'rgb', 'hsl']`
 
 Configures which color value formats are shown
-when using the [`@preview color-palette` annotation][color-preview].
+when using the [`@colors` annotation][color-preview].
 Valid options: `hex`, `rgb/rgba`, `hsl/hsla`
 
 [color-preview]: http://oddbird.net/herman/docs/demo_colors.html
@@ -183,8 +183,8 @@ Container for the following sass-related options:
 - Type: `String`
 - Default: `''`
 
-*Required if using [`@font`][font-docs] or [`@preview`][color-preview]
-annotations.*
+*Required if using [`@font`][font-docs], [`@colors`][color-preview],
+[`@ratios`][ratio-preview], or [`@sizes`][size-preview] annotations.*
 
 Relative path to a `sass-json file`
 (created with the [`herman-export` mixin][export-mixin]).
@@ -194,6 +194,8 @@ and used to display colors, fonts, ratios, and sizes.
 See [Exporting Styles to JSON][export].
 
 [font-docs]: http://oddbird.net/herman/docs/demo_fonts.html
+[ratio-preview]: http://oddbird.net/herman/docs/demo_sizes.html#preview-ratios
+[size-preview]: http://oddbird.net/herman/docs/demo_sizes.html#preview-sizes
 [export]: http://oddbird.net/herman/docs/api_json-export.html
 [export-mixin]: http://oddbird.net/herman/docs/api_json-export.html#mixin--herman-export
 

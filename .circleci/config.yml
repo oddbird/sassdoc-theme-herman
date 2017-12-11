@@ -1,19 +1,32 @@
 version: 2
 jobs:
+
   build:
     working_directory: ~/herman
     docker:
-      - image: node:8
+      - image: circleci/node:8-browsers
     steps:
       - checkout
       - restore_cache:
-          key: herman-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          keys:
+            - herman-yarn-{{ checksum "yarn.lock" }}
+            - herman-yarn-
+      - run:
+          name: Update yarn.lock [greenkeeper]
+          command: |
+            if [[ "${CIRCLE_BRANCH}" =~ greenkeeper\/.* ]]; then
+              yarn global add greenkeeper-lockfile@1 --prefix ~/.yarn
+              ~/.yarn/bin/greenkeeper-lockfile-update
+            fi
       - run:
           name: Install Dependencies
           command: yarn
       - run:
-          name: Set $PATH
-          command: echo 'export PATH=~/herman/node_modules/.bin:$PATH' >> $BASH_ENV
+          name: Upload yarn.lock [greenkeeper]
+          command: |
+            if [[ "${CIRCLE_BRANCH}" =~ greenkeeper\/.* ]]; then
+              ~/.yarn/bin/greenkeeper-lockfile-upload
+            fi
       - run:
           name: Check that yarn.lock matches package.json
           command: |
@@ -22,49 +35,154 @@ jobs:
               echo ">> yarn.lock is out of date, run \"yarn\""
               exit 1
             fi
-      - run:
-          name: Install NVM
-          command: wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
       - save_cache:
-          key: herman-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          key: herman-yarn-{{ checksum "yarn.lock" }}
           paths:
             - "~/.cache/yarn"
-            - "~/.nvm"
+      - save_cache:
+          key: herman-node-modules-{{ checksum "yarn.lock" }}
+          paths:
+            - "~/herman/node_modules"
+
+  build-node-6:
+    working_directory: ~/herman
+    docker:
+      - image: node:6
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - herman-node6-{{ checksum "yarn.lock" }}
+            - herman-node6-
+      - run:
+          name: Install Dependencies
+          command: yarn
+      - save_cache:
+          key: herman-node6-{{ checksum "yarn.lock" }}
+          paths:
+            - "~/.cache/yarn"
+      - save_cache:
+          key: herman-node6-modules-{{ checksum "yarn.lock" }}
+          paths:
+            - "~/herman/node_modules"
+
+  lint:
+    working_directory: ~/herman
+    docker:
+      - image: circleci/node:8-browsers
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - herman-node-modules-{{ checksum "yarn.lock" }}
+            - herman-node-modules-
+      - run:
+          name: Set $PATH
+          command: echo 'export PATH=~/herman/node_modules/.bin:$PATH' >> $BASH_ENV
       - run:
           name: Lint JS
           command: gulp eslint
       - run:
           name: Lint Sass
           command: gulp sasslint
+
+  test-sass:
+    working_directory: ~/herman
+    docker:
+      - image: circleci/node:8-browsers
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - herman-node-modules-{{ checksum "yarn.lock" }}
+            - herman-node-modules-
+      - run:
+          name: Set $PATH
+          command: echo 'export PATH=~/herman/node_modules/.bin:$PATH' >> $BASH_ENV
       - run:
           name: Test Sass
           command: gulp sasstest
+
+  test-js:
+    working_directory: ~/herman
+    docker:
+      - image: circleci/node:8-browsers
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - herman-node-modules-{{ checksum "yarn.lock" }}
+            - herman-node-modules-
       - run:
-          name: Run JS Tests [node latest]
+          name: Set $PATH
+          command: echo 'export PATH=~/herman/node_modules/.bin:$PATH' >> $BASH_ENV
+      - run:
+          name: Run JS Tests
+          command: gulp jstest
+      - run:
+          name: Run Client JS Tests
+          command: gulp clienttest
+      - run:
+          name: Report Test Coverage
           command: |
-            gulp jstest
-            yarn coveralls
+            nyc report --reporter=text-lcov | coveralls
+            nyc report --reporter=text-lcov --temp-directory ./jscov/client/ | coveralls
+          environment:
+            COVERALLS_PARALLEL: 'true'
       - run:
-          name: Run Tests [node 6]
+          name: Check Test Coverage
           command: |
-            export NVM_DIR="$HOME/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-            nvm install 6.2.2
-            yarn install --force
-            gulp jstest
-      - run:
-          name: Check JS Test Coverage
-          command: nyc check-coverage --statements=100 --functions=100 --branches=100 --lines=100
+            nyc check-coverage
+            nyc check-coverage --temp-directory ./jscov/client/
       - deploy:
-          name: Update yarn.lock [greenkeeper]
-          command: |
-            if [[ "${CIRCLE_BRANCH}" =~ greenkeeper\/.* ]]; then
-              yarn global add greenkeeper-lockfile@1 --prefix ~/.yarn
-              ~/.yarn/bin/greenkeeper-lockfile-update
-              ~/.yarn/bin/greenkeeper-lockfile-upload
-            fi
+          name: Notify Coveralls
+          command: curl -k "https://coveralls.io/webhook?repo_token=${COVERALLS_REPO_TOKEN}" -d "payload[build_number]=${CIRCLE_BUILD_NUM}&payload[status]=done"
       - store_artifacts:
           path: jscov
           destination: js-reports
       - store_test_results:
           path: jscov
+
+  test-node-6:
+    working_directory: ~/herman
+    docker:
+      - image: node:6
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - herman-node6-modules-{{ checksum "yarn.lock" }}
+            - herman-node6-modules-
+      - run:
+          name: Set $PATH
+          command: echo 'export PATH=~/herman/node_modules/.bin:$PATH' >> $BASH_ENV
+      - run:
+          name: Run JS Tests [node 6]
+          command: gulp jstest
+      - run:
+          name: Check Test Coverage [node 6]
+          command: nyc check-coverage
+      - store_artifacts:
+          path: jscov
+          destination: js-reports
+      - store_test_results:
+          path: jscov
+
+workflows:
+  version: 2
+  build-and-test:
+    jobs:
+      - build
+      - build-node-6
+      - lint:
+          requires:
+            - build
+      - test-sass:
+          requires:
+            - build
+      - test-js:
+          requires:
+            - build
+      - test-node-6:
+          requires:
+            - build-node-6

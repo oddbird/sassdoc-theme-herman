@@ -2,7 +2,7 @@
 // =============
 
 
-/// ## Documenting colors and rendering palettes
+/// # Documenting colors
 ///
 /// Whether you store colors as individual variables
 /// or group them into a map,
@@ -32,19 +32,24 @@ $brand-pink: hsl(330, 85%, 48%);
 /// we'll want to combine them into a map
 /// of name/value pairs.
 /// Sass does not provide any shortcuts for automating this step,
-/// or removing the duplication.
+/// or removing the duplication,
+/// but you can use a tool like our [Accoutrement-Color][color]
+/// to store and access colors
+/// directly in a Herman-friendly map.
+///
+/// [color]: http://oddbird.net/accoutrement-color/
 ///
 /// Create as many maps as you like
 /// to organize different palettes --
 /// primary, secondary, button-colors, etc.
 /// Each map will be displayed individually,
-/// using the `@preview color-palette` annotation:
+/// using the `@colors` annotation:
 ///
 /// ```scss
-/// // @preview color-palette
+/// /// @colors
 /// ```
 ///
-/// The `color-palette` preview accepts an optional `key` argument,
+/// The `@colors` annotation accepts an optional one-word key argument,
 /// which defaults to the map-variable name.
 /// That key will be used to access the data from JSON,
 /// so it doesn't matter what key is used,
@@ -52,7 +57,7 @@ $brand-pink: hsl(330, 85%, 48%);
 /// used when adding this data to `$herman`.
 ///
 /// ```scss
-/// // @preview color-palette; key: my-colors
+/// /// @colors my-colors
 /// ```
 ///
 /// By default, our color palettes display
@@ -68,7 +73,7 @@ $brand-pink: hsl(330, 85%, 48%);
 ///     - hsl
 /// ```
 ///
-/// @preview color-palette
+/// @colors
 /// @group demo_colors
 $demo-colors: (
   'brand-blue': $brand-blue,
@@ -101,7 +106,7 @@ $demo-colors: (
 /// - The second argument sets a `key` name
 ///   for accessing this particular group of colors.
 ///   The `herman-add` key should match
-///   the key provided to `@preview color-palette`.
+///   the key provided to `@colors`.
 /// - The third argument provides the actual map of data
 ///   to be added to the `$herman` export map.
 ///
@@ -159,26 +164,28 @@ $demo-noncolors: (
 /// In order to export real color data to Herman,
 /// we want to run every value in our map
 /// through the color function before exporting.
-/// `herman-add` accepts a final variable-length argument
-/// for calling a function on each value of the map.
-/// Pass in a function name (Sass 3.4-),
+/// `herman-add` accepts additional arguments at the end,
+/// for passing each map-value through a function.
+/// Provide a function name (Sass 3.4-),
 /// or first-class function (Sass 3.5+)
-/// along with any additional arguments that function might need:
+/// along with any additional arguments required for that function.
 ///
-/// ```scss
-///  $color-function: get-function('color');
-///  @include herman-add('colors', demo-noncolors, $demo-noncolors, $color-function, $args…);
-/// ```
+/// @colors demo-noncolors
+/// @example scss
+///   $herman: ();
+///   $demo-noncolors: (
+///     'light-gray': 'brand-blue' ('tint': 80%, 'desaturate': 80%),
+///     'gray': 'brand-blue' ('desaturate': 80%),
+///     'black': 'brand-blue' ('shade': 30%, 'desaturate': 80%),
+///   );
 ///
-/// The `color` function will be called on each value
-/// before adding it to our `$herman` map.
-/// The call happens in this format:
+///   @include herman-add(
+///     'colors', 'demo-noncolors', $demo-noncolors,
+///     'color' // function
+///   );
 ///
-/// ```scss
-/// 'color-name': color($value, $args…),
-/// ```
+///   /* #{$herman} */
 ///
-/// @preview color-palette; key: demo-noncolors
 /// @group demo_colors
 /// @link http://oddbird.net/accoutrement-color Accoutrement-Color
 @include herman-add('colors', 'demo-noncolors', $demo-noncolors, 'color');

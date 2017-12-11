@@ -1,0 +1,78 @@
+{# Utility Macros #}
+
+
+{% macro attr_if(attr, value) %}
+  {%- if value === true -%}
+    {{ attr }}
+  {%- elif value -%}
+    {{ attr }}="{{ value }}"
+  {%- endif -%}
+{% endmacro %}
+
+
+{% macro show_attrs(attrs) %}
+  {%- for name, value in attrs.items() %}{{ attr_if(name, value) }}{% endfor -%}
+{% endmacro %}
+
+
+{% macro link_if(content=none, url=none, attrs={}) -%}
+  {%- set content = caller() if caller else content -%}
+  {%- if url -%}
+    <a href="{{ url }}" {{ show_attrs(attrs) }}>{{ content|trim() }}</a>
+  {%- else -%}
+    <span {{ show_attrs(attrs) }}>{{ content|trim() }}</span>
+  {%- endif -%}
+{%- endmacro %}
+
+
+{# SVG Icon #}
+{% macro icon(name, alt=none, size=none, class=none) %}
+  <svg data-icon="{{ name }}" {{ attr_if('data-icon-size', size) }} {{ attr_if('class', class) }}>
+    {%- if alt -%}
+      <title>{{ alt }}</title>
+    {%- endif -%}
+    <use xlink:href="#icon-{{ name }}" />
+  </svg>
+{% endmacro %}
+
+
+{# Pre-Formated & Highlighted Code Block #}
+{% macro code_block(language=none, content=none, description=none) %}
+  {% set content = caller() if caller else content %}
+
+  {% if content and (content != '') %}
+    <div class="code-block">
+      {% if language or description %}
+        <div class="code-header">
+          <span class="code-language">
+            {{ language }}
+          </span>
+
+          {% if description %}
+            <span class='code-description'>
+              {{ description|striptags }}
+            </span>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      {% set language = 'jinja' if language == 'njk' else language %}
+      {% set language = ['lang', language]|join('-') if language !== none %}
+      <pre data-sassdoc="hljs"><code{% if language %} class="{{ language }}"{% endif %}>{{ content|escape|safe }}</code></pre>
+    </div>
+  {% endif %}
+{% endmacro %}
+
+
+{# Toggle collapsible elements (see `static/js/app/base.js`) #}
+{% macro toggle_button(id, expanded=false, button=false, synced=false) -%}
+  data-toggle="button" aria-controls="{{ id }}" aria-pressed="{{ 'true' if expanded else 'false' }}"{% if button %} type="button"{% else %} role="button"{% endif %} data-toggle-synced="{{ 'true' if synced else 'false' }}"
+{%- endmacro %}
+
+{% macro toggle_target(id, expanded=false, auto_closing=false, auto_closing_on_any_click=false, auto_closing_exception=none) -%}
+  data-toggle="target" id="{{ id }}" data-target-id="{{ id }}" aria-expanded="{{ 'true' if expanded else 'false' }}" data-auto-closing="{{ 'true' if (auto_closing or auto_closing_on_any_click) else 'false' }}" data-auto-closing-on-any-click="{{ 'true' if auto_closing_on_any_click else 'false' }}"{% if auto_closing_exception %} data-auto-closing-exception="{{ auto_closing_exception }}"{% endif %}
+{%- endmacro %}
+
+{% macro toggle_close(id) -%}
+  data-toggle="close" aria-controls="{{ id }}"
+{%- endmacro %}

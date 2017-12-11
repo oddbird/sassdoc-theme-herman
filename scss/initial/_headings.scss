@@ -9,6 +9,7 @@
   align-items: baseline;
   display: flex;
   font-size: size('h1');
+  font-weight: bold;
   margin-left: auto;
   margin-right: auto;
 }
@@ -19,11 +20,6 @@
 
   &,
   #{$link} {
-    color: color('theme-dark');
-  }
-
-  #{$focus} {
-    color: color('focus');
     text-decoration: none;
   }
 }

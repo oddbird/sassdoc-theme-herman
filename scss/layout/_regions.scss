@@ -9,6 +9,7 @@
 
 // App
 // ---
+
 [data-sassdoc-region='app'] {
   display: flex;
   flex-direction: column;
@@ -24,13 +25,15 @@
   flex: 1 1 auto;
   position: relative;
 
-  @include above('page') {
+  @include above('page-break') {
     justify-content: flex-end;
   }
 }
 
+
 // Navigation
 // ----------
+
 [data-nav-menu] {
   @include contrasted('theme-dark');
   @include z-index('sidebar');
@@ -40,7 +43,7 @@
 }
 
 [data-sassdoc-region='breadcrumb'] {
-  background: color('theme-light');
+  background: color('callout');
   padding: size('shim') size('flex-gutter');
 
   a,
@@ -53,16 +56,17 @@
 
 // Page
 // ----
-[role='main'] {
+
+[data-sassdoc-region='main'] {
   @include z-index('main');
   width: 100%;
 
-  @include above('page') {
+  @include above('page-break') {
     overflow: hidden;
   }
 }
 
-[data-sassdoc-region='main'] {
-  padding: size('gutter') size('flex-gutter');
+[data-sassdoc-page] {
+  padding: size('flex-gutter');
   position: relative;
 }

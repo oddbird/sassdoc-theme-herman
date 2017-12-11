@@ -2,22 +2,28 @@
 // =====================
 
 
-/// ## Documenting fonts & displaying specimens
+/// # Documenting fonts
 ///
-/// Whether you use a webfont CDN like Typkit and Google Fonts,
+/// Whether you use a webfont CDN like Typekit/Google Fonts,
 /// or locally-hosted font files,
 /// Herman can document and display your font-specimens.
-/// In the end, Herman will need a map
-/// converted to JSON --
+/// In order to do that, Herman will need a JSON map of font data --
 /// but we'll start with individual font families,
 /// one hosted on a CDN, and the other hosted locally.
-/// Then we can build the export from there.
+/// Then we can build and export.
+///
+/// We store all font data in maps,
+/// with the syntax used by both Herman (for JSON exporting)
+/// and our [Accoutrement-Type][type] toolkit.
+/// [See the font map documentation for details »][font-docs]
+///
+/// [font-docs]: http://oddbird.net/herman/docs/api_json-export.html#fonts
 ///
 /// Each font family will be displayed individually,
 /// using the `@font` annotation:
 ///
 /// ```scss
-/// // @font 'my-font' (regular, bold)
+/// /// @font my-font (regular, bold)
 /// ```
 ///
 /// Let's look at a few examples…
@@ -30,8 +36,14 @@
 /// For remotely-hosted fonts,
 /// the `@font` annotation accepts three arguments:
 ///
-/// - The first argument (in single-quotes or double-quotes) is the `key`
-///   that will be used to access the data from JSON,
+/// ```scss
+/// /// @font font-key (list of, variants, to show)
+/// ///   <any html required for import>
+/// ```
+///
+/// - The first argument is an optional one-word key
+///   which defaults to the map-variable name.
+///   That key will be used to access the data from JSON,
 ///   so it doesn't matter what key is used --
 ///   as long as the key given here matches the group-name
 ///   used when adding this data to `$herman`.
@@ -51,17 +63,13 @@
 ///
 /// [examples]: http://oddbird.net/herman/docs/demo_examples.html
 ///
-/// We've stored this data in a map,
-/// with the syntax used by both Herman (for JSON exporting)
-/// and our [Accoutrement-Type][type] toolkit.
-///
 /// [type]: http://oddbird.net/accoutrement-type/
 ///
 /// @example scss
-///   // @font 'demo-cdn' (regular, bold, bold italic)
+///   // @font demo-cdn (regular, bold, bold italic)
 ///   //   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" rel="stylesheet">
 ///
-/// @font 'demo-cdn' (regular, bold, bold italic)
+/// @font (regular, bold, bold italic)
 ///   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" rel="stylesheet">
 /// @group demo_fonts
 $demo-cdn: (
@@ -76,8 +84,9 @@ $demo-cdn: (
 /// For locally-hosted fonts,
 /// the `@font` annotation accepts three arguments:
 ///
-/// - The first argument (in single-quotes or double-quotes) is the `key`
-///   that will be used to access the data from JSON,
+/// - The first argument is an optional one-word key
+///   which defaults to the map-variable name.
+///   That key will be used to access the data from JSON,
 ///   so it doesn't matter what key is used --
 ///   as long as the key given here matches the group-name
 ///   used when adding this data to `$herman`.
@@ -93,7 +102,7 @@ $demo-cdn: (
 ///   included as keys in the font map itself.
 ///
 /// ```scss
-/// // @font 'demo-local' {woff2, woff, ttf}
+/// /// @font demo-local {woff2, woff, ttf}
 /// ```
 ///
 /// In order for this to work,
@@ -107,7 +116,7 @@ $demo-cdn: (
 ///   fontpath: 'fonts/'
 /// ```
 ///
-/// @font 'demo-local' {woff2, woff, ttf}
+/// @font {woff2, woff, ttf}
 /// @group demo_fonts
 $demo-local: (
   'name': 'rockingham',

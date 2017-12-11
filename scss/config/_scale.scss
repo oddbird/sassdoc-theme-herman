@@ -2,17 +2,21 @@
 // ==============
 
 
+/// # Herman Config: Sizes
+/// @group config-scale
+/// @link http://oddbird.net/accoutrement-scale/docs/
+///   Accoutrement Scale
+
+
 // Text Ratios
 // -----------
 /// A set of standard ratios
 /// for creating text rhythm and modular-scales.
 ///
 /// @group config-scale
-/// @preview ratios
-/// @link http://oddbird.net/accoutrement-scale/docs/
-///   Accoutrement Scale
+/// @ratios
 $text-ratios: (
-  'herman': 1.4
+  'line-height': 1.4
 );
 
 @include config('ratios', 'text-ratios', $text-ratios);
@@ -23,29 +27,28 @@ $text-ratios: (
 /// A set of standard text sizes.
 ///
 /// @group config-scale
-/// @preview sizes
-/// @link http://oddbird.net/accoutrement-scale/docs/
-///   Accoutrement Scale
+/// @sizes
 $text-sizes: (
   'root': 18px,
+  'rel-root': calc(16px + 0.125vw),
 
   'large-rem': 20px ('convert-units': 'rem'),
   'base-rem': 'root' ('convert-units': 'rem'),
   'small-rem': 16px ('convert-units': 'rem'),
   'xsmall-rem': 'base-rem' ('times': 0.75),
 
+  'xlarge': calc(%s + %s) ('base-rem', 2vw),
   'large': calc(%s + %s) ('base-rem', 1vw),
   'medium': calc(%s + %s) ('base-rem', 0.5vw),
   'base': calc(%s + %s) ('small-rem', 0.5vw),
   'small': calc(%s + %s) ('small-rem', 0.25vw),
   'xsmall': calc(%s + %s) ('xsmall-rem', 0.25vw),
-  'code': 'xsmall',
-  'small-code': calc(%s + %s) ('base-rem' ('times': 0.675), 0.25vw),
 
-  'h1': calc(%s + %s) ('base-rem', 2.5vw),
-  'h2': calc(%s + %s) ('base-rem', 2vw),
-  'h3': 'large',
+  'h1': 'xlarge',
+  'h2': 'large',
+  'h3': 'medium',
   'quote': 'medium',
+  'pre': 'xsmall',
 );
 
 @include config('sizes', 'text-sizes', $text-sizes);
@@ -56,16 +59,16 @@ $text-sizes: (
 /// A set of standard spacing sizes.
 ///
 /// @group config-scale
-/// @preview sizes; style: ruler
-/// @link http://oddbird.net/accoutrement-scale/docs/
-///   Accoutrement Scale
+/// @sizes {ruler}
 $spacing-sizes: (
-  'rhythm': 'root' ('herman': 1, 'convert-units': 'rem'),
+  'rhythm': 'root' ('line-height': 1, 'convert-units': 'rem'),
   'gutter': 'rhythm',
+  'gutter-minus': 'gutter' ('times': 0.75),
+  'gutter-plus': 'gutter' ('times': 1.5),
+
   'flex-gutter': calc(%s + %s) ('shim', 2.5vw),
-  'double-gutter': 'gutter' ('times': 2),
-  'spacer': 'gutter' ('times': 3),
-  'double-spacer': 'spacer' ('times': 2),
+  'spacer': calc(%s + %s) ('gutter' ('times': 3), 2.5vw),
+
   'shim': 'gutter' ('times': 0.5),
   'half-shim': 'shim' ('times': 0.5),
   'quarter-shim': 'shim' ('times': 0.25)
@@ -80,22 +83,22 @@ $spacing-sizes: (
 /// that can be applied to various components.
 ///
 /// @group config-scale
-/// @preview sizes; style: output-only
-/// @link http://oddbird.net/accoutrement-scale/docs/
-///   Accoutrement Scale
+/// @sizes {output-only}
 $pattern-sizes: (
   'border': 8px,
   'page': 50rem,
 
-  'nav-small': 21rem,
-  'nav-medium': 32rem,
+  'page-break': 50em,
+  'nav-small': 21em,
+  'nav-medium': 32em,
+  'nav-large': 65em,
 
-  'project-link-nav': 36rem,
   'specimen': 'rhythm' ('times': 3),
   'color-preview': calc(15em + 0.25vw), // trial and error…
   'color-swatch': 'rhythm' ('times': 4),
   'icon': 28px,
   'nav-underline': 4px,
+  'footer-logo': 'rhythm' ('times': 2),
 );
 
 @include config('sizes', 'pattern-sizes', $pattern-sizes);

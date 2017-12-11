@@ -1,0 +1,338 @@
+{% import 'utility.macros.njk' as utility %}
+{% import 'item/annotation.macros.njk' as annotation %}
+{% import 'item/macros.njk' as show %}
+
+
+{#
+  Show Previews
+  -------------
+  Call the requested previews with the appropriate JSON data.
+#}
+{% macro show_previews(data, item) %}
+  {% if data and item -%}
+    {%- set args = item.font or item.colors or item.ratios or item.sizes -%}
+    {%- set key = args.key or item.context.origName or item.context.name -%}
+
+    {%- if item.font %}
+      {{ font_specimen(key, data.fonts[key], item.iframed) }}
+    {% endif -%}
+
+    {%- if item.colors %}
+      {{ color_palette(data.colors[key]) }}
+    {% endif -%}
+
+    {%- if item.ratios %}
+      {{ ratios(data.ratios[key]) }}
+    {% endif -%}
+
+    {%- if item.sizes %}
+      {{ sizes(data.sizes[key], args) }}
+    {%- endif -%}
+  {%- endif %}
+{% endmacro %}
+
+
+{#
+  Color Palette
+  -------------
+  Display color palettes based on JSON map output.
+#}
+{% macro color_palette(data) %}
+  {% call show.item_section('color-palette', 'Color Previews') %}
+    <div class="color-palette">
+      {% for value, items in data|list|groupby('value') %}
+        <div class="color-preview">
+          <div class="color-swatch">
+            <div class="transparency-grid"></div>
+            <div class="color-overlay" style="background-color: {{ value }};"></div>
+          </div>
+          <div class="color-info">
+            <strong class="color-name">
+              {% for item in items %}
+                <span class="color-name-option">{{ item.key }}{% if not loop.last %},&nbsp;{% endif %}</span>
+              {% endfor %}
+            </strong>
+            {% set color = value|colors %}
+            {% if color %}
+              {% for format in ['hex', 'rgb', 'hsl'] %}
+                {% if color[format] %}
+                  <code class="color-value">{{ color[format] }}</code>
+                {% endif %}
+              {% endfor %}
+            {% else %}
+              <code class="color-value">{{ value }}</code>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% endcall %}
+{% endmacro %}
+
+
+{#
+  Font Specimen
+  -------------
+  Display all font-family specimens,
+  including multiple variants.
+
+  @prop {String} name -
+    Title for the font-family being displayed.
+  @prop {Dict} data -
+    All the available data on a given font,
+    derived from the Sass JSON export.
+  @prop {String} iframed -
+    Rendered font specimen iframe content.
+#}
+{% macro font_specimen(name, data, iframed) %}
+  {% set supplement = utility.link_if(data.name or name, data.source) %}
+  {% set supplement = supplement + ' (' + name + ')' if (data.name and data.name != name) else supplement %}
+
+  {% call show.item_section(
+    slug='font-specimen',
+    title='Font Preview',
+    supplement=supplement
+    ) %}
+
+    {% if data.stack %}
+      {% set family = [data.name or name, data.stack]|join(',') %}
+      {% set family = 'font-family: ' + font_names(family) + ';' %}
+      {{ utility.code_block(language='css', content=family|safe) }}
+    {% endif %}
+
+    {% if iframed %}
+      <iframe class="render-specimen" srcdoc="{{ iframed }}" width="100%" height="0"></iframe>
+    {% endif %}
+  {% endcall %}
+{% endmacro %}
+
+
+
+{#
+  Specimen Variant
+  ----------------
+  Display a single specimen variant.
+
+  @prop {String} family -
+    A CSS-ready value for font-family,
+    combining both the font name, and fallback font-stack.
+  @prop {String} option -
+    The name of a font variant,
+    e.g. `bold` or `italic` or `700 italic`.
+  @prop {Dict} data [none] -
+    Optional font-data for file-path lookup.
+  @prop {String} path [none] -
+    Optional file-path data,
+    if it is already attached to the option.
+#}
+{% macro specimen_variant(family, option, data=none, path=none) %}
+  {# Local variables for parsing variants in the data #}
+  {% set weight_options = [
+    '100',
+    '200',
+    '300',
+    '400',
+    '500',
+    '600',
+    '700',
+    '800',
+    '900',
+    'bold',
+    'bolder',
+    'lighter'
+  ] %}
+
+  {% set style_options = [
+    'italic', 'oblique'
+  ] %}
+
+  {% set other_options = [
+    'normal', 'regular'
+  ] %}
+
+  {# Initialize variants #}
+  {% set weight = 'normal' %}
+  {% set style = 'normal' %}
+
+  {# Split the option into variants, and find files where available #}
+  {% set split_option = option|split(' ') %}
+  {% set variant_check = split_option[0] %}
+  {% set is_variant = true if (variant_check in weight_options or variant_check in style_options or variant_check in other_options) else false %}
+
+  {# If we have an actual variant, display specimen #}
+  {% if is_variant %}
+    {% set path = data.option if data.option else path %}
+
+    {% for value in split_option %}
+      {% set weight = value if (value in weight_options) else weight %}
+      {% set style = value if (value in style_options) else style %}
+    {% endfor %}
+
+    <div data-specimen-face="{{ option }}">
+      <h4 data-specimen="face-name">
+        {{ option }}
+
+        {% if path %}
+          (<code>{{ path }}</code>)
+        {% endif %}
+      </h4>
+      <div data-specimen="sample"
+        style="font-family: {{ font_names(family) }}; font-weight: {{ weight }}; font-style: {{ style }};">
+        <div data-specimen="aa">Aa</div>
+        <div data-specimen="lorem">{{ lorem('alpha') }}</div>
+      </div>
+    </div>
+  {% endif %}
+{% endmacro %}
+
+
+{%- macro font_names(family) -%}
+  {%- set generic = ['serif', 'sans-serif', 'monospace', 'cursive', 'fantasy'] -%}
+  {%- for name in family|split(',') -%}
+    {{ name if (name in generic) else "'" + name + "'" }}
+    {%- if not loop.last %}, {% endif -%}
+  {%- endfor -%}
+{%- endmacro -%}
+
+
+{#
+  Lorem
+  -----
+  Display Lorem Ipsum text for font specimens.
+
+  @prop {'title' | 'body' | 'alpha'} length -
+    They type of Lorem Ipsum to display:
+    either title-length, paragraph-length,
+    or a list of standard characters
+    (uppercase, lowercase, numbers, and punctuation).
+#}
+{% macro lorem(length) %}
+  {% if length == 'title' %}
+    <span data-specimen-lorem="title">
+      Pack my box with five dozen liquor&nbsp;jugs.
+    </span>
+  {% elif length == 'body' %}
+    <span data-specimen-lorem="body">
+      A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine. I am so happy, my dear friend, so absorbed in the exquisite sense of mere tranquil existence, that I neglect my talents. I should be incapable of drawing a single stroke at the present moment; and yet I feel that I never was a greater artist than&nbsp;now.
+    </span>
+  {% elif length == 'alpha' %}
+    <span data-specimen-lorem="uppercase">
+      ABCDEFGHIJKLMNOPQRSTUVWXYZ
+    </span>
+    <span data-specimen-lorem="lowercase">
+      abcdefghijklmnopqrstuvwxyz
+    </span>
+    <span data-specimen-lorem="symbols">
+      1234567890([{“‘,.;:?!$&*’”}])
+    </span>
+  {% endif %}
+{% endmacro %}
+
+
+{% macro ratios(data) %}
+  {% for name, value in data %}
+    {% call show.item_section(
+      slug='ratio-preview',
+      title='Ratio',
+      supplement=name + ' (' + value + ')'
+    ) %}
+      {{ size_ruler(data, is_ratio=true) }}
+    {% endcall %}
+  {% endfor %}
+{% endmacro %}
+
+
+{% macro sizes(data, args) %}
+  {% call show.item_section('size-preview', 'Size Previews') %}
+    {% set style = args.style or 'text' %}
+
+    {% if style == 'ruler' %}
+      {{ size_ruler(data) }}
+    {% else %}
+      {{ size_output(data, style) }}
+    {% endif %}
+  {% endcall %}
+{% endmacro %}
+
+
+{% macro size_ruler(data, is_ratio=false) %}
+  <table class="rulers">
+    <tr class="is-hidden">
+      <th class="ruler-name">{{ 'Step' if is_ratio else 'Name' }}</th>
+      <th class="ruler-value">Value</th>
+      <td class="ruler-viz"></td>
+    </tr>
+
+    {% if is_ratio %}
+      {% set start = 5 %}
+      {% set count = range(1, 7) if (value == 'linear') else range(-3, 4) %}
+      {% for step in count %}
+        {% set result = (1 * step) if (value == 'linear') else (1 * (value ** step)) %}
+        {% set width = (start * step) if (value == 'linear') else (start * (value ** step)) %}
+        {% set width = width + 'em' %}
+
+        {{ size_ruler_row(
+          name='—' if ( result == 1 ) else step,
+          value='base' if ( result == 1 ) else result|round(2),
+          width=width
+          ) }}
+      {% endfor %}
+    {% else %}
+      {% for value, items in data|list|groupby('value') %}
+        {% set name = items|join(', ', 'key') %}
+        {{ size_ruler_row(name, value, value) }}
+      {% endfor %}
+    {% endif %}
+  </table>
+{% endmacro %}
+
+
+{% macro size_ruler_row(name, value, width) %}
+  <tr class="ruler{% if value == 'base' %} ratio-base{% endif %}">
+    <td class="ruler-name">
+      {{ name }}
+    </td>
+    <td class="ruler-value">
+      <code>
+        {{ value }}
+      </code>
+    </td>
+    <td class="ruler-viz">
+      <span class="ruler-bar" style="width: {{ width }};">
+        &nbsp;
+      </span>
+    </td>
+  </tr>
+{% endmacro %}
+
+
+{% macro size_output(data, style) %}
+  {% for value, items in data|list|groupby('value') %}
+    <div class="size-output">
+      <h4 class="size-heading">
+        {% set name = items|join(', ', 'key') %}
+        <span>{{ name }}</span>:
+        <code>{{ value }}</code>
+      </h4>
+
+      {% if style == 'text' %}
+        <div class="size-text" style="font-size: {{ value }};">
+          {{ lorem('title') }}
+        </div>
+      {% endif %}
+    </div>
+  {% endfor %}
+{% endmacro %}
+
+
+{% macro icons(item) %}
+  {% if item.icons and item.icons|length and item.iframed %}
+    {% call show.item_section(
+      slug='icon-preview',
+      title='Icon Previews',
+      supplement=item.iconsPath
+    ) %}
+      <iframe class="render-icons" srcdoc="{{ item.iframed }}" width="100%" height="0"></iframe>
+    {% endcall %}
+  {% endif %}
+{% endmacro %}

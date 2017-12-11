@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,53 +10,49 @@
   <title>Font Specimens | Herman Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
-  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
 
-  <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="stylesheet" href="assets/webpack/app_styles.min.css" />
+
+  
+
+  
 </head>
 <body>
-
   <svg xmlns="http://www.w3.org/2000/svg" hidden>
+  <symbol id="icon-logo" viewBox="0 0 16 16">
+    <path d="M.2 8L0 7.8v-.2C.8 6.9 1.9 5.9 2.7 5l.4.3c-.5.8-1.1 1.6-1.8 2.3 1 1.2 1 1.3 1.7 2.4l-.4.3c-.4-.4-.5-.6-1-1C1 8.6 1.1 8.7.2 8zM13 10c.6-1.1.7-1.1 1.7-2.4-.6-.6-1.3-1.5-1.7-2.3l.3-.3c.8.8 1.8 1.8 2.7 2.6v.2l-.8.7c-.3.3-1.2 1.1-1.8 1.7L13 10z"/><path d="M2.6 13.1H3c.9 0 1.1-.2 1.1-1.4V4.2c0-1.1-.2-1.4-1.1-1.4h-.4v-.6h4.5v.7h-.3c-.9 0-1.1.2-1.1 1.4v3.2h4.6V4.2c0-1.1-.2-1.4-1.1-1.4h-.3v-.6h4.5v.7H13c-.9 0-1.1.2-1.1 1.4v7.5c0 1.1.2 1.4 1.1 1.4h.4v.7H8.9v-.7h.3c.9 0 1.1-.2 1.1-1.4V8.2H5.7v3.5c0 1.1.2 1.4 1.1 1.4h.3v.7H2.6v-.7z"/>
+  </symbol>
   <symbol id="icon-menu" viewBox="0 0 24 28">
-    <title>menu icon</title>
     <path d="M24 21v2c0 .547-.453 1-1 1H1c-.547 0-1-.453-1-1v-2c0-.547.453-1 1-1h22c.547 0 1 .453 1 1zm0-8v2c0 .547-.453 1-1 1H1c-.547 0-1-.453-1-1v-2c0-.547.453-1 1-1h22c.547 0 1 .453 1 1zm0-8v2c0 .547-.453 1-1 1H1c-.547 0-1-.453-1-1V5c0-.547.453-1 1-1h22c.547 0 1 .453 1 1z"/>
   </symbol>
 </svg>
-  
-  
 
   <div data-sassdoc-region="app">
-    <header role="banner" data-sassdoc-region="banner">
+    <header data-sassdoc-region="banner">
       
-  
-  <button data-nav-toggle="small" data-toggle="button" aria-controls="nav-small" aria-pressed="false" data-toggle-synced="false">
+  <button data-nav-toggle data-toggle="button" aria-controls="nav" aria-pressed="false" type="button" data-toggle-synced="false">
+    
   <svg data-icon="menu" data-icon-size="icon-small" ><title>menu</title><use xlink:href="#icon-menu" />
   </svg>
-</button>
 
-  
-  <button data-nav-toggle="large" data-toggle="button" aria-controls="nav-large" aria-pressed="true" data-toggle-synced="false">
-  <svg data-icon="menu" data-icon-size="icon-small" ><title>menu</title><use xlink:href="#icon-menu" />
-  </svg>
-</button>
+  </button>
 
 
-
-      <h1 data-sassdoc="project-title">
+      <div data-sassdoc="project-title">
         <a href="index.html" rel="home" data-sassdoc="project-name">Herman</a>
         
-          <span data-sassdoc="project-version">1.0.0-alpha.15</span>
+          <span data-sassdoc="project-version">1.0.0-rc.6</span>
         
-      </h1>
+      </div>
     </header>
 
     <div data-sassdoc-region="container">
       
-  
-
-  
-    
-  <nav role="navigation" data-nav-menu="small" data-toggle="target" id="nav-small" data-target-id="nav-small" aria-expanded="false" data-auto-closing="false" data-auto-closing-on-any-click="false">
+  <nav data-nav-menu data-toggle="target" id="nav" data-target-id="nav" aria-expanded="false" data-auto-closing="false" data-auto-closing-on-any-click="false">
+    <form action="search.html">
+      <input type="text" name="q" placeholder="Search…" required minlength="3">
+    </form>
 
     <div data-sassdoc="nav-subsection">
       <h3 data-sassdoc="nav-title">
@@ -86,99 +84,101 @@
     </div>
 
     
-    <ul data-sassdoc="nav-subsection">
-      
+    <div data-sassdoc="nav-subsection">
+      <ul>
         
-        <li data-sassdoc="nav-item">
-          <a href="api_json-export.html" data-sassdoc-nav="is-not-active">Exporting Styles to<span class="widont">&nbsp;</span>JSON</a>
-        </li>
-      
+          
+          <li data-sassdoc="nav-item">
+            <a href="api_json-export.html" data-sassdoc-nav="is-not-active">Exporting Styles to<span class="widont">&nbsp;</span>JSON</a>
+          </li>
         
-        <li data-sassdoc="nav-item">
-          <a href="demo_colors.html" data-sassdoc-nav="is-not-active">Color Palettes</a>
-        </li>
-      
+          
+          <li data-sassdoc="nav-item">
+            <a href="demo_colors.html" data-sassdoc-nav="is-not-active">Color Palettes</a>
+          </li>
         
-        <li data-sassdoc="nav-item">
-          <a href="demo_fonts.html" data-sassdoc-nav="is-active">Font Specimens</a>
-        </li>
-      
+          
+          <li data-sassdoc="nav-item">
+            <a href="demo_fonts.html" data-sassdoc-nav="is-active">Font Specimens</a>
+          </li>
         
-        <li data-sassdoc="nav-item">
-          <a href="demo_sizes.html" data-sassdoc-nav="is-not-active">Ratios &amp;<span class="widont">&nbsp;</span>Sizes</a>
-        </li>
-      
+          
+          <li data-sassdoc="nav-item">
+            <a href="demo_sizes.html" data-sassdoc-nav="is-not-active">Ratios &amp;<span class="widont">&nbsp;</span>Sizes</a>
+          </li>
         
-        <li data-sassdoc="nav-item">
-          <a href="demo_icons.html" data-sassdoc-nav="is-not-active">SVG Icons</a>
-        </li>
-      
+          
+          <li data-sassdoc="nav-item">
+            <a href="demo_icons.html" data-sassdoc-nav="is-not-active">SVG Icons</a>
+          </li>
         
-        <li data-sassdoc="nav-item">
-          <a href="demo_examples.html" data-sassdoc-nav="is-not-active">Rendered Examples</a>
-        </li>
-      
+          
+          <li data-sassdoc="nav-item">
+            <a href="demo_examples.html" data-sassdoc-nav="is-not-active">Rendered Examples</a>
+          </li>
         
-        <li data-sassdoc="nav-item">
-          <a href="demo_test-sassdoc.html" data-sassdoc-nav="is-not-active">SassDoc Annotations</a>
-        </li>
-      
+          
+          <li data-sassdoc="nav-item">
+            <a href="demo_test-sassdoc.html" data-sassdoc-nav="is-not-active">SassDoc Annotations</a>
+          </li>
         
-        <li data-sassdoc="nav-item">
-          <a href="config_api-utilities.html" data-sassdoc-nav="is-not-active">_API Utilities</a>
-        </li>
-      
+          
+          <li data-sassdoc="nav-item">
+            <a href="config_api-utilities.html" data-sassdoc-nav="is-not-active">_API Utilities</a>
+          </li>
         
-        <li data-sassdoc="nav-item">
-          <a href="config-colors.html" data-sassdoc-nav="is-not-active">_Colors</a>
-        </li>
-      
+          
+          <li data-sassdoc="nav-item">
+            <a href="config-colors.html" data-sassdoc-nav="is-not-active">_Colors</a>
+          </li>
         
-        <li data-sassdoc="nav-item">
-          <a href="config-scale.html" data-sassdoc-nav="is-not-active">_Sizes</a>
-        </li>
-      
+          
+          <li data-sassdoc="nav-item">
+            <a href="config-scale.html" data-sassdoc-nav="is-not-active">_Sizes</a>
+          </li>
         
-        <li data-sassdoc="nav-item">
-          <a href="config-fonts.html" data-sassdoc-nav="is-not-active">_Fonts</a>
-        </li>
-      
+          
+          <li data-sassdoc="nav-item">
+            <a href="config-fonts.html" data-sassdoc-nav="is-not-active">_Fonts</a>
+          </li>
         
-        <li data-sassdoc="nav-item">
-          <a href="config-utils.html" data-sassdoc-nav="is-not-active">_Utilities</a>
-        </li>
-      
+          
+          <li data-sassdoc="nav-item">
+            <a href="config-utils.html" data-sassdoc-nav="is-not-active">_Utilities</a>
+          </li>
         
-        <li data-sassdoc="nav-item">
-          <a href="config-z-index.html" data-sassdoc-nav="is-not-active">_Z-index</a>
-        </li>
-      
+          
+          <li data-sassdoc="nav-item">
+            <a href="config-z-index.html" data-sassdoc-nav="is-not-active">_Z-index</a>
+          </li>
         
-        <li data-sassdoc="nav-item">
-          <a href="style-typography.html" data-sassdoc-nav="is-not-active">_Typography</a>
-        </li>
-      
+          
+          <li data-sassdoc="nav-item">
+            <a href="style-typography.html" data-sassdoc-nav="is-not-active">_Typography</a>
+          </li>
         
-        <li data-sassdoc="nav-item">
-          <a href="style-icons.html" data-sassdoc-nav="is-not-active">_Icons</a>
-        </li>
-      
+          
+          <li data-sassdoc="nav-item">
+            <a href="style-icons.html" data-sassdoc-nav="is-not-active">_Icons</a>
+          </li>
         
-        <li data-sassdoc="nav-item">
-          <a href="style-nav.html" data-sassdoc-nav="is-not-active">_Navigation</a>
-        </li>
-      
+          
+          <li data-sassdoc="nav-item">
+            <a href="style-nav.html" data-sassdoc-nav="is-not-active">_Navigation</a>
+          </li>
         
-        <li data-sassdoc="nav-item">
-          <a href="style-sections.html" data-sassdoc-nav="is-not-active">_Sections</a>
-        </li>
-      
+          
+          <li data-sassdoc="nav-item">
+            <a href="style-sections.html" data-sassdoc-nav="is-not-active">_Sections</a>
+          </li>
         
-        <li data-sassdoc="nav-item">
-          <a href="style-code.html" data-sassdoc-nav="is-not-active">_Code Blocks</a>
-        </li>
-      
-    </ul>
+          
+          <li data-sassdoc="nav-item">
+            <a href="style-code.html" data-sassdoc-nav="is-not-active">_Code Blocks</a>
+          </li>
+        
+      </ul>
+    </div>
 
     
     
@@ -212,174 +212,33 @@
         </ul>
       </div>
     
-  </nav>
-
-  
-    
-  <nav role="navigation" data-nav-menu="large" data-toggle="target" id="nav-large" data-target-id="nav-large" aria-expanded="true" data-auto-closing="false" data-auto-closing-on-any-click="false">
-
-    <div data-sassdoc="nav-subsection">
-      <h3 data-sassdoc="nav-title">
-        
-        <a href="index.html" data-sassdoc-nav="is-not-active">Herman</a>
-      </h3>
-
-      
-      
-        <ul>
-          
-            
-            <li data-sassdoc="nav-item">
-              <a href="CONFIGURATION.html" data-sassdoc-nav="is-not-active">Configuration</a>
-            </li>
-          
-            
-            <li data-sassdoc="nav-item">
-              <a href="CHANGELOG.html" data-sassdoc-nav="is-not-active">Changelog</a>
-            </li>
-          
-            
-            <li data-sassdoc="nav-item">
-              <a href="CONTRIBUTING.html" data-sassdoc-nav="is-not-active">Contributing</a>
-            </li>
-          
-        </ul>
-      
-    </div>
 
     
-    <ul data-sassdoc="nav-subsection">
-      
-        
-        <li data-sassdoc="nav-item">
-          <a href="api_json-export.html" data-sassdoc-nav="is-not-active">Exporting Styles to<span class="widont">&nbsp;</span>JSON</a>
-        </li>
-      
-        
-        <li data-sassdoc="nav-item">
-          <a href="demo_colors.html" data-sassdoc-nav="is-not-active">Color Palettes</a>
-        </li>
-      
-        
-        <li data-sassdoc="nav-item">
-          <a href="demo_fonts.html" data-sassdoc-nav="is-active">Font Specimens</a>
-        </li>
-      
-        
-        <li data-sassdoc="nav-item">
-          <a href="demo_sizes.html" data-sassdoc-nav="is-not-active">Ratios &amp;<span class="widont">&nbsp;</span>Sizes</a>
-        </li>
-      
-        
-        <li data-sassdoc="nav-item">
-          <a href="demo_icons.html" data-sassdoc-nav="is-not-active">SVG Icons</a>
-        </li>
-      
-        
-        <li data-sassdoc="nav-item">
-          <a href="demo_examples.html" data-sassdoc-nav="is-not-active">Rendered Examples</a>
-        </li>
-      
-        
-        <li data-sassdoc="nav-item">
-          <a href="demo_test-sassdoc.html" data-sassdoc-nav="is-not-active">SassDoc Annotations</a>
-        </li>
-      
-        
-        <li data-sassdoc="nav-item">
-          <a href="config_api-utilities.html" data-sassdoc-nav="is-not-active">_API Utilities</a>
-        </li>
-      
-        
-        <li data-sassdoc="nav-item">
-          <a href="config-colors.html" data-sassdoc-nav="is-not-active">_Colors</a>
-        </li>
-      
-        
-        <li data-sassdoc="nav-item">
-          <a href="config-scale.html" data-sassdoc-nav="is-not-active">_Sizes</a>
-        </li>
-      
-        
-        <li data-sassdoc="nav-item">
-          <a href="config-fonts.html" data-sassdoc-nav="is-not-active">_Fonts</a>
-        </li>
-      
-        
-        <li data-sassdoc="nav-item">
-          <a href="config-utils.html" data-sassdoc-nav="is-not-active">_Utilities</a>
-        </li>
-      
-        
-        <li data-sassdoc="nav-item">
-          <a href="config-z-index.html" data-sassdoc-nav="is-not-active">_Z-index</a>
-        </li>
-      
-        
-        <li data-sassdoc="nav-item">
-          <a href="style-typography.html" data-sassdoc-nav="is-not-active">_Typography</a>
-        </li>
-      
-        
-        <li data-sassdoc="nav-item">
-          <a href="style-icons.html" data-sassdoc-nav="is-not-active">_Icons</a>
-        </li>
-      
-        
-        <li data-sassdoc="nav-item">
-          <a href="style-nav.html" data-sassdoc-nav="is-not-active">_Navigation</a>
-        </li>
-      
-        
-        <li data-sassdoc="nav-item">
-          <a href="style-sections.html" data-sassdoc-nav="is-not-active">_Sections</a>
-        </li>
-      
-        
-        <li data-sassdoc="nav-item">
-          <a href="style-code.html" data-sassdoc-nav="is-not-active">_Code Blocks</a>
-        </li>
-      
-    </ul>
+      <aside class="footer-credit">
+        <a href="http://oddbird.net/herman/" class="footer-icon">
+          
+  <svg data-icon="logo" data-icon-size="footer-logo" ><use xlink:href="#icon-logo" />
+  </svg>
 
-    
-    
-      <div data-sassdoc="nav-subsection">
-        <h3 data-sassdoc="nav-title">
-          External Links
-        </h3>
-
-        <ul>
-          
-            <li data-sassdoc="nav-item">
-              <a href="http://oddbird.net/accoutrement-color/" data-sassdoc-nav="is-not-active">Accoutrement-Color</a>
-            </li>
-          
-            <li data-sassdoc="nav-item">
-              <a href="http://oddbird.net/accoutrement-scale/" data-sassdoc-nav="is-not-active">Accoutrement-Scale</a>
-            </li>
-          
-            <li data-sassdoc="nav-item">
-              <a href="http://oddbird.net/accoutrement-type/" data-sassdoc-nav="is-not-active">Accoutrement-Type</a>
-            </li>
-          
-            <li data-sassdoc="nav-item">
-              <a href="http://oddbird.net/accoutrement-layout/" data-sassdoc-nav="is-not-active">Accoutrement-Layout</a>
-            </li>
-          
-            <li data-sassdoc="nav-item">
-              <a href="http://oddbird.net/accoutrement-init/" data-sassdoc-nav="is-not-active">Accoutrement-Init</a>
-            </li>
-          
-        </ul>
-      </div>
+        </a>
+        <span>
+          Documented with
+          <a href="http://oddbird.net/herman/" class="footer-link">
+            Herman
+          </a>
+        </span>
+        <span>
+          by
+          <a href="http://oddbird.net/" class="footer-link">
+            OddBird
+          </a>
+        </span>
+      </aside>
     
   </nav>
 
-  
 
-
-      <main role="main">
+      <main data-sassdoc-region="main">
         
   <nav data-sassdoc-region="breadcrumb">
     
@@ -388,7 +247,7 @@
   </nav>
 
 
-        <div data-sassdoc-region="main" data-sassdoc-page="demo_fonts">
+        <div data-sassdoc-page="demo_fonts">
           
   
 
@@ -419,18 +278,21 @@
 
   
     <div data-item-section="prose" class="text-block">
-      <h2 id="documenting-fonts-displaying-specimens">Documenting fonts &amp; displaying<span class="widont">&nbsp;</span>specimens</h2>
-<p>Whether you use a webfont CDN like Typkit and Google Fonts,
+      <h1 id="documenting-fonts">Documenting fonts</h1>
+<p>Whether you use a webfont CDN like Typekit/Google Fonts,
 or locally-hosted font files,
 Herman can document and display your font-specimens.
-In the end, Herman will need a map
-converted to JSON –
+In order to do that, Herman will need a JSON map of font data –
 but we’ll start with individual font families,
 one hosted on a CDN, and the other hosted locally.
-Then we can build the export from<span class="widont">&nbsp;</span>there.</p>
+Then we can build and<span class="widont">&nbsp;</span>export.</p>
+<p>We store all font data in maps,
+with the syntax used by both Herman (for JSON exporting)
+and our [Accoutrement-Type][type] toolkit.
+<a href="http://oddbird.net/herman/docs/api_json-export.html#fonts">See the font map documentation for details<span class="widont">&nbsp;</span>»</a></p>
 <p>Each font family will be displayed individually,
 using the <code>@font</code> annotation:</p>
-<pre><code class="lang-scss">// @font 'my-font' (regular, bold)
+<pre><code class="lang-scss">/// @font my-font (regular, bold)
 </code></pre>
 <p>Let’s look at a few<span class="widont">&nbsp;</span>examples…</p>
 
@@ -508,7 +370,7 @@ using the <code>@font</code> annotation:</p>
   
   
 
-  <header data-item-section="header">
+  <div data-item-section="header">
     <h2 class="item-title">
       
         <span class="item-type"></span>
@@ -526,13 +388,10 @@ using the <code>@font</code> annotation:</p>
     
   
 
-  </header>
 
     
     
-
-    <div data-item-section="source">
-      
+    
   
 
   
@@ -557,7 +416,6 @@ using the <code>@font</code> annotation:</p>
     </div>
   
 
-    </div>
     
   
   
@@ -565,19 +423,17 @@ using the <code>@font</code> annotation:</p>
   
 
   
-    
-  
-
-  <div data-item-section="summary">
-    <h3 class="item-subtitle">Description</h3>
-    
-      <div class="text-block">
-        <h2 id="displaying-cdn-hosted-webfonts">Displaying CDN-hosted webfonts</h2>
+    <div class="text-block">
+      <h2 id="displaying-cdn-hosted-webfonts">Displaying CDN-hosted webfonts</h2>
 <p>For remotely-hosted fonts,
 the <code>@font</code> annotation accepts three<span class="widont">&nbsp;</span>arguments:</p>
+<pre><code class="lang-scss">/// @font font-key (list of, variants, to show)
+///   &lt;any html required for import&gt;
+</code></pre>
 <ul>
-<li>The first argument (in single-quotes or double-quotes) is the <code>key</code>
-that will be used to access the data from JSON,
+<li>The first argument is an optional one-word key
+which defaults to the map-variable name.
+That key will be used to access the data from JSON,
 so it doesn’t matter what key is used –
 as long as the key given here matches the group-name
 used when adding this data to <code>$herman</code>.</li>
@@ -595,24 +451,20 @@ for this font preview
 and all <a href="http://oddbird.net/herman/docs/demo_examples.html">Herman examples</a>,
 making your webfont available to other<span class="widont">&nbsp;</span>components.</li>
 </ul>
-<p>We’ve stored this data in a map,
-with the syntax used by both Herman (for JSON exporting)
-and our <a href="http://oddbird.net/accoutrement-type/">Accoutrement-Type</a><span class="widont">&nbsp;</span>toolkit.</p>
 
-        
+      
   
 
-        
+      
   
 
-        
+      
   
 
-      </div>
-    
+    </div>
+  
+
   </div>
-
-  
 
   
 
@@ -631,7 +483,9 @@ and our <a href="http://oddbird.net/accoutrement-type/">Accoutrement-Type</a><sp
     
 
     <div data-item-section="examples">
-      <h3 class="item-subtitle">Example</h3>
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Example</span>
+      </h3>
 
       
         
@@ -668,7 +522,7 @@ and our <a href="http://oddbird.net/accoutrement-type/">Accoutrement-Type</a><sp
 
       
       
-      <pre data-sassdoc="hljs"><code class="lang-scss">// @font &#39;demo-cdn&#39; (regular, bold, bold italic)
+      <pre data-sassdoc="hljs"><code class="lang-scss">// @font demo-cdn (regular, bold, bold italic)
 //   &lt;link href=&quot;https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700&quot; rel=&quot;stylesheet&quot;&gt;</code></pre>
     </div>
   
@@ -702,47 +556,48 @@ and our <a href="http://oddbird.net/accoutrement-type/">Accoutrement-Type</a><sp
 
   
   
-    
-    
-    
-
-    
-
-    
-    
-
-    
       
   
   
-  
 
   
-  
-
   <div data-item-section="font-specimen">
-    <h3 class="item-subtitle">Font Preview</h3>
     
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Font Preview</span>
+        
+          <span class="item-subtitle-supplement"><a href="https://fonts.google.com/specimen/Source+Code+Pro" >Source Code Pro</a><span class="widont">&nbsp;</span>(demo-cdn)</span>
+        
+      </h3>
     
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <a href="https://fonts.google.com/specimen/Source+Code+Pro" class="item-name">Source Code Pro</a>
-      
-      
-      <span class="value-type">(demo-cdn)</span>
-      
-    </h4>
+
+    
 
     
       
-      <div class="param-details text-block">
-        <code><strong>font-family</strong>: &#39;Source Code Pro&#39;, &#39;Consolas&#39;, &#39;Menlo&#39;, &#39;Courier New&#39;, monospace, sans-serif;</code>
-      </div>
-    
-  </div>
+      
+      
+  
 
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre data-sassdoc="hljs"><code class="lang-css">font-family: &#39;Source Code Pro&#39;, &#39;Consolas&#39;, &#39;Menlo&#39;, &#39;Courier New&#39;, monospace, sans-serif;</code></pre>
+    </div>
+  
+
+    
 
     
       <iframe class="render-specimen" srcdoc="
@@ -756,8 +611,8 @@ and our <a href="http://oddbird.net/accoutrement-type/">Accoutrement-Type</a><sp
   &lt;title&gt;fonts&lt;/title&gt;
 
   &lt;!-- Herman styles and fonts --&gt;
-  &lt;link href=&quot;https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700|Source+Sans+Pro:400,400i,700,700i&quot; rel=&quot;stylesheet&quot;&gt;
-  &lt;link rel=&quot;stylesheet&quot; href=&quot;assets/css/main.css&quot; /&gt;
+  &lt;link href=&quot;https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i&quot; rel=&quot;stylesheet&quot;&gt;
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;assets/webpack/app_styles.min.css&quot; /&gt;
 
   
     &lt;!-- Font HTML --&gt;
@@ -767,12 +622,6 @@ and our <a href="http://oddbird.net/accoutrement-type/">Accoutrement-Type</a><sp
   
 &lt;/head&gt;
 &lt;body class=&quot;sassdoc&quot;&gt;
-  
-  
-  
-  
-    
-      
   
   
 
@@ -824,8 +673,6 @@ and our <a href="http://oddbird.net/accoutrement-type/">Accoutrement-Type</a><sp
     &lt;/div&gt;
   
 
-    
-      
   
   
 
@@ -877,8 +724,6 @@ and our <a href="http://oddbird.net/accoutrement-type/">Accoutrement-Type</a><sp
     &lt;/div&gt;
   
 
-    
-      
   
   
 
@@ -932,9 +777,6 @@ and our <a href="http://oddbird.net/accoutrement-type/">Accoutrement-Type</a><sp
       &lt;/div&gt;
     &lt;/div&gt;
   
-
-    
-  
 &lt;/body&gt;
 &lt;/html&gt;
 " width="100%" height="0"></iframe>
@@ -944,8 +786,6 @@ and our <a href="http://oddbird.net/accoutrement-type/">Accoutrement-Type</a><sp
 
 
     
-
-  
 
 </section>
 
@@ -973,7 +813,7 @@ and our <a href="http://oddbird.net/accoutrement-type/">Accoutrement-Type</a><sp
   
   
 
-  <header data-item-section="header">
+  <div data-item-section="header">
     <h2 class="item-title">
       
         <span class="item-type"></span>
@@ -991,13 +831,10 @@ and our <a href="http://oddbird.net/accoutrement-type/">Accoutrement-Type</a><sp
     
   
 
-  </header>
 
     
     
-
-    <div data-item-section="source">
-      
+    
   
 
   
@@ -1025,7 +862,6 @@ and our <a href="http://oddbird.net/accoutrement-type/">Accoutrement-Type</a><sp
     </div>
   
 
-    </div>
     
   
   
@@ -1033,19 +869,14 @@ and our <a href="http://oddbird.net/accoutrement-type/">Accoutrement-Type</a><sp
   
 
   
-    
-  
-
-  <div data-item-section="summary">
-    <h3 class="item-subtitle">Description</h3>
-    
-      <div class="text-block">
-        <h2 id="displaying-local-fonts">Displaying local fonts</h2>
+    <div class="text-block">
+      <h2 id="displaying-local-fonts">Displaying local fonts</h2>
 <p>For locally-hosted fonts,
 the <code>@font</code> annotation accepts three<span class="widont">&nbsp;</span>arguments:</p>
 <ul>
-<li>The first argument (in single-quotes or double-quotes) is the <code>key</code>
-that will be used to access the data from JSON,
+<li>The first argument is an optional one-word key
+which defaults to the map-variable name.
+That key will be used to access the data from JSON,
 so it doesn’t matter what key is used –
 as long as the key given here matches the group-name
 used when adding this data to <code>$herman</code>.</li>
@@ -1060,7 +891,7 @@ of font variants to display in the preview.
 If omitted, it defaults to all variants
 included as keys in the font map<span class="widont">&nbsp;</span>itself.</li>
 </ul>
-<pre><code class="lang-scss">// @font 'demo-local' {woff2, woff, ttf}
+<pre><code class="lang-scss">/// @font demo-local {woff2, woff, ttf}
 </code></pre>
 <p>In order for this to work,
 you must specify a <code>fontpath</code>
@@ -1071,24 +902,23 @@ herman:
   fontpath: 'fonts/'
 </code></pre>
 
-        
+      
   
 
-        
+      
   
 
-        
+      
   
 
-      </div>
-    
+    </div>
+  
+
   </div>
 
   
 
   
-
-  
   
   
   
@@ -1121,47 +951,48 @@ herman:
 
   
   
-    
-    
-    
-
-    
-
-    
-    
-
-    
       
   
   
-  
 
   
-  
-
   <div data-item-section="font-specimen">
-    <h3 class="item-subtitle">Font Preview</h3>
     
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Font Preview</span>
+        
+          <span class="item-subtitle-supplement"><span >rockingham</span><span class="widont">&nbsp;</span>(demo-local)</span>
+        
+      </h3>
     
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">rockingham</span>
-      
-      
-      <span class="value-type">(demo-local)</span>
-      
-    </h4>
+
+    
 
     
       
-      <div class="param-details text-block">
-        <code><strong>font-family</strong>: &#39;rockingham&#39;, fantasy;</code>
-      </div>
-    
-  </div>
+      
+      
+  
 
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre data-sassdoc="hljs"><code class="lang-css">font-family: &#39;rockingham&#39;, fantasy;</code></pre>
+    </div>
+  
+
+    
 
     
       <iframe class="render-specimen" srcdoc="
@@ -1175,8 +1006,8 @@ herman:
   &lt;title&gt;fonts&lt;/title&gt;
 
   &lt;!-- Herman styles and fonts --&gt;
-  &lt;link href=&quot;https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700|Source+Sans+Pro:400,400i,700,700i&quot; rel=&quot;stylesheet&quot;&gt;
-  &lt;link rel=&quot;stylesheet&quot; href=&quot;assets/css/main.css&quot; /&gt;
+  &lt;link href=&quot;https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i&quot; rel=&quot;stylesheet&quot;&gt;
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;assets/webpack/app_styles.min.css&quot; /&gt;
 
   
 
@@ -1210,12 +1041,6 @@ herman:
 &lt;body class=&quot;sassdoc&quot;&gt;
   
   
-  
-  
-    
-      
-  
-  
 
   
 
@@ -1233,8 +1058,6 @@ herman:
   
   
 
-    
-      
   
   
 
@@ -1288,8 +1111,6 @@ herman:
     &lt;/div&gt;
   
 
-    
-      
   
   
 
@@ -1343,8 +1164,6 @@ herman:
     &lt;/div&gt;
   
 
-    
-      
   
   
 
@@ -1398,8 +1217,6 @@ herman:
     &lt;/div&gt;
   
 
-    
-      
   
   
 
@@ -1419,8 +1236,6 @@ herman:
   
   
 
-    
-      
   
   
 
@@ -1438,9 +1253,6 @@ herman:
   
 
   
-  
-
-    
   
 &lt;/body&gt;
 &lt;/html&gt;
@@ -1451,8 +1263,6 @@ herman:
 
 
     
-
-  
 
 </section>
 
@@ -1523,10 +1333,14 @@ it can be converted to JSON using <code>herman-export</code>.</p>
   
 
     
-  
-
   <div data-item-section="related">
-    <h3 class="item-subtitle">related</h3>
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Related</span>
+        
+      </h3>
+    
+
     
       
         
@@ -1658,10 +1472,8 @@ it can be converted to JSON using <code>herman-export</code>.</p>
     </div>
   </div>
 
-  <script type="text/javascript" src="assets/js/jquery-3.1.1.slim.js"></script>
-  <script type="text/javascript" src="assets/js/srcdoc-polyfill.min.js"></script>
-  <script type="text/javascript" src="assets/js/highlight.js"></script>
-  <script type="text/javascript" src="assets/js/base.js"></script>
-  <script type="text/javascript" src="assets/js/init.js"></script>
+  <script type="text/javascript" src="assets/webpack/vendor.min.js"></script>
+  <script type="text/javascript" src="assets/webpack/app.min.js"></script>
+  
 </body>
 </html>

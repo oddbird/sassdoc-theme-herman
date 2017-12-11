@@ -1,0 +1,93 @@
+{% import 'utility.macros.njk' as utility %}
+
+
+{% macro toggle() %}
+  <button data-nav-toggle {{ utility.toggle_button('nav', button='true') }}>
+    {{ utility.icon('menu', 'menu', size='icon-small') }}
+  </button>
+{% endmacro %}
+
+
+{% macro menu(
+  project,
+  groups,
+  byGroup,
+  activeGroup,
+  extraDocs,
+  extraLinks,
+  watermark=true
+) %}
+  <nav data-nav-menu {{ utility.toggle_target('nav')}}>
+    <form action="search.html">
+      <input type="text" name="q" placeholder="Search…" required minlength="3">
+    </form>
+
+    <div data-sassdoc="nav-subsection">
+      <h3 data-sassdoc="nav-title">
+        {% set activeNav = 'is-active' if (activeGroup == none) else 'is-not-active' %}
+        <a href="index.html" data-sassdoc-nav="{{ activeNav }}">{{ project }}</a>
+      </h3>
+
+      {# Markdown Files, e.g. Changelog, Getting Started #}
+      {% if extraDocs and extraDocs|length %}
+        <ul>
+          {% for extraDoc in extraDocs %}
+            {% set activeNav = 'is-active' if (activeGroup == extraDoc.filename) else 'is-not-active' %}
+            <li data-sassdoc="nav-item">
+              <a href="{{ extraDoc.filename }}.html" data-sassdoc-nav="{{ activeNav }}">{{ extraDoc.name }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+
+    {# Generated Sass Docs #}
+    <div data-sassdoc="nav-subsection">
+      <ul>
+        {% for groupName, group in byGroup %}
+          {% set activeNav = 'is-active' if (activeGroup == groupName) else 'is-not-active' %}
+          <li data-sassdoc="nav-item">
+            <a href="{{ groupName }}.html" data-sassdoc-nav="{{ activeNav }}">{{ groups[groupName] }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    {# External Links #}
+    {% if extraLinks and extraLinks|length %}
+      <div data-sassdoc="nav-subsection">
+        <h3 data-sassdoc="nav-title">
+          External Links
+        </h3>
+
+        <ul>
+          {% for extraLink in extraLinks %}
+            <li data-sassdoc="nav-item">
+              <a href="{{ extraLink.url }}" data-sassdoc-nav="is-not-active">{{ extraLink.name }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+
+    {% if watermark %}
+      <aside class="footer-credit">
+        <a href="http://oddbird.net/herman/" class="footer-icon">
+          {{ utility.icon('logo', size='footer-logo') }}
+        </a>
+        <span>
+          Documented with
+          <a href="http://oddbird.net/herman/" class="footer-link">
+            Herman
+          </a>
+        </span>
+        <span>
+          by
+          <a href="http://oddbird.net/" class="footer-link">
+            OddBird
+          </a>
+        </span>
+      </aside>
+    {% endif %}
+  </nav>
+{% endmacro %}

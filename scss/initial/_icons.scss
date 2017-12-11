@@ -1,12 +1,27 @@
 // Icons
 // =====
 
+
+/// # Herman Icons
+/// @icons assets/svg/
+/// @group style-icons
+
+
 /// A data attribute for setting an icon.
 /// @group style-icons
-/// @icons assets/svg/
 /// @example njk
-///   {% import 'utility.macros.j2' as utility %}
+///   {% import 'utility.macros.njk' as utility %}
 ///   {{ utility.icon('menu', size='icon-small') }}
+[data-icon] {
+  fill: currentColor;
+}
+
+
 [data-icon-size='icon-small'] {
   @include square('icon');
+}
+
+
+[data-icon-size='footer-logo'] {
+  @include square('footer-logo');
 }

@@ -1,0 +1,60 @@
+{% import 'utility.macros.njk' as utility %}
+
+
+{# @example annotation #}
+{% macro list(examples_list) %}
+  {% if examples_list %}
+    {% set title = 'Examples' if (examples_list.length > 1) else 'Example' %}
+
+    <div data-item-section="examples">
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">{{ title }}</span>
+      </h3>
+
+      {% for example in examples_list %}
+        {{ show(example) }}
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endmacro %}
+
+
+{% macro show(example) %}
+  {% set css = ['scss', 'sass', 'less', 'stylus', 'postcss'] %}
+  {% set render_types = {
+    'njk': 'html',
+    'scss': 'css',
+    'sass': 'css'
+  } %}
+
+  {# Get compiled language and code, if available from `rendered` #}
+  {% set rendered_type = render_types[example.type] if example.rendered else none %}
+  {% set rendered = example.rendered if rendered_type else none %}
+
+  {# Build the initial code block #}
+  {% set initial = utility.code_block(
+    language=example.type,
+    content=example.code,
+    description=example.description
+    ) %}
+
+  {# Build the rendered code block #}
+  {% set compiled = utility.code_block(
+    language=rendered_type,
+    content=example.rendered,
+    description='compiled'
+    ) if rendered else '' %}
+
+  {# Display what we got #}
+  <div class="example">
+    <div class="example-code">
+      {{ (initial + compiled)|safe }}
+    </div>
+
+    {% if example.iframed and not (example.type in css) %}
+      <div class="example-render">
+        <iframe class="render-example" srcdoc="{{ example.iframed }}" width="100%" height="0"></iframe>
+      </div>
+    {% endif %}
+  </div>
+{% endmacro %}

@@ -13,9 +13,10 @@ describe('renderIframe', function() {
     beforeEach(function() {
       this.env = {
         herman: {
-          customCSS: 'dist/css/main.css',
+          customCSS: 'test/js/fixtures/css/main.css',
           customHTML: 'templates/_icons.svg',
         },
+        logger: { log: sinon.spy() },
         dir: __dirname,
       };
     });
@@ -30,8 +31,8 @@ describe('renderIframe', function() {
         assert.equal(item.iframed, 'some iframed');
         assert.ok(this.env.customHTML);
         assert.deepEqual(this.env.customCSS, {
-          path: path.resolve(__dirname, 'dist/css/main.css'),
-          url: 'assets/css/custom/main.css',
+          path: path.resolve(__dirname, 'test/js/fixtures/css/main.css'),
+          url: 'assets/custom/main.css',
         });
 
         nunjucksEnv.render.restore();

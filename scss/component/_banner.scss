@@ -4,6 +4,7 @@
 [data-sassdoc-region='banner'] {
   @include section-arrow;
   @include z-index('banner');
+  align-items: center;
   box-shadow: 0 2px 2px color('shadow');
   display: flex;
   padding: size('shim');

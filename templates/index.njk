@@ -1,0 +1,27 @@
+{% extends 'base.njk' %}
+
+{% block main %}
+  {{ project_links(package.homepage, package.repository.url) }}
+
+  <div class="text-block">
+    {{ description|safe }}
+  </div>
+{% endblock %}
+
+
+{% macro project_links(home, repo) %}
+  {% if home or repo %}
+    <ul class="project-links">
+      {% if home %}
+        <li class="project-link-item">
+          <a href="{{ home }}" class="project-link">View Project</a>
+        </li>
+      {% endif %}
+      {% if repo %}
+        <li class="project-link-item">
+          <a href="{{ repo }}" class="project-link">View Source</a>
+        </li>
+      {% endif %}
+    </ul>
+  {% endif %}
+{% endmacro %}

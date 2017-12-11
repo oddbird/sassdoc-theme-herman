@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,53 +10,49 @@
   <title>Ratios &amp; Sizes | Herman Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
-  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
 
-  <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="stylesheet" href="assets/webpack/app_styles.min.css" />
+
+  
+
+  
 </head>
 <body>
-
   <svg xmlns="http://www.w3.org/2000/svg" hidden>
+  <symbol id="icon-logo" viewBox="0 0 16 16">
+    <path d="M.2 8L0 7.8v-.2C.8 6.9 1.9 5.9 2.7 5l.4.3c-.5.8-1.1 1.6-1.8 2.3 1 1.2 1 1.3 1.7 2.4l-.4.3c-.4-.4-.5-.6-1-1C1 8.6 1.1 8.7.2 8zM13 10c.6-1.1.7-1.1 1.7-2.4-.6-.6-1.3-1.5-1.7-2.3l.3-.3c.8.8 1.8 1.8 2.7 2.6v.2l-.8.7c-.3.3-1.2 1.1-1.8 1.7L13 10z"/><path d="M2.6 13.1H3c.9 0 1.1-.2 1.1-1.4V4.2c0-1.1-.2-1.4-1.1-1.4h-.4v-.6h4.5v.7h-.3c-.9 0-1.1.2-1.1 1.4v3.2h4.6V4.2c0-1.1-.2-1.4-1.1-1.4h-.3v-.6h4.5v.7H13c-.9 0-1.1.2-1.1 1.4v7.5c0 1.1.2 1.4 1.1 1.4h.4v.7H8.9v-.7h.3c.9 0 1.1-.2 1.1-1.4V8.2H5.7v3.5c0 1.1.2 1.4 1.1 1.4h.3v.7H2.6v-.7z"/>
+  </symbol>
   <symbol id="icon-menu" viewBox="0 0 24 28">
-    <title>menu icon</title>
     <path d="M24 21v2c0 .547-.453 1-1 1H1c-.547 0-1-.453-1-1v-2c0-.547.453-1 1-1h22c.547 0 1 .453 1 1zm0-8v2c0 .547-.453 1-1 1H1c-.547 0-1-.453-1-1v-2c0-.547.453-1 1-1h22c.547 0 1 .453 1 1zm0-8v2c0 .547-.453 1-1 1H1c-.547 0-1-.453-1-1V5c0-.547.453-1 1-1h22c.547 0 1 .453 1 1z"/>
   </symbol>
 </svg>
-  
-  
 
   <div data-sassdoc-region="app">
-    <header role="banner" data-sassdoc-region="banner">
+    <header data-sassdoc-region="banner">
       
-  
-  <button data-nav-toggle="small" data-toggle="button" aria-controls="nav-small" aria-pressed="false" data-toggle-synced="false">
+  <button data-nav-toggle data-toggle="button" aria-controls="nav" aria-pressed="false" type="button" data-toggle-synced="false">
+    
   <svg data-icon="menu" data-icon-size="icon-small" ><title>menu</title><use xlink:href="#icon-menu" />
   </svg>
-</button>
 
-  
-  <button data-nav-toggle="large" data-toggle="button" aria-controls="nav-large" aria-pressed="true" data-toggle-synced="false">
-  <svg data-icon="menu" data-icon-size="icon-small" ><title>menu</title><use xlink:href="#icon-menu" />
-  </svg>
-</button>
+  </button>
 
 
-
-      <h1 data-sassdoc="project-title">
+      <div data-sassdoc="project-title">
         <a href="index.html" rel="home" data-sassdoc="project-name">Herman</a>
         
-          <span data-sassdoc="project-version">1.0.0-alpha.15</span>
+          <span data-sassdoc="project-version">1.0.0-rc.6</span>
         
-      </h1>
+      </div>
     </header>
 
     <div data-sassdoc-region="container">
       
-  
-
-  
-    
-  <nav role="navigation" data-nav-menu="small" data-toggle="target" id="nav-small" data-target-id="nav-small" aria-expanded="false" data-auto-closing="false" data-auto-closing-on-any-click="false">
+  <nav data-nav-menu data-toggle="target" id="nav" data-target-id="nav" aria-expanded="false" data-auto-closing="false" data-auto-closing-on-any-click="false">
+    <form action="search.html">
+      <input type="text" name="q" placeholder="Search…" required minlength="3">
+    </form>
 
     <div data-sassdoc="nav-subsection">
       <h3 data-sassdoc="nav-title">
@@ -86,99 +84,101 @@
     </div>
 
     
-    <ul data-sassdoc="nav-subsection">
-      
+    <div data-sassdoc="nav-subsection">
+      <ul>
         
-        <li data-sassdoc="nav-item">
-          <a href="api_json-export.html" data-sassdoc-nav="is-not-active">Exporting Styles to<span class="widont">&nbsp;</span>JSON</a>
-        </li>
-      
+          
+          <li data-sassdoc="nav-item">
+            <a href="api_json-export.html" data-sassdoc-nav="is-not-active">Exporting Styles to<span class="widont">&nbsp;</span>JSON</a>
+          </li>
         
-        <li data-sassdoc="nav-item">
-          <a href="demo_colors.html" data-sassdoc-nav="is-not-active">Color Palettes</a>
-        </li>
-      
+          
+          <li data-sassdoc="nav-item">
+            <a href="demo_colors.html" data-sassdoc-nav="is-not-active">Color Palettes</a>
+          </li>
         
-        <li data-sassdoc="nav-item">
-          <a href="demo_fonts.html" data-sassdoc-nav="is-not-active">Font Specimens</a>
-        </li>
-      
+          
+          <li data-sassdoc="nav-item">
+            <a href="demo_fonts.html" data-sassdoc-nav="is-not-active">Font Specimens</a>
+          </li>
         
-        <li data-sassdoc="nav-item">
-          <a href="demo_sizes.html" data-sassdoc-nav="is-active">Ratios &amp;<span class="widont">&nbsp;</span>Sizes</a>
-        </li>
-      
+          
+          <li data-sassdoc="nav-item">
+            <a href="demo_sizes.html" data-sassdoc-nav="is-active">Ratios &amp;<span class="widont">&nbsp;</span>Sizes</a>
+          </li>
         
-        <li data-sassdoc="nav-item">
-          <a href="demo_icons.html" data-sassdoc-nav="is-not-active">SVG Icons</a>
-        </li>
-      
+          
+          <li data-sassdoc="nav-item">
+            <a href="demo_icons.html" data-sassdoc-nav="is-not-active">SVG Icons</a>
+          </li>
         
-        <li data-sassdoc="nav-item">
-          <a href="demo_examples.html" data-sassdoc-nav="is-not-active">Rendered Examples</a>
-        </li>
-      
+          
+          <li data-sassdoc="nav-item">
+            <a href="demo_examples.html" data-sassdoc-nav="is-not-active">Rendered Examples</a>
+          </li>
         
-        <li data-sassdoc="nav-item">
-          <a href="demo_test-sassdoc.html" data-sassdoc-nav="is-not-active">SassDoc Annotations</a>
-        </li>
-      
+          
+          <li data-sassdoc="nav-item">
+            <a href="demo_test-sassdoc.html" data-sassdoc-nav="is-not-active">SassDoc Annotations</a>
+          </li>
         
-        <li data-sassdoc="nav-item">
-          <a href="config_api-utilities.html" data-sassdoc-nav="is-not-active">_API Utilities</a>
-        </li>
-      
+          
+          <li data-sassdoc="nav-item">
+            <a href="config_api-utilities.html" data-sassdoc-nav="is-not-active">_API Utilities</a>
+          </li>
         
-        <li data-sassdoc="nav-item">
-          <a href="config-colors.html" data-sassdoc-nav="is-not-active">_Colors</a>
-        </li>
-      
+          
+          <li data-sassdoc="nav-item">
+            <a href="config-colors.html" data-sassdoc-nav="is-not-active">_Colors</a>
+          </li>
         
-        <li data-sassdoc="nav-item">
-          <a href="config-scale.html" data-sassdoc-nav="is-not-active">_Sizes</a>
-        </li>
-      
+          
+          <li data-sassdoc="nav-item">
+            <a href="config-scale.html" data-sassdoc-nav="is-not-active">_Sizes</a>
+          </li>
         
-        <li data-sassdoc="nav-item">
-          <a href="config-fonts.html" data-sassdoc-nav="is-not-active">_Fonts</a>
-        </li>
-      
+          
+          <li data-sassdoc="nav-item">
+            <a href="config-fonts.html" data-sassdoc-nav="is-not-active">_Fonts</a>
+          </li>
         
-        <li data-sassdoc="nav-item">
-          <a href="config-utils.html" data-sassdoc-nav="is-not-active">_Utilities</a>
-        </li>
-      
+          
+          <li data-sassdoc="nav-item">
+            <a href="config-utils.html" data-sassdoc-nav="is-not-active">_Utilities</a>
+          </li>
         
-        <li data-sassdoc="nav-item">
-          <a href="config-z-index.html" data-sassdoc-nav="is-not-active">_Z-index</a>
-        </li>
-      
+          
+          <li data-sassdoc="nav-item">
+            <a href="config-z-index.html" data-sassdoc-nav="is-not-active">_Z-index</a>
+          </li>
         
-        <li data-sassdoc="nav-item">
-          <a href="style-typography.html" data-sassdoc-nav="is-not-active">_Typography</a>
-        </li>
-      
+          
+          <li data-sassdoc="nav-item">
+            <a href="style-typography.html" data-sassdoc-nav="is-not-active">_Typography</a>
+          </li>
         
-        <li data-sassdoc="nav-item">
-          <a href="style-icons.html" data-sassdoc-nav="is-not-active">_Icons</a>
-        </li>
-      
+          
+          <li data-sassdoc="nav-item">
+            <a href="style-icons.html" data-sassdoc-nav="is-not-active">_Icons</a>
+          </li>
         
-        <li data-sassdoc="nav-item">
-          <a href="style-nav.html" data-sassdoc-nav="is-not-active">_Navigation</a>
-        </li>
-      
+          
+          <li data-sassdoc="nav-item">
+            <a href="style-nav.html" data-sassdoc-nav="is-not-active">_Navigation</a>
+          </li>
         
-        <li data-sassdoc="nav-item">
-          <a href="style-sections.html" data-sassdoc-nav="is-not-active">_Sections</a>
-        </li>
-      
+          
+          <li data-sassdoc="nav-item">
+            <a href="style-sections.html" data-sassdoc-nav="is-not-active">_Sections</a>
+          </li>
         
-        <li data-sassdoc="nav-item">
-          <a href="style-code.html" data-sassdoc-nav="is-not-active">_Code Blocks</a>
-        </li>
-      
-    </ul>
+          
+          <li data-sassdoc="nav-item">
+            <a href="style-code.html" data-sassdoc-nav="is-not-active">_Code Blocks</a>
+          </li>
+        
+      </ul>
+    </div>
 
     
     
@@ -212,174 +212,33 @@
         </ul>
       </div>
     
-  </nav>
-
-  
-    
-  <nav role="navigation" data-nav-menu="large" data-toggle="target" id="nav-large" data-target-id="nav-large" aria-expanded="true" data-auto-closing="false" data-auto-closing-on-any-click="false">
-
-    <div data-sassdoc="nav-subsection">
-      <h3 data-sassdoc="nav-title">
-        
-        <a href="index.html" data-sassdoc-nav="is-not-active">Herman</a>
-      </h3>
-
-      
-      
-        <ul>
-          
-            
-            <li data-sassdoc="nav-item">
-              <a href="CONFIGURATION.html" data-sassdoc-nav="is-not-active">Configuration</a>
-            </li>
-          
-            
-            <li data-sassdoc="nav-item">
-              <a href="CHANGELOG.html" data-sassdoc-nav="is-not-active">Changelog</a>
-            </li>
-          
-            
-            <li data-sassdoc="nav-item">
-              <a href="CONTRIBUTING.html" data-sassdoc-nav="is-not-active">Contributing</a>
-            </li>
-          
-        </ul>
-      
-    </div>
 
     
-    <ul data-sassdoc="nav-subsection">
-      
-        
-        <li data-sassdoc="nav-item">
-          <a href="api_json-export.html" data-sassdoc-nav="is-not-active">Exporting Styles to<span class="widont">&nbsp;</span>JSON</a>
-        </li>
-      
-        
-        <li data-sassdoc="nav-item">
-          <a href="demo_colors.html" data-sassdoc-nav="is-not-active">Color Palettes</a>
-        </li>
-      
-        
-        <li data-sassdoc="nav-item">
-          <a href="demo_fonts.html" data-sassdoc-nav="is-not-active">Font Specimens</a>
-        </li>
-      
-        
-        <li data-sassdoc="nav-item">
-          <a href="demo_sizes.html" data-sassdoc-nav="is-active">Ratios &amp;<span class="widont">&nbsp;</span>Sizes</a>
-        </li>
-      
-        
-        <li data-sassdoc="nav-item">
-          <a href="demo_icons.html" data-sassdoc-nav="is-not-active">SVG Icons</a>
-        </li>
-      
-        
-        <li data-sassdoc="nav-item">
-          <a href="demo_examples.html" data-sassdoc-nav="is-not-active">Rendered Examples</a>
-        </li>
-      
-        
-        <li data-sassdoc="nav-item">
-          <a href="demo_test-sassdoc.html" data-sassdoc-nav="is-not-active">SassDoc Annotations</a>
-        </li>
-      
-        
-        <li data-sassdoc="nav-item">
-          <a href="config_api-utilities.html" data-sassdoc-nav="is-not-active">_API Utilities</a>
-        </li>
-      
-        
-        <li data-sassdoc="nav-item">
-          <a href="config-colors.html" data-sassdoc-nav="is-not-active">_Colors</a>
-        </li>
-      
-        
-        <li data-sassdoc="nav-item">
-          <a href="config-scale.html" data-sassdoc-nav="is-not-active">_Sizes</a>
-        </li>
-      
-        
-        <li data-sassdoc="nav-item">
-          <a href="config-fonts.html" data-sassdoc-nav="is-not-active">_Fonts</a>
-        </li>
-      
-        
-        <li data-sassdoc="nav-item">
-          <a href="config-utils.html" data-sassdoc-nav="is-not-active">_Utilities</a>
-        </li>
-      
-        
-        <li data-sassdoc="nav-item">
-          <a href="config-z-index.html" data-sassdoc-nav="is-not-active">_Z-index</a>
-        </li>
-      
-        
-        <li data-sassdoc="nav-item">
-          <a href="style-typography.html" data-sassdoc-nav="is-not-active">_Typography</a>
-        </li>
-      
-        
-        <li data-sassdoc="nav-item">
-          <a href="style-icons.html" data-sassdoc-nav="is-not-active">_Icons</a>
-        </li>
-      
-        
-        <li data-sassdoc="nav-item">
-          <a href="style-nav.html" data-sassdoc-nav="is-not-active">_Navigation</a>
-        </li>
-      
-        
-        <li data-sassdoc="nav-item">
-          <a href="style-sections.html" data-sassdoc-nav="is-not-active">_Sections</a>
-        </li>
-      
-        
-        <li data-sassdoc="nav-item">
-          <a href="style-code.html" data-sassdoc-nav="is-not-active">_Code Blocks</a>
-        </li>
-      
-    </ul>
+      <aside class="footer-credit">
+        <a href="http://oddbird.net/herman/" class="footer-icon">
+          
+  <svg data-icon="logo" data-icon-size="footer-logo" ><use xlink:href="#icon-logo" />
+  </svg>
 
-    
-    
-      <div data-sassdoc="nav-subsection">
-        <h3 data-sassdoc="nav-title">
-          External Links
-        </h3>
-
-        <ul>
-          
-            <li data-sassdoc="nav-item">
-              <a href="http://oddbird.net/accoutrement-color/" data-sassdoc-nav="is-not-active">Accoutrement-Color</a>
-            </li>
-          
-            <li data-sassdoc="nav-item">
-              <a href="http://oddbird.net/accoutrement-scale/" data-sassdoc-nav="is-not-active">Accoutrement-Scale</a>
-            </li>
-          
-            <li data-sassdoc="nav-item">
-              <a href="http://oddbird.net/accoutrement-type/" data-sassdoc-nav="is-not-active">Accoutrement-Type</a>
-            </li>
-          
-            <li data-sassdoc="nav-item">
-              <a href="http://oddbird.net/accoutrement-layout/" data-sassdoc-nav="is-not-active">Accoutrement-Layout</a>
-            </li>
-          
-            <li data-sassdoc="nav-item">
-              <a href="http://oddbird.net/accoutrement-init/" data-sassdoc-nav="is-not-active">Accoutrement-Init</a>
-            </li>
-          
-        </ul>
-      </div>
+        </a>
+        <span>
+          Documented with
+          <a href="http://oddbird.net/herman/" class="footer-link">
+            Herman
+          </a>
+        </span>
+        <span>
+          by
+          <a href="http://oddbird.net/" class="footer-link">
+            OddBird
+          </a>
+        </span>
+      </aside>
     
   </nav>
 
-  
 
-
-      <main role="main">
+      <main data-sassdoc-region="main">
         
   <nav data-sassdoc-region="breadcrumb">
     
@@ -388,7 +247,7 @@
   </nav>
 
 
-        <div data-sassdoc-region="main" data-sassdoc-page="demo_sizes">
+        <div data-sassdoc-page="demo_sizes">
           
   
 
@@ -419,15 +278,14 @@
 
   
     <div data-item-section="prose" class="text-block">
-      <h2 id="documenting-ratios-and-sizes">Documenting ratios and<span class="widont">&nbsp;</span>sizes</h2>
-<p>In addition to documenting <a href="demo_colors.html">colors</a>,
+      <h1 id="documenting-ratios-sizes">Documenting ratios &amp;<span class="widont">&nbsp;</span>sizes</h1>
+<p>In addition to documenting colors and fonts,
 you can use Herman to document and display ratios and sizes.
-In the end, Herman will need a map
-converted to JSON –
+In the end, Herman will need a map –
 but we’ll start with individual ratios/sizes,
 and build the export from<span class="widont">&nbsp;</span>there.</p>
 <p>Let’s start with a ratio and two<span class="widont">&nbsp;</span>sizes:</p>
-<pre><code class="lang-scss">$herman-ratio: 1.4;
+<pre><code class="lang-scss">$line-height-ratio: 1.4;
 $root: 18px;
 $xlarge: 28px;
 </code></pre>
@@ -506,7 +364,7 @@ $xlarge: 28px;
   
   
 
-  <header data-item-section="header">
+  <div data-item-section="header">
     <h2 class="item-title">
       
         <span class="item-type"></span>
@@ -524,13 +382,10 @@ $xlarge: 28px;
     
   
 
-  </header>
 
     
     
-
-    <div data-item-section="source">
-      
+    
   
 
   
@@ -548,12 +403,11 @@ $xlarge: 28px;
       
       
       <pre data-sassdoc="hljs"><code class="lang-scss">$demo-ratios: (
-  &#39;herman-ratio&#39;: $herman-ratio
+  &#39;line-height&#39;: $line-height-ratio
 );</code></pre>
     </div>
   
 
-    </div>
     
   
   
@@ -561,14 +415,8 @@ $xlarge: 28px;
   
 
   
-    
-  
-
-  <div data-item-section="summary">
-    <h3 class="item-subtitle">Description</h3>
-    
-      <div class="text-block">
-        <h2 id="preview-ratios">Preview ratios</h2>
+    <div class="text-block">
+      <h2 id="preview-ratios">Preview ratios</h2>
 <p>In order to export our ratios to Herman,
 we’ll want to combine them into maps
 of name/value pairs.
@@ -578,38 +426,40 @@ but you can use a tool like our <a href="http://oddbird.net/accoutrement-scale/"
 to store and access ratios
 directly in a Herman-friendly<span class="widont">&nbsp;</span>map.</p>
 <pre><code class="lang-scss">$demo-ratios: (
-  'herman-ratio': $herman-ratio
+  'line-height': $line-height-ratio
 );
 </code></pre>
 <p>Create as many maps as you like
 to organize different types of ratios –
 text, spacing, etc.
 Each map will be displayed individually,
-using the <code>@preview ratios</code> annotation:</p>
-<pre><code class="lang-scss">// @preview ratios; count: 4
+using the <code>@ratios</code> annotation:</p>
+<pre><code class="lang-scss">/// @ratios my-ratios
 </code></pre>
-<p>The <code>ratios</code> preview accepts an optional <code>count</code> argument (defaults to <code>6</code>) –
-the number of ratio calculations to display,
-up to a maximum of <code>10</code>.</p>
+<p>The <code>@ratios</code> annotation accepts an optional one-word key argument,
+which defaults to the map-variable name.
+That key will be used to access the data from JSON,
+so it doesn’t matter what key is used,
+as long as the key given here matches the group-name
+used when adding this data to <code>$herman</code>.</p>
 
-        
+      
   
 
-        
+      
   
 
-        
+      
   
 
-      </div>
-    
+    </div>
+  
+
   </div>
 
   
 
   
-
-  
   
   
   
@@ -642,86 +492,195 @@ up to a maximum of <code>10</code>.</p>
 
   
   
-    
-    
-    
-
-    
-
-    
-    
-
-    
       
   
-  
-
+    
   <div data-item-section="ratio-preview">
-    <h3 class="item-subtitle">Ratio Preview</h3>
     
-    
-      <div data-sassdoc="ratio-preview">
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Ratio</span>
         
-  <div class="param-list">
-    <h4 class="param-title">
+          <span class="item-subtitle-supplement">line-height<span class="widont">&nbsp;</span>(1.4)</span>
+        
+      </h3>
+    
+
+    
+      
+  <table class="rulers">
+    <tr class="is-hidden">
+      <th class="ruler-name">Step</th>
+      <th class="ruler-value">Value</th>
+      <td class="ruler-viz"></td>
+    </tr>
+
+    
       
       
-        <span class="item-name">herman-ratio:</span>
       
-      <span class="item-value">1.4</span>
+        
+        
+        
+
+        
+  <tr class="ruler">
+    <td class="ruler-name">
+      -3
+    </td>
+    <td class="ruler-value">
+      <code>
+        0.36
+      </code>
+    </td>
+    <td class="ruler-viz">
+      <span class="ruler-bar" style="width: 1.8221574344023328em;">
+        &nbsp;
+      </span>
+    </td>
+  </tr>
+
       
+        
+        
+        
+
+        
+  <tr class="ruler">
+    <td class="ruler-name">
+      -2
+    </td>
+    <td class="ruler-value">
+      <code>
+        0.51
+      </code>
+    </td>
+    <td class="ruler-viz">
+      <span class="ruler-bar" style="width: 2.551020408163266em;">
+        &nbsp;
+      </span>
+    </td>
+  </tr>
+
       
-    </h4>
+        
+        
+        
+
+        
+  <tr class="ruler">
+    <td class="ruler-name">
+      -1
+    </td>
+    <td class="ruler-value">
+      <code>
+        0.71
+      </code>
+    </td>
+    <td class="ruler-viz">
+      <span class="ruler-bar" style="width: 3.5714285714285716em;">
+        &nbsp;
+      </span>
+    </td>
+  </tr>
+
+      
+        
+        
+        
+
+        
+  <tr class="ruler ratio-base">
+    <td class="ruler-name">
+      —
+    </td>
+    <td class="ruler-value">
+      <code>
+        base
+      </code>
+    </td>
+    <td class="ruler-viz">
+      <span class="ruler-bar" style="width: 5em;">
+        &nbsp;
+      </span>
+    </td>
+  </tr>
+
+      
+        
+        
+        
+
+        
+  <tr class="ruler">
+    <td class="ruler-name">
+      1
+    </td>
+    <td class="ruler-value">
+      <code>
+        1.4
+      </code>
+    </td>
+    <td class="ruler-viz">
+      <span class="ruler-bar" style="width: 7em;">
+        &nbsp;
+      </span>
+    </td>
+  </tr>
+
+      
+        
+        
+        
+
+        
+  <tr class="ruler">
+    <td class="ruler-name">
+      2
+    </td>
+    <td class="ruler-value">
+      <code>
+        1.96
+      </code>
+    </td>
+    <td class="ruler-viz">
+      <span class="ruler-bar" style="width: 9.799999999999999em;">
+        &nbsp;
+      </span>
+    </td>
+  </tr>
+
+      
+        
+        
+        
+
+        
+  <tr class="ruler">
+    <td class="ruler-name">
+      3
+    </td>
+    <td class="ruler-value">
+      <code>
+        2.74
+      </code>
+    </td>
+    <td class="ruler-viz">
+      <span class="ruler-bar" style="width: 13.719999999999997em;">
+        &nbsp;
+      </span>
+    </td>
+  </tr>
+
+      
+    
+  </table>
 
     
   </div>
 
-
-        
-
-        <div data-sassdoc="ratio-demos">
-          
-          
-            
-            <span data-sassdoc="ratio-demo" style="font-size: 1em;">
-              1
-            </span>
-          
-            
-            <span data-sassdoc="ratio-demo" style="font-size: 1.4em;">
-              1.4
-            </span>
-          
-            
-            <span data-sassdoc="ratio-demo" style="font-size: 1.9599999999999997em;">
-              1.96
-            </span>
-          
-            
-            <span data-sassdoc="ratio-demo" style="font-size: 2.7439999999999993em;">
-              2.74
-            </span>
-          
-            
-            <span data-sassdoc="ratio-demo" style="font-size: 3.841599999999999em;">
-              3.84
-            </span>
-          
-            
-            <span data-sassdoc="ratio-demo" style="font-size: 5.378239999999998em;">
-              5.38
-            </span>
-          
-        </div>
-      </div>
-    
   
-  </div>
-
 
     
-
-  
 
 </section>
 
@@ -749,7 +708,7 @@ up to a maximum of <code>10</code>.</p>
   
   
 
-  <header data-item-section="header">
+  <div data-item-section="header">
     <h2 class="item-title">
       
         <span class="item-type"></span>
@@ -767,13 +726,10 @@ up to a maximum of <code>10</code>.</p>
     
   
 
-  </header>
 
     
     
-
-    <div data-item-section="source">
-      
+    
   
 
   
@@ -797,7 +753,6 @@ up to a maximum of <code>10</code>.</p>
     </div>
   
 
-    </div>
     
   
   
@@ -805,19 +760,13 @@ up to a maximum of <code>10</code>.</p>
   
 
   
-    
-  
-
-  <div data-item-section="summary">
-    <h3 class="item-subtitle">Description</h3>
-    
-      <div class="text-block">
-        <h2 id="preview-sizes">Preview sizes</h2>
+    <div class="text-block">
+      <h2 id="preview-sizes">Preview sizes</h2>
 <p>Similar to ratios,
 sizes can be combined into any number of maps
 to preview with Herman.
 you can build these maps out of existing variables,
-or use a tool like our [Accoutrement-Scale][scale]
+or use a tool like our <a href="http://oddbird.net/accoutrement-scale/">Accoutrement-Scale</a>
 to store and access sizes
 directly in a Herman-friendly<span class="widont">&nbsp;</span>map.</p>
 <pre><code class="lang-scss">$demo-sizes: (
@@ -826,36 +775,48 @@ directly in a Herman-friendly<span class="widont">&nbsp;</span>map.</p>
 );
 </code></pre>
 <p>Each map will be displayed individually,
-using the <code>@preview sizes</code> annotation:</p>
-<pre><code class="lang-scss">// @preview sizes; style: ruler
+using the <code>@sizes</code> annotation:</p>
+<pre><code class="lang-scss">/// @sizes {ruler}
 </code></pre>
-<p>The <code>sizes</code> preview accepts an optional <code>style</code> argument
-(defaulting to <code>text</code>),
+<p>The <code>@sizes</code> annotation accepts two optional<span class="widont">&nbsp;</span>arguments:</p>
+<ul>
+<li>
+<p>An optional one-word key argument,
+which defaults to the map-variable name.
+That key will be used to access the data from JSON,
+so it doesn’t matter what key is used,
+as long as the key given here matches the group-name
+used when adding this data to <code>$herman</code>.</p>
+</li>
+<li>
+<p>An optional <code>style</code> argument (in curly-brackets <code>{...}</code>),
+defaulting to <code>text</code>,
 which specifies the type of output to<span class="widont">&nbsp;</span>display:</p>
 <ul>
-<li><code>text</code>: Displays a sentence of lorem-ipsum text at the given<span class="widont">&nbsp;</span>size.</li>
-<li><code>ruler</code>: Displays a pattern of shapes spaced at the given<span class="widont">&nbsp;</span>size.</li>
+<li><code>text</code>: Displays a sentence of lorem-ipsum text for each given<span class="widont">&nbsp;</span>size.</li>
+<li><code>ruler</code>: Displays horizontal bars of the given<span class="widont">&nbsp;</span>sizes.</li>
 <li><code>output-only</code>: Displays values only, without<span class="widont">&nbsp;</span>demonstration.</li>
 </ul>
+</li>
+</ul>
 
-        
+      
   
 
-        
+      
   
 
-        
+      
   
 
-      </div>
-    
+    </div>
+  
+
   </div>
 
   
 
   
-
-  
   
   
   
@@ -888,97 +849,411 @@ which specifies the type of output to<span class="widont">&nbsp;</span>display:<
 
   
   
-    
+
+</section>
+
+  
     
     
 
-    
 
-    
-    
 
+
+
+
+
+
+
+
+<section class="item" >
+  
     
+  
+  
+  
+  
+
+  
+    <div data-item-section="prose" class="text-block">
+      <h3 id="text-sizes">Text Sizes</h3>
+<pre><code class="lang-scss">/// @sizes demo-sizes {text}
+</code></pre>
+
       
   
+
+      
   
 
+      
+  
+
+    </div>
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+      
+  
   <div data-item-section="size-preview">
-    <h3 class="item-subtitle">Size Previews</h3>
     
-    
-      <div data-sassdoc="size-preview">
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Size Previews</span>
         
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">root:</span>
-      
-      <span class="item-value">18px</span>
-      
-      
-    </h4>
+      </h3>
+    
 
     
-  </div>
+    
 
+    
+      
+  
+    <div class="size-output">
+      <h4 class="size-heading">
+        
+        <span>root</span>:
+        <code>18px</code>
+      </h4>
 
-        
-        
-          <div data-size-demo="text" style="font-size: 18px;">
-            
-              
+      
+        <div class="size-text" style="font-size: 18px;">
+          
   
     <span data-specimen-lorem="title">
       Pack my box with five dozen liquor&nbsp;jugs.
     </span>
   
 
-            
-          </div>
+        </div>
+      
+    </div>
+  
+    <div class="size-output">
+      <h4 class="size-heading">
         
-      </div>
-    
-      <div data-sassdoc="size-preview">
-        
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">xlarge:</span>
-      
-      <span class="item-value">28px</span>
-      
-      
-    </h4>
+        <span>xlarge</span>:
+        <code>28px</code>
+      </h4>
 
-    
-  </div>
-
-
-        
-        
-          <div data-size-demo="text" style="font-size: 28px;">
-            
-              
+      
+        <div class="size-text" style="font-size: 28px;">
+          
   
     <span data-specimen-lorem="title">
       Pack my box with five dozen liquor&nbsp;jugs.
     </span>
   
 
-            
-          </div>
-        
-      </div>
+        </div>
+      
+    </div>
+  
+
     
   
   </div>
 
 
-    
+
+</section>
 
   
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" >
+  
+    
+  
+  
+  
+  
+
+  
+    <div data-item-section="prose" class="text-block">
+      <h3 id="size-rulers">Size Rulers</h3>
+<pre><code class="lang-scss">/// @sizes demo-sizes {ruler}
+</code></pre>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+      
+  
+  <div data-item-section="size-preview">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Size Previews</span>
+        
+      </h3>
+    
+
+    
+    
+
+    
+      
+  <table class="rulers">
+    <tr class="is-hidden">
+      <th class="ruler-name">Name</th>
+      <th class="ruler-value">Value</th>
+      <td class="ruler-viz"></td>
+    </tr>
+
+    
+      
+        
+        
+  <tr class="ruler">
+    <td class="ruler-name">
+      root
+    </td>
+    <td class="ruler-value">
+      <code>
+        18px
+      </code>
+    </td>
+    <td class="ruler-viz">
+      <span class="ruler-bar" style="width: 18px;">
+        &nbsp;
+      </span>
+    </td>
+  </tr>
+
+      
+        
+        
+  <tr class="ruler">
+    <td class="ruler-name">
+      xlarge
+    </td>
+    <td class="ruler-value">
+      <code>
+        28px
+      </code>
+    </td>
+    <td class="ruler-viz">
+      <span class="ruler-bar" style="width: 28px;">
+        &nbsp;
+      </span>
+    </td>
+  </tr>
+
+      
+    
+  </table>
+
+    
+  
+  </div>
+
+
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" >
+  
+    
+  
+  
+  
+  
+
+  
+    <div data-item-section="prose" class="text-block">
+      <h3 id="name-value-only">Name/Value Only</h3>
+<pre><code class="lang-scss">/// @sizes demo-sizes {output-only}
+</code></pre>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+      
+  
+  <div data-item-section="size-preview">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Size Previews</span>
+        
+      </h3>
+    
+
+    
+    
+
+    
+      
+  
+    <div class="size-output">
+      <h4 class="size-heading">
+        
+        <span>root</span>:
+        <code>18px</code>
+      </h4>
+
+      
+    </div>
+  
+    <div class="size-output">
+      <h4 class="size-heading">
+        
+        <span>xlarge</span>:
+        <code>28px</code>
+      </h4>
+
+      
+    </div>
+  
+
+    
+  
+  </div>
+
+
 
 </section>
 
@@ -1051,10 +1326,14 @@ it can be converted to JSON using <code>herman-export</code>.</p>
   
 
     
-  
-
   <div data-item-section="related">
-    <h3 class="item-subtitle">related</h3>
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Related</span>
+        
+      </h3>
+    
+
     
       
         
@@ -1186,10 +1465,8 @@ it can be converted to JSON using <code>herman-export</code>.</p>
     </div>
   </div>
 
-  <script type="text/javascript" src="assets/js/jquery-3.1.1.slim.js"></script>
-  <script type="text/javascript" src="assets/js/srcdoc-polyfill.min.js"></script>
-  <script type="text/javascript" src="assets/js/highlight.js"></script>
-  <script type="text/javascript" src="assets/js/base.js"></script>
-  <script type="text/javascript" src="assets/js/init.js"></script>
+  <script type="text/javascript" src="assets/webpack/vendor.min.js"></script>
+  <script type="text/javascript" src="assets/webpack/app.min.js"></script>
+  
 </body>
 </html>

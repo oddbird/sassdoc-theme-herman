@@ -2,12 +2,11 @@
 // ====================
 
 
-/// ## Documenting ratios and sizes
+/// # Documenting ratios & sizes
 ///
-/// In addition to documenting [colors][color-preview],
+/// In addition to documenting colors and fonts,
 /// you can use Herman to document and display ratios and sizes.
-/// In the end, Herman will need a map
-/// converted to JSON --
+/// In the end, Herman will need a map --
 /// but we'll start with individual ratios/sizes,
 /// and build the export from there.
 ///
@@ -16,7 +15,7 @@
 /// Let's start with a ratio and two sizes:
 ///
 /// ```scss
-/// $herman-ratio: 1.4;
+/// $line-height-ratio: 1.4;
 /// $root: 18px;
 /// $xlarge: 28px;
 /// ```
@@ -24,7 +23,7 @@
 /// @group demo_sizes
 
 
-$herman-ratio: 1.4;
+$line-height-ratio: 1.4;
 $root: 18px;
 $xlarge: 28px;
 
@@ -44,7 +43,7 @@ $xlarge: 28px;
 ///
 /// ```scss
 /// $demo-ratios: (
-///   'herman-ratio': $herman-ratio
+///   'line-height': $line-height-ratio
 /// );
 /// ```
 ///
@@ -52,20 +51,23 @@ $xlarge: 28px;
 /// to organize different types of ratios --
 /// text, spacing, etc.
 /// Each map will be displayed individually,
-/// using the `@preview ratios` annotation:
+/// using the `@ratios` annotation:
 ///
 /// ```scss
-/// // @preview ratios; count: 4
+/// /// @ratios my-ratios
 /// ```
 ///
-/// The `ratios` preview accepts an optional `count` argument (defaults to `6`) --
-/// the number of ratio calculations to display,
-/// up to a maximum of `10`.
+/// The `@ratios` annotation accepts an optional one-word key argument,
+/// which defaults to the map-variable name.
+/// That key will be used to access the data from JSON,
+/// so it doesn't matter what key is used,
+/// as long as the key given here matches the group-name
+/// used when adding this data to `$herman`.
 ///
-/// @preview ratios
+/// @ratios
 /// @group demo_sizes
 $demo-ratios: (
-  'herman-ratio': $herman-ratio
+  'line-height': $line-height-ratio
 );
 
 
@@ -79,6 +81,8 @@ $demo-ratios: (
 /// to store and access sizes
 /// directly in a Herman-friendly map.
 ///
+/// [scale]: http://oddbird.net/accoutrement-scale/
+///
 /// ```scss
 /// $demo-sizes: (
 ///   'root': $root,
@@ -87,26 +91,57 @@ $demo-ratios: (
 /// ```
 ///
 /// Each map will be displayed individually,
-/// using the `@preview sizes` annotation:
+/// using the `@sizes` annotation:
 ///
 /// ```scss
-/// // @preview sizes; style: ruler
+/// /// @sizes {ruler}
 /// ```
 ///
-/// The `sizes` preview accepts an optional `style` argument
-/// (defaulting to `text`),
-/// which specifies the type of output to display:
+/// The `@sizes` annotation accepts two optional arguments:
 ///
-/// - `text`: Displays a sentence of lorem-ipsum text at the given size.
-/// - `ruler`: Displays a pattern of shapes spaced at the given size.
-/// - `output-only`: Displays values only, without demonstration.
+/// - An optional one-word key argument,
+///   which defaults to the map-variable name.
+///   That key will be used to access the data from JSON,
+///   so it doesn't matter what key is used,
+///   as long as the key given here matches the group-name
+///   used when adding this data to `$herman`.
+/// - An optional `style` argument (in curly-brackets `{...}`),
+///   defaulting to `text`,
+///   which specifies the type of output to display:
 ///
-/// @preview sizes
+///   - `text`: Displays a sentence of lorem-ipsum text for each given size.
+///   - `ruler`: Displays horizontal bars of the given sizes.
+///   - `output-only`: Displays values only, without demonstration.
+///
 /// @group demo_sizes
 $demo-sizes: (
   'root': $root,
   'xlarge': $xlarge
 );
+
+
+/// ### Text Sizes
+/// ```scss
+/// /// @sizes demo-sizes {text}
+/// ```
+/// @sizes demo-sizes {text}
+/// @group demo_sizes
+
+
+/// ### Size Rulers
+/// ```scss
+/// /// @sizes demo-sizes {ruler}
+/// ```
+/// @sizes demo-sizes {ruler}
+/// @group demo_sizes
+
+
+/// ### Name/Value Only
+/// ```scss
+/// /// @sizes demo-sizes {output-only}
+/// ```
+/// @sizes demo-sizes {output-only}
+/// @group demo_sizes
 
 
 /// ## Add ratio/size data to $herman

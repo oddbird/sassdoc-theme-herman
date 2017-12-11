@@ -2,15 +2,19 @@
 // ==============
 
 
+/// # Herman Config: Color Palettes
+/// @group config-colors
+/// @link http://oddbird.net/accoutrement-color/docs/
+///   Accoutrement Color
+
+
 // Brand Colors
 // ------------
 /// We use bright primary colors for the main brand,
 /// everything else is based on these colors.
 ///
-/// @preview color-palette
+/// @colors
 /// @group config-colors
-/// @link http://oddbird.net/accoutrement-color/docs/
-///   Accoutrement Color
 ///
 /// @type map
 /// @prop {Color | String | List} '<color-name>' -
@@ -27,15 +31,14 @@ $brand-colors: (
 
 @include config('colors', 'brand-colors', $brand-colors);
 
+
 // Neutral Colors
 // --------------
 /// Use these neutral colors
 /// to create structure and hierarchy in the document.
 ///
-/// @preview color-palette
+/// @colors
 /// @group config-colors
-/// @link http://oddbird.net/accoutrement-color/docs/
-///   Accoutrement Color
 $neutral-colors: (
   'light-gray': 'brand-blue' ('tint': 80%, 'desaturate': 80%),
   'gray': 'brand-blue' ('desaturate': 80%),
@@ -50,10 +53,8 @@ $neutral-colors: (
 /// These status colors for UI elements
 /// give a quick sense of progress, warning, or errors.
 ///
-/// @preview color-palette
+/// @colors
 /// @group config-colors
-/// @link http://oddbird.net/accoutrement-color/docs/
-///   Accoutrement Color
 $status-colors: (
   'go': hsl(75, 65%, 30%),
   'yield': 'brand-orange',
@@ -68,10 +69,8 @@ $status-colors: (
 /// Applying the brand and accent colors
 /// to a sitewide theme.
 ///
-/// @preview color-palette
+/// @colors
 /// @group config-colors
-/// @link http://oddbird.net/accoutrement-color/docs/
-///   Accoutrement Color
 $theme-colors: (
   'theme-dark': 'brand-blue',
   'theme-light': 'brand-blue' ('tint': 80%),
@@ -79,17 +78,19 @@ $theme-colors: (
   'background': #fff,
   'text': 'black',
   'text-light': 'gray',
+
+  'action': 'brand-pink' ('shade': 25%),
+  'focus': 'theme-dark',
+  'underline': 'action' ('tint': 75%),
+
   'border': 'gray',
   'light-border': 'light-gray',
-  'callout': 'light-gray',
-  'overlay': 'callout' ('rgba': 0.9),
   'shadow': 'gray' ('rgba': 0.5),
-  'action': 'theme-dark',
-  'focus': 'action' ('shade': 25%),
-  'active': 'action',
-  'accent': 'brand-pink',
-  'slight': 'light-gray' ('tint': 90%),
-  'code': hsl(196, 23%, 45%),
+
+  'callout': 'theme-light',
+  'slight': 'callout' ('tint': 90%),
+
+  'code': 'theme-dark',
   'code-shadow': 'code' (rgba: 0.2),
 );
 
@@ -101,10 +102,8 @@ $theme-colors: (
 /// Colors used by accoutrement-color
 /// to calculate contrast ratios.
 ///
-/// @preview color-palette
+/// @colors
 /// @group config-colors
-/// @link http://oddbird.net/accoutrement-color/docs/
-///   Accoutrement Color
 $system-colors: (
   'contrast-light': 'background',
   'contrast-dark': 'text',

@@ -1,0 +1,52 @@
+{% import 'item/preview.macros.njk' as preview %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>fonts</title>
+
+  <!-- Herman styles and fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
+  <link rel="stylesheet" href="assets/webpack/app_styles.min.css" />
+
+  {% if item.font.html %}
+    <!-- Font HTML -->
+    {{ item.font.html|safe }}
+  {% endif %}
+
+  {% if item.font.localFontCSS %}
+    <!-- Local font @font-face CSS -->
+    <style type="text/css">
+{{ item.font.localFontCSS|safe }}
+    </style>
+  {% endif %}
+</head>
+<body class="sassdoc">
+  {%- set key = item.font.key or item.context.origName or item.context.name -%}
+  {%- set data = sassjson.fonts[key] -%}
+  {%- if data -%}
+    {%- set family = [data.name or key, data.stack]|join(',') -%}
+    {%- if item.font.variants and item.font.variants|length -%}
+      {%- for option in item.font.variants -%}
+        {{ preview.specimen_variant(
+          family=family,
+          option=option,
+          data=data,
+          path=data[option]
+        ) }}
+      {%- endfor -%}
+    {%- else -%}
+      {%- for option, path in data -%}
+        {{ preview.specimen_variant(
+          family=family,
+          option=option,
+          path=path
+        ) }}
+      {%- endfor -%}
+    {%- endif -%}
+  {%- endif -%}
+</body>
+</html>
