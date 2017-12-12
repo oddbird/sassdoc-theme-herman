@@ -1,7 +1,7 @@
 # Herman Changelog
 
 
-## Unreleased
+## 1.0.0-rc.7: 2017-12-12
 
 - NEW: Support SassDoc [`googleAnalytics`][googleAnalytics] and
   [`trackingCode`][trackingCode] options --
