@@ -127,6 +127,7 @@ jobs:
           command: |
             nyc report --reporter=text-lcov | coveralls
             nyc report --reporter=text-lcov --temp-directory ./jscov/client/ | coveralls
+            curl -k "https://coveralls.io/webhook?repo_token=${COVERALLS_REPO_TOKEN}" -d "payload[build_number]=${CIRCLE_BUILD_NUM}&payload[status]=done"
           environment:
             COVERALLS_PARALLEL: 'true'
       - run:
@@ -134,9 +135,6 @@ jobs:
           command: |
             nyc check-coverage
             nyc check-coverage --temp-directory ./jscov/client/
-      - deploy:
-          name: Notify Coveralls
-          command: curl -k "https://coveralls.io/webhook?repo_token=${COVERALLS_REPO_TOKEN}" -d "payload[build_number]=${CIRCLE_BUILD_NUM}&payload[status]=done"
       - store_artifacts:
           path: jscov
           destination: js-reports
