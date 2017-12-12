@@ -151,8 +151,27 @@ export const initializeNav = () => {
         nav.attr('aria-expanded', btn.attr('aria-pressed'));
       }
     };
-
     screenTest(mql);
     mql.addListener(screenTest);
   }
+};
+
+const filterSiblings = (selector, filter) => {
+  $(`${selector} ~ section`).each((idx, node) => {
+    if (filter === '' || node.id.includes(filter)) {
+      $(node).show();
+    } else {
+      $(node).hide();
+    }
+  });
+};
+
+export const initializePageFilters = () => {
+  $('#page-filter').submit(event => {
+    event.preventDefault();
+    return false;
+  });
+  $('#page-filter input').keyup(() => {
+    filterSiblings('#page-filter', $('#page-filter input').val());
+  });
 };

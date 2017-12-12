@@ -13,6 +13,7 @@
 {% endblock %}
 
 {% block main %}
+  {% include 'filter_form.j2' %}
   {% for item in items %}
     {% set type = item.context.type %}
     {% include 'item/_item.njk' %}

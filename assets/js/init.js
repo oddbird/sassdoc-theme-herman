@@ -9,4 +9,5 @@ $(() => {
   base.initializeToggles();
   base.initializeIframes();
   base.initializeNav();
+  base.initializePageFilters();
 });
