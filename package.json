@@ -36,7 +36,7 @@
   "devDependencies": {
     "@babel/core": "7.0.0-beta.32",
     "@babel/polyfill": "7.0.0-beta.32",
-    "@babel/preset-env": "7.0.0-beta.32",
+    "@babel/preset-env": "7.0.0-beta.35",
     "accoutrement-color": "^2.2.2",
     "accoutrement-init": "^1.1.2",
     "accoutrement-layout": "^3.0.2",
