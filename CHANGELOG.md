@@ -1,7 +1,7 @@
 # Herman Changelog
 
 
-## Unreleased
+## 1.0.0-rc.8: 2017-12-14
 
 - CHANGE: Use `installJinjaCompat` for default Nunjucks environment.
 - BUGFIX: Fix prettyPrint for compiled HTML/Nunjucks.
