@@ -1,6 +1,12 @@
 # Herman Changelog
 
 
+## Unreleased
+
+- CHANGE: Use `installJinjaCompat` for default Nunjucks environment.
+- BUGFIX: Fix prettyPrint for compiled HTML/Nunjucks.
+
+
 ## 1.0.0-rc.7: 2017-12-12
 
 - NEW: Support SassDoc [`googleAnalytics`][googleAnalytics] and
