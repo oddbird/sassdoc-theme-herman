@@ -42,7 +42,7 @@
       <div data-sassdoc="project-title">
         <a href="index.html" rel="home" data-sassdoc="project-name">Herman</a>
         
-          <span data-sassdoc="project-version">1.0.0-rc.8</span>
+          <span data-sassdoc="project-version">1.0.0</span>
         
       </div>
     </header>
@@ -251,6 +251,135 @@
           
   <div class="text-block">
     <h1 id="herman-changelog">Herman Changelog</h1>
+<h2 id="-1-0-0-2017-12-15-">🎉 1.0.0: 2017-12-15<span class="widont">&nbsp;</span>🎉</h2>
+<p><em>No changes from <code>v1.0.0-rc.8</code>. Changes since <code>v0.5.5</code>:</em></p>
+<h3 id="-new-features">🚀 New Features</h3>
+<ul>
+<li>Support for remaining SassDoc annotations:
+<code>@throw</code>, <code>@return</code>, <code>@output</code>, <code>@content</code>, <code>@since</code>, <code>@deprecated</code>,
+<code>@author</code>, <code>@todo</code>, <code>@type</code>, <code>@alias</code> (and aliased callback), <code>used-by</code>
+(<code>@require</code> annotation callbacks)</li>
+<li>New <code>@font</code>, <code>@colors</code>, <code>@sizes</code>, and <code>@ratios</code> annotations (replace
+<code>@preview</code> annotation) –
+<a href="https://github.com/oddbird/sassdoc-theme-herman/issues/206">#206</a></li>
+<li>Support for SassDoc <a href="http://sassdoc.com/customising-the-view/#google-analytics"><code>googleAnalytics</code></a> and
+<a href="http://sassdoc.com/customising-the-view/#tracking-code"><code>trackingCode</code></a> options –
+<a href="https://github.com/oddbird/sassdoc-theme-herman/issues/215">#215</a></li>
+<li>Site-wide search –
+<a href="https://github.com/oddbird/sassdoc-theme-herman/issues/28">#28</a></li>
+<li><code>extraDocs</code> option: adds additional files (parsed as Markdown) –
+<a href="https://github.com/oddbird/sassdoc-theme-herman/issues/117">#117</a></li>
+<li><code>extraLinks</code> option: adds external links to sidebar nav –
+<a href="https://github.com/oddbird/sassdoc-theme-herman/issues/175">#175</a></li>
+<li><code>displayColors</code> option: customizes color formats displayed with <code>@colors</code>
+annotation</li>
+<li><code>customHTML</code> option: HTML to include in rendered <code>@example</code> annotations
+(replaces <code>minifiedIcons</code> option)</li>
+<li>Support “prose” SassDoc comments, that aren’t attached to a Sass block
+(parsed as<span class="widont">&nbsp;</span>Markdown)</li>
+<li>Sass: <code>herman-export</code> mixin – JSON-export functionality is now built-in
+Sass-json-export integration should continue to work as<span class="widont">&nbsp;</span>expected</li>
+<li>Sass: <code>herman-add($key, $map, $args…)</code> function – adds maps directly to
+<code>$herman</code>, with optional function/args to compile raw map<span class="widont">&nbsp;</span>values</li>
+</ul>
+<h3 id="-breaking-changes">💥 Breaking Changes</h3>
+<ul>
+<li>Require Node &gt;=<span class="widont">&nbsp;</span>6.0.0</li>
+<li>Remove <code>@preview</code> annotation (replaced by new <code>@font</code>, <code>@colors</code>, <code>@sizes</code>,
+and <code>@ratios</code> annotations) –
+<a href="https://github.com/oddbird/sassdoc-theme-herman/issues/206">#206</a></li>
+<li>Remove <code>@macro</code> annotation (replaced by <code>@example njk</code>) –
+<a href="https://github.com/oddbird/sassdoc-theme-herman/issues/182">#182</a></li>
+<li><code>@icons</code> annotation now only requires path to a folder of SVG icons: relative
+to the project directory, no longer relative to the <code>templatepath</code> option –
+<a href="https://github.com/oddbird/sassdoc-theme-herman/issues/47">#47</a></li>
+<li>Herman-specific options are now nested under top-level <code>herman</code> object in
+SassDoc<span class="widont">&nbsp;</span>configuration</li>
+<li>Remove <code>minifiedIcons</code> option (replaced with new <code>customHTML</code> option)</li>
+<li>Remove <code>customHead</code> option (replaced by multiline <code>@font</code> annotation)</li>
+<li>Sass-specific options are now nested under <code>herman.sass</code> object</li>
+<li>Remove top-level <code>templatepath</code> and <code>nunjucksEnv</code> options – now nested
+under new <code>nunjucks</code> options object: <code>nunjucks.templatepath</code> and
+<code>nunjucks.environment</code></li>
+<li><code>customCSS</code> is only included in rendered <code>@example</code> annotation iframes</li>
+<li>Group navigation is now ordered according to config <code>groups</code> order –
+<a href="https://github.com/oddbird/sassdoc-theme-herman/issues/150">#150</a></li>
+<li>Preserve the original order of SassDoc comments, rather than grouping by<span class="widont">&nbsp;</span>type</li>
+<li>Sass: <code>$herman</code> export map structure is now organized by type, in nested
+maps: <code>colors</code>, <code>sizes</code>, <code>ratios</code>, and <code>fonts</code></li>
+<li>Sass: <code>herman-add</code> mixin now requires an initial <code>$type</code> argument,
+in order to assign the given data to the proper nested data-type<span class="widont">&nbsp;</span>map</li>
+<li>Sass: Rename <code>$json</code> to <code>$herman</code> for clearer<span class="widont">&nbsp;</span>name-spacing</li>
+<li>Sass: <code>_herman-inspect</code>, and <code>_herman-str-replace</code> are now considered private<span class="widont">&nbsp;</span>functions</li>
+<li>Sass: <code>herman-map-compile</code> always returns inspected (json-ready) values,
+and now accepts function<span class="widont">&nbsp;</span>args</li>
+<li>Sass: Remove <code>herman-add-colors</code>/<code>-sizes</code>/<code>-ratios</code>/<code>-font</code> from utils</li>
+</ul>
+<h3 id="-bug-fixes">🐛 Bug Fixes</h3>
+<ul>
+<li>Return correct promise from theme function (fixes early<span class="widont">&nbsp;</span>resolution)</li>
+<li><code>UsedBy</code> list is aware of <code>display.alias</code> to unlink hidden<span class="widont">&nbsp;</span>aliases</li>
+<li>Do not link to internal <code>@access private</code> items if <code>display</code> option
+is set to <code>access: ['public']</code></li>
+<li>Fix assets referenced with relative urls in client-provided
+<code>customCSS</code> for <code>@example</code> annotations –
+<a href="https://github.com/oddbird/sassdoc-theme-herman/issues/174">#174</a></li>
+<li>Fix blocks with multi-line selectors and custom <code>@name</code> annotations –
+<a href="https://github.com/oddbird/sassdoc-theme-herman/pull/140">#140</a></li>
+<li>Fix broken internal links –
+<a href="https://github.com/oddbird/sassdoc-theme-herman/issues/106">#106</a></li>
+<li>Do not break layout on fonts with single-item stack –
+<a href="https://github.com/oddbird/sassdoc-theme-herman/issues/172">#172</a></li>
+</ul>
+<h3 id="-polish">💅 Polish</h3>
+<ul>
+<li>Add attribution/link to Herman/OddBird in nav footer (hidden if
+<code>display.watermark</code> is set to <code>false</code>) –
+<a href="https://github.com/oddbird/sassdoc-theme-herman/issues/154">#154</a></li>
+<li>Replace <a href="https://github.com/chjj/marked">marked</a> with
+<a href="https://github.com/markdown-it/markdown-it">markdown-it</a> for Markdown
+parsing with quote beautification –
+<a href="https://github.com/oddbird/sassdoc-theme-herman/issues/119">#119</a></li>
+<li>Add “widont” text transformations with
+<a href="https://github.com/ekalinin/typogr.js">typogr</a></li>
+<li>Pretty-print compiled HTML/Nunjucks with
+<a href="https://github.com/maxogden/commonjs-html-prettyprinter">html<span class="widont">&nbsp;</span>prettyprinter</a></li>
+<li>Add Herman logo for default favicon –
+<a href="https://github.com/oddbird/sassdoc-theme-herman/issues/155">#155</a></li>
+<li>Group identical colors in <code>@colors</code> color-palette –
+<a href="https://github.com/oddbird/sassdoc-theme-herman/issues/123">#123</a></li>
+<li>Display <code>@example</code> source and compiled code (njk and html; scss and css)
+side-by-side –
+<a href="https://github.com/oddbird/sassdoc-theme-herman/issues/65">#65</a>,
+<a href="https://github.com/oddbird/sassdoc-theme-herman/issues/37">#37</a></li>
+<li>Display links on index pages to project home and source,
+when defined in the project <code>package.json</code> –
+<a href="https://github.com/oddbird/sassdoc-theme-herman/issues/65">#91</a></li>
+<li>Clean up display of parameters and properties –
+<a href="https://github.com/oddbird/sassdoc-theme-herman/issues/53">#53</a>,
+<a href="https://github.com/oddbird/sassdoc-theme-herman/issues/49">#49</a>,
+<a href="https://github.com/oddbird/sassdoc-theme-herman/issues/55">#55</a></li>
+<li>Re-brand with sidebar navigation –
+<a href="https://github.com/oddbird/sassdoc-theme-herman/issues/58">#58</a>,
+<a href="https://github.com/oddbird/sassdoc-theme-herman/issues/69">#69</a></li>
+<li>Various branding and style<span class="widont">&nbsp;</span>improvements</li>
+</ul>
+<h3 id="-internal">🏠 Internal</h3>
+<ul>
+<li>Use <a href="https://github.com/jgerigmeyer/CDocParser/tree/preserve-nested-comments">forked version of CDocParser</a>
+preserving <code>///</code> within comments –
+<a href="https://github.com/oddbird/sassdoc-theme-herman/issues/212">#212</a></li>
+<li>Use <code>installJinjaCompat</code> for default Nunjucks<span class="widont">&nbsp;</span>environment</li>
+<li>Bundle static assets with Webpack; precompile JS with Babel –
+<a href="https://github.com/oddbird/sassdoc-theme-herman/issues/205">#205</a></li>
+<li>Do not minify compiled HTML assets –
+<a href="https://github.com/oddbird/sassdoc-theme-herman/issues/186">#186</a></li>
+<li>Move documentation to <code>docs/</code> and include in<span class="widont">&nbsp;</span>repo</li>
+<li>Flesh out Herman<span class="widont">&nbsp;</span>documentation</li>
+<li>Use GoogleFonts rather than shipping font<span class="widont">&nbsp;</span>files</li>
+<li>Add 100% test<span class="widont">&nbsp;</span>coverage</li>
+<li>Update dependencies</li>
+</ul>
 <h2 id="1-0-0-rc-8-2017-12-14">1.0.0-rc.8: 2017-12-14</h2>
 <ul>
 <li>CHANGE: Use <code>installJinjaCompat</code> for default Nunjucks<span class="widont">&nbsp;</span>environment.</li>
