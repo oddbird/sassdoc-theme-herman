@@ -1,6 +1,138 @@
 # Herman Changelog
 
 
+## 🎉 1.0.0: 2017-12-15 🎉
+
+*No changes from `v1.0.0-rc.8`. Changes since `v0.5.5`:*
+
+### 🚀 New Features
+
+- Support for remaining SassDoc annotations:
+  `@throw`, `@return`, `@output`, `@content`, `@since`, `@deprecated`,
+  `@author`, `@todo`, `@type`, `@alias` (and aliased callback), `used-by`
+  (`@require` annotation callbacks)
+- New `@font`, `@colors`, `@sizes`, and `@ratios` annotations (replace
+  `@preview` annotation) --
+  [#206](https://github.com/oddbird/sassdoc-theme-herman/issues/206)
+- Support for SassDoc [`googleAnalytics`][googleAnalytics] and
+  [`trackingCode`][trackingCode] options --
+  [#215](https://github.com/oddbird/sassdoc-theme-herman/issues/215)
+- Site-wide search --
+  [#28](https://github.com/oddbird/sassdoc-theme-herman/issues/28)
+- `extraDocs` option: adds additional files (parsed as Markdown) --
+  [#117](https://github.com/oddbird/sassdoc-theme-herman/issues/117)
+- `extraLinks` option: adds external links to sidebar nav --
+  [#175](https://github.com/oddbird/sassdoc-theme-herman/issues/175)
+- `displayColors` option: customizes color formats displayed with `@colors`
+  annotation
+- `customHTML` option: HTML to include in rendered `@example` annotations
+  (replaces `minifiedIcons` option)
+- Support "prose" SassDoc comments, that aren't attached to a Sass block
+  (parsed as Markdown)
+- Sass: `herman-export` mixin -- JSON-export functionality is now built-in
+  Sass-json-export integration should continue to work as expected
+- Sass: `herman-add($key, $map, $args…)` function -- adds maps directly to
+  `$herman`, with optional function/args to compile raw map values
+
+### 💥 Breaking Changes
+
+- Require Node >= 6.0.0
+- Remove `@preview` annotation (replaced by new `@font`, `@colors`, `@sizes`,
+  and `@ratios` annotations) --
+  [#206](https://github.com/oddbird/sassdoc-theme-herman/issues/206)
+- Remove `@macro` annotation (replaced by `@example njk`) --
+  [#182](https://github.com/oddbird/sassdoc-theme-herman/issues/182)
+- `@icons` annotation now only requires path to a folder of SVG icons: relative
+  to the project directory, no longer relative to the `templatepath` option --
+  [#47](https://github.com/oddbird/sassdoc-theme-herman/issues/47)
+- Herman-specific options are now nested under top-level `herman` object in
+  SassDoc configuration
+- Remove `minifiedIcons` option (replaced with new `customHTML` option)
+- Remove `customHead` option (replaced by multiline `@font` annotation)
+- Sass-specific options are now nested under `herman.sass` object
+- Remove top-level `templatepath` and `nunjucksEnv` options -- now nested
+  under new `nunjucks` options object: `nunjucks.templatepath` and
+  `nunjucks.environment`
+- `customCSS` is only included in rendered `@example` annotation iframes
+- Group navigation is now ordered according to config `groups` order --
+  [#150](https://github.com/oddbird/sassdoc-theme-herman/issues/150)
+- Preserve the original order of SassDoc comments, rather than grouping by type
+- Sass: `$herman` export map structure is now organized by type, in nested
+  maps: `colors`, `sizes`, `ratios`, and `fonts`
+- Sass: `herman-add` mixin now requires an initial `$type` argument,
+  in order to assign the given data to the proper nested data-type map
+- Sass: Rename `$json` to `$herman` for clearer name-spacing
+- Sass: `_herman-inspect`, and `_herman-str-replace` are now considered private
+  functions
+- Sass: `herman-map-compile` always returns inspected (json-ready) values,
+  and now accepts function args
+- Sass: Remove `herman-add-colors`/`-sizes`/`-ratios`/`-font` from utils
+
+### 🐛 Bug Fixes
+
+- Return correct promise from theme function (fixes early resolution)
+- `UsedBy` list is aware of `display.alias` to unlink hidden aliases
+- Do not link to internal `@access private` items if `display` option
+  is set to `access: ['public']`
+- Fix assets referenced with relative urls in client-provided
+  `customCSS` for `@example` annotations --
+  [#174](https://github.com/oddbird/sassdoc-theme-herman/issues/174)
+- Fix blocks with multi-line selectors and custom `@name` annotations --
+  [#140](https://github.com/oddbird/sassdoc-theme-herman/pull/140)
+- Fix broken internal links --
+  [#106](https://github.com/oddbird/sassdoc-theme-herman/issues/106)
+- Do not break layout on fonts with single-item stack --
+  [#172](https://github.com/oddbird/sassdoc-theme-herman/issues/172)
+
+### 💅 Polish
+
+- Add attribution/link to Herman/OddBird in nav footer (hidden if
+  `display.watermark` is set to `false`) --
+  [#154](https://github.com/oddbird/sassdoc-theme-herman/issues/154)
+- Replace [marked](https://github.com/chjj/marked) with
+  [markdown-it](https://github.com/markdown-it/markdown-it) for Markdown
+  parsing with quote beautification --
+  [#119](https://github.com/oddbird/sassdoc-theme-herman/issues/119)
+- Add "widont" text transformations with
+  [typogr](https://github.com/ekalinin/typogr.js)
+- Pretty-print compiled HTML/Nunjucks with
+  [html prettyprinter](https://github.com/maxogden/commonjs-html-prettyprinter)
+- Add Herman logo for default favicon. --
+  [#155](https://github.com/oddbird/sassdoc-theme-herman/issues/155)
+- Group identical colors in color-palette --
+  [#123](https://github.com/oddbird/sassdoc-theme-herman/issues/123)
+- Display `@example` source and compiled code (njk and html; scss and css)
+  side-by-side --
+  [#65](https://github.com/oddbird/sassdoc-theme-herman/issues/65),
+  [#37](https://github.com/oddbird/sassdoc-theme-herman/issues/37)
+- Display links on index pages to project home and source,
+  when defined in the project `package.json` --
+  [#91](https://github.com/oddbird/sassdoc-theme-herman/issues/65)
+- Clean up display of parameters and properties --
+  [#53](https://github.com/oddbird/sassdoc-theme-herman/issues/53),
+  [#49](https://github.com/oddbird/sassdoc-theme-herman/issues/49),
+  [#55](https://github.com/oddbird/sassdoc-theme-herman/issues/55)
+- Re-brand with sidebar navigation --
+  [#58](https://github.com/oddbird/sassdoc-theme-herman/issues/58),
+  [#69](https://github.com/oddbird/sassdoc-theme-herman/issues/69)
+- Various branding and style improvements
+
+### 🏠 Internal
+
+- Use forked version of CDocParser preserving `///` within comments --
+  [#212](https://github.com/oddbird/sassdoc-theme-herman/issues/212)
+- Use `installJinjaCompat` for default Nunjucks environment
+- Bundle static assets with Webpack; precompile JS with Babel --
+  [#205](https://github.com/oddbird/sassdoc-theme-herman/issues/205)
+- Do not minify compiled HTML assets --
+  [#186](https://github.com/oddbird/sassdoc-theme-herman/issues/186)
+- Move documentation to `docs/` and include in repo
+- Flesh out Herman documentation
+- Use GoogleFonts rather than shipping font files
+- Add 100% test coverage
+- Update dependencies
+
+
 ## 1.0.0-rc.8: 2017-12-14
 
 - CHANGE: Use `installJinjaCompat` for default Nunjucks environment.
