@@ -97,9 +97,9 @@
   [typogr](https://github.com/ekalinin/typogr.js)
 - Pretty-print compiled HTML/Nunjucks with
   [html prettyprinter](https://github.com/maxogden/commonjs-html-prettyprinter)
-- Add Herman logo for default favicon. --
+- Add Herman logo for default favicon --
   [#155](https://github.com/oddbird/sassdoc-theme-herman/issues/155)
-- Group identical colors in color-palette --
+- Group identical colors in `@colors` color-palette --
   [#123](https://github.com/oddbird/sassdoc-theme-herman/issues/123)
 - Display `@example` source and compiled code (njk and html; scss and css)
   side-by-side --
@@ -119,7 +119,8 @@
 
 ### 🏠 Internal
 
-- Use forked version of CDocParser preserving `///` within comments --
+- Use [forked version of CDocParser](https://github.com/jgerigmeyer/CDocParser/tree/preserve-nested-comments)
+  preserving `///` within comments --
   [#212](https://github.com/oddbird/sassdoc-theme-herman/issues/212)
 - Use `installJinjaCompat` for default Nunjucks environment
 - Bundle static assets with Webpack; precompile JS with Babel --
