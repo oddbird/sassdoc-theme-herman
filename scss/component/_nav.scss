@@ -14,7 +14,7 @@
   flex-direction: column;
   width: auto;
 
-  @include below('nav-large') {
+  @include below('nav-break') {
     @include position(0 null 0 0);
     box-shadow: 0 0 size('half-shim') color('shadow');
     transform: translateX(-102%);
@@ -25,7 +25,7 @@
     }
   }
 
-  @include above('nav-large') {
+  @include above('nav-break') {
     flex: 0 0 auto;
   }
 }
@@ -43,7 +43,7 @@
     padding-right:  size('shim');
   }
 
-  @include above('nav-large') {
+  @include above('nav-break') {
     display: none;
   }
 
@@ -63,14 +63,6 @@
 [data-sassdoc='nav-item'] {
   list-style: none;
   margin: size('half-shim') 0;
-
-  @include below('nav-small') {
-    width: 50%;
-
-    &:nth-of-type(2n) {
-      padding-right: 1rem;
-    }
-  }
 }
 
 
@@ -163,7 +155,7 @@
   @include clearfix;
   border-top: 1px solid color('theme-light');
   flex: 0 0 auto;
-  font-size: size('xsmall');
+  font-size: size('footer');
   line-height: size('rhythm');
   padding-top: size('gutter');
 

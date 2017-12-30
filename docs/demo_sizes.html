@@ -124,11 +124,6 @@
         
           
           <li data-sassdoc="nav-item">
-            <a href="config_api-utilities.html" data-sassdoc-nav="is-not-active">_API Utilities</a>
-          </li>
-        
-          
-          <li data-sassdoc="nav-item">
             <a href="config-colors.html" data-sassdoc-nav="is-not-active">_Colors</a>
           </li>
         
@@ -175,6 +170,11 @@
           
           <li data-sassdoc="nav-item">
             <a href="style-code.html" data-sassdoc-nav="is-not-active">_Code Blocks</a>
+          </li>
+        
+          
+          <li data-sassdoc="nav-item">
+            <a href="config_api-utilities.html" data-sassdoc-nav="is-not-active">_Private Utilities</a>
           </li>
         
       </ul>
@@ -281,7 +281,7 @@ and build the export from<span class="widont">&nbsp;</span>there.</p>
 <p>Let’s start with a ratio and two<span class="widont">&nbsp;</span>sizes:</p>
 <pre><code class="lang-scss">$line-height-ratio: 1.4;
 $root: 18px;
-$xlarge: 28px;
+$xlarge: 3rem;
 </code></pre>
 
       
@@ -501,11 +501,14 @@ used when adding this data to <code>$herman</code>.</p>
 
     
       
-  <table class="rulers">
+  
+  
+
+  <table class="sizes">
     <tr class="is-hidden">
-      <th class="ruler-name">Step</th>
-      <th class="ruler-value">Value</th>
-      <td class="ruler-viz"></td>
+      <th class="size-name">Step</th>
+      <th class="size-value">Value</th>
+      <td class="size-viz"></td>
     </tr>
 
     
@@ -517,19 +520,23 @@ used when adding this data to <code>$herman</code>.</p>
         
 
         
-  <tr class="ruler">
-    <td class="ruler-name">
+  <tr class="size">
+    <td class="size-name">
       -3
     </td>
-    <td class="ruler-value">
+    <td class="size-value">
       <code>
         0.36
       </code>
     </td>
-    <td class="ruler-viz">
-      <span class="ruler-bar" style="width: 1.8221574344023328em;">
-        &nbsp;
-      </span>
+    <td class="size-viz">
+      
+        <div class="size-overflow">
+          <span class="size-bar" style="width: 1.8221574344023328em;">
+            &nbsp;
+          </span>
+        </div>
+      
     </td>
   </tr>
 
@@ -539,19 +546,23 @@ used when adding this data to <code>$herman</code>.</p>
         
 
         
-  <tr class="ruler">
-    <td class="ruler-name">
+  <tr class="size">
+    <td class="size-name">
       -2
     </td>
-    <td class="ruler-value">
+    <td class="size-value">
       <code>
         0.51
       </code>
     </td>
-    <td class="ruler-viz">
-      <span class="ruler-bar" style="width: 2.551020408163266em;">
-        &nbsp;
-      </span>
+    <td class="size-viz">
+      
+        <div class="size-overflow">
+          <span class="size-bar" style="width: 2.551020408163266em;">
+            &nbsp;
+          </span>
+        </div>
+      
     </td>
   </tr>
 
@@ -561,19 +572,23 @@ used when adding this data to <code>$herman</code>.</p>
         
 
         
-  <tr class="ruler">
-    <td class="ruler-name">
+  <tr class="size">
+    <td class="size-name">
       -1
     </td>
-    <td class="ruler-value">
+    <td class="size-value">
       <code>
         0.71
       </code>
     </td>
-    <td class="ruler-viz">
-      <span class="ruler-bar" style="width: 3.5714285714285716em;">
-        &nbsp;
-      </span>
+    <td class="size-viz">
+      
+        <div class="size-overflow">
+          <span class="size-bar" style="width: 3.5714285714285716em;">
+            &nbsp;
+          </span>
+        </div>
+      
     </td>
   </tr>
 
@@ -583,19 +598,23 @@ used when adding this data to <code>$herman</code>.</p>
         
 
         
-  <tr class="ruler ratio-base">
-    <td class="ruler-name">
+  <tr class="size ratio-base">
+    <td class="size-name">
       —
     </td>
-    <td class="ruler-value">
+    <td class="size-value">
       <code>
         base
       </code>
     </td>
-    <td class="ruler-viz">
-      <span class="ruler-bar" style="width: 5em;">
-        &nbsp;
-      </span>
+    <td class="size-viz">
+      
+        <div class="size-overflow">
+          <span class="size-bar" style="width: 5em;">
+            &nbsp;
+          </span>
+        </div>
+      
     </td>
   </tr>
 
@@ -605,19 +624,23 @@ used when adding this data to <code>$herman</code>.</p>
         
 
         
-  <tr class="ruler">
-    <td class="ruler-name">
+  <tr class="size">
+    <td class="size-name">
       1
     </td>
-    <td class="ruler-value">
+    <td class="size-value">
       <code>
         1.4
       </code>
     </td>
-    <td class="ruler-viz">
-      <span class="ruler-bar" style="width: 7em;">
-        &nbsp;
-      </span>
+    <td class="size-viz">
+      
+        <div class="size-overflow">
+          <span class="size-bar" style="width: 7em;">
+            &nbsp;
+          </span>
+        </div>
+      
     </td>
   </tr>
 
@@ -627,19 +650,23 @@ used when adding this data to <code>$herman</code>.</p>
         
 
         
-  <tr class="ruler">
-    <td class="ruler-name">
+  <tr class="size">
+    <td class="size-name">
       2
     </td>
-    <td class="ruler-value">
+    <td class="size-value">
       <code>
         1.96
       </code>
     </td>
-    <td class="ruler-viz">
-      <span class="ruler-bar" style="width: 9.799999999999999em;">
-        &nbsp;
-      </span>
+    <td class="size-viz">
+      
+        <div class="size-overflow">
+          <span class="size-bar" style="width: 9.799999999999999em;">
+            &nbsp;
+          </span>
+        </div>
+      
     </td>
   </tr>
 
@@ -649,19 +676,23 @@ used when adding this data to <code>$herman</code>.</p>
         
 
         
-  <tr class="ruler">
-    <td class="ruler-name">
+  <tr class="size">
+    <td class="size-name">
       3
     </td>
-    <td class="ruler-value">
+    <td class="size-value">
       <code>
         2.74
       </code>
     </td>
-    <td class="ruler-viz">
-      <span class="ruler-bar" style="width: 13.719999999999997em;">
-        &nbsp;
-      </span>
+    <td class="size-viz">
+      
+        <div class="size-overflow">
+          <span class="size-bar" style="width: 13.719999999999997em;">
+            &nbsp;
+          </span>
+        </div>
+      
     </td>
   </tr>
 
@@ -789,6 +820,8 @@ which specifies the type of output to<span class="widont">&nbsp;</span>display:<
 <ul>
 <li><code>text</code>: Displays a sentence of lorem-ipsum text for each given<span class="widont">&nbsp;</span>size.</li>
 <li><code>ruler</code>: Displays horizontal bars of the given<span class="widont">&nbsp;</span>sizes.</li>
+<li><code>ruler-large</code>: Displays horizontal bars –
+each on their own line, for more visible<span class="widont">&nbsp;</span>space.</li>
 <li><code>output-only</code>: Displays values only, without<span class="widont">&nbsp;</span>demonstration.</li>
 </ul>
 </li>
@@ -935,16 +968,28 @@ which specifies the type of output to<span class="widont">&nbsp;</span>display:<
 
     
       
-  
-    <div class="size-output">
-      <h4 class="size-heading">
-        
-        <span>root</span>:
-        <code>18px</code>
-      </h4>
+  <table class="sizes">
+    <tr class="is-hidden">
+      <th class="size-name">Name</th>
+      <th class="size-value">Value</th>
+      <td class="size-viz"></td>
+    </tr>
 
+    
       
-        <div class="size-text" style="font-size: 18px;">
+        
+  <tr class="size">
+    <td class="size-name">
+      root
+    </td>
+    <td class="size-value">
+      <code>
+        18px
+      </code>
+    </td>
+    <td class="size-viz is-text">
+      
+        <span class="size-text" style="font-size: 18px;">
           
   
     <span data-specimen-lorem="title">
@@ -952,19 +997,26 @@ which specifies the type of output to<span class="widont">&nbsp;</span>display:<
     </span>
   
 
-        </div>
+        </span>
       
-    </div>
-  
-    <div class="size-output">
-      <h4 class="size-heading">
-        
-        <span>xlarge</span>:
-        <code>28px</code>
-      </h4>
+    </td>
+  </tr>
 
+    
       
-        <div class="size-text" style="font-size: 28px;">
+        
+  <tr class="size">
+    <td class="size-name">
+      xlarge
+    </td>
+    <td class="size-value">
+      <code>
+        3rem
+      </code>
+    </td>
+    <td class="size-viz is-text">
+      
+        <span class="size-text" style="font-size: 3rem;">
           
   
     <span data-specimen-lorem="title">
@@ -972,10 +1024,13 @@ which specifies the type of output to<span class="widont">&nbsp;</span>display:<
     </span>
   
 
-        </div>
+        </span>
       
-    </div>
-  
+    </td>
+  </tr>
+
+    
+  </table>
 
     
   
@@ -1008,7 +1063,7 @@ which specifies the type of output to<span class="widont">&nbsp;</span>display:<
 
   
     <div data-item-section="prose" class="text-block">
-      <h3 id="size-rulers">Size Rulers</h3>
+      <h3 id="rulers">Rulers</h3>
 <pre><code class="lang-scss">/// @sizes demo-sizes {ruler}
 </code></pre>
 
@@ -1074,49 +1129,218 @@ which specifies the type of output to<span class="widont">&nbsp;</span>display:<
 
     
       
-  <table class="rulers">
+  
+  
+
+  <table class="sizes">
     <tr class="is-hidden">
-      <th class="ruler-name">Name</th>
-      <th class="ruler-value">Value</th>
-      <td class="ruler-viz"></td>
+      <th class="size-name">Name</th>
+      <th class="size-value">Value</th>
+      <td class="size-viz"></td>
     </tr>
 
     
       
         
         
-  <tr class="ruler">
-    <td class="ruler-name">
+  <tr class="size">
+    <td class="size-name">
       root
     </td>
-    <td class="ruler-value">
+    <td class="size-value">
       <code>
         18px
       </code>
     </td>
-    <td class="ruler-viz">
-      <span class="ruler-bar" style="width: 18px;">
-        &nbsp;
-      </span>
+    <td class="size-viz">
+      
+        <div class="size-overflow">
+          <span class="size-bar" style="width: 18px;">
+            &nbsp;
+          </span>
+        </div>
+      
     </td>
   </tr>
 
       
         
         
-  <tr class="ruler">
-    <td class="ruler-name">
+  <tr class="size">
+    <td class="size-name">
       xlarge
     </td>
-    <td class="ruler-value">
+    <td class="size-value">
       <code>
-        28px
+        3rem
       </code>
     </td>
-    <td class="ruler-viz">
-      <span class="ruler-bar" style="width: 28px;">
-        &nbsp;
-      </span>
+    <td class="size-viz">
+      
+        <div class="size-overflow">
+          <span class="size-bar" style="width: 3rem;">
+            &nbsp;
+          </span>
+        </div>
+      
+    </td>
+  </tr>
+
+      
+    
+  </table>
+
+    
+  
+  </div>
+
+
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" >
+  
+    
+  
+  
+  
+  
+
+  
+    <div data-item-section="prose" class="text-block">
+      <h3 id="large-rulers">Large Rulers</h3>
+<pre><code class="lang-scss">/// @sizes demo-sizes {ruler}
+</code></pre>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+      
+  
+  <div data-item-section="size-preview">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Size Previews</span>
+        
+      </h3>
+    
+
+    
+    
+
+    
+      
+  
+  
+
+  <table class="sizes is-large">
+    <tr class="is-hidden">
+      <th class="size-name">Name</th>
+      <th class="size-value">Value</th>
+      <td class="size-viz"></td>
+    </tr>
+
+    
+      
+        
+        
+  <tr class="size">
+    <td class="size-name">
+      root
+    </td>
+    <td class="size-value">
+      <code>
+        18px
+      </code>
+    </td>
+    <td class="size-viz">
+      
+        <div class="size-overflow">
+          <span class="size-bar" style="width: 18px;">
+            &nbsp;
+          </span>
+        </div>
+      
+    </td>
+  </tr>
+
+      
+        
+        
+  <tr class="size">
+    <td class="size-name">
+      xlarge
+    </td>
+    <td class="size-value">
+      <code>
+        3rem
+      </code>
+    </td>
+    <td class="size-viz">
+      
+        <div class="size-overflow">
+          <span class="size-bar" style="width: 3rem;">
+            &nbsp;
+          </span>
+        </div>
+      
     </td>
   </tr>
 
@@ -1221,27 +1445,49 @@ which specifies the type of output to<span class="widont">&nbsp;</span>display:<
 
     
       
-  
-    <div class="size-output">
-      <h4 class="size-heading">
-        
-        <span>root</span>:
-        <code>18px</code>
-      </h4>
+  <table class="sizes">
+    <tr class="is-hidden">
+      <th class="size-name">Name</th>
+      <th class="size-value">Value</th>
+      <td class="size-viz"></td>
+    </tr>
 
+    
       
-    </div>
-  
-    <div class="size-output">
-      <h4 class="size-heading">
         
-        <span>xlarge</span>:
-        <code>28px</code>
-      </h4>
-
+  <tr class="size">
+    <td class="size-name">
+      root
+    </td>
+    <td class="size-value">
+      <code>
+        18px
+      </code>
+    </td>
+    <td class="size-viz">
       
-    </div>
-  
+    </td>
+  </tr>
+
+    
+      
+        
+  <tr class="size">
+    <td class="size-name">
+      xlarge
+    </td>
+    <td class="size-value">
+      <code>
+        3rem
+      </code>
+    </td>
+    <td class="size-viz">
+      
+    </td>
+  </tr>
+
+    
+  </table>
 
     
   

@@ -124,11 +124,6 @@
         
           
           <li data-sassdoc="nav-item">
-            <a href="config_api-utilities.html" data-sassdoc-nav="is-not-active">_API Utilities</a>
-          </li>
-        
-          
-          <li data-sassdoc="nav-item">
             <a href="config-colors.html" data-sassdoc-nav="is-not-active">_Colors</a>
           </li>
         
@@ -175,6 +170,11 @@
           
           <li data-sassdoc="nav-item">
             <a href="style-code.html" data-sassdoc-nav="is-active">_Code Blocks</a>
+          </li>
+        
+          
+          <li data-sassdoc="nav-item">
+            <a href="config_api-utilities.html" data-sassdoc-nav="is-not-active">_Private Utilities</a>
           </li>
         
       </ul>
@@ -892,9 +892,9 @@ so code-overflow is more<span class="widont">&nbsp;</span>obvious.</p>
   @include before(&#39; &#39;) {
     @include position(0);
     background:
-      hljs-gradient(&#39;to top&#39;, &#39;small&#39;),
-      hljs-gradient(&#39;to right&#39;, &#39;small&#39;),
-      hljs-gradient(&#39;to bottom&#39;, &#39;small&#39;),
+      hljs-gradient(&#39;to top&#39;, 1rem),
+      hljs-gradient(&#39;to right&#39;, 1rem),
+      hljs-gradient(&#39;to bottom&#39;, 1rem),
       hljs-gradient(&#39;to left&#39;) no-repeat scroll;
     box-shadow: 0 0 size(&#39;half-shim&#39;) color(&#39;hljs-shadow&#39;) inset;
     pointer-events: none;

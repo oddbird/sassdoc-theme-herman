@@ -2,9 +2,18 @@
 // =============
 
 
-[data-sassdoc='font-stack'] {
-  @include font-family('code');
-  font-size: size('small');
+.font-specimen {
+  display: flex;
+  flex-wrap: wrap;
+  margin: size('gutter') negative('shim') 0;
+
+  @supports (display: grid) {
+    display: grid;
+    grid-auto-rows: auto;
+    grid-gap: size('gutter'); // sass-lint:disable-line no-misspelled-properties
+    grid-template-columns: repeat(auto-fit, minmax(size('font-preview'), 1fr));
+    margin: size('gutter') 0 0;
+  }
 }
 
 
@@ -12,7 +21,16 @@
 // ----
 
 [data-specimen-face] {
-  padding: size('shim') 0;
+  align-items: stretch;
+  display: flex;
+  flex: 1 0 size('font-preview');
+  flex-direction: column;
+  font-size: size('code');
+  margin: size('shim');
+
+  @supports (display: grid) {
+    margin: 0;
+  }
 }
 
 [data-specimen='sample'] {
@@ -22,14 +40,14 @@
   justify-content: space-between;
 }
 
-[data-specimen='aa'],
 [data-specimen='lorem'] {
-  padding: 0 size('shim');
+  padding-left: size('shim');
 }
 
 [data-specimen='aa'] {
   flex: 0 1 auto;
-  font-size: size('specimen');
+  font-size: size('specimen-aa');
+  padding-left: size('quarter-shim');
 }
 
 [data-specimen='lorem'] {

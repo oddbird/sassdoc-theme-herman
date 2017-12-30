@@ -24,27 +24,27 @@
   $color: 'theme-dark',
   $background: 'background'
 ) {
-  border-bottom: size('border') solid color($color);
+  border-bottom: size('arrow-border') solid color($color);
   display: block;
   position: relative;
   width: 100%;
 
-  @include wrap-content(' ') {
-    border: size('shim') solid transparent;
+  @include wrap-content('') {
+    border: size('arrow-depth') solid transparent;
     border-top-color: color($color);
-    border-width: size('shim') size('gutter') 0;
+    border-width: size('arrow-depth') size('arrow-side') 0;
     left: 50%;
     position: absolute;
     top: 100%;
     transition: border-width 200ms;
   }
 
-  @include before(' ') {
-    margin-top: size('border');
+  @include before('') {
+    margin-top: size('arrow-border');
     transform: translateX(-50%) translateY(-2px);
   }
 
-  @include after(' ') {
+  @include after('') {
     border-top-color: color($background);
     transform: translateX(-50%) translateY(-4px);
   }

@@ -236,7 +236,7 @@
       title='Ratio',
       supplement=name + ' (' + value + ')'
     ) %}
-      {{ size_ruler(data, is_ratio=true) }}
+      {{ size_ruler(data, style='ratio') }}
     {% endcall %}
   {% endfor %}
 {% endmacro %}
@@ -246,21 +246,26 @@
   {% call show.item_section('size-preview', 'Size Previews') %}
     {% set style = args.style or 'text' %}
 
-    {% if style == 'ruler' %}
-      {{ size_ruler(data) }}
+    {% if (style == 'ruler') or (style == 'ruler-large') %}
+      {{ size_ruler(data, style=style) }}
+    {% elif (style == 'text') %}
+      {{ size_text(data) }}
     {% else %}
-      {{ size_output(data, style) }}
+      {{ size_output(data) }}
     {% endif %}
   {% endcall %}
 {% endmacro %}
 
 
-{% macro size_ruler(data, is_ratio=false) %}
-  <table class="rulers">
+{% macro size_ruler(data, style) %}
+  {% set is_large = (style == 'ruler-large') %}
+  {% set is_ratio = (style == 'ratio') %}
+
+  <table class="sizes{% if is_large %} is-large{% endif %}">
     <tr class="is-hidden">
-      <th class="ruler-name">{{ 'Step' if is_ratio else 'Name' }}</th>
-      <th class="ruler-value">Value</th>
-      <td class="ruler-viz"></td>
+      <th class="size-name">{{ 'Step' if is_ratio else 'Name' }}</th>
+      <th class="size-value">Value</th>
+      <td class="size-viz"></td>
     </tr>
 
     {% if is_ratio %}
@@ -280,48 +285,80 @@
     {% else %}
       {% for value, items in data|list|groupby('value') %}
         {% set name = items|join(', ', 'key') %}
-        {{ size_ruler_row(name, value, value) }}
+        {{ size_ruler_row(
+          name=name,
+          value=value,
+          width=value
+        ) }}
       {% endfor %}
     {% endif %}
   </table>
 {% endmacro %}
 
 
-{% macro size_ruler_row(name, value, width) %}
-  <tr class="ruler{% if value == 'base' %} ratio-base{% endif %}">
-    <td class="ruler-name">
+{% macro size_ruler_row(name, value, width=none, text=none) %}
+  <tr class="size{% if value == 'base' %} ratio-base{% endif %}">
+    <td class="size-name">
       {{ name }}
     </td>
-    <td class="ruler-value">
+    <td class="size-value">
       <code>
         {{ value }}
       </code>
     </td>
-    <td class="ruler-viz">
-      <span class="ruler-bar" style="width: {{ width }};">
-        &nbsp;
-      </span>
+    <td class="size-viz{% if text %} is-text{% endif %}">
+      {% if width %}
+        <div class="size-overflow">
+          <span class="size-bar" style="width: {{ width }};">
+            &nbsp;
+          </span>
+        </div>
+      {% elif text %}
+        <span class="size-text" style="font-size: {{ value }};">
+          {{ lorem('title') }}
+        </span>
+      {% endif %}
     </td>
   </tr>
 {% endmacro %}
 
 
-{% macro size_output(data, style) %}
-  {% for value, items in data|list|groupby('value') %}
-    <div class="size-output">
-      <h4 class="size-heading">
-        {% set name = items|join(', ', 'key') %}
-        <span>{{ name }}</span>:
-        <code>{{ value }}</code>
-      </h4>
+{% macro size_text(data) %}
+  <table class="sizes">
+    <tr class="is-hidden">
+      <th class="size-name">Name</th>
+      <th class="size-value">Value</th>
+      <td class="size-viz"></td>
+    </tr>
 
-      {% if style == 'text' %}
-        <div class="size-text" style="font-size: {{ value }};">
-          {{ lorem('title') }}
-        </div>
-      {% endif %}
-    </div>
-  {% endfor %}
+    {% for value, items in data|list|groupby('value') %}
+      {% set name = items|join(', ', 'key') %}
+        {{ size_ruler_row(
+          name=name,
+          value=value,
+          text=value
+        ) }}
+    {% endfor %}
+  </table>
+{% endmacro %}
+
+
+{% macro size_output(data) %}
+  <table class="sizes">
+    <tr class="is-hidden">
+      <th class="size-name">Name</th>
+      <th class="size-value">Value</th>
+      <td class="size-viz"></td>
+    </tr>
+
+    {% for value, items in data|list|groupby('value') %}
+      {% set name = items|join(', ', 'key') %}
+        {{ size_ruler_row(
+          name=name,
+          value=value
+        ) }}
+    {% endfor %}
+  </table>
 {% endmacro %}
 
 

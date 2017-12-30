@@ -38,7 +38,6 @@
 .code-header {
   @include contrasted('theme-light');
   flex: 0 0 auto;
-  font-size: size('small');
   padding: 0 size('shim');
 
   + [data-sassdoc='hljs'] {
@@ -48,11 +47,10 @@
 
 .code-description {
   @include before(' – ');
-  font-size: size('small');
 }
 
 .example-render {
-  border: 1px solid color('light-border');
+  border: 1px solid color('border-light');
   border-top: 0;
   padding: size('shim');
 }

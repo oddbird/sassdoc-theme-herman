@@ -96,7 +96,6 @@ SassdocPlugin.prototype.apply = compiler => {
         demo_icons: 'SVG Icons',
         demo_examples: 'Rendered Examples',
         'demo_test-sassdoc': 'SassDoc Annotations',
-        'config_api-utilities': '_API Utilities',
         'config-colors': '_Colors',
         'config-scale': '_Sizes',
         'config-fonts': '_Fonts',
@@ -107,6 +106,7 @@ SassdocPlugin.prototype.apply = compiler => {
         'style-nav': '_Navigation',
         'style-sections': '_Sections',
         'style-code': '_Code Blocks',
+        'config_api-utilities': '_Private Utilities',
       },
     }).then(
       () => {

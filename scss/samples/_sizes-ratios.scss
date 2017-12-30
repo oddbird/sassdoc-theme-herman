@@ -17,7 +17,7 @@
 /// ```scss
 /// $line-height-ratio: 1.4;
 /// $root: 18px;
-/// $xlarge: 28px;
+/// $xlarge: 3rem;
 /// ```
 ///
 /// @group demo_sizes
@@ -25,7 +25,7 @@
 
 $line-height-ratio: 1.4;
 $root: 18px;
-$xlarge: 28px;
+$xlarge: 3rem;
 
 
 /// ## Preview ratios
@@ -111,6 +111,8 @@ $demo-ratios: (
 ///
 ///   - `text`: Displays a sentence of lorem-ipsum text for each given size.
 ///   - `ruler`: Displays horizontal bars of the given sizes.
+///   - `ruler-large`: Displays horizontal bars --
+///     each on their own line, for more visible space.
 ///   - `output-only`: Displays values only, without demonstration.
 ///
 /// @group demo_sizes
@@ -128,11 +130,19 @@ $demo-sizes: (
 /// @group demo_sizes
 
 
-/// ### Size Rulers
+/// ### Rulers
 /// ```scss
 /// /// @sizes demo-sizes {ruler}
 /// ```
 /// @sizes demo-sizes {ruler}
+/// @group demo_sizes
+
+
+/// ### Large Rulers
+/// ```scss
+/// /// @sizes demo-sizes {ruler}
+/// ```
+/// @sizes demo-sizes {ruler-large}
 /// @group demo_sizes
 
 

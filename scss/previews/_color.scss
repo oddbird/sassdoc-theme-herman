@@ -24,7 +24,7 @@
   display: flex;
   flex: 1 0 size('color-preview');
   flex-direction: column;
-  font-size: size('xsmall');
+  font-size: size('code');
   margin: size('shim');
 
   @supports (display: grid) {

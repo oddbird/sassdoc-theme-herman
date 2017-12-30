@@ -83,9 +83,9 @@ $hljs-colors: (
   @include before(' ') {
     @include position(0);
     background:
-      hljs-gradient('to top', 'small'),
-      hljs-gradient('to right', 'small'),
-      hljs-gradient('to bottom', 'small'),
+      hljs-gradient('to top', 1rem),
+      hljs-gradient('to right', 1rem),
+      hljs-gradient('to bottom', 1rem),
       hljs-gradient('to left') no-repeat scroll;
     box-shadow: 0 0 size('half-shim') color('hljs-shadow') inset;
     pointer-events: none;

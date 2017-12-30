@@ -124,11 +124,6 @@
         
           
           <li data-sassdoc="nav-item">
-            <a href="config_api-utilities.html" data-sassdoc-nav="is-not-active">_API Utilities</a>
-          </li>
-        
-          
-          <li data-sassdoc="nav-item">
             <a href="config-colors.html" data-sassdoc-nav="is-active">_Colors</a>
           </li>
         
@@ -175,6 +170,11 @@
           
           <li data-sassdoc="nav-item">
             <a href="style-code.html" data-sassdoc-nav="is-not-active">_Code Blocks</a>
+          </li>
+        
+          
+          <li data-sassdoc="nav-item">
+            <a href="config_api-utilities.html" data-sassdoc-nav="is-not-active">_Private Utilities</a>
           </li>
         
       </ul>
@@ -273,6 +273,11 @@
   
     <div data-item-section="prose" class="text-block">
       <h1 id="herman-config-color-palettes">Herman Config: Color<span class="widont">&nbsp;</span>Palettes</h1>
+<p>This page contains documentation of the colors used by Herman.
+We use OddBird’s <a href="http://oddbird.net/accoutrement-color/">Accoutrement-Color</a> module
+to store and manage colors directly in Sass map<span class="widont">&nbsp;</span>objects.</p>
+<p>For help documenting your brand colors,
+see the “<a href="/demo_colors.html">Documenting Colors</a>” page.</p>
 
       
   
@@ -429,7 +434,7 @@
       <pre data-sassdoc="hljs"><code class="lang-scss">$brand-colors: (
   &#39;brand-orange&#39;: hsl(24, 100%, 39%),
   &#39;brand-blue&#39;: hsl(195, 85%, 35%),
-  &#39;brand-pink&#39;: hsl(330, 85%, 48%),
+  &#39;brand-pink&#39;: hsl(330, 85%, 48%) (&#39;shade&#39;: 25%),
 );</code></pre>
     </div>
   
@@ -443,7 +448,11 @@
   
     <div class="text-block">
       <p>We use bright primary colors for the main brand,
-everything else is based on these<span class="widont">&nbsp;</span>colors.</p>
+everything else is based on these colors.
+These are based on the OddBird brand colors,
+but using a darker shade of the OddBird<span class="widont">&nbsp;</span>pink.</p>
+<p>These colors should be assigned to semantic theme-specific names
+before they are used in styling patterns and<span class="widont">&nbsp;</span>components.</p>
 
       
   
@@ -625,7 +634,7 @@ followed by an optional map of adjustments
         <div class="color-preview">
           <div class="color-swatch">
             <div class="transparency-grid"></div>
-            <div class="color-overlay" style="background-color: #e2127a;"></div>
+            <div class="color-overlay" style="background-color: #aa0e5c;"></div>
           </div>
           <div class="color-info">
             <strong class="color-name">
@@ -637,13 +646,13 @@ followed by an optional map of adjustments
             
               
                 
-                  <code class="color-value">#e2127a</code>
+                  <code class="color-value">#aa0e5c</code>
                 
               
                 
               
                 
-                  <code class="color-value">hsl(330, 85%, 48%)</code>
+                  <code class="color-value">hsl(330, 85%, 36%)</code>
                 
               
             
@@ -738,7 +747,9 @@ followed by an optional map of adjustments
   
     <div class="text-block">
       <p>Use these neutral colors
-to create structure and hierarchy in the<span class="widont">&nbsp;</span>document.</p>
+to create structure and hierarchy in the document.
+These colors should be assigned to semantic theme-specific names
+before they are used in styling patterns and<span class="widont">&nbsp;</span>components.</p>
 
       
   
@@ -908,242 +919,6 @@ to create structure and hierarchy in the<span class="widont">&nbsp;</span>docume
 
 
 
-<section class="item" id="variable--status-colors">
-  
-    
-  
-  
-
-  
-  
-  
-  
-
-  <div data-item-section="header">
-    <h2 class="item-title">
-      
-        <span class="item-type"></span>
-      
-
-      
-        <a href="#variable--status-colors" class="item-name">$status-colors</a>
-      
-
-      
-
-      
-    </h2>
-
-    
-  
-
-
-    
-    
-    
-  
-
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            scss
-          </span>
-
-          
-        </div>
-      
-
-      
-      
-      <pre data-sassdoc="hljs"><code class="lang-scss">$status-colors: (
-  &#39;go&#39;: hsl(75, 65%, 30%),
-  &#39;yield&#39;: &#39;brand-orange&#39;,
-  &#39;stop&#39;: hsl(0, 85%, 50%),
-);</code></pre>
-    </div>
-  
-
-    
-  
-  
-  
-  
-
-  
-    <div class="text-block">
-      <p>These status colors for UI elements
-give a quick sense of progress, warning, or<span class="widont">&nbsp;</span>errors.</p>
-
-      
-  
-
-      
-  
-
-      
-  
-
-    </div>
-  
-
-  </div>
-
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-
-  
-  
-
-
-  
-  
-  
-  
-    
-    
-  
-
-  
-
-  
-  
-
-
-  
-  
-
-  
-  
-      
-  
-  <div data-item-section="color-palette">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Color Previews</span>
-        
-      </h3>
-    
-
-    
-    <div class="color-palette">
-      
-        <div class="color-preview">
-          <div class="color-swatch">
-            <div class="transparency-grid"></div>
-            <div class="color-overlay" style="background-color: #657e1b;"></div>
-          </div>
-          <div class="color-info">
-            <strong class="color-name">
-              
-                <span class="color-name-option">go</span>
-              
-            </strong>
-            
-            
-              
-                
-                  <code class="color-value">#657e1b</code>
-                
-              
-                
-              
-                
-                  <code class="color-value">hsl(75, 65%, 30%)</code>
-                
-              
-            
-          </div>
-        </div>
-      
-        <div class="color-preview">
-          <div class="color-swatch">
-            <div class="transparency-grid"></div>
-            <div class="color-overlay" style="background-color: #c75000;"></div>
-          </div>
-          <div class="color-info">
-            <strong class="color-name">
-              
-                <span class="color-name-option">yield</span>
-              
-            </strong>
-            
-            
-              
-                
-                  <code class="color-value">#c75000</code>
-                
-              
-                
-              
-                
-                  <code class="color-value">hsl(24, 100%, 39%)</code>
-                
-              
-            
-          </div>
-        </div>
-      
-        <div class="color-preview">
-          <div class="color-swatch">
-            <div class="transparency-grid"></div>
-            <div class="color-overlay" style="background-color: #ec1313;"></div>
-          </div>
-          <div class="color-info">
-            <strong class="color-name">
-              
-                <span class="color-name-option">stop</span>
-              
-            </strong>
-            
-            
-              
-                
-                  <code class="color-value">#ec1313</code>
-                
-              
-                
-              
-                
-                  <code class="color-value">hsl(0, 85%, 50%)</code>
-                
-              
-            
-          </div>
-        </div>
-      
-    </div>
-  
-  </div>
-
-
-    
-
-</section>
-
-  
-    
-    
-
-
-
-
-
-
-
-
-
-
 <section class="item" id="variable--theme-colors">
   
     
@@ -1201,12 +976,12 @@ give a quick sense of progress, warning, or<span class="widont">&nbsp;</span>err
   &#39;text&#39;: &#39;black&#39;,
   &#39;text-light&#39;: &#39;gray&#39;,
 
-  &#39;action&#39;: &#39;brand-pink&#39; (&#39;shade&#39;: 25%),
+  &#39;action&#39;: &#39;brand-pink&#39;,
   &#39;focus&#39;: &#39;theme-dark&#39;,
   &#39;underline&#39;: &#39;action&#39; (&#39;tint&#39;: 75%),
 
   &#39;border&#39;: &#39;gray&#39;,
-  &#39;light-border&#39;: &#39;light-gray&#39;,
+  &#39;border-light&#39;: &#39;light-gray&#39;,
   &#39;shadow&#39;: &#39;gray&#39; (&#39;rgba&#39;: 0.5),
 
   &#39;callout&#39;: &#39;theme-light&#39;,
@@ -1226,8 +1001,12 @@ give a quick sense of progress, warning, or<span class="widont">&nbsp;</span>err
 
   
     <div class="text-block">
-      <p>Applying the brand and accent colors
-to a sitewide<span class="widont">&nbsp;</span>theme.</p>
+      <p>Rather than directly accessing and adjusting
+the explicitly named (e.g. “pink” or “gray”)
+brand and neutral colors –
+we assign them to semantic theme-specific names.
+These are the colors that should be used
+in our pattern/component<span class="widont">&nbsp;</span>styles.</p>
 
       
   
@@ -1503,7 +1282,7 @@ to a sitewide<span class="widont">&nbsp;</span>theme.</p>
           <div class="color-info">
             <strong class="color-name">
               
-                <span class="color-name-option">light-border</span>
+                <span class="color-name-option">border-light</span>
               
             </strong>
             

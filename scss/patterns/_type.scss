@@ -39,7 +39,7 @@ mark {
 // ----
 
 pre {
-  font-size: size('pre');
+  font-size: size('code');
 }
 
 pre,
@@ -140,7 +140,7 @@ code {
   }
 
   blockquote {
-    border-left: size('half-shim') solid color('light-border');
+    border-left: size('half-shim') solid color('border-light');
     font-size: size('quote');
     padding-left: size('shim') + size('half-shim');
 
@@ -158,7 +158,7 @@ code {
 
     cite {
       display: block;
-      font-size: size('small');
+      font-size: size('reset');
     }
   }
 }
