@@ -1,7 +1,7 @@
 // Footer Credit
 // =============
 /// The OddBird credit in the navigation footer can be toggled
-/// using the SassDoc `watermark` configuration setting.
+/// using the [SassDoc `display.watermark` configuration setting](http://sassdoc.com/customising-the-view/#watermark-display).
 /// @group component-footer
 /// @example njk
 ///   {% import 'utility.macros.njk' as utility %}
@@ -24,7 +24,7 @@
 ///   </aside>
 
 
-/// Layout for the footer credit…
+/// Layout for the footer credit.
 /// @group component-footer
 .footer-credit {
   @include clearfix;

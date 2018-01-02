@@ -1,6 +1,12 @@
 # Herman Changelog
 
 
+## Unreleased
+
+- CHANGE: Open links within iframe in parent context
+  (`<base target="_parent">`).
+
+
 ## 🎉 1.0.0: 2017-12-15 🎉
 
 *No changes from `v1.0.0-rc.8`. Changes since `v0.5.5`:*

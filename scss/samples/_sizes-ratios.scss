@@ -140,7 +140,7 @@ $demo-sizes: (
 
 /// ### Large Rulers
 /// ```scss
-/// /// @sizes demo-sizes {ruler}
+/// /// @sizes demo-sizes {ruler-large}
 /// ```
 /// @sizes demo-sizes {ruler-large}
 /// @group demo_sizes
@@ -174,8 +174,8 @@ $demo-sizes: (
 /// Once your data is all stored in the `$herman` map,
 /// it can be converted to JSON using `herman-export`.
 ///
-/// [export]: http://oddbird.net/herman/docs/api_json-export.html
-/// [size-docs]: http://oddbird.net/herman/docs/api_json-export.html#sizes-ratios
+/// [export]: /api_json-export.html
+/// [size-docs]: /api_json-export.html#sizes-ratios
 ///
 /// @see $herman
 /// @see herman-add

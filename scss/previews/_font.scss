@@ -10,7 +10,7 @@
   @supports (display: grid) {
     display: grid;
     grid-auto-rows: auto;
-    grid-gap: size('gutter'); // sass-lint:disable-line no-misspelled-properties
+    grid-gap: size('gutter');
     grid-template-columns: repeat(auto-fit, minmax(size('font-preview'), 1fr));
     margin: size('gutter') 0 0;
   }
@@ -41,19 +41,16 @@
 }
 
 [data-specimen='lorem'] {
+  flex: 1 1 auto;
   padding-left: size('shim');
+
+  span {
+    display: block;
+  }
 }
 
 [data-specimen='aa'] {
   flex: 0 1 auto;
   font-size: size('specimen-aa');
   padding-left: size('quarter-shim');
-}
-
-[data-specimen='lorem'] {
-  flex: 1 1 auto;
-
-  span {
-    display: block;
-  }
 }

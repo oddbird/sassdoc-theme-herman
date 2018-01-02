@@ -8,7 +8,7 @@
 /// @group style-icons
 
 
-/// ## macro `icons()`
+/// ## macro `icon()`
 /// Icons should be added to the html using our
 /// `icon()` utility macro in Nunjucks.
 ///
@@ -23,6 +23,7 @@
 /// - `class=none` :: {`string` | `none`}<br/>
 ///   Any classes that should be applied to the icon.
 ///
+/// @group style-icons
 /// @example njk
 ///   {% import 'utility.macros.njk' as utility %}
 ///   {{ utility.icon('menu', size='nav-icon') }}

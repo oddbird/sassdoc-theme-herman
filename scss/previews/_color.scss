@@ -13,7 +13,7 @@
   @supports (display: grid) {
     display: grid;
     grid-auto-rows: auto;
-    grid-gap: size('gutter'); // sass-lint:disable-line no-misspelled-properties
+    grid-gap: size('gutter');
     grid-template-columns: repeat(auto-fit, minmax(size('color-preview'), 1fr));
     margin: 0;
   }

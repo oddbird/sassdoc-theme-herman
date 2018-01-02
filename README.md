@@ -8,7 +8,7 @@
 > Documentation should become the default --
 > an integrated part of the development process.
 >
-> <cite>---<a href="#@@@">Miriam Suzanne</a></cite>
+> <cite>---<a href="http://oddbird.net/birds/#bird-miriam">Miriam Suzanne</a></cite>
 
 At [OddBird][oddbird],
 we wanted better tools for documenting
