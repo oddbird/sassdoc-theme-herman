@@ -452,7 +452,7 @@ Some typography is also inherited from the
 
       
       
-      <pre data-sassdoc="hljs"><code class="lang-scss">:root {
+      <pre class="hljs-pre"><code class="lang-scss">:root {
   @include font-family(&#39;sans&#39;);
   font-size: size(&#39;root&#39;);
   font-size: size(&#39;responsive&#39;); //sass-lint:disable-line no-duplicate-properties
@@ -586,7 +586,7 @@ responsive font-size, fallback font-size, and<span class="widont">&nbsp;</span>l
 
       
       
-      <pre data-sassdoc="hljs"><code class="lang-scss">::selection {
+      <pre class="hljs-pre"><code class="lang-scss">::selection {
   background-color: color(&#39;callout&#39;);
 }</code></pre>
     </div>
@@ -716,7 +716,7 @@ responsive font-size, fallback font-size, and<span class="widont">&nbsp;</span>l
 
       
       
-      <pre data-sassdoc="hljs"><code class="lang-scss">mark {
+      <pre class="hljs-pre"><code class="lang-scss">mark {
   background-color: color(&#39;callout&#39;);
   display: inline-block;
   padding: 0 size(&#39;quarter-shim&#39;);
@@ -848,7 +848,7 @@ responsive font-size, fallback font-size, and<span class="widont">&nbsp;</span>l
 
       
       
-      <pre data-sassdoc="hljs"><code class="lang-scss">[href] {
+      <pre class="hljs-pre"><code class="lang-scss">[href] {
   #{$link} {
     color: color(&#39;action&#39;);
     text-decoration-color: color(&#39;underline&#39;);
@@ -1057,7 +1057,7 @@ to stand out from basic<span class="widont">&nbsp;</span>text.</p>
 
       
       
-      <pre data-sassdoc="hljs"><code class="lang-scss">pre {
+      <pre class="hljs-pre"><code class="lang-scss">pre {
   @include font-family(&#39;code&#39;);
   font-size: size(&#39;code&#39;);
 }</code></pre>
@@ -1189,17 +1189,12 @@ and a smaller<span class="widont">&nbsp;</span>font-size.</p>
 
       
       
-      <pre data-sassdoc="hljs"><code class="lang-scss">code {
+      <pre class="hljs-pre"><code class="lang-scss">code {
   @include font-family(&#39;code&#39;);
   font-weight: bolder;
 
   pre &amp; {
-    background-color: transparent;
-    border-radius: 0;
-    box-shadow: none;
-    display: block;
     font-weight: normal;
-    padding: 0;
   }
 }</code></pre>
     </div>
@@ -1215,7 +1210,7 @@ and a smaller<span class="widont">&nbsp;</span>font-size.</p>
     <div class="text-block">
       <p>Code uses a monospace font-stack,
 and slightly bolder text when inline -
-but creates a more set-apart “block” when used inside the <code>pre</code> tag.</p>
+but allows for syntax-highlighting in a block<span class="widont">&nbsp;</span>context.</p>
 
       
   
@@ -1246,6 +1241,49 @@ but creates a more set-apart “block” when used inside the <code>pre</code> t
   
   
 
+
+  
+
+    
+  <div data-item-section="related">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Related</span>
+        
+      </h3>
+    
+
+    
+      
+
+      
+        
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <a href="
+  style-code.html#css--Code%20Blocks" class="item-name">Code Blocks</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+      
+    
+  </div>
 
   
   
@@ -1331,7 +1369,7 @@ but creates a more set-apart “block” when used inside the <code>pre</code> t
 
       
       
-      <pre data-sassdoc="hljs"><code class="lang-scss">.is-hidden {
+      <pre class="hljs-pre"><code class="lang-scss">.is-hidden {
   @include is-hidden;
 }</code></pre>
     </div>
@@ -1462,7 +1500,7 @@ can be visually hidden without removing from the<span class="widont">&nbsp;</spa
 
       
       
-      <pre data-sassdoc="hljs"><code class="lang-scss">.text-block {
+      <pre class="hljs-pre"><code class="lang-scss">.text-block {
   max-width: 80ch;
 
   h1,
@@ -1642,7 +1680,7 @@ headings, blockquotes, lists, code, emphasis,<span class="widont">&nbsp;</span>e
 
       
       
-      <pre data-sassdoc="hljs"><code class="lang-html">&lt;div class=&quot;text-block&quot;&gt;
+      <pre class="hljs-pre"><code class="lang-html">&lt;div class=&quot;text-block&quot;&gt;
   &lt;h1&gt;HTML Ipsum Presents&lt;/h1&gt;
 
   &lt;p&gt;&lt;strong&gt;Pellentesque habitant morbi tristique&lt;/strong&gt; senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. &lt;em&gt;Aenean ultricies mi vitae est.&lt;/em&gt; Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, &lt;code&gt;commodo vitae&lt;/code&gt;, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. &lt;a href=&quot;#&quot;&gt;Donec non enim&lt;/a&gt; in turpis pulvinar facilisis. Ut felis.&lt;/p&gt;
@@ -1833,7 +1871,7 @@ headings, blockquotes, lists, code, emphasis,<span class="widont">&nbsp;</span>e
 
       
       
-      <pre data-sassdoc="hljs"><code class="lang-scss">.invert-colors {
+      <pre class="hljs-pre"><code class="lang-scss">.invert-colors {
   @include invert-colors;
 }</code></pre>
     </div>
@@ -1919,7 +1957,7 @@ headings, blockquotes, lists, code, emphasis,<span class="widont">&nbsp;</span>e
 
       
       
-      <pre data-sassdoc="hljs"><code class="lang-html">&lt;div class=&quot;invert-colors&quot; style=&quot;padding: 1em;&quot;&gt;
+      <pre class="hljs-pre"><code class="lang-html">&lt;div class=&quot;invert-colors&quot; style=&quot;padding: 1em;&quot;&gt;
   You shall sojourn at &lt;a href=&quot;#&quot;&gt;Paris, Rome, and Naples&lt;/a&gt;.
 &lt;/div&gt;</code></pre>
     </div>

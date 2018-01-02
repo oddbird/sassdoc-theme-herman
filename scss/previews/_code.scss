@@ -1,0 +1,57 @@
+// Code Previews
+// =============
+/// # Herman Code-Block Styles
+/// Code-block styles and syntax highlighting,
+/// for both user and machine-generated code samples.
+/// @group style-code
+/// @link https://highlightjs.org/ Highlight.JS
+
+
+// Code Blocks
+// -----------
+/// @name Code Blocks
+/// @group style-code
+.code-block {
+  align-items: stretch;
+  display: flex;
+  flex: 1 1 20em;
+  flex-direction: column;
+  max-height: size('rhythm') * 12;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+
+// Code Header
+// -----------
+/// @group style-code
+.code-header {
+  @include contrasted('theme-light');
+  flex: 0 0 auto;
+  padding: 0 size('shim');
+}
+
+
+// Code Description
+// ----------------
+/// @group style-code
+.code-description {
+  @include before(' – ');
+}
+
+
+// Pre
+// ---
+/// @group style-code
+.hljs-pre,
+.text-block pre { // sass-lint:disable-line force-element-nesting
+  background-color: color('slight');
+  border: 1px solid color('callout');
+  color: color('code');
+  flex: 1 1 auto;
+  flex-wrap: wrap;
+
+  code {
+    padding: size('shim');
+  }
+}

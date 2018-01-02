@@ -558,7 +558,7 @@ used to make it an arrow-outline rather than a solid<span class="widont">&nbsp;<
 
       
       
-      <pre data-sassdoc="hljs"><code class="lang-scss">[data-region=&#39;banner&#39;] {
+      <pre class="hljs-pre"><code class="lang-scss">[data-region=&#39;banner&#39;] {
   @include banner-arrow;
 }</code></pre>
     </div>
@@ -584,7 +584,7 @@ used to make it an arrow-outline rather than a solid<span class="widont">&nbsp;<
 
       
       
-      <pre data-sassdoc="hljs"><code class="lang-css">[data-region=&#39;banner&#39;] {
+      <pre class="hljs-pre"><code class="lang-css">[data-region=&#39;banner&#39;] {
   border-bottom: 8px solid #0d7fa5;
   box-shadow: 0 2px 2px rgba(85, 91, 94, 0.5);
   display: block;
@@ -658,7 +658,7 @@ used to make it an arrow-outline rather than a solid<span class="widont">&nbsp;<
 
       
       
-      <pre data-sassdoc="hljs"><code class="lang-html">&lt;header data-region=&quot;banner&quot;&gt;
+      <pre class="hljs-pre"><code class="lang-html">&lt;header data-region=&quot;banner&quot;&gt;
   Hello World
 &lt;/header&gt;</code></pre>
     </div>
@@ -797,7 +797,7 @@ used to make it an arrow-outline rather than a solid<span class="widont">&nbsp;<
 
       
       
-      <pre data-sassdoc="hljs"><code class="lang-scss">[data-region=&#39;banner&#39;] {
+      <pre class="hljs-pre"><code class="lang-scss">[data-region=&#39;banner&#39;] {
   @include banner-arrow;
   @include z-index(&#39;banner&#39;);
   align-items: center;
@@ -887,7 +887,7 @@ used to make it an arrow-outline rather than a solid<span class="widont">&nbsp;<
 
       
       
-      <pre data-sassdoc="hljs"><code class="lang-jinja">{% import &#39;utility.macros.njk&#39; as utility %}
+      <pre class="hljs-pre"><code class="lang-jinja">{% import &#39;utility.macros.njk&#39; as utility %}
 &lt;header data-region=&quot;banner&quot;&gt;
   &lt;button data-nav-toggle&gt;
     {{ utility.icon(&#39;menu&#39;, size=&#39;nav-icon&#39;) }}
@@ -920,7 +920,7 @@ used to make it an arrow-outline rather than a solid<span class="widont">&nbsp;<
 
       
       
-      <pre data-sassdoc="hljs"><code class="lang-html">&lt;header data-region=&quot;banner&quot;&gt;
+      <pre class="hljs-pre"><code class="lang-html">&lt;header data-region=&quot;banner&quot;&gt;
   &lt;button data-nav-toggle&gt;
     &lt;svg data-icon=&quot;menu&quot; data-icon-size=&quot;nav-icon&quot;&gt;
       &lt;use xlink:href=&quot;#icon-menu&quot; /&gt;
@@ -1077,7 +1077,7 @@ used to make it an arrow-outline rather than a solid<span class="widont">&nbsp;<
 
       
       
-      <pre data-sassdoc="hljs"><code class="lang-scss">.project-title {
+      <pre class="hljs-pre"><code class="lang-scss">.project-title {
   align-items: baseline;
   display: flex;
   margin-left: auto;
@@ -1167,7 +1167,7 @@ including both the name and version of the<span class="widont">&nbsp;</span>proj
 
       
       
-      <pre data-sassdoc="hljs"><code class="lang-html">&lt;div class=&quot;project-title&quot;&gt;
+      <pre class="hljs-pre"><code class="lang-html">&lt;div class=&quot;project-title&quot;&gt;
   &lt;a href=&quot;index.html&quot; rel=&quot;home&quot; class=&quot;project-name&quot;&gt;Herman&lt;/a&gt;
   &lt;span class=&quot;project-version&quot;&gt;1.0.0&lt;/span&gt;
 &lt;/div&gt;</code></pre>
@@ -1310,7 +1310,7 @@ including both the name and version of the<span class="widont">&nbsp;</span>proj
 
       
       
-      <pre data-sassdoc="hljs"><code class="lang-scss">.project-name {
+      <pre class="hljs-pre"><code class="lang-scss">.project-name {
   font-size: size(&#39;h1&#39;);
   font-weight: bold;
   padding-left: size(&#39;half-shim&#39;);
@@ -1403,7 +1403,7 @@ including both the name and version of the<span class="widont">&nbsp;</span>proj
 
       
       
-      <pre data-sassdoc="hljs"><code class="lang-html">&lt;a href=&quot;index.html&quot; rel=&quot;home&quot; class=&quot;project-name&quot;&gt;Herman&lt;/a&gt;</code></pre>
+      <pre class="hljs-pre"><code class="lang-html">&lt;a href=&quot;index.html&quot; rel=&quot;home&quot; class=&quot;project-name&quot;&gt;Herman&lt;/a&gt;</code></pre>
     </div>
   
 
@@ -1540,7 +1540,7 @@ including both the name and version of the<span class="widont">&nbsp;</span>proj
 
       
       
-      <pre data-sassdoc="hljs"><code class="lang-scss">.project-version {
+      <pre class="hljs-pre"><code class="lang-scss">.project-version {
   @include font-family(&#39;sans&#39;);
   color: color(&#39;text-light&#39;);
   font-size: size(&#39;h3&#39;);
@@ -1628,7 +1628,7 @@ including both the name and version of the<span class="widont">&nbsp;</span>proj
 
       
       
-      <pre data-sassdoc="hljs"><code class="lang-html">&lt;span class=&quot;project-version&quot;&gt;1.0.0&lt;/span&gt;</code></pre>
+      <pre class="hljs-pre"><code class="lang-html">&lt;span class=&quot;project-version&quot;&gt;1.0.0&lt;/span&gt;</code></pre>
     </div>
   
 
@@ -1765,7 +1765,7 @@ including both the name and version of the<span class="widont">&nbsp;</span>proj
 
       
       
-      <pre data-sassdoc="hljs"><code class="lang-scss">[data-nav-toggle] {
+      <pre class="hljs-pre"><code class="lang-scss">[data-nav-toggle] {
   color: color(&#39;action&#39;);
   padding: size(&#39;half-shim&#39;);
 
@@ -1867,7 +1867,7 @@ including both the name and version of the<span class="widont">&nbsp;</span>proj
 
       
       
-      <pre data-sassdoc="hljs"><code class="lang-jinja">{% import &#39;utility.macros.njk&#39; as utility %}
+      <pre class="hljs-pre"><code class="lang-jinja">{% import &#39;utility.macros.njk&#39; as utility %}
 &lt;button data-nav-toggle&gt;
   {{ utility.icon(&#39;menu&#39;, size=&#39;nav-icon&#39;) }}
 &lt;/button&gt;</code></pre>
@@ -1894,7 +1894,7 @@ including both the name and version of the<span class="widont">&nbsp;</span>proj
 
       
       
-      <pre data-sassdoc="hljs"><code class="lang-html">&lt;button data-nav-toggle&gt;
+      <pre class="hljs-pre"><code class="lang-html">&lt;button data-nav-toggle&gt;
   &lt;svg data-icon=&quot;menu&quot; data-icon-size=&quot;nav-icon&quot;&gt;
     &lt;use xlink:href=&quot;#icon-menu&quot; /&gt;
   &lt;/svg&gt;

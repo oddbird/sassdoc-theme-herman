@@ -80,19 +80,16 @@ pre {
 // ----
 /// Code uses a monospace font-stack,
 /// and slightly bolder text when inline -
-/// but creates a more set-apart "block" when used inside the `pre` tag.
+/// but allows for syntax-highlighting in a block context.
+///
 /// @group style-typography
+/// @see {css} Code Blocks
 code {
   @include font-family('code');
   font-weight: bolder;
 
   pre & {
-    background-color: transparent;
-    border-radius: 0;
-    box-shadow: none;
-    display: block;
     font-weight: normal;
-    padding: 0;
   }
 }
 

@@ -7,46 +7,9 @@
 
 .example-code {
   align-items: stretch;
-  border: 1px solid color('theme-light');
   display: flex;
   flex-wrap: wrap;
   overflow: hidden;
-
-  [data-sassdoc='hljs'] {
-    margin-bottom: 0; // override the hljs margin needed for non-nested blocks
-  }
-
-  &[aria-hidden='true'] {
-    display: none;
-  }
-}
-
-.code-block {
-  align-items: stretch;
-  display: flex;
-  flex: 1 1 20em;
-  flex-direction: column;
-  max-height: size('rhythm') * 12;
-  max-width: 100%;
-  overflow: auto;
-
-  & + & {
-    border-left: 1px solid color('theme-light');
-  }
-}
-
-.code-header {
-  @include contrasted('theme-light');
-  flex: 0 0 auto;
-  padding: 0 size('shim');
-
-  + [data-sassdoc='hljs'] {
-    flex: 1 1 auto;
-  }
-}
-
-.code-description {
-  @include before(' – ');
 }
 
 .example-render {

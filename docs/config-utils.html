@@ -590,7 +590,7 @@ Accoutrement globals and Herman<span class="widont">&nbsp;</span>export.</p>
 
       
       
-      <pre data-sassdoc="hljs"><code class="lang-scss">$brand-colors: (
+      <pre class="hljs-pre"><code class="lang-scss">$brand-colors: (
   &#39;brand-orange&#39;: hsl(24, 100%, 39%),
   &#39;brand-blue&#39;: hsl(195, 85%, 35%),
   &#39;brand-pink&#39;: hsl(330, 85%, 48%) (&#39;shade&#39;: 25%),
@@ -885,7 +885,7 @@ to include on the returned link or<span class="widont">&nbsp;</span>span.</li>
 
       
       
-      <pre data-sassdoc="hljs"><code class="lang-jinja">{% import &#39;utility.macros.njk&#39; as utility %}
+      <pre class="hljs-pre"><code class="lang-jinja">{% import &#39;utility.macros.njk&#39; as utility %}
 {{ utility.link_if(content=&#39;stacy&#39;, url=&#39;#&#39;, attrs={&#39;data-sassdoc&#39;: &#39;font-name&#39;} ) }}
 {{ utility.link_if(content=&#39;not stacy&#39;, url=none) }}</code></pre>
     </div>
@@ -911,7 +911,7 @@ to include on the returned link or<span class="widont">&nbsp;</span>span.</li>
 
       
       
-      <pre data-sassdoc="hljs"><code class="lang-html">&lt;a href=&quot;#&quot; data-sassdoc=&quot;font-name&quot;&gt;stacy&lt;/a&gt;
+      <pre class="hljs-pre"><code class="lang-html">&lt;a href=&quot;#&quot; data-sassdoc=&quot;font-name&quot;&gt;stacy&lt;/a&gt;
 
 &lt;span&gt;not stacy&lt;/span&gt;</code></pre>
     </div>
@@ -1052,7 +1052,7 @@ to include on the returned link or<span class="widont">&nbsp;</span>span.</li>
 
       
       
-      <pre data-sassdoc="hljs"><code class="lang-scss">$link: &#39;&amp;:link, &amp;:visited&#39;;</code></pre>
+      <pre class="hljs-pre"><code class="lang-scss">$link: &#39;&amp;:link, &amp;:visited&#39;;</code></pre>
     </div>
   
 
@@ -1136,7 +1136,7 @@ to include on the returned link or<span class="widont">&nbsp;</span>span.</li>
 
       
       
-      <pre data-sassdoc="hljs"><code class="lang-scss">a {
+      <pre class="hljs-pre"><code class="lang-scss">a {
   #{$link} {
     color: blue;
   }
@@ -1164,7 +1164,7 @@ to include on the returned link or<span class="widont">&nbsp;</span>span.</li>
 
       
       
-      <pre data-sassdoc="hljs"><code class="lang-css">a:link, a:visited {
+      <pre class="hljs-pre"><code class="lang-css">a:link, a:visited {
   color: blue;
 }
 </code></pre>
@@ -1312,7 +1312,7 @@ to include on the returned link or<span class="widont">&nbsp;</span>span.</li>
 
       
       
-      <pre data-sassdoc="hljs"><code class="lang-scss">$focus: &#39;&amp;:hover, &amp;:focus, &amp;:active&#39;;</code></pre>
+      <pre class="hljs-pre"><code class="lang-scss">$focus: &#39;&amp;:hover, &amp;:focus, &amp;:active&#39;;</code></pre>
     </div>
   
 
@@ -1396,7 +1396,7 @@ to include on the returned link or<span class="widont">&nbsp;</span>span.</li>
 
       
       
-      <pre data-sassdoc="hljs"><code class="lang-scss">a {
+      <pre class="hljs-pre"><code class="lang-scss">a {
   #{$focus} {
     color: red;
   }
@@ -1424,7 +1424,7 @@ to include on the returned link or<span class="widont">&nbsp;</span>span.</li>
 
       
       
-      <pre data-sassdoc="hljs"><code class="lang-css">a:hover, a:focus, a:active {
+      <pre class="hljs-pre"><code class="lang-css">a:hover, a:focus, a:active {
   color: red;
 }
 </code></pre>
@@ -1587,7 +1587,7 @@ to include on the returned link or<span class="widont">&nbsp;</span>span.</li>
 
       
       
-      <pre data-sassdoc="hljs"><code class="lang-scss">.invert-colors {
+      <pre class="hljs-pre"><code class="lang-scss">.invert-colors {
   @include invert-colors;
 }</code></pre>
     </div>
@@ -1613,7 +1613,7 @@ to include on the returned link or<span class="widont">&nbsp;</span>span.</li>
 
       
       
-      <pre data-sassdoc="hljs"><code class="lang-css">.invert-colors {
+      <pre class="hljs-pre"><code class="lang-css">.invert-colors {
   background-color: #0d7fa5;
   color: #fff;
 }
@@ -1665,7 +1665,7 @@ to include on the returned link or<span class="widont">&nbsp;</span>span.</li>
 
       
       
-      <pre data-sassdoc="hljs"><code class="lang-html">&lt;div class=&quot;invert-colors&quot; style=&quot;padding: 1em;&quot;&gt;
+      <pre class="hljs-pre"><code class="lang-html">&lt;div class=&quot;invert-colors&quot; style=&quot;padding: 1em;&quot;&gt;
   You shall sojourn at &lt;a href=&quot;#&quot;&gt;Paris, Rome, and Naples&lt;/a&gt;.
 &lt;/div&gt;</code></pre>
     </div>
@@ -1904,7 +1904,7 @@ to include on the returned link or<span class="widont">&nbsp;</span>span.</li>
 
       
       
-      <pre data-sassdoc="hljs"><code class="lang-scss">$z-index: (
+      <pre class="hljs-pre"><code class="lang-scss">$z-index: (
   &#39;main&#39;,
   &#39;sidebar&#39;,
   &#39;banner&#39;,
