@@ -108,7 +108,7 @@ describe('search', function() {
           },
         },
       ];
-      this.results = $('<div data-sassdoc-page>').appendTo('body');
+      this.results = $('<div data-page>').appendTo('body');
     });
 
     afterEach(function() {
@@ -162,7 +162,7 @@ describe('search', function() {
       this.indexSearch = sinon.stub();
       this.indexLoad = sinon.stub(lunr.Index, 'load');
       this.indexLoad.returns({ search: this.indexSearch });
-      this.results = $('<div data-sassdoc-page>').appendTo('body');
+      this.results = $('<div data-page>').appendTo('body');
     });
 
     afterEach(function() {

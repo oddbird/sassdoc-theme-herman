@@ -2,14 +2,14 @@
 // =======
 
 
-/// # Herman Config: Z-Index
-/// @group config-z-index
-/// @link http://oddbird.net/accoutrement-layout/docs/z-index.html
-///   Accoutrement Layout: Z-Index
-
-
-/// List of named z-index layers.
+/// List of named z-index layers for Herman's layout.
 /// The order they are defined
 /// will be the integer they are assigned.
-/// @group config-z-index
-$z-index: 'bump', 'main', 'sidebar', 'banner', 'overlay', 'loader';
+/// @group config-utils
+/// @link http://oddbird.net/accoutrement-layout/docs/z-index.html
+///   Accoutrement Layout: Z-Index
+$z-index: (
+  'main',
+  'sidebar',
+  'banner',
+);

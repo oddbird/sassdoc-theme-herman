@@ -1,75 +1,49 @@
-// Typography Styles
-// =================
-
-
-/// # Herman Typography
-/// @group style-typography
-
-::selection {
-  background-color: color('callout');
-}
-
-
-mark {
-  background-color: color('callout');
-  display: inline-block;
-  padding: 0 size('quarter-shim');
-}
-
-
-// Links
-// -----
-
-[href] {
-  #{$link} {
-    color: color('action');
-    text-decoration-color: color('underline');
-    text-decoration-skip: ink;
-    transition: text-decoration-color 250ms, color 200ms;
-  }
-
-  #{$focus} {
-    color: color('focus');
-    text-decoration-color: currentColor;
-  }
-}
-
-
-// Code
-// ----
-
-pre {
-  font-size: size('code');
-}
-
-pre,
-code {
-  @include font-family('code');
-}
-
-code {
-  font-weight: bolder;
-
-  pre & {
-    background-color: transparent;
-    border-radius: 0;
-    box-shadow: none;
-    display: block;
-    font-weight: normal;
-    padding: 0;
-  }
-}
-
-.visually-hidden {
-  @include is-hidden;
-}
+// Typography Patterns
+// ===================
 
 
 // Text Blocks
 // -----------
-/// Style a block of rendered html-text,
-/// with line-length and typographic styles.
+/// There are some typographic elements
+/// that can't be applied globally,
+/// but will be generated in markdown-rendered html-text blocks.
+/// The `text-block` class can be used to provide
+/// max line-length and other typographic features --
+/// headings, blockquotes, lists, code, emphasis, etc.
+///
 /// @group style-typography
+///
+/// @example html
+///   <div class="text-block">
+///     <h1>HTML Ipsum Presents</h1>
+///
+///     <p><strong>Pellentesque habitant morbi tristique</strong> senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. <a href="#">Donec non enim</a> in turpis pulvinar facilisis. Ut felis.</p>
+///
+///     <h2>Header Level 2</h2>
+///
+///     <ol>
+///        <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
+///        <li>Aliquam tincidunt mauris eu risus.</li>
+///     </ol>
+///
+///     <blockquote>
+///       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+///       <cite>—Anonymous</cite>
+///     </blockquote>
+///
+///     <h3>Header Level 3</h3>
+///
+///     <ul>
+///        <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
+///        <li>Aliquam tincidunt mauris eu risus.</li>
+///     </ul>
+///
+///     <pre><code>#header h1 a {
+///     display: block;
+///     width: 300px;
+///     height: 80px;
+///   }</code></pre>
+///   </div>
 .text-block {
   max-width: 80ch;
 
@@ -142,23 +116,39 @@ code {
   blockquote {
     border-left: size('half-shim') solid color('border-light');
     font-size: size('quote');
+    margin-left: negative('gutter');
     padding-left: size('shim') + size('half-shim');
 
-    > :first-child {
-      text-indent: -0.4em;
-    }
+    > p {
+      &:not(:last-child) {
+        text-indent: -0.4em;
 
-    > :nth-last-child(2) {
-      margin-bottom: size('gutter-minus');
-    }
-
-    > :last-child {
-      margin-top: size('gutter-minus');
+        @include wrap-content {
+          color: color('theme-dark');
+        }
+      }
     }
 
     cite {
       display: block;
       font-size: size('reset');
+      font-style: normal;
     }
   }
+}
+
+
+// Invert Colors
+// -------------
+/// Invert the colors of a block, creating a light-on-dark area.
+///
+/// @group style-typography
+/// @require {mixin} invert-colors
+///
+/// @example html
+///   <div class="invert-colors" style="padding: 1em;">
+///     You shall sojourn at <a href="#">Paris, Rome, and Naples</a>.
+///   </div>
+.invert-colors {
+  @include invert-colors;
 }

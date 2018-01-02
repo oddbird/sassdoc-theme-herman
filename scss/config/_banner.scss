@@ -1,30 +1,37 @@
 // Section Arrow
 // =============
+/// # Herman Banner Region
+/// Styles related to the top banner in generated Herman docs.
+/// @group style-banner
 
 
-/// # Herman Section-Arrow Component
-/// @group style-sections
-
-
-/// Apply a top-border with centered down-arrow triangle,
-/// for use as a section-divider.
-/// @group style-sections
+// Banner Arrow
+// ------------
+/// Apply a bottom-border with centered down-arrow triangle,
+/// for use as a divider between the banner and main content.
+///
+/// @group style-banner
+///
 /// @parameter {color | string} $color ['theme-dark'] -
 ///   The color of the border/arrow line
 /// @parameter {color | string} $background ['background'] -
 ///   The background color above the border/arrow,
 ///   used to make it an arrow-outline rather than a solid triangle
+///
 /// @example scss
-///   [data-styleguide='section-arrow'] {
-///     @include section-arrow;
+///   [data-region='banner'] {
+///     @include banner-arrow;
 ///   }
 /// @example html
-///   <header data-sassdoc-region="banner"></header>
-@mixin section-arrow(
+///   <header data-region="banner">
+///     Hello World
+///   </header>
+@mixin banner-arrow(
   $color: 'theme-dark',
   $background: 'background'
 ) {
   border-bottom: size('arrow-border') solid color($color);
+  box-shadow: 0 2px 2px color('shadow');
   display: block;
   position: relative;
   width: 100%;

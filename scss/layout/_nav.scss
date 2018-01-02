@@ -1,0 +1,49 @@
+// Navigation Layout
+// =================
+/// # Herman Navigation Region
+/// Styles related to the navigation sidebar in generated Herman docs.
+/// @group style-nav
+
+
+// Nav Region
+// ==========
+/// Layout and styles for the navigation region.
+///
+/// @group style-nav
+/// @example html
+///   <div data-region="container" style="min-height: 12em;">
+///     <nav data-region="nav" aria-expanded="true">
+///       Navigation Region…
+///     </nav>
+///     <main data-region="main">
+///       Pellentesque habitant morbi tristique
+///       senectus et netus et malesuada fames ac turpis egestas.
+///       Vestibulum tortor quam, feugiat vitae, ultricies eget,
+///       tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.
+///     </main>
+///   </div>
+[data-region='nav'] {
+  @include invert-colors;
+  @include z-index('sidebar');
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  padding: size('gutter');
+  white-space: nowrap;
+  width: auto;
+
+  @include below('nav-break') {
+    @include position(0 null 0 0);
+    box-shadow: 0 0 size('half-shim') color('shadow');
+    transform: translateX(-102%);
+    transition: transform 0.4s;
+
+    &[aria-expanded='true'] {
+      transform: translateX(0);
+    }
+  }
+
+  @include above('nav-break') {
+    flex: 0 0 auto;
+  }
+}

@@ -1,0 +1,110 @@
+// Banner Styles
+// =============
+
+
+// Banner Region
+// -------------
+/// Layout styles for Herman's top-banner region.
+///
+/// @group style-banner
+/// @example njk
+///   {% import 'utility.macros.njk' as utility %}
+///   <header data-region="banner">
+///     <button data-nav-toggle>
+///       {{ utility.icon('menu', size='nav-icon') }}
+///     </button>
+///     <div class="project-title">
+///       <a href="index.html" rel="home" class="project-name">Herman</a>
+///       <span class="project-version">1.0.0</span>
+///     </div>
+///   </header>
+[data-region='banner'] {
+  @include banner-arrow;
+  @include z-index('banner');
+  align-items: center;
+  display: flex;
+  padding: size('shim');
+}
+
+
+// Project Title
+// -------------
+/// Used for the top-banner project title,
+/// including both the name and version of the project.
+///
+/// @group style-banner
+/// @example html
+///   <div class="project-title">
+///     <a href="index.html" rel="home" class="project-name">Herman</a>
+///     <span class="project-version">1.0.0</span>
+///   </div>
+.project-title {
+  align-items: baseline;
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+// Project Name
+// ------------
+/// Specific styling for the top-banner project name.
+///
+/// @group style-banner
+/// @example html
+///   <a href="index.html" rel="home" class="project-name">Herman</a>
+.project-name {
+  font-size: size('h1');
+  font-weight: bold;
+  padding-left: size('half-shim');
+  padding-right: size('half-shim');
+
+  #{$link} {
+    text-decoration: none;
+  }
+}
+
+
+// Project Title
+// -------------
+/// Less prominent text for the top-banner project version.
+///
+/// @group style-banner
+/// @example html
+///   <span class="project-version">1.0.0</span>
+.project-version {
+  @include font-family('sans');
+  color: color('text-light');
+  font-size: size('h3');
+}
+
+
+// Nav Toggle
+// ----------
+/// The navigation-menu toggle is only visible on small screens.
+///
+/// @group style-banner
+/// @example njk
+///   {% import 'utility.macros.njk' as utility %}
+///   <button data-nav-toggle>
+///     {{ utility.icon('menu', size='nav-icon') }}
+///   </button>
+[data-nav-toggle] {
+  color: color('action');
+  padding: size('half-shim');
+
+  @include above('page-break') {
+    padding-left: size('shim');
+    padding-right:  size('shim');
+  }
+
+  @include above('nav-break') {
+    display: none;
+  }
+
+  #{$focus},
+  &[aria-pressed='true'] {
+    color: color('focus');
+    outline: 0;
+  }
+}

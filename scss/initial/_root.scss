@@ -1,6 +1,20 @@
-// Root
-// ====
+// Root Typography
+// ===============
 
+
+/// # Herman Typography
+/// Initial styling for typographic elements in Herman.
+/// Some typography is also inherited from the
+/// [Accoutrement-Init][init] normalization files.
+///
+/// [init]: http://oddbird.net/accoutrement-init/
+/// @link http://oddbird.net/accoutrement-init/ Accoutrement-Init
+/// @group style-typography
+
+
+/// The root typographic styles provide a default font,
+/// responsive font-size, fallback font-size, and line-height.
+/// @group style-typography
 :root {
   @include font-family('sans');
   font-size: size('root');
@@ -9,6 +23,87 @@
 }
 
 
+// Selection
+// ---------
+/// Selected text uses a light color from the Herman color palette.
+/// @group style-typography
+::selection {
+  background-color: color('callout');
+}
+
+
+// Mark
+// ----
+/// For search-results, we mark target text with a background color.
+/// @group style-typography
+mark {
+  background-color: color('callout');
+  display: inline-block;
+  padding: 0 size('quarter-shim');
+}
+
+
+// Links
+// -----
+/// Default links use both color and text-underline
+/// to stand out from basic text.
+/// @group style-typography
+/// @see $link
+/// @see $focus
+[href] {
+  #{$link} {
+    color: color('action');
+    text-decoration-color: color('underline');
+    text-decoration-skip: ink;
+    transition: text-decoration-color 250ms, color 200ms;
+  }
+
+  #{$focus} {
+    color: color('focus');
+    text-decoration-color: currentColor;
+  }
+}
+
+
+// Pre
+// ---
+/// Pre-formatted blocks use our monospace `code` font-stack,
+/// and a smaller font-size.
+/// @group style-typography
+pre {
+  @include font-family('code');
+  font-size: size('code');
+}
+
+
+// Code
+// ----
+/// Code uses a monospace font-stack,
+/// and slightly bolder text when inline -
+/// but creates a more set-apart "block" when used inside the `pre` tag.
+/// @group style-typography
+code {
+  @include font-family('code');
+  font-weight: bolder;
+
+  pre & {
+    background-color: transparent;
+    border-radius: 0;
+    box-shadow: none;
+    display: block;
+    font-weight: normal;
+    padding: 0;
+  }
+}
+
+
+// Is Hidden
+// ---------
+/// Text that is provided for screen-reader accessibility only,
+/// can be visually hidden without removing from the DOM.
+/// @group style-typography
 .is-hidden {
   @include is-hidden;
 }
+
+
