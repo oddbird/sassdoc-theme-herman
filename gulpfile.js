@@ -2,16 +2,18 @@
 
 'use strict';
 
+const beeper = require('beeper');
 const browserSync = require('browser-sync').create();
 const chalk = require('chalk');
 const del = require('del');
 const eslint = require('gulp-eslint');
 const gulp = require('gulp');
-const gutil = require('gulp-util');
 const imagemin = require('gulp-imagemin');
 const KarmaServer = require('karma').Server;
+const log = require('fancy-log');
 const mocha = require('gulp-mocha');
 const path = require('path');
+const PluginError = require('plugin-error');
 const prettier = require('gulp-prettier-plugin');
 const rename = require('gulp-rename');
 const sasslint = require('gulp-sass-lint');
@@ -66,8 +68,8 @@ process.on('exit', () => {
 });
 
 const onError = function(err) {
-  gutil.log(chalk.red(err.message || `Task failed with code: ${err}`));
-  gutil.beep();
+  log.error(chalk.red(err.message || `Task failed with code: ${err}`));
+  beeper();
   if (this && this.emit) {
     this.emit('end');
   }
@@ -79,7 +81,7 @@ const spawnTask = function(command, args, cb, failOnError = true) {
     spawn(command, args, { stdio: 'inherit' })
       .on('error', err => {
         if (failOnError) {
-          gutil.beep();
+          beeper();
           return cb(err);
         }
         onError(err);
@@ -88,7 +90,7 @@ const spawnTask = function(command, args, cb, failOnError = true) {
       .on('exit', code => {
         if (code) {
           if (failOnError) {
-            gutil.beep();
+            beeper();
             return cb(new Error(`Task failed with code ${code}`));
           }
           onError(code);
@@ -98,10 +100,10 @@ const spawnTask = function(command, args, cb, failOnError = true) {
   );
 };
 
-const eslintTask = (src, failOnError, log) => {
-  if (log) {
+const eslintTask = (src, failOnError, shouldLog) => {
+  if (shouldLog) {
     const cmd = `eslint ${src}`;
-    gutil.log('Running', `'${chalk.cyan(cmd)}'...`);
+    log('Running', `'${chalk.cyan(cmd)}'...`);
   }
   const stream = gulp
     .src(src)
@@ -114,10 +116,10 @@ const eslintTask = (src, failOnError, log) => {
   return stream;
 };
 
-const prettierTask = function(src, log) {
-  if (log) {
+const prettierTask = function(src, shouldLog) {
+  if (shouldLog) {
     const cmd = `prettier ${src}`;
-    gutil.log('Running', `'${chalk.cyan(cmd)}'...`);
+    log('Running', `'${chalk.cyan(cmd)}'...`);
   }
   return gulp
     .src(src, { base: './' })
@@ -126,10 +128,10 @@ const prettierTask = function(src, log) {
     .on('error', onError);
 };
 
-const sasslintTask = function(src, failOnError, log) {
-  if (log) {
+const sasslintTask = function(src, failOnError, shouldLog) {
+  if (shouldLog) {
     const cmd = `sasslint ${src}`;
-    gutil.log('Running', `'${chalk.cyan(cmd)}'...`);
+    log('Running', `'${chalk.cyan(cmd)}'...`);
   }
   const stream = gulp
     .src(src)
@@ -196,9 +198,9 @@ gulp.task('jstest-nofail', cb => {
 
 const karmaOnBuild = done => exitCode => {
   if (exitCode) {
-    gutil.beep();
+    beeper();
     done(
-      new gutil.PluginError('karma', {
+      new PluginError('karma', {
         name: 'KarmaError',
         message: `Failed with exit code: ${exitCode}`,
       })
@@ -343,17 +345,17 @@ gulp.task('minify', ['svgmin', 'imagemin']);
 
 const webpackOnBuild = done => (err, stats) => {
   if (err) {
-    gutil.log(chalk.red(err.stack || err));
+    log.error(chalk.red(err.stack || err));
     if (err.details) {
-      gutil.log(chalk.red(err.details));
+      log.error(chalk.red(err.details));
     }
   }
 
   if (err || stats.hasErrors() || stats.hasWarnings()) {
-    gutil.beep();
+    beeper();
   }
 
-  gutil.log(
+  log(
     stats.toString({
       colors: true,
       chunks: false,

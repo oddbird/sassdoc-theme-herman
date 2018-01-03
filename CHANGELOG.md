@@ -1,6 +1,12 @@
 # Herman Changelog
 
 
+## Unreleased
+
+- 🏠 INTERNAL: Remove deprecated dev-dependency `gulp-util`.
+- 🏠 INTERNAL: Upgrade dependencies.
+
+
 ## 1.0.1: 2018-01-03
 
 - 📝 DOCS: Document Herman-specific styles and patterns.
