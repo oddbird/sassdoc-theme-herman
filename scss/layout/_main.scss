@@ -1,0 +1,32 @@
+// Main Layout
+// ===========
+/// # Herman Main-Content Region
+/// Styles related to the main content area in generated Herman docs.
+/// @group style-main
+
+
+
+// Main Region
+// -----------
+/// Layout and styles for the main content region.
+///
+/// @group style-main
+[data-region='main'] {
+  @include z-index('main');
+
+  @include above('page-break') {
+    overflow: hidden;
+  }
+}
+
+
+
+// Page
+// ----
+/// Generic wrapper for page-specific content.
+///
+/// @group style-main
+[data-page] {
+  padding: size('flex-gutter');
+  position: relative;
+}

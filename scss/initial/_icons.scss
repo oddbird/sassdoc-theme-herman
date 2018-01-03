@@ -3,25 +3,56 @@
 
 
 /// # Herman Icons
+/// Herman doesn't use very many icons internally…
 /// @icons assets/svg/
 /// @group style-icons
 
 
-/// A data attribute for setting an icon.
+/// ## macro `icon()`
+/// Icons should be added to the html using our
+/// `icon()` utility macro in Nunjucks.
+///
+/// - `name` :: {`string`}<br/>
+///   The string ID used to identify the icon desired.
+/// - `alt=none` :: {`string` | `none`}<br/>
+///   Alternate text for the icon will be visually hidden,
+///   but available to screen-readers.
+/// - `size=none` :: {`string` | `none`}<br/>
+///   Currently supported icon sizes include
+///   `'nav-icon'` and `'footer-logo'`.
+/// - `class=none` :: {`string` | `none`}<br/>
+///   Any classes that should be applied to the icon.
+///
 /// @group style-icons
 /// @example njk
 ///   {% import 'utility.macros.njk' as utility %}
-///   {{ utility.icon('menu', size='icon-small') }}
+///   {{ utility.icon('menu', size='nav-icon') }}
+
+
+// Data-Icon
+// ---------
+/// Icons inherit the color of their surroundings,
+/// and default to a `1em` square if no other dimensions are provided.
+/// @group style-icons
 [data-icon] {
+  @include square(1em);
   fill: currentColor;
 }
 
 
-[data-icon-size='icon-small'] {
-  @include square('icon');
+// Icon-Size: Nav
+// --------------
+/// Used for the menu-bar icon.
+/// @group style-icons
+[data-icon-size='nav-icon'] {
+  @include square('nav-icon');
 }
 
 
+// Icon-Size: Footer Logo
+// ----------------------
+/// Used for the footer Herman logo.
+/// @group style-icons
 [data-icon-size='footer-logo'] {
   @include square('footer-logo');
 }

@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <title>_Layout: Nav | Herman Documentation</title>
+  <title>_Component: Breadcrumb | Herman Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
@@ -159,7 +159,7 @@
         
           
           <li class="nav-item">
-            <a href="style-nav.html" data-nav="is-active">_Layout: Nav</a>
+            <a href="style-nav.html" data-nav="is-not-active">_Layout: Nav</a>
           </li>
         
           
@@ -194,7 +194,7 @@
         
           
           <li class="nav-item">
-            <a href="component-breadcrumb.html" data-nav="is-not-active">_Component: Breadcrumb</a>
+            <a href="component-breadcrumb.html" data-nav="is-active">_Component: Breadcrumb</a>
           </li>
         
       </ul>
@@ -263,11 +263,11 @@
   <nav class="breadcrumb">
     
     <a href="index.html" >Herman</a> »
-    <strong>_Layout: Nav</strong>
+    <strong>_Component: Breadcrumb</strong>
   </nav>
 
 
-        <div data-page="style-nav">
+        <div data-page="component-breadcrumb">
           
   
     
@@ -292,8 +292,8 @@
 
   
     <div data-item-section="prose" class="text-block">
-      <h1 id="herman-navigation-region">Herman Navigation Region</h1>
-<p>Styles related to the navigation sidebar in generated Herman<span class="widont">&nbsp;</span>docs.</p>
+      <h1 id="herman-breadcrumb-component">Herman Breadcrumb Component</h1>
+<p>So you always know where you<span class="widont">&nbsp;</span>are…</p>
 
       
   
@@ -358,7 +358,7 @@
 
 
 
-<section class="item" id="css--%5Bdata-region%3D&#39;nav&#39;%5D">
+<section class="item" id="css--.breadcrumb">
   
     
   
@@ -376,7 +376,7 @@
       
 
       
-        <a href="#css--%5Bdata-region%3D&#39;nav&#39;%5D" class="item-name">[data-region=&#39;nav&#39;]</a>
+        <a href="#css--.breadcrumb" class="item-name">.breadcrumb</a>
       
 
       
@@ -407,29 +407,14 @@
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">[data-region=&#39;nav&#39;] {
-  @include invert-colors;
-  @include z-index(&#39;sidebar&#39;);
-  align-items: stretch;
-  display: flex;
-  flex-direction: column;
-  padding: size(&#39;gutter&#39;);
-  white-space: nowrap;
-  width: auto;
+      <pre class="hljs-pre"><code class="lang-scss">.breadcrumb {
+  background: color(&#39;callout&#39;);
+  padding: size(&#39;shim&#39;) size(&#39;flex-gutter&#39;);
 
-  @include below(&#39;nav-break&#39;) {
-    @include position(0 null 0 0);
-    box-shadow: 0 0 size(&#39;half-shim&#39;) color(&#39;shadow&#39;);
-    transform: translateX(-102%);
-    transition: transform 0.4s;
-
-    &amp;[aria-expanded=&#39;true&#39;] {
-      transform: translateX(0);
-    }
-  }
-
-  @include above(&#39;nav-break&#39;) {
-    flex: 0 0 auto;
+  a,
+  span,
+  strong {
+    display: inline-block;
   }
 }</code></pre>
     </div>
@@ -441,20 +426,6 @@
   
   
 
-  
-    <div class="text-block">
-      <p>Layout and styles for the navigation<span class="widont">&nbsp;</span>region.</p>
-
-      
-  
-
-      
-  
-
-      
-  
-
-    </div>
   
 
   </div>
@@ -515,17 +486,10 @@
 
       
       
-      <pre class="hljs-pre"><code class="lang-html">&lt;div data-region=&quot;container&quot; style=&quot;min-height: 12em;&quot;&gt;
-  &lt;nav data-region=&quot;nav&quot; aria-expanded=&quot;true&quot;&gt;
-    Navigation Region…
-  &lt;/nav&gt;
-  &lt;main data-region=&quot;main&quot;&gt;
-    Pellentesque habitant morbi tristique
-    senectus et netus et malesuada fames ac turpis egestas.
-    Vestibulum tortor quam, feugiat vitae, ultricies eget,
-    tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.
-  &lt;/main&gt;
-&lt;/div&gt;</code></pre>
+      <pre class="hljs-pre"><code class="lang-html">&lt;nav class=&quot;breadcrumb&quot;&gt;
+  &lt;a href=&quot;index.html&quot;&gt;Herman&lt;/a&gt; »
+  &lt;strong&gt;_Component: Breadcrumb&lt;/strong&gt;
+&lt;/nav&gt;</code></pre>
     </div>
   
 
@@ -566,10 +530,9 @@
   &lt;/symbol&gt;
 &lt;/svg&gt;
   
-  &lt;div data-region=&quot;container&quot; style=&quot;min-height: 12em;&quot;&gt;
-  &lt;nav data-region=&quot;nav&quot; aria-expanded=&quot;true&quot;&gt;Navigation Region…&lt;/nav&gt;
-  &lt;main data-region=&quot;main&quot;&gt;Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.&lt;/main&gt;
-&lt;/div&gt;
+  &lt;nav class=&quot;breadcrumb&quot;&gt; &lt;a href=&quot;index.html&quot;&gt;Herman&lt;/a&gt; » &lt;strong&gt;_Component: Breadcrumb&lt;/strong&gt;
+
+&lt;/nav&gt;
 &lt;/body&gt;
 &lt;/html&gt;
 " width="100%" height="0"></iframe>

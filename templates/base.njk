@@ -34,19 +34,19 @@
 <body>
   {% include '_icons.svg' %}
 
-  <div data-sassdoc-region="app">
-    <header data-sassdoc-region="banner">
+  <div data-region="app">
+    <header data-region="banner">
       {{ nav.toggle() }}
 
-      <div data-sassdoc="project-title">
-        <a href="index.html" rel="home" data-sassdoc="project-name">{{ project_title }}</a>
+      <div class="project-title">
+        <a href="index.html" rel="home" class="project-name">{{ project_title }}</a>
         {% if package.version %}
-          <span data-sassdoc="project-version">{{ package.version }}</span>
+          <span class="project-version">{{ package.version }}</span>
         {% endif %}
       </div>
     </header>
 
-    <div data-sassdoc-region="container">
+    <div data-region="container">
       {{ nav.menu(
         project=project_title,
         groups=groups,
@@ -57,10 +57,10 @@
         watermark=display.watermark
       ) }}
 
-      <main data-sassdoc-region="main">
+      <main data-region="main">
         {% block breadcrumb %}{% endblock %}
 
-        <div data-sassdoc-page="{% block page_slug %}{{ activeGroup or 'index' }}{% endblock %}">
+        <div data-page="{% block page_slug %}{{ activeGroup or 'index' }}{% endblock %}">
           {% block main %}{% endblock %}
         </div>
       </main>

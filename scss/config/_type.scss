@@ -2,16 +2,33 @@
 // =================
 
 
+/// ## macro `link_if()`
+/// This Nunjucks utility macro returns either
+/// an anchor tag, or span, depending on
+/// the truthyness of the `url` argument.
+///
+/// - `content` :: {`string`}<br/>
+///   The text/html contents of the link.
+/// - `url=none` :: {`string` | `none`}<br/>
+///   The link-target URL, if any is available.
+///   When there is no URL provided, we return a span.
+/// - `attrs={}` :: {`dictionary`}<br/>
+///   A dictionary of arbitrary html attributes
+///   to include on the returned link or span.
+///
+/// @group config-utils
+///
+/// @example njk
+///   {% import 'utility.macros.njk' as utility %}
+///   {{ utility.link_if(content='stacy', url='#', attrs={'data-sassdoc': 'font-name'} ) }}
+///   {{ utility.link_if(content='not stacy', url=none) }}
+
+
 // Link
 // ----
 /// Shortcut for `link` and `visited` pseudo-classes.
 /// @group config-utils
-/// @see $focus
-/// @example njk
-///   {% import 'utility.macros.njk' as utility %}
-///   {{ utility.link_if( content='stacy', url='#', attrs={'data-sassdoc': 'font-name'} ) }}
-/// @todo Add a sample @todo
-/// @example scss - target link and visited anchors
+/// @example scss
 ///   a {
 ///     #{$link} {
 ///       color: blue;
@@ -24,7 +41,6 @@ $link: '&:link, &:visited';
 // -----
 /// Shortcut for `hover`, `focus`, and `active` pseudo-classes.
 /// @group config-utils
-/// @see $link
 /// @example scss
 ///   a {
 ///     #{$focus} {
@@ -32,3 +48,26 @@ $link: '&:link, &:visited';
 ///     }
 ///   }
 $focus: '&:hover, &:focus, &:active';
+
+
+// Invert Colors
+// -------------
+/// Invert the colors of a block, creating light-on-dark text and links.
+/// @group config-utils
+/// @example scss
+///   .invert-colors {
+///     @include invert-colors;
+///   }
+/// @example html
+///   <div class="invert-colors" style="padding: 1em;">
+///     You shall sojourn at <a href="#">Paris, Rome, and Naples</a>.
+///   </div>
+@mixin invert-colors {
+  @include contrasted('theme-dark');
+
+  [href] {
+    #{$link} {
+      color: inherit;
+    }
+  }
+}

@@ -21,9 +21,8 @@
 }
 
 .item-subtitle {
-  border-bottom: 1px solid color('light-border');
+  border-bottom: 1px solid color('border-light');
   color: color('text-light');
-  font-size: size('small');
   font-weight: normal;
   margin-bottom: size('shim');
 }
@@ -76,13 +75,13 @@
 
 .param-title {
   color: color('text-light');
-  font-size: size('base');
+  font-size: size('h3');
 }
 
 .param-details {
   margin-top: size('half-shim');
 
-  @include above('nav-medium') {
+  @include above('item-break') {
     margin-left: size('gutter');
   }
 }
@@ -91,7 +90,7 @@
 // Requires
 // --------
 .requires-wrapper {
-  @include above('nav-medium') {
+  @include above('item-break') {
     display: flex;
     margin-bottom: size('gutter-plus');
 

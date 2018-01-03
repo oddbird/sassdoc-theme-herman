@@ -10,8 +10,8 @@
 
 // Text Ratios
 // -----------
-/// A set of standard ratios
-/// for creating text rhythm and modular-scales.
+/// We only use ratios to establish line-height on Herman,
+/// since the font sizes are all responsive calculations.
 ///
 /// @group config-scale
 /// @ratios
@@ -22,33 +22,54 @@ $text-ratios: (
 @include config('ratios', 'text-ratios', $text-ratios);
 
 
+// Root Sizes
+// ----------
+/// We use a `responsive` viewport-based size
+/// for the root of our typography,
+/// with a `px`-based fallback for older browsers
+/// and unit conversions.
+/// We also provide `small` and `large`
+/// font-sizes to be used in special cases.
+///
+/// These sizes should only be accessed for establishing
+/// the root size on the `html` tag,
+/// or assigned more semantic names before applying to
+/// patterns and components.
+///
+/// @group config-scale
+/// @sizes
+$root-sizes: (
+  'root': 18px,
+  'responsive': calc(16px + 0.125vw),
+
+  'large': calc(%s + %s) (1rem, 0.5vw),
+  'small': 0.9rem,
+);
+
+@include config('sizes', 'root-sizes', $root-sizes);
+
+
 // Text Sizes
 // ----------
-/// A set of standard text sizes.
+/// The `reset` size (`1rem`) allows you to reset
+/// to the root font size from inside any element.
+/// We also provide a set of pattern-specific sizes
+/// to use directly in component styles.
 ///
 /// @group config-scale
 /// @sizes
 $text-sizes: (
-  'root': 18px,
-  'rel-root': calc(16px + 0.125vw),
+  'reset': 1rem,
 
-  'large-rem': 20px ('convert-units': 'rem'),
-  'base-rem': 'root' ('convert-units': 'rem'),
-  'small-rem': 16px ('convert-units': 'rem'),
-  'xsmall-rem': 'base-rem' ('times': 0.75),
+  'h1': calc(%s + %s) (1rem, 2vw),
+  'h2': calc(%s + %s) (1rem, 1vw),
+  'h3': 'large',
 
-  'xlarge': calc(%s + %s) ('base-rem', 2vw),
-  'large': calc(%s + %s) ('base-rem', 1vw),
-  'medium': calc(%s + %s) ('base-rem', 0.5vw),
-  'base': calc(%s + %s) ('small-rem', 0.5vw),
-  'small': calc(%s + %s) ('small-rem', 0.25vw),
-  'xsmall': calc(%s + %s) ('xsmall-rem', 0.25vw),
+  'quote': 'large',
 
-  'h1': 'xlarge',
-  'h2': 'large',
-  'h3': 'medium',
-  'quote': 'medium',
-  'pre': 'xsmall',
+  'code': 'small',
+  'footer': 'small',
+  'search': 'small',
 );
 
 @include config('sizes', 'text-sizes', $text-sizes);
@@ -56,22 +77,25 @@ $text-sizes: (
 
 // Spacing Sizes
 // -------------
-/// A set of standard spacing sizes.
+/// A mostly-linear scale of spacing-sizes
+/// based on fractions and multiples of the base line-height.
+/// These can be used to add spacing between components,
+/// and provide site hierarchy.
 ///
 /// @group config-scale
 /// @sizes {ruler}
 $spacing-sizes: (
-  'rhythm': 'root' ('line-height': 1, 'convert-units': 'rem'),
+  'rhythm': 1rem ('line-height': 1),
   'gutter': 'rhythm',
-  'gutter-minus': 'gutter' ('times': 0.75),
-  'gutter-plus': 'gutter' ('times': 1.5),
+  'gutter-plus': 'gutter' ('plus': 'shim'),
 
   'flex-gutter': calc(%s + %s) ('shim', 2.5vw),
   'spacer': calc(%s + %s) ('gutter' ('times': 3), 2.5vw),
 
+  'gutter-minus': 'gutter' ('minus': 'shim'),
   'shim': 'gutter' ('times': 0.5),
   'half-shim': 'shim' ('times': 0.5),
-  'quarter-shim': 'shim' ('times': 0.25)
+  'quarter-shim': 'shim' ('times': 0.25),
 );
 
 @include config('sizes', 'spacing-sizes', $spacing-sizes);
@@ -79,26 +103,44 @@ $spacing-sizes: (
 
 // Pattern Sizes
 // -------------
-/// A set of pattern-specific sizes,
-/// that can be applied to various components.
+/// Semantically-named sizes
+/// for managing patterns and component layouts.
 ///
 /// @group config-scale
-/// @sizes {output-only}
+/// @sizes {ruler}
 $pattern-sizes: (
-  'border': 8px,
-  'page': 50rem,
-
-  'page-break': 50em,
-  'nav-small': 21em,
-  'nav-medium': 32em,
-  'nav-large': 65em,
-
-  'specimen': 'rhythm' ('times': 3),
-  'color-preview': calc(15em + 0.25vw), // trial and error…
-  'color-swatch': 'rhythm' ('times': 4),
-  'icon': 28px,
   'nav-underline': 4px,
+  'nav-icon': 28px,
+
+  'arrow-border': 8px,
+  'arrow-depth': 'shim',
+  'arrow-side': 'gutter',
+
+  'font-preview': 24em,
+  'specimen-aa': 'rhythm' ('times': 3),
+
+  'color-preview': 16em,
+  'color-swatch': 'rhythm' ('times': 4),
+
   'footer-logo': 'rhythm' ('times': 2),
 );
 
 @include config('sizes', 'pattern-sizes', $pattern-sizes);
+
+
+// Layout Sizes
+// -------------
+/// Layout-specific sizes,
+/// for establishing larger widths and breakpoints.
+///
+/// @group config-scale
+/// @sizes {ruler-large}
+$layout-sizes: (
+  'page': 50rem,
+
+  'item-break': 40em,
+  'page-break': 50em,
+  'nav-break': 65em,
+);
+
+@include config('sizes', 'layout-sizes', $layout-sizes);

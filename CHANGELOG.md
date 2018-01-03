@@ -1,6 +1,13 @@
 # Herman Changelog
 
 
+## Unreleased
+
+- 📝 DOCS: Document Herman-specific styles and patterns.
+- 🐛 BUGFIX: Open links within iframe in parent context
+  (`<base target="_parent">`).
+
+
 ## 🎉 1.0.0: 2017-12-15 🎉
 
 *No changes from `v1.0.0-rc.8`. Changes since `v0.5.5`:*

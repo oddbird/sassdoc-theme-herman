@@ -3,6 +3,16 @@
 
 
 /// # Herman Config: Color Palettes
+/// This page contains documentation of the colors used by Herman.
+/// We use OddBird's [Accoutrement-Color][ac] module
+/// to store and manage colors directly in Sass map objects.
+///
+/// [ac]: http://oddbird.net/accoutrement-color/
+///
+/// For help documenting your brand colors,
+/// see the "[Documenting Colors][colors]" page.
+///
+/// [colors]: /demo_colors.html
 /// @group config-colors
 /// @link http://oddbird.net/accoutrement-color/docs/
 ///   Accoutrement Color
@@ -12,6 +22,11 @@
 // ------------
 /// We use bright primary colors for the main brand,
 /// everything else is based on these colors.
+/// These are based on the OddBird brand colors,
+/// but using a darker shade of the OddBird pink.
+///
+/// These colors should be assigned to semantic theme-specific names
+/// before they are used in styling patterns and components.
 ///
 /// @colors
 /// @group config-colors
@@ -26,16 +41,19 @@
 $brand-colors: (
   'brand-orange': hsl(24, 100%, 39%),
   'brand-blue': hsl(195, 85%, 35%),
-  'brand-pink': hsl(330, 85%, 48%),
+  'brand-pink': hsl(330, 85%, 48%) ('shade': 25%),
 );
 
 @include config('colors', 'brand-colors', $brand-colors);
+
 
 
 // Neutral Colors
 // --------------
 /// Use these neutral colors
 /// to create structure and hierarchy in the document.
+/// These colors should be assigned to semantic theme-specific names
+/// before they are used in styling patterns and components.
 ///
 /// @colors
 /// @group config-colors
@@ -48,26 +66,15 @@ $neutral-colors: (
 @include config('colors', 'neutral-colors', $neutral-colors);
 
 
-// Status Colors
-// -------------
-/// These status colors for UI elements
-/// give a quick sense of progress, warning, or errors.
-///
-/// @colors
-/// @group config-colors
-$status-colors: (
-  'go': hsl(75, 65%, 30%),
-  'yield': 'brand-orange',
-  'stop': hsl(0, 85%, 50%),
-);
-
-@include config('colors', 'status-colors', $status-colors);
-
 
 // Theme Colors
 // ------------
-/// Applying the brand and accent colors
-/// to a sitewide theme.
+/// Rather than directly accessing and adjusting
+/// the explicitly named (e.g. "pink" or "gray")
+/// brand and neutral colors,
+/// we assign them to semantic theme-specific names.
+/// These are the colors that should be used
+/// in our pattern/component styles.
 ///
 /// @colors
 /// @group config-colors
@@ -79,12 +86,12 @@ $theme-colors: (
   'text': 'black',
   'text-light': 'gray',
 
-  'action': 'brand-pink' ('shade': 25%),
+  'action': 'brand-pink',
   'focus': 'theme-dark',
   'underline': 'action' ('tint': 75%),
 
   'border': 'gray',
-  'light-border': 'light-gray',
+  'border-light': 'light-gray',
   'shadow': 'gray' ('rgba': 0.5),
 
   'callout': 'theme-light',

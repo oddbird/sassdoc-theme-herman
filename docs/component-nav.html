@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <title>_Layout: Nav | Herman Documentation</title>
+  <title>_Component: Nav | Herman Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
@@ -159,7 +159,7 @@
         
           
           <li class="nav-item">
-            <a href="style-nav.html" data-nav="is-active">_Layout: Nav</a>
+            <a href="style-nav.html" data-nav="is-not-active">_Layout: Nav</a>
           </li>
         
           
@@ -184,7 +184,7 @@
         
           
           <li class="nav-item">
-            <a href="component-nav.html" data-nav="is-not-active">_Component: Nav</a>
+            <a href="component-nav.html" data-nav="is-active">_Component: Nav</a>
           </li>
         
           
@@ -263,11 +263,11 @@
   <nav class="breadcrumb">
     
     <a href="index.html" >Herman</a> »
-    <strong>_Layout: Nav</strong>
+    <strong>_Component: Nav</strong>
   </nav>
 
 
-        <div data-page="style-nav">
+        <div data-page="component-nav">
           
   
     
@@ -292,8 +292,7 @@
 
   
     <div data-item-section="prose" class="text-block">
-      <h1 id="herman-navigation-region">Herman Navigation Region</h1>
-<p>Styles related to the navigation sidebar in generated Herman<span class="widont">&nbsp;</span>docs.</p>
+      <h1 id="herman-navigation-components">Herman Navigation Components</h1>
 
       
   
@@ -358,7 +357,7 @@
 
 
 
-<section class="item" id="css--%5Bdata-region%3D&#39;nav&#39;%5D">
+<section class="item" id="css--.nav-subsection">
   
     
   
@@ -376,7 +375,7 @@
       
 
       
-        <a href="#css--%5Bdata-region%3D&#39;nav&#39;%5D" class="item-name">[data-region=&#39;nav&#39;]</a>
+        <a href="#css--.nav-subsection" class="item-name">.nav-subsection</a>
       
 
       
@@ -407,29 +406,17 @@
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">[data-region=&#39;nav&#39;] {
-  @include invert-colors;
-  @include z-index(&#39;sidebar&#39;);
-  align-items: stretch;
-  display: flex;
-  flex-direction: column;
-  padding: size(&#39;gutter&#39;);
-  white-space: nowrap;
-  width: auto;
+      <pre class="hljs-pre"><code class="lang-scss">.nav-subsection {
+  flex: 0 0 auto;
+  padding-bottom: size(&#39;gutter&#39;);
 
-  @include below(&#39;nav-break&#39;) {
-    @include position(0 null 0 0);
-    box-shadow: 0 0 size(&#39;half-shim&#39;) color(&#39;shadow&#39;);
-    transform: translateX(-102%);
-    transition: transform 0.4s;
-
-    &amp;[aria-expanded=&#39;true&#39;] {
-      transform: translateX(0);
-    }
+  &amp;:last-of-type {
+    flex: 1 0 auto;
   }
 
-  @include above(&#39;nav-break&#39;) {
-    flex: 0 0 auto;
+  &amp; + &amp; {
+    border-top: 1px solid color(&#39;theme-light&#39;);
+    padding-top: size(&#39;gutter&#39;);
   }
 }</code></pre>
     </div>
@@ -443,7 +430,436 @@
 
   
     <div class="text-block">
-      <p>Layout and styles for the navigation<span class="widont">&nbsp;</span>region.</p>
+      <p>Group the main navigation into<span class="widont">&nbsp;</span>sub-sections…</p>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="css--.nav-title">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type"></span>
+      
+
+      
+        <a href="#css--.nav-title" class="item-name">.nav-title</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+    
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">.nav-title {
+  font-weight: bold;
+  margin: size(&#39;half-shim&#39;) 0;
+  width: 100%;
+}</code></pre>
+    </div>
+  
+
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>Each subsection may optionally have a<span class="widont">&nbsp;</span>title…</p>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="css--.nav-item">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type"></span>
+      
+
+      
+        <a href="#css--.nav-item" class="item-name">.nav-item</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+    
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">.nav-item {
+  list-style: none;
+  margin: size(&#39;half-shim&#39;) 0;
+}</code></pre>
+    </div>
+  
+
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>Each list-item in the navigation<span class="widont">&nbsp;</span>menus…</p>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="css--%5Bdata-nav%5D">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type"></span>
+      
+
+      
+        <a href="#css--%5Bdata-nav%5D" class="item-name">[data-nav]</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+    
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">[data-nav] {
+  #{$link} {
+    color: color(&#39;background&#39;);
+    line-height: 1.1;
+    padding-bottom: size(&#39;quarter-shim&#39;);
+    position: relative;
+    text-decoration: none;
+    transition: color 0.4s;
+
+    // Animated underlines
+    @include before(&#39;&#39;) {
+      @include position(null null 0 0);
+      background: color(&#39;theme-light&#39;);
+      height: size(&#39;nav-underline&#39;);
+      transform: scale3d(0, 1, 1);
+      transform-origin: center left;
+      transition: transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+      transition-delay: 0.2s;
+      width: 100%;
+    }
+  }
+
+  #{$focus} {
+    @include before(&#39;&#39;) {
+      transform: scale3d(1, 1, 1);
+      transition-delay: 0s;
+    }
+  }
+
+  &amp;[data-nav=&#39;is-active&#39;] {
+    #{$link},
+    #{$focus} {
+      @include before(&#39;&#39;) {
+        transform: scale3d(1, 1, 1);
+        transition-delay: 0s;
+      }
+    }
+  }
+}</code></pre>
+    </div>
+  
+
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>Navigation items, with inactive and active<span class="widont">&nbsp;</span>states.</p>
 
       
   
@@ -515,16 +931,9 @@
 
       
       
-      <pre class="hljs-pre"><code class="lang-html">&lt;div data-region=&quot;container&quot; style=&quot;min-height: 12em;&quot;&gt;
-  &lt;nav data-region=&quot;nav&quot; aria-expanded=&quot;true&quot;&gt;
-    Navigation Region…
-  &lt;/nav&gt;
-  &lt;main data-region=&quot;main&quot;&gt;
-    Pellentesque habitant morbi tristique
-    senectus et netus et malesuada fames ac turpis egestas.
-    Vestibulum tortor quam, feugiat vitae, ultricies eget,
-    tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.
-  &lt;/main&gt;
+      <pre class="hljs-pre"><code class="lang-html">&lt;div class=&quot;invert-colors&quot; style=&quot;padding: 1em;&quot;&gt;
+  &lt;a href=&quot;#&quot; data-nav=&quot;is-not-active&quot;&gt;not active&lt;/a&gt;&lt;br /&gt;
+  &lt;a href=&quot;#&quot; data-nav=&quot;is-active&quot;&gt;active&lt;/a&gt;
 &lt;/div&gt;</code></pre>
     </div>
   
@@ -566,9 +975,9 @@
   &lt;/symbol&gt;
 &lt;/svg&gt;
   
-  &lt;div data-region=&quot;container&quot; style=&quot;min-height: 12em;&quot;&gt;
-  &lt;nav data-region=&quot;nav&quot; aria-expanded=&quot;true&quot;&gt;Navigation Region…&lt;/nav&gt;
-  &lt;main data-region=&quot;main&quot;&gt;Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.&lt;/main&gt;
+  &lt;div class=&quot;invert-colors&quot; style=&quot;padding: 1em;&quot;&gt; &lt;a href=&quot;#&quot; data-nav=&quot;is-not-active&quot;&gt;not active&lt;/a&gt;
+  &lt;br /&gt; &lt;a href=&quot;#&quot; data-nav=&quot;is-active&quot;&gt;active&lt;/a&gt;
+
 &lt;/div&gt;
 &lt;/body&gt;
 &lt;/html&gt;

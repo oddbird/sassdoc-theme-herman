@@ -1,93 +1,14 @@
 // Navigation Styles
 // =================
-
-/// # Herman Navigation Component
-/// @group style-nav
-
-
-// Small Menu
-// ----------
-
-[data-nav-menu] {
-  align-items: stretch;
-  display: flex;
-  flex-direction: column;
-  width: auto;
-
-  @include below('nav-large') {
-    @include position(0 null 0 0);
-    box-shadow: 0 0 size('half-shim') color('shadow');
-    transform: translateX(-102%);
-    transition: transform 0.4s;
-
-    &[aria-expanded='true'] {
-      transform: translateX(0);
-    }
-  }
-
-  @include above('nav-large') {
-    flex: 0 0 auto;
-  }
-}
-
-
-// Toggles
-// -------
-
-[data-nav-toggle] {
-  color: color('action');
-  padding: size('half-shim');
-
-  @include above('page-break') {
-    padding-left: size('shim');
-    padding-right:  size('shim');
-  }
-
-  @include above('nav-large') {
-    display: none;
-  }
-
-  &:focus,
-  &:hover,
-  &:active,
-  &[aria-pressed='true'] {
-    color: color('focus');
-    outline: 0;
-  }
-}
-
-
-// Nav Items
-// ---------
-
-[data-sassdoc='nav-item'] {
-  list-style: none;
-  margin: size('half-shim') 0;
-
-  @include below('nav-small') {
-    width: 50%;
-
-    &:nth-of-type(2n) {
-      padding-right: 1rem;
-    }
-  }
-}
-
-
-// Nav Titles
-// ----------
-
-[data-sassdoc='nav-title'] {
-  font-weight: bold;
-  margin: size('half-shim') 0;
-  width: 100%;
-}
+/// # Herman Navigation Components
+/// @group component-nav
 
 
 // Nav Subsections
 // ---------------
-
-[data-sassdoc='nav-subsection'] {
+/// Group the main navigation into sub-sections…
+/// @group component-nav
+.nav-subsection {
   flex: 0 0 auto;
   padding-bottom: size('gutter');
 
@@ -102,20 +23,37 @@
 }
 
 
+// Nav Titles
+// ----------
+/// Each subsection may optionally have a title…
+/// @group component-nav
+.nav-title {
+  font-weight: bold;
+  margin: size('half-shim') 0;
+  width: 100%;
+}
+
+
+// Nav Items
+// ---------
+/// Each list-item in the navigation menus…
+/// @group component-nav
+.nav-item {
+  list-style: none;
+  margin: size('half-shim') 0;
+}
+
+
 // Nav Links
 // ---------
 /// Navigation items, with inactive and active states.
-/// @group style-nav
+/// @group component-nav
 /// @example html
-///   <ul data-nav-menu>
-///     <li data-sassdoc="nav-item">
-///       <a href="#" data-sassdoc-nav="is-not-active">not active</a>
-///     </li>
-///     <li data-sassdoc="nav-item">
-///       <a href="#" data-sassdoc-nav="is-active">active</a>
-///     </li>
-///   </ul>
-[data-sassdoc-nav] {
+///   <div class="invert-colors" style="padding: 1em;">
+///     <a href="#" data-nav="is-not-active">not active</a><br />
+///     <a href="#" data-nav="is-active">active</a>
+///   </div>
+[data-nav] {
   #{$link} {
     color: color('background');
     line-height: 1.1;
@@ -144,7 +82,7 @@
     }
   }
 
-  &[data-sassdoc-nav='is-active'] {
+  &[data-nav='is-active'] {
     #{$link},
     #{$focus} {
       @include before('') {
@@ -154,45 +92,3 @@
     }
   }
 }
-
-
-// Footer Credit
-// -------------
-
-.footer-credit {
-  @include clearfix;
-  border-top: 1px solid color('theme-light');
-  flex: 0 0 auto;
-  font-size: size('xsmall');
-  line-height: size('rhythm');
-  padding-top: size('gutter');
-
-  span {
-    display: block;
-    overflow: hidden;
-    white-space: nowrap;
-  }
-}
-
-
-.footer-icon {
-  #{$link} {
-    color: inherit;
-    float: left;
-    margin-right: size('half-shim');
-  }
-}
-
-
-.footer-link {
-  #{$link} {
-    color: color('background');
-    font-weight: bold;
-    text-decoration-color: transparent;
-  }
-
-  #{$focus} {
-    text-decoration-color: currentColor;
-  }
-}
-

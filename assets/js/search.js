@@ -119,7 +119,7 @@ export const showResults = (matches, val) => {
     })
   );
   resultsTpl.filter('.js-search-results').html(results);
-  $('[data-sassdoc-page]').html(resultsTpl);
+  $('[data-page]').html(resultsTpl);
 };
 
 export const doSearch = (data, val) => {

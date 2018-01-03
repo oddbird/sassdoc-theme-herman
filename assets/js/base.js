@@ -133,8 +133,8 @@ export const initializeNav = () => {
   const breakpoint =
     sassConfig &&
     sassConfig.sizes &&
-    sassConfig.sizes['pattern-sizes'] &&
-    sassConfig.sizes['pattern-sizes']['nav-large'];
+    sassConfig.sizes['layout-sizes'] &&
+    sassConfig.sizes['layout-sizes']['nav-break'];
 
   /* istanbul ignore else */
   if (breakpoint) {

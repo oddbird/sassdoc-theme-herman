@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <title>_Layout: Nav | Herman Documentation</title>
+  <title>_Layout: Main | Herman Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
@@ -159,12 +159,12 @@
         
           
           <li class="nav-item">
-            <a href="style-nav.html" data-nav="is-active">_Layout: Nav</a>
+            <a href="style-nav.html" data-nav="is-not-active">_Layout: Nav</a>
           </li>
         
           
           <li class="nav-item">
-            <a href="style-main.html" data-nav="is-not-active">_Layout: Main</a>
+            <a href="style-main.html" data-nav="is-active">_Layout: Main</a>
           </li>
         
           
@@ -263,11 +263,11 @@
   <nav class="breadcrumb">
     
     <a href="index.html" >Herman</a> »
-    <strong>_Layout: Nav</strong>
+    <strong>_Layout: Main</strong>
   </nav>
 
 
-        <div data-page="style-nav">
+        <div data-page="style-main">
           
   
     
@@ -292,8 +292,8 @@
 
   
     <div data-item-section="prose" class="text-block">
-      <h1 id="herman-navigation-region">Herman Navigation Region</h1>
-<p>Styles related to the navigation sidebar in generated Herman<span class="widont">&nbsp;</span>docs.</p>
+      <h1 id="herman-main-content-region">Herman Main-Content Region</h1>
+<p>Styles related to the main content area in generated Herman<span class="widont">&nbsp;</span>docs.</p>
 
       
   
@@ -358,7 +358,7 @@
 
 
 
-<section class="item" id="css--%5Bdata-region%3D&#39;nav&#39;%5D">
+<section class="item" id="css--%5Bdata-region%3D&#39;main&#39;%5D">
   
     
   
@@ -376,7 +376,7 @@
       
 
       
-        <a href="#css--%5Bdata-region%3D&#39;nav&#39;%5D" class="item-name">[data-region=&#39;nav&#39;]</a>
+        <a href="#css--%5Bdata-region%3D&#39;main&#39;%5D" class="item-name">[data-region=&#39;main&#39;]</a>
       
 
       
@@ -407,29 +407,11 @@
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">[data-region=&#39;nav&#39;] {
-  @include invert-colors;
-  @include z-index(&#39;sidebar&#39;);
-  align-items: stretch;
-  display: flex;
-  flex-direction: column;
-  padding: size(&#39;gutter&#39;);
-  white-space: nowrap;
-  width: auto;
+      <pre class="hljs-pre"><code class="lang-scss">[data-region=&#39;main&#39;] {
+  @include z-index(&#39;main&#39;);
 
-  @include below(&#39;nav-break&#39;) {
-    @include position(0 null 0 0);
-    box-shadow: 0 0 size(&#39;half-shim&#39;) color(&#39;shadow&#39;);
-    transform: translateX(-102%);
-    transition: transform 0.4s;
-
-    &amp;[aria-expanded=&#39;true&#39;] {
-      transform: translateX(0);
-    }
-  }
-
-  @include above(&#39;nav-break&#39;) {
-    flex: 0 0 auto;
+  @include above(&#39;page-break&#39;) {
+    overflow: hidden;
   }
 }</code></pre>
     </div>
@@ -443,7 +425,7 @@
 
   
     <div class="text-block">
-      <p>Layout and styles for the navigation<span class="widont">&nbsp;</span>region.</p>
+      <p>Layout and styles for the main content<span class="widont">&nbsp;</span>region.</p>
 
       
   
@@ -473,32 +455,76 @@
 
   
   
+
+
+  
+  
+  
+  
+    
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
     
 
-    <div data-item-section="examples">
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Example</span>
-      </h3>
+
+
+
+
+
+
+
+
+
+<section class="item" id="css--%5Bdata-page%5D">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type"></span>
+      
 
       
-        
-  
-  
-
-  
-  
-  
-
-  
-  
-
-  
-  
-
-  
-  <div class="example">
-    <div class="example-code">
+        <a href="#css--%5Bdata-page%5D" class="item-name">[data-page]</a>
       
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+    
   
 
   
@@ -506,7 +532,7 @@
       
         <div class="code-header">
           <span class="code-language">
-            html
+            scss
           </span>
 
           
@@ -515,70 +541,50 @@
 
       
       
-      <pre class="hljs-pre"><code class="lang-html">&lt;div data-region=&quot;container&quot; style=&quot;min-height: 12em;&quot;&gt;
-  &lt;nav data-region=&quot;nav&quot; aria-expanded=&quot;true&quot;&gt;
-    Navigation Region…
-  &lt;/nav&gt;
-  &lt;main data-region=&quot;main&quot;&gt;
-    Pellentesque habitant morbi tristique
-    senectus et netus et malesuada fames ac turpis egestas.
-    Vestibulum tortor quam, feugiat vitae, ultricies eget,
-    tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.
-  &lt;/main&gt;
-&lt;/div&gt;</code></pre>
+      <pre class="hljs-pre"><code class="lang-scss">[data-page] {
+  padding: size(&#39;flex-gutter&#39;);
+  position: relative;
+}</code></pre>
     </div>
   
 
-    </div>
-
     
-      <div class="example-render">
-        <iframe class="render-example" srcdoc="&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-&lt;head&gt;
-  &lt;meta charset=&quot;utf-8&quot; /&gt;
-  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
-  &lt;base target=&quot;_parent&quot;&gt;
-
-  &lt;title&gt;example&lt;/title&gt;
-
   
-    &lt;!-- Custom Font HTML --&gt;
-    
-&lt;link href=&quot;https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700,700i&quot; rel=&quot;stylesheet&quot;&gt;
-&lt;link href=&quot;https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600&quot; rel=&quot;stylesheet&quot;&gt;
-&lt;link href=&quot;https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700&quot; rel=&quot;stylesheet&quot;&gt;
+  
+  
   
 
   
-    &lt;!-- Custom CSS --&gt;
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;assets/custom/app_styles.min.css&quot; /&gt;
-  
-&lt;/head&gt;
-&lt;body class=&quot;sassdoc&quot;&gt;
-  
-    &lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; hidden&gt;
-  &lt;symbol id=&quot;icon-logo&quot; viewBox=&quot;0 0 16 16&quot;&gt;
-    &lt;path d=&quot;M.2 8L0 7.8v-.2C.8 6.9 1.9 5.9 2.7 5l.4.3c-.5.8-1.1 1.6-1.8 2.3 1 1.2 1 1.3 1.7 2.4l-.4.3c-.4-.4-.5-.6-1-1C1 8.6 1.1 8.7.2 8zM13 10c.6-1.1.7-1.1 1.7-2.4-.6-.6-1.3-1.5-1.7-2.3l.3-.3c.8.8 1.8 1.8 2.7 2.6v.2l-.8.7c-.3.3-1.2 1.1-1.8 1.7L13 10z&quot;/&gt;&lt;path d=&quot;M2.6 13.1H3c.9 0 1.1-.2 1.1-1.4V4.2c0-1.1-.2-1.4-1.1-1.4h-.4v-.6h4.5v.7h-.3c-.9 0-1.1.2-1.1 1.4v3.2h4.6V4.2c0-1.1-.2-1.4-1.1-1.4h-.3v-.6h4.5v.7H13c-.9 0-1.1.2-1.1 1.4v7.5c0 1.1.2 1.4 1.1 1.4h.4v.7H8.9v-.7h.3c.9 0 1.1-.2 1.1-1.4V8.2H5.7v3.5c0 1.1.2 1.4 1.1 1.4h.3v.7H2.6v-.7z&quot;/&gt;
-  &lt;/symbol&gt;
-  &lt;symbol id=&quot;icon-menu&quot; viewBox=&quot;0 0 24 28&quot;&gt;
-    &lt;path d=&quot;M24 21v2c0 .547-.453 1-1 1H1c-.547 0-1-.453-1-1v-2c0-.547.453-1 1-1h22c.547 0 1 .453 1 1zm0-8v2c0 .547-.453 1-1 1H1c-.547 0-1-.453-1-1v-2c0-.547.453-1 1-1h22c.547 0 1 .453 1 1zm0-8v2c0 .547-.453 1-1 1H1c-.547 0-1-.453-1-1V5c0-.547.453-1 1-1h22c.547 0 1 .453 1 1z&quot;/&gt;
-  &lt;/symbol&gt;
-&lt;/svg&gt;
-  
-  &lt;div data-region=&quot;container&quot; style=&quot;min-height: 12em;&quot;&gt;
-  &lt;nav data-region=&quot;nav&quot; aria-expanded=&quot;true&quot;&gt;Navigation Region…&lt;/nav&gt;
-  &lt;main data-region=&quot;main&quot;&gt;Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.&lt;/main&gt;
-&lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-" width="100%" height="0"></iframe>
-      </div>
-    
-  </div>
+    <div class="text-block">
+      <p>Generic wrapper for page-specific<span class="widont">&nbsp;</span>content.</p>
 
       
+  
+
+      
+  
+
+      
+  
+
     </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
   
 
 

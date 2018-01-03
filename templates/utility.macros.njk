@@ -58,7 +58,7 @@
 
       {% set language = 'jinja' if language == 'njk' else language %}
       {% set language = ['lang', language]|join('-') if language !== none %}
-      <pre data-sassdoc="hljs"><code{% if language %} class="{{ language }}"{% endif %}>{{ content|escape|safe }}</code></pre>
+      <pre class="hljs-pre"><code{% if language %} class="{{ language }}"{% endif %}>{{ content|escape|safe }}</code></pre>
     </div>
   {% endif %}
 {% endmacro %}

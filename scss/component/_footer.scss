@@ -1,0 +1,67 @@
+// Footer Credit
+// =============
+/// The OddBird credit in the navigation footer can be toggled
+/// using the [SassDoc `display.watermark` configuration setting](http://sassdoc.com/customising-the-view/#watermark-display).
+/// @group component-footer
+/// @example njk
+///   {% import 'utility.macros.njk' as utility %}
+///   <aside class="footer-credit">
+///     <a href="http://oddbird.net/herman/" class="footer-icon">
+///       {{ utility.icon('logo', size='footer-logo') }}
+///     </a>
+///     <span>
+///       Documented with
+///       <a href="http://oddbird.net/herman/" class="footer-link">
+///         Herman
+///       </a>
+///     </span>
+///     <span>
+///       by
+///       <a href="http://oddbird.net/" class="footer-link">
+///         OddBird
+///       </a>
+///     </span>
+///   </aside>
+
+
+/// Layout for the footer credit.
+/// @group component-footer
+.footer-credit {
+  @include clearfix;
+  border-top: 1px solid color('theme-light');
+  flex: 0 0 auto;
+  font-size: size('footer');
+  line-height: size('rhythm');
+  padding-top: size('gutter');
+
+  span {
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+}
+
+
+/// Layout for the footer logo-icon.
+/// @group component-footer
+.footer-icon {
+  #{$link} {
+    color: inherit;
+    float: left;
+    margin-right: size('half-shim');
+  }
+}
+
+
+/// Special styles for the footer links.
+/// @group component-footer
+.footer-link {
+  #{$link} {
+    font-weight: bold;
+    text-decoration-color: transparent;
+  }
+
+  #{$focus} {
+    text-decoration-color: currentColor;
+  }
+}

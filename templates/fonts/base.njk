@@ -5,6 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <base target="_parent">
 
   <title>fonts</title>
 
@@ -24,7 +25,7 @@
     </style>
   {% endif %}
 </head>
-<body class="sassdoc">
+<body class="sassdoc font-specimen">
   {%- set key = item.font.key or item.context.origName or item.context.name -%}
   {%- set data = sassjson.fonts[key] -%}
   {%- if data -%}

@@ -2,23 +2,17 @@
 // ===================
 // Orginal Style from ethanschoonover.com/solarized
 // (c) Jeremy Hull <sourdrums@gmail.com>
-// sass-lint:disable force-element-nesting, class-name-format, indentation
-
-
-/// # Herman Code-Block Styles
-/// @group style-code
-/// @link https://highlightjs.org/ Highlight.JS
+// sass-lint:disable force-element-nesting, class-name-format
 
 
 // hljs colors
 // -----------
-/// A map of colors for code-highlighting
+/// Colors for code-highlighting with hljs,
+/// based on [Solarized-Light](http://ethanschoonover.com/solarized)
+/// & the Herman brand.
 /// @group style-code
-/// @access private
-/// @type map
+/// @colors
 $hljs-colors: (
-  'hljs-background': 'slight',
-  'hljs-text': 'code',
   'hljs-comment': #93a1a1,
   'hljs-green': #859900,
   'hljs-cyan': #2aa198,
@@ -27,82 +21,21 @@ $hljs-colors: (
   'hljs-orange': #cb4b16,
   'hljs-red': #dc322f,
   'hljs-formula': #eee8d5,
-  'hljs-shadow': 'code-shadow',
 );
 
-@include config('colors', 'hljs-colors', $hljs-colors);
-
-
-// hljs-gradient
-// -------------
-/// Creates a faux-background gradient
-/// to overlay the edges of a code-block,
-/// so code-overflow is more obvious.
-/// @group style-code
-/// @access private
-/// @see {css} Code Blocks
-/// @parameter {string} $direction -
-///   Any valid gradient direction, e.g. `to top`
-/// @parameter {string} $small [false] -
-///   Use a smaller gradient for vertical/left overflow
-/// @return {background-image} -
-///   A linear-gradient with the appropriate color-stops
-@function hljs-gradient(
-  $direction,
-  $small: false
-) {
-  $color: color('hljs-background');
-  $dir: unquote($direction);
-  $first: if($small, size('quarter-shim'), size('half-shim'));
-  $second: if($small, size('shim'), size('gutter') + size('shim'));
-
-  @return linear-gradient($dir, $color $first, rgba($color, 0) $second);
-}
-
-
-// Code Blocks
-/// @name Code Blocks
-/// @group style-code
-/// @access private
-/// @requires {function} hljs-gradient
-[data-sassdoc='hljs'],
-.text-block pre {
-  align-items: stretch;
-  background-color: color('hljs-background');
-  color: color('hljs-text');
-  display: flex;
-  position: relative;
-
-  code {
-    flex: 0 0 100%;
-    overflow-x: auto;
-    padding: size('shim');
-    padding-right: size('gutter');
-  }
-
-  @include before(' ') {
-    @include position(0);
-    background:
-      hljs-gradient('to top', 'small'),
-      hljs-gradient('to right', 'small'),
-      hljs-gradient('to bottom', 'small'),
-      hljs-gradient('to left') no-repeat scroll;
-    box-shadow: 0 0 size('half-shim') color('hljs-shadow') inset;
-    pointer-events: none;
-  }
-}
+@include herman-add('colors', 'hljs-colors', $hljs-colors);
 
 
 .hljs-comment,
 .hljs-quote {
-  color: color('hljs-comment');
+  color: color('hljs-comment', $hljs-colors);
 }
 
 // Solarized Green
 .hljs-keyword,
 .hljs-selector-tag,
 .hljs-addition {
-  color: color('hljs-green');
+  color: color('hljs-green', $hljs-colors);
 }
 
 // Solarized Cyan
@@ -112,7 +45,7 @@ $hljs-colors: (
 .hljs-literal,
 .hljs-doctag,
 .hljs-regexp {
-  color: color('hljs-cyan');
+  color: color('hljs-cyan', $hljs-colors);
 }
 
 // Solarized Blue
@@ -121,7 +54,7 @@ $hljs-colors: (
 .hljs-name,
 .hljs-selector-id,
 .hljs-selector-class {
-  color: color('hljs-blue');
+  color: color('hljs-blue', $hljs-colors);
 }
 
 // Solarized Yellow
@@ -131,7 +64,7 @@ $hljs-colors: (
 .hljs-template-variable,
 .hljs-class .hljs-title,
 .hljs-type {
-  color: color('hljs-yellow');
+  color: color('hljs-yellow', $hljs-colors);
 }
 
 // Solarized Orange
@@ -143,17 +76,17 @@ $hljs-colors: (
 .hljs-selector-attr,
 .hljs-selector-pseudo,
 .hljs-link {
-  color: color('hljs-orange');
+  color: color('hljs-orange', $hljs-colors);
 }
 
 // Solarized Red
 .hljs-built_in,
 .hljs-deletion {
-  color: color('hljs-red');
+  color: color('hljs-red', $hljs-colors);
 }
 
 .hljs-formula {
-  background: color('hljs-formula');
+  background: color('hljs-formula', $hljs-colors);
 }
 
 .hljs-emphasis {
