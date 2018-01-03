@@ -3,7 +3,8 @@
 
 ## Unreleased
 
-- CHANGE: Open links within iframe in parent context
+- 📝 DOCS: Document Herman-specific styles and patterns.
+- 🐛 BUGFIX: Open links within iframe in parent context
   (`<base target="_parent">`).
 
 
