@@ -372,17 +372,24 @@ gulp.task('browser-sync', cb => {
   );
 });
 
-gulp.task('test', gulp.parallel('jstest', 'sasstest'));
+gulp.task(
+  'test',
+  gulp.series(gulp.parallel('jstest', 'sasstest'), 'clienttest')
+);
 gulp.task('serve', gulp.parallel('watch', 'browser-sync'));
 gulp.task('quick-serve', gulp.parallel('webpack', 'browser-sync'));
 gulp.task(
   'dev',
-  gulp.series(gulp.parallel('eslint', 'sasslint', 'test'), 'serve')
+  gulp.series(
+    gulp.parallel('eslint', 'sasslint', 'sasstest'),
+    gulp.parallel('jstest', 'serve')
+  )
 );
 gulp.task(
   'default',
   gulp.parallel(
     'sasslint',
-    gulp.series('eslint', gulp.parallel('test', 'webpack'))
+    'sasstest',
+    gulp.series('eslint', gulp.parallel('jstest', 'webpack'), 'clienttest')
   )
 );
