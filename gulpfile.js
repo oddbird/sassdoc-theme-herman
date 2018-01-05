@@ -5,7 +5,6 @@
 const beeper = require('beeper');
 const browserSync = require('browser-sync').create();
 const chalk = require('chalk');
-const del = require('del');
 const eslint = require('gulp-eslint');
 const gulp = require('gulp');
 const imagemin = require('gulp-imagemin');
@@ -146,7 +145,10 @@ const sasslintTask = function(src, failOnError, shouldLog) {
 
 gulp.task('prettier', () => prettierTask(paths.ALL_JS));
 
-gulp.task('eslint', ['prettier'], () => eslintTask(paths.ALL_JS, true));
+gulp.task(
+  'eslint',
+  gulp.series('prettier', () => eslintTask(paths.ALL_JS, true))
+);
 
 gulp.task('eslint-nofail', () => eslintTask(paths.ALL_JS));
 
@@ -219,7 +221,7 @@ gulp.task('clienttest', cb => {
 });
 
 // Use karma watcher instead of gulp watcher for tests
-gulp.task('clienttest-watch', () => {
+gulp.task('clienttest-watch', cb => {
   new KarmaServer({
     configFile: path.join(__dirname, 'karma.conf.js'),
     autoWatch: true,
@@ -228,84 +230,7 @@ gulp.task('clienttest-watch', () => {
       reporters: [{ type: 'html', subdir: '.' }, { type: 'text-summary' }],
     },
   }).start();
-});
-
-gulp.task('test', ['sasstest', 'jstest']);
-
-gulp.task('browser-sync', cb => {
-  browserSync.init(
-    {
-      open: false,
-      server: {
-        baseDir: paths.DOCS_DIR,
-      },
-      logLevel: 'info',
-      logPrefix: 'herman',
-      notify: false,
-      ghostMode: false,
-      files: [`${paths.DOCS_DIR}**/*`],
-      reloadDelay: 300,
-      reloadThrottle: 500,
-      // Because we're debouncing, we always want to reload the page to prevent
-      // a case where the CSS change is detected first (and injected), and
-      // subsequent JS/HTML changes are ignored.
-      injectChanges: false,
-    },
-    cb
-  );
-});
-
-gulp.task('default', ['webpack', 'eslint', 'sasslint', 'test']);
-
-gulp.task('compile', ['webpack']);
-
-gulp.task('serve', ['watch', 'browser-sync']);
-gulp.task('quick-serve', ['webpack', 'browser-sync']);
-
-// Development task.
-// While working on a theme.
-gulp.task('dev', [
-  'prettier',
-  'eslint-nofail',
-  'sasslint-nofail',
-  'test',
-  'watch',
-]);
-
-gulp.task('watch', ['clienttest-watch', 'webpack-watch'], () => {
-  // run webpack to compile static assets
-  gulp.watch(
-    [
-      paths.SVG,
-      paths.TEMPLATES,
-      `${paths.TEMPLATES_DIR}_icon_template.lodash`,
-      './README.md',
-      './CHANGELOG.md',
-      './CONFIGURATION.md',
-      './CONTRIBUTING.md',
-      './package.json',
-    ],
-    ['webpack']
-  );
-
-  gulp.watch([paths.JS_TESTS_FILES, paths.SRC_JS], ['jstest-nofail']);
-
-  gulp.watch(paths.SASS, ev => {
-    if (ev.type === 'added' || ev.type === 'changed') {
-      sasslintTask(ev.path, false, true);
-    }
-  });
-
-  gulp.watch(paths.SASS, ['sasstest']);
-
-  gulp.watch('**/.sass-lint.yml', ['sasslint-nofail']);
-  gulp.watch('**/.eslintrc.yml', ['eslint-nofail']);
-});
-
-gulp.task('svg-clean', cb => {
-  del(`${paths.TEMPLATES_DIR}_icons.svg`).then(() => {
-    cb();
-  });
+  cb();
 });
 
 gulp.task('svgmin', () =>
@@ -341,7 +266,7 @@ gulp.task('imagemin', () => {
     .pipe(gulp.dest(dest));
 });
 
-gulp.task('minify', ['svgmin', 'imagemin']);
+gulp.task('minify', gulp.parallel('svgmin', 'imagemin'));
 
 const webpackOnBuild = done => (err, stats) => {
   if (err) {
@@ -367,12 +292,97 @@ const webpackOnBuild = done => (err, stats) => {
   }
 };
 
-gulp.task('webpack', ['minify'], cb => {
-  const webpackConfig = require('./webpack.config');
-  webpack(webpackConfig).run(webpackOnBuild(cb));
+gulp.task(
+  'webpack',
+  gulp.series('minify', cb => {
+    const webpackConfig = require('./webpack.config');
+    webpack(webpackConfig).run(webpackOnBuild(cb));
+  })
+);
+
+gulp.task(
+  'webpack-watch',
+  gulp.series('minify', cb => {
+    const webpackConfig = require('./webpack.config');
+    webpack(webpackConfig).watch(300, webpackOnBuild(cb));
+  })
+);
+
+gulp.task(
+  'watch',
+  gulp.parallel('clienttest-watch', 'webpack-watch', cb => {
+    // run webpack to compile static assets
+    gulp.watch(
+      [
+        paths.SVG,
+        paths.TEMPLATES,
+        `${paths.TEMPLATES_DIR}_icon_template.lodash`,
+        './README.md',
+        './CHANGELOG.md',
+        './CONFIGURATION.md',
+        './CONTRIBUTING.md',
+        './package.json',
+      ],
+      gulp.parallel('webpack')
+    );
+
+    gulp.watch(
+      [paths.JS_TESTS_FILES, paths.SRC_JS],
+      gulp.parallel('jstest-nofail')
+    );
+
+    // lint scss on changes
+    gulp.watch(paths.SASS).on('all', (event, filepath) => {
+      if (event === 'add' || event === 'change') {
+        sasslintTask(filepath, false, true);
+      }
+    });
+
+    // run sass tests on changes
+    gulp.watch(paths.SASS, gulp.parallel('sasstest'));
+
+    // lint all scss when rules change
+    gulp.watch('**/.sass-lint.yml', gulp.parallel('sasslint-nofail'));
+    gulp.watch('**/.eslintrc.yml', gulp.parallel('eslint-nofail'));
+
+    cb();
+  })
+);
+
+gulp.task('browser-sync', cb => {
+  browserSync.init(
+    {
+      open: false,
+      server: {
+        baseDir: paths.DOCS_DIR,
+      },
+      logLevel: 'info',
+      logPrefix: 'herman',
+      notify: false,
+      ghostMode: false,
+      files: [`${paths.DOCS_DIR}**/*`],
+      reloadDelay: 300,
+      reloadThrottle: 500,
+      // Because we're debouncing, we always want to reload the page to prevent
+      // a case where the CSS change is detected first (and injected), and
+      // subsequent JS/HTML changes are ignored.
+      injectChanges: false,
+    },
+    cb
+  );
 });
 
-gulp.task('webpack-watch', ['minify'], () => {
-  const webpackConfig = require('./webpack.config');
-  webpack(webpackConfig).watch(300, webpackOnBuild());
-});
+gulp.task('test', gulp.parallel('jstest', 'sasstest'));
+gulp.task('serve', gulp.parallel('watch', 'browser-sync'));
+gulp.task('quick-serve', gulp.parallel('webpack', 'browser-sync'));
+gulp.task(
+  'dev',
+  gulp.series(gulp.parallel('eslint', 'sasslint', 'test'), 'serve')
+);
+gulp.task(
+  'default',
+  gulp.parallel(
+    'sasslint',
+    gulp.series('eslint', gulp.parallel('test', 'webpack'))
+  )
+);
