@@ -79,6 +79,21 @@
               <a href="CONTRIBUTING.html" data-nav="is-not-active">Contributing</a>
             </li>
           
+            
+            <li class="nav-item">
+              <a href="foo.html" data-nav="is-not-active">Foo</a>
+            </li>
+          
+            
+            <li class="nav-item">
+              <a href="foobar.html" data-nav="is-not-active">Foobar</a>
+            </li>
+          
+            
+            <li class="nav-item">
+              <a href="buzbaz.html" data-nav="is-not-active">buzbaz</a>
+            </li>
+          
         </ul>
       
     </div>
@@ -276,7 +291,8 @@ under <code>herman</code> object in <a href="http://sassdoc.com/configuration/">
 <pre><code class="lang-yaml"># .sassdocrc
 theme: herman
 herman:
-  extraDocs: [...]
+  extraDocs:
+   - './my-file.md'
 </code></pre>
 <pre><code class="lang-js">// Node API
 const sassdoc = require('sassdoc');
@@ -284,7 +300,7 @@ const sassdoc = require('sassdoc');
 sassdoc('./scss', {
   theme: 'herman',
   herman: {
-    extraDocs: [...]
+    extraDocs: ['./my-file.md']
   }
 });
 </code></pre>
@@ -294,12 +310,18 @@ sassdoc('./scss', {
 <li>Type: <code>Array</code></li>
 <li>Default: <code>[]</code></li>
 </ul>
-<p>Add files (parsed as Markdown) to your compiled documentation.
+<p>Add text files to your compiled documentation,
+optionally parsed as <a href="https://markdown-it.github.io/">Markdown</a>
+or <a href="http://docutils.sourceforge.net/rst.html">reStructuredText</a>.
 Each value in the list should be an <code>Object</code>
-with keys <code>path</code> (relative path to the local file)
-and <code>name</code> (displayed in the compiled documentation navigation),
-or a <code>String</code> path
-(in which case the filename will be displayed in the<span class="widont">&nbsp;</span>navigation).</p>
+with keys <code>path</code> (relative path to the local file),
+<code>name</code> (displayed in the compiled documentation navigation –
+defaults to the filename),
+and <code>format</code> (<code>'md'</code>, <code>'rst'</code>, or <code>'none'</code> – defaults to <code>'md'</code>).
+Alternatively, if the value is a <code>String</code> path,
+the filename will be displayed in the navigation
+and the file will be parsed as Markdown
+unless the file extension is <code>.rst</code>.</p>
 <p>This is useful for including additional documents,
 such as a changelog, quickstart guide,
 or instructions for<span class="widont">&nbsp;</span>contributing.</p>

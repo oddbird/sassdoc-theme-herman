@@ -9,7 +9,8 @@ under `herman` object in [SassDoc config][sdconfig].
 # .sassdocrc
 theme: herman
 herman:
-  extraDocs: [...]
+  extraDocs:
+   - './my-file.md'
 ```
 
 ```js
@@ -19,7 +20,7 @@ const sassdoc = require('sassdoc');
 sassdoc('./scss', {
   theme: 'herman',
   herman: {
-    extraDocs: [...]
+    extraDocs: ['./my-file.md']
   }
 });
 ```
@@ -32,12 +33,18 @@ All relative paths are relative to the SassDoc config file or the `cwd`.
 - Type: `Array`
 - Default: `[]`
 
-Add files (parsed as Markdown) to your compiled documentation.
+Add text files to your compiled documentation,
+optionally parsed as [Markdown](https://markdown-it.github.io/)
+or [reStructuredText](http://docutils.sourceforge.net/rst.html).
 Each value in the list should be an `Object`
-with keys `path` (relative path to the local file)
-and `name` (displayed in the compiled documentation navigation),
-or a `String` path
-(in which case the filename will be displayed in the navigation).
+with keys `path` (relative path to the local file),
+`name` (displayed in the compiled documentation navigation --
+defaults to the filename),
+and `format` (`'md'`, `'rst'`, or `'none'` -- defaults to `'md'`).
+Alternatively, if the value is a `String` path,
+the filename will be displayed in the navigation
+and the file will be parsed as Markdown
+unless the file extension is `.rst`.
 
 This is useful for including additional documents,
 such as a changelog, quickstart guide,

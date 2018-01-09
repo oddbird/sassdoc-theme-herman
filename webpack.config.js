@@ -44,7 +44,10 @@ SassdocPlugin.prototype.apply = compiler => {
         extraDocs: [
           { name: 'Configuration', path: './CONFIGURATION.md' },
           { name: 'Changelog', path: './CHANGELOG.md' },
-          { name: 'Contributing', path: './CONTRIBUTING.md' },
+          { name: 'Contributing', path: './CONTRIBUTING' },
+          { name: 'Foo', path: './foo.rst' },
+          { name: 'Foobar', path: './foobar.md', format: 'rst' },
+          { path: './buzbaz.md', format: 'none' },
         ],
         extraLinks: [
           {
