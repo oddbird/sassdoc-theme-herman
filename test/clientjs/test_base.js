@@ -107,7 +107,7 @@ describe('initializeToggles', function() {
     expect(this.toggleClose).to.have.been.calledTwice;
     expect(this.targetClose).to.have.been.calledTwice;
 
-    this.targetClose.reset();
+    this.targetClose.resetHistory();
     this.target.attr('aria-expanded', 'true');
     this.close.click();
 

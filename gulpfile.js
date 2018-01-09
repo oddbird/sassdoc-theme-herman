@@ -240,7 +240,6 @@ gulp.task('svgmin', () =>
     .pipe(
       svg({
         id: 'icon-%f',
-        title: '%f icon',
         templates: [
           path.join(__dirname, paths.TEMPLATES_DIR, '_icon_template.lodash'),
         ],
