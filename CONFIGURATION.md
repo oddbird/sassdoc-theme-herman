@@ -9,7 +9,8 @@ under `herman` object in [SassDoc config][sdconfig].
 # .sassdocrc
 theme: herman
 herman:
-  extraDocs: [...]
+  extraDocs:
+    - './my-file.md'
 ```
 
 ```js
@@ -19,7 +20,7 @@ const sassdoc = require('sassdoc');
 sassdoc('./scss', {
   theme: 'herman',
   herman: {
-    extraDocs: [...]
+    extraDocs: ['./my-file.md']
   }
 });
 ```
@@ -35,7 +36,8 @@ All relative paths are relative to the SassDoc config file or the `cwd`.
 Add files (parsed as Markdown) to your compiled documentation.
 Each value in the list should be an `Object`
 with keys `path` (relative path to the local file)
-and `name` (displayed in the compiled documentation navigation),
+and optionally `name` (displayed in the compiled documentation navigation --
+defaults to the filename),
 or a `String` path
 (in which case the filename will be displayed in the navigation).
 

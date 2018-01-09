@@ -276,7 +276,8 @@ under <code>herman</code> object in <a href="http://sassdoc.com/configuration/">
 <pre><code class="lang-yaml"># .sassdocrc
 theme: herman
 herman:
-  extraDocs: [...]
+  extraDocs:
+    - './my-file.md'
 </code></pre>
 <pre><code class="lang-js">// Node API
 const sassdoc = require('sassdoc');
@@ -284,7 +285,7 @@ const sassdoc = require('sassdoc');
 sassdoc('./scss', {
   theme: 'herman',
   herman: {
-    extraDocs: [...]
+    extraDocs: ['./my-file.md']
   }
 });
 </code></pre>
@@ -297,7 +298,8 @@ sassdoc('./scss', {
 <p>Add files (parsed as Markdown) to your compiled documentation.
 Each value in the list should be an <code>Object</code>
 with keys <code>path</code> (relative path to the local file)
-and <code>name</code> (displayed in the compiled documentation navigation),
+and optionally <code>name</code> (displayed in the compiled documentation navigation –
+defaults to the filename),
 or a <code>String</code> path
 (in which case the filename will be displayed in the<span class="widont">&nbsp;</span>navigation).</p>
 <p>This is useful for including additional documents,

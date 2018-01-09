@@ -47,6 +47,9 @@ describe('prepareContext', function() {
             path: `${__dirname}/fixtures/markdown/complex.md`,
             name: 'A complex doc',
           },
+          {
+            path: `${__dirname}/fixtures/markdown/complex.md`,
+          },
           `${__dirname}/no/such/file`,
         ],
       },
@@ -65,7 +68,12 @@ describe('prepareContext', function() {
           name: 'A complex doc',
           text: '<h1 id="a-complex-file">A complex file</h1>\n',
         };
-        assert.deepEqual(ctx.extraDocs, [simple, complex]);
+        const complex2 = {
+          filename: 'complex',
+          name: 'complex',
+          text: '<h1 id="a-complex-file">A complex file</h1>\n',
+        };
+        assert.deepEqual(ctx.extraDocs, [simple, complex, complex2]);
         sinon.assert.calledOnce(warn);
         done();
       })
