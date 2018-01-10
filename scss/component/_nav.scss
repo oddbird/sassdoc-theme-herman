@@ -44,6 +44,16 @@
 }
 
 
+// Nested Nav Items
+// ----------------
+/// Each nested subnav list-item in the navigation menus…
+/// @group component-nav
+.nav-item-nested {
+  list-style: none;
+  margin: size('half-shim') 0 size('half-shim') size('half-shim');
+}
+
+
 // Nav Links
 // ---------
 /// Navigation items, with inactive and active states.
