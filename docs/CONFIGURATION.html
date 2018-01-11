@@ -314,6 +314,33 @@ sassdoc('./scss', {
 });
 </code></pre>
 <p>All relative paths are relative to the SassDoc config file or the <code>cwd</code>.</p>
+<h2 id="sassdoc-groups">SassDoc: groups</h2>
+<ul>
+<li>Type: <code>Object</code></li>
+<li>Default: <code>{ undefined: &quot;general&quot; }</code></li>
+</ul>
+<p>Groups are a SassDoc configuration option,
+not nested inside the Herman block –
+though we provide some extra functionality
+on top of the <a href="http://sassdoc.com/configuration/#groups">SassDoc configuration</a>.
+In addition to naming groups,
+we allow you to order them and create
+one level of<span class="widont">&nbsp;</span>sub-grouping:</p>
+<pre><code class="lang-yaml"># .sassdocrc
+groups:
+  # all items will be listed in the order given…
+  - api-config: Configuration
+  - api-json: Exporting Styles to JSON
+
+  # nested objects will create named subgroups…
+  - Public API:
+    - api-colors: Color Palettes
+    - api-fonts: Font Specimens
+    - api-scale: Ratios &amp; Sizes
+  - Design Tokens:
+    - config-colors: _Colors
+    - config-fonts: _Fonts
+</code></pre>
 <h2 id="extradocs">extraDocs</h2>
 <ul>
 <li>Type: <code>Array</code></li>
