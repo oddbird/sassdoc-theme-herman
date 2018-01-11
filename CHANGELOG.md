@@ -5,6 +5,9 @@
 
 - 🏠 INTERNAL: Remove deprecated dev-dependency `gulp-util`.
 - 🏠 INTERNAL: Upgrade dependencies.
+- 🚀 NEW: Extend SassDoc [groups](http://sassdoc.com/configuration/#groups)
+  setting to allow nesting groups in named categories --
+  [#228](https://github.com/oddbird/sassdoc-theme-herman/issues/228)
 
 
 ## 1.0.1: 2018-01-03

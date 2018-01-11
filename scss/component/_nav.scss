@@ -10,16 +10,27 @@
 /// @group component-nav
 .nav-subsection {
   flex: 0 0 auto;
-  padding-bottom: size('gutter');
 
   &:last-of-type {
     flex: 1 0 auto;
   }
 
-  & + & {
-    border-top: 1px solid color('theme-light');
+  & + .nav-item {
+    border-top: 1px solid;
+    margin-top: size('double-gutter');
     padding-top: size('gutter');
   }
+}
+
+
+// Nav Home
+// --------
+/// There is a home link at the top of the navigation…
+/// @group component-nav
+.nav-home {
+  font-size: size('large');
+  font-weight: bold;
+  margin-top: size('gutter-plus');
 }
 
 
@@ -28,9 +39,10 @@
 /// Each subsection may optionally have a title…
 /// @group component-nav
 .nav-title {
+  border-top: 1px solid;
   font-weight: bold;
-  margin: size('half-shim') 0;
-  width: 100%;
+  margin: size('double-gutter') 0 size('gutter');
+  padding-top: size('quarter-shim');
 }
 
 

@@ -10,8 +10,8 @@
 
 {% macro menu(
   project,
-  groups,
   byGroup,
+  originalGroups,
   activeGroup,
   extraDocs,
   extraLinks,
@@ -23,7 +23,7 @@
     </form>
 
     <div class="nav-subsection">
-      <h3 class="nav-title">
+      <h3 class="nav-home">
         {% set activeNav = 'is-active' if (activeGroup == none) else 'is-not-active' %}
         <a href="index.html" data-nav="{{ activeNav }}">{{ project }}</a>
       </h3>
@@ -44,12 +44,20 @@
     {# Generated Sass Docs #}
     <div class="nav-subsection">
       <ul>
-        {% for groupName, group in byGroup %}
-          {% set activeNav = 'is-active' if (activeGroup == groupName) else 'is-not-active' %}
-          <li class="nav-item">
-            <a href="{{ groupName }}.html" data-nav="{{ activeNav }}">{{ groups[groupName] }}</a>
-          </li>
-        {% endfor %}
+        {%- for slug, value in originalGroups -%}
+          {%- if value|isString -%}
+            {{ navitem(slug, value, activeGroup, byGroup) }}
+          {%- else %}
+            <li class="nav-subsection">
+              <h3 class="nav-title">{{ slug }}</h3>
+              <ul>
+                {% for subslug, subvalue in value -%}
+                  {{ navitem(subslug, subvalue, activeGroup, byGroup) }}
+                {%- endfor -%}
+              </ul>
+            </li>
+          {%- endif -%}
+        {%- endfor -%}
       </ul>
     </div>
 
@@ -90,4 +98,15 @@
       </aside>
     {% endif %}
   </nav>
+{% endmacro %}
+
+
+{% macro navitem(slug, display, activeGroup, byGroup) %}
+  {# Do not display if the group was defined but has no contents. #}
+  {%- if byGroup[slug] -%}
+    {%- set activeNav = 'is-active' if (activeGroup == slug) else 'is-not-active' %}
+    <li class="nav-item">
+      <a href="{{ slug }}.html" data-nav="{{ activeNav }}">{{ display }}</a>
+    </li>
+  {% endif -%}
 {% endmacro %}
