@@ -34,6 +34,11 @@ We're happy to work with you to make this the best
 
 To install the necessary Node dependencies, run ``yarn``.
 
+Development on this project requires ``gulp v4``.
+If you do not have ``gulp-cli`` [installed globally](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md#install-the-gulp-command) --
+or if you have an outdated version (``<2.0.0``) installed --
+first run ``npm install -g gulp-cli``.
+
 You can lint the project's JS with ``gulp eslint``
 and run the JS unit tests with ``gulp test``.
 You can lint Sass with ``gulp sasslint``
