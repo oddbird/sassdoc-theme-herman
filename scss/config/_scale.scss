@@ -88,11 +88,12 @@ $spacing-sizes: (
   'rhythm': 1rem ('line-height': 1),
   'gutter': 'rhythm',
   'gutter-plus': 'gutter' ('plus': 'shim'),
+  'double-gutter': 'gutter' ('times': 2),
 
   'flex-gutter': calc(%s + %s) ('shim', 2.5vw),
   'spacer': calc(%s + %s) ('gutter' ('times': 3), 2.5vw),
 
-  'gutter-minus': 'gutter' ('minus': 'shim'),
+  'gutter-minus': 'gutter' ('minus': 'half-shim'),
   'shim': 'gutter' ('times': 0.5),
   'half-shim': 'shim' ('times': 0.5),
   'quarter-shim': 'shim' ('times': 0.25),

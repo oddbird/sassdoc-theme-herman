@@ -88,7 +88,7 @@ SassdocPlugin.prototype.apply = compiler => {
         alias: true,
       },
       groups: {
-        Docs: {
+        'Public API': {
           'api_json-export': 'Exporting Styles to JSON',
           'api_sass-accoutrement': 'Accoutrement Integration',
           demo_colors: 'Color Palettes',
@@ -98,28 +98,28 @@ SassdocPlugin.prototype.apply = compiler => {
           demo_examples: 'Rendered Examples',
           'demo_test-sassdoc': 'SassDoc Annotations',
         },
-        Configuration: {
-          'config-colors': '_Config: Colors',
-          'config-scale': '_Config: Sizes',
-          'config-fonts': '_Config: Fonts',
-          'config-utils': '_Config: Utilities',
-          'config_api-utilities': '_Config: API Utils',
+        '_Design Tokens': {
+          'config-colors': '_Colors',
+          'config-scale': '_Sizes',
+          'config-fonts': '_Fonts',
+          'config-utils': '_Utilities',
+          'config_api-utilities': '_API Utils',
         },
-        Layout: {
-          'style-regions': '_Layout: Regions',
-          'style-banner': '_Layout: Banner',
-          'style-nav': '_Layout: Nav',
-          'style-main': '_Layout: Main',
+        _Layout: {
+          'style-regions': '_Regions',
+          'style-banner': '_Banner',
+          'style-nav': '_Nav',
+          'style-main': '_Main',
         },
-        Patterns: {
-          'style-icons': '_Pattern: Icons',
-          'style-typography': '_Pattern: Typography',
-          'style-code': '_Pattern: Code Blocks',
+        _Patterns: {
+          'style-icons': '_Icons',
+          'style-typography': '_Typography',
+          'style-code': '_Code Blocks',
         },
-        Components: {
-          'component-nav': '_Component: Nav',
-          'component-footer': '_Component: Footer',
-          'component-breadcrumb': '_Component: Breadcrumb',
+        _Components: {
+          'component-nav': '_Nav',
+          'component-footer': '_Footer',
+          'component-breadcrumb': '_Breadcrumb',
         },
       },
     }).then(
