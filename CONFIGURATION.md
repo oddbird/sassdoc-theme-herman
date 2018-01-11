@@ -31,7 +31,7 @@ All relative paths are relative to the SassDoc config file or the `cwd`.
 ## SassDoc: groups
 
 - Type: `Object`
-- Default: `{ undefined: "general" }`
+- Default: `{ undefined: 'General' }`
 
 Groups are a SassDoc configuration option,
 not nested inside the Herman block --
@@ -44,18 +44,18 @@ one level of sub-grouping:
 ```yaml
 # .sassdocrc
 groups:
-  # all items will be listed in the order given…
-  - api-config: Configuration
-  - api-json: Exporting Styles to JSON
+  # all items will be listed in the order given...
+  api-config: Configuration
+  api-json: Exporting Styles to JSON
 
-  # nested objects will create named subgroups…
-  - Public API:
-    - api-colors: Color Palettes
-    - api-fonts: Font Specimens
-    - api-scale: Ratios & Sizes
-  - Design Tokens:
-    - config-colors: _Colors
-    - config-fonts: _Fonts
+  # nested objects will create named subgroups...
+  Public API:
+    api-colors: Color Palettes
+    api-fonts: Font Specimens
+    api-scale: Ratios & Sizes
+  Design Tokens:
+    config-colors: _Colors
+    config-fonts: _Fonts
 ```
 
 [groups]: http://sassdoc.com/configuration/#groups
