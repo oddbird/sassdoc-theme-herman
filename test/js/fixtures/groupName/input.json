@@ -1,0 +1,48 @@
+{
+  "groups": {
+    "G1": "Group 1",
+    "Category 1": {
+      "g2": "Group 2"
+    },
+    "Category 2": {
+      "g2": "cat2-g2"
+    }
+  },
+  "data": [{
+    "description": "Test: function group g1.\n",
+    "context": {
+      "type": "function",
+      "name": "test-func-group-g1"
+    },
+    "group": [
+      "g1"
+    ],
+    "access": [
+      "public"
+    ]
+  }, {
+    "description": "Test: function group g2.\n",
+    "context": {
+      "type": "function",
+      "name": "test-func-group-g2"
+    },
+    "group": [
+      "G2"
+    ],
+    "access": [
+      "public"
+    ]
+  }, {
+    "description": "Test: function group new.\n",
+    "context": {
+      "type": "function",
+      "name": "test-func-group-new"
+    },
+    "group": [
+      "new"
+    ],
+    "access": [
+      "public"
+    ]
+  }]
+}

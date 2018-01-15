@@ -201,16 +201,40 @@ describe('renderHerman', function() {
           group: ['group1'],
           access: 'public',
         },
+        {
+          description: 'This is more text',
+          context: {
+            type: 'variable',
+          },
+          group: ['group2'],
+          access: 'public',
+        },
+        {
+          description: 'This is yet more text',
+          context: {
+            type: 'variable',
+          },
+          group: ['fail'],
+          access: 'public',
+        },
       ],
       groups: {
-        group1: 'Group 1',
+        'Group 1 Parent': {
+          group1: 'Group 1',
+        },
+        group2: 'Group 2',
       },
       display: {
         access: ['private', 'public'],
       },
     })
-      .then(ctx => renderHerman(this.dest, ctx))
+      .then(ctx => {
+        // Test group that doesn't exist
+        delete ctx.groups.fail;
+        return renderHerman(this.dest, ctx);
+      })
       .then(() => access(`${this.dest}/group1.html`))
+      .then(() => access(`${this.dest}/group2.html`))
       .then(() => {
         assert.ok(true);
         done();
