@@ -57,13 +57,13 @@
 ///     /* color maps */
 ///   );
 ///   'sizes': (
-///     /* color maps */
+///     /* size maps */
 ///   );
 ///   'ratios': (
-///     /* color maps */
+///     /* ratio maps */
 ///   );
 ///   'fonts': (
-///     /* color maps */
+///     /* font maps */
 ///   );
 /// );
 /// ```
@@ -112,21 +112,48 @@
 /// since font-previews display a single font at a time.
 /// The data map accepts:
 ///
-/// - `name`: how the font should be referenced in CSS (if omitted, defaults to top-level key)
+/// - `name`: how the font should be referenced in CSS
+///   (if omitted, defaults to top-level key)
 /// - `stack`: optional string or list of font-stack fallbacks
 /// - `source`: link to more information on the font,
 ///    or typekit/googlefonts as useful
-/// - `svgid`: optional suffix value for local SVG font `src`, e.g. `font-file.svg#svgid` (if omitted, defaults to `name`)
+/// - `local`: font name (or space-separated list of font names)
+///   used to look for local user fonts
+/// - `formats`: font format (or space-separated list of font formats)
+///   for locally-hosted fonts --
+///   valid format options are
+///   `ttf`, `otf`, `woff`, `woff2`, `svg`, `svgz`, and `eot`
+/// - `svgid`: optional suffix value for local SVG font `src`,
+///   e.g. `font-file.svg#svgid` (if omitted, defaults to `name`)
 /// - `<variant>`: describe any number of relative paths to locally-hosted
-///   font-files per variant: e.g. `regular`, `bold italic`, etc.
+///   font-files, or embedded `data:...` font strings
+///   per variant (e.g. `regular`, `bold italic`, etc.) --
+///   optionally, the value can also be a nested object
+///   with the following variant-specific keys:
+///   - `path`: variant-specific relative path to locally-hosted font-files
+///   - `local`: font name (or space-separated list of font names)
+///     used to look for local user fonts
+///   - `svgid`: optional suffix value for local SVG font `src`,
+///     e.g. `font-file.svg#svgid` (if omitted, defaults to `name`)
+///   - `<format>`: describe any number of relative paths to locally-hosted
+///     font-files, or embedded `data:...` font strings
+///     per format (e.g. `ttf`, `otf`, `woff2`, etc.)
+///
 ///
 /// ```scss
 /// 'body-font': (
 ///   'name': 'Source Sans Pro',
-///   'source': 'https://github.com/adobe-fonts/source-sans-pro'
 ///   'stack': ('Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'),
+///   'local': 'Source Sans Pro' 'SourceSansPro' 'source-sans-pro',
+///   'formats': 'woff' 'woff2' 'ttf',
 ///   'regular': 'sans/sourcesanspro-regular-webfont',
 ///   'italic': 'sans/sourcesanspro-italic-webfont',
+///   'bold': (
+///     'path': 'sans/sourcesanspro-bold-webfont',
+///     'local': 'source-sans-pro-bold',
+///     'ttf': 'sans-ttf/sourcesanspro-bold-webfont',
+///     'woff': 'data:application/x-font-woff;charset=utf-8;base64...'
+///   ),
 /// )
 /// ```
 ///
@@ -148,8 +175,16 @@
 ///       'body-font': (
 ///         'name': 'Source Sans Pro',
 ///         'stack': ('Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'),
+///         'local': 'Source Sans Pro' 'SourceSansPro' 'source-sans-pro',
+///         'formats': 'woff' 'woff2' 'ttf',
 ///         'regular': 'sans/sourcesanspro-regular-webfont',
 ///         'italic': 'sans/sourcesanspro-italic-webfont',
+///         'bold': (
+///           'path': 'sans/sourcesanspro-bold-webfont',
+///           'local': 'source-sans-pro-bold',
+///           'ttf': 'sans-ttf/sourcesanspro-bold-webfont',
+///           'woff': 'data:application/x-font-woff;charset=utf-8;base64...'
+///         ),
 ///       ),
 ///     ),
 ///     'sizes': (

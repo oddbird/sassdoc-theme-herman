@@ -10,15 +10,18 @@
 
 @font-face {
   font-family: '{{ family }}';
-{%- if 'eot' in formats %}
-  src: url('{{ dest_path }}.eot');
-{%- endif %}
-  src:
-{%- for format in formats -%}
-  {%- set suffix = '?#iefix' if format == 'eot' else '' -%}
-  {%- set suffix = '#' + svgid if format in ['svg', 'svgz'] else suffix -%}
-  {%- if format_options[format] %} url('{{ dest_path }}.{{ format }}{{ suffix }}') format('{{ format_options[format] }}'){{ ';' if loop.last else ',' }}{% endif %}
-{%- endfor %}
   font-style: {{ style }};
   font-weight: {{ weight }};
+{%- if formats.eot %}
+  src: url('{{ formats.eot.dest }}');
+{%- endif %}
+  src:
+{%- if local and local.length -%}
+  {%- for name in local %} local('{{ name }}'),{% endfor -%}
+{%- endif -%}
+{%- for format, paths in formats.iteritems() -%}
+  {%- set suffix = '?#iefix' if format == 'eot' else '' -%}
+  {%- set suffix = '#' + svgid if format in ['svg', 'svgz'] else suffix -%}
+  {%- if format_options[format] %} url('{{ paths.dest }}{{ suffix }}') format('{{ format_options[format] }}'){{ ';' if loop.last else ',' }}{% endif %}
+{%- endfor %}
 }

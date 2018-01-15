@@ -23,13 +23,13 @@ describe('parse', function() {
     });
   });
 
-  describe('localFont', function() {
+  describe('font', function() {
     it('skips invalid variants', function() {
       const font = {
         variants: ['bold'],
       };
       const data = {};
-      const actual = parse.localFont(font, data);
+      const actual = parse.font(font, data);
       const expected = [];
 
       assert.deepEqual(actual, expected);
@@ -38,23 +38,29 @@ describe('parse', function() {
     it('sets weight and style appropriately', function() {
       const font = {
         variants: ['italic 100'],
-        formats: ['italic'],
       };
       const data = {
-        'italic 100': 'font/path',
+        formats: 'woff',
+        'italic 100': {
+          path: 'font/path',
+          svgid: 'svgid',
+        },
       };
-      const actual = parse.localFont(font, data);
+      const actual = parse.font(font, data);
       const expected = [
         {
-          ctx: {
-            dest_path: 'assets/fonts/font/path',
-            family: undefined,
-            formats: ['italic'],
-            style: 'italic',
-            svgid: undefined,
-            weight: '100',
+          variant: 'italic 100',
+          family: undefined,
+          formats: {
+            woff: {
+              src: 'font/path.woff',
+              dest: 'assets/fonts/font/path.woff',
+            },
           },
-          src_path: 'font/path',
+          style: 'italic',
+          svgid: 'svgid',
+          weight: '100',
+          local: undefined,
         },
       ];
 

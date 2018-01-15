@@ -113,76 +113,28 @@
   ----------------
   Display a single specimen variant.
 
-  @prop {String} family -
-    A CSS-ready value for font-family,
-    combining both the font name, and fallback font-stack.
-  @prop {String} option -
-    The name of a font variant,
-    e.g. `bold` or `italic` or `700 italic`.
-  @prop {Dict} data [none] -
-    Optional font-data for file-path lookup.
-  @prop {String} path [none] -
-    Optional file-path data,
-    if it is already attached to the option.
+  @prop {Dict} variant -
+    Parsed variant data (style, weight, formats, etc).
+  @prop {Dict} data -
+    Font-data from Sass map.
 #}
-{% macro specimen_variant(family, option, data=none, path=none) %}
-  {# Local variables for parsing variants in the data #}
-  {% set weight_options = [
-    '100',
-    '200',
-    '300',
-    '400',
-    '500',
-    '600',
-    '700',
-    '800',
-    '900',
-    'bold',
-    'bolder',
-    'lighter'
-  ] %}
+{% macro specimen_variant(variant, data) %}
+  {% set path = data[variant.variant] if data[variant.variant]|isString else '' %}
+  {% set path = data[variant.variant].path or path %}
+  {% set family = [variant.family, data.stack]|join(',') %}
+  <div data-specimen-face="{{ variant.variant }}">
+    <h4 data-specimen="face-name">
+      {{ variant.variant }}
 
-  {% set style_options = [
-    'italic', 'oblique'
-  ] %}
-
-  {% set other_options = [
-    'normal', 'regular'
-  ] %}
-
-  {# Initialize variants #}
-  {% set weight = 'normal' %}
-  {% set style = 'normal' %}
-
-  {# Split the option into variants, and find files where available #}
-  {% set split_option = option|split(' ') %}
-  {% set variant_check = split_option[0] %}
-  {% set is_variant = true if (variant_check in weight_options or variant_check in style_options or variant_check in other_options) else false %}
-
-  {# If we have an actual variant, display specimen #}
-  {% if is_variant %}
-    {% set path = data.option if data.option else path %}
-
-    {% for value in split_option %}
-      {% set weight = value if (value in weight_options) else weight %}
-      {% set style = value if (value in style_options) else style %}
-    {% endfor %}
-
-    <div data-specimen-face="{{ option }}">
-      <h4 data-specimen="face-name">
-        {{ option }}
-
-        {% if path %}
-          (<code>{{ path }}</code>)
-        {% endif %}
-      </h4>
-      <div data-specimen="sample"
-        style="font-family: {{ font_names(family) }}; font-weight: {{ weight }}; font-style: {{ style }};">
-        <div data-specimen="aa">Aa</div>
-        <div data-specimen="lorem">{{ lorem('alpha') }}</div>
-      </div>
+      {% if path %}
+        (<code>{{ path }}</code>)
+      {% endif %}
+    </h4>
+    <div data-specimen="sample" style="font-family: {{ font_names(family) }}; font-weight: {{ variant.weight }}; font-style: {{ variant.style }};">
+      <div data-specimen="aa">Aa</div>
+      <div data-specimen="lorem">{{ lorem('alpha') }}</div>
     </div>
-  {% endif %}
+  </div>
 {% endmacro %}
 
 
