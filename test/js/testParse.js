@@ -30,9 +30,9 @@ describe('parse', function() {
       };
       const data = {};
       const actual = parse.font(font, data);
-      const expected = [];
 
-      assert.deepEqual(actual, expected);
+      assert.equal(actual.length, 1);
+      assert.deepEqual(actual[0].formats, {});
     });
 
     it('sets weight and style appropriately', function() {
@@ -50,6 +50,7 @@ describe('parse', function() {
       const expected = [
         {
           variant: 'italic 100',
+          isLocal: true,
           family: undefined,
           formats: {
             woff: {

@@ -441,6 +441,40 @@ describe('font annotation', function() {
         .catch(done);
     });
 
+    it('stores parsed data for webfonts', function(done) {
+      const env = {
+        herman: {},
+        sassjson: {
+          fonts: {
+            'test-font': {},
+          },
+        },
+      };
+      const font = annotations.font(env);
+      const data = [{ font: { key: 'test-font', variants: ['regular'] } }];
+
+      font
+        .resolve(data)
+        .then(() => {
+          const expected = [
+            {
+              isLocal: false,
+              variant: 'regular',
+              family: 'test-font',
+              formats: {},
+              svgid: 'test-font',
+              style: 'normal',
+              weight: 'normal',
+              local: undefined,
+            },
+          ];
+
+          assert.deepEqual(data[0].font.parsedVariants, expected);
+          done();
+        })
+        .catch(done);
+    });
+
     it('skips items without a font attribute', function(done) {
       const env = {};
       const font = annotations.font(env);
@@ -480,7 +514,7 @@ describe('font annotation', function() {
       font
         .resolve(data)
         .then(() => {
-          assert.equal(env.localFonts, undefined);
+          assert.deepEqual(env.localFonts, []);
           assert.equal(data[0].font.localFontCSS, undefined);
           assert.notEqual(data[0].iframed, undefined);
           done();
@@ -550,7 +584,7 @@ describe('font annotation', function() {
         .resolve(data)
         .then(() => {
           assert.equal(data[0].font.localFontCSS, undefined);
-          assert.deepEqual(env.localFonts, undefined);
+          assert.deepEqual(env.localFonts, []);
           done();
         })
         .catch(done);
