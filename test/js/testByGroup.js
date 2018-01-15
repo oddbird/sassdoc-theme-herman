@@ -12,10 +12,12 @@ describe('byGroup', function() {
       { id: 3, group: ['g1'] },
       { id: 4, group: ['g2'] },
     ];
-    const orderedGroups = {
-      g2: null,
-      g1: null,
-    };
+    const orderedGroups = [
+      'g2',
+      { parent: 'Group 1', subgroups: ['g1'] },
+      'fail',
+      { parent: 'Fake', subgroups: ['group'] },
+    ];
     const actual = byGroup(data, orderedGroups);
     const expected = {
       g2: [{ id: 2, group: ['g2'] }, { id: 4, group: ['g2'] }],

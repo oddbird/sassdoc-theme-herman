@@ -21,7 +21,8 @@ describe('prepareContext', function() {
         groups: {
           undefined: 'General',
         },
-        originalGroups: {},
+        orderedGroups: ['undefined'],
+        subgroupsByGroup: {},
         sort: ['group', 'file', 'line', 'access'],
         herman: {
           nunjucks: {},

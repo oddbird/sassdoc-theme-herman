@@ -11,7 +11,8 @@
 {% macro menu(
   project,
   byGroup,
-  originalGroups,
+  groups,
+  orderedGroups,
   activeGroup,
   extraDocs,
   extraLinks,
@@ -44,15 +45,15 @@
     {# Generated Sass Docs #}
     <div class="nav-subsection">
       <ul>
-        {%- for slug, value in originalGroups -%}
-          {%- if value|isString -%}
-            {{ navitem(slug, value, activeGroup, byGroup) }}
+        {%- for slug in orderedGroups -%}
+          {%- if slug|isString -%}
+            {{ navitem(slug, groups[slug], activeGroup, byGroup) }}
           {%- else %}
             <li class="nav-subsection">
-              <h3 class="nav-title">{{ slug }}</h3>
+              <h3 class="nav-title">{{ slug.parent }}</h3>
               <ul>
-                {% for subslug, subvalue in value -%}
-                  {{ navitem(subslug, subvalue, activeGroup, byGroup) }}
+                {% for subslug in slug.subgroups -%}
+                  {{ navitem(subslug, groups[slug.parent][subslug], activeGroup, byGroup) }}
                 {%- endfor -%}
               </ul>
             </li>
