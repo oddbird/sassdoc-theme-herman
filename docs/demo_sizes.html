@@ -317,6 +317,12 @@
   
     <div data-item-section="prose" class="text-block">
       <h1 id="documenting-ratios-sizes">Documenting ratios &amp;<span class="widont">&nbsp;</span>sizes</h1>
+<p>Herman provides custom annotations
+for visualizing sizes and ratios,
+along with other design tokens.
+See the <a href="CONFIGURATION.html#sass-jsonfile"><code>sass.jsonfile</code> configuration</a>
+to ensure that Herman has access
+to your exported Sass<span class="widont">&nbsp;</span>data.</p>
 <p>In addition to documenting colors and fonts,
 you can use Herman to document and display ratios and sizes.
 In the end, Herman will need a map –
@@ -1566,11 +1572,11 @@ each on their own line, for more visible<span class="widont">&nbsp;</span>space.
     <div data-item-section="prose" class="text-block">
       <h2 id="add-ratio-size-data-to-herman">Add ratio/size data to<span class="widont">&nbsp;</span>$herman</h2>
 <p>In order to preview the <code>$demo-ratios</code> and <code>$demo-sizes</code> maps,
-we also need to <a href="/api_json-export.html">export the data to<span class="widont">&nbsp;</span>JSON</a>.</p>
+we also need to <a href="api_json-export.html">export the data to<span class="widont">&nbsp;</span>JSON</a>.</p>
 <p>You can add data to the <code>$herman</code> export-map by hand,
 or use the provided <code>herman-add</code> mixin
 to combine existing maps into the proper structure.
-<a href="/api_json-export.html#sizes-ratios">See the size/ratio map documentation for details<span class="widont">&nbsp;</span>»</a></p>
+<a href="api_json-export.html#sizes-ratios">See the size/ratio map documentation for details<span class="widont">&nbsp;</span>»</a></p>
 <pre><code class="lang-scss"> @include herman-add('ratios', 'demo-ratios', $demo-ratios);
  @include herman-add('sizes', 'demo-sizes', $demo-sizes);
 </code></pre>
