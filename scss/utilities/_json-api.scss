@@ -123,8 +123,6 @@
 /// - `stack`: optional string or list of font-stack fallbacks
 /// - `source`: link to more information on the font,
 ///    or typekit/googlefonts as useful
-/// - `local`: font name (or space-separated list of font names)
-///   used to look for local user fonts
 /// - `formats`: font format (or space-separated list of font formats)
 ///   for locally-hosted fonts --
 ///   valid format options are
@@ -150,7 +148,6 @@
 /// 'body-font': (
 ///   'name': 'Source Sans Pro',
 ///   'stack': ('Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'),
-///   'local': 'Source Sans Pro' 'SourceSansPro' 'source-sans-pro',
 ///   'formats': 'woff' 'woff2' 'ttf',
 ///   'regular': 'sans/sourcesanspro-regular-webfont',
 ///   'italic': 'sans/sourcesanspro-italic-webfont',
@@ -181,7 +178,6 @@
 ///       'body-font': (
 ///         'name': 'Source Sans Pro',
 ///         'stack': ('Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'),
-///         'local': 'Source Sans Pro' 'SourceSansPro' 'source-sans-pro',
 ///         'formats': 'woff' 'woff2' 'ttf',
 ///         'regular': 'sans/sourcesanspro-regular-webfont',
 ///         'italic': 'sans/sourcesanspro-italic-webfont',

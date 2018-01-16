@@ -652,8 +652,6 @@ The data map<span class="widont">&nbsp;</span>accepts:</p>
 <li><code>stack</code>: optional string or list of font-stack<span class="widont">&nbsp;</span>fallbacks</li>
 <li><code>source</code>: link to more information on the font,
 or typekit/googlefonts as<span class="widont">&nbsp;</span>useful</li>
-<li><code>local</code>: font name (or space-separated list of font names)
-used to look for local user<span class="widont">&nbsp;</span>fonts</li>
 <li><code>formats</code>: font format (or space-separated list of font formats)
 for locally-hosted fonts –
 valid format options are
@@ -680,7 +678,6 @@ per format (e.g. <code>ttf</code>, <code>otf</code>, <code>woff2</code>, etc.)</
 <pre><code class="lang-scss">'body-font': (
   'name': 'Source Sans Pro',
   'stack': ('Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'),
-  'local': 'Source Sans Pro' 'SourceSansPro' 'source-sans-pro',
   'formats': 'woff' 'woff2' 'ttf',
   'regular': 'sans/sourcesanspro-regular-webfont',
   'italic': 'sans/sourcesanspro-italic-webfont',
@@ -782,7 +779,6 @@ per format (e.g. <code>ttf</code>, <code>otf</code>, <code>woff2</code>, etc.)</
     &#39;body-font&#39;: (
       &#39;name&#39;: &#39;Source Sans Pro&#39;,
       &#39;stack&#39;: (&#39;Helvetica Neue&#39;, &#39;Helvetica&#39;, &#39;Arial&#39;, &#39;sans-serif&#39;),
-      &#39;local&#39;: &#39;Source Sans Pro&#39; &#39;SourceSansPro&#39; &#39;source-sans-pro&#39;,
       &#39;formats&#39;: &#39;woff&#39; &#39;woff2&#39; &#39;ttf&#39;,
       &#39;regular&#39;: &#39;sans/sourcesanspro-regular-webfont&#39;,
       &#39;italic&#39;: &#39;sans/sourcesanspro-italic-webfont&#39;,

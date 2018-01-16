@@ -406,7 +406,7 @@ describe('font annotation', function() {
         .catch(done);
     });
 
-    it('allows setting top-level shared `local` names', function(done) {
+    it('allows setting `local` as a string', function(done) {
       const env = {
         herman: {},
         sassjson: {
@@ -414,8 +414,8 @@ describe('font annotation', function() {
             'test-font': {
               regular: {
                 woff: 'data:embedded',
+                local: 'this-and-that',
               },
-              local: 'this-test-font',
             },
           },
         },
@@ -430,7 +430,7 @@ describe('font annotation', function() {
             "  font-family: 'test-font';\n" +
             '  font-style: normal;\n' +
             '  font-weight: normal;\n' +
-            "  src: local('this-test-font'), " +
+            "  src: local('this-and-that'), " +
             "url('data:embedded') format('woff');\n" +
             '}\n';
 
