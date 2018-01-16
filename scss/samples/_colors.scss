@@ -50,7 +50,9 @@ $brand-pink: hsl(330, 85%, 48%);
 /// ```
 ///
 /// The `@colors` annotation accepts an optional one-word key argument,
-/// which defaults to the map-variable name.
+/// which defaults to name of the code being documented
+/// (that is, the name of the variable/function/mixin
+/// on the first line after the `///` SassDoc documentation).
 /// That key will be used to access the data from JSON,
 /// so it doesn't matter what key is used,
 /// as long as the key given here matches the group-name

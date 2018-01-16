@@ -352,7 +352,11 @@ from other developer comments (<code>//</code>).</p>
 </code></pre>
 <p>Annotation comments can be free-floating,
 or attached to a particular Sass/CSS object –
-such as a variable, mixin, function, or selector<span class="widont">&nbsp;</span>block.</p>
+such as a variable, mixin, function, or selector block.
+Note that while SassDoc allows annotation comments
+to be separated from the documented code by newlines,
+Herman considers documentation to be free-floating “prose” if
+it is separated from documented code by one or more<span class="widont">&nbsp;</span>newlines.</p>
 <pre><code class="lang-scss">/// this is a free-floating comment
 
 /// this comment is attached to the following mixin code-block

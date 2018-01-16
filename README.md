@@ -67,6 +67,10 @@ from other developer comments (`//`).
 Annotation comments can be free-floating,
 or attached to a particular Sass/CSS object --
 such as a variable, mixin, function, or selector block.
+Note that while SassDoc allows annotation comments
+to be separated from the documented code by newlines,
+Herman considers documentation to be free-floating "prose" if
+it is separated from documented code by one or more newlines.
 
 ```scss
 /// this is a free-floating comment

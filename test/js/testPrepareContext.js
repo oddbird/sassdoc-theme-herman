@@ -198,4 +198,49 @@ describe('prepareContext', function() {
       })
       .catch(done);
   });
+
+  it('warns if prose block uses custom annotation with key', function(done) {
+    const logger = { warn: sinon.spy() };
+    const item = {
+      commentRange: {
+        start: 0,
+        end: 5,
+      },
+      context: {
+        name: 'Test\nItem',
+        line: {
+          start: 8,
+          end: 10,
+        },
+      },
+      colors: { key: '' },
+      file: {},
+      group: ['test'],
+      access: 'public',
+    };
+    const expected = [
+      extend({}, item, {
+        context: {
+          type: 'prose',
+          line: {
+            start: 0,
+            end: 5,
+          },
+        },
+        groupName: {
+          test: 'test',
+        },
+      }),
+    ];
+    prepareContext({
+      logger,
+      data: [item],
+    })
+      .then(ctx => {
+        assert.deepEqual(ctx.data, expected);
+        sinon.assert.calledOnce(logger.warn);
+        done();
+      })
+      .catch(done);
+  });
 });

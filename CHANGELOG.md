@@ -3,11 +3,14 @@
 
 ## Unreleased
 
-- 🏠 INTERNAL: Remove deprecated dev-dependency `gulp-util`.
-- 🏠 INTERNAL: Upgrade dependencies.
+- 🏠 INTERNAL: Remove deprecated dev-dependency `gulp-util`
+- 🏠 INTERNAL: Upgrade dependencies
 - 🚀 NEW: Extend SassDoc [groups](http://sassdoc.com/configuration/#groups)
   setting to allow nesting groups in named categories --
   [#228](https://github.com/oddbird/sassdoc-theme-herman/issues/228)
+- 🐛 BUGFIX: Warn if custom annotation is used in a prose block without a `key`
+  argument --
+  [#236](https://github.com/oddbird/sassdoc-theme-herman/issues/236)
 
 
 ## 1.0.1: 2018-01-03
