@@ -4,6 +4,15 @@
 
 /// # Documenting fonts
 ///
+/// Herman provides custom annotations
+/// for visualizing fonts,
+/// along with other design tokens.
+/// See the [`sass.jsonfile` configuration][json]
+/// to ensure that Herman has access
+/// to your exported Sass data.
+///
+/// [json]: CONFIGURATION.html#sass-jsonfile
+///
 /// Whether you use a webfont CDN like Typekit/Google Fonts,
 /// or locally-hosted font files,
 /// Herman can document and display your font-specimens.

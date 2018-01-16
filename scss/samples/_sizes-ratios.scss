@@ -4,6 +4,15 @@
 
 /// # Documenting ratios & sizes
 ///
+/// Herman provides custom annotations
+/// for visualizing sizes and ratios,
+/// along with other design tokens.
+/// See the [`sass.jsonfile` configuration][json]
+/// to ensure that Herman has access
+/// to your exported Sass data.
+///
+/// [json]: CONFIGURATION.html#sass-jsonfile
+///
 /// In addition to documenting colors and fonts,
 /// you can use Herman to document and display ratios and sizes.
 /// In the end, Herman will need a map --

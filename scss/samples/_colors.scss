@@ -4,6 +4,15 @@
 
 /// # Documenting colors
 ///
+/// Herman provides custom annotations
+/// for visualizing color palettes,
+/// along with other design tokens.
+/// See the [`sass.jsonfile` configuration][json]
+/// to ensure that Herman has access
+/// to your exported Sass data.
+///
+/// [json]: CONFIGURATION.html#sass-jsonfile
+///
 /// Whether you store colors as individual variables
 /// or group them into a map,
 /// you can use Herman to document and display color palettes.
