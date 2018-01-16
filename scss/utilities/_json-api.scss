@@ -17,6 +17,12 @@
 /// and the `herman-export` mixin
 /// to generate JSON out of Sass variables.
 ///
+/// See the [`sass.jsonfile` configuration][json]
+/// to ensure that Herman has access
+/// to your exported Sass data.
+///
+/// [json]: CONFIGURATION.html#sass-jsonfile
+///
 /// @group api_json-export
 /// @see herman-export
 ///

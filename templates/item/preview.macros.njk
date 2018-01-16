@@ -12,21 +12,22 @@
   {% if data and item -%}
     {%- set args = item.font or item.colors or item.ratios or item.sizes -%}
     {%- set key = args.key or item.context.origName or item.context.name -%}
+    {%- if key -%}
+      {%- if item.font and data.fonts[key] %}
+        {{ font_specimen(key, data.fonts[key], item.iframed) }}
+      {% endif -%}
 
-    {%- if item.font %}
-      {{ font_specimen(key, data.fonts[key], item.iframed) }}
-    {% endif -%}
+      {%- if item.colors and data.colors[key] %}
+        {{ color_palette(data.colors[key]) }}
+      {% endif -%}
 
-    {%- if item.colors %}
-      {{ color_palette(data.colors[key]) }}
-    {% endif -%}
+      {%- if item.ratios and data.ratios[key] %}
+        {{ ratios(data.ratios[key]) }}
+      {% endif -%}
 
-    {%- if item.ratios %}
-      {{ ratios(data.ratios[key]) }}
-    {% endif -%}
-
-    {%- if item.sizes %}
-      {{ sizes(data.sizes[key], args) }}
+      {%- if item.sizes and data.sizes[key] %}
+        {{ sizes(data.sizes[key], args) }}
+      {%- endif -%}
     {%- endif -%}
   {%- endif %}
 {% endmacro %}

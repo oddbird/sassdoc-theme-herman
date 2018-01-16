@@ -4,6 +4,15 @@
 
 /// # Documenting colors
 ///
+/// Herman provides custom annotations
+/// for visualizing color palettes,
+/// along with other design tokens.
+/// See the [`sass.jsonfile` configuration][json]
+/// to ensure that Herman has access
+/// to your exported Sass data.
+///
+/// [json]: CONFIGURATION.html#sass-jsonfile
+///
 /// Whether you store colors as individual variables
 /// or group them into a map,
 /// you can use Herman to document and display color palettes.
@@ -50,7 +59,9 @@ $brand-pink: hsl(330, 85%, 48%);
 /// ```
 ///
 /// The `@colors` annotation accepts an optional one-word key argument,
-/// which defaults to the map-variable name.
+/// which defaults to name of the code being documented
+/// (that is, the name of the variable/function/mixin
+/// on the first line after the `///` SassDoc documentation).
 /// That key will be used to access the data from JSON,
 /// so it doesn't matter what key is used,
 /// as long as the key given here matches the group-name
@@ -127,7 +138,7 @@ $demo-colors: (
 ///
 /// [See the color map documentation for details »][color-docs]
 ///
-/// [color-docs]: /api_json-export.html#colors
+/// [color-docs]: api_json-export.html#colors
 ///
 /// @see $herman
 /// @see herman-add

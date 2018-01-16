@@ -84,7 +84,7 @@
     "matchmedia-polyfill": "^0.3.0",
     "mocha": "^4.0.1",
     "nyc": "^11.3.0",
-    "plugin-error": "^0.1.2",
+    "plugin-error": "^1.0.0",
     "postcss-loader": "^2.0.9",
     "prettier": "^1.9.1",
     "sass-loader": "^6.0.6",

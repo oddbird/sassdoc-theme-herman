@@ -4,6 +4,15 @@
 
 /// # Documenting fonts
 ///
+/// Herman provides custom annotations
+/// for visualizing fonts,
+/// along with other design tokens.
+/// See the [`sass.jsonfile` configuration][json]
+/// to ensure that Herman has access
+/// to your exported Sass data.
+///
+/// [json]: CONFIGURATION.html#sass-jsonfile
+///
 /// Whether you use a webfont CDN like Typekit/Google Fonts,
 /// or locally-hosted font files,
 /// Herman can document and display your font-specimens.
@@ -17,7 +26,7 @@
 /// and our [Accoutrement-Type][type] toolkit.
 /// [See the font map documentation for details »][font-docs]
 ///
-/// [font-docs]: /api_json-export.html#fonts
+/// [font-docs]: api_json-export.html#fonts
 ///
 /// Each font family will be displayed individually,
 /// using the `@font` annotation:
@@ -61,7 +70,7 @@
 ///   and all [Herman examples][examples],
 ///   making your webfont available to other components.
 ///
-/// [examples]: /demo_examples.html
+/// [examples]: demo_examples.html
 ///
 /// [type]: http://oddbird.net/accoutrement-type/
 ///
@@ -144,8 +153,8 @@ $demo-local: (
 /// After adding your data to the `$herman` map,
 /// it can be converted to JSON using `herman-export`.
 ///
-/// [export]: /api_json-export.html
-/// [font-docs]: /api_json-export.html#fonts
+/// [export]: api_json-export.html
+/// [font-docs]: api_json-export.html#fonts
 ///
 /// @see $herman
 /// @see herman-add
