@@ -1,16 +1,16 @@
 # Herman Changelog
 
 
-## Unreleased
+## 1.1.0: 2018-01-17
 
-- 🏠 INTERNAL: Remove deprecated dev-dependency `gulp-util`
-- 🏠 INTERNAL: Upgrade dependencies
 - 🚀 NEW: Extend SassDoc [groups](http://sassdoc.com/configuration/#groups)
   setting to allow nesting groups in named categories --
   [#228](https://github.com/oddbird/sassdoc-theme-herman/issues/228)
 - 🐛 BUGFIX: Fix `herman-export` including incorrectly escaped quotes
   (especially when compiled with Ruby Sass) --
   [#236](https://github.com/oddbird/sassdoc-theme-herman/issues/236)
+- 🏠 INTERNAL: Remove deprecated dev-dependency `gulp-util`
+- 🏠 INTERNAL: Upgrade dependencies
 
 
 ## 1.0.1: 2018-01-03
