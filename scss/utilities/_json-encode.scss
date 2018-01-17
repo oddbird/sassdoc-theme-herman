@@ -107,7 +107,7 @@
 @function _herman-quote(
   $value
 ) {
-  $value: inspect($value);
+  $value: '#{$value}';
   $value: _herman-escape-quotes($value);
   @return '"#{$value}"';
 }
@@ -131,7 +131,7 @@
   $i: str-index($string, $old);
   $n: str-length($old);
 
-  @if $string == $old {
+  @if ($string == $old) {
     $return: $new;
   } @else if $i {
     $a: if($i > 1, str-slice($string, 1, $i - 1), '');
