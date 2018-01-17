@@ -127,8 +127,6 @@
 ///   for locally-hosted fonts --
 ///   valid format options are
 ///   `ttf`, `otf`, `woff`, `woff2`, `svg`, `svgz`, and `eot`
-/// - `svgid`: optional suffix value for local SVG font `src`,
-///   e.g. `font-file.svg#svgid` (if omitted, defaults to `name`)
 /// - `<variant>`: describe any number of relative paths to locally-hosted
 ///   font-files, or embedded `data:...` font strings
 ///   per variant (e.g. `regular`, `bold italic`, etc.) --

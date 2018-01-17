@@ -17,6 +17,8 @@
   [#197](https://github.com/oddbird/sassdoc-theme-herman/issues/197)
 - 💥 BREAKING: Remove `@font` annotation "formats" option (`{woff, woff2}`) --
   replaced by `formats` key in font Sass map
+- 💥 BREAKING: Ignore `@font` Sass map top-level `svgid` option --
+  replaced by variant-specific nested `svgid` option
 
 
 ## 1.0.1: 2018-01-03
