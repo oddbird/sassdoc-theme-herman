@@ -3,14 +3,6 @@
 
 ## Unreleased
 
-- 🏠 INTERNAL: Remove deprecated dev-dependency `gulp-util`
-- 🏠 INTERNAL: Upgrade dependencies
-- 🚀 NEW: Extend SassDoc [groups](http://sassdoc.com/configuration/#groups)
-  setting to allow nesting groups in named categories --
-  [#228](https://github.com/oddbird/sassdoc-theme-herman/issues/228)
-- 🐛 BUGFIX: Fix `herman-export` including incorrectly escaped quotes
-  (especially when compiled with Ruby Sass) --
-  [#236](https://github.com/oddbird/sassdoc-theme-herman/issues/236)
 - 🚀 NEW: Add support for CSS `@font-face` `local()` src in font previews --
   [#173](https://github.com/oddbird/sassdoc-theme-herman/issues/173)
 - 🚀 NEW: Add support for embedded data-URI (`data:...`) font previews --
@@ -19,6 +11,18 @@
   replaced by `formats` key in font Sass map
 - 💥 BREAKING: Ignore `@font` Sass map top-level `svgid` option --
   replaced by variant-specific nested `svgid` option
+
+
+## 1.1.0: 2018-01-17
+
+- 🚀 NEW: Extend SassDoc [groups](http://sassdoc.com/configuration/#groups)
+  setting to allow nesting groups in named categories --
+  [#228](https://github.com/oddbird/sassdoc-theme-herman/issues/228)
+- 🐛 BUGFIX: Fix `herman-export` including incorrectly escaped quotes
+  (especially when compiled with Ruby Sass) --
+  [#236](https://github.com/oddbird/sassdoc-theme-herman/issues/236)
+- 🏠 INTERNAL: Remove deprecated dev-dependency `gulp-util`
+- 🏠 INTERNAL: Upgrade dependencies
 
 
 ## 1.0.1: 2018-01-03
