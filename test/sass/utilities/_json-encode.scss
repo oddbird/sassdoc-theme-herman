@@ -30,7 +30,7 @@
     $map: (
       1: (a, b, c),
       'two': 3em,
-      (three four): 'hello "world"',
+      'three' 'four': 'hello "world"',
     );
 
     @include assert-equal(
@@ -87,7 +87,7 @@
     $map: (
       1: (a, b, c),
       'two': 3em,
-      (three four): 'hello "world"',
+      three four: 'hello "world"',
     );
 
     @include assert-equal(
@@ -128,7 +128,7 @@
 
     @include assert-equal(
       _herman-quote('one' 'two' 'three'),
-      '"\\"one\\" \\"two\\" \\"three\\""'
+      '"one two three"'
     );
   }
 }

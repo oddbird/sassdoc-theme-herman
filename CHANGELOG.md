@@ -8,8 +8,8 @@
 - 🚀 NEW: Extend SassDoc [groups](http://sassdoc.com/configuration/#groups)
   setting to allow nesting groups in named categories --
   [#228](https://github.com/oddbird/sassdoc-theme-herman/issues/228)
-- 🐛 BUGFIX: Warn if custom annotation is used in a prose block without a `key`
-  argument --
+- 🐛 BUGFIX: Fix `herman-export` including incorrectly escaped quotes
+  (especially when compiled with Ruby Sass) --
   [#236](https://github.com/oddbird/sassdoc-theme-herman/issues/236)
 - 🚀 NEW: Add support for CSS `@font-face` `local()` src in font previews --
   [#173](https://github.com/oddbird/sassdoc-theme-herman/issues/173)
