@@ -8,7 +8,7 @@
   'svgz': 'svg'
 } -%}
 
-{%- set separate_eot = formats.eot and (local or (orderedFormats|length > 1 and hasEmbedded)) -%}
+{%- set separate_eot = formats.eot and not formats.eot.dest|startsWith('data:') and (local or hasEmbedded) -%}
 {%- set only_eot = formats.eot and orderedFormats.length === 1 -%}
 
 {%- if separate_eot -%}
@@ -24,11 +24,10 @@
   font-family: '{{ family }}';
 {%- if formats.eot and not separate_eot %}
   src: url('{{ formats.eot.dest }}');
-{%- endif -%}
-{%- if local or not only_eot %}
+{%- endif %}
   src:
 {%- if local and local.length -%}
-  {%- for name in local %} local('{{ name }}'){{ ';' if only_eot else ',' }}{% endfor -%}
+  {%- for name in local %} local('{{ name }}'){{ ';' if only_eot and separate_eot else ',' }}{% endfor -%}
 {%- endif -%}
 {%- for ext in orderedFormats -%}
   {%- if formats[ext] and not (ext === 'eot' and separate_eot) -%}
@@ -36,8 +35,7 @@
     {%- set suffix = '#' + svgid if ext in ['svg', 'svgz'] else suffix -%}
     {{ ' ' }}url('{{ formats[ext].dest }}{{ suffix }}') format('{{ format_options[ext] }}'){{ ';' if loop.last else ',' }}
   {%- endif -%}
-{%- endfor -%}
-{%- endif %}
+{%- endfor %}
   font-weight: {{ weight }};
   font-style: {{ style }};
 }
