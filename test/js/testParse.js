@@ -51,6 +51,7 @@ describe('parse', function() {
         {
           variant: 'italic 100',
           isLocal: true,
+          hasEmbedded: false,
           family: undefined,
           formats: {
             woff: {

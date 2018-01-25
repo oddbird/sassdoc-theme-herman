@@ -11,6 +11,8 @@
   replaced by `formats` key in font Sass map
 - 💥 BREAKING: Ignore `@font` Sass map top-level `svgid` option --
   replaced by variant-specific nested `svgid` option
+- 🐛 BUGFIX: `@font` previews for local/embedded fonts now sort `@font-face`
+  src according to [fontsquirrel generated syntax](https://www.fontsquirrel.com/tools/webfont-generator)
 
 
 ## 1.1.0: 2018-01-17

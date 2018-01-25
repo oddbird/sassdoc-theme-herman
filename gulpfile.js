@@ -328,7 +328,7 @@ gulp.task(
       );
 
       gulp.watch(
-        [paths.JS_TESTS_FILES, paths.SRC_JS],
+        [paths.JS_TESTS_FILES, paths.SRC_JS, paths.TEMPLATES],
         gulp.parallel('jstest-nofail')
       );
 
