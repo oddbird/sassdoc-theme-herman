@@ -477,7 +477,8 @@ describe('font annotation', function() {
             '@font-face {\n' +
             "  font-family: 'test-font';\n" +
             "  src: url('data:embedded-eot');\n" +
-            "  src: url('data:embedded-eot?#iefix') format('embedded-opentype'), " +
+            "  src: url('data:embedded-eot?#iefix') " +
+            "format('embedded-opentype'), " +
             "url('data:embedded-woff') format('woff');\n" +
             '  font-weight: normal;\n' +
             '  font-style: normal;\n' +
@@ -514,7 +515,8 @@ describe('font annotation', function() {
             '@font-face {\n' +
             "  font-family: 'test-font';\n" +
             "  src: url('data:embedded');\n" +
-            "  src: url('data:embedded?#iefix') format('embedded-opentype');\n" +
+            "  src: url('data:embedded?#iefix') " +
+            "format('embedded-opentype');\n" +
             '  font-weight: normal;\n' +
             '  font-style: normal;\n' +
             '}\n';
