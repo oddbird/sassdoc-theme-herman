@@ -33,6 +33,7 @@
   {%- if formats[ext] and not (ext === 'eot' and separate_eot) -%}
     {%- set suffix = '?#iefix' if ext == 'eot' else '' -%}
     {%- set suffix = '#' + svgid if ext in ['svg', 'svgz'] else suffix -%}
+    {%- set suffix = '' if formats[ext].dest|startsWith('data:') else suffix -%}
     {{ ' ' }}url('{{ formats[ext].dest }}{{ suffix }}') format('{{ format_options[ext] }}'){{ ';' if loop.last else ',' }}
   {%- endif -%}
 {%- endfor %}

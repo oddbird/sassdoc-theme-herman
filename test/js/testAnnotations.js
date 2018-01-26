@@ -477,8 +477,7 @@ describe('font annotation', function() {
             '@font-face {\n' +
             "  font-family: 'test-font';\n" +
             "  src: url('data:embedded-eot');\n" +
-            "  src: url('data:embedded-eot?#iefix') " +
-            "format('embedded-opentype'), " +
+            "  src: url('data:embedded-eot') format('embedded-opentype'), " +
             "url('data:embedded-woff') format('woff');\n" +
             '  font-weight: normal;\n' +
             '  font-style: normal;\n' +
@@ -515,14 +514,48 @@ describe('font annotation', function() {
             '@font-face {\n' +
             "  font-family: 'test-font';\n" +
             "  src: url('data:embedded');\n" +
-            "  src: url('data:embedded?#iefix') " +
-            "format('embedded-opentype');\n" +
+            "  src: url('data:embedded') format('embedded-opentype');\n" +
             '  font-weight: normal;\n' +
             '  font-style: normal;\n' +
             '}\n';
 
           assert.equal(this.data[0].font.localFontCSS, css);
           assert.deepEqual(env.localFonts, []);
+          done();
+        })
+        .catch(done);
+    });
+
+    it('adds svgid', function(done) {
+      const env = {
+        herman: {
+          fontpath: '/path',
+        },
+        sassjson: {
+          fonts: {
+            'test-font': {
+              regular: {
+                svg: 'my/font',
+                svgid: 'my-font',
+              },
+            },
+          },
+        },
+      };
+      const font = annotations.font(env);
+
+      font
+        .resolve(this.data)
+        .then(() => {
+          const css =
+            '@font-face {\n' +
+            "  font-family: 'test-font';\n" +
+            "  src: url('assets/fonts/my/font.svg#my-font') format('svg');\n" +
+            '  font-weight: normal;\n' +
+            '  font-style: normal;\n' +
+            '}\n';
+
+          assert.equal(this.data[0].font.localFontCSS, css);
           done();
         })
         .catch(done);
