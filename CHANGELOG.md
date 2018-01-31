@@ -1,7 +1,7 @@
 # Herman Changelog
 
 
-## Unreleased
+## 2.0.0: 2018-01-31
 
 - 🚀 NEW: Add support for CSS `@font-face` `local()` src in font previews --
   [#173](https://github.com/oddbird/sassdoc-theme-herman/issues/173)
