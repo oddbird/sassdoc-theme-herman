@@ -32,7 +32,7 @@
 /// using the `@font` annotation:
 ///
 /// ```scss
-/// /// @font my-font (regular, bold)
+/// /// @font my-font (normal, bold)
 /// ```
 ///
 /// Let's look at a few examples…
@@ -75,10 +75,10 @@
 /// [type]: http://oddbird.net/accoutrement-type/
 ///
 /// @example scss
-///   // @font demo-cdn (regular, bold, bold italic)
+///   // @font demo-cdn (normal, bold, bold italic)
 ///   //   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" rel="stylesheet">
 ///
-/// @font (regular, bold, bold italic)
+/// @font (normal, bold, bold italic)
 ///   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" rel="stylesheet">
 /// @group demo_fonts
 $demo-cdn: (
@@ -123,7 +123,7 @@ $demo-cdn: (
 /// @group demo_fonts
 $demo-local: (
   'name': 'rockingham',
-  'regular': (
+  'normal': (
     'path': 'rockingham/rockingham-regular-webfont',
     'local': 'rockingham-regular-webfont',
   ),

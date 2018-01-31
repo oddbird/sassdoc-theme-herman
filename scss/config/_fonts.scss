@@ -13,7 +13,7 @@
 /// A clean sans-serif option
 /// used for smaller text like captions and labels.
 ///
-/// @font sans (regular, bold, italic, bold italic)
+/// @font sans (normal, bold, italic, bold italic)
 ///   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
 /// @group config-fonts
 $sans-font: (
@@ -29,7 +29,7 @@ $sans-font: (
 // ---------
 /// A readable monospace font for code previews.
 ///
-/// @font code (regular, bolder)
+/// @font code (normal, bolder)
 ///   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600" rel="stylesheet">
 /// @group config-fonts
 $code-font: (

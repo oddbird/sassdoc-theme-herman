@@ -257,7 +257,7 @@ describe('font annotation', function() {
         sassjson: {
           fonts: {
             'test-font': {
-              regular: 'font/font',
+              normal: 'font/font',
               formats: 'woff',
             },
           },
@@ -294,7 +294,7 @@ describe('font annotation', function() {
         sassjson: {
           fonts: {
             'test-font': {
-              regular: 'font/font',
+              normal: 'font/font',
               formats: ['eot', 'ttf'],
             },
           },
@@ -332,7 +332,7 @@ describe('font annotation', function() {
         sassjson: {
           fonts: {
             'test-font': {
-              regular: {
+              normal: {
                 woff: 'data:embedded',
               },
               bold: 'data:another-embedded',
@@ -376,7 +376,7 @@ describe('font annotation', function() {
         sassjson: {
           fonts: {
             'test-font': {
-              regular: {
+              normal: {
                 woff: 'data:embedded',
                 fail: 'bad',
                 ttf: 'font/font',
@@ -416,7 +416,7 @@ describe('font annotation', function() {
         sassjson: {
           fonts: {
             'test-font': {
-              regular: {
+              normal: {
                 path: 'font/font',
                 local: 'this',
               },
@@ -460,7 +460,7 @@ describe('font annotation', function() {
         sassjson: {
           fonts: {
             'test-font': {
-              regular: {
+              normal: {
                 woff: 'data:embedded-woff',
                 eot: 'data:embedded-eot',
               },
@@ -498,7 +498,7 @@ describe('font annotation', function() {
         sassjson: {
           fonts: {
             'test-font': {
-              regular: {
+              normal: {
                 eot: 'data:embedded',
               },
             },
@@ -534,7 +534,7 @@ describe('font annotation', function() {
         sassjson: {
           fonts: {
             'test-font': {
-              regular: {
+              normal: {
                 svg: 'my/font',
                 svgid: 'my-font',
               },
@@ -567,7 +567,7 @@ describe('font annotation', function() {
         sassjson: {
           fonts: {
             'test-font': {
-              regular: {
+              normal: {
                 woff: 'data:embedded',
                 local: 'this-and-that',
               },
@@ -606,7 +606,7 @@ describe('font annotation', function() {
         },
       };
       const font = annotations.font(env);
-      const data = [{ font: { key: 'test-font', variants: ['regular'] } }];
+      const data = [{ font: { key: 'test-font', variants: ['normal'] } }];
 
       font
         .resolve(data)
@@ -615,7 +615,7 @@ describe('font annotation', function() {
             {
               isLocal: false,
               hasEmbedded: false,
-              variant: 'regular',
+              variant: 'normal',
               family: 'test-font',
               formats: {},
               svgid: 'test-font',
@@ -653,7 +653,7 @@ describe('font annotation', function() {
         sassjson: {
           fonts: {
             'test-font': {
-              regular: 'font/font',
+              normal: 'font/font',
             },
           },
         },
@@ -721,7 +721,7 @@ describe('font annotation', function() {
         sassjson: {
           fonts: {
             'test-font': {
-              regular: 'font/font',
+              normal: 'font/font',
               formats: 'fail',
             },
           },
