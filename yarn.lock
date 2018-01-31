@@ -537,9 +537,9 @@ accoutrement-scale@^5.0.1:
   version "5.0.2"
   resolved "https://registry.yarnpkg.com/accoutrement-scale/-/accoutrement-scale-5.0.2.tgz#2589252f8fd1eaf579a7d9f72343e81efe08259c"
 
-accoutrement-type@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/accoutrement-type/-/accoutrement-type-4.0.0.tgz#107c88ea279e97623744d4ff143d08e245a135ed"
+accoutrement-type@^4.0.2:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/accoutrement-type/-/accoutrement-type-4.0.2.tgz#7094421411e338677c00b743b61b5fc7c70a4b12"
 
 acorn-dynamic-import@^2.0.0:
   version "2.0.2"
@@ -9281,9 +9281,9 @@ schema-utils@^0.3.0:
   dependencies:
     ajv "^5.0.0"
 
-scss-comment-parser@^0.8.3:
+scss-comment-parser@^0.8.3, "scss-comment-parser@github:jgerigmeyer/scss-comment-parser#fix-semicolon":
   version "0.8.3"
-  resolved "https://registry.yarnpkg.com/scss-comment-parser/-/scss-comment-parser-0.8.3.tgz#34cf7daa90d4f2c82896acb10d85a7f00cc5bb0a"
+  resolved "https://codeload.github.com/jgerigmeyer/scss-comment-parser/tar.gz/566e28e251b63ee1443ef17551f274f11ef155c4"
   dependencies:
     cdocparser "^0.13.0"
 

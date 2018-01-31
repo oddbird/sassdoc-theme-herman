@@ -13,6 +13,9 @@
   replaced by variant-specific nested `svgid` option
 - 🐛 BUGFIX: `@font` previews for local/embedded fonts now sort `@font-face`
   src according to [fontsquirrel generated syntax](https://www.fontsquirrel.com/tools/webfont-generator)
+- 🏠 INTERNAL: Use [forked version of scss-comment-parser](https://github.com/jgerigmeyer/scss-comment-parser/tree/fix-semicolon)
+  allowing semicolons in documented variable values (e.g. data-URIs) --
+  [#254](https://github.com/oddbird/sassdoc-theme-herman/issues/254)
 
 
 ## 1.1.0: 2018-01-17

@@ -41,7 +41,7 @@
     "accoutrement-init": "^1.1.2",
     "accoutrement-layout": "^3.0.2",
     "accoutrement-scale": "^5.0.1",
-    "accoutrement-type": "^4.0.0",
+    "accoutrement-type": "^4.0.2",
     "autoprefixer": "^7.2.1",
     "babel-eslint": "^8.0.3",
     "babel-loader": "8.0.0-beta.0",
@@ -96,9 +96,10 @@
     "webpack": "^3.10.0"
   },
   "resolutions": {
-    "cdocparser": "^0.15.0",
     "browserslist": ">=2.4.0",
-    "nunjucks": "^2.5.2"
+    "cdocparser": "^0.15.0",
+    "nunjucks": "^2.5.2",
+    "scss-comment-parser": "github:jgerigmeyer/scss-comment-parser#fix-semicolon"
   },
   "scripts": {
     "precommit": "lint-staged"
