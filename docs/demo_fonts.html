@@ -336,7 +336,7 @@ and our [Accoutrement-Type][type] toolkit.
 <a href="api_json-export.html#fonts">See the font map documentation for details<span class="widont">&nbsp;</span>»</a></p>
 <p>Each font family will be displayed individually,
 using the <code>@font</code> annotation:</p>
-<pre><code class="lang-scss">/// @font my-font (regular, bold)
+<pre><code class="lang-scss">/// @font my-font (normal, bold)
 </code></pre>
 <p>Let’s look at a few<span class="widont">&nbsp;</span>examples…</p>
 
@@ -566,7 +566,7 @@ making your webfont available to other<span class="widont">&nbsp;</span>componen
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">// @font demo-cdn (regular, bold, bold italic)
+      <pre class="hljs-pre"><code class="lang-scss">// @font demo-cdn (normal, bold, bold italic)
 //   &lt;link href=&quot;https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700&quot; rel=&quot;stylesheet&quot;&gt;</code></pre>
     </div>
   
@@ -669,39 +669,16 @@ making your webfont available to other<span class="widont">&nbsp;</span>componen
 &lt;body class=&quot;sassdoc font-specimen&quot;&gt;
   
   
+  
+  &lt;div data-specimen-face=&quot;normal&quot;&gt;
+    &lt;h4 data-specimen=&quot;face-name&quot;&gt;
+      normal
 
-  
-
-  
-
-  
-  
-  
-
-  
-  
-  
-  
-
-  
-  
-    
-
-    
       
-      
-    
-
-    &lt;div data-specimen-face=&quot;regular&quot;&gt;
-      &lt;h4 data-specimen=&quot;face-name&quot;&gt;
-        regular
-
-        
-      &lt;/h4&gt;
-      &lt;div data-specimen=&quot;sample&quot;
-        style=&quot;font-family: &amp;#39;Source Code Pro&amp;#39;, &amp;#39;Consolas&amp;#39;, &amp;#39;Menlo&amp;#39;, &amp;#39;Courier New&amp;#39;, monospace, sans-serif; font-weight: normal; font-style: normal;&quot;&gt;
-        &lt;div data-specimen=&quot;aa&quot;&gt;Aa&lt;/div&gt;
-        &lt;div data-specimen=&quot;lorem&quot;&gt;
+    &lt;/h4&gt;
+    &lt;div data-specimen=&quot;sample&quot; style=&quot;font-family: &amp;#39;Source Code Pro&amp;#39;, &amp;#39;Consolas&amp;#39;, &amp;#39;Menlo&amp;#39;, &amp;#39;Courier New&amp;#39;, monospace, sans-serif; font-weight: normal; font-style: normal;&quot;&gt;
+      &lt;div data-specimen=&quot;aa&quot;&gt;Aa&lt;/div&gt;
+      &lt;div data-specimen=&quot;lorem&quot;&gt;
   
     &lt;span data-specimen-lorem=&quot;uppercase&quot;&gt;
       ABCDEFGHIJKLMNOPQRSTUVWXYZ
@@ -714,45 +691,21 @@ making your webfont available to other<span class="widont">&nbsp;</span>componen
     &lt;/span&gt;
   
 &lt;/div&gt;
-      &lt;/div&gt;
     &lt;/div&gt;
-  
-
-  
-  
-
-  
-
-  
+  &lt;/div&gt;
 
   
   
   
+  &lt;div data-specimen-face=&quot;bold&quot;&gt;
+    &lt;h4 data-specimen=&quot;face-name&quot;&gt;
+      bold
 
-  
-  
-  
-  
-
-  
-  
-    
-
-    
       
-      
-    
-
-    &lt;div data-specimen-face=&quot;bold&quot;&gt;
-      &lt;h4 data-specimen=&quot;face-name&quot;&gt;
-        bold
-
-        
-      &lt;/h4&gt;
-      &lt;div data-specimen=&quot;sample&quot;
-        style=&quot;font-family: &amp;#39;Source Code Pro&amp;#39;, &amp;#39;Consolas&amp;#39;, &amp;#39;Menlo&amp;#39;, &amp;#39;Courier New&amp;#39;, monospace, sans-serif; font-weight: bold; font-style: normal;&quot;&gt;
-        &lt;div data-specimen=&quot;aa&quot;&gt;Aa&lt;/div&gt;
-        &lt;div data-specimen=&quot;lorem&quot;&gt;
+    &lt;/h4&gt;
+    &lt;div data-specimen=&quot;sample&quot; style=&quot;font-family: &amp;#39;Source Code Pro&amp;#39;, &amp;#39;Consolas&amp;#39;, &amp;#39;Menlo&amp;#39;, &amp;#39;Courier New&amp;#39;, monospace, sans-serif; font-weight: bold; font-style: normal;&quot;&gt;
+      &lt;div data-specimen=&quot;aa&quot;&gt;Aa&lt;/div&gt;
+      &lt;div data-specimen=&quot;lorem&quot;&gt;
   
     &lt;span data-specimen-lorem=&quot;uppercase&quot;&gt;
       ABCDEFGHIJKLMNOPQRSTUVWXYZ
@@ -765,48 +718,21 @@ making your webfont available to other<span class="widont">&nbsp;</span>componen
     &lt;/span&gt;
   
 &lt;/div&gt;
-      &lt;/div&gt;
     &lt;/div&gt;
-  
-
-  
-  
-
-  
-
-  
+  &lt;/div&gt;
 
   
   
   
+  &lt;div data-specimen-face=&quot;bold italic&quot;&gt;
+    &lt;h4 data-specimen=&quot;face-name&quot;&gt;
+      bold italic
 
-  
-  
-  
-  
-
-  
-  
-    
-
-    
       
-      
-    
-      
-      
-    
-
-    &lt;div data-specimen-face=&quot;bold italic&quot;&gt;
-      &lt;h4 data-specimen=&quot;face-name&quot;&gt;
-        bold italic
-
-        
-      &lt;/h4&gt;
-      &lt;div data-specimen=&quot;sample&quot;
-        style=&quot;font-family: &amp;#39;Source Code Pro&amp;#39;, &amp;#39;Consolas&amp;#39;, &amp;#39;Menlo&amp;#39;, &amp;#39;Courier New&amp;#39;, monospace, sans-serif; font-weight: bold; font-style: italic;&quot;&gt;
-        &lt;div data-specimen=&quot;aa&quot;&gt;Aa&lt;/div&gt;
-        &lt;div data-specimen=&quot;lorem&quot;&gt;
+    &lt;/h4&gt;
+    &lt;div data-specimen=&quot;sample&quot; style=&quot;font-family: &amp;#39;Source Code Pro&amp;#39;, &amp;#39;Consolas&amp;#39;, &amp;#39;Menlo&amp;#39;, &amp;#39;Courier New&amp;#39;, monospace, sans-serif; font-weight: bold; font-style: italic;&quot;&gt;
+      &lt;div data-specimen=&quot;aa&quot;&gt;Aa&lt;/div&gt;
+      &lt;div data-specimen=&quot;lorem&quot;&gt;
   
     &lt;span data-specimen-lorem=&quot;uppercase&quot;&gt;
       ABCDEFGHIJKLMNOPQRSTUVWXYZ
@@ -819,9 +745,8 @@ making your webfont available to other<span class="widont">&nbsp;</span>componen
     &lt;/span&gt;
   
 &lt;/div&gt;
-      &lt;/div&gt;
     &lt;/div&gt;
-  
+  &lt;/div&gt;
 &lt;/body&gt;
 &lt;/html&gt;
 " width="100%" height="0"></iframe>
@@ -898,11 +823,15 @@ making your webfont available to other<span class="widont">&nbsp;</span>componen
       
       <pre class="hljs-pre"><code class="lang-scss">$demo-local: (
   &#39;name&#39;: &#39;rockingham&#39;,
-  &#39;regular&#39;: &#39;rockingham/rockingham-regular-webfont&#39;,
+  &#39;normal&#39;: (
+    &#39;path&#39;: &#39;rockingham/rockingham-regular-webfont&#39;,
+    &#39;local&#39;: &#39;rockingham-regular-webfont&#39;,
+  ),
   &#39;bold&#39;: &#39;rockingham/rockingham-bold-webfont&#39;,
   &#39;italic&#39;: &#39;rockingham/rockingham-italic-webfont&#39;,
   &#39;bold&#39; &#39;italic&#39;: &#39;rockingham/rockingham-bolditalic-webfont&#39;,
   &#39;stack&#39;: &#39;fantasy&#39;,
+  &#39;formats&#39;: &#39;woff2&#39; &#39;woff&#39; &#39;ttf&#39;,
 );</code></pre>
     </div>
   
@@ -917,7 +846,7 @@ making your webfont available to other<span class="widont">&nbsp;</span>componen
     <div class="text-block">
       <h2 id="displaying-local-fonts">Displaying local fonts</h2>
 <p>For locally-hosted fonts,
-the <code>@font</code> annotation accepts three<span class="widont">&nbsp;</span>arguments:</p>
+the <code>@font</code> annotation accepts two<span class="widont">&nbsp;</span>arguments:</p>
 <ul>
 <li>The first argument is an optional one-word key
 which defaults to the map-variable name.
@@ -925,18 +854,12 @@ That key will be used to access the data from JSON,
 so it doesn’t matter what key is used –
 as long as the key given here matches the group-name
 used when adding this data to <code>$herman</code>.</li>
-<li>The second argument (in curly-brackets <code>{...}</code>) is a required list
-of font file formats to include.
-Valid format options are
-<code>ttf</code>, <code>otf</code>, <code>woff</code>, <code>woff2</code>, <code>svg</code>, <code>svgz</code>, and <code>eot</code>.
-These will be loaded in the order given,
-with special-casing for <code>eot</code> files.</li>
-<li>The third argument (in parentheses) is an optional list
+<li>The second argument (in parentheses) is an optional list
 of font variants to display in the preview.
 If omitted, it defaults to all variants
 included as keys in the font map<span class="widont">&nbsp;</span>itself.</li>
 </ul>
-<pre><code class="lang-scss">/// @font demo-local {woff2, woff, ttf}
+<pre><code class="lang-scss">/// @font demo-local
 </code></pre>
 <p>In order for this to work,
 you must specify a <code>fontpath</code>
@@ -1062,30 +985,30 @@ herman:
     &lt;style type=&quot;text/css&quot;&gt;
 @font-face {
   font-family: &#39;rockingham&#39;;
-  src: url(&#39;assets/fonts/rockingham/rockingham-regular-webfont.woff2&#39;) format(&#39;woff2&#39;), url(&#39;assets/fonts/rockingham/rockingham-regular-webfont.woff&#39;) format(&#39;woff&#39;), url(&#39;assets/fonts/rockingham/rockingham-regular-webfont.ttf&#39;) format(&#39;truetype&#39;);
-  font-style: normal;
+  src: local(&#39;rockingham-regular-webfont&#39;), url(&#39;assets/fonts/rockingham/rockingham-regular-webfont.woff2&#39;) format(&#39;woff2&#39;), url(&#39;assets/fonts/rockingham/rockingham-regular-webfont.woff&#39;) format(&#39;woff&#39;), url(&#39;assets/fonts/rockingham/rockingham-regular-webfont.ttf&#39;) format(&#39;truetype&#39;);
   font-weight: normal;
+  font-style: normal;
 }
 
 @font-face {
   font-family: &#39;rockingham&#39;;
   src: url(&#39;assets/fonts/rockingham/rockingham-bold-webfont.woff2&#39;) format(&#39;woff2&#39;), url(&#39;assets/fonts/rockingham/rockingham-bold-webfont.woff&#39;) format(&#39;woff&#39;), url(&#39;assets/fonts/rockingham/rockingham-bold-webfont.ttf&#39;) format(&#39;truetype&#39;);
-  font-style: normal;
   font-weight: bold;
+  font-style: normal;
 }
 
 @font-face {
   font-family: &#39;rockingham&#39;;
   src: url(&#39;assets/fonts/rockingham/rockingham-italic-webfont.woff2&#39;) format(&#39;woff2&#39;), url(&#39;assets/fonts/rockingham/rockingham-italic-webfont.woff&#39;) format(&#39;woff&#39;), url(&#39;assets/fonts/rockingham/rockingham-italic-webfont.ttf&#39;) format(&#39;truetype&#39;);
-  font-style: italic;
   font-weight: normal;
+  font-style: italic;
 }
 
 @font-face {
   font-family: &#39;rockingham&#39;;
   src: url(&#39;assets/fonts/rockingham/rockingham-bolditalic-webfont.woff2&#39;) format(&#39;woff2&#39;), url(&#39;assets/fonts/rockingham/rockingham-bolditalic-webfont.woff&#39;) format(&#39;woff&#39;), url(&#39;assets/fonts/rockingham/rockingham-bolditalic-webfont.ttf&#39;) format(&#39;truetype&#39;);
-  font-style: italic;
   font-weight: bold;
+  font-style: italic;
 }
 
     &lt;/style&gt;
@@ -1094,60 +1017,18 @@ herman:
 &lt;body class=&quot;sassdoc font-specimen&quot;&gt;
   
   
+  
+  &lt;div data-specimen-face=&quot;normal&quot;&gt;
+    &lt;h4 data-specimen=&quot;face-name&quot;&gt;
+      normal
 
-  
-
-  
-
-  
-  
-  
-
-  
-  
-  
-  
-
-  
-  
-
-  
-  
-
-  
-
-  
-
-  
-  
-  
-
-  
-  
-  
-  
-
-  
-  
-    
-
-    
       
+        (&lt;code&gt;rockingham/rockingham-regular-webfont&lt;/code&gt;)
       
-    
-
-    &lt;div data-specimen-face=&quot;regular&quot;&gt;
-      &lt;h4 data-specimen=&quot;face-name&quot;&gt;
-        regular
-
-        
-          (&lt;code&gt;rockingham/rockingham-regular-webfont&lt;/code&gt;)
-        
-      &lt;/h4&gt;
-      &lt;div data-specimen=&quot;sample&quot;
-        style=&quot;font-family: &amp;#39;rockingham&amp;#39;, fantasy; font-weight: normal; font-style: normal;&quot;&gt;
-        &lt;div data-specimen=&quot;aa&quot;&gt;Aa&lt;/div&gt;
-        &lt;div data-specimen=&quot;lorem&quot;&gt;
+    &lt;/h4&gt;
+    &lt;div data-specimen=&quot;sample&quot; style=&quot;font-family: &amp;#39;rockingham&amp;#39;, fantasy; font-weight: normal; font-style: normal;&quot;&gt;
+      &lt;div data-specimen=&quot;aa&quot;&gt;Aa&lt;/div&gt;
+      &lt;div data-specimen=&quot;lorem&quot;&gt;
   
     &lt;span data-specimen-lorem=&quot;uppercase&quot;&gt;
       ABCDEFGHIJKLMNOPQRSTUVWXYZ
@@ -1160,47 +1041,23 @@ herman:
     &lt;/span&gt;
   
 &lt;/div&gt;
-      &lt;/div&gt;
     &lt;/div&gt;
-  
-
-  
-  
-
-  
-
-  
+  &lt;/div&gt;
 
   
   
   
+  &lt;div data-specimen-face=&quot;bold&quot;&gt;
+    &lt;h4 data-specimen=&quot;face-name&quot;&gt;
+      bold
 
-  
-  
-  
-  
-
-  
-  
-    
-
-    
       
+        (&lt;code&gt;rockingham/rockingham-bold-webfont&lt;/code&gt;)
       
-    
-
-    &lt;div data-specimen-face=&quot;bold&quot;&gt;
-      &lt;h4 data-specimen=&quot;face-name&quot;&gt;
-        bold
-
-        
-          (&lt;code&gt;rockingham/rockingham-bold-webfont&lt;/code&gt;)
-        
-      &lt;/h4&gt;
-      &lt;div data-specimen=&quot;sample&quot;
-        style=&quot;font-family: &amp;#39;rockingham&amp;#39;, fantasy; font-weight: bold; font-style: normal;&quot;&gt;
-        &lt;div data-specimen=&quot;aa&quot;&gt;Aa&lt;/div&gt;
-        &lt;div data-specimen=&quot;lorem&quot;&gt;
+    &lt;/h4&gt;
+    &lt;div data-specimen=&quot;sample&quot; style=&quot;font-family: &amp;#39;rockingham&amp;#39;, fantasy; font-weight: bold; font-style: normal;&quot;&gt;
+      &lt;div data-specimen=&quot;aa&quot;&gt;Aa&lt;/div&gt;
+      &lt;div data-specimen=&quot;lorem&quot;&gt;
   
     &lt;span data-specimen-lorem=&quot;uppercase&quot;&gt;
       ABCDEFGHIJKLMNOPQRSTUVWXYZ
@@ -1213,47 +1070,23 @@ herman:
     &lt;/span&gt;
   
 &lt;/div&gt;
-      &lt;/div&gt;
     &lt;/div&gt;
-  
-
-  
-  
-
-  
-
-  
+  &lt;/div&gt;
 
   
   
   
+  &lt;div data-specimen-face=&quot;italic&quot;&gt;
+    &lt;h4 data-specimen=&quot;face-name&quot;&gt;
+      italic
 
-  
-  
-  
-  
-
-  
-  
-    
-
-    
       
+        (&lt;code&gt;rockingham/rockingham-italic-webfont&lt;/code&gt;)
       
-    
-
-    &lt;div data-specimen-face=&quot;italic&quot;&gt;
-      &lt;h4 data-specimen=&quot;face-name&quot;&gt;
-        italic
-
-        
-          (&lt;code&gt;rockingham/rockingham-italic-webfont&lt;/code&gt;)
-        
-      &lt;/h4&gt;
-      &lt;div data-specimen=&quot;sample&quot;
-        style=&quot;font-family: &amp;#39;rockingham&amp;#39;, fantasy; font-weight: normal; font-style: italic;&quot;&gt;
-        &lt;div data-specimen=&quot;aa&quot;&gt;Aa&lt;/div&gt;
-        &lt;div data-specimen=&quot;lorem&quot;&gt;
+    &lt;/h4&gt;
+    &lt;div data-specimen=&quot;sample&quot; style=&quot;font-family: &amp;#39;rockingham&amp;#39;, fantasy; font-weight: normal; font-style: italic;&quot;&gt;
+      &lt;div data-specimen=&quot;aa&quot;&gt;Aa&lt;/div&gt;
+      &lt;div data-specimen=&quot;lorem&quot;&gt;
   
     &lt;span data-specimen-lorem=&quot;uppercase&quot;&gt;
       ABCDEFGHIJKLMNOPQRSTUVWXYZ
@@ -1266,50 +1099,23 @@ herman:
     &lt;/span&gt;
   
 &lt;/div&gt;
-      &lt;/div&gt;
     &lt;/div&gt;
-  
-
-  
-  
-
-  
-
-  
+  &lt;/div&gt;
 
   
   
   
+  &lt;div data-specimen-face=&quot;bold italic&quot;&gt;
+    &lt;h4 data-specimen=&quot;face-name&quot;&gt;
+      bold italic
 
-  
-  
-  
-  
-
-  
-  
-    
-
-    
       
+        (&lt;code&gt;rockingham/rockingham-bolditalic-webfont&lt;/code&gt;)
       
-    
-      
-      
-    
-
-    &lt;div data-specimen-face=&quot;bold italic&quot;&gt;
-      &lt;h4 data-specimen=&quot;face-name&quot;&gt;
-        bold italic
-
-        
-          (&lt;code&gt;rockingham/rockingham-bolditalic-webfont&lt;/code&gt;)
-        
-      &lt;/h4&gt;
-      &lt;div data-specimen=&quot;sample&quot;
-        style=&quot;font-family: &amp;#39;rockingham&amp;#39;, fantasy; font-weight: bold; font-style: italic;&quot;&gt;
-        &lt;div data-specimen=&quot;aa&quot;&gt;Aa&lt;/div&gt;
-        &lt;div data-specimen=&quot;lorem&quot;&gt;
+    &lt;/h4&gt;
+    &lt;div data-specimen=&quot;sample&quot; style=&quot;font-family: &amp;#39;rockingham&amp;#39;, fantasy; font-weight: bold; font-style: italic;&quot;&gt;
+      &lt;div data-specimen=&quot;aa&quot;&gt;Aa&lt;/div&gt;
+      &lt;div data-specimen=&quot;lorem&quot;&gt;
   
     &lt;span data-specimen-lorem=&quot;uppercase&quot;&gt;
       ABCDEFGHIJKLMNOPQRSTUVWXYZ
@@ -1322,28 +1128,8 @@ herman:
     &lt;/span&gt;
   
 &lt;/div&gt;
-      &lt;/div&gt;
     &lt;/div&gt;
-  
-
-  
-  
-
-  
-
-  
-
-  
-  
-  
-
-  
-  
-  
-  
-
-  
-  
+  &lt;/div&gt;
 &lt;/body&gt;
 &lt;/html&gt;
 " width="100%" height="0"></iframe>

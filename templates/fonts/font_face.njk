@@ -1,24 +1,42 @@
 {% set format_options = {
+  'eot': 'embedded-opentype',
+  'woff2': 'woff2',
+  'woff': 'woff',
   'ttf': 'truetype',
   'otf': 'opentype',
-  'woff': 'woff',
-  'woff2': 'woff2',
   'svg': 'svg',
-  'svgz': 'svg',
-  'eot': 'embedded-opentype'
+  'svgz': 'svg'
 } -%}
 
+{%- set separate_eot = formats.eot and not formats.eot.dest|startsWith('data:') and (local or hasEmbedded) -%}
+{%- set only_eot = formats.eot and orderedFormats.length === 1 -%}
+
+{%- if separate_eot -%}
 @font-face {
   font-family: '{{ family }}';
-{%- if 'eot' in formats %}
-  src: url('{{ dest_path }}.eot');
+  src: url('{{ formats.eot.dest }}');
+  font-weight: {{ weight }};
+  font-style: {{ style }};
+}
+
+{% endif -%}
+@font-face {
+  font-family: '{{ family }}';
+{%- if formats.eot and not separate_eot %}
+  src: url('{{ formats.eot.dest }}');
 {%- endif %}
   src:
-{%- for format in formats -%}
-  {%- set suffix = '?#iefix' if format == 'eot' else '' -%}
-  {%- set suffix = '#' + svgid if format in ['svg', 'svgz'] else suffix -%}
-  {%- if format_options[format] %} url('{{ dest_path }}.{{ format }}{{ suffix }}') format('{{ format_options[format] }}'){{ ';' if loop.last else ',' }}{% endif %}
+{%- if local and local.length -%}
+  {%- for name in local %} local('{{ name }}'){{ ';' if only_eot and separate_eot else ',' }}{% endfor -%}
+{%- endif -%}
+{%- for ext in orderedFormats -%}
+  {%- if formats[ext] and not (ext === 'eot' and separate_eot) -%}
+    {%- set suffix = '?#iefix' if ext == 'eot' else '' -%}
+    {%- set suffix = '#' + svgid if ext in ['svg', 'svgz'] else suffix -%}
+    {%- set suffix = '' if formats[ext].dest|startsWith('data:') else suffix -%}
+    {{ ' ' }}url('{{ formats[ext].dest }}{{ suffix }}') format('{{ format_options[ext] }}'){{ ';' if loop.last else ',' }}
+  {%- endif -%}
 {%- endfor %}
-  font-style: {{ style }};
   font-weight: {{ weight }};
+  font-style: {{ style }};
 }

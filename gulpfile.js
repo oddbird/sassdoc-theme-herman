@@ -309,43 +309,47 @@ gulp.task(
 
 gulp.task(
   'watch',
-  gulp.parallel('clienttest-watch', 'webpack-watch', cb => {
-    // run webpack to compile static assets
-    gulp.watch(
-      [
-        paths.SVG,
-        paths.TEMPLATES,
-        `${paths.TEMPLATES_DIR}_icon_template.lodash`,
-        './README.md',
-        './CHANGELOG.md',
-        './CONFIGURATION.md',
-        './CONTRIBUTING.md',
-        './package.json',
-      ],
-      gulp.parallel('webpack')
-    );
+  gulp.series(
+    'webpack-watch',
+    cb => {
+      // run webpack to compile static assets
+      gulp.watch(
+        [
+          paths.SVG,
+          paths.TEMPLATES,
+          `${paths.TEMPLATES_DIR}_icon_template.lodash`,
+          './README.md',
+          './CHANGELOG.md',
+          './CONFIGURATION.md',
+          './CONTRIBUTING.md',
+          './package.json',
+        ],
+        gulp.parallel('webpack')
+      );
 
-    gulp.watch(
-      [paths.JS_TESTS_FILES, paths.SRC_JS],
-      gulp.parallel('jstest-nofail')
-    );
+      gulp.watch(
+        [paths.JS_TESTS_FILES, paths.SRC_JS, paths.TEMPLATES],
+        gulp.parallel('jstest-nofail')
+      );
 
-    // lint scss on changes
-    gulp.watch(paths.SASS).on('all', (event, filepath) => {
-      if (event === 'add' || event === 'change') {
-        sasslintTask(filepath, false, true);
-      }
-    });
+      // lint scss on changes
+      gulp.watch(paths.SASS).on('all', (event, filepath) => {
+        if (event === 'add' || event === 'change') {
+          sasslintTask(filepath, false, true);
+        }
+      });
 
-    // run sass tests on changes
-    gulp.watch(paths.SASS, gulp.parallel('sasstest'));
+      // run sass tests on changes
+      gulp.watch(paths.SASS, gulp.parallel('sasstest'));
 
-    // lint all scss when rules change
-    gulp.watch('**/.sass-lint.yml', gulp.parallel('sasslint-nofail'));
-    gulp.watch('**/.eslintrc.yml', gulp.parallel('eslint-nofail'));
+      // lint all scss when rules change
+      gulp.watch('**/.sass-lint.yml', gulp.parallel('sasslint-nofail'));
+      gulp.watch('**/.eslintrc.yml', gulp.parallel('eslint-nofail'));
 
-    cb();
-  })
+      cb();
+    },
+    'clienttest-watch'
+  )
 );
 
 gulp.task('browser-sync', cb => {

@@ -34,14 +34,14 @@
     "sassdoc": "^2.5.0"
   },
   "devDependencies": {
-    "@babel/core": "7.0.0-beta.32",
-    "@babel/polyfill": "7.0.0-beta.32",
-    "@babel/preset-env": "7.0.0-beta.32",
+    "@babel/core": "7.0.0-beta.39",
+    "@babel/polyfill": "7.0.0-beta.39",
+    "@babel/preset-env": "7.0.0-beta.39",
     "accoutrement-color": "^2.2.2",
     "accoutrement-init": "^1.1.2",
     "accoutrement-layout": "^3.0.2",
     "accoutrement-scale": "^5.0.1",
-    "accoutrement-type": "^3.1.0",
+    "accoutrement-type": "^4.0.2",
     "autoprefixer": "^7.2.1",
     "babel-eslint": "^8.0.3",
     "babel-loader": "8.0.0-beta.0",
@@ -82,7 +82,7 @@
     "lint-staged": "^6.0.0",
     "mark.js": "^8.11.0",
     "matchmedia-polyfill": "^0.3.0",
-    "mocha": "^4.0.1",
+    "mocha": "^5.0.0",
     "nyc": "^11.3.0",
     "plugin-error": "^1.0.0",
     "postcss-loader": "^2.0.9",
@@ -96,9 +96,10 @@
     "webpack": "^3.10.0"
   },
   "resolutions": {
-    "cdocparser": "^0.15.0",
     "browserslist": ">=2.4.0",
-    "nunjucks": "^2.5.2"
+    "cdocparser": "^0.15.0",
+    "nunjucks": "^2.5.2",
+    "scss-comment-parser": "github:jgerigmeyer/scss-comment-parser#fix-semicolon"
   },
   "scripts": {
     "precommit": "lint-staged"

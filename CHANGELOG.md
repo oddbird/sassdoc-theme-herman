@@ -1,6 +1,23 @@
 # Herman Changelog
 
 
+## Unreleased
+
+- 🚀 NEW: Add support for CSS `@font-face` `local()` src in font previews --
+  [#173](https://github.com/oddbird/sassdoc-theme-herman/issues/173)
+- 🚀 NEW: Add support for embedded data-URI (`data:...`) font previews --
+  [#197](https://github.com/oddbird/sassdoc-theme-herman/issues/197)
+- 💥 BREAKING: Remove `@font` annotation "formats" option (`{woff, woff2}`) --
+  replaced by `formats` key in font Sass map
+- 💥 BREAKING: Ignore `@font` Sass map top-level `svgid` option --
+  replaced by variant-specific nested `svgid` option
+- 🐛 BUGFIX: `@font` previews for local/embedded fonts now sort `@font-face`
+  src according to [fontsquirrel generated syntax](https://www.fontsquirrel.com/tools/webfont-generator)
+- 🏠 INTERNAL: Use [forked version of scss-comment-parser](https://github.com/jgerigmeyer/scss-comment-parser/tree/fix-semicolon)
+  allowing semicolons in documented variable values (e.g. data-URIs) --
+  [#254](https://github.com/oddbird/sassdoc-theme-herman/issues/254)
+
+
 ## 1.1.0: 2018-01-17
 
 - 🚀 NEW: Extend SassDoc [groups](http://sassdoc.com/configuration/#groups)

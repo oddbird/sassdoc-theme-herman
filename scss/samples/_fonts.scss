@@ -32,7 +32,7 @@
 /// using the `@font` annotation:
 ///
 /// ```scss
-/// /// @font my-font (regular, bold)
+/// /// @font my-font (normal, bold)
 /// ```
 ///
 /// Let's look at a few examples…
@@ -75,10 +75,10 @@
 /// [type]: http://oddbird.net/accoutrement-type/
 ///
 /// @example scss
-///   // @font demo-cdn (regular, bold, bold italic)
+///   // @font demo-cdn (normal, bold, bold italic)
 ///   //   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" rel="stylesheet">
 ///
-/// @font (regular, bold, bold italic)
+/// @font (normal, bold, bold italic)
 ///   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" rel="stylesheet">
 /// @group demo_fonts
 $demo-cdn: (
@@ -91,7 +91,7 @@ $demo-cdn: (
 /// ## Displaying local fonts
 ///
 /// For locally-hosted fonts,
-/// the `@font` annotation accepts three arguments:
+/// the `@font` annotation accepts two arguments:
 ///
 /// - The first argument is an optional one-word key
 ///   which defaults to the map-variable name.
@@ -99,19 +99,13 @@ $demo-cdn: (
 ///   so it doesn't matter what key is used --
 ///   as long as the key given here matches the group-name
 ///   used when adding this data to `$herman`.
-/// - The second argument (in curly-brackets `{...}`) is a required list
-///   of font file formats to include.
-///   Valid format options are
-///   `ttf`, `otf`, `woff`, `woff2`, `svg`, `svgz`, and `eot`.
-///   These will be loaded in the order given,
-///   with special-casing for `eot` files.
-/// - The third argument (in parentheses) is an optional list
+/// - The second argument (in parentheses) is an optional list
 ///   of font variants to display in the preview.
 ///   If omitted, it defaults to all variants
 ///   included as keys in the font map itself.
 ///
 /// ```scss
-/// /// @font demo-local {woff2, woff, ttf}
+/// /// @font demo-local
 /// ```
 ///
 /// In order for this to work,
@@ -125,15 +119,19 @@ $demo-cdn: (
 ///   fontpath: 'fonts/'
 /// ```
 ///
-/// @font {woff2, woff, ttf}
+/// @font
 /// @group demo_fonts
 $demo-local: (
   'name': 'rockingham',
-  'regular': 'rockingham/rockingham-regular-webfont',
+  'normal': (
+    'path': 'rockingham/rockingham-regular-webfont',
+    'local': 'rockingham-regular-webfont',
+  ),
   'bold': 'rockingham/rockingham-bold-webfont',
   'italic': 'rockingham/rockingham-italic-webfont',
   'bold' 'italic': 'rockingham/rockingham-bolditalic-webfont',
   'stack': 'fantasy',
+  'formats': 'woff2' 'woff' 'ttf',
 );
 
 

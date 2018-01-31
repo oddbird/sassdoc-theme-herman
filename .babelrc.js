@@ -3,7 +3,7 @@
 'use strict';
 
 const env = process.env.BABEL_ENV;
-const plugins = [];
+const plugins = ['./arrow-function-coverage-fix.js'];
 if (env === 'test') {
   plugins.push(['istanbul', { include: ['assets/js/*!(init).js'] }]);
 }

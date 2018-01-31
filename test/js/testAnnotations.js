@@ -150,31 +150,26 @@ describe('font annotation', function() {
       };
       const font = annotations.font(env);
       const input =
-        'key (variant1, variant2) {format1, format2}\n' +
-        '  <link rel="another-stylesheet">';
+        'key (variant1, variant2)\n  <link rel="another-stylesheet">';
       font.parse(input);
       assert.deepEqual(env.fontsHTML, ['<link rel="another-stylesheet">']);
     });
 
     it('parses options and returns object', function() {
-      const input =
-        'key-thing {format1, format2} (variant1, variant2)\n' +
-        '  <link rel="stylesheet">';
+      const input = 'key-thing (variant1, variant2)\n  <link rel="stylesheet">';
       assert.deepEqual(this.font.parse(input), {
         key: 'key-thing',
         variants: ['variant1', 'variant2'],
-        formats: ['format1', 'format2'],
         html: '<link rel="stylesheet">',
       });
       assert.equal(this.env.fontsHTML, '\n<link rel="stylesheet">');
     });
 
     it('skips HTML if no linebreak', function() {
-      const input = '"key-thing" (variant1, variant2) {format1, format2}';
+      const input = '"key-thing" (variant1, variant2)';
       assert.deepEqual(this.font.parse(input), {
         key: 'key-thing',
         variants: ['variant1', 'variant2'],
-        formats: ['format1', 'format2'],
         html: '',
       });
       assert.equal(this.env.fontsHTML, undefined);
@@ -183,12 +178,10 @@ describe('font annotation', function() {
     it('appends obj.html to existing fontsHTML', function() {
       this.env.fontsHTML = '\n<link rel="stylesheet">';
       const input =
-        "'key' (variant1, variant2) {format1, format2}\n" +
-        '  <link rel="another-stylesheet">';
+        '\'key\' (variant1, variant2)\n  <link rel="another-stylesheet">';
       assert.deepEqual(this.font.parse(input), {
         key: 'key',
         variants: ['variant1', 'variant2'],
-        formats: ['format1', 'format2'],
         html: '<link rel="another-stylesheet">',
       });
       assert.equal(
@@ -197,12 +190,11 @@ describe('font annotation', function() {
       );
     });
 
-    it("doesn't set variants or formats if not appropriate bits", function() {
+    it("doesn't set variants if not appropriate bits", function() {
       const input = '';
       assert.deepEqual(this.font.parse(input), {
         key: '',
         variants: [],
-        formats: [],
         html: '',
       });
       assert.equal(this.env.fontsHTML, undefined);
@@ -211,29 +203,14 @@ describe('font annotation', function() {
 
   describe('resolve', function() {
     beforeEach(function() {
-      this.data = [{ font: { key: 'test-font', formats: ['woff'] } }];
+      this.data = [{ font: { key: 'test-font' } }];
       this.origData = Object.assign({}, this.data);
     });
 
-    it('warns and exits if no fontpath', function() {
-      const env = { logger: { warn: sinon.stub() }, herman: {} };
-      const font = annotations.font(env);
-
-      font.resolve(this.data);
-
-      assert.deepEqual(this.data, this.origData);
-      assert(
-        env.logger.warn.calledWith(
-          'Must pass in a `fontpath` if using @font annotation with local ' +
-            'fonts.'
-        )
-      );
-    });
-
-    it('warns and exits if no jsonfile', function() {
+    it('warns and exits if no jsonfile defined', function() {
       const env = {
         logger: { warn: sinon.stub() },
-        herman: { fontpath: '/path' },
+        herman: {},
       };
       const font = annotations.font(env);
 
@@ -242,8 +219,7 @@ describe('font annotation', function() {
       assert.deepEqual(this.data, this.origData);
       assert(
         env.logger.warn.calledWith(
-          'Must pass in a `sassjson` file if using @font annotation with ' +
-            'local fonts.'
+          'Must pass in a `sassjson` file if using @font annotation.'
         )
       );
     });
@@ -252,7 +228,6 @@ describe('font annotation', function() {
       const env = {
         logger: { warn: sinon.stub() },
         herman: {
-          fontpath: '/path',
           sass: {
             jsonfile: `${__dirname}/no/such/file.json`,
           },
@@ -275,6 +250,38 @@ describe('font annotation', function() {
         .catch(done);
     });
 
+    it('warns and exits if no fontpath', function(done) {
+      const env = {
+        logger: { warn: sinon.stub() },
+        herman: {},
+        sassjson: {
+          fonts: {
+            'test-font': {
+              normal: 'font/font',
+              formats: 'woff',
+            },
+          },
+        },
+      };
+      const font = annotations.font(env);
+
+      font
+        .resolve(this.data)
+        .then(() => {
+          assert.fail('The promise should be rejected');
+          done();
+        })
+        .catch(() => {
+          assert.deepEqual(this.data, this.origData);
+          sinon.assert.calledWith(
+            env.logger.warn,
+            'Must pass in a `fontpath` if using @font annotation with local ' +
+              'fonts.'
+          );
+          done();
+        });
+    });
+
     it('adds `@font-face` CSS and localFonts src', function(done) {
       const env = {
         logger: { warn: sinon.stub() },
@@ -287,7 +294,8 @@ describe('font annotation', function() {
         sassjson: {
           fonts: {
             'test-font': {
-              regular: 'font/font',
+              normal: 'font/font',
+              formats: ['eot', 'ttf'],
             },
           },
         },
@@ -300,13 +308,324 @@ describe('font annotation', function() {
           const css =
             '@font-face {\n' +
             "  font-family: 'test-font';\n" +
-            "  src: url('assets/fonts/font/font.woff') format('woff');\n" +
-            '  font-style: normal;\n' +
+            "  src: url('assets/fonts/font/font.eot');\n" +
+            "  src: url('assets/fonts/font/font.eot?#iefix') " +
+            "format('embedded-opentype'), " +
+            "url('assets/fonts/font/font.ttf') format('truetype');\n" +
             '  font-weight: normal;\n' +
+            '  font-style: normal;\n' +
             '}\n';
 
           assert.equal(this.data[0].font.localFontCSS, css);
-          assert.deepEqual(env.localFonts, ['/path/font/font.woff']);
+          assert.deepEqual(env.localFonts, [
+            '/path/font/font.eot',
+            '/path/font/font.ttf',
+          ]);
+          done();
+        })
+        .catch(done);
+    });
+
+    it('adds `@font-face` CSS for embedded `data:` fonts', function(done) {
+      const env = {
+        herman: {},
+        sassjson: {
+          fonts: {
+            'test-font': {
+              normal: {
+                woff: 'data:embedded',
+              },
+              bold: 'data:another-embedded',
+              formats: 'woff',
+            },
+          },
+        },
+      };
+      const font = annotations.font(env);
+
+      font
+        .resolve(this.data)
+        .then(() => {
+          const css =
+            '@font-face {\n' +
+            "  font-family: 'test-font';\n" +
+            "  src: url('data:embedded') format('woff');\n" +
+            '  font-weight: normal;\n' +
+            '  font-style: normal;\n' +
+            '}\n' +
+            '\n' +
+            '@font-face {\n' +
+            "  font-family: 'test-font';\n" +
+            "  src: url('data:another-embedded') format('woff');\n" +
+            '  font-weight: bold;\n' +
+            '  font-style: normal;\n' +
+            '}\n';
+
+          assert.equal(this.data[0].font.localFontCSS, css);
+          assert.deepEqual(env.localFonts, []);
+          done();
+        })
+        .catch(done);
+    });
+
+    it('adds `@font-face` CSS for `local` names', function(done) {
+      const env = {
+        herman: {
+          fontpath: '/path',
+        },
+        sassjson: {
+          fonts: {
+            'test-font': {
+              normal: {
+                woff: 'data:embedded',
+                fail: 'bad',
+                ttf: 'font/font',
+                local: ['this', 'that'],
+              },
+            },
+          },
+        },
+      };
+      const font = annotations.font(env);
+
+      font
+        .resolve(this.data)
+        .then(() => {
+          const css =
+            '@font-face {\n' +
+            "  font-family: 'test-font';\n" +
+            "  src: local('this'), local('that'), " +
+            "url('data:embedded') format('woff'), " +
+            "url('assets/fonts/font/font.ttf') format('truetype');\n" +
+            '  font-weight: normal;\n' +
+            '  font-style: normal;\n' +
+            '}\n';
+
+          assert.equal(this.data[0].font.localFontCSS, css);
+          assert.deepEqual(env.localFonts, ['/path/font/font.ttf']);
+          done();
+        })
+        .catch(done);
+    });
+
+    it('adds separate `@font-face` for `eot` and `local`', function(done) {
+      const env = {
+        herman: {
+          fontpath: '/path',
+        },
+        sassjson: {
+          fonts: {
+            'test-font': {
+              normal: {
+                path: 'font/font',
+                local: 'this',
+              },
+              formats: 'eot',
+            },
+          },
+        },
+      };
+      const font = annotations.font(env);
+
+      font
+        .resolve(this.data)
+        .then(() => {
+          const css =
+            '@font-face {\n' +
+            "  font-family: 'test-font';\n" +
+            "  src: url('assets/fonts/font/font.eot');\n" +
+            '  font-weight: normal;\n' +
+            '  font-style: normal;\n' +
+            '}\n' +
+            '\n' +
+            '@font-face {\n' +
+            "  font-family: 'test-font';\n" +
+            "  src: local('this');\n" +
+            '  font-weight: normal;\n' +
+            '  font-style: normal;\n' +
+            '}\n';
+
+          assert.equal(this.data[0].font.localFontCSS, css);
+          assert.deepEqual(env.localFonts, ['/path/font/font.eot']);
+          done();
+        })
+        .catch(done);
+    });
+
+    it('adds separate `@font-face` for `eot` and `data:`', function(done) {
+      const env = {
+        herman: {
+          fontpath: '/path',
+        },
+        sassjson: {
+          fonts: {
+            'test-font': {
+              normal: {
+                woff: 'data:embedded-woff',
+                eot: 'data:embedded-eot',
+              },
+            },
+          },
+        },
+      };
+      const font = annotations.font(env);
+
+      font
+        .resolve(this.data)
+        .then(() => {
+          const css =
+            '@font-face {\n' +
+            "  font-family: 'test-font';\n" +
+            "  src: url('data:embedded-eot');\n" +
+            "  src: url('data:embedded-eot') format('embedded-opentype'), " +
+            "url('data:embedded-woff') format('woff');\n" +
+            '  font-weight: normal;\n' +
+            '  font-style: normal;\n' +
+            '}\n';
+
+          assert.equal(this.data[0].font.localFontCSS, css);
+          assert.deepEqual(env.localFonts, []);
+          done();
+        })
+        .catch(done);
+    });
+
+    it('adds `@font-face` for embedded eot', function(done) {
+      const env = {
+        herman: {
+          fontpath: '/path',
+        },
+        sassjson: {
+          fonts: {
+            'test-font': {
+              normal: {
+                eot: 'data:embedded',
+              },
+            },
+          },
+        },
+      };
+      const font = annotations.font(env);
+
+      font
+        .resolve(this.data)
+        .then(() => {
+          const css =
+            '@font-face {\n' +
+            "  font-family: 'test-font';\n" +
+            "  src: url('data:embedded');\n" +
+            "  src: url('data:embedded') format('embedded-opentype');\n" +
+            '  font-weight: normal;\n' +
+            '  font-style: normal;\n' +
+            '}\n';
+
+          assert.equal(this.data[0].font.localFontCSS, css);
+          assert.deepEqual(env.localFonts, []);
+          done();
+        })
+        .catch(done);
+    });
+
+    it('adds svgid', function(done) {
+      const env = {
+        herman: {
+          fontpath: '/path',
+        },
+        sassjson: {
+          fonts: {
+            'test-font': {
+              normal: {
+                svg: 'my/font',
+                svgid: 'my-font',
+              },
+            },
+          },
+        },
+      };
+      const font = annotations.font(env);
+
+      font
+        .resolve(this.data)
+        .then(() => {
+          const css =
+            '@font-face {\n' +
+            "  font-family: 'test-font';\n" +
+            "  src: url('assets/fonts/my/font.svg#my-font') format('svg');\n" +
+            '  font-weight: normal;\n' +
+            '  font-style: normal;\n' +
+            '}\n';
+
+          assert.equal(this.data[0].font.localFontCSS, css);
+          done();
+        })
+        .catch(done);
+    });
+
+    it('allows setting `local` as a string', function(done) {
+      const env = {
+        herman: {},
+        sassjson: {
+          fonts: {
+            'test-font': {
+              normal: {
+                woff: 'data:embedded',
+                local: 'this-and-that',
+              },
+            },
+          },
+        },
+      };
+      const font = annotations.font(env);
+
+      font
+        .resolve(this.data)
+        .then(() => {
+          const css =
+            '@font-face {\n' +
+            "  font-family: 'test-font';\n" +
+            "  src: local('this-and-that'), " +
+            "url('data:embedded') format('woff');\n" +
+            '  font-weight: normal;\n' +
+            '  font-style: normal;\n' +
+            '}\n';
+
+          assert.equal(this.data[0].font.localFontCSS, css);
+          assert.deepEqual(env.localFonts, []);
+          done();
+        })
+        .catch(done);
+    });
+
+    it('stores parsed data for webfonts', function(done) {
+      const env = {
+        herman: {},
+        sassjson: {
+          fonts: {
+            'test-font': {},
+          },
+        },
+      };
+      const font = annotations.font(env);
+      const data = [{ font: { key: 'test-font', variants: ['normal'] } }];
+
+      font
+        .resolve(data)
+        .then(() => {
+          const expected = [
+            {
+              isLocal: false,
+              hasEmbedded: false,
+              variant: 'normal',
+              family: 'test-font',
+              formats: {},
+              svgid: 'test-font',
+              style: 'normal',
+              weight: 'normal',
+              local: undefined,
+            },
+          ];
+
+          assert.deepEqual(data[0].font.parsedVariants, expected);
           done();
         })
         .catch(done);
@@ -328,14 +647,22 @@ describe('font annotation', function() {
 
     it('skips localFont processing if formats is empty', function(done) {
       const env = {
-        sassjson: 'json',
+        herman: {
+          fontpath: '/path',
+        },
+        sassjson: {
+          fonts: {
+            'test-font': {
+              normal: 'font/font',
+            },
+          },
+        },
       };
       const font = annotations.font(env);
       const data = [
         {
           font: {
-            key: 'foo',
-            formats: [],
+            key: 'test-font',
           },
         },
       ];
@@ -343,7 +670,7 @@ describe('font annotation', function() {
       font
         .resolve(data)
         .then(() => {
-          assert.equal(env.localFonts, undefined);
+          assert.deepEqual(env.localFonts, []);
           assert.equal(data[0].font.localFontCSS, undefined);
           assert.notEqual(data[0].iframed, undefined);
           done();
@@ -367,7 +694,7 @@ describe('font annotation', function() {
       const data = [
         {
           font: {
-            formats: ['woff'],
+            formats: 'woff',
           },
           context: {},
           name: 'foo',
@@ -388,36 +715,31 @@ describe('font annotation', function() {
 
     it('skips localFonts processing if not a valid format', function(done) {
       const env = {
-        logger: { warn: sinon.stub() },
         herman: {
           fontpath: '/path',
-          sass: {
-            jsonfile: '/json',
-          },
         },
         sassjson: {
           fonts: {
             'test-font': {
-              regular: 'font/font',
+              normal: 'font/font',
+              formats: 'fail',
             },
           },
         },
       };
       const font = annotations.font(env);
-      const data = [{ font: { key: 'test-font', formats: ['fail'] } }];
+      const data = [
+        {
+          font: {
+            key: 'test-font',
+          },
+        },
+      ];
 
       font
         .resolve(data)
         .then(() => {
-          const css =
-            '@font-face {\n' +
-            "  font-family: 'test-font';\n" +
-            '  src:\n' +
-            '  font-style: normal;\n' +
-            '  font-weight: normal;\n' +
-            '}\n';
-
-          assert.equal(data[0].font.localFontCSS, css);
+          assert.equal(data[0].font.localFontCSS, undefined);
           assert.deepEqual(env.localFonts, []);
           done();
         })

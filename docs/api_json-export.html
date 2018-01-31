@@ -604,13 +604,13 @@ under a key that describes what type of data is being<span class="widont">&nbsp;
     /* color maps */
   );
   'sizes': (
-    /* color maps */
+    /* size maps */
   );
   'ratios': (
-    /* color maps */
+    /* ratio maps */
   );
   'fonts': (
-    /* color maps */
+    /* font maps */
   );
 );
 </code></pre>
@@ -647,20 +647,43 @@ and size values should be valid CSS<span class="widont">&nbsp;</span>lengths.</p
 since font-previews display a single font at a time.
 The data map<span class="widont">&nbsp;</span>accepts:</p>
 <ul>
-<li><code>name</code>: how the font should be referenced in CSS (if omitted, defaults to top-level<span class="widont">&nbsp;</span>key)</li>
+<li><code>name</code>: how the font should be referenced in CSS
+(if omitted, defaults to top-level<span class="widont">&nbsp;</span>key)</li>
 <li><code>stack</code>: optional string or list of font-stack<span class="widont">&nbsp;</span>fallbacks</li>
 <li><code>source</code>: link to more information on the font,
 or typekit/googlefonts as<span class="widont">&nbsp;</span>useful</li>
-<li><code>svgid</code>: optional suffix value for local SVG font <code>src</code>, e.g. <code>font-file.svg#svgid</code> (if omitted, defaults to <code>name</code>)</li>
+<li><code>formats</code>: font format (or space-separated list of font formats)
+for locally-hosted fonts – valid format options are
+<code>ttf</code>, <code>otf</code>, <code>woff</code>, <code>woff2</code>, <code>svg</code>, <code>svgz</code>, and <code>eot</code></li>
 <li><code>&lt;variant&gt;</code>: describe any number of relative paths to locally-hosted
-font-files per variant: e.g. <code>regular</code>, <code>bold italic</code>, etc.</li>
+font-files, or embedded <code>data:...</code> font strings
+per variant (e.g. <code>normal</code>, <code>bold italic</code>, etc.) –
+optionally, the value can also be a nested object
+with the following variant-specific keys:
+<ul>
+<li><code>path</code>: variant-specific relative path to locally-hosted<span class="widont">&nbsp;</span>font-files</li>
+<li><code>local</code>: font name (or space-separated list of font names)
+used to look for local user<span class="widont">&nbsp;</span>fonts</li>
+<li><code>svgid</code>: optional suffix value for local SVG font <code>src</code>,
+e.g. <code>font-file.svg#svgid</code> (if omitted, defaults to <code>name</code>)</li>
+<li><code>&lt;format&gt;</code>: describe any number of relative paths to locally-hosted
+font-files, or embedded <code>data:...</code> font strings
+per format (e.g. <code>ttf</code>, <code>otf</code>, <code>woff2</code>, etc.)</li>
+</ul>
+</li>
 </ul>
 <pre><code class="lang-scss">'body-font': (
   'name': 'Source Sans Pro',
-  'source': 'https://github.com/adobe-fonts/source-sans-pro'
   'stack': ('Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'),
-  'regular': 'sans/sourcesanspro-regular-webfont',
+  'formats': 'woff' 'woff2' 'ttf',
+  'normal': 'sans/sourcesanspro-regular-webfont',
   'italic': 'sans/sourcesanspro-italic-webfont',
+  'bold': (
+    'path': 'sans/sourcesanspro-bold-webfont',
+    'local': 'source-sans-pro-bold',
+    'ttf': 'sans-ttf/sourcesanspro-bold-webfont',
+    'woff': 'data:application/x-font-woff;charset=utf-8;base64...'
+  ),
 )
 </code></pre>
 
@@ -753,8 +776,15 @@ font-files per variant: e.g. <code>regular</code>, <code>bold italic</code>, etc
     &#39;body-font&#39;: (
       &#39;name&#39;: &#39;Source Sans Pro&#39;,
       &#39;stack&#39;: (&#39;Helvetica Neue&#39;, &#39;Helvetica&#39;, &#39;Arial&#39;, &#39;sans-serif&#39;),
-      &#39;regular&#39;: &#39;sans/sourcesanspro-regular-webfont&#39;,
+      &#39;formats&#39;: &#39;woff&#39; &#39;woff2&#39; &#39;ttf&#39;,
+      &#39;normal&#39;: &#39;sans/sourcesanspro-regular-webfont&#39;,
       &#39;italic&#39;: &#39;sans/sourcesanspro-italic-webfont&#39;,
+      &#39;bold&#39;: (
+        &#39;path&#39;: &#39;sans/sourcesanspro-bold-webfont&#39;,
+        &#39;local&#39;: &#39;source-sans-pro-bold&#39;,
+        &#39;ttf&#39;: &#39;sans-ttf/sourcesanspro-bold-webfont&#39;,
+        &#39;woff&#39;: &#39;data:application/x-font-woff;charset=utf-8;base64...&#39;
+      ),
     ),
   ),
   &#39;sizes&#39;: (
