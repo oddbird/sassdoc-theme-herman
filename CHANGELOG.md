@@ -1,6 +1,11 @@
 # Herman Changelog
 
 
+## Unreleased
+
+- 🏠 INTERNAL: Upgrade dependencies
+
+
 ## 2.0.0: 2018-01-31
 
 - 🚀 NEW: Add support for CSS `@font-face` `local()` src in font previews --

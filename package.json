@@ -98,8 +98,7 @@
   "resolutions": {
     "browserslist": ">=2.4.0",
     "cdocparser": "^0.15.0",
-    "nunjucks": "^2.5.2",
-    "scss-comment-parser": "github:jgerigmeyer/scss-comment-parser#fix-semicolon"
+    "nunjucks": "^2.5.2"
   },
   "scripts": {
     "precommit": "lint-staged"
