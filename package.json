@@ -45,7 +45,7 @@
     "autoprefixer": "^7.2.1",
     "babel-eslint": "^8.0.3",
     "babel-loader": "8.0.0-beta.0",
-    "babel-minify-webpack-plugin": "^0.2.0",
+    "babel-minify-webpack-plugin": "^0.3.0",
     "babel-plugin-istanbul": "^4.1.5",
     "beeper": "^1.1.1",
     "browser-sync": "^2.18.13",
