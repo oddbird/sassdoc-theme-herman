@@ -91,7 +91,7 @@
     "sass-true": "^3.0.2",
     "sassdoc": "^2.5.0",
     "sinon": "^4.1.1",
-    "sinon-chai": "^2.14.0",
+    "sinon-chai": "^3.0.0",
     "srcdoc-polyfill": "^1.0.0",
     "webpack": "^3.10.0"
   },
