@@ -21,8 +21,10 @@
 }
 
 .item-subtitle {
-  border-bottom: 1px solid color('border-light');
+  border-bottom: 1px solid color('border');
+  border-bottom-color: var(--color-border, color('border'));
   color: color('text-light');
+  color: var(--color-text-light, color('text-light')); //sass-lint:disable-line no-duplicate-properties
   font-weight: normal;
   margin-bottom: size('shim');
 }
@@ -55,12 +57,14 @@
 .value-type,
 .item-note {
   color: color('text-light');
+  color: var(--color-text-light, color('text-light')); //sass-lint:disable-line no-duplicate-properties
   display: inline-block;
   font-weight: normal;
 }
 
 .alias {
   color: color('text-light');
+  color: var(--color-text-light, color('text-light')); //sass-lint:disable-line no-duplicate-properties
   font-style: italic;
 }
 
@@ -75,6 +79,7 @@
 
 .param-title {
   color: color('text-light');
+  color: var(--color-text-light, color('text-light')); //sass-lint:disable-line no-duplicate-properties
   font-size: size('h3');
 }
 

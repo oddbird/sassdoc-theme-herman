@@ -57,3 +57,25 @@
     @include herman-add($type, $name, $value);
   }
 }
+
+
+// Set Variables
+// -------------
+@mixin set-variables(
+  $map,
+  $function,
+  $prefix: $function
+) {
+  @each $key, $value in $map {
+    $var: '--#{$prefix}-#{$key}';
+
+    @if $function {
+      $value: call($function, $value);
+    } @else {
+      $var-value: unquote('--#{$prefix}-#{$value}');
+      $value: var($var-value);
+    }
+
+    #{$var}: $value;
+  }
+}

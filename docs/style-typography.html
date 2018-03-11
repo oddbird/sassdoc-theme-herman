@@ -473,9 +473,15 @@ Some typography is also inherited from the
       
       <pre class="hljs-pre"><code class="lang-scss">:root {
   @include font-family(&#39;sans&#39;);
+  @include set-variables($theme-colors, &#39;color&#39;);
+  @include set-variables($dynamic-colors, null, &#39;color&#39;);
+  background-color: color(&#39;background&#39;);
+  background-color: var(--color-background, color(&#39;background&#39;)); //sass-lint:disable-line no-duplicate-properties
+  color: color(&#39;text&#39;);
+  color: var(--color-text, color(&#39;text&#39;)); //sass-lint:disable-line no-duplicate-properties
   font-size: size(&#39;root&#39;);
   font-size: size(&#39;responsive&#39;); //sass-lint:disable-line no-duplicate-properties
-  line-height: ratio(&#39;herman&#39;);
+  line-height: ratio(&#39;line-height&#39;);
 }</code></pre>
     </div>
   
@@ -607,6 +613,9 @@ responsive font-size, fallback font-size, and<span class="widont">&nbsp;</span>l
       
       <pre class="hljs-pre"><code class="lang-scss">::selection {
   background-color: color(&#39;callout&#39;);
+  background-color: var(--color-callout, color(&#39;callout&#39;)); //sass-lint:disable-line no-duplicate-properties
+  color: color(&#39;callout-text&#39;);
+  color: var(--color-text, color(&#39;callout-text&#39;)); //sass-lint:disable-line no-duplicate-properties
 }</code></pre>
     </div>
   
@@ -737,6 +746,9 @@ responsive font-size, fallback font-size, and<span class="widont">&nbsp;</span>l
       
       <pre class="hljs-pre"><code class="lang-scss">mark {
   background-color: color(&#39;callout&#39;);
+  background-color: var(--color-callout, color(&#39;callout&#39;)); //sass-lint:disable-line no-duplicate-properties
+  color: color(&#39;callout-text&#39;);
+  color: var(--color-text, color(&#39;callout-text&#39;)); //sass-lint:disable-line no-duplicate-properties
   display: inline-block;
   padding: 0 size(&#39;quarter-shim&#39;);
 }</code></pre>
@@ -870,13 +882,16 @@ responsive font-size, fallback font-size, and<span class="widont">&nbsp;</span>l
       <pre class="hljs-pre"><code class="lang-scss">[href] {
   #{$link} {
     color: color(&#39;action&#39;);
+    color: var(--color-action, color(&#39;action&#39;)); //sass-lint:disable-line no-duplicate-properties
     text-decoration-color: color(&#39;underline&#39;);
+    text-decoration-color: var(--color-underline, color(&#39;underline&#39;)); //sass-lint:disable-line no-duplicate-properties
     text-decoration-skip: ink;
     transition: text-decoration-color 250ms, color 200ms;
   }
 
   #{$focus} {
     color: color(&#39;focus&#39;);
+    color: var(--color-focus, color(&#39;focus&#39;)); //sass-lint:disable-line no-duplicate-properties
     text-decoration-color: currentColor;
   }
 }</code></pre>
@@ -1527,7 +1542,8 @@ can be visually hidden without removing from the<span class="widont">&nbsp;</spa
   h2,
   h3,
   h4 {
-    color: color(&#39;black&#39;);
+    color: color(&#39;text&#39;);
+    color: var(--color-text, color(&#39;text&#39;));
 
     a {
       #{$link} {
@@ -1590,7 +1606,8 @@ can be visually hidden without removing from the<span class="widont">&nbsp;</spa
   }
 
   blockquote {
-    border-left: size(&#39;half-shim&#39;) solid color(&#39;border-light&#39;);
+    border-left: size(&#39;half-shim&#39;) solid color(&#39;border&#39;);
+    border-left-color: var(--color-border, color(&#39;border&#39;));
     font-size: size(&#39;quote&#39;);
     margin-left: negative(&#39;gutter&#39;);
     padding-left: size(&#39;shim&#39;) + size(&#39;half-shim&#39;);

@@ -38,6 +38,7 @@
 
 .color-swatch {
   border: 1px solid color('border');
+  border-color: var(--color-border, color('border'));
   height: size('color-swatch');
   min-width: size('color-swatch');
   position: relative;
@@ -69,10 +70,10 @@
 }
 
 .color-value {
-  background-color: color('slight');
+  background-color: color('code-background');
   border-radius: size('quarter-shim');
-  box-shadow: 0 0 size('quarter-shim') color('code-shadow') inset;
-  color: color('text-light');
+  box-shadow: 0 0 size('quarter-shim') color('shadow') inset;
+  color: color('code');
   font-weight: normal;
   margin-top: size('quarter-shim');
   white-space: nowrap;

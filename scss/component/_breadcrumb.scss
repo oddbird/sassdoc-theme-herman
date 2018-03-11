@@ -15,6 +15,9 @@
 ///   </nav>
 .breadcrumb {
   background: color('callout');
+  background: var(--color-callout, color('callout')); //sass-lint:disable-line no-duplicate-properties
+  color: color('callout-text');
+  color: var(--color-callout-text, color('callout-text')); //sass-lint:disable-line no-duplicate-properties
   padding: size('shim') size('flex-gutter');
 
   a,

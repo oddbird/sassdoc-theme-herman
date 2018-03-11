@@ -9,7 +9,8 @@
 
 
 input {
-  border: 1px solid color('border-light');
+  border: 1px solid color('border');
+  border-color: var(--color-border, color('border'));
   color: inherit;
   font-size: size('search');
   margin-bottom: size('half-shim');

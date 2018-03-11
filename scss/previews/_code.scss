@@ -26,7 +26,10 @@
 // -----------
 /// @group style-code
 .code-header {
-  @include contrasted('theme-light');
+  background-color: color('callout');
+  background-color: var(--color-callout, color('callout')); //sass-lint:disable-line no-duplicate-properties
+  color: color('callout-text');
+  color: var(--color-text, color('callout-text')); //sass-lint:disable-line no-duplicate-properties
   flex: 0 0 auto;
   padding: 0 size('shim');
 }
@@ -45,8 +48,9 @@
 /// @group style-code
 .hljs-pre,
 .text-block pre { // sass-lint:disable-line force-element-nesting
-  background-color: color('slight');
-  border: 1px solid color('callout');
+  background-color: color('code-background');
+  border: 1px solid color('border');
+  border-color: var(--color-border, color('border'));
   color: color('code');
   flex: 1 1 auto;
   flex-wrap: wrap;

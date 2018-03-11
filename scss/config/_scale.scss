@@ -16,7 +16,7 @@
 /// @group config-scale
 /// @ratios
 $text-ratios: (
-  'line-height': 1.4
+  'line-height': 1.35
 );
 
 @include config('ratios', 'text-ratios', $text-ratios);

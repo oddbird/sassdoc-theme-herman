@@ -25,6 +25,7 @@
 .project-link {
   #{$link} {
     border: 1px solid color('action');
+    border-color: var(--color-action, color('action'));
     border-radius: size('gutter');
     padding: size('half-shim') size('gutter');
     text-align: center;
@@ -33,6 +34,9 @@
   }
 
   #{$focus} {
-    @include contrasted('action');
+    background-color: color('action');
+    background-color: var(--color-action, color('action')); //sass-lint:disable-line no-duplicate-properties
+    color: color('background');
+    color: var(--color-background, color('background'));
   }
 }

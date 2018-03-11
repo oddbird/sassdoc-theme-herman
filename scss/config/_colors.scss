@@ -81,39 +81,55 @@ $neutral-colors: (
 $theme-colors: (
   'theme-dark': 'brand-blue',
   'theme-light': 'brand-blue' ('tint': 80%),
-
-  'background': #fff,
-  'text': 'black',
-  'text-light': 'gray',
-
-  'action': 'brand-pink',
-  'focus': 'theme-dark',
-  'underline': 'action' ('tint': 75%),
-
-  'border': 'gray',
-  'border-light': 'light-gray',
-  'shadow': 'gray' ('rgba': 0.5),
-
-  'callout': 'theme-light',
-  'slight': 'callout' ('tint': 90%),
-
-  'code': 'theme-dark',
-  'code-shadow': 'code' (rgba: 0.2),
+  'contrast-light': #fff,
+  'contrast-low': 'gray',
+  'contrast-dark': 'black',
+  'accent-dark': 'brand-pink',
+  'accent-light': 'accent-dark' ('tint': 75%),
 );
 
 @include config('colors', 'theme-colors', $theme-colors);
 
 
-// System Colors
-// -------------
-/// Colors used by accoutrement-color
-/// to calculate contrast ratios.
+// Dynamic Colors
+// --------------
+/// These theme-colors are based on the primary theme colors,
+/// and change based on project-specific theme-color settings.
 ///
 /// @colors
 /// @group config-colors
-$system-colors: (
-  'contrast-light': 'background',
-  'contrast-dark': 'text',
+$dynamic-colors: (
+  'background': 'contrast-light',
+  'text': 'contrast-dark',
+  'text-light': 'contrast-low',
+
+  'sidebar-background': 'theme-dark',
+  'sidebar-text': 'contrast-light',
+
+  'action': 'accent-dark',
+  'focus': 'theme-dark',
+  'underline': 'accent-light',
+
+  'border': 'callout',
+  'callout': 'theme-light',
+  'callout-text': 'text',
 );
 
-@include config('colors', 'system-colors', $system-colors);
+@include config('colors', 'dynamic-colors', $dynamic-colors);
+
+
+// Static Colors
+// -------------
+/// These theme-colors are based on the neutral tones,
+/// and don't change in relation to project-specific
+/// theme-color settings.
+///
+/// @colors
+/// @group config-colors
+$static-colors: (
+  'code': 'theme-dark',
+  'code-background': 'theme-light' ('tint': 90%),
+  'shadow': 'contrast-dark' ('rgba': 0.25),
+);
+
+@include config('colors', 'static-colors', $static-colors);

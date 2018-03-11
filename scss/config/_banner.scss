@@ -12,12 +12,6 @@
 ///
 /// @group style-banner
 ///
-/// @parameter {color | string} $color ['theme-dark'] -
-///   The color of the border/arrow line
-/// @parameter {color | string} $background ['background'] -
-///   The background color above the border/arrow,
-///   used to make it an arrow-outline rather than a solid triangle
-///
 /// @example scss
 ///   [data-region='banner'] {
 ///     @include banner-arrow;
@@ -26,11 +20,9 @@
 ///   <header data-region="banner">
 ///     Hello World
 ///   </header>
-@mixin banner-arrow(
-  $color: 'theme-dark',
-  $background: 'background'
-) {
-  border-bottom: size('arrow-border') solid color($color);
+@mixin banner-arrow {
+  border-bottom: size('arrow-border') solid color('theme-dark');
+  border-bottom-color: var(--color-theme-dark, color('theme-dark'));
   box-shadow: 0 2px 2px color('shadow');
   display: block;
   position: relative;
@@ -38,7 +30,8 @@
 
   @include wrap-content('') {
     border: size('arrow-depth') solid transparent;
-    border-top-color: color($color);
+    border-top-color: color('theme-dark');
+    border-top-color: var(--color-theme-dark, color('theme-dark')); //sass-lint:disable-line no-duplicate-properties
     border-width: size('arrow-depth') size('arrow-side') 0;
     left: 50%;
     position: absolute;
@@ -52,7 +45,8 @@
   }
 
   @include after('') {
-    border-top-color: color($background);
+    border-top-color: color('background');
+    border-top-color: var(--color-background, color('background')); //sass-lint:disable-line no-duplicate-properties
     transform: translateX(-50%) translateY(-4px);
   }
 }

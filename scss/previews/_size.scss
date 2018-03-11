@@ -57,7 +57,8 @@
     vertical-align: baseline;
 
     + td {
-      border-left: 1px solid color('border-light');
+      border-left: 1px solid color('border');
+      border-left-color: var(--color-border, color('border'));
     }
   }
 
@@ -77,6 +78,7 @@
 .size-name,
 .size-value {
   color: color('text-light');
+  color: var(--color-text-light, color('text-light')); //sass-lint:disable-line no-duplicate-properties
   flex: 0 1 5ch;
   font-size: size('code');
   white-space: nowrap;
@@ -100,25 +102,46 @@
 }
 
 .size-bar {
-  background-color: color('border');
-  background-image:
-  linear-gradient(
-    to left,
-    color('underline') 1px,
-    transparent 1px,
-    transparent
-  ),
-  linear-gradient(
-    to left,
-    color('border-light' ('rgba': 0.5)) 1px,
-    transparent 1px,
-    transparent
-  ),
-  linear-gradient(
-    to left,
-    color('border-light' ('rgba': 0.25)) 1px,
-    transparent 1px,
-    transparent
+  background-color: color('contrast-dark');
+  background-image: (
+    linear-gradient(
+      to left,
+      color('contrast-light') 1px,
+      transparent 1px,
+      transparent
+    ),
+    linear-gradient(
+      to left,
+      color('contrast-low') 1px,
+      transparent 1px,
+      transparent
+    ),
+    linear-gradient(
+      to left,
+      color('contrast-low') 1px,
+      transparent 1px,
+      transparent
+    )
+  );
+  background-image: ( //sass-lint:disable-line no-duplicate-properties
+    linear-gradient(
+      to left,
+      var(--color-contrast-light, color('contrast-light')) 1px,
+      transparent 1px,
+      transparent
+    ),
+    linear-gradient(
+      to left,
+      var(--color-contrast-low, color('contrast-low')) 1px,
+      transparent 1px,
+      transparent
+    ),
+    linear-gradient(
+      to left,
+      var(--color-contrast-low, color('contrast-low')) 1px,
+      transparent 1px,
+      transparent
+    )
   );
   background-position: 0 100%;
   background-repeat: repeat-x;
@@ -136,9 +159,11 @@
 // ------
 
 .ratio-base {
-  background-color: color('callout');
+  background: color('callout');
+  background-color: var(--color-callout, color('callout')); //sass-lint:disable-line no-duplicate-properties
 
   .size-bar {
-    background-color: color('action');
+    background-color: color('accent-dark');
+    background-color: var(--color-accent-dark, color('accent-dark')); //sass-lint:disable-line no-duplicate-properties
   }
 }

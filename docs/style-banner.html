@@ -448,89 +448,6 @@ for use as a divider between the banner and main<span class="widont">&nbsp;</spa
   
 
   
-    
-  <div data-item-section="parameter">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Parameters</span>
-        
-      </h3>
-    
-
-    
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$color:</span>
-      
-      <span class="item-value">&#39;theme-dark&#39;</span>
-      <span class="value-type">(color |<span class="widont">&nbsp;</span>string)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The color of the border/arrow<span class="widont">&nbsp;</span>line</p>
-
-      </div>
-    
-  </div>
-
-
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">$background:</span>
-      
-      <span class="item-value">&#39;background&#39;</span>
-      <span class="value-type">(color |<span class="widont">&nbsp;</span>string)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>The background color above the border/arrow,
-used to make it an arrow-outline rather than a solid<span class="widont">&nbsp;</span>triangle</p>
-
-      </div>
-    
-  </div>
-
-
-      
-
-      
-  
-
-      
-  
-
-      
-  
-
-      
-  
-
-    
-  </div>
-
-  
 
 
   
@@ -605,7 +522,8 @@ used to make it an arrow-outline rather than a solid<span class="widont">&nbsp;<
       
       <pre class="hljs-pre"><code class="lang-css">[data-region=&#39;banner&#39;] {
   border-bottom: 8px solid #0d7fa5;
-  box-shadow: 0 2px 2px rgba(85, 91, 94, 0.5);
+  border-bottom-color: var(--color-theme-dark, #0d7fa5);
+  box-shadow: 0 2px 2px rgba(59, 64, 66, 0.25);
   display: block;
   position: relative;
   width: 100%;
@@ -613,9 +531,10 @@ used to make it an arrow-outline rather than a solid<span class="widont">&nbsp;<
 
 [data-region=&#39;banner&#39;]::before, [data-region=&#39;banner&#39;]::after {
   content: &quot;&quot;;
-  border: 0.7rem solid transparent;
+  border: 0.675rem solid transparent;
   border-top-color: #0d7fa5;
-  border-width: 0.7rem 1.4rem 0;
+  border-top-color: var(--color-theme-dark, #0d7fa5);
+  border-width: 0.675rem 1.35rem 0;
   left: 50%;
   position: absolute;
   top: 100%;
@@ -631,6 +550,7 @@ used to make it an arrow-outline rather than a solid<span class="widont">&nbsp;<
 [data-region=&#39;banner&#39;]::after {
   content: &quot;&quot;;
   border-top-color: #fff;
+  border-top-color: var(--color-background, #fff);
   transform: translateX(-50%) translateY(-4px);
 }
 </code></pre>
@@ -1566,6 +1486,7 @@ including both the name and version of the<span class="widont">&nbsp;</span>proj
       <pre class="hljs-pre"><code class="lang-scss">.project-version {
   @include font-family(&#39;sans&#39;);
   color: color(&#39;text-light&#39;);
+  color: var(--color-text-light, color(&#39;text-light&#39;)); //sass-lint:disable-line no-duplicate-properties
   font-size: size(&#39;h3&#39;);
 }</code></pre>
     </div>
@@ -1791,6 +1712,7 @@ including both the name and version of the<span class="widont">&nbsp;</span>proj
       
       <pre class="hljs-pre"><code class="lang-scss">[data-nav-toggle] {
   color: color(&#39;action&#39;);
+  color: var(--color-action, color(&#39;action&#39;)); //sass-lint:disable-line no-duplicate-properties
   padding: size(&#39;half-shim&#39;);
 
   @include above(&#39;page-break&#39;) {
@@ -1805,6 +1727,7 @@ including both the name and version of the<span class="widont">&nbsp;</span>proj
   #{$focus},
   &amp;[aria-pressed=&#39;true&#39;] {
     color: color(&#39;focus&#39;);
+    color: var(--color-focus, color(&#39;focus&#39;)); //sass-lint:disable-line no-duplicate-properties
     outline: 0;
   }
 }</code></pre>

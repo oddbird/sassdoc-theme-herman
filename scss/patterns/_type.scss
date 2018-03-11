@@ -51,7 +51,8 @@
   h2,
   h3,
   h4 {
-    color: color('black');
+    color: color('text');
+    color: var(--color-text, color('text'));
 
     a {
       #{$link} {
@@ -114,7 +115,8 @@
   }
 
   blockquote {
-    border-left: size('half-shim') solid color('border-light');
+    border-left: size('half-shim') solid color('border');
+    border-left-color: var(--color-border, color('border'));
     font-size: size('quote');
     margin-left: negative('gutter');
     padding-left: size('shim') + size('half-shim');
