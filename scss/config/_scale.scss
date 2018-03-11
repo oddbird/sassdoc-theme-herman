@@ -40,7 +40,7 @@ $text-ratios: (
 /// @sizes
 $root-sizes: (
   'root': 18px,
-  'responsive': calc(16px + 0.125vw),
+  'responsive': calc(1em + 0.125vw),
 
   'large': calc(%s + %s) (1rem, 0.5vw),
   'small': 0.9rem,
