@@ -28,7 +28,7 @@
 /// @group component-footer
 .footer-credit {
   @include clearfix;
-  border-top: 1px solid color('theme-light');
+  border-top: 1px solid currentColor;
   flex: 0 0 auto;
   font-size: size('footer');
   line-height: size('rhythm');

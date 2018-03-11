@@ -433,6 +433,9 @@
       
       <pre class="hljs-pre"><code class="lang-scss">.breadcrumb {
   background: color(&#39;callout&#39;);
+  background: var(--color-callout, color(&#39;callout&#39;)); //sass-lint:disable-line no-duplicate-properties
+  color: color(&#39;callout-text&#39;);
+  color: var(--color-callout-text, color(&#39;callout-text&#39;)); //sass-lint:disable-line no-duplicate-properties
   padding: size(&#39;shim&#39;) size(&#39;flex-gutter&#39;);
 
   a,

@@ -593,7 +593,10 @@ for both user and machine-generated code<span class="widont">&nbsp;</span>sample
       
       
       <pre class="hljs-pre"><code class="lang-scss">.code-header {
-  @include contrasted(&#39;theme-light&#39;);
+  background-color: color(&#39;callout&#39;);
+  background-color: var(--color-callout, color(&#39;callout&#39;)); //sass-lint:disable-line no-duplicate-properties
+  color: color(&#39;callout-text&#39;);
+  color: var(--color-text, color(&#39;callout-text&#39;)); //sass-lint:disable-line no-duplicate-properties
   flex: 0 0 auto;
   padding: 0 size(&#39;shim&#39;);
 }</code></pre>
@@ -830,8 +833,9 @@ for both user and machine-generated code<span class="widont">&nbsp;</span>sample
       <pre class="hljs-pre"><code class="lang-scss">.hljs-pre,
 .text-block pre {
   // sass-lint:disable-line force-element-nesting
-  background-color: color(&#39;slight&#39;);
-  border: 1px solid color(&#39;callout&#39;);
+  background-color: color(&#39;code-background&#39;);
+  border: 1px solid color(&#39;border&#39;);
+  border-color: var(--color-border, color(&#39;border&#39;));
   color: color(&#39;code&#39;);
   flex: 1 1 auto;
   flex-wrap: wrap;

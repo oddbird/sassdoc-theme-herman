@@ -63,11 +63,19 @@ $focus: '&:hover, &:focus, &:active';
 ///     You shall sojourn at <a href="#">Paris, Rome, and Naples</a>.
 ///   </div>
 @mixin invert-colors {
-  @include contrasted('theme-dark');
+  background-color: color('sidebar-background');
+  background-color: var(--color-sidebar-background, color('sidebar-background')); //sass-lint:disable-line no-duplicate-properties
+  color: color('sidebar-text');
+  color: var(--color-sidebar-text, color('sidebar-text')); //sass-lint:disable-line no-duplicate-properties
 
   [href] {
     #{$link} {
       color: inherit;
     }
+  }
+
+  input {
+    border-color: currentColor;
+    color: currentColor;
   }
 }

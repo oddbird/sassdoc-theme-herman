@@ -75,6 +75,7 @@
 .project-version {
   @include font-family('sans');
   color: color('text-light');
+  color: var(--color-text-light, color('text-light')); //sass-lint:disable-line no-duplicate-properties
   font-size: size('h3');
 }
 
@@ -91,6 +92,7 @@
 ///   </button>
 [data-nav-toggle] {
   color: color('action');
+  color: var(--color-action, color('action')); //sass-lint:disable-line no-duplicate-properties
   padding: size('half-shim');
 
   @include above('page-break') {
@@ -105,6 +107,7 @@
   #{$focus},
   &[aria-pressed='true'] {
     color: color('focus');
+    color: var(--color-focus, color('focus')); //sass-lint:disable-line no-duplicate-properties
     outline: 0;
   }
 }

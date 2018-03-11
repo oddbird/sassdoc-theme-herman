@@ -968,7 +968,7 @@
       
       <pre class="hljs-pre"><code class="lang-scss">[data-nav] {
   #{$link} {
-    color: color(&#39;background&#39;);
+    color: inherit;
     line-height: 1.1;
     padding-bottom: size(&#39;quarter-shim&#39;);
     position: relative;
@@ -978,7 +978,7 @@
     // Animated underlines
     @include before(&#39;&#39;) {
       @include position(null null 0 0);
-      background: color(&#39;theme-light&#39;);
+      background: currentColor;
       height: size(&#39;nav-underline&#39;);
       transform: scale3d(0, 1, 1);
       transform-origin: center left;

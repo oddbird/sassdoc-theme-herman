@@ -1635,11 +1635,18 @@ to include on the returned link or<span class="widont">&nbsp;</span>span.</li>
       
       <pre class="hljs-pre"><code class="lang-css">.invert-colors {
   background-color: #0d7fa5;
+  background-color: var(--color-sidebar-background, #0d7fa5);
   color: #fff;
+  color: var(--color-sidebar-text, #fff);
 }
 
 .invert-colors [href]:link, .invert-colors [href]:visited {
   color: inherit;
+}
+
+.invert-colors input {
+  border-color: currentColor;
+  color: currentColor;
 }
 </code></pre>
     </div>
