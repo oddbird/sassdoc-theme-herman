@@ -135,5 +135,17 @@ describe('parse', function() {
 
       assert.deepEqual(actual.toString(), expected);
     });
+
+    it('skips domain-relative URLs', function() {
+      const file = {
+        path: `${__dirname}/fixtures/css/main.css`,
+        contents: '.foo { background: url(/foo); }',
+      };
+      parse.customCSS(file, this.enc, this.env);
+      const actual = file.contents;
+      const expected = '.foo { background: url(/foo); }';
+
+      assert.deepEqual(actual.toString(), expected);
+    });
   });
 });
