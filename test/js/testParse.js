@@ -81,37 +81,32 @@ describe('parse', function() {
 
     it('handles relative URLs', function() {
       const file = {
-        path: `${__dirname}/fixtures/css/main.css`,
+        path: path.normalize(`${__dirname}/fixtures/css/main.css`),
         contents: '.foo { background: url("foo.png"); }',
       };
       parse.customCSS(file, this.enc, this.env);
       const actual = file.contents;
-      const outPath = path.normalize('/fixtures/css/foo.png');
-      const expected = `.foo { background: url(".${outPath}"); }`;
+      const expected = '.foo { background: url("./fixtures/css/foo.png"); }';
 
       assert.deepEqual(actual.toString(), expected);
     });
 
     it('handles unquoted relative URLs', function() {
       const file = {
-        path: `${__dirname}/fixtures/css/main.css`,
+        path: path.normalize(`${__dirname}/fixtures/css/main.css`),
         contents: '.foo { background: url(foo.png); }',
       };
       parse.customCSS(file, this.enc, this.env);
       const actual = file.contents;
-      const outPath = path.normalize('/fixtures/css/foo.png');
-      const expected = `.foo { background: url(.${outPath}); }`;
+      const expected = '.foo { background: url(./fixtures/css/foo.png); }';
 
       assert.deepEqual(actual.toString(), expected);
     });
 
     it('uses localFonts', function() {
-      const inPath = path.normalize('myfonts/font.ttf');
       const file = {
-        path: `${__dirname}/fixtures/css/main.css`,
-        contents: `.foo { @font-face { src: url(..${path.sep}..${
-          path.sep
-        }${inPath}); }}`,
+        path: path.normalize(`${__dirname}/fixtures/css/main.css`),
+        contents: '.foo { @font-face { src: url(../../myfonts/font.ttf); }}',
       };
       const env = Object.assign(this.env, {
         localFonts: [path.normalize(`${__dirname}/myfonts/font.ttf`)],
@@ -121,8 +116,7 @@ describe('parse', function() {
       });
       parse.customCSS(file, this.enc, env);
       const actual = file.contents;
-      const outPath = path.normalize('/fonts/font.ttf');
-      const expected = `.foo { @font-face { src: url(..${outPath}); }}`;
+      const expected = '.foo { @font-face { src: url(../fonts/font.ttf); }}';
 
       assert.deepEqual(actual.toString(), expected);
     });

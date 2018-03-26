@@ -285,6 +285,7 @@ describe('font annotation', function() {
 
     it('adds `@font-face` CSS and localFonts src', function(done) {
       const env = {
+        dir: '',
         logger: { warn: sinon.stub() },
         herman: {
           fontpath: path.normalize('/path'),
@@ -371,6 +372,7 @@ describe('font annotation', function() {
 
     it('adds `@font-face` CSS for `local` names', function(done) {
       const env = {
+        dir: '',
         herman: {
           fontpath: path.normalize('/path'),
         },
@@ -413,6 +415,7 @@ describe('font annotation', function() {
 
     it('adds separate `@font-face` for `eot` and `local`', function(done) {
       const env = {
+        dir: '',
         herman: {
           fontpath: path.normalize('/path'),
         },
@@ -533,6 +536,7 @@ describe('font annotation', function() {
 
     it('adds svgid', function(done) {
       const env = {
+        dir: '',
         herman: {
           fontpath: path.normalize('/path'),
         },
