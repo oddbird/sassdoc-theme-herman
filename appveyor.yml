@@ -12,8 +12,8 @@ install:
 test_script:
   - node --version
   - yarn --version
-  - echo $PATH
-  - dir node_modules
+  - echo %path%
+  - dir node_modules\.bin
   - gulp jstest
   - nyc report --reporter=text-lcov
   - nyc check-coverage
@@ -22,7 +22,3 @@ build: off
 
 artifacts:
   - path: jscov
-
-notifications:
-  - provider: Slack
-    incoming_webhook: https://hooks.slack.com/services/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
