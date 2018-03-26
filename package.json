@@ -28,6 +28,7 @@
     "through2": "^2.0.3",
     "tinycolor2": "^1.4.1",
     "typogr": "^0.6.7",
+    "unixify": "^1.0.0",
     "vinyl-fs": "^3.0.0"
   },
   "peerDependencies": {
