@@ -1,0 +1,17 @@
+environment:
+  matrix:
+    - nodejs_version: '6'
+    - nodejs_version: 'LTS'
+    - nodejs_version: 'Current'
+
+install:
+  - ps: Install-Product node $env:nodejs_version
+  - appveyor-retry yarn
+
+test_script:
+  - SET PATH=.\node_modules\.bin;%PATH%
+  - node --version
+  - yarn --version
+  - mocha --reporter=spec ".\test\js\*.js"
+
+build: off

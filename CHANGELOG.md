@@ -4,6 +4,8 @@
 ## Unreleased
 
 - 🏠 INTERNAL: Upgrade dependencies
+- 🏠 INTERNAL: Run tests on Windows --
+  [#270](https://github.com/oddbird/sassdoc-theme-herman/issues/270)
 
 
 ## 2.0.0: 2018-01-31
