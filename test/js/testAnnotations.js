@@ -296,7 +296,7 @@ describe('font annotation', function() {
         sassjson: {
           fonts: {
             'test-font': {
-              normal: 'font/font',
+              normal: path.normalize('font/font'),
               formats: ['eot', 'ttf'],
             },
           },
@@ -320,8 +320,8 @@ describe('font annotation', function() {
 
           assert.equal(this.data[0].font.localFontCSS, css);
           assert.deepEqual(env.localFonts, [
-            path.normalize('/path/font/font.eot'),
-            path.normalize('/path/font/font.ttf'),
+            path.resolve('/path/font/font.eot'),
+            path.resolve('/path/font/font.ttf'),
           ]);
           done();
         })
@@ -382,7 +382,7 @@ describe('font annotation', function() {
               normal: {
                 woff: 'data:embedded',
                 fail: 'bad',
-                ttf: 'font/font',
+                ttf: path.normalize('font/font'),
                 local: ['this', 'that'],
               },
             },
@@ -406,7 +406,7 @@ describe('font annotation', function() {
 
           assert.equal(this.data[0].font.localFontCSS, css);
           assert.deepEqual(env.localFonts, [
-            path.normalize('/path/font/font.ttf'),
+            path.resolve('/path/font/font.ttf'),
           ]);
           done();
         })
@@ -423,7 +423,7 @@ describe('font annotation', function() {
           fonts: {
             'test-font': {
               normal: {
-                path: 'font/font',
+                path: path.normalize('font/font'),
                 local: 'this',
               },
               formats: 'eot',
@@ -453,7 +453,7 @@ describe('font annotation', function() {
 
           assert.equal(this.data[0].font.localFontCSS, css);
           assert.deepEqual(env.localFonts, [
-            path.normalize('/path/font/font.eot'),
+            path.resolve('/path/font/font.eot'),
           ]);
           done();
         })
@@ -544,7 +544,7 @@ describe('font annotation', function() {
           fonts: {
             'test-font': {
               normal: {
-                svg: 'my/font',
+                svg: path.normalize('my/font'),
                 svgid: 'my-font',
               },
             },
@@ -565,6 +565,7 @@ describe('font annotation', function() {
             '}\n';
 
           assert.equal(this.data[0].font.localFontCSS, css);
+          assert.deepEqual(env.localFonts, [path.resolve('/path/my/font.svg')]);
           done();
         })
         .catch(done);
