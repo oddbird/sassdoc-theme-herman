@@ -77,7 +77,7 @@ const onError = function(err) {
 // Execute a command, logging output live while process runs
 const spawnTask = function(command, args, cb, failOnError = true) {
   spawned.push(
-    spawn(command, args, { stdio: 'inherit' })
+    spawn(command, args, { stdio: 'inherit', cwd: __dirname })
       .on('error', err => {
         if (failOnError) {
           beeper();
