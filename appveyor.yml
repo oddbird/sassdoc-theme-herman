@@ -10,15 +10,9 @@ install:
   - appveyor-retry yarn
 
 test_script:
+  - SET PATH=node_modules\.bin;%PATH%
   - node --version
   - yarn --version
-  - echo %path%
-  - dir node_modules\.bin
-  - gulp jstest
-  - nyc report --reporter=text-lcov
-  - nyc check-coverage
+  - mocha --reporter=spec 'test\js\*.js'
 
 build: off
-
-artifacts:
-  - path: jscov
