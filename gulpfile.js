@@ -77,7 +77,7 @@ const onError = function(err) {
 // Execute a command, logging output live while process runs
 const spawnTask = function(command, args, cb, failOnError = true) {
   spawned.push(
-    spawn(command, args, { stdio: 'inherit' })
+    spawn(command, args, { stdio: 'inherit', cwd: __dirname })
       .on('error', err => {
         if (failOnError) {
           beeper();
@@ -170,10 +170,10 @@ const getJsTestArgs = verbose => {
     reporter: covReporters,
     cache: true,
     all: true,
-    'report-dir': './jscov/src/',
+    'report-dir': path.join(__dirname, 'jscov', 'src'),
   };
   const args = [
-    './node_modules/.bin/mocha',
+    path.join(__dirname, 'node_modules', '.bin', 'mocha'),
     '--reporter',
     mochaReporter,
     `${paths.JS_TESTS_DIR}*.js`,
@@ -191,11 +191,20 @@ const getJsTestArgs = verbose => {
 };
 
 gulp.task('jstest', cb => {
-  spawnTask('./node_modules/.bin/nyc', getJsTestArgs(true), cb);
+  spawnTask(
+    path.join(__dirname, 'node_modules', '.bin', 'nyc'),
+    getJsTestArgs(true),
+    cb
+  );
 });
 
 gulp.task('jstest-nofail', cb => {
-  spawnTask('./node_modules/.bin/nyc', getJsTestArgs(), cb, false);
+  spawnTask(
+    path.join(__dirname, 'node_modules', '.bin', 'nyc'),
+    getJsTestArgs(),
+    cb,
+    false
+  );
 });
 
 const karmaOnBuild = done => exitCode => {
