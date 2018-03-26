@@ -57,7 +57,8 @@ describe('icons annotation', function() {
     });
 
     it('renders icons', function(done) {
-      const data = [{ icons: 'test/js/fixtures/icons' }];
+      const iconPath = path.normalize('test/js/fixtures/icons');
+      const data = [{ icons: iconPath }];
 
       this.icons
         .resolve(data)
@@ -65,13 +66,13 @@ describe('icons annotation', function() {
           assert.deepEqual(data[0].icons, [
             {
               name: 'ok',
-              path: 'test/js/fixtures/icons/',
+              path: `${iconPath}${path.sep}`,
               rendered:
                 '<svg data-icon="ok"  ><use xlink:href="#icon-ok" />\n  </svg>',
             },
             {
               name: 'warning',
-              path: 'test/js/fixtures/icons/',
+              path: `${iconPath}${path.sep}`,
               rendered:
                 '<svg data-icon="warning"  >' +
                 '<use xlink:href="#icon-warning" />\n  </svg>',
@@ -286,7 +287,7 @@ describe('font annotation', function() {
       const env = {
         logger: { warn: sinon.stub() },
         herman: {
-          fontpath: '/path',
+          fontpath: path.normalize('/path'),
           sass: {
             jsonfile: '/json',
           },
@@ -318,8 +319,8 @@ describe('font annotation', function() {
 
           assert.equal(this.data[0].font.localFontCSS, css);
           assert.deepEqual(env.localFonts, [
-            '/path/font/font.eot',
-            '/path/font/font.ttf',
+            path.normalize('/path/font/font.eot'),
+            path.normalize('/path/font/font.ttf'),
           ]);
           done();
         })
@@ -371,7 +372,7 @@ describe('font annotation', function() {
     it('adds `@font-face` CSS for `local` names', function(done) {
       const env = {
         herman: {
-          fontpath: '/path',
+          fontpath: path.normalize('/path'),
         },
         sassjson: {
           fonts: {
@@ -402,7 +403,9 @@ describe('font annotation', function() {
             '}\n';
 
           assert.equal(this.data[0].font.localFontCSS, css);
-          assert.deepEqual(env.localFonts, ['/path/font/font.ttf']);
+          assert.deepEqual(env.localFonts, [
+            path.normalize('/path/font/font.ttf'),
+          ]);
           done();
         })
         .catch(done);
@@ -411,7 +414,7 @@ describe('font annotation', function() {
     it('adds separate `@font-face` for `eot` and `local`', function(done) {
       const env = {
         herman: {
-          fontpath: '/path',
+          fontpath: path.normalize('/path'),
         },
         sassjson: {
           fonts: {
@@ -446,7 +449,9 @@ describe('font annotation', function() {
             '}\n';
 
           assert.equal(this.data[0].font.localFontCSS, css);
-          assert.deepEqual(env.localFonts, ['/path/font/font.eot']);
+          assert.deepEqual(env.localFonts, [
+            path.normalize('/path/font/font.eot'),
+          ]);
           done();
         })
         .catch(done);
@@ -529,7 +534,7 @@ describe('font annotation', function() {
     it('adds svgid', function(done) {
       const env = {
         herman: {
-          fontpath: '/path',
+          fontpath: path.normalize('/path'),
         },
         sassjson: {
           fonts: {

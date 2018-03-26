@@ -1,6 +1,7 @@
 'use strict';
 
 const assert = require('assert');
+const path = require('path');
 
 const parse = require('../../lib/utils/parse');
 
@@ -85,7 +86,8 @@ describe('parse', function() {
       };
       parse.customCSS(file, this.enc, this.env);
       const actual = file.contents;
-      const expected = '.foo { background: url("./fixtures/css/foo.png"); }';
+      const outPath = path.normalize('/fixtures/css/foo.png');
+      const expected = `.foo { background: url(".${outPath}"); }`;
 
       assert.deepEqual(actual.toString(), expected);
     });
@@ -97,25 +99,30 @@ describe('parse', function() {
       };
       parse.customCSS(file, this.enc, this.env);
       const actual = file.contents;
-      const expected = '.foo { background: url(./fixtures/css/foo.png); }';
+      const outPath = path.normalize('/fixtures/css/foo.png');
+      const expected = `.foo { background: url(.${outPath}); }`;
 
       assert.deepEqual(actual.toString(), expected);
     });
 
     it('uses localFonts', function() {
+      const inPath = path.normalize('myfonts/font.ttf');
       const file = {
         path: `${__dirname}/fixtures/css/main.css`,
-        contents: '.foo { @font-face { src: url(../../myfonts/font.ttf); }}',
+        contents: `.foo { @font-face { src: url(..${path.sep}..${
+          path.sep
+        }${inPath}); }}`,
       };
       const env = Object.assign(this.env, {
-        localFonts: [`${__dirname}/myfonts/font.ttf`],
+        localFonts: [path.normalize(`${__dirname}/myfonts/font.ttf`)],
         herman: {
-          fontpath: 'myfonts/',
+          fontpath: path.normalize('myfonts/'),
         },
       });
       parse.customCSS(file, this.enc, env);
       const actual = file.contents;
-      const expected = '.foo { @font-face { src: url(../fonts/font.ttf); }}';
+      const outPath = path.normalize('/fonts/font.ttf');
+      const expected = `.foo { @font-face { src: url(..${outPath}); }}`;
 
       assert.deepEqual(actual.toString(), expected);
     });
