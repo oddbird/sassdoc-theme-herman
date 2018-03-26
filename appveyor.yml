@@ -13,5 +13,10 @@ test_script:
   - node --version
   - yarn --version
   - gulp jstest
+  - nyc report --reporter=text-lcov
+  - nyc check-coverage
 
 build: off
+
+artifacts:
+  - path: jscov

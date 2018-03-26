@@ -1,7 +1,8 @@
 # [Herman][herman] [a [SassDoc][sassdoc] theme]
 
-[![CircleCI](https://circleci.com/gh/oddbird/sassdoc-theme-herman.svg?style=svg)](https://circleci.com/gh/oddbird/sassdoc-theme-herman)
-[![Coverage Status](https://coveralls.io/repos/github/oddbird/sassdoc-theme-herman/badge.svg)](https://coveralls.io/github/oddbird/sassdoc-theme-herman)
+[![CircleCI](https://circleci.com/gh/oddbird/sassdoc-theme-herman/tree/master.svg?style=svg)](https://circleci.com/gh/oddbird/sassdoc-theme-herman/tree/master)
+[![AppVeyor](https://ci.appveyor.com/api/projects/status/w02fa9k998fywntl/branch/master?svg=true)](https://ci.appveyor.com/project/jgerigmeyer/sassdoc-theme-herman)
+[![Coverage Status](https://coveralls.io/repos/github/oddbird/sassdoc-theme-herman/badge.svg?branch=master)](https://coveralls.io/github/oddbird/sassdoc-theme-herman?branch=master)
 [![Greenkeeper badge](https://badges.greenkeeper.io/oddbird/sassdoc-theme-herman.svg)](https://greenkeeper.io/)
 
 > **If it's not documented, it doesn't exist.**
