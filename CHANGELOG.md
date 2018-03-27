@@ -3,6 +3,9 @@
 
 ## Unreleased
 
+- 🐛 BUGFIX: Fix bugs in `customCSS` URL re-writing --
+  [#265](https://github.com/oddbird/sassdoc-theme-herman/issues/265),
+  [#266](https://github.com/oddbird/sassdoc-theme-herman/issues/266)
 - 🏠 INTERNAL: Upgrade dependencies
 - 🏠 INTERNAL: Run tests on Windows --
   [#270](https://github.com/oddbird/sassdoc-theme-herman/issues/270)

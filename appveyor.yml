@@ -1,8 +1,8 @@
 environment:
   matrix:
-    - nodejs_version: '6'
-    - nodejs_version: 'LTS'
-    - nodejs_version: 'Current'
+    - nodejs_version: "6"
+    - nodejs_version: "LTS"
+    - nodejs_version: "Current"
 
 install:
   - ps: Install-Product node $env:nodejs_version
@@ -12,6 +12,7 @@ test_script:
   - SET PATH=.\node_modules\.bin;%PATH%
   - node --version
   - yarn --version
-  - mocha --reporter=spec ".\test\js\*.js"
+  - mocha --timeout=10000 ".\test\js\*.js"
 
 build: off
+skip_branch_with_pr: true

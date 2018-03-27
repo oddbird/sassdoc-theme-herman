@@ -1,6 +1,7 @@
 'use strict';
 
 const assert = require('assert');
+const path = require('path');
 
 const parse = require('../../lib/utils/parse');
 
@@ -55,7 +56,7 @@ describe('parse', function() {
           family: undefined,
           formats: {
             woff: {
-              src: 'font/path.woff',
+              src: path.normalize('font/path.woff'),
               dest: 'assets/fonts/font/path.woff',
             },
           },
@@ -79,8 +80,10 @@ describe('parse', function() {
     });
 
     it('handles relative URLs', function() {
+      const srcPath = path.resolve(__dirname, 'fixtures', 'css', 'main.css');
+      const destPath = path.resolve(__dirname, 'fixtures', 'css', 'foo.png');
       const file = {
-        path: `${__dirname}/fixtures/css/main.css`,
+        path: srcPath,
         contents: '.foo { background: url("foo.png"); }',
       };
       parse.customCSS(file, this.enc, this.env);
@@ -88,11 +91,14 @@ describe('parse', function() {
       const expected = '.foo { background: url("./fixtures/css/foo.png"); }';
 
       assert.deepEqual(actual.toString(), expected);
+      assert.deepEqual(this.env.customCSSFiles, [destPath]);
     });
 
     it('handles unquoted relative URLs', function() {
+      const srcPath = path.resolve(__dirname, 'fixtures', 'css', 'main.css');
+      const destPath = path.resolve(__dirname, 'fixtures', 'css', 'foo.png');
       const file = {
-        path: `${__dirname}/fixtures/css/main.css`,
+        path: srcPath,
         contents: '.foo { background: url(foo.png); }',
       };
       parse.customCSS(file, this.enc, this.env);
@@ -100,17 +106,18 @@ describe('parse', function() {
       const expected = '.foo { background: url(./fixtures/css/foo.png); }';
 
       assert.deepEqual(actual.toString(), expected);
+      assert.deepEqual(this.env.customCSSFiles, [destPath]);
     });
 
     it('uses localFonts', function() {
       const file = {
-        path: `${__dirname}/fixtures/css/main.css`,
+        path: path.resolve(__dirname, 'fixtures', 'css', 'main.css'),
         contents: '.foo { @font-face { src: url(../../myfonts/font.ttf); }}',
       };
       const env = Object.assign(this.env, {
-        localFonts: [`${__dirname}/myfonts/font.ttf`],
+        localFonts: [path.resolve(__dirname, 'myfonts', 'font.ttf')],
         herman: {
-          fontpath: 'myfonts/',
+          fontpath: 'myfonts',
         },
       });
       parse.customCSS(file, this.enc, env);
@@ -118,6 +125,7 @@ describe('parse', function() {
       const expected = '.foo { @font-face { src: url(../fonts/font.ttf); }}';
 
       assert.deepEqual(actual.toString(), expected);
+      assert.deepEqual(env.customCSSFiles, []);
     });
 
     it('skips external URLs', function() {
@@ -134,6 +142,20 @@ describe('parse', function() {
         ' background: url(data://foo); }';
 
       assert.deepEqual(actual.toString(), expected);
+      assert.deepEqual(this.env.customCSSFiles, []);
+    });
+
+    it('skips domain-relative URLs', function() {
+      const file = {
+        path: `${__dirname}/fixtures/css/main.css`,
+        contents: '.foo { background: url(/foo); }',
+      };
+      parse.customCSS(file, this.enc, this.env);
+      const actual = file.contents;
+      const expected = '.foo { background: url(/foo); }';
+
+      assert.deepEqual(actual.toString(), expected);
+      assert.deepEqual(this.env.customCSSFiles, []);
     });
   });
 });
