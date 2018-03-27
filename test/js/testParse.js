@@ -81,7 +81,7 @@ describe('parse', function() {
 
     it('handles relative URLs', function() {
       const file = {
-        path: path.normalize(`${__dirname}/fixtures/css/main.css`),
+        path: path.resolve(__dirname, 'fixtures', 'css', 'main.css'),
         contents: '.foo { background: url("foo.png"); }',
       };
       parse.customCSS(file, this.enc, this.env);
@@ -93,7 +93,7 @@ describe('parse', function() {
 
     it('handles unquoted relative URLs', function() {
       const file = {
-        path: path.normalize(`${__dirname}/fixtures/css/main.css`),
+        path: path.resolve(__dirname, 'fixtures', 'css', 'main.css'),
         contents: '.foo { background: url(foo.png); }',
       };
       parse.customCSS(file, this.enc, this.env);
@@ -105,11 +105,11 @@ describe('parse', function() {
 
     it('uses localFonts', function() {
       const file = {
-        path: path.normalize(`${__dirname}/fixtures/css/main.css`),
+        path: path.resolve(__dirname, 'fixtures', 'css', 'main.css'),
         contents: '.foo { @font-face { src: url(../../myfonts/font.ttf); }}',
       };
       const env = Object.assign(this.env, {
-        localFonts: [path.normalize(`${__dirname}/myfonts/font.ttf`)],
+        localFonts: [path.resolve(__dirname, 'myfonts', 'font.ttf')],
         herman: {
           fontpath: path.normalize('myfonts/'),
         },
