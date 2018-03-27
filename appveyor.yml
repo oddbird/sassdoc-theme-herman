@@ -12,7 +12,7 @@ test_script:
   - SET PATH=.\node_modules\.bin;%PATH%
   - node --version
   - yarn --version
-  - mocha --reporter=spec ".\test\js\*.js"
+  - mocha ".\test\js\*.js"
 
 build: off
 skip_branch_with_pr: true
