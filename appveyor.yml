@@ -12,7 +12,7 @@ test_script:
   - SET PATH=.\node_modules\.bin;%PATH%
   - node --version
   - yarn --version
-  - mocha ".\test\js\*.js"
+  - mocha --timeout=10000 ".\test\js\*.js"
 
 build: off
 skip_branch_with_pr: true
