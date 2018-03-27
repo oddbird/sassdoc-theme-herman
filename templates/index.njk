@@ -2,10 +2,11 @@
 
 {% block main %}
   {{ project_links(package.homepage, package.repository.url) }}
-
-  <div class="text-block">
-    {{ description|safe }}
-  </div>
+  {% if description and description != '' %}
+    <div class="text-block">
+      {{ description|safe }}
+    </div>
+  {% endif %}
 {% endblock %}
 
 
