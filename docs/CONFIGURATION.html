@@ -471,7 +471,7 @@ See <a href="http://oddbird.net/herman/docs/api_json-export.html">Exporting Styl
 <li>Default: <code>[]</code></li>
 </ul>
 <p>Array of paths used to resolve <code>@import</code> declarations.
-Passed through to <a href="https://github.com/sass/node-sass/#includepaths">node-sass</a> when
+Passed through to <a href="https://github.com/sass/node-sass/#includepaths">node-sass-includepaths</a> when
 compiling <code>@example sass/scss</code> annotations.
 See our <a href="http://oddbird.net/herman/docs/demo_examples.html#compiling-sass-scss"><code>@example</code> documentation</a>.</p>
 <h3 id="sass-includes">sass.includes</h3>
@@ -487,6 +487,16 @@ Sass configuration and toolkit files
 that may be used by any example.
 It’s best to avoid files with output CSS,
 as that output will be displayed in every single Sass<span class="widont">&nbsp;</span>example.</p>
+<h3 id="sass-outputstyle">sass.outputstyle</h3>
+<ul>
+<li>Type: <code>String</code></li>
+<li>Default: <code>'expanded'</code></li>
+</ul>
+<p>Determines the output format of the final CSS
+of compiled <code>@example sass/scss</code> annotations.
+Passed through to <a href="https://github.com/sass/node-sass/#outputstyle">node-sass-outputstyle</a>.
+Accepts <code>'nested'</code>, <code>'expanded'</code>, <code>'compact'</code>, or <code>'compressed'</code>.
+See our <a href="http://oddbird.net/herman/docs/demo_examples.html#compiling-sass-scss"><code>@example</code> documentation</a>.</p>
 
   </div>
 
