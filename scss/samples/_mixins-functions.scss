@@ -1,7 +1,6 @@
 // Mixin and Function Documentation
 // ================================
 
-
 /// # SassDoc Annotations
 ///
 /// Herman supports all the core
@@ -10,7 +9,6 @@
 /// so you can see what they look like in Herman.
 ///
 /// @group demo_test-sassdoc
-
 
 // Herman Sample
 // -------------
@@ -47,11 +45,7 @@
 ///   .example::before {
 ///     content: herman-sample(1, 2);
 ///   }
-@function herman-sample(
-  $one,
-  $two: $one,
-  $three: 'three'
-) {
+@function herman-sample($one, $two: $one, $three: 'three') {
   @if (not $one) or (not $two) or (not $three) {
     @error 'Please provide values for all three parameters';
   }
@@ -59,21 +53,15 @@
   @return $one $two $three;
 }
 
-
 // Sample Alias
 // ------------
 /// This is a sample function alias.
 /// @group demo_test-sassdoc
 /// @alias herman-sample
 /// @deprecated I don't think this alias is useful anymore
-@function sample-alias(
-  $one,
-  $two: $one,
-  $three: 'three'
-) {
+@function sample-alias($one, $two: $one, $three: 'three') {
   @return herman-sample($one, $two, $three);
 }
-
 
 // Sample Alias Two
 // ----------------
@@ -81,14 +69,9 @@
 /// @group demo_test-sassdoc
 /// @alias herman-sample
 /// @deprecated Doesn't seem to work without a message
-@function sample-alias-two(
-  $one,
-  $two: $one,
-  $three: 'three'
-) {
+@function sample-alias-two($one, $two: $one, $three: 'three') {
   @return herman-sample($one, $two, $three);
 }
-
 
 /// Extra Commentary
 /// ================
@@ -109,7 +92,6 @@
 ///   }
 /// @link http://sassdoc.com/annotations/
 /// @group demo_test-sassdoc
-
 
 // Mixin with Content
 // ------------------
@@ -135,13 +117,9 @@
 ///       color: red;
 ///     }
 ///   }
-@mixin before-sample(
-  $content,
-  $list...
-) {
+@mixin before-sample($content, $list...) {
   &::before {
     content: $content;
     @content;
   }
 }
-

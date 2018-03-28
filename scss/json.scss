@@ -1,13 +1,11 @@
 // Export Sass to JSON
 // ===================
 
-
 // Import the utilities and data
 @import 'utilities';
 @import 'config/manifest';
 @import 'previews/highlight';
 @import 'samples/manifest';
-
 
 // Export to JSON
 @include herman-export;

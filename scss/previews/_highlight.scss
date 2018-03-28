@@ -4,7 +4,6 @@
 // (c) Jeremy Hull <sourdrums@gmail.com>
 // sass-lint:disable force-element-nesting, class-name-format
 
-
 // hljs colors
 // -----------
 /// Colors for code-highlighting with hljs,
@@ -20,11 +19,10 @@ $hljs-colors: (
   'hljs-yellow': #b58900,
   'hljs-orange': #cb4b16,
   'hljs-red': #dc322f,
-  'hljs-formula': #eee8d5,
+  'hljs-formula': #eee8d5
 );
 
 @include herman-add('colors', 'hljs-colors', $hljs-colors);
-
 
 .hljs-comment,
 .hljs-quote {

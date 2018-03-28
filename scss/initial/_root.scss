@@ -1,7 +1,6 @@
 // Root Typography
 // ===============
 
-
 /// # Herman Typography
 /// Initial styling for typographic elements in Herman.
 /// Some typography is also inherited from the
@@ -11,17 +10,16 @@
 /// @link http://oddbird.net/accoutrement-init/ Accoutrement-Init
 /// @group style-typography
 
-
 /// The root typographic styles provide a default font,
 /// responsive font-size, fallback font-size, and line-height.
 /// @group style-typography
 :root {
+  // sass-lint:disable-block no-duplicate-properties
   @include font-family('sans');
   font-size: size('root');
-  font-size: size('responsive'); //sass-lint:disable-line no-duplicate-properties
+  font-size: size('responsive');
   line-height: ratio('herman');
 }
-
 
 // Selection
 // ---------
@@ -30,7 +28,6 @@
 ::selection {
   background-color: color('callout');
 }
-
 
 // Mark
 // ----
@@ -41,7 +38,6 @@ mark {
   display: inline-block;
   padding: 0 size('quarter-shim');
 }
-
 
 // Links
 // -----
@@ -64,7 +60,6 @@ mark {
   }
 }
 
-
 // Pre
 // ---
 /// Pre-formatted blocks use our monospace `code` font-stack,
@@ -74,7 +69,6 @@ pre {
   @include font-family('code');
   font-size: size('code');
 }
-
 
 // Code
 // ----
@@ -94,7 +88,6 @@ code {
   }
 }
 
-
 // Is Hidden
 // ---------
 /// Text that is provided for screen-reader accessibility only,
@@ -103,5 +96,3 @@ code {
 .is-hidden {
   @include is-hidden;
 }
-
-

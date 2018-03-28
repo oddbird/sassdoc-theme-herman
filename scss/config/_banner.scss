@@ -4,7 +4,6 @@
 /// Styles related to the top banner in generated Herman docs.
 /// @group style-banner
 
-
 // Banner Arrow
 // ------------
 /// Apply a bottom-border with centered down-arrow triangle,
@@ -26,10 +25,7 @@
 ///   <header data-region="banner">
 ///     Hello World
 ///   </header>
-@mixin banner-arrow(
-  $color: 'theme-dark',
-  $background: 'background'
-) {
+@mixin banner-arrow($color: 'theme-dark', $background: 'background') {
   border-bottom: size('arrow-border') solid color($color);
   box-shadow: 0 2px 2px color('shadow');
   display: block;

@@ -20,3 +20,6 @@ npm-debug.log*
 test/js/dest/
 yarn-debug.log*
 yarn-error.log*
+
+dist/webpack/app_styles.min.js
+dist/webpack/styleguide_json*

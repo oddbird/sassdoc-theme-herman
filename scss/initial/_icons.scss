@@ -1,12 +1,10 @@
 // Icons
 // =====
 
-
 /// # Herman Icons
 /// Herman doesn't use very many icons internally…
 /// @icons assets/svg/
 /// @group style-icons
-
 
 /// ## macro `icon()`
 /// Icons should be added to the html using our
@@ -28,7 +26,6 @@
 ///   {% import 'utility.macros.njk' as utility %}
 ///   {{ utility.icon('menu', size='nav-icon') }}
 
-
 // Data-Icon
 // ---------
 /// Icons inherit the color of their surroundings,
@@ -39,7 +36,6 @@
   fill: currentColor;
 }
 
-
 // Icon-Size: Nav
 // --------------
 /// Used for the menu-bar icon.
@@ -47,7 +43,6 @@
 [data-icon-size='nav-icon'] {
   @include square('nav-icon');
 }
-
 
 // Icon-Size: Footer Logo
 // ----------------------

@@ -1,7 +1,6 @@
 // Preview Layouts
 // ===============
 
-
 // Color Preview
 // -------------
 
@@ -32,7 +31,6 @@
   }
 }
 
-
 // Color Swatch
 // ------------
 
@@ -49,11 +47,11 @@
 }
 
 .transparency-grid {
-  background: url('data:image/svg+xml;utf8,<svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 20 20"><rect width="10" height="10"/><rect x="10" y="10" width="10" height="10"/></svg>') center repeat scroll;
+  background: url('data:image/svg+xml;utf8,<svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 20 20"><rect width="10" height="10"/><rect x="10" y="10" width="10" height="10"/></svg>')
+    center repeat scroll;
   background-size: 0.5em 0.5em;
   left: 50%;
 }
-
 
 // Color Info
 // ----------

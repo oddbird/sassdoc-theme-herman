@@ -1,7 +1,6 @@
 // Json Encoding
 // =============
 
-
 // JSON Ecode
 // ----------
 /// Encode any Sass value as a JSON-ready string.
@@ -28,7 +27,6 @@
   @return _herman-quote($value);
 }
 
-
 // Encode List
 // -----------
 /// Encode each item in a Sass list,
@@ -38,9 +36,7 @@
 ///
 /// @param {list} $list -
 ///   List to be encoded for JSON exporting
-@function _herman-encode-list(
-  $list
-) {
+@function _herman-encode-list($list) {
   $str: '';
 
   @each $item in $list {
@@ -51,7 +47,6 @@
   @return '[#{$str}]';
 }
 
-
 // Encode Map
 // ----------
 /// Encode each key/value in a Sass map,
@@ -61,9 +56,7 @@
 ///
 /// @param {map} $map -
 ///   Map to be encoded for JSON exporting
-@function _herman-encode-map(
-  $map
-) {
+@function _herman-encode-map($map) {
   $str: '';
 
   @each $key, $value in $map {
@@ -74,7 +67,6 @@
   @return '{#{$str}}';
 }
 
-
 // Encode Number
 // -------------
 /// Encode a number for JSON,
@@ -84,16 +76,13 @@
 ///
 /// @param {number} $number -
 ///   Number to be encoded for JSON exporting
-@function _herman-encode-number(
-  $number
-) {
+@function _herman-encode-number($number) {
   @if unitless($number) {
     @return inspect($number);
   }
 
   @return _herman-quote($number);
 }
-
 
 // Quote
 // -----
@@ -104,14 +93,11 @@
 ///
 /// @param {*} $value -
 ///   The value to inspect and quote.
-@function _herman-quote(
-  $value
-) {
+@function _herman-quote($value) {
   $value: '#{$value}';
   $value: _herman-escape-quotes($value);
   @return '"#{$value}"';
 }
-
 
 // Escape Quotes
 // -------------
@@ -122,9 +108,7 @@
 ///
 /// @param {string} $string -
 ///   The string to be manipulated
-@function _herman-escape-quotes(
-  $string
-) {
+@function _herman-escape-quotes($string) {
   $return: $string;
   $old: '"';
   $new: '\\"';

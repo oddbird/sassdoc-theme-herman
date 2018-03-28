@@ -1,10 +1,8 @@
 // Accoutrement Utils
 // ==================
 
-
 /// # Herman Config: Private Helpers
 /// @group config-utils
-
 
 // Config
 // ------
@@ -38,11 +36,7 @@
 ///   );
 ///
 ///   @include config('colors', 'brand-colors', $brand-colors);
-@mixin config(
-  $type,
-  $name,
-  $value
-) {
+@mixin config($type, $name, $value) {
   @if index('color' 'colors', $type) {
     @include add-colors($value);
     @include herman-add($type, $name, $value, 'color');

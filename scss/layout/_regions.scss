@@ -6,7 +6,6 @@
 /// as well as the `app` and `container` wrapping regions.
 /// @group style-regions
 
-
 // General
 // -------
 /// All regions are full-width by default.
@@ -15,7 +14,6 @@
 [data-region] {
   width: 100%;
 }
-
 
 // App
 // ---
@@ -30,7 +28,6 @@
   min-height: 100vh;
   padding: 0;
 }
-
 
 // Container
 // ---------

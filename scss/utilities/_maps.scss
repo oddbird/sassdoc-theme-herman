@@ -1,7 +1,6 @@
 // Map Utilities
 // =============
 
-
 // Herman Add
 // ----------
 /// Add a map of colors, fonts, sizes, ratios, etc
@@ -33,12 +32,7 @@
 ///   );
 ///   @include herman-add('colors', 'brand-colors', $brand-colors, 'color');
 ///   /* #{$herman} */
-@mixin herman-add(
-  $type,
-  $key,
-  $map,
-  $args...
-) {
+@mixin herman-add($type, $key, $map, $args...) {
   // pluralize type
   $type: map-get($_herman-plural-types, $type) or $type;
 
@@ -55,7 +49,6 @@
   // Merge nested map back into $herman
   $herman: map-merge($herman, $nested) !global;
 }
-
 
 // Map Compile
 // -----------
@@ -86,11 +79,7 @@
 ///     'light-gray': 'brand-blue' ('tint': 80%, 'desaturate': 80%),
 ///   );
 ///   /* #{herman-map-compile($brand-colors, 'color')} */
-@function herman-map-compile(
-  $map,
-  $function,
-  $args...
-) {
+@function herman-map-compile($map, $function, $args...) {
   $output: ();
 
   @each $key, $value in $map {

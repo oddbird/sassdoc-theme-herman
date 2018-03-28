@@ -470,9 +470,10 @@ Some typography is also inherited from the
       
       
       <pre class="hljs-pre"><code class="lang-scss">:root {
+  // sass-lint:disable-block no-duplicate-properties
   @include font-family(&#39;sans&#39;);
   font-size: size(&#39;root&#39;);
-  font-size: size(&#39;responsive&#39;); //sass-lint:disable-line no-duplicate-properties
+  font-size: size(&#39;responsive&#39;);
   line-height: ratio(&#39;herman&#39;);
 }</code></pre>
     </div>
@@ -2092,7 +2093,8 @@ headings, blockquotes, lists, code, emphasis,<span class="widont">&nbsp;</span>e
     </div>
   </div>
 
-  <script type="text/javascript" src="assets/webpack/vendor.min.js"></script>
+  <script type="text/javascript" src="assets/webpack/runtime.min.js"></script>
+  <script type="text/javascript" src="assets/webpack/common.min.js"></script>
   <script type="text/javascript" src="assets/webpack/app.min.js"></script>
   
 </body>

@@ -6,7 +6,6 @@ process.env.NODE_ENV = 'production';
 process.env.BROWSERSLIST_CONFIG = './.browserslistrc';
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const MinifyPlugin = require('babel-minify-webpack-plugin');
 const path = require('path');
 const sassdoc = require('sassdoc');
 const webpack = require('webpack');
@@ -138,18 +137,12 @@ SassdocPlugin.prototype.apply = compiler => {
 };
 
 module.exports = {
+  mode: process.env.NODE_ENV || 'development',
   // context for entry points
   context: path.join(__dirname, 'assets', 'js'),
   // define all the entry point bundles
   entry: {
     app: './init',
-    vendor: [
-      'jquery',
-      'srcdoc-polyfill',
-      'vendor/highlight',
-      'matchmedia-polyfill',
-      'matchmedia-polyfill/matchMedia.addListener',
-    ],
     search: './search',
     app_styles: ['main.scss'],
     styleguide_json: ['json.scss'],
@@ -170,6 +163,20 @@ module.exports = {
   resolveLoader: {
     alias: { sassjson: path.join(__dirname, 'sass-json-loader') },
   },
+  optimization: {
+    runtimeChunk: 'single',
+    splitChunks: {
+      cacheGroups: {
+        // pull common code into common bundle
+        common: {
+          name: 'common',
+          chunks: 'initial',
+          minChunks: 2,
+          minSize: 0,
+        },
+      },
+    },
+  },
   plugins: [
     // ignore flycheck and Emacs special files when watching
     new webpack.WatchIgnorePlugin([/flycheck_/, /\.#/, /#$/]),
@@ -180,28 +187,10 @@ module.exports = {
       'window.jQuery': 'jquery',
       'root.jQuery': 'jquery',
     }),
-    // pull common code out of other bundles
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'app',
-      minChunks: Infinity,
-      chunks: ['search'],
-    }),
-    // pull webpack runtime and common vendor code out of all bundles
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      minChunks: Infinity,
-    }),
-    // Enable scope hoisting
-    new webpack.optimize.ModuleConcatenationPlugin(),
     // pull all CSS out of JS bundles
     new ExtractTextPlugin({
       filename: styleOutput,
-      allChunks: true,
     }),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('production'),
-    }),
-    new MinifyPlugin(),
     new SassdocPlugin(),
   ],
   module: {
@@ -229,23 +218,20 @@ module.exports = {
             {
               loader: 'css-loader',
               options: {
-                sourceMap: true,
                 minimize: true,
                 url: false,
               },
             },
             {
               loader: 'postcss-loader',
-              options: { sourceMap: true },
             },
             {
               loader: 'sass-loader',
-              options: { sourceMap: true },
             },
           ],
         }),
       },
     ],
   },
-  devtool: 'cheap-module-source-map',
+  devtool: false,
 };

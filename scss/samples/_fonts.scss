@@ -1,7 +1,6 @@
 // Font Specimen Samples
 // =====================
 
-
 /// # Documenting fonts
 ///
 /// Herman provides custom annotations
@@ -38,7 +37,6 @@
 /// Let's look at a few examples…
 ///
 /// @group demo_fonts
-
 
 /// ## Displaying CDN-hosted webfonts
 ///
@@ -84,9 +82,8 @@
 $demo-cdn: (
   'name': 'Source Code Pro',
   'source': 'https://fonts.google.com/specimen/Source+Code+Pro',
-  'stack': ('Consolas', 'Menlo', 'Courier New', monospace, sans-serif),
+  'stack': ('Consolas', 'Menlo', 'Courier New', monospace, sans-serif)
 );
-
 
 /// ## Displaying local fonts
 ///
@@ -123,17 +120,17 @@ $demo-cdn: (
 /// @group demo_fonts
 $demo-local: (
   'name': 'rockingham',
-  'normal': (
-    'path': 'rockingham/rockingham-regular-webfont',
-    'local': 'rockingham-regular-webfont',
-  ),
+  'normal':
+    (
+      'path': 'rockingham/rockingham-regular-webfont',
+      'local': 'rockingham-regular-webfont'
+    ),
   'bold': 'rockingham/rockingham-bold-webfont',
   'italic': 'rockingham/rockingham-italic-webfont',
   'bold' 'italic': 'rockingham/rockingham-bolditalic-webfont',
   'stack': 'fantasy',
-  'formats': 'woff2' 'woff' 'ttf',
+  'formats': 'woff2' 'woff' 'ttf'
 );
-
 
 /// ## Add font data to $herman
 ///

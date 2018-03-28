@@ -1,7 +1,6 @@
 // Ratio Preview
 // =============
 
-
 //
 // @TODO: Add docs to block-size-table!
 //
@@ -43,7 +42,6 @@
     padding-bottom: size('shim');
   }
 }
-
 
 // Rulers
 // ------
@@ -101,25 +99,24 @@
 
 .size-bar {
   background-color: color('border');
-  background-image:
-  linear-gradient(
-    to left,
-    color('underline') 1px,
-    transparent 1px,
-    transparent
-  ),
-  linear-gradient(
-    to left,
-    color('border-light' ('rgba': 0.5)) 1px,
-    transparent 1px,
-    transparent
-  ),
-  linear-gradient(
-    to left,
-    color('border-light' ('rgba': 0.25)) 1px,
-    transparent 1px,
-    transparent
-  );
+  background-image: linear-gradient(
+      to left,
+      color('underline') 1px,
+      transparent 1px,
+      transparent
+    ),
+    linear-gradient(
+      to left,
+      color('border-light' ('rgba': 0.5)) 1px,
+      transparent 1px,
+      transparent
+    ),
+    linear-gradient(
+      to left,
+      color('border-light' ('rgba': 0.25)) 1px,
+      transparent 1px,
+      transparent
+    );
   background-position: 0 100%;
   background-repeat: repeat-x;
   background-size: 100px 75%, 10px 50%, 5px 25%;
@@ -130,7 +127,6 @@
 .size-text {
   line-height: 1.2;
 }
-
 
 // Ratios
 // ------
