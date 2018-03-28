@@ -12,7 +12,6 @@
 .nyc_output/
 .sass-cache/
 .yarn-integrity
-dist/
 docs/assets/
 docs/search-data.json
 jscov/
