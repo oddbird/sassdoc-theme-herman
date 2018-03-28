@@ -21,7 +21,7 @@
     "lunr": "^2.1.6",
     "markdown-it": "^8.4.1",
     "markdown-it-named-headers": "^0.0.4",
-    "node-sass": "4.7.2",
+    "node-sass": "^4.8.3",
     "nunjucks": "^2.5.2",
     "sassdoc-extras": "^2.4.1",
     "strip-indent": "^2.0.0",
@@ -98,7 +98,6 @@
   "resolutions": {
     "browserslist": ">=2.4.0",
     "cdocparser": "^0.15.0",
-    "node-sass": "4.7.2",
     "nunjucks": "^2.5.2"
   },
   "scripts": {

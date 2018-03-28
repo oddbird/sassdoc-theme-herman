@@ -81,6 +81,11 @@
 ///   /* #{herman-map-compile($brand-colors, 'color')} */
 @function herman-map-compile($map, $function, $args...) {
   $output: ();
+  $type: type-of($function);
+
+  @if ($type == 'string' and function-exists('get-function')) {
+    $function: get-function($function);
+  }
 
   @each $key, $value in $map {
     @if length($args) > 0 {
