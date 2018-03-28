@@ -1,7 +1,6 @@
 // JSON Export Utilities
 // ---------------------
 
-
 /// # Exporting Styles to JSON
 ///
 /// While many UX patterns will be rendered as HTML components,
@@ -37,7 +36,6 @@
 ///   );
 ///
 ///   @include herman-export($herman);
-
 
 // Herman
 // ------
@@ -195,7 +193,6 @@
 ///   );
 $herman: () !default;
 
-
 // Herman Export
 // -------------
 /// Encode a Sass map as a JSON-ready string,
@@ -209,9 +206,7 @@ $herman: () !default;
 /// @example scss
 ///   // Export to JSON
 ///   @include herman-export;
-@mixin herman-export(
-  $map: $herman
-) {
+@mixin herman-export($map: $herman) {
   $json: _herman-encode($map);
   /*! json-encode: #{$json} */
 }

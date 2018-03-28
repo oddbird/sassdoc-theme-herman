@@ -1,7 +1,6 @@
 // Ratio & Size Samples
 // ====================
 
-
 /// # Documenting ratios & sizes
 ///
 /// Herman provides custom annotations
@@ -31,11 +30,9 @@
 ///
 /// @group demo_sizes
 
-
 $line-height-ratio: 1.4;
 $root: 18px;
 $xlarge: 3rem;
-
 
 /// ## Preview ratios
 ///
@@ -75,10 +72,7 @@ $xlarge: 3rem;
 ///
 /// @ratios
 /// @group demo_sizes
-$demo-ratios: (
-  'line-height': $line-height-ratio
-);
-
+$demo-ratios: ('line-height': $line-height-ratio);
 
 /// ## Preview sizes
 ///
@@ -130,14 +124,12 @@ $demo-sizes: (
   'xlarge': $xlarge
 );
 
-
 /// ### Text Sizes
 /// ```scss
 /// /// @sizes demo-sizes {text}
 /// ```
 /// @sizes demo-sizes {text}
 /// @group demo_sizes
-
 
 /// ### Rulers
 /// ```scss
@@ -146,7 +138,6 @@ $demo-sizes: (
 /// @sizes demo-sizes {ruler}
 /// @group demo_sizes
 
-
 /// ### Large Rulers
 /// ```scss
 /// /// @sizes demo-sizes {ruler-large}
@@ -154,14 +145,12 @@ $demo-sizes: (
 /// @sizes demo-sizes {ruler-large}
 /// @group demo_sizes
 
-
 /// ### Name/Value Only
 /// ```scss
 /// /// @sizes demo-sizes {output-only}
 /// ```
 /// @sizes demo-sizes {output-only}
 /// @group demo_sizes
-
 
 /// ## Add ratio/size data to $herman
 ///

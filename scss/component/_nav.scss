@@ -3,7 +3,6 @@
 /// # Herman Navigation Components
 /// @group component-nav
 
-
 // Nav Subsections
 // ---------------
 /// Group the main navigation into sub-sections…
@@ -22,7 +21,6 @@
   }
 }
 
-
 // Nav Home
 // --------
 /// There is a home link at the top of the navigation…
@@ -32,7 +30,6 @@
   font-weight: bold;
   margin-top: size('gutter-plus');
 }
-
 
 // Nav Titles
 // ----------
@@ -45,7 +42,6 @@
   padding-top: size('quarter-shim');
 }
 
-
 // Nav Items
 // ---------
 /// Each list-item in the navigation menus…
@@ -54,7 +50,6 @@
   list-style: none;
   margin: size('half-shim') 0;
 }
-
 
 // Nav Links
 // ---------

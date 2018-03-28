@@ -460,8 +460,6 @@ see the “<a href="demo_colors.html">Documenting Colors</a>” page.</p>
     
     
   
-
-  
     <div class="code-block">
       
         <div class="code-header">
@@ -478,7 +476,7 @@ see the “<a href="demo_colors.html">Documenting Colors</a>” page.</p>
       <pre class="hljs-pre"><code class="lang-scss">$brand-colors: (
   &#39;brand-orange&#39;: hsl(24, 100%, 39%),
   &#39;brand-blue&#39;: hsl(195, 85%, 35%),
-  &#39;brand-pink&#39;: hsl(330, 85%, 48%) (&#39;shade&#39;: 25%),
+  &#39;brand-pink&#39;: hsl(330, 85%, 48%) (&#39;shade&#39;: 25%)
 );</code></pre>
     </div>
   
@@ -759,8 +757,6 @@ followed by an optional map of adjustments
     
     
   
-
-  
     <div class="code-block">
       
         <div class="code-header">
@@ -777,7 +773,7 @@ followed by an optional map of adjustments
       <pre class="hljs-pre"><code class="lang-scss">$neutral-colors: (
   &#39;light-gray&#39;: &#39;brand-blue&#39; (&#39;tint&#39;: 80%, &#39;desaturate&#39;: 80%),
   &#39;gray&#39;: &#39;brand-blue&#39; (&#39;desaturate&#39;: 80%),
-  &#39;black&#39;: &#39;brand-blue&#39; (&#39;shade&#39;: 30%, &#39;desaturate&#39;: 80%),
+  &#39;black&#39;: &#39;brand-blue&#39; (&#39;shade&#39;: 30%, &#39;desaturate&#39;: 80%)
 );</code></pre>
     </div>
   
@@ -997,8 +993,6 @@ before they are used in styling patterns and<span class="widont">&nbsp;</span>co
     
     
   
-
-  
     <div class="code-block">
       
         <div class="code-header">
@@ -1015,24 +1009,19 @@ before they are used in styling patterns and<span class="widont">&nbsp;</span>co
       <pre class="hljs-pre"><code class="lang-scss">$theme-colors: (
   &#39;theme-dark&#39;: &#39;brand-blue&#39;,
   &#39;theme-light&#39;: &#39;brand-blue&#39; (&#39;tint&#39;: 80%),
-
   &#39;background&#39;: #fff,
   &#39;text&#39;: &#39;black&#39;,
   &#39;text-light&#39;: &#39;gray&#39;,
-
   &#39;action&#39;: &#39;brand-pink&#39;,
   &#39;focus&#39;: &#39;theme-dark&#39;,
   &#39;underline&#39;: &#39;action&#39; (&#39;tint&#39;: 75%),
-
   &#39;border&#39;: &#39;gray&#39;,
   &#39;border-light&#39;: &#39;light-gray&#39;,
   &#39;shadow&#39;: &#39;gray&#39; (&#39;rgba&#39;: 0.5),
-
   &#39;callout&#39;: &#39;theme-light&#39;,
   &#39;slight&#39;: &#39;callout&#39; (&#39;tint&#39;: 90%),
-
   &#39;code&#39;: &#39;theme-dark&#39;,
-  &#39;code-shadow&#39;: &#39;code&#39; (rgba: 0.2),
+  &#39;code-shadow&#39;: &#39;code&#39; (rgba: 0.2)
 );</code></pre>
     </div>
   
@@ -1486,8 +1475,6 @@ in our pattern/component<span class="widont">&nbsp;</span>styles.</p>
     
     
   
-
-  
     <div class="code-block">
       
         <div class="code-header">
@@ -1503,7 +1490,7 @@ in our pattern/component<span class="widont">&nbsp;</span>styles.</p>
       
       <pre class="hljs-pre"><code class="lang-scss">$system-colors: (
   &#39;contrast-light&#39;: &#39;background&#39;,
-  &#39;contrast-dark&#39;: &#39;text&#39;,
+  &#39;contrast-dark&#39;: &#39;text&#39;
 );</code></pre>
     </div>
   
@@ -1653,7 +1640,8 @@ to calculate contrast<span class="widont">&nbsp;</span>ratios.</p>
     </div>
   </div>
 
-  <script type="text/javascript" src="assets/webpack/vendor.min.js"></script>
+  <script type="text/javascript" src="assets/webpack/runtime.min.js"></script>
+  <script type="text/javascript" src="assets/webpack/common.min.js"></script>
   <script type="text/javascript" src="assets/webpack/app.min.js"></script>
   
 </body>

@@ -143,16 +143,28 @@ const sasslintTask = function(src, failOnError, shouldLog) {
   return stream;
 };
 
-gulp.task('prettier', () => prettierTask(paths.ALL_JS));
+gulp.task('prettier-js', () => prettierTask(paths.ALL_JS));
+gulp.task('prettier-scss', () =>
+  prettierTask(
+    paths.SASS.concat([
+      '!static/sass/config/_color.scss',
+      '!static/sass/config/_scale.scss',
+    ])
+  )
+);
+gulp.task('prettier', gulp.parallel('prettier-js', 'prettier-scss'));
 
 gulp.task(
   'eslint',
-  gulp.series('prettier', () => eslintTask(paths.ALL_JS, true))
+  gulp.series('prettier-js', () => eslintTask(paths.ALL_JS, true))
 );
 
 gulp.task('eslint-nofail', () => eslintTask(paths.ALL_JS));
 
-gulp.task('sasslint', () => sasslintTask(paths.SASS, true));
+gulp.task(
+  'sasslint',
+  gulp.series('prettier-scss', () => sasslintTask(paths.SASS, true))
+);
 
 gulp.task('sasslint-nofail', () => sasslintTask(paths.SASS));
 
@@ -226,8 +238,8 @@ gulp.task('clienttest-watch', cb => {
     configFile: path.join(__dirname, 'karma.conf.js'),
     autoWatch: true,
     singleRun: false,
-    coverageReporter: {
-      reporters: [{ type: 'html', subdir: '.' }, { type: 'text-summary' }],
+    coverageIstanbulReporter: {
+      reports: ['html', 'text-summary'],
     },
   }).start();
   cb();
@@ -342,9 +354,16 @@ gulp.task(
       // run sass tests on changes
       gulp.watch(paths.SASS, gulp.parallel('sasstest'));
 
-      // lint all scss when rules change
+      // lint all code when rules change
       gulp.watch('**/.sass-lint.yml', gulp.parallel('sasslint-nofail'));
       gulp.watch('**/.eslintrc.yml', gulp.parallel('eslint-nofail'));
+
+      // lint js on changes
+      gulp.watch(paths.ALL_JS).on('all', (event, filepath) => {
+        if (event === 'add' || event === 'change') {
+          eslintTask(filepath, false, true);
+        }
+      });
 
       cb();
     },

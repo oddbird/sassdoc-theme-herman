@@ -5,12 +5,15 @@
 process.env.BABEL_ENV = 'test';
 
 const extend = require('extend');
+const path = require('path');
 const webpack = require('webpack');
 // Use extend instead of Object.assign to do a deep merge,
 // because we're modifying nested properties on the new object.
 const webpackConf = extend(true, {}, require('./webpack.config.js'));
 
 Reflect.deleteProperty(webpackConf, 'entry');
+webpackConf.optimization = {};
+webpackConf.devtool = 'cheap-module-inline-source-map';
 webpackConf.plugins = [
   new webpack.WatchIgnorePlugin([/flycheck_/, /\.#/, /#$/]),
   new webpack.ProvidePlugin({
@@ -21,6 +24,21 @@ webpackConf.plugins = [
   }),
   new webpack.LoaderOptionsPlugin({ debug: true }),
 ];
+
+// Instrument source JS with Istanbul
+webpackConf.module.rules.push({
+  test: /assets\/js\/.*\.js$/,
+  exclude: /(node_modules|vendor)/,
+  enforce: 'post',
+  use: [
+    {
+      loader: 'istanbul-instrumenter-loader',
+      options: {
+        esModules: true,
+      },
+    },
+  ],
+});
 
 module.exports = config => {
   config.set({
@@ -48,7 +66,7 @@ module.exports = config => {
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['dots', 'mocha', 'coverage', 'junit'],
+    reporters: ['dots', 'mocha', 'coverage-istanbul', 'junit'],
 
     // reporter options
     mochaReporter: {
@@ -56,20 +74,23 @@ module.exports = config => {
       showDiff: true,
     },
 
-    coverageReporter: {
-      dir: 'jscov/client/',
-      reporters: [
-        { type: 'html', subdir: '.' },
-        { type: 'json', subdir: '.' },
-        { type: 'text' },
-      ],
-      instrumenterOptions: { istanbul: { noCompact: true } },
+    coverageIstanbulReporter: {
+      dir: path.join(__dirname, 'jscov', 'client'),
+      reports: ['html', 'json', 'text'],
+      'report-config': {
+        html: { subdir: '.' },
+        json: { subdir: '.' },
+      },
+      fixWebpackSourcePaths: true,
     },
 
     // results will be saved as $outputDir/$browserName.xml
     junitReporter: { outputDir: 'jscov/client/' },
 
-    webpackMiddleware: { noInfo: true },
+    webpackMiddleware: {
+      logLevel: 'error',
+      stats: 'errors-only',
+    },
 
     // web server port
     port: 9876,
@@ -80,7 +101,7 @@ module.exports = config => {
     // level of logging
     // possible values: config.LOG_DISABLE, config.LOG_ERROR, config.LOG_WARN,
     // config.LOG_INFO, config.LOG_DEBUG
-    logLevel: 'WARN',
+    logLevel: config.LOG_ERROR,
 
     // enable/disable watching file and executing tests whenever a file changes
     autoWatch: false,

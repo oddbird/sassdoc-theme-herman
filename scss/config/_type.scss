@@ -1,7 +1,6 @@
 // Typography Config
 // =================
 
-
 /// ## macro `link_if()`
 /// This Nunjucks utility macro returns either
 /// an anchor tag, or span, depending on
@@ -23,7 +22,6 @@
 ///   {{ utility.link_if(content='stacy', url='#', attrs={'data-sassdoc': 'font-name'} ) }}
 ///   {{ utility.link_if(content='not stacy', url=none) }}
 
-
 // Link
 // ----
 /// Shortcut for `link` and `visited` pseudo-classes.
@@ -36,7 +34,6 @@
 ///   }
 $link: '&:link, &:visited';
 
-
 // Focus
 // -----
 /// Shortcut for `hover`, `focus`, and `active` pseudo-classes.
@@ -48,7 +45,6 @@ $link: '&:link, &:visited';
 ///     }
 ///   }
 $focus: '&:hover, &:focus, &:active';
-
 
 // Invert Colors
 // -------------

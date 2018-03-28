@@ -299,6 +299,10 @@
 <ul>
 <li>🚀 NEW: Add <code>sass.outputStyle</code> option (default: <code>expanded</code>) –
 <a href="https://github.com/oddbird/sassdoc-theme-herman/issues/263">#263</a></li>
+<li>🐛 BUGFIX: Fix bug if annotations try to access missing <code>env.herman</code> –
+<a href="https://github.com/oddbird/sassdoc-theme-herman/issues/273">#273</a></li>
+<li>🐛 BUGFIX: Fix bug displaying tabs in <code>&lt;code&gt;</code> blocks –
+<a href="https://github.com/oddbird/sassdoc-theme-herman/issues/271">#271</a></li>
 <li>🐛 BUGFIX: Fix bugs in <code>customCSS</code> URL re-writing –
 <a href="https://github.com/oddbird/sassdoc-theme-herman/issues/265">#265</a>,
 <a href="https://github.com/oddbird/sassdoc-theme-herman/issues/266">#266</a></li>
@@ -780,7 +784,8 @@ determining the type of preview to display
     </div>
   </div>
 
-  <script type="text/javascript" src="assets/webpack/vendor.min.js"></script>
+  <script type="text/javascript" src="assets/webpack/runtime.min.js"></script>
+  <script type="text/javascript" src="assets/webpack/common.min.js"></script>
   <script type="text/javascript" src="assets/webpack/app.min.js"></script>
   
 </body>

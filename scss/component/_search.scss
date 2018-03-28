@@ -1,26 +1,21 @@
 // Search
 // ======
 
-
 .search-heading {
   font-size: size('h1');
 }
-
 
 .search-term {
   @include font-family('code');
 }
 
-
 .search-results {
   list-style: none;
 }
 
-
 .search-result {
   margin: size('flex-gutter') 0;
 }
-
 
 [data-result-field='contents'] {
   color: color('text-light');

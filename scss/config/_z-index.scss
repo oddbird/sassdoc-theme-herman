@@ -1,7 +1,6 @@
 // Z-Index
 // =======
 
-
 /// List of named z-index layers for Herman's layout.
 /// The order they are defined
 /// will be the integer they are assigned.
@@ -11,5 +10,5 @@
 $z-index: (
   'main',
   'sidebar',
-  'banner',
+  'banner'
 );

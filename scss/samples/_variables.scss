@@ -1,7 +1,6 @@
 // Sample Variable Documentation
 // =============================
 
-
 // Private
 // -------
 /// Private variables will display unless you set `access: ['public']`
@@ -11,7 +10,6 @@
 /// @type *
 $private: 'for internal use only';
 
-
 // Basic Value
 // -----------
 /// The basics for documenting your average non-map variable.
@@ -19,7 +17,6 @@ $private: 'for internal use only';
 /// @type *
 /// @requires $private
 $basic-value: if(not 'social', $private, 'hello world');
-
 
 // Map Value
 // ---------
@@ -36,5 +33,5 @@ $basic-value: if(not 'social', $private, 'hello world');
 ///   What to say in the evening before bed
 $map-value: (
   'morning': $basic-value,
-  'evening': $private,
+  'evening': $private
 );

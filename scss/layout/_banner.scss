@@ -1,7 +1,6 @@
 // Banner Styles
 // =============
 
-
 // Banner Region
 // -------------
 /// Layout styles for Herman's top-banner region.
@@ -26,7 +25,6 @@
   padding: size('shim');
 }
 
-
 // Project Title
 // -------------
 /// Used for the top-banner project title,
@@ -44,7 +42,6 @@
   margin-left: auto;
   margin-right: auto;
 }
-
 
 // Project Name
 // ------------
@@ -64,7 +61,6 @@
   }
 }
 
-
 // Project Title
 // -------------
 /// Less prominent text for the top-banner project version.
@@ -77,7 +73,6 @@
   color: color('text-light');
   font-size: size('h3');
 }
-
 
 // Nav Toggle
 // ----------
@@ -95,7 +90,7 @@
 
   @include above('page-break') {
     padding-left: size('shim');
-    padding-right:  size('shim');
+    padding-right: size('shim');
   }
 
   @include above('nav-break') {
