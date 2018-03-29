@@ -54,9 +54,9 @@ $brand-colors: (
 /// @colors
 /// @group config-colors
 $neutral-colors: (
-  'light-gray': 'brand-blue' ('tint': 80%, 'desaturate': 80%),
-  'gray': 'brand-blue' ('desaturate': 80%),
-  'black': 'brand-blue' ('shade': 30%, 'desaturate': 80%)
+  'light-gray': 'brand-blue' ('tint': 80%, get-function('desaturate'): 80%),
+  'gray': 'brand-blue' (get-function('desaturate'): 80%),
+  'black': 'brand-blue' ('shade': 30%, get-function('desaturate'): 80%)
 );
 
 @include config('colors', 'neutral-colors', $neutral-colors);
@@ -83,11 +83,11 @@ $theme-colors: (
   'underline': 'action' ('tint': 75%),
   'border': 'gray',
   'border-light': 'light-gray',
-  'shadow': 'gray' ('rgba': 0.5),
+  'shadow': 'gray' (get-function('rgba'): 0.5),
   'callout': 'theme-light',
   'slight': 'callout' ('tint': 90%),
   'code': 'theme-dark',
-  'code-shadow': 'code' (rgba: 0.2)
+  'code-shadow': 'code' (get-function('rgba'): 0.2)
 );
 
 @include config('colors', 'theme-colors', $theme-colors);

@@ -1459,9 +1459,9 @@ and any additional arguments for the<span class="widont">&nbsp;</span>function</
       
       <pre class="hljs-pre"><code class="lang-scss">$brand-colors: (
   &#39;brand-blue&#39;: hsl(195, 85%, 35%),
-  &#39;light-gray&#39;: &#39;brand-blue&#39; (&#39;tint&#39;: 80%, &#39;desaturate&#39;: 80%),
+  &#39;light-gray&#39;: &#39;brand-blue&#39; (&#39;tint&#39;: 80%, get-function(&#39;desaturate&#39;): 80%),
 );
-@include herman-add(&#39;colors&#39;, &#39;brand-colors&#39;, $brand-colors, &#39;color&#39;);
+@include herman-add(&#39;colors&#39;, &#39;brand-colors&#39;, $brand-colors, get-function(&#39;color&#39;));
 /* #{$herman} */</code></pre>
     </div>
   
@@ -1985,9 +1985,9 @@ and converted to json-ready<span class="widont">&nbsp;</span>strings</p>
       <pre class="hljs-pre"><code class="lang-scss">$brand-colors: (
   &#39;brand-orange&#39;: hsl(24, 100%, 39%),
   &#39;brand-blue&#39;: hsl(195, 85%, 35%),
-  &#39;light-gray&#39;: &#39;brand-blue&#39; (&#39;tint&#39;: 80%, &#39;desaturate&#39;: 80%),
+  &#39;light-gray&#39;: &#39;brand-blue&#39; (&#39;tint&#39;: 80%, get-function(&#39;desaturate&#39;): 80%),
 );
-/* #{herman-map-compile($brand-colors, &#39;color&#39;)} */</code></pre>
+/* #{herman-map-compile($brand-colors, get-function(&#39;color&#39;))} */</code></pre>
     </div>
   
 

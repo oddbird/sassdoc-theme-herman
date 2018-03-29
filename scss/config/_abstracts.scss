@@ -39,13 +39,13 @@
 @mixin config($type, $name, $value) {
   @if index('color' 'colors', $type) {
     @include add-colors($value);
-    @include herman-add($type, $name, $value, 'color');
+    @include herman-add($type, $name, $value, get-function('color'));
   } @else if index('size' 'sizes', $type) {
     $sizes: map-merge($sizes, $value) !global;
-    @include herman-add($type, $name, $value, 'size');
+    @include herman-add($type, $name, $value, get-function('size'));
   } @else if index('ratio' 'ratios', $type) {
     $ratios: map-merge($ratios, $value) !global;
-    @include herman-add($type, $name, $value, 'ratio');
+    @include herman-add($type, $name, $value, get-function('ratio'));
   } @else if index('font' 'fonts', $type) {
     @include add-font($name, $value);
     @include herman-add($type, $name, $value);
