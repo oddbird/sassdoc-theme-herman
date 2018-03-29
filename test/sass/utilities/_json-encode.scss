@@ -49,6 +49,10 @@
       '"hello \\"world\\""'
     );
   }
+
+  @include it('returns escaped backslashes in strings') {
+    @include assert-equal(_herman-encode('hello\\world'), '"hello\\\\world"');
+  }
 }
 
 // Encode List
@@ -108,6 +112,17 @@
     @include assert-equal(
       _herman-escape-quotes('hello "world"'),
       'hello \\"world\\"'
+    );
+  }
+}
+
+// Escape Backslashes
+// ------------------
+@include describe('herman-escape-backslashes [function]') {
+  @include it('escapes backslashes in string') {
+    @include assert-equal(
+      _herman-escape-backslashes('hello\\world'),
+      'hello\\\\world'
     );
   }
 }
