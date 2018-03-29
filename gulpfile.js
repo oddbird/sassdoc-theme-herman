@@ -38,7 +38,10 @@ const paths = {
       `${this.TEMPLATES_DIR}**/*.njk`,
       `!${this.TEMPLATES_DIR}client/*.njk`,
     ].concat(this.IGNORE);
-    this.SASS = [`${this.SASS_DIR}**/*.scss`].concat(this.IGNORE);
+    this.SASS = [
+      `${this.SASS_DIR}**/*.scss`,
+      `${this.SASS_TESTS_DIR}**/*.scss`,
+    ].concat(this.IGNORE);
     this.SRC_JS = ['lib/**/*.js', 'index.js'].concat(this.IGNORE);
     this.ALL_JS = [
       `${this.ASSETS_JS_DIR}*.js`,
@@ -144,14 +147,7 @@ const sasslintTask = function(src, failOnError, shouldLog) {
 };
 
 gulp.task('prettier-js', () => prettierTask(paths.ALL_JS));
-gulp.task('prettier-scss', () =>
-  prettierTask(
-    paths.SASS.concat([
-      '!static/sass/config/_color.scss',
-      '!static/sass/config/_scale.scss',
-    ])
-  )
-);
+gulp.task('prettier-scss', () => prettierTask(paths.SASS));
 gulp.task('prettier', gulp.parallel('prettier-js', 'prettier-scss'));
 
 gulp.task(
