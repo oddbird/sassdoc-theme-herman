@@ -241,11 +241,11 @@ See [Exporting Styles to JSON][export].
 - Default: `[]`
 
 Array of paths used to resolve `@import` declarations.
-Passed through to [node-sass] when
+Passed through to [node-sass-includepaths] when
 compiling `@example sass/scss` annotations.
 See our [`@example` documentation][example-docs-scss].
 
-[node-sass]: https://github.com/sass/node-sass/#includepaths
+[node-sass-includepaths]: https://github.com/sass/node-sass/#includepaths
 
 
 ### sass.includes
@@ -264,3 +264,17 @@ It's best to avoid files with output CSS,
 as that output will be displayed in every single Sass example.
 
 [example-docs-scss]: http://oddbird.net/herman/docs/demo_examples.html#compiling-sass-scss
+
+
+### sass.outputstyle
+
+- Type: `String`
+- Default: `'expanded'`
+
+Determines the output format of the final CSS
+of compiled `@example sass/scss` annotations.
+Passed through to [node-sass-outputstyle].
+Accepts `'nested'`, `'expanded'`, `'compact'`, or `'compressed'`.
+See our [`@example` documentation][example-docs-scss].
+
+[node-sass-outputstyle]: https://github.com/sass/node-sass/#outputstyle

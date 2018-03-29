@@ -927,6 +927,34 @@ describe('example annotation', function() {
         .catch(done);
     });
 
+    it('uses custom `outputstyle` setting', function(done) {
+      const data = [
+        {
+          example: [
+            {
+              type: 'scss',
+              code: '/* a relevant comment */',
+            },
+          ],
+        },
+      ];
+      const env = extend(true, {}, this.env, {
+        herman: {
+          sass: {
+            outputstyle: 'compressed',
+          },
+        },
+      });
+      const example = annotations.example(env);
+      example
+        .resolve(data)
+        .then(() => {
+          assert.equal(data[0].example[0].rendered, '');
+          done();
+        })
+        .catch(done);
+    });
+
     it('skips non-html, non-njk, non-scss items', function(done) {
       const data = [
         {

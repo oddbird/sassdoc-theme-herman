@@ -65,9 +65,10 @@
 ///
 /// ```yaml
 /// herman:
-///   includepaths:
-///     - 'static/sass'
-///     - 'node_modules'
+///   sass:
+///     includepaths:
+///       - 'static/sass'
+///       - 'node_modules'
 /// ```
 ///
 /// You can also set an array of default `includes`
@@ -88,6 +89,19 @@
 /// Generally, included Sass files should not contain
 /// any CSS output of their own,
 /// since all compiled output will be displayed with the `@example`.
+///
+/// By default, the CSS output will be "expanded"
+/// (see the [node-sass] docs).
+/// You can override this with the `outputstyle` option:
+///
+/// [node-sass]: https://github.com/sass/node-sass/#outputstyle
+///
+/// ```yaml
+/// # .sassdocrc (yaml)
+/// herman:
+///   sass:
+///     outputstyle: 'compressed'
+/// ```
 ///
 /// @group demo_examples
 ///

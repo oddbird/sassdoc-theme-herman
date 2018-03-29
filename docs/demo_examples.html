@@ -475,9 +475,10 @@ you must set an <code>includepaths</code> key
 in your sassdoc <code>herman.sass</code> configuration object –
 an array of places to look for Sass<span class="widont">&nbsp;</span>includes:</p>
 <pre><code class="lang-yaml">herman:
-  includepaths:
-    - 'static/sass'
-    - 'node_modules'
+  sass:
+    includepaths:
+      - 'static/sass'
+      - 'node_modules'
 </code></pre>
 <p>You can also set an array of default <code>includes</code>
 (relative to any <code>includepaths</code>)
@@ -494,6 +495,14 @@ herman:
 <p>Generally, included Sass files should not contain
 any CSS output of their own,
 since all compiled output will be displayed with the <code>@example</code>.</p>
+<p>By default, the CSS output will be “expanded”
+(see the <a href="https://github.com/sass/node-sass/#outputstyle">node-sass</a> docs).
+You can override this with the <code>outputstyle</code> option:</p>
+<pre><code class="lang-yaml"># .sassdocrc (yaml)
+herman:
+  sass:
+    outputstyle: 'compressed'
+</code></pre>
 
       
   
