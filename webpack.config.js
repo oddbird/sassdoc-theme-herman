@@ -7,7 +7,7 @@ process.env.BROWSERSLIST_CONFIG = './.browserslistrc';
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const path = require('path');
-const sassdoc = require('sassdoc');
+const SassDocPlugin = require('./sassdoc-webpack-plugin');
 const webpack = require('webpack');
 
 const jsOutput = '[name].min.js';
@@ -16,124 +16,90 @@ const styleOutput = '[name].min.css';
 const outputPath = path.join(__dirname, 'dist', 'webpack');
 const sassdocPath = path.join(__dirname, 'docs');
 
-const SassdocPlugin = function() {};
-const getCSS = function(entry) {
-  if (!entry) {
-    return undefined;
-  }
-  let css;
-  for (const thisPath of entry) {
-    if (thisPath.substr(-4) === '.css') {
-      css = thisPath;
-    }
-  }
-  return css;
-};
-SassdocPlugin.prototype.apply = compiler => {
-  compiler.plugin('after-emit', (compilation, cb) => {
-    const statsJSON = compilation.getStats().toJson();
-    const css = getCSS(statsJSON.assetsByChunkName.app_styles);
-    const json = getCSS(statsJSON.assetsByChunkName.styleguide_json);
-    const cssPath = css ? path.join(outputPath, css) : undefined;
-    const jsonPath = json ? path.join(outputPath, json) : undefined;
-    sassdoc('./scss/**/*.scss', {
-      dest: sassdocPath,
-      theme: __dirname,
-      herman: {
-        extraDocs: [
-          { name: 'Configuration', path: './CONFIGURATION.md' },
-          { name: 'Changelog', path: './CHANGELOG.md' },
-          { name: 'Contributing', path: './CONTRIBUTING.md' },
-        ],
-        extraLinks: [
-          {
-            name: 'Accoutrement-Color',
-            url: 'http://oddbird.net/accoutrement-color/',
-          },
-          {
-            name: 'Accoutrement-Scale',
-            url: 'http://oddbird.net/accoutrement-scale/',
-          },
-          {
-            name: 'Accoutrement-Type',
-            url: 'http://oddbird.net/accoutrement-type/',
-          },
-          {
-            name: 'Accoutrement-Layout',
-            url: 'http://oddbird.net/accoutrement-layout/',
-          },
-          {
-            name: 'Accoutrement-Init',
-            url: 'http://oddbird.net/accoutrement-init/',
-          },
-        ],
-        displayColors: ['hex', 'hsl'],
-        customCSS: cssPath,
-        customHTML: path.join(__dirname, 'templates', '_icons.svg'),
-        fontpath: path.join(__dirname, 'fonts'),
-        nunjucks: {
-          templatepath: path.join(__dirname, 'templates'),
-        },
-        sass: {
-          jsonfile: jsonPath,
-          includepaths: [
-            path.join(__dirname, 'scss'),
-            path.join(__dirname, 'node_modules'),
-          ],
-          includes: ['utilities', 'config/manifest'],
-        },
+const sassDocOpts = {
+  src: './scss/**/*.scss',
+  dest: sassdocPath,
+  theme: __dirname,
+  herman: {
+    extraDocs: [
+      { name: 'Configuration', path: './CONFIGURATION.md' },
+      { name: 'Changelog', path: './CHANGELOG.md' },
+      { name: 'Contributing', path: './CONTRIBUTING.md' },
+    ],
+    extraLinks: [
+      {
+        name: 'Accoutrement-Color',
+        url: 'http://oddbird.net/accoutrement-color/',
       },
-      display: {
-        alias: true,
+      {
+        name: 'Accoutrement-Scale',
+        url: 'http://oddbird.net/accoutrement-scale/',
       },
-      groups: {
-        'Public API': {
-          'api_json-export': 'Exporting Styles to JSON',
-          'api_sass-accoutrement': 'Accoutrement Integration',
-          demo_colors: 'Color Palettes',
-          demo_fonts: 'Font Specimens',
-          demo_sizes: 'Ratios & Sizes',
-          demo_icons: 'SVG Icons',
-          demo_examples: 'Rendered Examples',
-          'demo_test-sassdoc': 'SassDoc Annotations',
-        },
-        '_Design Tokens': {
-          'config-colors': '_Colors',
-          'config-scale': '_Sizes',
-          'config-fonts': '_Fonts',
-          'config-utils': '_Utilities',
-          'config_api-utilities': '_API Utils',
-        },
-        _Layout: {
-          'style-regions': '_Regions',
-          'style-banner': '_Banner',
-          'style-nav': '_Nav',
-          'style-main': '_Main',
-        },
-        _Patterns: {
-          'style-icons': '_Icons',
-          'style-typography': '_Typography',
-          'style-code': '_Code Blocks',
-        },
-        _Components: {
-          'component-nav': '_Nav',
-          'component-footer': '_Footer',
-          'component-breadcrumb': '_Breadcrumb',
-        },
+      {
+        name: 'Accoutrement-Type',
+        url: 'http://oddbird.net/accoutrement-type/',
       },
-    }).then(
-      () => {
-        /* eslint-disable no-console */
-        console.log('Generated Sassdoc documentation.');
-        cb();
+      {
+        name: 'Accoutrement-Layout',
+        url: 'http://oddbird.net/accoutrement-layout/',
       },
-      err => {
-        console.error(err);
-        cb();
-        /* eslint-enable no-console */
-      }
-    );
-  });
+      {
+        name: 'Accoutrement-Init',
+        url: 'http://oddbird.net/accoutrement-init/',
+      },
+    ],
+    displayColors: ['hex', 'hsl'],
+    customHTML: path.join(__dirname, 'templates', '_icons.svg'),
+    fontpath: path.join(__dirname, 'fonts'),
+    nunjucks: {
+      templatepath: path.join(__dirname, 'templates'),
+    },
+    sass: {
+      includepaths: [
+        path.join(__dirname, 'scss'),
+        path.join(__dirname, 'node_modules'),
+      ],
+      includes: ['utilities', 'config/manifest'],
+    },
+  },
+  display: {
+    alias: true,
+  },
+  groups: {
+    'Public API': {
+      'api_json-export': 'Exporting Styles to JSON',
+      'api_sass-accoutrement': 'Accoutrement Integration',
+      demo_colors: 'Color Palettes',
+      demo_fonts: 'Font Specimens',
+      demo_sizes: 'Ratios & Sizes',
+      demo_icons: 'SVG Icons',
+      demo_examples: 'Rendered Examples',
+      'demo_test-sassdoc': 'SassDoc Annotations',
+    },
+    '_Design Tokens': {
+      'config-colors': '_Colors',
+      'config-scale': '_Sizes',
+      'config-fonts': '_Fonts',
+      'config-utils': '_Utilities',
+      'config_api-utilities': '_API Utils',
+    },
+    _Layout: {
+      'style-regions': '_Regions',
+      'style-banner': '_Banner',
+      'style-nav': '_Nav',
+      'style-main': '_Main',
+    },
+    _Patterns: {
+      'style-icons': '_Icons',
+      'style-typography': '_Typography',
+      'style-code': '_Code Blocks',
+    },
+    _Components: {
+      'component-nav': '_Nav',
+      'component-footer': '_Footer',
+      'component-breadcrumb': '_Breadcrumb',
+    },
+  },
 };
 
 module.exports = {
@@ -191,7 +157,13 @@ module.exports = {
     new ExtractTextPlugin({
       filename: styleOutput,
     }),
-    new SassdocPlugin(),
+    new SassDocPlugin(sassDocOpts, {
+      assetPaths: [
+        { entry: 'app_styles', optPath: 'herman.customCSS' },
+        { entry: 'styleguide_json', optPath: 'herman.sass.jsonfile' },
+      ],
+      outputPath,
+    }),
   ],
   module: {
     rules: [
