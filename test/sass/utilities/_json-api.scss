@@ -1,7 +1,6 @@
 // JSON Export Tests
 // =================
 
-
 // Herman Export
 // -------------
 @include describe('herman-export [mixin]') {
@@ -9,7 +8,7 @@
     $map: (
       1: (a, b, c),
       'two': 3em,
-      (three four): 'hello "world"',
+      (three four): 'hello "world"'
     );
 
     @include assert {
@@ -17,6 +16,7 @@
         @include herman-export($map);
       }
 
+      // sass-lint:disable no-empty-rulesets
       @include expect {
         /*! json-encode: #{_herman-encode($map)} */
       }
