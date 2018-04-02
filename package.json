@@ -69,6 +69,7 @@
     "jinja-loader": "^0.0.8",
     "jquery": "^3.2.1",
     "jquery-deparam": "^0.5.3",
+    "js-yaml": "^3.11.0",
     "json-loader": "^0.5.7",
     "karma": "^2.0.0",
     "karma-chai-sinon": "^0.1.5",
@@ -80,6 +81,7 @@
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "4.0.0-beta.0",
     "lint-staged": "^7.0.0",
+    "lodash.set": "^4.3.2",
     "mark.js": "^8.11.0",
     "matchmedia-polyfill": "^0.3.0",
     "mocha": "^5.0.5",
@@ -93,7 +95,8 @@
     "sinon": "^4.4.10",
     "sinon-chai": "^3.0.0",
     "srcdoc-polyfill": "^1.0.0",
-    "webpack": "^4.3.0"
+    "webpack": "^4.4.1",
+    "webpack-cli": "^2.0.13"
   },
   "resolutions": {
     "browserslist": ">=2.4.0",
