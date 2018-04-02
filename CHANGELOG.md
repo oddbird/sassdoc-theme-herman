@@ -1,11 +1,11 @@
 # Herman Changelog
 
 
-## Unreleased
+## 2.1.0: 2018-04-02
 
-- 🐛 BUGFIX: Escape backslashes in herman-export string values
 - 🚀 NEW: Add `sass.outputStyle` option (default: `expanded`) --
   [#263](https://github.com/oddbird/sassdoc-theme-herman/issues/263)
+- 🐛 BUGFIX: Escape backslashes in `herman-export` string values
 - 🐛 BUGFIX: Fix bug if annotations try to access missing `env.herman` --
   [#273](https://github.com/oddbird/sassdoc-theme-herman/issues/273)
 - 🐛 BUGFIX: Fix bug displaying tabs in `<code>` blocks --
@@ -13,9 +13,9 @@
 - 🐛 BUGFIX: Fix bugs in `customCSS` URL re-writing --
   [#265](https://github.com/oddbird/sassdoc-theme-herman/issues/265),
   [#266](https://github.com/oddbird/sassdoc-theme-herman/issues/266)
-- 🏠 INTERNAL: Upgrade dependencies
 - 🏠 INTERNAL: Run tests on Windows --
   [#270](https://github.com/oddbird/sassdoc-theme-herman/issues/270)
+- 🏠 INTERNAL: Upgrade dependencies
 
 
 ## 2.0.0: 2018-01-31
