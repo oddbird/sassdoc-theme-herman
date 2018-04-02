@@ -107,13 +107,13 @@
     ),
     linear-gradient(
       to left,
-      color('border-light' ('rgba': 0.5)) 1px,
+      color('border-light' (get-function('rgba'): 0.5)) 1px,
       transparent 1px,
       transparent
     ),
     linear-gradient(
       to left,
-      color('border-light' ('rgba': 0.25)) 1px,
+      color('border-light' (get-function('rgba'): 0.25)) 1px,
       transparent 1px,
       transparent
     );

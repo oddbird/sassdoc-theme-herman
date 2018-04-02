@@ -771,9 +771,9 @@ followed by an optional map of adjustments
       
       
       <pre class="hljs-pre"><code class="lang-scss">$neutral-colors: (
-  &#39;light-gray&#39;: &#39;brand-blue&#39; (&#39;tint&#39;: 80%, &#39;desaturate&#39;: 80%),
-  &#39;gray&#39;: &#39;brand-blue&#39; (&#39;desaturate&#39;: 80%),
-  &#39;black&#39;: &#39;brand-blue&#39; (&#39;shade&#39;: 30%, &#39;desaturate&#39;: 80%)
+  &#39;light-gray&#39;: &#39;brand-blue&#39; (&#39;tint&#39;: 80%, get-function(&#39;desaturate&#39;): 80%),
+  &#39;gray&#39;: &#39;brand-blue&#39; (get-function(&#39;desaturate&#39;): 80%),
+  &#39;black&#39;: &#39;brand-blue&#39; (&#39;shade&#39;: 30%, get-function(&#39;desaturate&#39;): 80%)
 );</code></pre>
     </div>
   
@@ -1017,11 +1017,11 @@ before they are used in styling patterns and<span class="widont">&nbsp;</span>co
   &#39;underline&#39;: &#39;action&#39; (&#39;tint&#39;: 75%),
   &#39;border&#39;: &#39;gray&#39;,
   &#39;border-light&#39;: &#39;light-gray&#39;,
-  &#39;shadow&#39;: &#39;gray&#39; (&#39;rgba&#39;: 0.5),
+  &#39;shadow&#39;: &#39;gray&#39; (get-function(&#39;rgba&#39;): 0.5),
   &#39;callout&#39;: &#39;theme-light&#39;,
   &#39;slight&#39;: &#39;callout&#39; (&#39;tint&#39;: 90%),
   &#39;code&#39;: &#39;theme-dark&#39;,
-  &#39;code-shadow&#39;: &#39;code&#39; (rgba: 0.2)
+  &#39;code-shadow&#39;: &#39;code&#39; (get-function(&#39;rgba&#39;): 0.2)
 );</code></pre>
     </div>
   

@@ -142,9 +142,9 @@ $demo-colors: (
 @include herman-add('colors', 'demo-colors', $demo-colors);
 
 $demo-noncolors: (
-  'light-gray': 'brand-blue' ('tint': 80%, 'desaturate': 80%),
-  'gray': 'brand-blue' ('desaturate': 80%),
-  'black': 'brand-blue' ('shade': 30%, 'desaturate': 80%)
+  'light-gray': 'brand-blue' ('tint': 80%, get-function('desaturate'): 80%),
+  'gray': 'brand-blue' (get-function('desaturate'): 80%),
+  'black': 'brand-blue' ('shade': 30%, get-function('desaturate'): 80%)
 );
 
 /// ## Compile and export complex maps
@@ -158,9 +158,9 @@ $demo-noncolors: (
 ///
 /// ```scss
 /// $demo-noncolors: (
-///   'light-gray': 'brand-blue' ('tint': 80%, 'desaturate': 80%),
-///   'gray': 'brand-blue' ('desaturate': 80%),
-///   'black': 'brand-blue' ('shade': 30%, 'desaturate': 80%),
+///   'light-gray': 'brand-blue' ('tint': 80%, get-function('desaturate'): 80%),
+///   'gray': 'brand-blue' (get-function('desaturate'): 80%),
+///   'black': 'brand-blue' ('shade': 30%, get-function('desaturate'): 80%),
 /// );
 /// ```
 ///
@@ -179,18 +179,23 @@ $demo-noncolors: (
 /// @example scss
 ///   $herman: ();
 ///   $demo-noncolors: (
-///     'light-gray': 'brand-blue' ('tint': 80%, 'desaturate': 80%),
-///     'gray': 'brand-blue' ('desaturate': 80%),
-///     'black': 'brand-blue' ('shade': 30%, 'desaturate': 80%),
+///     'light-gray': 'brand-blue' ('tint': 80%, get-function('desaturate'): 80%),
+///     'gray': 'brand-blue' (get-function('desaturate'): 80%),
+///     'black': 'brand-blue' ('shade': 30%, get-function('desaturate'): 80%),
 ///   );
 ///
 ///   @include herman-add(
 ///     'colors', 'demo-noncolors', $demo-noncolors,
-///     'color' // function
+///     get-function('color') // function
 ///   );
 ///
 ///   /* #{$herman} */
 ///
 /// @group demo_colors
 /// @link http://oddbird.net/accoutrement-color Accoutrement-Color
-@include herman-add('colors', 'demo-noncolors', $demo-noncolors, 'color');
+@include herman-add(
+  'colors',
+  'demo-noncolors',
+  $demo-noncolors,
+  get-function('color')
+);

@@ -28,9 +28,9 @@
 /// @example scss
 ///   $brand-colors: (
 ///     'brand-blue': hsl(195, 85%, 35%),
-///     'light-gray': 'brand-blue' ('tint': 80%, 'desaturate': 80%),
+///     'light-gray': 'brand-blue' ('tint': 80%, get-function('desaturate'): 80%),
 ///   );
-///   @include herman-add('colors', 'brand-colors', $brand-colors, 'color');
+///   @include herman-add('colors', 'brand-colors', $brand-colors, get-function('color'));
 ///   /* #{$herman} */
 @mixin herman-add($type, $key, $map, $args...) {
   // pluralize type
@@ -76,9 +76,9 @@
 ///   $brand-colors: (
 ///     'brand-orange': hsl(24, 100%, 39%),
 ///     'brand-blue': hsl(195, 85%, 35%),
-///     'light-gray': 'brand-blue' ('tint': 80%, 'desaturate': 80%),
+///     'light-gray': 'brand-blue' ('tint': 80%, get-function('desaturate'): 80%),
 ///   );
-///   /* #{herman-map-compile($brand-colors, 'color')} */
+///   /* #{herman-map-compile($brand-colors, get-function('color'))} */
 @function herman-map-compile($map, $function, $args...) {
   $output: ();
 

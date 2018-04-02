@@ -3,9 +3,9 @@
 
 $colors-initial: (
   'brand-blue': hsl(195, 85%, 35%),
-  'light-gray': 'brand-blue' ('tint': 80%, 'desaturate': 80%),
-  'gray': 'brand-blue' ('desaturate': 80%),
-  'black': 'brand-blue' ('shade': 30%, 'desaturate': 80%)
+  'light-gray': 'brand-blue' ('tint': 80%, get-function('desaturate'): 80%),
+  'gray': 'brand-blue' (get-function('desaturate'): 80%),
+  'black': 'brand-blue' ('shade': 30%, get-function('desaturate'): 80%)
 );
 
 $colors-compiled: (
@@ -24,7 +24,7 @@ $darken: (
 
 $sizes: (
   'root': 20px,
-  'rhythm': 'root' ('fifth': 1, 'convert-units': 'rem')
+  'rhythm': 'root' ('fifth': 1, get-function('convert-units'): 'rem')
 );
 
 $sizes-compiled: (
@@ -37,7 +37,7 @@ $sizes-compiled: (
 @include describe('herman-map-compile [function]') {
   @include it('returns a map with values run through a given function') {
     @include assert-equal(
-      herman-map-compile($sizes, 'size'),
+      herman-map-compile($sizes, get-function('size')),
       $sizes-compiled,
       $inspect: true
     );
@@ -45,7 +45,7 @@ $sizes-compiled: (
 
   @include it('allows extra args be passed in') {
     @include assert-equal(
-      herman-map-compile($colors-compiled, 'darken', 20%),
+      herman-map-compile($colors-compiled, get-function('darken'), 20%),
       $darken,
       $inspect: true
     );
@@ -81,7 +81,13 @@ $sizes-compiled: (
 
     @include assert-equal($herman, $empty);
 
-    @include herman-add('colors', 'dark', $colors-compiled, 'darken', 20%);
+    @include herman-add(
+      'colors',
+      'dark',
+      $colors-compiled,
+      get-function('darken'),
+      20%
+    );
     $expect: ('colors': ('dark': $darken));
 
     @include assert-equal($herman, $expect, $inspect: true);
