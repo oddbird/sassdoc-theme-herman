@@ -95,6 +95,7 @@
 ///   The value to inspect and quote.
 @function _herman-quote($value) {
   $value: '#{$value}';
+  $value: _herman-escape-backslashes($value);
   $value: _herman-escape-quotes($value);
   @return '"#{$value}"';
 }
@@ -121,6 +122,35 @@
     $a: if($i > 1, str-slice($string, 1, $i - 1), '');
     $z: str-slice($string, $i + $n);
     $z: _herman-escape-quotes($z);
+
+    $return: $a + if($new, $new, '') + $z;
+  }
+
+  @return $return;
+}
+
+// Escape Backslashes
+// ------------------
+/// Return a string, with internal backslashes escaped.
+///
+/// @group config_api-utilities
+/// @access private
+///
+/// @param {string} $string -
+///   The string to be manipulated
+@function _herman-escape-backslashes($string) {
+  $return: $string;
+  $old: '\\';
+  $new: '\\\\';
+  $i: str-index($string, $old);
+  $n: str-length($old);
+
+  @if ($string == $old) {
+    $return: $new;
+  } @else if $i {
+    $a: if($i > 1, str-slice($string, 1, $i - 1), '');
+    $z: str-slice($string, $i + $n);
+    $z: _herman-escape-backslashes($z);
 
     $return: $a + if($new, $new, '') + $z;
   }
