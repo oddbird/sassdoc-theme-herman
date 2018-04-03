@@ -41,7 +41,7 @@
     "accoutrement-color": "^2.2.3",
     "accoutrement-init": "^1.1.2",
     "accoutrement-layout": "^3.0.2",
-    "accoutrement-scale": "^5.0.1",
+    "accoutrement-scale": "^6.0.0",
     "accoutrement-type": "^4.0.2",
     "autoprefixer": "^8.2.0",
     "babel-eslint": "^8.2.2",
