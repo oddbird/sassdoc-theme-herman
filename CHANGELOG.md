@@ -1,6 +1,11 @@
 # Herman Changelog
 
 
+## Unreleased
+
+- 💥 BREAKING: Move `node-sass` to `peerDependencies`
+
+
 ## 2.1.0: 2018-04-02
 
 - 🚀 NEW: Add `sass.outputStyle` option (default: `expanded`) --

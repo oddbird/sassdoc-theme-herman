@@ -4,6 +4,15 @@
 /// # Herman Config: Private Helpers
 /// @group config-utils
 
+// Functions
+// ---------
+$functions: (
+  'darken': get-function('darken'),
+  'desaturate': get-function('desaturate'),
+  'rgba': get-function('rgba'),
+  'convert': get-function('convert-units')
+);
+
 // Config
 // ------
 /// Internal utility for managing Herman and Accoutrement maps
