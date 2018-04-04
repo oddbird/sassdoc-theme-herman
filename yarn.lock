@@ -549,9 +549,9 @@ accepts@~1.3.3, accepts@~1.3.4:
     mime-types "~2.1.18"
     negotiator "0.6.1"
 
-accoutrement-color@^2.3.0:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/accoutrement-color/-/accoutrement-color-2.3.0.tgz#669623ffcbfd090bd4523804ad52593e85dd7ec4"
+accoutrement-color@^2.3.1:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/accoutrement-color/-/accoutrement-color-2.3.1.tgz#9466bbd74b394d1dbc36466ad09ca6d566ff35d9"
 
 accoutrement-init@^1.1.2:
   version "1.1.2"

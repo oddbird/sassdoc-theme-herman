@@ -45,7 +45,7 @@ $sizes-compiled: (
 
   @include it('allows extra args be passed in') {
     @include assert-equal(
-      herman-map-compile($colors-compiled, 'darken', 20%),
+      herman-map-compile($colors-compiled, get-function('darken'), 20%),
       $darken,
       $inspect: true
     );
@@ -81,7 +81,13 @@ $sizes-compiled: (
 
     @include assert-equal($herman, $empty);
 
-    @include herman-add('colors', 'dark', $colors-compiled, 'darken', 20%);
+    @include herman-add(
+      'colors',
+      'dark',
+      $colors-compiled,
+      get-function('darken'),
+      20%
+    );
     $expect: ('colors': ('dark': $darken));
 
     @include assert-equal($herman, $expect, $inspect: true);

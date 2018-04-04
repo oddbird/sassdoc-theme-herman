@@ -56,6 +56,9 @@
 /// will be compiled by Herman,
 /// and display the output along with the source.
 ///
+/// Note that Sass/Scss examples require `node-sass`
+/// to be installed, if it isn't already: `npm install node-sass`.
+///
 /// All Sass examples must be complete and valid,
 /// with the ability to import Sass partials inside each example.
 /// In order for this to work with Sass/Scss,

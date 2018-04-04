@@ -4,6 +4,7 @@ const assert = require('assert');
 const extend = require('extend');
 const nunjucks = require('nunjucks');
 const path = require('path');
+const Promise = require('bluebird');
 const sinon = require('sinon');
 
 /* eslint-disable global-require */
@@ -953,6 +954,39 @@ describe('example annotation', function() {
           done();
         })
         .catch(done);
+    });
+
+    it('warns, exits if no node-sass and scss @example used', function(done) {
+      const data = [{ example: [{ type: 'scss' }] }];
+      sinon.stub(Promise, 'promisify').throws();
+
+      this.example
+        .resolve(data)
+        .then(() => {
+          sinon.assert.calledOnce(this.env.logger.warn);
+          assert.deepEqual(data, [
+            { example: [{ type: 'scss', rendered: undefined }] },
+          ]);
+        })
+        .finally(() => {
+          Promise.promisify.restore();
+          done();
+        });
+    });
+
+    it('only requires node-sass once', function(done) {
+      const data = [{ example: [{ type: 'scss', code: '' }] }];
+      const data2 = [{ example: [{ type: 'scss', code: '' }] }];
+      sinon.spy(Promise, 'promisify');
+
+      Promise.all([this.example.resolve(data), this.example.resolve(data2)])
+        .then(() => {
+          sinon.assert.calledOnce(Promise.promisify);
+        })
+        .finally(() => {
+          Promise.promisify.restore();
+          done();
+        });
     });
 
     it('skips non-html, non-njk, non-scss items', function(done) {
