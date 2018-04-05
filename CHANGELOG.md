@@ -5,6 +5,7 @@
 
 - 💥 BREAKING: Move `node-sass` to `peerDependencies`
 - 🐛 BUGFIX: Do not require `node-sass` if `@example scss` is not used
+- 🏠 INTERNAL: Upgrade dev dependencies
 
 
 ## 2.1.0: 2018-04-02

@@ -43,8 +43,17 @@ and more.
 npm install sassdoc sassdoc-theme-herman
 ```
 
+Note: If you plan to use Herman to display samples of Sass/Scss code,
+`node-sass` is required as a `peerDependency`.
+If it's not already installed in your project,
+install it with Herman:
+
+```bash
+npm install node-sass
+```
+
 See the [SassDoc documentation](http://sassdoc.com/getting-started/)
-to install SassDoc and run it via various build tools.
+to run SassDoc via various build tools.
 Specify `herman` as the theme
 in your SassDoc options:
 
