@@ -1,7 +1,7 @@
 # Herman Changelog
 
 
-## Unreleased
+## 3.0.0: 2018-04-09
 
 - 💥 BREAKING: Move `node-sass` to `peerDependencies`
 - 🐛 BUGFIX: Do not require `node-sass` if `@example scss` is not used
