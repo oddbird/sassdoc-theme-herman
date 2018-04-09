@@ -4,6 +4,30 @@
 /// # Herman Config: Private Helpers
 /// @group config-utils
 
+// Functions
+// ---------
+/// These functions will be made available to
+/// accoutrement-color & accoutrement-scale tools,
+/// for use in the `$colors` and `$sizes` configuration maps.
+/// Register additional functions as needed,
+/// or establish alias names for existing functions.
+///
+/// @group config-utils
+/// @type map
+///
+/// @link http://oddbird.net/accoutrement-color Accoutrement-Color
+/// @link http://oddbird.net/accoutrement-scale Accoutrement-Scale
+///
+/// @prop {function | string} <alias> -
+///   Use `get-function()` to capture a first-class function,
+///   or use a string to reference existing functions and alias-keys
+$functions: (
+  'darken': get-function('darken'),
+  'desaturate': get-function('desaturate'),
+  'rgba': get-function('rgba'),
+  'convert': 'convert-units'
+);
+
 // Config
 // ------
 /// Internal utility for managing Herman and Accoutrement maps

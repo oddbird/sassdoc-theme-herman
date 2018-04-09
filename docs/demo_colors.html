@@ -832,9 +832,9 @@ where the values need to be parsed and compiled
 before they can be exported to Herman.
 Using <a href="http://oddbird.net/accoutrement-color">accoutrement-color</a>, our maps look like<span class="widont">&nbsp;</span>this:</p>
 <pre><code class="lang-scss">$demo-noncolors: (
-  'light-gray': 'brand-blue' ('tint': 80%, get-function('desaturate'): 80%),
-  'gray': 'brand-blue' (get-function('desaturate'): 80%),
-  'black': 'brand-blue' ('shade': 30%, get-function('desaturate'): 80%),
+  'light-gray': 'brand-blue' ('tint': 80%, 'desaturate': 80%),
+  'gray': 'brand-blue' ('desaturate': 80%),
+  'black': 'brand-blue' ('shade': 30%, 'desaturate': 80%),
 );
 </code></pre>
 <p>Our <code>color()</code> function knows how to interpret that syntax
@@ -916,9 +916,9 @@ along with any additional arguments required for that<span class="widont">&nbsp;
       
       <pre class="hljs-pre"><code class="lang-scss">$herman: ();
 $demo-noncolors: (
-  &#39;light-gray&#39;: &#39;brand-blue&#39; (&#39;tint&#39;: 80%, get-function(&#39;desaturate&#39;): 80%),
-  &#39;gray&#39;: &#39;brand-blue&#39; (get-function(&#39;desaturate&#39;): 80%),
-  &#39;black&#39;: &#39;brand-blue&#39; (&#39;shade&#39;: 30%, get-function(&#39;desaturate&#39;): 80%),
+  &#39;light-gray&#39;: &#39;brand-blue&#39; (&#39;tint&#39;: 80%, &#39;desaturate&#39;: 80%),
+  &#39;gray&#39;: &#39;brand-blue&#39; (&#39;desaturate&#39;: 80%),
+  &#39;black&#39;: &#39;brand-blue&#39; (&#39;shade&#39;: 30%, &#39;desaturate&#39;: 80%),
 );
 
 @include herman-add(

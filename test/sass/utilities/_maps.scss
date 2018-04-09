@@ -3,9 +3,9 @@
 
 $colors-initial: (
   'brand-blue': hsl(195, 85%, 35%),
-  'light-gray': 'brand-blue' ('tint': 80%, get-function('desaturate'): 80%),
-  'gray': 'brand-blue' (get-function('desaturate'): 80%),
-  'black': 'brand-blue' ('shade': 30%, get-function('desaturate'): 80%)
+  'light-gray': 'brand-blue' ('tint': 80%, 'desaturate': 80%),
+  'gray': 'brand-blue' ('desaturate': 80%),
+  'black': 'brand-blue' ('shade': 30%, 'desaturate': 80%)
 );
 
 $colors-compiled: (
@@ -24,7 +24,7 @@ $darken: (
 
 $sizes: (
   'root': 20px,
-  'rhythm': 'root' ('fifth': 1, get-function('convert-units'): 'rem')
+  'rhythm': 'root' ('fifth': 1, 'convert': 'rem')
 );
 
 $sizes-compiled: (
