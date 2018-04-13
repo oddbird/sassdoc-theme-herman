@@ -1,6 +1,12 @@
 # Herman Changelog
 
 
+## Unreleased
+
+- 🏠 INTERNAL: Remove `node-sass` from `peerDependencies`
+- 🏠 INTERNAL: Upgrade dev dependencies
+
+
 ## 3.0.0: 2018-04-09
 
 - 💥 BREAKING: Move `node-sass` to `peerDependencies`
