@@ -34,7 +34,7 @@
     "sassdoc": "^2.5.0"
   },
   "devDependencies": {
-    "@babel/core": "7.0.0-beta.44",
+    "@babel/core": "7.0.0-beta.45",
     "@babel/polyfill": "7.0.0-beta.44",
     "@babel/preset-env": "7.0.0-beta.44",
     "accoutrement-color": "^2.3.1",
