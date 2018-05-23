@@ -16,7 +16,7 @@ describe('renderIframe', function() {
           customCSS: 'test/js/fixtures/css/main.css',
           customHTML: 'templates/_icons.svg',
         },
-        logger: { log: sinon.spy() },
+        logger: { log: sinon.fake() },
         dir: __dirname,
       };
     });
@@ -113,7 +113,7 @@ describe('renderIframe', function() {
           },
         },
         logger: {
-          warn: sinon.spy(),
+          warn: sinon.fake(),
         },
       };
     });

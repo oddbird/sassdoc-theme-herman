@@ -87,7 +87,7 @@ describe('search', function() {
 
   describe('showResults', function() {
     beforeEach(function() {
-      this.nunjucksRender = sinon.spy(search.nunjucksEnv, 'render');
+      this.nunjucksRender = this.sandbox.spy(search.nunjucksEnv, 'render');
       search.setSearchStore({
         'some-key': { title: 'A doc title', contents: 'Some contents' },
       });
@@ -159,8 +159,8 @@ describe('search', function() {
 
   describe('doSearch', function() {
     beforeEach(function() {
-      this.indexSearch = sinon.stub();
-      this.indexLoad = sinon.stub(lunr.Index, 'load');
+      this.indexSearch = sinon.fake();
+      this.indexLoad = this.sandbox.stub(lunr.Index, 'load');
       this.indexLoad.returns({ search: this.indexSearch });
       this.results = $('<div data-page>').appendTo('body');
     });
@@ -192,8 +192,8 @@ describe('search', function() {
     beforeEach(function() {
       this.href = window.location.href;
       window.history.replaceState(null, document.title, '/?q=test');
-      this.indexSearch = sinon.stub();
-      this.indexLoad = sinon.stub(lunr.Index, 'load');
+      this.indexSearch = sinon.fake();
+      this.indexLoad = this.sandbox.stub(lunr.Index, 'load');
       this.indexLoad.returns({ search: this.indexSearch });
     });
 

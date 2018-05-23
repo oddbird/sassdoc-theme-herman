@@ -22,7 +22,7 @@ describe('getNunjucksEnv', function() {
   it('returns null if env.herman missing', function() {
     const env = {
       logger: {
-        warn: sinon.spy(),
+        warn: sinon.fake(),
       },
     };
     const actual = getNunjucksEnv(null, env, null);

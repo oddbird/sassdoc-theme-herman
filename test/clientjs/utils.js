@@ -33,39 +33,20 @@ before(function() {
 });
 
 beforeEach(function() {
-  this.xhr = sinon.useFakeXMLHttpRequest();
-  this.requests = [];
-  this.xhr.onCreate = req => {
-    this.requests.push(req);
-  };
-  this.clock = sinon.useFakeTimers();
+  this.sandbox = sinon.createSandbox({
+    useFakeServer: true,
+  });
+  this.requests = this.sandbox.server.requests;
 });
 
 afterEach(function() {
-  this.xhr.restore();
-  this.clock.restore();
+  this.sandbox.restore();
   $(window).off('resize');
   $('body').off('click toggle:close toggle:open target:close target:open');
 });
 
 chai.use(_chai => {
   const { Assertion } = _chai;
-
-  Assertion.addMethod('calledOnceWith', function(...args) {
-    const obj = this._obj;
-    const assertion = new Assertion(obj);
-
-    assertion.to.have.been.calledOnce;
-    Reflect.apply(assertion.calledWith, assertion, args);
-  });
-
-  Assertion.addMethod('calledOnceWithExactly', function(...args) {
-    const obj = this._obj;
-    const assertion = new Assertion(obj);
-
-    assertion.to.have.been.calledOnce;
-    Reflect.apply(assertion.calledWithExactly, assertion, args);
-  });
 
   Assertion.addMethod('containRequest', function(method, url) {
     const obj = this._obj;

@@ -23,10 +23,10 @@ describe('initializeToggles', function() {
     this.close = $(
       '<div data-toggle="close" aria-controls="target &foo">'
     ).appendTo('body');
-    const toggleClose = (this.toggleClose = sinon.spy());
-    const toggleOpen = (this.toggleOpen = sinon.spy());
-    const targetClose = (this.targetClose = sinon.spy());
-    const targetOpen = (this.targetOpen = sinon.spy());
+    const toggleClose = (this.toggleClose = sinon.fake());
+    const toggleOpen = (this.toggleOpen = sinon.fake());
+    const targetClose = (this.targetClose = sinon.fake());
+    const targetOpen = (this.targetOpen = sinon.fake());
     this.toggle.on('toggle:close', toggleClose);
     this.toggle2.on('toggle:close', toggleClose);
     this.toggle.on('toggle:open', toggleOpen);
@@ -220,7 +220,7 @@ describe('initializeToggles', function() {
 
 describe('initializeIframes', function() {
   it('triggers callbacks on window resize', function() {
-    sinon.stub($.fn, 'outerHeight').returns(30);
+    this.sandbox.stub($.fn, 'outerHeight').returns(30);
     const iframe = $('<iframe height="20">');
     iframe.appendTo('body');
     base.initializeIframes();
@@ -246,10 +246,10 @@ describe('initializeIframes', function() {
 describe('initializeNav', function() {
   beforeEach(function() {
     this.mql = {
-      addListener: sinon.spy(),
+      addListener: sinon.fake(),
       matches: true,
     };
-    sinon.stub(window, 'matchMedia').returns(this.mql);
+    this.sandbox.stub(window, 'matchMedia').returns(this.mql);
     this.nav = $('<div id="nav">').appendTo('body');
     this.btn = $('<div aria-controls="nav" aria-pressed="false">').appendTo(
       'body'

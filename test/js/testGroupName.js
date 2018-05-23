@@ -9,7 +9,7 @@ const input = require('./fixtures/groupName/input');
 
 describe('groupName', function() {
   it('adds groupName, ctx.orderedGroups, ctx.subgroupsByGroup', function() {
-    input.logger = { warn: sinon.spy() };
+    input.logger = { warn: sinon.fake() };
     groupName(input);
 
     sinon.assert.calledOnce(input.logger.warn);

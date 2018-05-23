@@ -4,7 +4,7 @@
 ## Unreleased
 
 - 🏠 INTERNAL: Remove `node-sass` from `peerDependencies`
-- 🏠 INTERNAL: Upgrade dev dependencies
+- 🏠 INTERNAL: Upgrade dependencies
 
 
 ## 3.0.0: 2018-04-09

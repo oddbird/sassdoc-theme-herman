@@ -31,7 +31,7 @@ describe('assets', function() {
   });
 
   it('Parses file', function(done) {
-    const parser = sinon.spy();
+    const parser = sinon.fake();
     const env = 'foo';
     const opts = { parser, env };
 

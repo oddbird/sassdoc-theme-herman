@@ -39,7 +39,7 @@ describe('prepareContext', function() {
   });
 
   it('sets extraDocs', function(done) {
-    const warn = sinon.spy();
+    const warn = sinon.fake();
     prepareContext({
       data: [],
       herman: {
@@ -120,7 +120,7 @@ describe('prepareContext', function() {
   });
 
   it('logs a missing Sass JSON file', function(done) {
-    const warn = sinon.spy();
+    const warn = sinon.fake();
     prepareContext({
       data: [],
       logger: { warn },
@@ -200,7 +200,7 @@ describe('prepareContext', function() {
   });
 
   it('warns if prose block uses custom annotation with key', function(done) {
-    const logger = { warn: sinon.spy() };
+    const logger = { warn: sinon.fake() };
     const item = {
       commentRange: {
         start: 0,

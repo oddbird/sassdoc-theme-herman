@@ -22,7 +22,7 @@ const annotations = {
 describe('icons annotation', function() {
   beforeEach(function() {
     this.env = {
-      logger: { warn: sinon.stub() },
+      logger: { warn: sinon.fake() },
     };
     this.icons = annotations.icons(this.env);
   });
@@ -211,7 +211,7 @@ describe('font annotation', function() {
 
     it('warns and exits if no jsonfile defined', function() {
       const env = {
-        logger: { warn: sinon.stub() },
+        logger: { warn: sinon.fake() },
         herman: {},
       };
       const font = annotations.font(env);
@@ -228,7 +228,7 @@ describe('font annotation', function() {
 
     it('logs an error if missing Sass jsonfile', function(done) {
       const env = {
-        logger: { warn: sinon.stub() },
+        logger: { warn: sinon.fake() },
         herman: {
           sass: {
             jsonfile: `${__dirname}/no/such/file.json`,
@@ -254,7 +254,7 @@ describe('font annotation', function() {
 
     it('warns and exits if no fontpath', function(done) {
       const env = {
-        logger: { warn: sinon.stub() },
+        logger: { warn: sinon.fake() },
         herman: {},
         sassjson: {
           fonts: {
@@ -287,7 +287,7 @@ describe('font annotation', function() {
     it('adds `@font-face` CSS and localFonts src', function(done) {
       const env = {
         dir: __dirname,
-        logger: { warn: sinon.stub() },
+        logger: { warn: sinon.fake() },
         herman: {
           fontpath: path.normalize('/path'),
           sass: {
@@ -698,7 +698,7 @@ describe('font annotation', function() {
           fontpath: '/path',
         },
         logger: {
-          warn: sinon.spy(),
+          warn: sinon.fake(),
         },
       };
       const font = annotations.font(env);
@@ -767,14 +767,14 @@ describe('example annotation', function() {
           templatepath: path.resolve(__dirname, 'fixtures', 'templates'),
         },
       },
-      logger: { warn: sinon.spy() },
+      logger: { warn: sinon.fake() },
     };
     this.example = annotations.example(this.env);
   });
 
   describe('resolve', function() {
     it('warns and exits if no templatepath and njk @example used', function() {
-      const env = { logger: { warn: sinon.spy() }, herman: {} };
+      const env = { logger: { warn: sinon.fake() }, herman: {} };
       const example = annotations.example(env);
       const data = [{ example: [{ type: 'njk' }] }];
 
@@ -1009,7 +1009,7 @@ describe('example annotation', function() {
     });
 
     it('warns only once about missing templatepath', function() {
-      const env = { logger: { warn: sinon.stub() }, herman: {} };
+      const env = { logger: { warn: sinon.fake() }, herman: {} };
       const example = annotations.example(env);
       const data = [
         { example: [{ type: 'njk' }] },
@@ -1022,7 +1022,7 @@ describe('example annotation', function() {
     });
 
     it('does not warn if njk @example not used', function() {
-      const env = { logger: { warn: sinon.stub() }, herman: {} };
+      const env = { logger: { warn: sinon.fake() }, herman: {} };
       const example = annotations.example(env);
       const data = [{}];
 
