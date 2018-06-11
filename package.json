@@ -92,7 +92,7 @@
     "sass-loader": "^7.0.1",
     "sass-true": "^4.0.0",
     "sassdoc": "^2.5.0",
-    "sinon": "^5.0.7",
+    "sinon": "^6.0.0",
     "sinon-chai": "^3.1.0",
     "srcdoc-polyfill": "^1.0.0",
     "webpack": "^4.8.3",
