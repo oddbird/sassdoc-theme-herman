@@ -70,7 +70,7 @@
     "jquery-deparam": "^0.5.3",
     "js-yaml": "^3.11.0",
     "json-loader": "^0.5.7",
-    "karma": "^2.0.2",
+    "karma": "^3.0.0",
     "karma-chai-sinon": "^0.1.5",
     "karma-chrome-launcher": "^2.2.0",
     "karma-coverage-istanbul-reporter": "2.0.1",
