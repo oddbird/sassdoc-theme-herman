@@ -3,6 +3,8 @@
 
 ## Unreleased
 
+- 🐛 BUGFIX: Improve error message when reading external files --
+  [#311](https://github.com/oddbird/sassdoc-theme-herman/issues/311)
 - 🏠 INTERNAL: Remove `node-sass` from `peerDependencies`
 - 🏠 INTERNAL: Upgrade dependencies
 

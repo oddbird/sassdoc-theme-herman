@@ -244,7 +244,7 @@ describe('font annotation', function() {
           }'`;
           assert(
             env.logger.warn.calledWith(
-              `File not found: ${env.herman.sass.jsonfile}\n${errMsg}`
+              `Error reading file: ${env.herman.sass.jsonfile}\n${errMsg}`
             )
           );
           done();
