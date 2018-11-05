@@ -85,7 +85,7 @@ $brand-pink: hsl(330, 85%, 48%);
 /// @group demo_colors
 $demo-colors: (
   'brand-blue': $brand-blue,
-  'brand-pink': $brand-pink
+  'brand-pink': $brand-pink,
 );
 
 /// ## Add color-data to $herman
@@ -142,9 +142,20 @@ $demo-colors: (
 @include herman-add('colors', 'demo-colors', $demo-colors);
 
 $demo-noncolors: (
-  'light-gray': 'brand-blue' ('tint': 80%, 'desaturate': 80%),
-  'gray': 'brand-blue' ('desaturate': 80%),
-  'black': 'brand-blue' ('shade': 30%, 'desaturate': 80%)
+  'light-gray': 'brand-blue'
+    (
+      'tint': 80%,
+      'desaturate': 80%,
+    ),
+  'gray': 'brand-blue'
+    (
+      'desaturate': 80%,
+    ),
+  'black': 'brand-blue'
+    (
+      'shade': 30%,
+      'desaturate': 80%,
+    ),
 );
 
 /// ## Compile and export complex maps

@@ -4,7 +4,7 @@ jobs:
   build:
     working_directory: ~/herman
     docker:
-      - image: circleci/node:8-browsers
+      - image: circleci/node:10-browsers
     steps:
       - checkout
       - restore_cache:
@@ -12,21 +12,8 @@ jobs:
             - herman-yarn-{{ checksum "yarn.lock" }}
             - herman-yarn-
       - run:
-          name: Update yarn.lock [greenkeeper]
-          command: |
-            if [[ "${CIRCLE_BRANCH}" =~ greenkeeper\/.* ]]; then
-              yarn global add greenkeeper-lockfile@1 --prefix ~/.yarn
-              ~/.yarn/bin/greenkeeper-lockfile-update
-            fi
-      - run:
           name: Install Dependencies
           command: yarn
-      - run:
-          name: Upload yarn.lock [greenkeeper]
-          command: |
-            if [[ "${CIRCLE_BRANCH}" =~ greenkeeper\/.* ]]; then
-              ~/.yarn/bin/greenkeeper-lockfile-upload
-            fi
       - run:
           name: Check that yarn.lock matches package.json
           command: |
@@ -69,7 +56,7 @@ jobs:
   lint:
     working_directory: ~/herman
     docker:
-      - image: circleci/node:8-browsers
+      - image: circleci/node:10-browsers
     steps:
       - checkout
       - restore_cache:
@@ -89,7 +76,7 @@ jobs:
   test-sass:
     working_directory: ~/herman
     docker:
-      - image: circleci/node:8-browsers
+      - image: circleci/node:10-browsers
     steps:
       - checkout
       - restore_cache:
@@ -106,7 +93,7 @@ jobs:
   test-js:
     working_directory: ~/herman
     docker:
-      - image: circleci/node:8-browsers
+      - image: circleci/node:10-browsers
     steps:
       - checkout
       - restore_cache:

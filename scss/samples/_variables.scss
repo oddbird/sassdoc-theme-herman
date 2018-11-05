@@ -33,5 +33,5 @@ $basic-value: if(not 'social', $private, 'hello world');
 ///   What to say in the evening before bed
 $map-value: (
   'morning': $basic-value,
-  'evening': $private
+  'evening': $private,
 );

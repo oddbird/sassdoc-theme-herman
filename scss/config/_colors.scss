@@ -39,7 +39,10 @@
 $brand-colors: (
   'brand-orange': hsl(24, 100%, 39%),
   'brand-blue': hsl(195, 85%, 35%),
-  'brand-pink': hsl(330, 85%, 48%) ('shade': 25%)
+  'brand-pink': hsl(330, 85%, 48%)
+    (
+      'shade': 25%,
+    ),
 );
 
 @include config('colors', 'brand-colors', $brand-colors);
@@ -54,9 +57,20 @@ $brand-colors: (
 /// @colors
 /// @group config-colors
 $neutral-colors: (
-  'light-gray': 'brand-blue' ('tint': 80%, 'desaturate': 80%),
-  'gray': 'brand-blue' ('desaturate': 80%),
-  'black': 'brand-blue' ('shade': 30%, 'desaturate': 80%)
+  'light-gray': 'brand-blue'
+    (
+      'tint': 80%,
+      'desaturate': 80%,
+    ),
+  'gray': 'brand-blue'
+    (
+      'desaturate': 80%,
+    ),
+  'black': 'brand-blue'
+    (
+      'shade': 30%,
+      'desaturate': 80%,
+    ),
 );
 
 @include config('colors', 'neutral-colors', $neutral-colors);
@@ -74,20 +88,35 @@ $neutral-colors: (
 /// @group config-colors
 $theme-colors: (
   'theme-dark': 'brand-blue',
-  'theme-light': 'brand-blue' ('tint': 80%),
+  'theme-light': 'brand-blue'
+    (
+      'tint': 80%,
+    ),
   'background': #fff,
   'text': 'black',
   'text-light': 'gray',
   'action': 'brand-pink',
   'focus': 'theme-dark',
-  'underline': 'action' ('tint': 75%),
+  'underline': 'action'
+    (
+      'tint': 75%,
+    ),
   'border': 'gray',
   'border-light': 'light-gray',
-  'shadow': 'gray' ('rgba': 0.5),
+  'shadow': 'gray'
+    (
+      'rgba': 0.5,
+    ),
   'callout': 'theme-light',
-  'slight': 'callout' ('tint': 90%),
+  'slight': 'callout'
+    (
+      'tint': 90%,
+    ),
   'code': 'theme-dark',
-  'code-shadow': 'code' ('rgba': 0.2)
+  'code-shadow': 'code'
+    (
+      'rgba': 0.2,
+    ),
 );
 
 @include config('colors', 'theme-colors', $theme-colors);
@@ -101,7 +130,7 @@ $theme-colors: (
 /// @group config-colors
 $system-colors: (
   'contrast-light': 'background',
-  'contrast-dark': 'text'
+  'contrast-dark': 'text',
 );
 
 @include config('colors', 'system-colors', $system-colors);

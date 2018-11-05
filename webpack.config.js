@@ -5,9 +5,11 @@
 process.env.NODE_ENV = 'production';
 process.env.BROWSERSLIST_CONFIG = './.browserslistrc';
 
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const SassDocPlugin = require('./sassdoc-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+const path = require('path');
 const webpack = require('webpack');
 
 const jsOutput = '[name].min.js';
@@ -28,24 +30,8 @@ const sassDocOpts = {
     ],
     extraLinks: [
       {
-        name: 'Accoutrement-Color',
-        url: 'http://oddbird.net/accoutrement-color/',
-      },
-      {
-        name: 'Accoutrement-Scale',
-        url: 'http://oddbird.net/accoutrement-scale/',
-      },
-      {
-        name: 'Accoutrement-Type',
-        url: 'http://oddbird.net/accoutrement-type/',
-      },
-      {
-        name: 'Accoutrement-Layout',
-        url: 'http://oddbird.net/accoutrement-layout/',
-      },
-      {
-        name: 'Accoutrement-Init',
-        url: 'http://oddbird.net/accoutrement-init/',
+        name: 'Accoutrement',
+        url: 'http://oddbird.net/accoutrement/',
       },
     ],
     displayColors: ['hex', 'hsl'],
@@ -130,6 +116,13 @@ module.exports = {
     alias: { sassjson: path.join(__dirname, 'sass-json-loader') },
   },
   optimization: {
+    minimizer: [
+      new TerserPlugin({
+        cache: true,
+        parallel: true,
+      }),
+      new OptimizeCSSAssetsPlugin(),
+    ],
     runtimeChunk: 'single',
     splitChunks: {
       cacheGroups: {
@@ -154,7 +147,7 @@ module.exports = {
       'root.jQuery': 'jquery',
     }),
     // pull all CSS out of JS bundles
-    new ExtractTextPlugin({
+    new MiniCssExtractPlugin({
       filename: styleOutput,
     }),
     new SassDocPlugin(sassDocOpts, {
@@ -164,6 +157,10 @@ module.exports = {
       ],
       outputPath,
     }),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('production'),
+    }),
+    new webpack.HashedModuleIdsPlugin(),
   ],
   module: {
     rules: [
@@ -185,23 +182,23 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        use: ExtractTextPlugin.extract({
-          use: [
-            {
-              loader: 'css-loader',
-              options: {
-                minimize: true,
-                url: false,
-              },
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              minimize: true,
+              url: false,
+              importLoaders: 2,
             },
-            {
-              loader: 'postcss-loader',
-            },
-            {
-              loader: 'sass-loader',
-            },
-          ],
-        }),
+          },
+          {
+            loader: 'postcss-loader',
+          },
+          {
+            loader: 'sass-loader',
+          },
+        ],
       },
     ],
   },
