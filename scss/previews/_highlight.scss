@@ -19,7 +19,7 @@ $hljs-colors: (
   'hljs-yellow': #b58900,
   'hljs-orange': #cb4b16,
   'hljs-red': #dc322f,
-  'hljs-formula': #eee8d5
+  'hljs-formula': #eee8d5,
 );
 
 @include herman-add('colors', 'hljs-colors', $hljs-colors);

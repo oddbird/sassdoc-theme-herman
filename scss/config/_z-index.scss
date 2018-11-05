@@ -7,8 +7,4 @@
 /// @group config-utils
 /// @link http://oddbird.net/accoutrement-layout/docs/z-index.html
 ///   Accoutrement Layout: Z-Index
-$z-index: (
-  'main',
-  'sidebar',
-  'banner'
-);
+$z-index: ('main', 'sidebar', 'banner');

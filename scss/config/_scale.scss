@@ -13,7 +13,9 @@
 ///
 /// @group config-scale
 /// @ratios
-$text-ratios: ('line-height': 1.4);
+$text-ratios: (
+  'line-height': 1.4,
+);
 
 @include config('ratios', 'text-ratios', $text-ratios);
 
@@ -36,8 +38,12 @@ $text-ratios: ('line-height': 1.4);
 $root-sizes: (
   'root': 18px,
   'responsive': calc(1em + 0.125vw),
-  'large': calc(%s + %s) (1rem, 0.5vw),
-  'small': 0.9rem
+  'large': calc(%s + %s)
+    (
+      1rem,
+      0.5vw,
+    ),
+  'small': 0.9rem,
 );
 
 @include config('sizes', 'root-sizes', $root-sizes);
@@ -53,13 +59,21 @@ $root-sizes: (
 /// @sizes
 $text-sizes: (
   'reset': 1rem,
-  'h1': calc(%s + %s) (1rem, 2vw),
-  'h2': calc(%s + %s) (1rem, 1vw),
+  'h1': calc(%s + %s)
+    (
+      1rem,
+      2vw,
+    ),
+  'h2': calc(%s + %s)
+    (
+      1rem,
+      1vw,
+    ),
   'h3': 'large',
   'quote': 'large',
   'code': 'small',
   'footer': 'small',
-  'search': 'small'
+  'search': 'small',
 );
 
 @include config('sizes', 'text-sizes', $text-sizes);
@@ -74,16 +88,48 @@ $text-sizes: (
 /// @group config-scale
 /// @sizes {ruler}
 $spacing-sizes: (
-  'rhythm': 1rem ('line-height': 1),
+  'rhythm': 1rem
+    (
+      'line-height': 1,
+    ),
   'gutter': 'rhythm',
-  'gutter-plus': 'gutter' ('plus': 'shim'),
-  'double-gutter': 'gutter' ('times': 2),
-  'flex-gutter': calc(%s + %s) ('shim', 2.5vw),
-  'spacer': calc(%s + %s) ('gutter' ('times': 3), 2.5vw),
-  'gutter-minus': 'gutter' ('minus': 'half-shim'),
-  'shim': 'gutter' ('times': 0.5),
-  'half-shim': 'shim' ('times': 0.5),
-  'quarter-shim': 'shim' ('times': 0.25)
+  'gutter-plus': 'gutter'
+    (
+      'plus': 'shim',
+    ),
+  'double-gutter': 'gutter'
+    (
+      'times': 2,
+    ),
+  'flex-gutter': calc(%s + %s)
+    (
+      'shim',
+      2.5vw,
+    ),
+  'spacer': calc(%s + %s)
+    (
+      'gutter'
+        (
+          'times': 3,
+        ),
+      2.5vw,
+    ),
+  'gutter-minus': 'gutter'
+    (
+      'minus': 'half-shim',
+    ),
+  'shim': 'gutter'
+    (
+      'times': 0.5,
+    ),
+  'half-shim': 'shim'
+    (
+      'times': 0.5,
+    ),
+  'quarter-shim': 'shim'
+    (
+      'times': 0.25,
+    ),
 );
 
 @include config('sizes', 'spacing-sizes', $spacing-sizes);
@@ -102,10 +148,19 @@ $pattern-sizes: (
   'arrow-depth': 'shim',
   'arrow-side': 'gutter',
   'font-preview': 24em,
-  'specimen-aa': 'rhythm' ('times': 3),
+  'specimen-aa': 'rhythm'
+    (
+      'times': 3,
+    ),
   'color-preview': 16em,
-  'color-swatch': 'rhythm' ('times': 4),
-  'footer-logo': 'rhythm' ('times': 2)
+  'color-swatch': 'rhythm'
+    (
+      'times': 4,
+    ),
+  'footer-logo': 'rhythm'
+    (
+      'times': 2,
+    ),
 );
 
 @include config('sizes', 'pattern-sizes', $pattern-sizes);
@@ -121,7 +176,7 @@ $layout-sizes: (
   'page': 50rem,
   'item-break': 40em,
   'page-break': 50em,
-  'nav-break': 65em
+  'nav-break': 65em,
 );
 
 @include config('sizes', 'layout-sizes', $layout-sizes);

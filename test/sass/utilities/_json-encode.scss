@@ -18,9 +18,13 @@
 
   @include it('encodes each key/value in a map') {
     $map: (
-      1: (a, b, c),
+      1: (
+        a,
+        b,
+        c,
+      ),
       'two': 3em,
-      'three' 'four': 'hello "world"'
+      'three' 'four': 'hello "world"',
     );
 
     @include assert-equal(
@@ -68,9 +72,13 @@
 @include describe('herman-encode-map [function]') {
   @include it('encodes each key/value in a map') {
     $map: (
-      1: (a, b, c),
+      1: (
+        a,
+        b,
+        c,
+      ),
       'two': 3em,
-      three four: 'hello "world"'
+      three four: 'hello "world"',
     );
 
     @include assert-equal(

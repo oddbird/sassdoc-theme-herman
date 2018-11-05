@@ -43,8 +43,15 @@
 
   // Update nested map by type
   $nested: map-get($herman, $type) or ();
-  $nested: map-merge($nested, ($key: $map));
-  $nested: ($type: $nested);
+  $nested: map-merge(
+    $nested,
+    (
+      $key: $map,
+    )
+  );
+  $nested: (
+    $type: $nested,
+  );
 
   // Merge nested map back into $herman
   $herman: map-merge($herman, $nested) !global;
@@ -91,7 +98,12 @@
       $value: call($function, $value);
     }
 
-    $output: map-merge($output, ($key: $value));
+    $output: map-merge(
+      $output,
+      (
+        $key: $value,
+      )
+    );
   }
 
   @return $output;

@@ -17,7 +17,12 @@
 $sans-font: (
   'name': 'Source Sans Pro',
   'source': 'https://fonts.google.com/specimen/Source+Sans+Pro',
-  'stack': ('Helvetica Neue', 'Helvetica', 'Arial', sans-serif)
+  'stack': (
+    'Helvetica Neue',
+    'Helvetica',
+    'Arial',
+    sans-serif,
+  ),
 );
 
 @include config('font', 'sans', $sans-font);
@@ -32,19 +37,18 @@ $sans-font: (
 $code-font: (
   'name': 'Source Code Pro',
   'source': 'https://fonts.google.com/specimen/Source+Code+Pro',
-  'stack':
-    (
-      'Consolas',
-      'Menlo',
-      'Monaco',
-      'Lucida Console',
-      'Liberation Mono',
-      'DejaVu Sans Mono',
-      'Bitstream Vera Sans Mono',
-      'Courier New',
-      monospace,
-      sans-serif
-    )
+  'stack': (
+    'Consolas',
+    'Menlo',
+    'Monaco',
+    'Lucida Console',
+    'Liberation Mono',
+    'DejaVu Sans Mono',
+    'Bitstream Vera Sans Mono',
+    'Courier New',
+    monospace,
+    sans-serif,
+  ),
 );
 
 @include config('font', 'code', $code-font);
