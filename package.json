@@ -14,7 +14,7 @@
     "bluebird": "^3.5.2",
     "cheerio": "^1.0.0-rc.2",
     "extend": "^3.0.2",
-    "gulp-imagemin": "^4.0.0",
+    "gulp-imagemin": "^5.0.0",
     "gulp-rename": "^1.4.0",
     "gulp-svg-symbols": "^3.2.0",
     "html": "^1.0.0",
