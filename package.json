@@ -24,7 +24,7 @@
     "nunjucks": "^2.5.2",
     "sassdoc-extras": "^2.4.1",
     "strip-indent": "^2.0.0",
-    "through2": "^2.0.3",
+    "through2": "^3.0.0",
     "tinycolor2": "^1.4.1",
     "typogr": "^0.6.8",
     "unixify": "^1.0.0",
