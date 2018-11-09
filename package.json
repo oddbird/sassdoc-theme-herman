@@ -21,7 +21,7 @@
     "lunr": "^2.3.5",
     "markdown-it": "^8.4.2",
     "markdown-it-named-headers": "^0.0.4",
-    "nunjucks": "^2.5.2",
+    "nunjucks": "^3.1.4",
     "sassdoc-extras": "^2.4.1",
     "strip-indent": "^2.0.0",
     "through2": "^2.0.3",
