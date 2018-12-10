@@ -8,7 +8,6 @@ process.env.BROWSERSLIST_CONFIG = './.browserslistrc';
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const SassDocPlugin = require('./sassdoc-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
 const path = require('path');
 const webpack = require('webpack');
 
@@ -116,13 +115,6 @@ module.exports = {
     alias: { sassjson: path.join(__dirname, 'sass-json-loader') },
   },
   optimization: {
-    minimizer: [
-      new TerserPlugin({
-        cache: true,
-        parallel: true,
-      }),
-      new OptimizeCSSAssetsPlugin(),
-    ],
     runtimeChunk: 'single',
     splitChunks: {
       cacheGroups: {
@@ -146,6 +138,7 @@ module.exports = {
       'window.jQuery': 'jquery',
       'root.jQuery': 'jquery',
     }),
+    new OptimizeCSSAssetsPlugin(),
     // pull all CSS out of JS bundles
     new MiniCssExtractPlugin({
       filename: styleOutput,
@@ -187,7 +180,6 @@ module.exports = {
           {
             loader: 'css-loader',
             options: {
-              minimize: true,
               url: false,
               importLoaders: 2,
             },
