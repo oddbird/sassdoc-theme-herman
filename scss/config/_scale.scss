@@ -3,16 +3,16 @@
 
 /// # Herman Config: Sizes
 /// @group config-scale
-/// @link http://oddbird.net/accoutrement-scale/docs/
-///   Accoutrement Scale
+/// @link http://oddbird.net/accoutrement/docs/
+///   Accoutrement
 
 // Text Ratios
 // -----------
 /// We only use ratios to establish line-height on Herman,
 /// since the font sizes are all responsive calculations.
 ///
-/// @group config-scale
 /// @ratios
+/// @group config-scale
 $text-ratios: (
   'line-height': 1.4,
 );
@@ -33,16 +33,12 @@ $text-ratios: (
 /// or assigned more semantic names before applying to
 /// patterns and components.
 ///
-/// @group config-scale
 /// @sizes
+/// @group config-scale
 $root-sizes: (
   'root': 18px,
   'responsive': calc(1em + 0.125vw),
-  'large': calc(%s + %s)
-    (
-      1rem,
-      0.5vw,
-    ),
+  'large': calc(1rem + 0.5vw),
   'small': 0.9rem,
 );
 
@@ -55,25 +51,17 @@ $root-sizes: (
 /// We also provide a set of pattern-specific sizes
 /// to use directly in component styles.
 ///
-/// @group config-scale
 /// @sizes
+/// @group config-scale
 $text-sizes: (
   'reset': 1rem,
-  'h1': calc(%s + %s)
-    (
-      1rem,
-      2vw,
-    ),
-  'h2': calc(%s + %s)
-    (
-      1rem,
-      1vw,
-    ),
-  'h3': 'large',
-  'quote': 'large',
-  'code': 'small',
-  'footer': 'small',
-  'search': 'small',
+  'h1': calc(1rem + 2vw),
+  'h2': calc(1rem + 1vw),
+  'h3': '#large',
+  'quote': '#large',
+  'code': '#small',
+  'footer': '#small',
+  'search': '#small',
 );
 
 @include config('sizes', 'text-sizes', $text-sizes);
@@ -85,48 +73,43 @@ $text-sizes: (
 /// These can be used to add spacing between components,
 /// and provide site hierarchy.
 ///
-/// @group config-scale
 /// @sizes {ruler}
+/// @group config-scale
 $spacing-sizes: (
   'rhythm': 1rem
     (
       'line-height': 1,
     ),
-  'gutter': 'rhythm',
-  'gutter-plus': 'gutter'
+  'gutter': '#rhythm',
+  'gutter-plus': '#gutter'
     (
-      'plus': 'shim',
+      'plus': '#shim',
     ),
-  'double-gutter': 'gutter'
+  'double-gutter': '#gutter'
     (
       'times': 2,
     ),
-  'flex-gutter': calc(%s + %s)
+  'flex-gutter': 'calc(#shim + 2.5vw)',
+  'spacer': 'calc(%s + 2.5vw)'
     (
-      'shim',
-      2.5vw,
-    ),
-  'spacer': calc(%s + %s)
-    (
-      'gutter'
+      '%s': '#gutter'
         (
           'times': 3,
         ),
-      2.5vw,
     ),
-  'gutter-minus': 'gutter'
+  'gutter-minus': '#gutter'
     (
-      'minus': 'half-shim',
+      'minus': '#half-shim',
     ),
-  'shim': 'gutter'
-    (
-      'times': 0.5,
-    ),
-  'half-shim': 'shim'
+  'shim': '#gutter'
     (
       'times': 0.5,
     ),
-  'quarter-shim': 'shim'
+  'half-shim': '#shim'
+    (
+      'times': 0.5,
+    ),
+  'quarter-shim': '#shim'
     (
       'times': 0.25,
     ),
@@ -139,25 +122,25 @@ $spacing-sizes: (
 /// Semantically-named sizes
 /// for managing patterns and component layouts.
 ///
-/// @group config-scale
 /// @sizes {ruler}
+/// @group config-scale
 $pattern-sizes: (
   'nav-underline': 4px,
   'nav-icon': 28px,
   'arrow-border': 8px,
-  'arrow-depth': 'shim',
-  'arrow-side': 'gutter',
+  'arrow-depth': '#shim',
+  'arrow-side': '#gutter',
   'font-preview': 24em,
-  'specimen-aa': 'rhythm'
+  'specimen-aa': '#rhythm'
     (
       'times': 3,
     ),
   'color-preview': 16em,
-  'color-swatch': 'rhythm'
+  'color-swatch': '#rhythm'
     (
       'times': 4,
     ),
-  'footer-logo': 'rhythm'
+  'footer-logo': '#rhythm'
     (
       'times': 2,
     ),
@@ -170,8 +153,8 @@ $pattern-sizes: (
 /// Layout-specific sizes,
 /// for establishing larger widths and breakpoints.
 ///
-/// @group config-scale
 /// @sizes {ruler-large}
+/// @group config-scale
 $layout-sizes: (
   'page': 50rem,
   'item-break': 40em,

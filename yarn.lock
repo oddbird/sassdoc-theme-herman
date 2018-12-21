@@ -841,30 +841,10 @@ accepts@~1.3.4:
     mime-types "~2.1.18"
     negotiator "0.6.1"
 
-accoutrement-color@^2.3.1:
-  version "2.3.1"
-  resolved "https://registry.yarnpkg.com/accoutrement-color/-/accoutrement-color-2.3.1.tgz#9466bbd74b394d1dbc36466ad09ca6d566ff35d9"
-  integrity sha512-vQCzQq6XSN5hCOze/IZR9qHF4gIX8TUQoVFGWuRDby+1t+9LgXZ0W3oeuskzKkr+jo3/Gqqo+8xjp3kUEEV49A==
-
-accoutrement-init@^1.1.3:
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/accoutrement-init/-/accoutrement-init-1.1.3.tgz#6f7c267ade6351e47218c4f8b4cc2b8ac76c3754"
-  integrity sha512-PzNOzd4iYC3KQihBUb4xC89CehAEVbFJWjyi16ixvhbgxR5lSiyBHMYCBN0yKJbvqIw4l/o6linNjhsNtD/BjQ==
-
-accoutrement-layout@^3.0.2:
-  version "3.0.3"
-  resolved "https://registry.yarnpkg.com/accoutrement-layout/-/accoutrement-layout-3.0.3.tgz#747c630b24e8989296100c792297ea8ba18a0f47"
-  integrity sha512-RstQkzvy6F7EtCslguULKLu6IiCzrwcktkfNQ8srjsVk6J/2Rlaq3wwFyURQdjCNoftXrnInfbH5jsGkvgLqOQ==
-
-accoutrement-scale@^6.0.0:
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/accoutrement-scale/-/accoutrement-scale-6.0.0.tgz#b7c973e319dbe21533ca9e0f57e8a5962d952c45"
-  integrity sha512-H94syTrqHpLd4H4vnohFTJ2uIVzv3HArbP0MYujfGmFz1cqvB4K0xVcpO3GnQRU34NaBJ+AcUAqNDMD2oiCtIg==
-
-accoutrement-type@^4.0.2:
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/accoutrement-type/-/accoutrement-type-4.0.2.tgz#7094421411e338677c00b743b61b5fc7c70a4b12"
-  integrity sha512-zVbcs4MrHXz6Obyp5mqj39pbxdjb0xC5xbud0Tnnu2ZRuCQvcP88DEIP2BOUhdonCu2jWpuaLwTsL6p/5QdrgA==
+accoutrement@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/accoutrement/-/accoutrement-2.1.0.tgz#aed22d276127aa6a15ff2dadb02dbac7e75e94b3"
+  integrity sha512-m+cfoQD2FILNsc06LKYUscN0ZlJKaTxVLvz100ySb88vho/LIlh/+Jk5cIyY05/u9oVfqQJNHpSn3WjNCT6FTw==
 
 acorn-dynamic-import@^3.0.0:
   version "3.0.0"
@@ -7874,10 +7854,10 @@ node-releases@^1.0.5:
   dependencies:
     semver "^5.3.0"
 
-node-sass@4.10.0:
-  version "4.10.0"
-  resolved "https://registry.yarnpkg.com/node-sass/-/node-sass-4.10.0.tgz#dcc2b364c0913630945ccbf7a2bbf1f926effca4"
-  integrity sha512-fDQJfXszw6vek63Fe/ldkYXmRYK/QS6NbvM3i5oEo9ntPDy4XX7BcKZyTKv+/kSSxRtXXc7l+MSwEmYc0CSy6Q==
+node-sass@^4.11.0:
+  version "4.11.0"
+  resolved "https://registry.yarnpkg.com/node-sass/-/node-sass-4.11.0.tgz#183faec398e9cbe93ba43362e2768ca988a6369a"
+  integrity sha512-bHUdHTphgQJZaF1LASx0kAviPH7sGlcyNhWade4eVIpFp6tsn7SV8xNMTbsQFpEV9VXpnwTTnNYlfsZXgGgmkA==
   dependencies:
     async-foreach "^0.1.3"
     chalk "^1.1.1"

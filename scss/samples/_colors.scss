@@ -39,11 +39,11 @@ $brand-pink: hsl(330, 85%, 48%);
 /// of name/value pairs.
 /// Sass does not provide any shortcuts for automating this step,
 /// or removing the duplication,
-/// but you can use a tool like our [Accoutrement-Color][color]
+/// but you can use a tool like our [Accoutrement][ac]
 /// to store and access colors
 /// directly in a Herman-friendly map.
 ///
-/// [color]: http://oddbird.net/accoutrement-color/
+/// [ac]: http://oddbird.net/accoutrement/
 ///
 /// Create as many maps as you like
 /// to organize different palettes --
@@ -163,9 +163,9 @@ $demo-noncolors: (
 /// At OddBird, we store our colors in more complex maps,
 /// where the values need to be parsed and compiled
 /// before they can be exported to Herman.
-/// Using [accoutrement-color][ac], our maps look like this:
+/// Using [accoutrement][ac], our maps look like this:
 ///
-/// [ac]: http://oddbird.net/accoutrement-color
+/// [ac]: http://oddbird.net/accoutrement
 ///
 /// ```scss
 /// $demo-noncolors: (
@@ -203,7 +203,7 @@ $demo-noncolors: (
 ///   /* #{$herman} */
 ///
 /// @group demo_colors
-/// @link http://oddbird.net/accoutrement-color Accoutrement-Color
+/// @link http://oddbird.net/accoutrement Accoutrement
 @include herman-add(
   'colors',
   'demo-noncolors',
