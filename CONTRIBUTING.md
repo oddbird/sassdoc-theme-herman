@@ -40,13 +40,13 @@ or if you have an outdated version (``<2.0.0``) installed --
 first run ``npm install -g gulp-cli``.
 
 You can lint the project's JS with ``gulp eslint``
-and run the JS unit tests with ``gulp test``.
+and run the JS unit tests with ``gulp jstest``.
 You can lint Sass with ``gulp sasslint``
 and run the Sass tests with ``gulp sasstest``.
 
 To compile and minify the static assets --
 as well as generate the documentation --
-run ``gulp compile``.
+run ``gulp webpack``.
 
 Just running ``gulp`` will perform all of the above tasks.
 
