@@ -324,7 +324,7 @@ gulp.task(
       gulp.watch(
         [
           paths.SVG,
-          paths.TEMPLATES,
+          ...paths.TEMPLATES,
           `${paths.TEMPLATES_DIR}_icon_template.lodash`,
           './README.md',
           './CHANGELOG.md',
@@ -336,7 +336,7 @@ gulp.task(
       );
 
       gulp.watch(
-        [paths.JS_TESTS_FILES, paths.SRC_JS, paths.TEMPLATES],
+        [...paths.JS_TESTS_FILES, ...paths.SRC_JS, ...paths.TEMPLATES],
         gulp.parallel('jstest-nofail')
       );
 

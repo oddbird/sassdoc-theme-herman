@@ -69,6 +69,6 @@ $functions: (
     @include herman-add($type, $name, $value, get-function('ratio'));
   } @else if index('font' 'fonts', $type) {
     @include add-font($name, $value);
-    @include herman-add($type, $name, $value, get-function('font'));
+    @include herman-add($type, $name, $value);
   }
 }
