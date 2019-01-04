@@ -910,7 +910,7 @@ describe('example annotation', function() {
       const env = extend(true, {}, this.env, {
         herman: {
           sass: {
-            includes: ['~accoutrement/sass/plugin/color/utils', 'import'],
+            includes: ['~accoutrement/sass/core/parser', 'import'],
             includepaths: [path.join(__dirname, 'fixtures', 'scss')],
           },
         },
