@@ -302,7 +302,7 @@
     <div data-item-section="prose" class="text-block">
       <h1 id="herman-config-color-palettes">Herman Config: Color<span class="widont">&nbsp;</span>Palettes</h1>
 <p>This page contains documentation of the colors used by Herman.
-We use OddBird’s <a href="http://oddbird.net/accoutrement-color/">Accoutrement-Color</a> module
+We use OddBird’s <a href="http://oddbird.net/accoutrement/">Accoutrement</a> Color plugin
 to store and manage colors directly in Sass map<span class="widont">&nbsp;</span>objects.</p>
 <p>For help documenting your brand colors,
 see the “<a href="demo_colors.html">Documenting Colors</a>” page.</p>
@@ -356,7 +356,7 @@ see the “<a href="demo_colors.html">Documenting Colors</a>” page.</p>
     <h4 class="param-title">
       
       
-        <a href="http://oddbird.net/accoutrement-color/docs/" class="item-name">Accoutrement Color</a>
+        <a href="http://oddbird.net/accoutrement/docs/" class="item-name">Accoutrement</a>
       
       
       
@@ -541,7 +541,7 @@ before they are used in styling patterns and<span class="widont">&nbsp;</span>co
 or previously-defined key,
 followed by an optional map of adjustments
 (as defined in
-<a href="http://oddbird.net/accoutrement-color/docs/">Accoutrement-Color</a>).</p>
+<a href="http://oddbird.net/accoutrement/docs/">Accoutrement</a>).</p>
 
       </div>
     
@@ -758,18 +758,19 @@ followed by an optional map of adjustments
       
       
       <pre class="hljs-pre"><code class="lang-scss">$neutral-colors: (
-  &#39;light-gray&#39;: &#39;brand-blue&#39;
+  &#39;light-gray&#39;: &#39;#brand-blue&#39;
     (
       &#39;tint&#39;: 80%,
       &#39;desaturate&#39;: 80%,
     ),
-  &#39;gray&#39;: &#39;brand-blue&#39;
+  &#39;gray&#39;: &#39;#brand-blue&#39;
     (
       &#39;desaturate&#39;: 80%,
     ),
-  &#39;black&#39;: &#39;brand-blue&#39;
+  &#39;contrast-light&#39;: #fff,
+  &#39;contrast-dark&#39;: &#39;#brand-blue&#39;
     (
-      &#39;shade&#39;: 30%,
+      &#39;shade&#39;: 30% #000,
       &#39;desaturate&#39;: 80%,
     ),
 );</code></pre>
@@ -910,12 +911,40 @@ before they are used in styling patterns and<span class="widont">&nbsp;</span>co
         <div class="color-preview">
           <div class="color-swatch">
             <div class="transparency-grid"></div>
+            <div class="color-overlay" style="background-color: #fff;"></div>
+          </div>
+          <div class="color-info">
+            <strong class="color-name">
+              
+                <span class="color-name-option">contrast-light</span>
+              
+            </strong>
+            
+            
+              
+                
+                  <code class="color-value">#ffffff</code>
+                
+              
+                
+              
+                
+                  <code class="color-value">hsl(0, 0%, 100%)</code>
+                
+              
+            
+          </div>
+        </div>
+      
+        <div class="color-preview">
+          <div class="color-swatch">
+            <div class="transparency-grid"></div>
             <div class="color-overlay" style="background-color: #3b4042;"></div>
           </div>
           <div class="color-info">
             <strong class="color-name">
               
-                <span class="color-name-option">black</span>
+                <span class="color-name-option">contrast-dark</span>
               
             </strong>
             
@@ -1005,33 +1034,33 @@ before they are used in styling patterns and<span class="widont">&nbsp;</span>co
       
       
       <pre class="hljs-pre"><code class="lang-scss">$theme-colors: (
-  &#39;theme-dark&#39;: &#39;brand-blue&#39;,
-  &#39;theme-light&#39;: &#39;brand-blue&#39;
+  &#39;theme-dark&#39;: &#39;#brand-blue&#39;,
+  &#39;theme-light&#39;: &#39;#brand-blue&#39;
     (
       &#39;tint&#39;: 80%,
     ),
-  &#39;background&#39;: #fff,
-  &#39;text&#39;: &#39;black&#39;,
-  &#39;text-light&#39;: &#39;gray&#39;,
-  &#39;action&#39;: &#39;brand-pink&#39;,
-  &#39;focus&#39;: &#39;theme-dark&#39;,
-  &#39;underline&#39;: &#39;action&#39;
+  &#39;background&#39;: &#39;#contrast-light&#39;,
+  &#39;text&#39;: &#39;#contrast-dark&#39;,
+  &#39;text-light&#39;: &#39;#gray&#39;,
+  &#39;action&#39;: &#39;#brand-pink&#39;,
+  &#39;focus&#39;: &#39;#theme-dark&#39;,
+  &#39;underline&#39;: &#39;#action&#39;
     (
       &#39;tint&#39;: 75%,
     ),
-  &#39;border&#39;: &#39;gray&#39;,
-  &#39;border-light&#39;: &#39;light-gray&#39;,
-  &#39;shadow&#39;: &#39;gray&#39;
+  &#39;border&#39;: &#39;#gray&#39;,
+  &#39;border-light&#39;: &#39;#light-gray&#39;,
+  &#39;shadow&#39;: &#39;#gray&#39;
     (
       &#39;rgba&#39;: 0.5,
     ),
-  &#39;callout&#39;: &#39;theme-light&#39;,
-  &#39;slight&#39;: &#39;callout&#39;
+  &#39;callout&#39;: &#39;#theme-light&#39;,
+  &#39;slight&#39;: &#39;#callout&#39;
     (
       &#39;tint&#39;: 90%,
     ),
-  &#39;code&#39;: &#39;theme-dark&#39;,
-  &#39;code-shadow&#39;: &#39;code&#39;
+  &#39;code&#39;: &#39;#theme-dark&#39;,
+  &#39;code-shadow&#39;: &#39;#code&#39;
     (
       &#39;rgba&#39;: 0.2,
     ),
@@ -1267,7 +1296,7 @@ in our pattern/component<span class="widont">&nbsp;</span>styles.</p>
         <div class="color-preview">
           <div class="color-swatch">
             <div class="transparency-grid"></div>
-            <div class="color-overlay" style="background-color: #aa0e5c;"></div>
+            <div class="color-overlay" style="background-color: #b91e6c;"></div>
           </div>
           <div class="color-info">
             <strong class="color-name">
@@ -1279,13 +1308,13 @@ in our pattern/component<span class="widont">&nbsp;</span>styles.</p>
             
               
                 
-                  <code class="color-value">#aa0e5c</code>
+                  <code class="color-value">#b91e6c</code>
                 
               
                 
               
                 
-                  <code class="color-value">hsl(330, 85%, 36%)</code>
+                  <code class="color-value">hsl(330, 72%, 42%)</code>
                 
               
             
@@ -1295,7 +1324,7 @@ in our pattern/component<span class="widont">&nbsp;</span>styles.</p>
         <div class="color-preview">
           <div class="color-swatch">
             <div class="transparency-grid"></div>
-            <div class="color-overlay" style="background-color: #eac3d6;"></div>
+            <div class="color-overlay" style="background-color: #eec7da;"></div>
           </div>
           <div class="color-info">
             <strong class="color-name">
@@ -1307,13 +1336,13 @@ in our pattern/component<span class="widont">&nbsp;</span>styles.</p>
             
               
                 
-                  <code class="color-value">#eac3d6</code>
+                  <code class="color-value">#eec7da</code>
                 
               
                 
               
                 
-                  <code class="color-value">hsl(331, 48%, 84%)</code>
+                  <code class="color-value">hsl(331, 53%, 86%)</code>
                 
               
             
@@ -1426,211 +1455,6 @@ in our pattern/component<span class="widont">&nbsp;</span>styles.</p>
               
                 
                   <code class="color-value">hsla(195, 85%, 35%, 0.2)</code>
-                
-              
-            
-          </div>
-        </div>
-      
-    </div>
-  
-  </div>
-
-
-      
-
-</section>
-
-  
-    
-    
-
-
-
-
-
-
-
-
-
-
-<section class="item" id="variable--system-colors">
-  
-    
-  
-  
-
-  
-  
-  
-  
-
-  <div data-item-section="header">
-    <h2 class="item-title">
-      
-        <span class="item-type"></span>
-      
-
-      
-        <a href="#variable--system-colors" class="item-name">$system-colors</a>
-      
-
-      
-
-      
-    </h2>
-
-    
-  
-
-
-    
-    
-    
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            scss
-          </span>
-
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-scss">$system-colors: (
-  &#39;contrast-light&#39;: &#39;background&#39;,
-  &#39;contrast-dark&#39;: &#39;text&#39;,
-);</code></pre>
-    </div>
-  
-
-    
-  
-  
-  
-  
-
-  
-    <div class="text-block">
-      <p>Colors used by accoutrement-color
-to calculate contrast<span class="widont">&nbsp;</span>ratios.</p>
-
-      
-  
-
-      
-  
-
-      
-  
-
-    </div>
-  
-
-  </div>
-
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-
-  
-  
-
-
-  
-  
-  
-  
-    
-    
-  
-
-  
-
-  
-  
-
-
-  
-  
-
-  
-  
-        
-  
-  <div data-item-section="color-palette">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Color Previews</span>
-        
-      </h3>
-    
-
-    
-    <div class="color-palette">
-      
-        <div class="color-preview">
-          <div class="color-swatch">
-            <div class="transparency-grid"></div>
-            <div class="color-overlay" style="background-color: #fff;"></div>
-          </div>
-          <div class="color-info">
-            <strong class="color-name">
-              
-                <span class="color-name-option">contrast-light</span>
-              
-            </strong>
-            
-            
-              
-                
-                  <code class="color-value">#ffffff</code>
-                
-              
-                
-              
-                
-                  <code class="color-value">hsl(0, 0%, 100%)</code>
-                
-              
-            
-          </div>
-        </div>
-      
-        <div class="color-preview">
-          <div class="color-swatch">
-            <div class="transparency-grid"></div>
-            <div class="color-overlay" style="background-color: #3b4042;"></div>
-          </div>
-          <div class="color-info">
-            <strong class="color-name">
-              
-                <span class="color-name-option">contrast-dark</span>
-              
-            </strong>
-            
-            
-              
-                
-                  <code class="color-value">#3b4042</code>
-                
-              
-                
-              
-                
-                  <code class="color-value">hsl(197, 6%, 25%)</code>
                 
               
             

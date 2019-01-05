@@ -41,11 +41,11 @@ $xlarge: 3rem;
 /// of name/value pairs.
 /// Sass does not provide any shortcuts for automating this step,
 /// or removing the duplication,
-/// but you can use a tool like our [Accoutrement-Scale][scale]
+/// but you can use a tool like our [Accoutrement][ac]
 /// to store and access ratios
 /// directly in a Herman-friendly map.
 ///
-/// [scale]: http://oddbird.net/accoutrement-scale/
+/// [ac]: http://oddbird.net/accoutrement/
 ///
 /// ```scss
 /// $demo-ratios: (
@@ -82,11 +82,11 @@ $demo-ratios: (
 /// sizes can be combined into any number of maps
 /// to preview with Herman.
 /// you can build these maps out of existing variables,
-/// or use a tool like our [Accoutrement-Scale][scale]
+/// or use a tool like our [Accoutrement][ac]
 /// to store and access sizes
 /// directly in a Herman-friendly map.
 ///
-/// [scale]: http://oddbird.net/accoutrement-scale/
+/// [ac]: http://oddbird.net/accoutrement/
 ///
 /// ```scss
 /// $demo-sizes: (
@@ -181,6 +181,6 @@ $demo-sizes: (
 /// @see herman-add
 /// @see herman-export
 /// @group demo_sizes
-/// @link http://oddbird.net/accoutrement-scale Accoutrement-Scale
+/// @link http://oddbird.net/accoutrement Accoutrement
 @include herman-add('ratios', 'demo-ratios', $demo-ratios);
 @include herman-add('sizes', 'demo-sizes', $demo-sizes);

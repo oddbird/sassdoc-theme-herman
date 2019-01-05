@@ -351,7 +351,7 @@
     <h4 class="param-title">
       
       
-        <a href="http://oddbird.net/accoutrement-scale/docs/" class="item-name">Accoutrement Scale</a>
+        <a href="http://oddbird.net/accoutrement/docs/" class="item-name">Accoutrement</a>
       
       
       
@@ -802,11 +802,7 @@ since the font sizes are all responsive<span class="widont">&nbsp;</span>calcula
       <pre class="hljs-pre"><code class="lang-scss">$root-sizes: (
   &#39;root&#39;: 18px,
   &#39;responsive&#39;: calc(1em + 0.125vw),
-  &#39;large&#39;: calc(%s + %s)
-    (
-      1rem,
-      0.5vw,
-    ),
+  &#39;large&#39;: calc(1rem + 0.5vw),
   &#39;small&#39;: 0.9rem,
 );</code></pre>
     </div>
@@ -1083,21 +1079,13 @@ patterns and<span class="widont">&nbsp;</span>components.</p>
       
       <pre class="hljs-pre"><code class="lang-scss">$text-sizes: (
   &#39;reset&#39;: 1rem,
-  &#39;h1&#39;: calc(%s + %s)
-    (
-      1rem,
-      2vw,
-    ),
-  &#39;h2&#39;: calc(%s + %s)
-    (
-      1rem,
-      1vw,
-    ),
-  &#39;h3&#39;: &#39;large&#39;,
-  &#39;quote&#39;: &#39;large&#39;,
-  &#39;code&#39;: &#39;small&#39;,
-  &#39;footer&#39;: &#39;small&#39;,
-  &#39;search&#39;: &#39;small&#39;,
+  &#39;h1&#39;: calc(1rem + 2vw),
+  &#39;h2&#39;: calc(1rem + 1vw),
+  &#39;h3&#39;: &#39;#large&#39;,
+  &#39;quote&#39;: &#39;#large&#39;,
+  &#39;code&#39;: &#39;#small&#39;,
+  &#39;footer&#39;: &#39;#small&#39;,
+  &#39;search&#39;: &#39;#small&#39;,
 );</code></pre>
     </div>
   
@@ -1397,41 +1385,36 @@ to use directly in component<span class="widont">&nbsp;</span>styles.</p>
     (
       &#39;line-height&#39;: 1,
     ),
-  &#39;gutter&#39;: &#39;rhythm&#39;,
-  &#39;gutter-plus&#39;: &#39;gutter&#39;
+  &#39;gutter&#39;: &#39;#rhythm&#39;,
+  &#39;gutter-plus&#39;: &#39;#gutter&#39;
     (
-      &#39;plus&#39;: &#39;shim&#39;,
+      &#39;plus&#39;: &#39;#shim&#39;,
     ),
-  &#39;double-gutter&#39;: &#39;gutter&#39;
+  &#39;double-gutter&#39;: &#39;#gutter&#39;
     (
       &#39;times&#39;: 2,
     ),
-  &#39;flex-gutter&#39;: calc(%s + %s)
+  &#39;flex-gutter&#39;: &#39;calc(#shim + 2.5vw)&#39;,
+  &#39;spacer&#39;: &#39;calc(%s + 2.5vw)&#39;
     (
-      &#39;shim&#39;,
-      2.5vw,
-    ),
-  &#39;spacer&#39;: calc(%s + %s)
-    (
-      &#39;gutter&#39;
+      &#39;%s&#39;: &#39;#gutter&#39;
         (
           &#39;times&#39;: 3,
         ),
-      2.5vw,
     ),
-  &#39;gutter-minus&#39;: &#39;gutter&#39;
+  &#39;gutter-minus&#39;: &#39;#gutter&#39;
     (
-      &#39;minus&#39;: &#39;half-shim&#39;,
+      &#39;minus&#39;: &#39;#half-shim&#39;,
     ),
-  &#39;shim&#39;: &#39;gutter&#39;
-    (
-      &#39;times&#39;: 0.5,
-    ),
-  &#39;half-shim&#39;: &#39;shim&#39;
+  &#39;shim&#39;: &#39;#gutter&#39;
     (
       &#39;times&#39;: 0.5,
     ),
-  &#39;quarter-shim&#39;: &#39;shim&#39;
+  &#39;half-shim&#39;: &#39;#shim&#39;
+    (
+      &#39;times&#39;: 0.5,
+    ),
+  &#39;quarter-shim&#39;: &#39;#shim&#39;
     (
       &#39;times&#39;: 0.25,
     ),
@@ -1810,19 +1793,19 @@ and provide site<span class="widont">&nbsp;</span>hierarchy.</p>
   &#39;nav-underline&#39;: 4px,
   &#39;nav-icon&#39;: 28px,
   &#39;arrow-border&#39;: 8px,
-  &#39;arrow-depth&#39;: &#39;shim&#39;,
-  &#39;arrow-side&#39;: &#39;gutter&#39;,
+  &#39;arrow-depth&#39;: &#39;#shim&#39;,
+  &#39;arrow-side&#39;: &#39;#gutter&#39;,
   &#39;font-preview&#39;: 24em,
-  &#39;specimen-aa&#39;: &#39;rhythm&#39;
+  &#39;specimen-aa&#39;: &#39;#rhythm&#39;
     (
       &#39;times&#39;: 3,
     ),
   &#39;color-preview&#39;: 16em,
-  &#39;color-swatch&#39;: &#39;rhythm&#39;
+  &#39;color-swatch&#39;: &#39;#rhythm&#39;
     (
       &#39;times&#39;: 4,
     ),
-  &#39;footer-logo&#39;: &#39;rhythm&#39;
+  &#39;footer-logo&#39;: &#39;#rhythm&#39;
     (
       &#39;times&#39;: 2,
     ),

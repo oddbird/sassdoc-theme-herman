@@ -26,14 +26,14 @@ $hljs-colors: (
 
 .hljs-comment,
 .hljs-quote {
-  color: color('hljs-comment', $hljs-colors);
+  color: color('hljs-comment', $source: $hljs-colors);
 }
 
 // Solarized Green
 .hljs-keyword,
 .hljs-selector-tag,
 .hljs-addition {
-  color: color('hljs-green', $hljs-colors);
+  color: color('hljs-green', $source: $hljs-colors);
 }
 
 // Solarized Cyan
@@ -43,7 +43,7 @@ $hljs-colors: (
 .hljs-literal,
 .hljs-doctag,
 .hljs-regexp {
-  color: color('hljs-cyan', $hljs-colors);
+  color: color('hljs-cyan', $source: $hljs-colors);
 }
 
 // Solarized Blue
@@ -52,7 +52,7 @@ $hljs-colors: (
 .hljs-name,
 .hljs-selector-id,
 .hljs-selector-class {
-  color: color('hljs-blue', $hljs-colors);
+  color: color('hljs-blue', $source: $hljs-colors);
 }
 
 // Solarized Yellow
@@ -62,7 +62,7 @@ $hljs-colors: (
 .hljs-template-variable,
 .hljs-class .hljs-title,
 .hljs-type {
-  color: color('hljs-yellow', $hljs-colors);
+  color: color('hljs-yellow', $source: $hljs-colors);
 }
 
 // Solarized Orange
@@ -74,17 +74,17 @@ $hljs-colors: (
 .hljs-selector-attr,
 .hljs-selector-pseudo,
 .hljs-link {
-  color: color('hljs-orange', $hljs-colors);
+  color: color('hljs-orange', $source: $hljs-colors);
 }
 
 // Solarized Red
 .hljs-built_in,
 .hljs-deletion {
-  color: color('hljs-red', $hljs-colors);
+  color: color('hljs-red', $source: $hljs-colors);
 }
 
 .hljs-formula {
-  background: color('hljs-formula', $hljs-colors);
+  background: color('hljs-formula', $source: $hljs-colors);
 }
 
 .hljs-emphasis {

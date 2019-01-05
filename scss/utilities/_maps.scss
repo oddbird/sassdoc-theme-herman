@@ -28,7 +28,7 @@
 /// @example scss
 ///   $brand-colors: (
 ///     'brand-blue': hsl(195, 85%, 35%),
-///     'light-gray': 'brand-blue' ('tint': 80%, 'desaturate': 80%),
+///     'light-gray': '#brand-blue' ('tint': 80%, 'desaturate': 80%),
 ///   );
 ///   @include herman-add('colors', 'brand-colors', $brand-colors, get-function('color'));
 ///   /* #{$herman} */
@@ -62,7 +62,7 @@
 /// Pass the values of any map through a given function
 /// (with optional arguments)
 /// and return the compiled map.
-/// This is used by `herman-add` and `accoutrement-add`,
+/// This is used by `herman-add`,
 /// but can also be accessed directly.
 ///
 /// @group api_json-export

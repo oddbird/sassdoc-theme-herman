@@ -3,18 +3,18 @@
 
 $colors-initial: (
   'brand-blue': hsl(195, 85%, 35%),
-  'light-gray': 'brand-blue'
+  'light-gray': '#brand-blue'
     (
       'tint': 80%,
       'desaturate': 80%,
     ),
-  'gray': 'brand-blue'
+  'gray': '#brand-blue'
     (
       'desaturate': 80%,
     ),
-  'black': 'brand-blue'
+  'black': '#brand-blue'
     (
-      'shade': 30%,
+      'shade': 30% #000,
       'desaturate': 80%,
     ),
 );
@@ -35,9 +35,9 @@ $darken: (
 
 $sizes: (
   'root': 20px,
-  'rhythm': 'root'
+  'rhythm': '#root'
     (
-      'fifth': 1,
+      '_fifth': 1,
       'convert': 'rem',
     ),
 );

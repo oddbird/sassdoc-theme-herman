@@ -3,18 +3,18 @@
 
 /// # Herman Config: Color Palettes
 /// This page contains documentation of the colors used by Herman.
-/// We use OddBird's [Accoutrement-Color][ac] module
+/// We use OddBird's [Accoutrement][ac] Color plugin
 /// to store and manage colors directly in Sass map objects.
 ///
-/// [ac]: http://oddbird.net/accoutrement-color/
+/// [ac]: http://oddbird.net/accoutrement/
 ///
 /// For help documenting your brand colors,
 /// see the "[Documenting Colors][colors]" page.
 ///
 /// [colors]: demo_colors.html
 /// @group config-colors
-/// @link http://oddbird.net/accoutrement-color/docs/
-///   Accoutrement Color
+/// @link http://oddbird.net/accoutrement/docs/
+///   Accoutrement
 
 // Brand Colors
 // ------------
@@ -35,7 +35,7 @@
 ///   or previously-defined key,
 ///   followed by an optional map of adjustments
 ///   (as defined in
-///   [Accoutrement-Color](http://oddbird.net/accoutrement-color/docs/)).
+///   [Accoutrement](http://oddbird.net/accoutrement/docs/)).
 $brand-colors: (
   'brand-orange': hsl(24, 100%, 39%),
   'brand-blue': hsl(195, 85%, 35%),
@@ -57,18 +57,19 @@ $brand-colors: (
 /// @colors
 /// @group config-colors
 $neutral-colors: (
-  'light-gray': 'brand-blue'
+  'light-gray': '#brand-blue'
     (
       'tint': 80%,
       'desaturate': 80%,
     ),
-  'gray': 'brand-blue'
+  'gray': '#brand-blue'
     (
       'desaturate': 80%,
     ),
-  'black': 'brand-blue'
+  'contrast-light': #fff,
+  'contrast-dark': '#brand-blue'
     (
-      'shade': 30%,
+      'shade': 30% #000,
       'desaturate': 80%,
     ),
 );
@@ -87,50 +88,36 @@ $neutral-colors: (
 /// @colors
 /// @group config-colors
 $theme-colors: (
-  'theme-dark': 'brand-blue',
-  'theme-light': 'brand-blue'
+  'theme-dark': '#brand-blue',
+  'theme-light': '#brand-blue'
     (
       'tint': 80%,
     ),
-  'background': #fff,
-  'text': 'black',
-  'text-light': 'gray',
-  'action': 'brand-pink',
-  'focus': 'theme-dark',
-  'underline': 'action'
+  'background': '#contrast-light',
+  'text': '#contrast-dark',
+  'text-light': '#gray',
+  'action': '#brand-pink',
+  'focus': '#theme-dark',
+  'underline': '#action'
     (
       'tint': 75%,
     ),
-  'border': 'gray',
-  'border-light': 'light-gray',
-  'shadow': 'gray'
+  'border': '#gray',
+  'border-light': '#light-gray',
+  'shadow': '#gray'
     (
       'rgba': 0.5,
     ),
-  'callout': 'theme-light',
-  'slight': 'callout'
+  'callout': '#theme-light',
+  'slight': '#callout'
     (
       'tint': 90%,
     ),
-  'code': 'theme-dark',
-  'code-shadow': 'code'
+  'code': '#theme-dark',
+  'code-shadow': '#code'
     (
       'rgba': 0.2,
     ),
 );
 
 @include config('colors', 'theme-colors', $theme-colors);
-
-// System Colors
-// -------------
-/// Colors used by accoutrement-color
-/// to calculate contrast ratios.
-///
-/// @colors
-/// @group config-colors
-$system-colors: (
-  'contrast-light': 'background',
-  'contrast-dark': 'text',
-);
-
-@include config('colors', 'system-colors', $system-colors);

@@ -7,16 +7,15 @@
 // Functions
 // ---------
 /// These functions will be made available to
-/// accoutrement-color & accoutrement-scale tools,
-/// for use in the `$colors` and `$sizes` configuration maps.
+/// accoutrement tools
+/// for use in configuration maps.
 /// Register additional functions as needed,
 /// or establish alias names for existing functions.
 ///
 /// @group config-utils
 /// @type map
 ///
-/// @link http://oddbird.net/accoutrement-color Accoutrement-Color
-/// @link http://oddbird.net/accoutrement-scale Accoutrement-Scale
+/// @link http://oddbird.net/accoutrement Accoutrement
 ///
 /// @prop {function | string} <alias> -
 ///   Use `get-function()` to capture a first-class function,
@@ -25,7 +24,7 @@ $functions: (
   'darken': get-function('darken'),
   'desaturate': get-function('desaturate'),
   'rgba': get-function('rgba'),
-  'convert': 'convert-units',
+  'convert': '#convert-units',
 );
 
 // Config
@@ -37,9 +36,7 @@ $functions: (
 /// and is not included as part of the Herman API.
 ///
 /// @group config-utils
-/// @link http://oddbird.net/accoutrement-color Accoutrement-Color
-/// @link http://oddbird.net/accoutrement-type Accoutrement-Type
-/// @link http://oddbird.net/accoutrement-scale Accoutrement-Scale
+/// @link http://oddbird.net/accoutrement Accoutrement
 ///
 /// @param {string} $type -
 ///   The type of data being added, e.g.
@@ -65,13 +62,13 @@ $functions: (
     @include add-colors($value);
     @include herman-add($type, $name, $value, get-function('color'));
   } @else if index('size' 'sizes', $type) {
-    $sizes: map-merge($sizes, $value) !global;
+    @include add-sizes($value);
     @include herman-add($type, $name, $value, get-function('size'));
   } @else if index('ratio' 'ratios', $type) {
-    $ratios: map-merge($ratios, $value) !global;
+    @include add-ratios($value);
     @include herman-add($type, $name, $value, get-function('ratio'));
   } @else if index('font' 'fonts', $type) {
     @include add-font($name, $value);
-    @include herman-add($type, $name, $value);
+    @include herman-add($type, $name, font($name));
   }
 }
