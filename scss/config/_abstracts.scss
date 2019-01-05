@@ -24,7 +24,7 @@ $functions: (
   'darken': get-function('darken'),
   'desaturate': get-function('desaturate'),
   'rgba': get-function('rgba'),
-  'convert': 'convert-units',
+  'convert': '#convert-units',
 );
 
 // Config
@@ -69,6 +69,6 @@ $functions: (
     @include herman-add($type, $name, $value, get-function('ratio'));
   } @else if index('font' 'fonts', $type) {
     @include add-font($name, $value);
-    @include herman-add($type, $name, $value);
+    @include herman-add($type, $name, font($name));
   }
 }

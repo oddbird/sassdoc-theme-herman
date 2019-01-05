@@ -96,7 +96,8 @@
     ) %}
 
     {% if data.stack %}
-      {% set family = [data.name or name, data.stack]|join(',') %}
+      {% set name = data.name or name %}
+      {% set family = [name, data.stack]|join(',') if not (name in data.stack) else data.stack %}
       {% set family = 'font-family: ' + font_names(family) + ';' %}
       {{ utility.code_block(language='css', content=family|safe) }}
     {% endif %}
@@ -140,9 +141,9 @@
 
 
 {%- macro font_names(family) -%}
-  {%- set generic = ['serif', 'sans-serif', 'monospace', 'cursive', 'fantasy'] -%}
-  {%- for name in family|split(',') -%}
-    {{ name if (name in generic) else "'" + name + "'" }}
+  {% set family = family|split(',') if family|isString else family %}
+  {%- for name in family -%}
+    {{ "'" + name + "'" if (' ' in name) else name }}
     {%- if not loop.last %}, {% endif -%}
   {%- endfor -%}
 {%- endmacro -%}
