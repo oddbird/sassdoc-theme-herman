@@ -123,7 +123,8 @@
 {% macro specimen_variant(variant, data) %}
   {% set path = data[variant.variant] if data[variant.variant]|isString else '' %}
   {% set path = data[variant.variant].path or path %}
-  {% set family = [variant.family, data.stack]|join(',') %}
+  {% set stack = data.stack if data.stack and not data.stack|isString else [data.stack] %}
+  {% set family = [variant.family, stack]|join(',') if not (variant.family in stack) else stack %}
   <div data-specimen-face="{{ variant.variant }}">
     <h4 data-specimen="face-name">
       {{ variant.variant }}
