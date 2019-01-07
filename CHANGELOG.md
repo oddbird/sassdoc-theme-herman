@@ -1,7 +1,7 @@
 # Herman Changelog
 
 
-## Unreleased
+## 3.0.1: 2019-01-07
 
 - 🐛 BUGFIX: Improve error message when reading external files --
   [#311](https://github.com/oddbird/sassdoc-theme-herman/issues/311)
