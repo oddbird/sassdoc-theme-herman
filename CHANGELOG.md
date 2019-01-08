@@ -1,6 +1,13 @@
 # Herman Changelog
 
 
+## Unreleased
+
+- 🐛 BUGFIX: Allow local system fonts without `formats` --
+  [#336](https://github.com/oddbird/sassdoc-theme-herman/issues/336)
+- 🏠 INTERNAL: Upgrade dependencies
+
+
 ## 3.0.1: 2019-01-07
 
 - 🐛 BUGFIX: Improve error message when reading external files --

@@ -414,6 +414,42 @@ describe('font annotation', function() {
         .catch(done);
     });
 
+    it('adds `@font-face` CSS for `local` without `formats`', function(done) {
+      const env = {
+        dir: __dirname,
+        herman: {
+          fontpath: path.normalize('/path'),
+        },
+        sassjson: {
+          fonts: {
+            'test-font': {
+              normal: {
+                local: ['this', 'that'],
+              },
+            },
+          },
+        },
+      };
+      const font = annotations.font(env);
+
+      font
+        .resolve(this.data)
+        .then(() => {
+          const css =
+            '@font-face {\n' +
+            "  font-family: 'test-font';\n" +
+            "  src: local('this'), local('that');\n" +
+            '  font-weight: normal;\n' +
+            '  font-style: normal;\n' +
+            '}\n';
+
+          assert.equal(this.data[0].font.localFontCSS, css);
+          assert.deepEqual(env.localFonts, []);
+          done();
+        })
+        .catch(done);
+    });
+
     it('adds separate `@font-face` for `eot` and `local`', function(done) {
       const env = {
         dir: __dirname,
