@@ -1,11 +1,10 @@
 # Herman Changelog
 
 
-## Unreleased
+## 3.0.2: 2019-01-09
 
 - 🐛 BUGFIX: Allow local system fonts without `formats` --
   [#336](https://github.com/oddbird/sassdoc-theme-herman/issues/336)
-- 🏠 INTERNAL: Upgrade dependencies
 
 
 ## 3.0.1: 2019-01-07
