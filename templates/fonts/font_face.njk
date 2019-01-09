@@ -27,7 +27,7 @@
 {%- endif %}
   src:
 {%- if local and local.length -%}
-  {%- for name in local %} local('{{ name }}'){{ ';' if only_eot and separate_eot else ',' }}{% endfor -%}
+  {%- for name in local %} local('{{ name }}'){{ ';' if loop.last and ((only_eot and separate_eot) or orderedFormats.length === 0) else ',' }}{% endfor -%}
 {%- endif -%}
 {%- for ext in orderedFormats -%}
   {%- if formats[ext] and not (ext === 'eot' and separate_eot) -%}
