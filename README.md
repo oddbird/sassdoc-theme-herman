@@ -36,14 +36,14 @@ and more.
 [icon-docs]: http://oddbird.net/herman/docs/demo_icons.html
 [example-docs]: http://oddbird.net/herman/docs/demo_examples.html
 
-
 ## Getting Started
 
 ```bash
 npm install sassdoc sassdoc-theme-herman
 ```
 
-Note: `node-sass` is required to use Herman
+Note: A Sass implementation (`node-sass` or `sass`)
+is required to use Herman
 to display samples of Sass/Scss code.
 If it's not already installed in your project,
 install it along with Herman:
@@ -60,7 +60,6 @@ in your SassDoc options:
 ```bash
 sassdoc <src> --theme herman
 ```
-
 
 ### SassDoc Comments
 
@@ -89,7 +88,6 @@ it is separated from documented code by one or more newlines.
 @mixin sample-object { … }
 ```
 
-
 ### Herman Annotations
 
 In addition to the core SassDoc annotations,
@@ -111,7 +109,6 @@ for displaying [color-palettes][color-preview],
 [See the full documentation for details »][docs]
 
 [docs]: http://oddbird.net/herman/docs/CONFIGURATION.html
-
 
 ## SassDoc Extras
 

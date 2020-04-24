@@ -910,7 +910,9 @@ $demo-noncolors: (
   get-function(&#39;color&#39;) // function
 );
 
-/* #{$herman} */</code></pre>
+@each $key, $value in $herman {
+/* #{$key}: #{inspect($value)} */
+}</code></pre>
     </div>
   
 
@@ -932,8 +934,7 @@ $demo-noncolors: (
 
       
       
-      <pre class="hljs-pre"><code class="lang-css">/* (&quot;colors&quot;: (&quot;demo-noncolors&quot;: (&quot;light-gray&quot;: #dedede, &quot;gray&quot;: #555b5e, &quot;black&quot;: #515151))) */
-</code></pre>
+      <pre class="hljs-pre"><code class="lang-css">/* colors: (&quot;demo-noncolors&quot;: (&quot;light-gray&quot;: #dedede, &quot;gray&quot;: #555b5e, &quot;black&quot;: #515151)) */</code></pre>
     </div>
   
 

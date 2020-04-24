@@ -20,8 +20,14 @@ describe('byGroup', function() {
     ];
     const actual = byGroup(data, orderedGroups);
     const expected = {
-      g2: [{ id: 2, group: ['g2'] }, { id: 4, group: ['g2'] }],
-      g1: [{ id: 1, group: ['g1'] }, { id: 3, group: ['g1'] }],
+      g2: [
+        { id: 2, group: ['g2'] },
+        { id: 4, group: ['g2'] },
+      ],
+      g1: [
+        { id: 1, group: ['g1'] },
+        { id: 3, group: ['g1'] },
+      ],
     };
     assert.deepEqual(actual, expected, JSON.stringify(actual));
   });

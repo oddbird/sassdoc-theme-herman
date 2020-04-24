@@ -56,7 +56,7 @@
 /// will be compiled by Herman,
 /// and display the output along with the source.
 ///
-/// Note that Sass/Scss examples require `node-sass`
+/// Note that Sass/Scss examples require `node-sass` or `sass`
 /// to be installed, if it isn't already: `npm install node-sass`.
 ///
 /// All Sass examples must be complete and valid,
@@ -74,9 +74,11 @@
 ///       - 'node_modules'
 /// ```
 ///
-/// You can also set an array of default `includes`
+/// You can also set an array of default `includes` or `use`
 /// (relative to any `includepaths`)
 /// to include for all Sass examples:
+///
+/// To `@import` files:
 ///
 /// ```yaml
 /// # .sassdocrc (yaml)
@@ -87,6 +89,18 @@
 ///     includes:
 ///       - 'utilities'
 ///       - 'config/manifest'
+/// ```
+///
+/// Or to `@use` files:
+///
+/// ```yaml
+/// # .sassdocrc (yaml)
+/// herman:
+///   sass:
+///     includepaths:
+///       - 'static/sass'
+///     use:
+///       - 'config/tools'
 /// ```
 ///
 /// Generally, included Sass files should not contain

@@ -452,7 +452,7 @@ with an API for supporting additional<span class="widont">&nbsp;</span>languages
 <p>Example annotations with language set to <code>sass</code> or <code>scss</code>
 will be compiled by Herman,
 and display the output along with the<span class="widont">&nbsp;</span>source.</p>
-<p>Note that Sass/Scss examples require <code>node-sass</code>
+<p>Note that Sass/Scss examples require <code>node-sass</code> or <code>sass</code>
 to be installed, if it isn’t already: <code>npm install node-sass</code>.</p>
 <p>All Sass examples must be complete and valid,
 with the ability to import Sass partials inside each example.
@@ -466,9 +466,10 @@ an array of places to look for Sass<span class="widont">&nbsp;</span>includes:</
       - 'static/sass'
       - 'node_modules'
 </code></pre>
-<p>You can also set an array of default <code>includes</code>
+<p>You can also set an array of default <code>includes</code> or <code>use</code>
 (relative to any <code>includepaths</code>)
 to include for all Sass<span class="widont">&nbsp;</span>examples:</p>
+<p>To <code>@import</code> files:</p>
 <pre><code class="lang-yaml"># .sassdocrc (yaml)
 herman:
   sass:
@@ -477,6 +478,15 @@ herman:
     includes:
       - 'utilities'
       - 'config/manifest'
+</code></pre>
+<p>Or to <code>@use</code> files:</p>
+<pre><code class="lang-yaml"># .sassdocrc (yaml)
+herman:
+  sass:
+    includepaths:
+      - 'static/sass'
+    use:
+      - 'config/tools'
 </code></pre>
 <p>Generally, included Sass files should not contain
 any CSS output of their own,
@@ -583,9 +593,8 @@ herman:
       
       
       <pre class="hljs-pre"><code class="lang-css">.sass-nesting {
-  content: &#39;Example: Compiling Sass...&#39;;
-}
-</code></pre>
+  content: &quot;Example: Compiling Sass...&quot;;
+}</code></pre>
     </div>
   
 

@@ -10,6 +10,7 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const SassDocPlugin = require('./sassdoc-webpack-plugin');
 const path = require('path');
 const webpack = require('webpack');
+const sass = require('sass');
 
 const jsOutput = '[name].min.js';
 const styleOutput = '[name].min.css';
@@ -45,6 +46,7 @@ const sassDocOpts = {
         path.join(__dirname, 'node_modules'),
       ],
       includes: ['utilities', 'config/manifest'],
+      implementation: sass,
     },
   },
   display: {

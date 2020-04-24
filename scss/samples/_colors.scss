@@ -200,8 +200,9 @@ $demo-noncolors: (
 ///     get-function('color') // function
 ///   );
 ///
-///   /* #{$herman} */
-///
+///   @each $key, $value in $herman {
+///   /* #{$key}: #{inspect($value)} */
+///   }
 /// @group demo_colors
 /// @link http://oddbird.net/accoutrement Accoutrement
 @include herman-add(

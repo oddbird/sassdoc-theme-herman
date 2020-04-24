@@ -1,10 +1,10 @@
 'use strict';
 
 const assert = require('assert');
+const Promise = require('bluebird');
 const extend = require('extend');
 const nunjucks = require('nunjucks');
 const path = require('path');
-const Promise = require('bluebird');
 const sinon = require('sinon');
 
 /* eslint-disable global-require */
@@ -206,7 +206,7 @@ describe('font annotation', function() {
   describe('resolve', function() {
     beforeEach(function() {
       this.data = [{ font: { key: 'test-font' } }];
-      this.origData = Object.assign({}, this.data);
+      this.origData = Object.assign([], this.data);
     });
 
     it('warns and exits if no jsonfile defined', function() {
@@ -239,9 +239,9 @@ describe('font annotation', function() {
         .font(env)
         .resolve(this.data)
         .then(() => {
-          const errMsg = `ENOENT: no such file or directory, open '${
-            env.herman.sass.jsonfile
-          }'`;
+          const errMsg =
+            'ENOENT: no such file or directory, open ' +
+            `'${env.herman.sass.jsonfile}'`;
           assert(
             env.logger.warn.calledWith(
               `Error reading file: ${env.herman.sass.jsonfile}\n${errMsg}`
@@ -932,7 +932,7 @@ describe('example annotation', function() {
         .catch(done);
     });
 
-    it('injects global imports for scss items', function(done) {
+    it('injects global imports for scss items [import]', function(done) {
       const data = [
         {
           example: [
@@ -958,6 +958,40 @@ describe('example annotation', function() {
           assert.equal(
             data[0].example[0].rendered,
             `body {\n  border: 1px;\n}\n\n${data[0].example[0].code}\n`
+          );
+          done();
+        })
+        .catch(done);
+    });
+
+    it('injects global imports for scss items [dart-sass]', function(done) {
+      const data = [
+        {
+          example: [
+            {
+              type: 'scss',
+              code: '/* just a placeholder */',
+            },
+          ],
+        },
+      ];
+      const env = extend(true, {}, this.env, {
+        herman: {
+          sass: {
+            use: ['~accoutrement/sass/core/parser', 'import'],
+            includepaths: [path.join(__dirname, 'fixtures', 'scss')],
+            // eslint-disable-next-line global-require
+            implementation: require('sass'),
+          },
+        },
+      });
+      const example = annotations.example(env);
+      example
+        .resolve(data)
+        .then(() => {
+          assert.equal(
+            data[0].example[0].rendered,
+            `body {\n  border: 1px;\n}\n\n${data[0].example[0].code}`
           );
           done();
         })
@@ -999,7 +1033,7 @@ describe('example annotation', function() {
       this.example
         .resolve(data)
         .then(() => {
-          sinon.assert.calledOnce(this.env.logger.warn);
+          sinon.assert.calledTwice(this.env.logger.warn);
           assert.deepEqual(data, [
             { example: [{ type: 'scss', rendered: undefined }] },
           ]);
@@ -1023,6 +1057,63 @@ describe('example annotation', function() {
           Promise.promisify.restore();
           done();
         });
+    });
+
+    it('uses custom `sass.implementation` string [dart-sass]', function(done) {
+      const data = [
+        {
+          example: [
+            {
+              type: 'scss',
+              code: '/* just a placeholder */',
+            },
+          ],
+        },
+      ];
+      const env = extend(true, {}, this.env, {
+        herman: {
+          sass: {
+            implementation: 'sass',
+          },
+        },
+      });
+      const example = annotations.example(env);
+      example
+        .resolve(data)
+        .then(() => {
+          assert.equal(data[0].example[0].rendered, data[0].example[0].code);
+          done();
+        })
+        .catch(done);
+    });
+
+    it('custom `sass.implementation` instance [dart-sass]', function(done) {
+      const data = [
+        {
+          example: [
+            {
+              type: 'scss',
+              code: '/* just a placeholder */',
+            },
+          ],
+        },
+      ];
+      const env = extend(true, {}, this.env, {
+        herman: {
+          sass: {
+            // eslint-disable-next-line global-require
+            implementation: require('sass'),
+          },
+        },
+      });
+      const example = annotations.example(env);
+      example
+        .resolve(data)
+        .then(() => {
+          assert.equal(data[0].example[0].rendered, data[0].example[0].code);
+          done();
+        })
+        .catch(done);
     });
 
     it('skips non-html, non-njk, non-scss items', function(done) {
