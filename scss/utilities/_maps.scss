@@ -26,12 +26,16 @@
 /// @output
 ///   Updated `$herman` map, ready for JSON export
 /// @example scss
+///   $herman: ();
 ///   $brand-colors: (
 ///     'brand-blue': hsl(195, 85%, 35%),
 ///     'light-gray': '#brand-blue' ('tint': 80%, 'desaturate': 80%),
 ///   );
 ///   @include herman-add('colors', 'brand-colors', $brand-colors, get-function('color'));
-///   /* #{$herman} */
+///
+///   @each $key, $value in $herman {
+///   /* #{$key}: #{inspect($value)} */
+///   }
 @mixin herman-add($type, $key, $map, $args...) {
   // pluralize type
   $type: map-get($_herman-plural-types, $type) or $type;
@@ -85,7 +89,11 @@
 ///     'brand-blue': hsl(195, 85%, 35%),
 ///     'light-gray': 'brand-blue' ('tint': 80%, 'desaturate': 80%),
 ///   );
-///   /* #{herman-map-compile($brand-colors, get-function('color'))} */
+///   $compiled: herman-map-compile($brand-colors, get-function('color'));
+///
+///   @each $key, $value in $compiled {
+///   /* #{$key}: #{$value} */
+///   }
 @function herman-map-compile($map, $function, $args...) {
   $output: ();
 

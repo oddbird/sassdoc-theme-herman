@@ -583,15 +583,14 @@ used to make it an arrow-outline rather than a solid<span class="widont">&nbsp;<
 
       
       
-      <pre class="hljs-pre"><code class="lang-css">[data-region=&#39;banner&#39;] {
+      <pre class="hljs-pre"><code class="lang-css">[data-region=banner] {
   border-bottom: 8px solid #0d7fa5;
   box-shadow: 0 2px 2px rgba(85, 91, 94, 0.5);
   display: block;
   position: relative;
   width: 100%;
 }
-
-[data-region=&#39;banner&#39;]::before, [data-region=&#39;banner&#39;]::after {
+[data-region=banner]::before, [data-region=banner]::after {
   content: &quot;&quot;;
   border: 0.7rem solid transparent;
   border-top-color: #0d7fa5;
@@ -601,19 +600,16 @@ used to make it an arrow-outline rather than a solid<span class="widont">&nbsp;<
   top: 100%;
   transition: border-width 200ms;
 }
-
-[data-region=&#39;banner&#39;]::before {
+[data-region=banner]::before {
   content: &quot;&quot;;
   margin-top: 8px;
   transform: translateX(-50%) translateY(-2px);
 }
-
-[data-region=&#39;banner&#39;]::after {
+[data-region=banner]::after {
   content: &quot;&quot;;
   border-top-color: #fff;
   transform: translateX(-50%) translateY(-4px);
-}
-</code></pre>
+}</code></pre>
     </div>
   
 
