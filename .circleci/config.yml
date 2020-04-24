@@ -110,10 +110,7 @@ jobs:
             - herman-node6-modules-{{ checksum "yarn.lock" }}
       - run:
           name: Run JS Tests [node 6]
-          command: yarn gulp jstest
-      - run:
-          name: Check Test Coverage [node 6]
-          command: yarn nyc check-coverage
+          command: yarn gulp jstest-node6
       - store_artifacts:
           path: jscov
           destination: js-reports

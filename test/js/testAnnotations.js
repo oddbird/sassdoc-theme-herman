@@ -5,7 +5,6 @@ const Promise = require('bluebird');
 const extend = require('extend');
 const nunjucks = require('nunjucks');
 const path = require('path');
-const dartSass = require('sass');
 const sinon = require('sinon');
 
 /* eslint-disable global-require */
@@ -965,7 +964,7 @@ describe('example annotation', function() {
         .catch(done);
     });
 
-    it('injects global imports for scss items [use]', function(done) {
+    it('injects global imports for scss items [dart-sass]', function(done) {
       const data = [
         {
           example: [
@@ -981,7 +980,8 @@ describe('example annotation', function() {
           sass: {
             use: ['~accoutrement/sass/core/parser', 'import'],
             includepaths: [path.join(__dirname, 'fixtures', 'scss')],
-            implementation: dartSass,
+            // eslint-disable-next-line global-require
+            implementation: require('sass'),
           },
         },
       });
@@ -1059,7 +1059,7 @@ describe('example annotation', function() {
         });
     });
 
-    it('uses custom `sass.implementation` string', function(done) {
+    it('uses custom `sass.implementation` string [dart-sass]', function(done) {
       const data = [
         {
           example: [
@@ -1087,7 +1087,7 @@ describe('example annotation', function() {
         .catch(done);
     });
 
-    it('uses custom `sass.implementation` instance', function(done) {
+    it('custom `sass.implementation` instance [dart-sass]', function(done) {
       const data = [
         {
           example: [
@@ -1101,7 +1101,8 @@ describe('example annotation', function() {
       const env = extend(true, {}, this.env, {
         herman: {
           sass: {
-            implementation: dartSass,
+            // eslint-disable-next-line global-require
+            implementation: require('sass'),
           },
         },
       });
