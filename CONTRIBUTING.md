@@ -29,37 +29,35 @@ and may provide feedback before accepting a PR.
 We're happy to work with you to make this the best
 (and friendliest) project we can.
 
-
 ## Development
 
-To install the necessary Node dependencies, run ``yarn``.
+To install the necessary Node dependencies, run `yarn`.
 
-Development on this project requires ``gulp v4``.
-If you do not have ``gulp-cli`` [installed globally](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md#install-the-gulp-command) --
-or if you have an outdated version (``<2.0.0``) installed --
-first run ``npm install -g gulp-cli``.
+Development on this project requires `gulp v4`.
+If you do not have `gulp-cli` [installed globally](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md#install-the-gulp-command) --
+or if you have an outdated version (`<2.0.0`) installed --
+first run `npm install -g gulp-cli`.
 
-You can lint the project's JS with ``gulp eslint``
-and run the JS unit tests with ``gulp jstest``.
-You can lint Sass with ``gulp sasslint``
-and run the Sass tests with ``gulp sasstest``.
+You can lint the project's JS with `gulp eslint`
+and run the JS unit tests with `gulp jstest`.
+You can lint Sass with `gulp sasslint`
+and run the Sass tests with `gulp sasstest`.
 
 To compile and minify the static assets --
 as well as generate the documentation --
-run ``gulp webpack``.
+run `gulp webpack`.
 
-Just running ``gulp`` will perform all of the above tasks.
+Just running `gulp` will perform all of the above tasks.
 
-You can start up a local development server with ``gulp serve``.
+You can start up a local development server with `gulp serve`.
 This will also watch for changes to local files
 and automatically perform an appropriate selection of the above tasks
 whenever changes are detected to relevant files.
 
-Access the running server at ``http://localhost:3000``.
+Access the running server at `http://localhost:3000`.
 
-Refer to the ``gulpfile.js`` source and [gulp](http://gulpjs.com/)
+Refer to the `gulpfile.js` source and [gulp](http://gulpjs.com/)
 documentation for more info.
-
 
 ## Code of Conduct
 

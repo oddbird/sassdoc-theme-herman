@@ -1,6 +1,6 @@
-version: 2
-jobs:
+version: 2.1
 
+jobs:
   build:
     working_directory: ~/herman
     docker:
@@ -17,11 +17,11 @@ jobs:
       - save_cache:
           key: herman-yarn-{{ checksum "yarn.lock" }}
           paths:
-            - "~/.cache/yarn"
+            - '~/.cache/yarn'
       - save_cache:
           key: herman-node-modules-{{ checksum "yarn.lock" }}
           paths:
-            - "~/herman/node_modules"
+            - '~/herman/node_modules'
 
   build-node-6:
     working_directory: ~/herman
@@ -39,11 +39,11 @@ jobs:
       - save_cache:
           key: herman-node6-{{ checksum "yarn.lock" }}
           paths:
-            - "~/.cache/yarn"
+            - '~/.cache/yarn'
       - save_cache:
           key: herman-node6-modules-{{ checksum "yarn.lock" }}
           paths:
-            - "~/herman/node_modules"
+            - '~/herman/node_modules'
 
   lint:
     working_directory: ~/herman
