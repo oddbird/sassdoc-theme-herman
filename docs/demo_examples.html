@@ -452,8 +452,22 @@ with an API for supporting additional<span class="widont">&nbsp;</span>languages
 <p>Example annotations with language set to <code>sass</code> or <code>scss</code>
 will be compiled by Herman,
 and display the output along with the<span class="widont">&nbsp;</span>source.</p>
-<p>Note that Sass/Scss examples require <code>node-sass</code>
-to be installed, if it isn’t already: <code>npm install node-sass</code>.</p>
+<p>Herman supports both <code>sass</code> <a href="https://sass-lang.com/dart-sass">dart-sass</a> 
+and <code>node-sass</code> <a href="https://www.npmjs.com/package/node-sass">node-sass</a> for building Sass/Scss examples,
+and requires that either package be installed.
+If it isn’t already, download your chosen module through npm: 
+<p>
+<div><code>npm install node-sass</code></div>
+<div><code>npm install sass</code></div>
+</p>
+<p>Dart Sass is the primary implementation of Sass, which means it gets new features first. 
+However, Herman uses node-sass as the default compiler.  In order to use Dart Sass instead, include the <code>implementation</code>
+key in your sassdoc configuration:</p>
+<pre><code class="lang-yaml">herman:
+  sass:
+    implementation: 'sass'
+</code></pre>
+
 <p>All Sass examples must be complete and valid,
 with the ability to import Sass partials inside each example.
 In order for this to work with Sass/Scss,

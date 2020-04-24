@@ -20,13 +20,12 @@ const sassdoc = require('sassdoc');
 sassdoc('./scss', {
   theme: 'herman',
   herman: {
-    extraDocs: ['./my-file.md']
-  }
+    extraDocs: ['./my-file.md'],
+  },
 });
 ```
 
 All relative paths are relative to the SassDoc config file or the `cwd`.
-
 
 ## SassDoc: groups
 
@@ -60,7 +59,6 @@ groups:
 
 [groups]: http://sassdoc.com/configuration/#groups
 
-
 ## extraDocs
 
 - Type: `Array`
@@ -78,7 +76,6 @@ This is useful for including additional documents,
 such as a changelog, quickstart guide,
 or instructions for contributing.
 
-
 ## extraLinks
 
 - Type: `Array`
@@ -90,7 +87,6 @@ Each value in the list should be an `Object` with keys `name` and `url`.
 This is useful for linking to additional documentation
 for dependencies or other third-party integrations.
 
-
 ## displayColors
 
 - Type: `Array`
@@ -101,7 +97,6 @@ when using the [`@colors` annotation][color-preview].
 Valid options: `hex`, `rgb/rgba`, `hsl/hsla`
 
 [color-preview]: http://oddbird.net/herman/docs/demo_colors.html
-
 
 ## customCSS
 
@@ -139,7 +134,6 @@ which will be included in the `<head>` of rendered
 [extract-text]: https://github.com/webpack-contrib/extract-text-webpack-plugin#extract
 [css-loader]: https://github.com/webpack-contrib/css-loader#url
 
-
 ## customHTML
 
 - Type: `String`
@@ -154,20 +148,18 @@ in example output.
 
 [example-docs]: http://oddbird.net/herman/docs/demo_examples.html
 
-
 ## fontpath
 
 - Type: `String`
 - Default: `''`
 
-*Required if using [`@font` annotation][font-docs-local] with local font
-files.*
+_Required if using [`@font` annotation][font-docs-local] with local font
+files._
 
 Relative path to a directory containing local font files.
 See our [`@font` documentation][font-docs-local].
 
 [font-docs-local]: http://oddbird.net/herman/docs/demo_fonts.html#displaying-local-fonts
-
 
 ## nunjucks
 
@@ -178,18 +170,16 @@ Container for the following [Nunjucks][nunjucks]-related options:
 
 [nunjucks]: https://mozilla.github.io/nunjucks/
 
-
 ### nunjucks.templatepath
 
 - Type: `String`
 - Default: `''`
 
-*Either `nunjucks.templatepath` or
+_Either `nunjucks.templatepath` or
 [`nunjucks.environment`](#nunjucks-environment) is required if using
-[`@example njk` annotation][example-njk].*
+[`@example njk` annotation][example-njk]._
 
 Relative path to a directory containing Nunjucks templates.
-
 
 ### nunjucks.environment
 
@@ -198,12 +188,11 @@ Relative path to a directory containing Nunjucks templates.
 
 [njk-instance]: https://mozilla.github.io/nunjucks/api.html#environment
 
-*Either [`nunjucks.templatepath`](#nunjucks-templatepath) or
+_Either [`nunjucks.templatepath`](#nunjucks-templatepath) or
 `nunjucks.environment` is required if using
-[`@example njk` annotation][example-njk].*
+[`@example njk` annotation][example-njk]._
 
 [example-njk]: http://oddbird.net/herman/docs/demo_examples.html#compiling-nunjucks
-
 
 ## sass
 
@@ -212,14 +201,13 @@ Relative path to a directory containing Nunjucks templates.
 
 Container for the following sass-related options:
 
-
 ### sass.jsonfile
 
 - Type: `String`
 - Default: `''`
 
-*Required if using [`@font`][font-docs], [`@colors`][color-preview],
-[`@ratios`][ratio-preview], or [`@sizes`][size-preview] annotations.*
+_Required if using [`@font`][font-docs], [`@colors`][color-preview],
+[`@ratios`][ratio-preview], or [`@sizes`][size-preview] annotations._
 
 Relative path to a `sass-json file`
 (created with the [`herman-export` mixin][export-mixin]).
@@ -234,7 +222,6 @@ See [Exporting Styles to JSON][export].
 [export]: http://oddbird.net/herman/docs/api_json-export.html
 [export-mixin]: http://oddbird.net/herman/docs/api_json-export.html#mixin--herman-export
 
-
 ### sass.includepaths
 
 - Type: `Array`
@@ -246,7 +233,6 @@ compiling `@example sass/scss` annotations.
 See our [`@example` documentation][example-docs-scss].
 
 [node-sass-includepaths]: https://github.com/sass/node-sass/#includepaths
-
 
 ### sass.includes
 
@@ -265,7 +251,6 @@ as that output will be displayed in every single Sass example.
 
 [example-docs-scss]: http://oddbird.net/herman/docs/demo_examples.html#compiling-sass-scss
 
-
 ### sass.outputstyle
 
 - Type: `String`
@@ -278,3 +263,11 @@ Accepts `'nested'`, `'expanded'`, `'compact'`, or `'compressed'`.
 See our [`@example` documentation][example-docs-scss].
 
 [node-sass-outputstyle]: https://github.com/sass/node-sass/#outputstyle
+
+### sass.implementation
+
+- Type: `String`
+- Default: `'node-sass'`
+
+Determines how sass is compiled.
+Accepts `'node-sass'` or `'sass'`.
