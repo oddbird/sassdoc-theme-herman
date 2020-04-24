@@ -293,8 +293,8 @@ const sassdoc = require('sassdoc');
 sassdoc('./scss', {
   theme: 'herman',
   herman: {
-    extraDocs: ['./my-file.md']
-  }
+    extraDocs: ['./my-file.md'],
+  },
 });
 </code></pre>
 <p>All relative paths are relative to the SassDoc config file or the <code>cwd</code>.</p>
@@ -449,13 +449,21 @@ The JSON contents will be added under the
 <code>sassjson</code> key of the sassdoc context,
 and used to display colors, fonts, ratios, and sizes.
 See <a href="http://oddbird.net/herman/docs/api_json-export.html">Exporting Styles to<span class="widont">&nbsp;</span>JSON</a>.</p>
+<h3 id="sass-implementation">sass.implementation</h3>
+<ul>
+<li>Type: <code>String</code> or Sass implementation<span class="widont">&nbsp;</span>instance</li>
+<li>Default: <code>'node-sass'</code></li>
+</ul>
+<p>Determines the Sass implementation (<a href="https://github.com/sass/node-sass">Node Sass</a> or <a href="https://sass-lang.com/dart-sass">Dart
+Sass</a>) to use for Sass compilation if using <a href="http://oddbird.net/herman/docs/demo_examples.html#compiling-nunjucks"><code>@example njk</code>
+annotation</a>. Accepts <code>'node-sass'</code> or <code>'sass'</code>.</p>
 <h3 id="sass-includepaths">sass.includepaths</h3>
 <ul>
 <li>Type: <code>Array</code></li>
 <li>Default: <code>[]</code></li>
 </ul>
 <p>Array of paths used to resolve <code>@import</code> declarations.
-Passed through to <a href="https://github.com/sass/node-sass/#includepaths">node-sass-includepaths</a> when
+Passed through to Sass <a href="https://github.com/sass/node-sass/#includepaths">includepaths</a> when
 compiling <code>@example sass/scss</code> annotations.
 See our <a href="http://oddbird.net/herman/docs/demo_examples.html#compiling-sass-scss"><code>@example</code> documentation</a>.</p>
 <h3 id="sass-includes">sass.includes</h3>
@@ -478,16 +486,9 @@ as that output will be displayed in every single Sass<span class="widont">&nbsp;
 </ul>
 <p>Determines the output format of the final CSS
 of compiled <code>@example sass/scss</code> annotations.
-Passed through to <a href="https://github.com/sass/node-sass/#outputstyle">node-sass-outputstyle</a>.
+Passed through to Sass <a href="https://github.com/sass/node-sass/#outputstyle">outputStyle</a> option.
 Accepts <code>'nested'</code>, <code>'expanded'</code>, <code>'compact'</code>, or <code>'compressed'</code>.
 See our <a href="http://oddbird.net/herman/docs/demo_examples.html#compiling-sass-scss"><code>@example</code> documentation</a>.</p>
-<h3 id="sass-implementation">sass.implementation</h3>
-<ul>
-<li>Type: <code>String</code></li>
-<li>Default: <code>'node-sass'</code></li>
-</ul>
-<p>Determines how sass is compiled.
-Accepts <code>'node-sass'</code> or <code>'sass'</code>.</p>
 
   </div>
 

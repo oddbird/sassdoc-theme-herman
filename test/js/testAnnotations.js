@@ -1,10 +1,11 @@
 'use strict';
 
 const assert = require('assert');
+const Promise = require('bluebird');
 const extend = require('extend');
 const nunjucks = require('nunjucks');
 const path = require('path');
-const Promise = require('bluebird');
+const dartSass = require('sass');
 const sinon = require('sinon');
 
 /* eslint-disable global-require */
@@ -999,7 +1000,7 @@ describe('example annotation', function() {
       this.example
         .resolve(data)
         .then(() => {
-          sinon.assert.calledOnce(this.env.logger.warn);
+          sinon.assert.calledTwice(this.env.logger.warn);
           assert.deepEqual(data, [
             { example: [{ type: 'scss', rendered: undefined }] },
           ]);
@@ -1023,6 +1024,62 @@ describe('example annotation', function() {
           Promise.promisify.restore();
           done();
         });
+    });
+
+    it('uses custom `sass.implementation` string', function(done) {
+      const data = [
+        {
+          example: [
+            {
+              type: 'scss',
+              code: '/* just a placeholder */',
+            },
+          ],
+        },
+      ];
+      const env = extend(true, {}, this.env, {
+        herman: {
+          sass: {
+            implementation: 'sass',
+          },
+        },
+      });
+      const example = annotations.example(env);
+      example
+        .resolve(data)
+        .then(() => {
+          assert.equal(data[0].example[0].rendered, data[0].example[0].code);
+          done();
+        })
+        .catch(done);
+    });
+
+    it('uses custom `sass.implementation` instance', function(done) {
+      const data = [
+        {
+          example: [
+            {
+              type: 'scss',
+              code: '/* just a placeholder */',
+            },
+          ],
+        },
+      ];
+      const env = extend(true, {}, this.env, {
+        herman: {
+          sass: {
+            implementation: dartSass,
+          },
+        },
+      });
+      const example = annotations.example(env);
+      example
+        .resolve(data)
+        .then(() => {
+          assert.equal(data[0].example[0].rendered, data[0].example[0].code);
+          done();
+        })
+        .catch(done);
     });
 
     it('skips non-html, non-njk, non-scss items', function(done) {

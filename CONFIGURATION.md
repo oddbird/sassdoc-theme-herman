@@ -222,17 +222,29 @@ See [Exporting Styles to JSON][export].
 [export]: http://oddbird.net/herman/docs/api_json-export.html
 [export-mixin]: http://oddbird.net/herman/docs/api_json-export.html#mixin--herman-export
 
+### sass.implementation
+
+- Type: `String` or Sass implementation instance
+- Default: `'node-sass'`
+
+Determines the Sass implementation ([Node Sass][node-sass] or [Dart
+Sass][dart-sass]) to use for Sass compilation if using [`@example njk`
+annotation][example-njk]. Accepts `'node-sass'` or `'sass'`.
+
+[node-sass]: https://github.com/sass/node-sass
+[dart-sass]: https://sass-lang.com/dart-sass
+
 ### sass.includepaths
 
 - Type: `Array`
 - Default: `[]`
 
 Array of paths used to resolve `@import` declarations.
-Passed through to [node-sass-includepaths] when
+Passed through to Sass [includepaths] when
 compiling `@example sass/scss` annotations.
 See our [`@example` documentation][example-docs-scss].
 
-[node-sass-includepaths]: https://github.com/sass/node-sass/#includepaths
+[includepaths]: https://github.com/sass/node-sass/#includepaths
 
 ### sass.includes
 
@@ -258,16 +270,8 @@ as that output will be displayed in every single Sass example.
 
 Determines the output format of the final CSS
 of compiled `@example sass/scss` annotations.
-Passed through to [node-sass-outputstyle].
+Passed through to Sass [outputStyle] option.
 Accepts `'nested'`, `'expanded'`, `'compact'`, or `'compressed'`.
 See our [`@example` documentation][example-docs-scss].
 
-[node-sass-outputstyle]: https://github.com/sass/node-sass/#outputstyle
-
-### sass.implementation
-
-- Type: `String`
-- Default: `'node-sass'`
-
-Determines how sass is compiled.
-Accepts `'node-sass'` or `'sass'`.
+[outputstyle]: https://github.com/sass/node-sass/#outputstyle
