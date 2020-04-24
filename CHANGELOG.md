@@ -1,6 +1,6 @@
 # Herman Changelog
 
-## UNRELEASED
+## 3.1.0: 2020-04-24
 
 - 🚀 NEW: Add `sass.implementation` (default: `node-sass`) and `sass.use`
   (default: `[]`) options to support Dart Sass --
