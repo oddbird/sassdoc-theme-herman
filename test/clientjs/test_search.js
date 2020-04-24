@@ -37,7 +37,10 @@ describe('search', function() {
 
     it('sets no mark on the title if no title', function() {
       const title = [];
-      const contents = [{ start: 4, length: 3 }, { start: 10, length: 3 }];
+      const contents = [
+        { start: 4, length: 3 },
+        { start: 10, length: 3 },
+      ];
       search.highlightSearchResult(this.el, { title, contents });
       expect(this.titleEl.childNodes.length).to.equal(1);
       expect(this.textEl.childNodes.length).to.be.above(1);
@@ -54,7 +57,10 @@ describe('search', function() {
     it('truncates long text between matches', function() {
       const title = [];
       // Matches "This" and "minimum"
-      const contents = [{ start: 0, length: 4 }, { start: 162, length: 7 }];
+      const contents = [
+        { start: 0, length: 4 },
+        { start: 162, length: 7 },
+      ];
       search.highlightSearchResult(this.el, { title, contents });
       const expected =
         'This is a long test that has lots of words in it and similar things ' +

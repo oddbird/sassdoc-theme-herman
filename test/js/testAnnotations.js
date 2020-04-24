@@ -206,7 +206,7 @@ describe('font annotation', function() {
   describe('resolve', function() {
     beforeEach(function() {
       this.data = [{ font: { key: 'test-font' } }];
-      this.origData = Object.assign({}, this.data);
+      this.origData = Object.assign([], this.data);
     });
 
     it('warns and exits if no jsonfile defined', function() {
@@ -239,9 +239,9 @@ describe('font annotation', function() {
         .font(env)
         .resolve(this.data)
         .then(() => {
-          const errMsg = `ENOENT: no such file or directory, open '${
-            env.herman.sass.jsonfile
-          }'`;
+          const errMsg =
+            'ENOENT: no such file or directory, open ' +
+            `'${env.herman.sass.jsonfile}'`;
           assert(
             env.logger.warn.calledWith(
               `Error reading file: ${env.herman.sass.jsonfile}\n${errMsg}`
