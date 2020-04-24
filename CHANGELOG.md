@@ -1,5 +1,11 @@
 # Herman Changelog
 
+## UNRELEASED
+
+- 🚀 NEW: Add `sass.implementation` (default: `node-sass`) and `sass.use`
+  (default: `[]`) options to support Dart Sass --
+  [#342](https://github.com/oddbird/sassdoc-theme-herman/issues/342)
+
 ## 3.0.2: 2019-01-09
 
 - 🐛 BUGFIX: Allow local system fonts without `formats` --

@@ -14,9 +14,9 @@ jobs:
           name: Install Dependencies
           command: yarn install --frozen-lockfile
       - persist_to_workspace:
-        root: .
-        paths:
-          - ./node_modules
+          root: .
+          paths:
+            - ./node_modules
       - save_cache:
           key: herman-yarn-{{ checksum "yarn.lock" }}
           paths:
