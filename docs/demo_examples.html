@@ -466,9 +466,10 @@ an array of places to look for Sass<span class="widont">&nbsp;</span>includes:</
       - 'static/sass'
       - 'node_modules'
 </code></pre>
-<p>You can also set an array of default <code>includes</code>
+<p>You can also set an array of default <code>includes</code> or <code>use</code>
 (relative to any <code>includepaths</code>)
 to include for all Sass<span class="widont">&nbsp;</span>examples:</p>
+<p>To <code>@import</code> files:</p>
 <pre><code class="lang-yaml"># .sassdocrc (yaml)
 herman:
   sass:
@@ -477,6 +478,15 @@ herman:
     includes:
       - 'utilities'
       - 'config/manifest'
+</code></pre>
+<p>Or to <code>@use</code> files:</p>
+<pre><code class="lang-yaml"># .sassdocrc (yaml)
+herman:
+  sass:
+    includepaths:
+      - 'static/sass'
+    use:
+      - 'config/tools'
 </code></pre>
 <p>Generally, included Sass files should not contain
 any CSS output of their own,

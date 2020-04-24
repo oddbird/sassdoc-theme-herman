@@ -479,6 +479,20 @@ Sass configuration and toolkit files
 that may be used by any example.
 It’s best to avoid files with output CSS,
 as that output will be displayed in every single Sass<span class="widont">&nbsp;</span>example.</p>
+<h3 id="sass-use">sass.use</h3>
+<ul>
+<li>Type: <code>Array</code></li>
+<li>Default: <code>[]</code></li>
+</ul>
+<p>List of files (relative to any <a href="#sass-includepaths"><code>sass.includepaths</code></a>) to
+<code>@use</code> for all <code>@example sass/scss</code> annotations.
+See our <a href="http://oddbird.net/herman/docs/demo_examples.html#compiling-sass-scss"><code>@example</code> documentation</a>.</p>
+<p>This is useful for including any global
+Sass configuration and toolkit files
+that may be used by any example,
+using the <a href="https://sass-lang.com/blog/the-module-system-is-launched">Dart Sass module system</a>.
+It’s best to avoid files with output CSS,
+as that output will be displayed in every single Sass<span class="widont">&nbsp;</span>example.</p>
 <h3 id="sass-outputstyle">sass.outputstyle</h3>
 <ul>
 <li>Type: <code>String</code></li>

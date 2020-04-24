@@ -263,6 +263,25 @@ as that output will be displayed in every single Sass example.
 
 [example-docs-scss]: http://oddbird.net/herman/docs/demo_examples.html#compiling-sass-scss
 
+### sass.use
+
+- Type: `Array`
+- Default: `[]`
+
+List of files (relative to any [`sass.includepaths`](#sass-includepaths)) to
+`@use` for all `@example sass/scss` annotations.
+See our [`@example` documentation][example-docs-scss].
+
+This is useful for including any global
+Sass configuration and toolkit files
+that may be used by any example,
+using the [Dart Sass module system][dart-sass-modules].
+It's best to avoid files with output CSS,
+as that output will be displayed in every single Sass example.
+
+[example-docs-scss]: http://oddbird.net/herman/docs/demo_examples.html#compiling-sass-scss
+[dart-sass-modules]: https://sass-lang.com/blog/the-module-system-is-launched
+
 ### sass.outputstyle
 
 - Type: `String`

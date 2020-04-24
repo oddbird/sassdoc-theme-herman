@@ -933,7 +933,7 @@ describe('example annotation', function() {
         .catch(done);
     });
 
-    it('injects global imports for scss items', function(done) {
+    it('injects global imports for scss items [import]', function(done) {
       const data = [
         {
           example: [
@@ -959,6 +959,39 @@ describe('example annotation', function() {
           assert.equal(
             data[0].example[0].rendered,
             `body {\n  border: 1px;\n}\n\n${data[0].example[0].code}\n`
+          );
+          done();
+        })
+        .catch(done);
+    });
+
+    it('injects global imports for scss items [use]', function(done) {
+      const data = [
+        {
+          example: [
+            {
+              type: 'scss',
+              code: '/* just a placeholder */',
+            },
+          ],
+        },
+      ];
+      const env = extend(true, {}, this.env, {
+        herman: {
+          sass: {
+            use: ['~accoutrement/sass/core/parser', 'import'],
+            includepaths: [path.join(__dirname, 'fixtures', 'scss')],
+            implementation: dartSass,
+          },
+        },
+      });
+      const example = annotations.example(env);
+      example
+        .resolve(data)
+        .then(() => {
+          assert.equal(
+            data[0].example[0].rendered,
+            `body {\n  border: 1px;\n}\n\n${data[0].example[0].code}`
           );
           done();
         })
