@@ -6,6 +6,7 @@
   (default: `[]`) options to support Dart Sass --
   [#342](https://github.com/oddbird/sassdoc-theme-herman/issues/342) and
   [#341](https://github.com/oddbird/sassdoc-theme-herman/issues/341)
+- 🏠 INTERNAL: Use Dart Sass to compile Herman styles
 - 🏠 INTERNAL: Upgrade dependencies
 
 ## 3.0.2: 2019-01-09
