@@ -156,4 +156,33 @@ describe('renderIframe', function() {
       });
     });
   });
+
+  describe('sizes', function() {
+    beforeEach(function() {
+      this.env = {
+        herman: {
+          customCSS: 'test/js/fixtures/css/main.css',
+        },
+        dir: __dirname,
+      };
+    });
+
+    it('renders', function(done) {
+      const item = {
+        sizes: {
+          key: true,
+        },
+      };
+
+      renderIframe(this.env, item, 'sizes')
+        .then(() => {
+          assert.deepEqual(this.env.customCSS, {
+            path: path.resolve(__dirname, 'test/js/fixtures/css/main.css'),
+            url: 'assets/custom/main.css',
+          });
+          done();
+        })
+        .catch(done);
+    });
+  });
 });
