@@ -103,7 +103,17 @@ describe('colors annotation', function() {
 
 describe('sizes annotation', function() {
   before(function() {
-    this.sizes = annotations.sizes();
+    this.env = {
+      herman: {
+        sass: {
+          jsonfile: `${__dirname}/fixtures/css/json.css`,
+        },
+      },
+      logger: {
+        warn: sinon.fake(),
+      },
+    };
+    this.sizes = annotations.sizes(this.env);
   });
 
   describe('parse', function() {
@@ -123,11 +133,78 @@ describe('sizes annotation', function() {
       });
     });
   });
+
+  describe('resolve', function() {
+    it('bails early if no sizes on items', function(done) {
+      const data = [{}];
+      this.sizes
+        .resolve(data)
+        .then(() => {
+          assert.deepEqual(data, [{}]);
+          done();
+        })
+        .catch(done);
+    });
+
+    it('fails on missing sassjson sizesData', function(done) {
+      const data = [
+        {
+          sizes: {
+            key: '',
+            style: '',
+          },
+          context: {
+            name: 'foo',
+          },
+        },
+      ];
+
+      this.sizes
+        .resolve(data)
+        .then(() => {
+          assert.fail('The promise should be rejected');
+          done();
+        })
+        .catch(() => {
+          sinon.assert.calledOnce(this.env.logger.warn);
+          done();
+        });
+    });
+
+    it('renders sizes', function(done) {
+      const data = [
+        {
+          sizes: {
+            key: 'root-sizes',
+            style: '',
+          },
+        },
+      ];
+
+      this.sizes
+        .resolve(data)
+        .then(() => {
+          assert.ok(data[0].iframed !== undefined);
+          done();
+        })
+        .catch(done);
+    });
+  });
 });
 
 describe('ratios annotation', function() {
   before(function() {
-    this.ratios = annotations.ratios();
+    this.env = {
+      herman: {
+        sass: {
+          jsonfile: `${__dirname}/fixtures/css/json.css`,
+        },
+      },
+      logger: {
+        warn: sinon.fake(),
+      },
+    };
+    this.ratios = annotations.ratios(this.env);
   });
 
   describe('parse', function() {
@@ -135,6 +212,51 @@ describe('ratios annotation', function() {
       assert.deepEqual(this.ratios.parse('foo-bar'), {
         key: 'foo-bar',
       });
+    });
+  });
+
+  describe('resolve', function() {
+    it('bails early if no ratios on items', function(done) {
+      const data = [{}];
+      this.ratios
+        .resolve(data)
+        .then(() => {
+          assert.deepEqual(data, [{}]);
+          done();
+        })
+        .catch(done);
+    });
+
+    it('fails on missing sassjson ratiosData', function(done) {
+      const data = [
+        {
+          ratios: { key: '' },
+          context: { name: 'foo' },
+        },
+      ];
+
+      this.ratios
+        .resolve(data)
+        .then(() => {
+          assert.fail('The promise should be rejected');
+          done();
+        })
+        .catch(() => {
+          sinon.assert.calledOnce(this.env.logger.warn);
+          done();
+        });
+    });
+
+    it('renders ratios', function(done) {
+      const data = [{ ratios: { key: 'root-ratios' } }];
+
+      this.ratios
+        .resolve(data)
+        .then(() => {
+          assert.ok(data[0].iframed !== undefined);
+          done();
+        })
+        .catch(done);
     });
   });
 });
@@ -209,21 +331,28 @@ describe('font annotation', function() {
       this.origData = Object.assign([], this.data);
     });
 
-    it('warns and exits if no jsonfile defined', function() {
+    it('warns and exits if no jsonfile defined', function(done) {
       const env = {
         logger: { warn: sinon.fake() },
         herman: {},
       };
-      const font = annotations.font(env);
 
-      font.resolve(this.data);
-
-      assert.deepEqual(this.data, this.origData);
-      assert(
-        env.logger.warn.calledWith(
-          'Must pass in a `sassjson` file if using @font annotation.'
-        )
-      );
+      annotations
+        .font(env)
+        .resolve(this.data)
+        .then(() => {
+          assert.fail('The promise should be rejected');
+          done();
+        })
+        .catch(() => {
+          assert.deepEqual(this.data, this.origData);
+          assert(
+            env.logger.warn.calledWith(
+              'Must pass in a `sassjson` file if using @font annotation.'
+            )
+          );
+          done();
+        });
     });
 
     it('logs an error if missing Sass jsonfile', function(done) {

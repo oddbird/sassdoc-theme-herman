@@ -27,17 +27,19 @@ describe('renderIframe', function() {
         rendered: true,
       };
 
-      renderIframe(this.env, item, 'example').then(() => {
-        assert.equal(item.iframed, 'some iframed');
-        assert.ok(this.env.customHTML);
-        assert.deepEqual(this.env.customCSS, {
-          path: path.resolve(__dirname, 'test/js/fixtures/css/main.css'),
-          url: 'assets/custom/main.css',
-        });
+      renderIframe(this.env, item, 'example')
+        .then(() => {
+          assert.equal(item.iframed, 'some iframed');
+          assert.ok(this.env.customHTML);
+          assert.deepEqual(this.env.customCSS, {
+            path: path.resolve(__dirname, 'test/js/fixtures/css/main.css'),
+            url: 'assets/custom/main.css',
+          });
 
-        nunjucksEnv.render.restore();
-        done();
-      });
+          nunjucksEnv.render.restore();
+          done();
+        })
+        .catch(done);
     });
 
     it("doesn't render if no item.rendered", function(done) {
@@ -45,13 +47,15 @@ describe('renderIframe', function() {
         rendered: false,
       };
 
-      renderIframe(this.env, item, 'example').then(() => {
-        assert.equal(item.iframed, undefined);
-        assert.equal(this.env.customHTML, undefined);
-        assert.equal(this.env.customCSS, undefined);
+      renderIframe(this.env, item, 'example')
+        .then(() => {
+          assert.equal(item.iframed, undefined);
+          assert.equal(this.env.customHTML, undefined);
+          assert.equal(this.env.customCSS, undefined);
 
-        done();
-      });
+          done();
+        })
+        .catch(done);
     });
 
     it('inserts raw HTML if env.herman.customHTML is bad path', function(done) {
@@ -61,11 +65,13 @@ describe('renderIframe', function() {
         rendered: true,
       };
 
-      renderIframe(this.env, item, 'example').then(() => {
-        assert.equal(this.env.customHTML, this.env.herman.customHTML);
+      renderIframe(this.env, item, 'example')
+        .then(() => {
+          assert.equal(this.env.customHTML, this.env.herman.customHTML);
 
-        done();
-      });
+          done();
+        })
+        .catch(done);
     });
   });
 
@@ -81,13 +87,15 @@ describe('renderIframe', function() {
         iconsPath: path.resolve(__dirname, 'fixtures', 'icons'),
       };
 
-      renderIframe(this.env, item, 'icon').then(() => {
-        assert.equal(item.iframed, 'some iframed');
-        assert.ok(this.env.iconsSvg);
+      renderIframe(this.env, item, 'icon')
+        .then(() => {
+          assert.equal(item.iframed, 'some iframed');
+          assert.ok(this.env.iconsSvg);
 
-        nunjucksEnv.render.restore();
-        done();
-      });
+          nunjucksEnv.render.restore();
+          done();
+        })
+        .catch(done);
     });
 
     it("doesn't render if no item.icons", function(done) {
@@ -95,12 +103,14 @@ describe('renderIframe', function() {
         icons: [],
       };
 
-      renderIframe(this.env, item, 'icon').then(() => {
-        assert.equal(item.iframed, undefined);
-        assert.equal(this.env.iconsSvg, undefined);
+      renderIframe(this.env, item, 'icon')
+        .then(() => {
+          assert.equal(item.iframed, undefined);
+          assert.equal(this.env.iconsSvg, undefined);
 
-        done();
-      });
+          done();
+        })
+        .catch(done);
     });
   });
 
@@ -125,19 +135,13 @@ describe('renderIframe', function() {
         },
       };
 
-      renderIframe(this.env, item, 'font').then(() => {
-        const expected = {
-          colors: {
-            'brand-colors': {
-              'brand-orange': '#c75000',
-            },
-          },
-        };
+      renderIframe(this.env, item, 'font')
+        .then(() => {
+          assert.ok(this.env.sassjson.colors !== undefined);
 
-        assert.deepEqual(this.env.sassjson, expected);
-
-        done();
-      });
+          done();
+        })
+        .catch(done);
     });
 
     it('logs the error on a bad sassjson', function(done) {
@@ -149,37 +153,10 @@ describe('renderIframe', function() {
         },
       };
 
-      renderIframe(this.env, item, 'font').then(() => {
-        sinon.assert.calledOnce(env.logger.warn);
-
-        done();
-      });
-    });
-  });
-
-  describe('sizes', function() {
-    beforeEach(function() {
-      this.env = {
-        herman: {
-          customCSS: 'test/js/fixtures/css/main.css',
-        },
-        dir: __dirname,
-      };
-    });
-
-    it('renders', function(done) {
-      const item = {
-        sizes: {
-          key: true,
-        },
-      };
-
-      renderIframe(this.env, item, 'sizes')
+      renderIframe(this.env, item, 'font')
         .then(() => {
-          assert.deepEqual(this.env.customCSS, {
-            path: path.resolve(__dirname, 'test/js/fixtures/css/main.css'),
-            url: 'assets/custom/main.css',
-          });
+          sinon.assert.calledOnce(env.logger.warn);
+
           done();
         })
         .catch(done);
