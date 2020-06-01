@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <base target="_parent">
 
-  <title>fonts</title>
+  <title>sizes</title>
 
   {% if customCSS and customCSS.url %}
     <!-- Custom CSS -->
@@ -17,26 +17,18 @@
   <!-- Herman styles and fonts -->
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
   <link rel="stylesheet" href="assets/webpack/app_styles.min.css" />
-
-  {% if item.font.html %}
-    <!-- Font HTML -->
-    {{ item.font.html|safe }}
-  {% endif %}
-
-  {% if item.font.localFontCSS %}
-    <!-- Local font @font-face CSS -->
-    <style type="text/css">
-{{ item.font.localFontCSS|safe }}
-    </style>
-  {% endif %}
 </head>
-<body class="sassdoc font-specimen">
-  {%- set key = item.font.key -%}
-  {%- set data = sassjson.fonts[key] -%}
-  {%- if data and item.font.parsedVariants and item.font.parsedVariants|length -%}
-    {%- for variant in item.font.parsedVariants -%}
-      {{ preview.specimen_variant(variant, data) }}
-    {%- endfor -%}
+<body class="sassdoc size-specimen">
+  {%- set args = item.sizes -%}
+  {%- set key = args.key -%}
+  {%- set data = sassjson.sizes[key] -%}
+  {%- set style = args.style or 'text' -%}
+  {%- if (style == 'ruler') or (style == 'ruler-large') -%}
+    {{ preview.size_ruler(data, style=style) }}
+  {%- elif (style == 'text') -%}
+    {{ preview.size_text(data) }}
+  {%- else -%}
+    {{ preview.size_output(data) }}
   {%- endif -%}
 </body>
 </html>
