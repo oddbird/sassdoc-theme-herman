@@ -35,6 +35,7 @@ yarn-error.log*
 yarn.lock
 
 dist/webpack/app_styles.min.js
+dist/webpack/iframe_styles.min.js
 dist/webpack/styleguide_json*
 
 scss/*

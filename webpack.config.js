@@ -98,6 +98,7 @@ module.exports = {
     app: './init',
     search: './search',
     app_styles: ['main.scss'],
+    iframe_styles: ['iframes.scss'],
     styleguide_json: ['json.scss'],
   },
   output: {
