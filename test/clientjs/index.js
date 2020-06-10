@@ -8,6 +8,6 @@ testsContext.keys().forEach(testsContext);
 const srcContext = require.context(
   './../../assets/js/',
   false,
-  /^(?!.\/init).*\.js$/
+  /^(?!.\/init).*\.js$/,
 );
 srcContext.keys().forEach(srcContext);

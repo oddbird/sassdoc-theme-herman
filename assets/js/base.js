@@ -7,7 +7,7 @@ export const initializeToggles = () => {
     const id = $(this).attr('aria-controls');
     const target = $(`[data-target-id="${id}"]`);
     const openToggles = $(
-      `[data-toggle="button"][aria-controls="${id}"][aria-pressed="true"]`
+      `[data-toggle="button"][aria-controls="${id}"][aria-pressed="true"]`,
     );
     openToggles.attr('aria-pressed', 'false');
     target.trigger('target:close');
@@ -18,7 +18,7 @@ export const initializeToggles = () => {
     const targetID = toggle.attr('aria-controls');
     const target = $(`[data-target-id="${targetID}"]`);
     const otherToggles = $(
-      `[data-toggle="button"][aria-controls="${targetID}"]`
+      `[data-toggle="button"][aria-controls="${targetID}"]`,
     ).not(toggle);
     // If this is a synced toggle, open all other attached toggles
     if (toggle.data('toggle-synced')) {
@@ -47,7 +47,7 @@ export const initializeToggles = () => {
     // Close a target and update any attached toggles
     const id = target.attr('data-target-id');
     const openToggles = $(
-      `[data-toggle="button"][aria-controls="${id}"][aria-pressed="true"]`
+      `[data-toggle="button"][aria-controls="${id}"][aria-pressed="true"]`,
     );
     if (openToggles.length) {
       openToggles.trigger('toggle:close');
@@ -101,7 +101,7 @@ export const initializeToggles = () => {
 
   body.on('click', (evt) => {
     const openTargets = $(
-      '[data-toggle="target"][aria-expanded="true"][data-auto-closing="true"]'
+      '[data-toggle="target"][aria-expanded="true"][data-auto-closing="true"]',
     );
     openTargets.each((index, target) => {
       autoClose($(evt.target), $(target));

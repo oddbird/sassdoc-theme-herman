@@ -1,0 +1,46 @@
+# See https://github.com/stylelint/stylelint/blob/master/docs/user-guide/rules.md
+# Also https://github.com/kristerkari/stylelint-scss#list-of-rules
+
+extends:
+  - stylelint-config-recommended
+  - stylelint-prettier/recommended
+plugins:
+  - stylelint-scss
+  - stylelint-prettier
+
+ignoreFiles:
+  - '**/*.js'
+
+rules:
+  prettier/prettier: true
+
+  at-rule-no-unknown: null
+  property-no-unknown:
+    - true
+    - ignoreProperties:
+        - '/^.*\.\$.*/'
+  scss/at-rule-no-unknown:
+    - true
+    - ignoreAtRules:
+        - use
+        - forward
+
+  # possible errors (these are all on by default)
+  no-descending-specificity: null
+
+  # limit language features
+  at-rule-no-vendor-prefix: true
+  color-named: always-where-possible
+  declaration-block-no-redundant-longhand-properties:
+    - true
+    - ignoreShorthands:
+        - grid-template
+  declaration-block-single-line-max-declarations: 1
+  declaration-no-important: true
+  function-url-no-scheme-relative: true
+  media-feature-name-no-vendor-prefix: true
+  property-no-vendor-prefix: true
+  selector-max-empty-lines: 0
+  selector-no-vendor-prefix: true
+  shorthand-property-no-redundant-values: true
+  value-no-vendor-prefix: true

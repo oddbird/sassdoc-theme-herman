@@ -1,9 +1,10 @@
 'use strict';
 
-const assert = require('assert');
-const del = require('del');
 const fs = require('fs');
+
+const assert = require('assert');
 const path = require('path');
+const del = require('del');
 const Promise = require('bluebird');
 
 const render = require('../../lib/utils/render');
@@ -30,8 +31,8 @@ describe('render', function () {
         assert.ok(data.includes('<title>Title | Herman Documentation</title>'));
         assert.ok(
           data.includes(
-            '<p>I say: Hello<span class="widont">&nbsp;</span>World!</p>'
-          )
+            '<p>I say: Hello<span class="widont">&nbsp;</span>World!</p>',
+          ),
         );
         done();
       })

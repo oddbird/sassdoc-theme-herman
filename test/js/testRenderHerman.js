@@ -1,8 +1,9 @@
 'use strict';
 
+const fs = require('fs');
+
 const assert = require('assert');
 const del = require('del');
-const fs = require('fs');
 const Promise = require('bluebird');
 
 const prepareContext = require('../../lib/prepareContext');

@@ -1,9 +1,10 @@
 'use strict';
 
-const assert = require('assert');
-const del = require('del');
 const fs = require('fs');
+
+const assert = require('assert');
 const path = require('path');
+const del = require('del');
 const Promise = require('bluebird');
 const sinon = require('sinon');
 

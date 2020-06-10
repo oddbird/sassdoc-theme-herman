@@ -8,41 +8,33 @@
       "g2": "cat2-g2"
     }
   },
-  "data": [{
-    "description": "Test: function group g1.\n",
-    "context": {
-      "type": "function",
-      "name": "test-func-group-g1"
+  "data": [
+    {
+      "description": "Test: function group g1.\n",
+      "context": {
+        "type": "function",
+        "name": "test-func-group-g1"
+      },
+      "group": ["g1"],
+      "access": ["public"]
     },
-    "group": [
-      "g1"
-    ],
-    "access": [
-      "public"
-    ]
-  }, {
-    "description": "Test: function group g2.\n",
-    "context": {
-      "type": "function",
-      "name": "test-func-group-g2"
+    {
+      "description": "Test: function group g2.\n",
+      "context": {
+        "type": "function",
+        "name": "test-func-group-g2"
+      },
+      "group": ["G2"],
+      "access": ["public"]
     },
-    "group": [
-      "G2"
-    ],
-    "access": [
-      "public"
-    ]
-  }, {
-    "description": "Test: function group new.\n",
-    "context": {
-      "type": "function",
-      "name": "test-func-group-new"
-    },
-    "group": [
-      "new"
-    ],
-    "access": [
-      "public"
-    ]
-  }]
+    {
+      "description": "Test: function group new.\n",
+      "context": {
+        "type": "function",
+        "name": "test-func-group-new"
+      },
+      "group": ["new"],
+      "access": ["public"]
+    }
+  ]
 }

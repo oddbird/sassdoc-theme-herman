@@ -1,8 +1,8 @@
 'use strict';
 
 const assert = require('assert');
-const extend = require('extend');
 const path = require('path');
+const extend = require('extend');
 const sinon = require('sinon');
 
 const renderIframe = require('../../lib/renderIframe');

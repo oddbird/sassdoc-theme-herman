@@ -5,12 +5,13 @@
 process.env.NODE_ENV = 'production';
 process.env.BROWSERSLIST_CONFIG = './.browserslistrc';
 
+const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const SassDocPlugin = require('./sassdoc-webpack-plugin');
-const path = require('path');
 const webpack = require('webpack');
 const sass = require('sass');
+
+const SassDocPlugin = require('./sassdoc-webpack-plugin');
 
 const jsOutput = '[name].min.js';
 const styleOutput = '[name].min.css';

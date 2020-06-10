@@ -1,10 +1,10 @@
 'use strict';
 
 const assert = require('assert');
+const path = require('path');
 const Promise = require('bluebird');
 const extend = require('extend');
 const nunjucks = require('nunjucks');
-const path = require('path');
 const sinon = require('sinon');
 
 /* eslint-disable global-require */
@@ -310,7 +310,7 @@ describe('font annotation', function () {
       });
       assert.equal(
         this.env.fontsHTML,
-        '\n<link rel="stylesheet">\n<link rel="another-stylesheet">'
+        '\n<link rel="stylesheet">\n<link rel="another-stylesheet">',
       );
     });
 
@@ -348,8 +348,8 @@ describe('font annotation', function () {
           assert.deepEqual(this.data, this.origData);
           assert(
             env.logger.warn.calledWith(
-              'Must pass in a `sassjson` file if using @font annotation.'
-            )
+              'Must pass in a `sassjson` file if using @font annotation.',
+            ),
           );
           done();
         });
@@ -373,8 +373,8 @@ describe('font annotation', function () {
             `'${env.herman.sass.jsonfile}'`;
           assert(
             env.logger.warn.calledWith(
-              `Error reading file: ${env.herman.sass.jsonfile}\n${errMsg}`
-            )
+              `Error reading file: ${env.herman.sass.jsonfile}\n${errMsg}`,
+            ),
           );
           done();
         })
@@ -407,7 +407,7 @@ describe('font annotation', function () {
           sinon.assert.calledWith(
             env.logger.warn,
             'Must pass in a `fontpath` if using @font annotation with local ' +
-              'fonts.'
+              'fonts.',
           );
           done();
         });
@@ -948,8 +948,8 @@ describe('example annotation', function () {
       assert.deepEqual(data, [{ example: [{ type: 'njk' }] }]);
       assert(
         env.logger.warn.calledWith(
-          'Must pass in a nunjucks.templatepath if using Nunjucks @example.'
-        )
+          'Must pass in a nunjucks.templatepath if using Nunjucks @example.',
+        ),
       );
     });
 
@@ -1021,7 +1021,7 @@ describe('example annotation', function () {
         .then(() => {
           assert.equal(
             data[0].example[0].rendered,
-            `${data[0].example[0].code}\n`
+            `${data[0].example[0].code}\n`,
           );
           done();
         })
@@ -1054,7 +1054,7 @@ describe('example annotation', function () {
           sinon.assert.calledOnce(this.env.logger.warn);
           sinon.assert.calledWith(
             this.env.logger.warn,
-            `Error compiling @example scss: \n${errMsg}\n${sassData}`
+            `Error compiling @example scss: \n${errMsg}\n${sassData}`,
           );
           done();
         })
@@ -1086,7 +1086,7 @@ describe('example annotation', function () {
         .then(() => {
           assert.equal(
             data[0].example[0].rendered,
-            `body {\n  border: 1px;\n}\n\n${data[0].example[0].code}\n`
+            `body {\n  border: 1px;\n}\n\n${data[0].example[0].code}\n`,
           );
           done();
         })
@@ -1120,7 +1120,7 @@ describe('example annotation', function () {
         .then(() => {
           assert.equal(
             data[0].example[0].rendered,
-            `body {\n  border: 1px;\n}\n\n${data[0].example[0].code}`
+            `body {\n  border: 1px;\n}\n\n${data[0].example[0].code}`,
           );
           done();
         })
@@ -1313,7 +1313,7 @@ describe('example annotation', function () {
 
     it('uses custom nunjucks env, if exists', function () {
       const nunjucksEnv = nunjucks.configure(
-        path.resolve(__dirname, 'fixtures', 'templates')
+        path.resolve(__dirname, 'fixtures', 'templates'),
       );
       nunjucksEnv.addFilter('plus_one', function (val) {
         return val + 1;

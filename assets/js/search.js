@@ -116,7 +116,7 @@ export const showResults = (matches, val) => {
     nunjucksEnv.render('search_results.njk', {
       term: val,
       count: results.length,
-    })
+    }),
   );
   resultsTpl.filter('.js-search-results').html(results);
   $('[data-page]').html(resultsTpl);

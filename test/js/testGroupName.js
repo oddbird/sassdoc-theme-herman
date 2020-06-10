@@ -3,8 +3,9 @@
 const assert = require('assert');
 const sinon = require('sinon');
 
-const expected = require('./fixtures/groupName/expected');
 const groupName = require('../../lib/utils/groupName');
+
+const expected = require('./fixtures/groupName/expected');
 const input = require('./fixtures/groupName/input');
 
 describe('groupName', function () {

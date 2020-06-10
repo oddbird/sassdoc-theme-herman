@@ -1,24 +1,47 @@
 # http://eslint.org/docs/rules/
 
 root: true
-parser: babel-eslint
 parserOptions:
   sourceType: script
-  ecmaVersion: 2015
+  ecmaVersion: 2018
 env:
   es6: true
   node: true
 plugins:
   - prettier
+  - import
+settings:
+  import/resolver:
+    webpack:
+      config:
+        resolve:
+          modules:
+            - assets/js
+            - templates/client
+            - scss
+            - node_modules
+          alias:
+            jquery: 'jquery/dist/jquery.slim'
+            nunjucks: 'nunjucks/browser/nunjucks-slim'
+        resolveLoader:
+          alias:
+            sassjson: 'sass-json-loader'
 extends:
   - eslint:recommended
-  - prettier
+  - plugin:import/recommended
+  - plugin:prettier/recommended
 rules:
   # Prettier
   prettier/prettier:
     - 2
     - singleQuote: true
-      trailingComma: es5
+      trailingComma: all
+
+  # Import
+  import/order:
+    - 1
+    - newlines-between: always
+  import/named: 1
 
   # Possible Errors
   getter-return: 2
@@ -36,6 +59,7 @@ rules:
   guard-for-in: 2
   no-alert: 2
   no-caller: 2
+  no-console: 1
   no-div-regex: 2
   no-else-return: 2
   no-eq-null: 2
@@ -54,6 +78,7 @@ rules:
   no-new-func: 2
   no-new-wrappers: 2
   no-octal-escape: 2
+  no-param-reassign: 2
   no-proto: 2
   no-return-assign: 2
   no-return-await: 2
@@ -70,9 +95,9 @@ rules:
   no-warning-comments:
     - 1
     - terms:
-      - todo
-      - fixme
-      - '@@@'
+        - todo
+        - fixme
+        - '@@@'
   no-with: 2
   prefer-promise-reject-errors:
     - 2
@@ -94,7 +119,6 @@ rules:
   no-use-before-define: 2
 
   # Node.js and CommonJS
-  callback-return: 2
   global-require: 2
   handle-callback-err: 2
   no-buffer-constructor: 2
@@ -113,12 +137,16 @@ rules:
   func-style: 2
   linebreak-style: 2
   lines-between-class-members: 2
-  max-len: 2
+  max-len:
+    - 2
+    - ignoreComments: true
+      ignoreStrings: true
+      ignorePattern: '^import .*'
   new-cap:
     - 2
     - capIsNewExceptions:
-      - Deferred
-      - Event
+        - Deferred
+        - Event
   no-array-constructor: 2
   no-bitwise: 2
   no-continue: 2
@@ -140,7 +168,7 @@ rules:
 
   # ECMAScript 6
   arrow-body-style: 2
-  no-duplicate-imports: 2
+  no-duplicate-imports: 0
   no-useless-computed-key: 2
   no-useless-constructor: 2
   no-useless-rename: 2
@@ -155,4 +183,5 @@ rules:
   prefer-rest-params: 2
   prefer-spread: 2
   prefer-template: 2
+  sort-imports: 0
   symbol-description: 2

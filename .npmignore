@@ -23,6 +23,7 @@ assets/
 fonts/
 gulpfile.js
 jscov/
+coverage/
 npm-debug.log*
 postcss.config.js
 sass-json-loader.js
@@ -40,3 +41,7 @@ dist/webpack/styleguide_json*
 scss/*
 !scss/utilities/
 !scss/_utilities.scss
+
+.pnp.js
+.vscode/
+.yarn/

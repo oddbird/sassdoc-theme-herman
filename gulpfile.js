@@ -2,6 +2,8 @@
 
 'use strict';
 
+const { spawn } = require('child_process');
+
 const beeper = require('beeper');
 const browserSync = require('browser-sync').create();
 const chalk = require('chalk');
@@ -18,7 +20,6 @@ const rename = require('gulp-rename');
 // const sasslint = require('gulp-sass-lint');
 const svg = require('gulp-svg-symbols');
 const webpack = require('webpack');
-const { spawn } = require('child_process');
 
 // Theme and project specific paths.
 const paths = {
@@ -98,7 +99,7 @@ const spawnTask = function (command, args, cb, failOnError = true) {
           onError(code);
         }
         return cb();
-      })
+      }),
   );
 };
 
@@ -125,7 +126,7 @@ const prettierTask = function (src, shouldLog) {
   }
   return gulp
     .src(src, { base: './' })
-    .pipe(prettier({ singleQuote: true, trailingComma: 'es5' }))
+    .pipe(prettier({ singleQuote: true, trailingComma: 'all' }))
     .pipe(gulp.dest('./'))
     .on('error', onError);
 };
@@ -152,7 +153,7 @@ gulp.task('prettier', gulp.parallel('prettier-js', 'prettier-scss'));
 
 gulp.task(
   'eslint',
-  gulp.series('prettier-js', () => eslintTask(paths.ALL_JS, true))
+  gulp.series('prettier-js', () => eslintTask(paths.ALL_JS, true)),
 );
 
 gulp.task('eslint-nofail', () => eslintTask(paths.ALL_JS));
@@ -165,7 +166,9 @@ gulp.task('eslint-nofail', () => eslintTask(paths.ALL_JS));
 // gulp.task('sasslint-nofail', () => sasslintTask(paths.SASS));
 
 gulp.task('sasstest', () =>
-  gulp.src(`${paths.SASS_TESTS_DIR}test_sass.js`, { read: false }).pipe(mocha())
+  gulp
+    .src(`${paths.SASS_TESTS_DIR}test_sass.js`, { read: false })
+    .pipe(mocha()),
 );
 
 const getJsTestArgs = (verbose) => {
@@ -213,7 +216,7 @@ const karmaOnBuild = (done) => (exitCode) => {
       new PluginError('karma', {
         name: 'KarmaError',
         message: `Failed with exit code: ${exitCode}`,
-      })
+      }),
     );
   } else {
     done();
@@ -224,7 +227,7 @@ const karmaOnBuild = (done) => (exitCode) => {
 gulp.task('clienttest', (cb) => {
   new KarmaServer(
     { configFile: path.join(__dirname, 'karma.conf.js') },
-    karmaOnBuild(cb)
+    karmaOnBuild(cb),
   ).start();
 });
 
@@ -251,10 +254,10 @@ gulp.task('svgmin', () =>
         templates: [
           path.join(__dirname, paths.TEMPLATES_DIR, '_icon_template.lodash'),
         ],
-      })
+      }),
     )
     .pipe(rename('_icons.svg'))
-    .pipe(gulp.dest(paths.TEMPLATES_DIR))
+    .pipe(gulp.dest(paths.TEMPLATES_DIR)),
 );
 
 gulp.task('imagemin', () => {
@@ -268,7 +271,7 @@ gulp.task('imagemin', () => {
         imagemin.jpegtran(),
         imagemin.optipng(),
         imagemin.svgo(),
-      ])
+      ]),
     )
     .pipe(gulp.dest(dest));
 });
@@ -291,7 +294,7 @@ const webpackOnBuild = (done) => (err, stats) => {
     stats.toString({
       colors: true,
       chunks: false,
-    })
+    }),
   );
 
   if (done) {
@@ -304,7 +307,7 @@ gulp.task(
   gulp.series('minify', (cb) => {
     const webpackConfig = require('./webpack.config');
     webpack(webpackConfig).run(webpackOnBuild(cb));
-  })
+  }),
 );
 
 gulp.task(
@@ -312,7 +315,7 @@ gulp.task(
   gulp.series('minify', (cb) => {
     const webpackConfig = require('./webpack.config');
     webpack(webpackConfig).watch(300, webpackOnBuild(cb));
-  })
+  }),
 );
 
 gulp.task(
@@ -332,12 +335,12 @@ gulp.task(
           './CONTRIBUTING.md',
           './package.json',
         ],
-        gulp.parallel('webpack')
+        gulp.parallel('webpack'),
       );
 
       gulp.watch(
         [...paths.JS_TESTS_FILES, ...paths.SRC_JS, ...paths.TEMPLATES],
-        gulp.parallel('jstest-nofail')
+        gulp.parallel('jstest-nofail'),
       );
 
       // // lint scss on changes
@@ -363,8 +366,8 @@ gulp.task(
 
       cb();
     },
-    'clienttest-watch'
-  )
+    'clienttest-watch',
+  ),
 );
 
 gulp.task('browser-sync', (cb) => {
@@ -386,13 +389,13 @@ gulp.task('browser-sync', (cb) => {
       // subsequent JS/HTML changes are ignored.
       injectChanges: false,
     },
-    cb
+    cb,
   );
 });
 
 gulp.task(
   'test',
-  gulp.series(gulp.parallel('jstest', 'sasstest'), 'clienttest')
+  gulp.series(gulp.parallel('jstest', 'sasstest'), 'clienttest'),
 );
 gulp.task('serve', gulp.parallel('watch', 'browser-sync'));
 gulp.task('quick-serve', gulp.parallel('webpack', 'browser-sync'));
@@ -402,16 +405,16 @@ gulp.task(
     gulp.parallel(
       'eslint',
       // 'sasslint',
-      'sasstest'
+      'sasstest',
     ),
-    gulp.parallel('jstest', 'serve')
-  )
+    gulp.parallel('jstest', 'serve'),
+  ),
 );
 gulp.task(
   'default',
   gulp.parallel(
     // 'sasslint',
     'sasstest',
-    gulp.series('eslint', gulp.parallel('jstest', 'webpack'), 'clienttest')
-  )
+    gulp.series('eslint', gulp.parallel('jstest', 'webpack'), 'clienttest'),
+  ),
 );

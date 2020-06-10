@@ -5,12 +5,13 @@
 const path = require('path');
 const sassTrue = require('sass-true');
 
-const importer = function(url) {
-  if (url[0] === '~') {
-    url = path.resolve('node_modules', url.substr(1));
+const importer = function (url) {
+  let file = url;
+  if (url.startsWith('~')) {
+    file = path.resolve('node_modules', url.substr(1));
   }
 
-  return { file: url };
+  return { file };
 };
 
 const sassFile = path.join(__dirname, 'test.scss');

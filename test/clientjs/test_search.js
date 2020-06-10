@@ -1,5 +1,4 @@
 import lunr from 'lunr';
-
 import * as search from 'search';
 
 describe('search', function () {

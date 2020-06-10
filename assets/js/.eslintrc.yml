@@ -2,10 +2,14 @@
 
 parserOptions:
   sourceType: module
-  ecmaFeatures:
-    impliedStrict: true
 env:
   browser: true
   commonjs: true
   jquery: true
   node: false
+plugins:
+  - simple-import-sort
+rules:
+  # Import
+  simple-import-sort/sort: 1
+  import/order: 0

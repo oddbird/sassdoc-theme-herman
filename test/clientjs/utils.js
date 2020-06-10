@@ -12,7 +12,7 @@ before(function () {
         req.respond(
           status,
           headers || { 'Content-Type': 'application/json' },
-          JSON.stringify(json)
+          JSON.stringify(json),
         );
         break;
       }
@@ -61,7 +61,7 @@ chai.use((_chai) => {
     this.assert(
       found,
       `no ${method} to ${url} found`,
-      `expected ${method} to ${url} not to exist`
+      `expected ${method} to ${url} not to exist`,
     );
   });
 });

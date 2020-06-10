@@ -3,6 +3,7 @@
 'use strict';
 
 const fs = require('fs');
+
 const path = require('path');
 const sassdoc = require('sassdoc');
 const set = require('lodash.set');
@@ -22,12 +23,13 @@ const getAsset = function (entry, ext = 'css') {
 };
 
 class SassDocPlugin {
-  constructor(options, pluginOptions) {
+  constructor(opts, pluginOptions) {
+    let options = opts;
     if (!options) {
       try {
         // Load .sassdocrc configuration
         options = yaml.safeLoad(
-          fs.readFileSync(path.join(process.cwd(), '.sassdocrc'), 'utf-8')
+          fs.readFileSync(path.join(process.cwd(), '.sassdocrc'), 'utf-8'),
         );
       } catch (err) {
         console.warn(err);

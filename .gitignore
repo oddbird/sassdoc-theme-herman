@@ -11,17 +11,22 @@
 .npm
 .nyc_output/
 .sass-cache/
-.yarn-integrity
 docs/assets/
 docs/search-data.json
 jscov/
 node_modules/
 npm-debug.log*
 test/js/dest/
-yarn-debug.log*
-yarn-error.log*
 .nvmrc
 
 dist/webpack/app_styles.min.js
 dist/webpack/iframe_styles.min.js
 dist/webpack/styleguide_json*
+
+yarn-debug.log*
+yarn-error.log*
+.yarn-integrity
+.yarn/*
+!.yarn/cache
+!.yarn/releases
+!.yarn/plugins

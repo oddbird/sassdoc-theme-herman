@@ -2,8 +2,6 @@
 
 parserOptions:
   sourceType: module
-  ecmaFeatures:
-    impliedStrict: true
 env:
   browser: true
   commonjs: true
@@ -14,7 +12,13 @@ globals:
   chai: true
   expect: true
   sinon: true
+plugins:
+  - simple-import-sort
 rules:
+  # Import
+  simple-import-sort/sort: 1
+  import/order: 0
+
   func-names: 0
   no-unused-expressions: 0
   prefer-arrow-callback: 0

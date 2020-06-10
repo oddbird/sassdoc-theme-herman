@@ -4,9 +4,10 @@
 
 process.env.BABEL_ENV = 'test';
 
-const extend = require('extend');
 const path = require('path');
+const extend = require('extend');
 const webpack = require('webpack');
+
 // Use extend instead of Object.assign to do a deep merge,
 // because we're modifying nested properties on the new object.
 const webpackConf = extend(true, {}, require('./webpack.config.js'));
