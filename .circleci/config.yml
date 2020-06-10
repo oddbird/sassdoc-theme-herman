@@ -22,23 +22,6 @@ jobs:
           paths:
             - ./node_modules
 
-  build-node-6:
-    working_directory: ~/herman
-    docker:
-      - image: node:6
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - herman-node6-{{ checksum "yarn.lock" }}
-      - run:
-          name: Install Dependencies
-          command: yarn install --frozen-lockfile --ignore-engines
-      - save_cache:
-          key: herman-node6-modules-{{ checksum "yarn.lock" }}
-          paths:
-            - ./node_modules
-
   lint:
     working_directory: ~/herman
     docker:
@@ -99,30 +82,11 @@ jobs:
       - store_test_results:
           path: jscov
 
-  test-node-6:
-    working_directory: ~/herman
-    docker:
-      - image: node:6
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - herman-node6-modules-{{ checksum "yarn.lock" }}
-      - run:
-          name: Run JS Tests [node 6]
-          command: yarn gulp jstest-node6
-      - store_artifacts:
-          path: jscov
-          destination: js-reports
-      - store_test_results:
-          path: jscov
-
 workflows:
   version: 2
   build-and-test:
     jobs:
       - build
-      - build-node-6
       - lint:
           requires:
             - build
@@ -132,6 +96,3 @@ workflows:
       - test-js:
           requires:
             - build
-      - test-node-6:
-          requires:
-            - build-node-6

@@ -8,7 +8,7 @@
     "sassdoc-theme"
   ],
   "engines": {
-    "node": ">=6"
+    "node": ">=10"
   },
   "dependencies": {
     "bluebird": "^3.7.2",
@@ -21,7 +21,7 @@
     "lunr": "^2.3.8",
     "markdown-it": "^10.0.0",
     "markdown-it-named-headers": "^0.0.4",
-    "nunjucks": "^2.5.2",
+    "nunjucks": "^3.2.1",
     "sassdoc-extras": "^2.5.1",
     "strip-indent": "^2.0.0",
     "through2": "^3.0.1",
@@ -98,8 +98,7 @@
   },
   "resolutions": {
     "browserslist": ">=2.4.0",
-    "cdocparser": "^0.15.0",
-    "nunjucks": "^2.5.2"
+    "cdocparser": "^0.15.0"
   },
   "license": "MIT",
   "repository": {
