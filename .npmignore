@@ -17,7 +17,6 @@
 .nyc_output/
 .prettierrc
 .sass-cache/
-.sass-lint.yml
 .yarn-integrity
 appveyor.yml
 assets/

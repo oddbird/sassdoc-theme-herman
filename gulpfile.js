@@ -15,7 +15,7 @@ const path = require('path');
 const PluginError = require('plugin-error');
 const prettier = require('gulp-prettier-plugin');
 const rename = require('gulp-rename');
-const sasslint = require('gulp-sass-lint');
+// const sasslint = require('gulp-sass-lint');
 const svg = require('gulp-svg-symbols');
 const webpack = require('webpack');
 const { spawn } = require('child_process');
@@ -130,21 +130,21 @@ const prettierTask = function(src, shouldLog) {
     .on('error', onError);
 };
 
-const sasslintTask = function(src, failOnError, shouldLog) {
-  if (shouldLog) {
-    const cmd = `sasslint ${src}`;
-    log('Running', `'${chalk.cyan(cmd)}'...`);
-  }
-  const stream = gulp
-    .src(src)
-    .pipe(sasslint())
-    .pipe(sasslint.format())
-    .pipe(sasslint.failOnError());
-  if (!failOnError) {
-    stream.on('error', onError);
-  }
-  return stream;
-};
+// const sasslintTask = function(src, failOnError, shouldLog) {
+//   if (shouldLog) {
+//     const cmd = `sasslint ${src}`;
+//     log('Running', `'${chalk.cyan(cmd)}'...`);
+//   }
+//   const stream = gulp
+//     .src(src)
+//     .pipe(sasslint())
+//     .pipe(sasslint.format())
+//     .pipe(sasslint.failOnError());
+//   if (!failOnError) {
+//     stream.on('error', onError);
+//   }
+//   return stream;
+// };
 
 gulp.task('prettier-js', () => prettierTask(paths.ALL_JS));
 gulp.task('prettier-scss', () => prettierTask(paths.SASS));
@@ -157,12 +157,12 @@ gulp.task(
 
 gulp.task('eslint-nofail', () => eslintTask(paths.ALL_JS));
 
-gulp.task(
-  'sasslint',
-  gulp.series('prettier-scss', () => sasslintTask(paths.SASS, true))
-);
+// gulp.task(
+//   'sasslint',
+//   gulp.series('prettier-scss', () => sasslintTask(paths.SASS, true))
+// );
 
-gulp.task('sasslint-nofail', () => sasslintTask(paths.SASS));
+// gulp.task('sasslint-nofail', () => sasslintTask(paths.SASS));
 
 gulp.task('sasstest', () =>
   gulp.src(`${paths.SASS_TESTS_DIR}test_sass.js`, { read: false }).pipe(mocha())
@@ -346,18 +346,18 @@ gulp.task(
         gulp.parallel('jstest-nofail')
       );
 
-      // lint scss on changes
-      gulp.watch(paths.SASS).on('all', (event, filepath) => {
-        if (event === 'add' || event === 'change') {
-          sasslintTask(filepath, false, true);
-        }
-      });
+      // // lint scss on changes
+      // gulp.watch(paths.SASS).on('all', (event, filepath) => {
+      //   if (event === 'add' || event === 'change') {
+      //     sasslintTask(filepath, false, true);
+      //   }
+      // });
 
       // run sass tests on changes
       gulp.watch(paths.SASS, gulp.parallel('sasstest'));
 
       // lint all code when rules change
-      gulp.watch('**/.sass-lint.yml', gulp.parallel('sasslint-nofail'));
+      // gulp.watch('**/.sass-lint.yml', gulp.parallel('sasslint-nofail'));
       gulp.watch('**/.eslintrc.yml', gulp.parallel('eslint-nofail'));
 
       // lint js on changes
@@ -405,14 +405,18 @@ gulp.task('quick-serve', gulp.parallel('webpack', 'browser-sync'));
 gulp.task(
   'dev',
   gulp.series(
-    gulp.parallel('eslint', 'sasslint', 'sasstest'),
+    gulp.parallel(
+      'eslint',
+      // 'sasslint',
+      'sasstest'
+    ),
     gulp.parallel('jstest', 'serve')
   )
 );
 gulp.task(
   'default',
   gulp.parallel(
-    'sasslint',
+    // 'sasslint',
     'sasstest',
     gulp.series('eslint', gulp.parallel('jstest', 'webpack'), 'clienttest')
   )

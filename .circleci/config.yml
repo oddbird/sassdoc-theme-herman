@@ -50,9 +50,9 @@ jobs:
       - run:
           name: Lint JS
           command: yarn gulp eslint
-      - run:
-          name: Lint Sass
-          command: yarn gulp sasslint
+      # - run:
+      #     name: Lint Sass
+      #     command: yarn gulp sasslint
 
   test-sass:
     working_directory: ~/herman

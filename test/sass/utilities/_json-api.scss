@@ -23,7 +23,6 @@
         @include herman-export($map);
       }
 
-      // sass-lint:disable no-empty-rulesets
       @include expect {
         /*! json-encode: #{_herman-encode($map)} */
       }
