@@ -1,21 +1,33 @@
-[data-herman-sizetable] {
-  min-width: 100%;
-}
-
-[data-herman-sizetable='output'] {
-  min-width: initial;
-}
-
-[data-herman-th] {
-  text-align: left;
-}
-
 [data-herman-size='overflow'] {
   max-width: 100%;
   overflow-x: auto;
 }
 
-[data-herman-size='bar'] {
+[data-herman-size~='highlight'] {
+  --herman-size-bar: #{color('action')};
+  --herman-cell-color: #{color('callout')};
+  --herman-label-color: #{color('callout')};
+}
+
+[data-herman-viz] {
+  margin: var(--herman-viz-before, 0.25rem) auto
+    var(--herman-viz-after, 0.25rem) 0;
+}
+
+[data-herman-size~='viz-row'] {
+  [data-herman-viz='bar'] {
+    --herman-viz-before: 0;
+    --herman-viz-after: 0.5rem;
+  }
+}
+
+[data-herman-table~='text'] {
+  --herman-viz-before: 1rem;
+  --herman-viz-after: 1rem;
+  --herman-label-color: #{color('callout')};
+}
+
+[data-herman-viz='bar'] {
   background-color: var(--herman-size-bar, #{color('border')});
   background-image: linear-gradient(
       to left,
@@ -51,105 +63,6 @@
   background-repeat: repeat-x;
   background-size: 100px 75%, 10px 50%, 5px 25%;
   border-radius: size('quarter-shim');
-  display: inline-block;
+  display: block;
+  min-height: 1.5em;
 }
-
-[data-herman-size='text'] {
-  line-height: 1.2;
-}
-
-[data-herman-size~='highlight'] {
-  --herman-size-bar: #{color('action')};
-  background-color: color('callout');
-}
-
-// //
-// // @TODO: Add docs to block-size-table!
-// //
-// @mixin block-size-table {
-//   display: block;
-
-//   tbody {
-//     display: block;
-//     max-width: 100%;
-//   }
-
-//   tr {
-//     display: flex;
-//     flex-wrap: wrap;
-//   }
-
-//   td {
-//     display: block;
-//     flex: 0 0 auto;
-//     text-align: left;
-
-//     + td {
-//       border-left: 0;
-//     }
-//   }
-
-//   .size-name,
-//   .size-value {
-//     padding-bottom: 0;
-//   }
-
-//   .size-viz {
-//     flex: 0 0 100%;
-//     max-width: initial;
-//   }
-
-//   .size-overflow,
-//   .is-text {
-//     padding-bottom: size('shim');
-//   }
-// }
-
-// // Rulers
-// // ------
-
-// .sizes {
-//   width: 100%;
-
-//   td {
-//     overflow: hidden;
-//     padding: size('quarter-shim') size('shim');
-//     vertical-align: baseline;
-
-//     + td {
-//       border-left: 1px solid color('border-light');
-//     }
-//   }
-
-//   &.is-large {
-//     @include block-size-table;
-//   }
-
-//   @include below('item-break') {
-//     @include block-size-table;
-//   }
-// }
-
-// .size {
-//   max-width: 100%;
-// }
-
-// .size-name,
-// .size-value {
-//   color: color('text-light');
-//   flex: 0 1 5ch;
-//   font-size: size('code');
-//   white-space: nowrap;
-// }
-
-// .size-viz {
-//   max-width: 0;
-//   overflow-x: auto;
-//   width: 100%;
-
-//   &.is-text {
-//     overflow-x: hidden;
-//     text-overflow: ellipsis;
-//     white-space: nowrap;
-//   }
-// }

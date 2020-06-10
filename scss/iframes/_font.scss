@@ -1,4 +1,5 @@
 [data-herman-preview='font'] {
+  --herman-label-color: #{color('slight')};
   display: flex;
   flex-wrap: wrap;
   margin: size('gutter') negative('shim') 0;
