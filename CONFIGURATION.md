@@ -126,12 +126,12 @@ which will be included in the `<head>` of rendered
   This means that the paths must either be absolute,
   or relative to the location of the CSS file itself.
   If using Webpack to bundle your Herman `customCSS`,
-  this likely means [disabling the `publicPath` setting][extract-text]
+  this likely means [disabling the `publicPath` setting][public-path]
   for this CSS file (e.g. `publicPath: ''`),
   or [disabling Webpack's `url()` pre-processing][css-loader] entirely.
 
 [font-docs-webfonts]: http://oddbird.net/herman/docs/demo_fonts.html#displaying-webfonts
-[extract-text]: https://github.com/webpack-contrib/extract-text-webpack-plugin#extract
+[public-path]: https://github.com/webpack-contrib/mini-css-extract-plugin#publicpath
 [css-loader]: https://github.com/webpack-contrib/css-loader#url
 
 ## customHTML

@@ -384,7 +384,7 @@ in your rendered <code>@example</code> annotations.
 This means that the paths must either be absolute,
 or relative to the location of the CSS file itself.
 If using Webpack to bundle your Herman <code>customCSS</code>,
-this likely means <a href="https://github.com/webpack-contrib/extract-text-webpack-plugin#extract">disabling the <code>publicPath</code> setting</a>
+this likely means <a href="https://github.com/webpack-contrib/mini-css-extract-plugin#publicpath">disabling the <code>publicPath</code> setting</a>
 for this CSS file (e.g. <code>publicPath: ''</code>),
 or <a href="https://github.com/webpack-contrib/css-loader#url">disabling Webpack’s <code>url()</code> pre-processing</a> entirely.</li>
 </ul>
