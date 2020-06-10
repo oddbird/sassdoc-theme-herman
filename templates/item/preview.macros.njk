@@ -125,17 +125,17 @@
   {%- set path = data[variant.variant].path or path -%}
   {%- set stack = data.stack if data.stack and not data.stack|isString else [data.stack] -%}
   {%- set family = [variant.family, stack]|join(',') if not (variant.family in stack) else stack -%}
-  <div data-specimen-face="{{ variant.variant }}">
-    <h4 data-specimen="face-name">
+  <div data-herman-fontface="{{ variant.variant }}">
+    <p data-herman-font="name">
       {{ variant.variant }}
 
       {% if path %}
         (<code>{{ path }}</code>)
       {% endif %}
-    </h4>
-    <div data-specimen="sample" style="font-family: {{ font_names(family) }}; font-weight: {{ variant.weight }}; font-style: {{ variant.style }};">
-      <div data-specimen="aa">Aa</div>
-      <div data-specimen="lorem">{{ lorem('alpha') }}</div>
+    </p>
+    <div data-herman-font="sample" style="font-family: {{ font_names(family) }}; font-weight: {{ variant.weight }}; font-style: {{ variant.style }};">
+      <div data-herman-font="aa">Aa</div>
+      <div data-herman-font="lorem">{{ lorem('alpha') }}</div>
     </div>
   </div>
 {% endmacro %}
@@ -163,21 +163,21 @@
 #}
 {% macro lorem(length) %}
   {% if length == 'title' %}
-    <span data-specimen-lorem="title">
+    <span data-herman-lorem="title">
       Pack my box with five dozen liquor&nbsp;jugs.
     </span>
   {% elif length == 'body' %}
-    <span data-specimen-lorem="body">
+    <span data-herman-lorem="body">
       A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine. I am so happy, my dear friend, so absorbed in the exquisite sense of mere tranquil existence, that I neglect my talents. I should be incapable of drawing a single stroke at the present moment; and yet I feel that I never was a greater artist than&nbsp;now.
     </span>
   {% elif length == 'alpha' %}
-    <span data-specimen-lorem="uppercase">
+    <span data-herman-lorem="uppercase">
       ABCDEFGHIJKLMNOPQRSTUVWXYZ
     </span>
-    <span data-specimen-lorem="lowercase">
+    <span data-herman-lorem="lowercase">
       abcdefghijklmnopqrstuvwxyz
     </span>
-    <span data-specimen-lorem="symbols">
+    <span data-herman-lorem="symbols">
       1234567890([{“‘,.;:?!$&*’”}])
     </span>
   {% endif %}
@@ -206,18 +206,17 @@
 {% endmacro %}
 
 
-{% macro size_ruler(data, style) %}
-  {% set is_large = (style == 'ruler-large') %}
-  {% set is_ratio = (style == 'ratio') %}
+{% macro size_table(data, style) %}
+  <table data-herman-sizetable="{{ style }}">
+    <thead>
+      <tr>
+        <th data-herman-th="name">{{ 'Step' if (style == 'ratio') else 'Name' }}</th>
+        <th data-herman-th="value">Value</th>
+      </tr>
+    </thead>
 
-  <table class="sizes{% if is_large %} is-large{% endif %}">
-    <tr class="is-hidden">
-      <th class="size-name">{{ 'Step' if is_ratio else 'Name' }}</th>
-      <th class="size-value">Value</th>
-      <td class="size-viz"></td>
-    </tr>
-
-    {% if is_ratio %}
+    <tbody>
+    {% if (style == 'ratio') %}
       {% set value = data %}
       {% set start = 5 %}
       {% set count = range(1, 7) if (value == 'linear') else range(-3, 4) %}
@@ -235,80 +234,48 @@
     {% else %}
       {% for value, items in data|list|groupby('value') %}
         {% set name = items|join(', ', 'key') %}
-        {{ size_ruler_row(
-          name=name,
-          value=value,
-          width=value
-        ) }}
+          {{ size_ruler_row(
+            name=name,
+            value=value,
+            width=value if ('ruler' in style) else none,
+            text=value if (style == 'text') else none
+          ) }}
       {% endfor %}
     {% endif %}
+    </tbody>
   </table>
 {% endmacro %}
 
 
 {% macro size_ruler_row(name, value, width=none, text=none) %}
-  <tr class="size{% if value == 'base' %} ratio-base{% endif %}">
-    <td class="size-name">
+  <tr data-herman-size="row{% if value == 'base' %} highlight{% endif %}">
+    <td data-herman-size="name">
       {{ name }}
     </td>
-    <td class="size-value">
+    <td data-herman-size="value">
       <code>
         {{ value }}
       </code>
     </td>
-    <td class="size-viz{% if text %} is-text{% endif %}">
-      {% if width %}
-        <div class="size-overflow">
-          <span class="size-bar" style="width: {{ width }};">
+  </tr>
+
+  {% if width or text %}
+    <tr data-herman-size="viz-row" aria-hidden="true">
+      <td data-herman-size="viz-cell" colspan="2">
+        <div data-herman-size="overflow">
+        {% if width %}
+          <span data-herman-size="bar" style="width: {{ width }};">
             &nbsp;
           </span>
+        {% elif text %}
+          <span data-herman-size="text" style="font-size: {{ value }};">
+            {{ lorem('title') }}
+          </span>
+        {% endif %}
         </div>
-      {% elif text %}
-        <span class="size-text" style="font-size: {{ value }};">
-          {{ lorem('title') }}
-        </span>
-      {% endif %}
-    </td>
-  </tr>
-{% endmacro %}
-
-
-{% macro size_text(data) %}
-  <table class="sizes">
-    <tr class="is-hidden">
-      <th class="size-name">Name</th>
-      <th class="size-value">Value</th>
-      <td class="size-viz"></td>
+      </td>
     </tr>
-
-    {% for value, items in data|list|groupby('value') %}
-      {% set name = items|join(', ', 'key') %}
-        {{ size_ruler_row(
-          name=name,
-          value=value,
-          text=value
-        ) }}
-    {% endfor %}
-  </table>
-{% endmacro %}
-
-
-{% macro size_output(data) %}
-  <table class="sizes">
-    <tr class="is-hidden">
-      <th class="size-name">Name</th>
-      <th class="size-value">Value</th>
-      <td class="size-viz"></td>
-    </tr>
-
-    {% for value, items in data|list|groupby('value') %}
-      {% set name = items|join(', ', 'key') %}
-        {{ size_ruler_row(
-          name=name,
-          value=value
-        ) }}
-    {% endfor %}
-  </table>
+  {% endif %}
 {% endmacro %}
 
 

@@ -1,7 +1,7 @@
 {% import 'nav.macros.njk' as nav %}
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-herman="root">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -31,7 +31,7 @@
     {{ trackingCode|safe }}
   {% endif %}
 </head>
-<body>
+<body data-herman="body">
   {% include '_icons.svg' %}
 
   <div data-region="app">

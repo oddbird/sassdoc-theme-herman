@@ -30,7 +30,7 @@
     </style>
   {% endif %}
 </head>
-<body class="sassdoc font-specimen">
+<body data-herman-preview='font'>
   {%- set key = item.font.key -%}
   {%- set data = sassjson.fonts[key] -%}
   {%- if data and item.font.parsedVariants and item.font.parsedVariants|length -%}
