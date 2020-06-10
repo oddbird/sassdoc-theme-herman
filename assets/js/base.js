@@ -43,7 +43,7 @@ export const initializeToggles = () => {
     }
   });
 
-  const closeTarget = target => {
+  const closeTarget = (target) => {
     // Close a target and update any attached toggles
     const id = target.attr('data-target-id');
     const openToggles = $(
@@ -99,7 +99,7 @@ export const initializeToggles = () => {
     }
   };
 
-  body.on('click', evt => {
+  body.on('click', (evt) => {
     const openTargets = $(
       '[data-toggle="target"][aria-expanded="true"][data-auto-closing="true"]'
     );
@@ -110,7 +110,7 @@ export const initializeToggles = () => {
 };
 
 export const initializeIframes = () => {
-  const fitIframeToContent = iframe => {
+  const fitIframeToContent = (iframe) => {
     /* istanbul ignore else */
     if (iframe.contentWindow.document.body) {
       iframe.height = $(iframe.contentWindow.document).outerHeight(true);
@@ -142,7 +142,7 @@ export const initializeNav = () => {
     const btn = $('[aria-controls="nav"]');
     const mql = window.matchMedia(`(min-width: ${breakpoint})`);
 
-    const screenTest = e => {
+    const screenTest = (e) => {
       if (e.matches) {
         /* the viewport is wider than the breakpoint */
         nav.attr('aria-expanded', 'true');

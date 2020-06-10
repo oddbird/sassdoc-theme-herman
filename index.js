@@ -16,7 +16,7 @@ const sizes = require('./lib/annotations/sizes');
  * and the context variables `ctx`.
  */
 const herman = (dest, ctx) =>
-  prepareContext(ctx).then(preparedContext =>
+  prepareContext(ctx).then((preparedContext) =>
     renderHerman(dest, preparedContext)
   );
 

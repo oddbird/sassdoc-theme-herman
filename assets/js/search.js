@@ -13,7 +13,7 @@ nunjucks.installJinjaCompat();
 // that. To avoid this issue, we need a loader that checks the `window` object
 // every time.
 //
-export const getSource = name => ({
+export const getSource = (name) => ({
   src: {
     type: 'code',
     obj: window.nunjucksPrecompiled[name],
@@ -25,7 +25,7 @@ export const nunjucksEnv = new nunjucks.Environment(new PrecompiledLoader());
 
 let searchStore;
 
-export const setSearchStore = val => {
+export const setSearchStore = (val) => {
   searchStore = val;
 };
 
@@ -33,15 +33,15 @@ export const getSearchStore = () => searchStore;
 
 export const getUrlParams = () => deparam(window.location.search.substr(1));
 
-const getSearchResultsByField = matches => {
+const getSearchResultsByField = (matches) => {
   const results = {
     title: [],
     contents: [],
   };
-  Object.keys(matches).forEach(term => {
-    Object.keys(matches[term]).forEach(fieldName => {
+  Object.keys(matches).forEach((term) => {
+    Object.keys(matches[term]).forEach((fieldName) => {
       // For each term found in each field, store position of matches
-      const pos = matches[term][fieldName].position.map(p => ({
+      const pos = matches[term][fieldName].position.map((p) => ({
         start: p[0],
         length: p[1],
       }));
@@ -64,7 +64,7 @@ export const highlightSearchResult = (el, results) => {
     new Mark(textEl).markRanges(results.contents.slice(0, 5), {
       done: () => {
         // Truncate text not within 15 words of a match
-        textEl.childNodes.forEach(node => {
+        textEl.childNodes.forEach((node) => {
           const hasPrev = node.previousSibling !== null;
           const hasNext = node.nextSibling !== null;
           const isText = node.nodeName === '#text';

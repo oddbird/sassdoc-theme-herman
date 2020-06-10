@@ -10,8 +10,8 @@ const { renderHerman, makeNunjucksColors } = require('../../lib/renderHerman');
 
 const access = Promise.promisify(fs.access);
 
-describe('makeNunjucksColors', function() {
-  before(function() {
+describe('makeNunjucksColors', function () {
+  before(function () {
     this.colors = makeNunjucksColors({
       herman: {
         displayColors: undefined,
@@ -19,12 +19,12 @@ describe('makeNunjucksColors', function() {
     });
   });
 
-  it('exits early on invalid colors', function() {
+  it('exits early on invalid colors', function () {
     const actual = this.colors('not a color');
     assert.equal(actual, undefined);
   });
 
-  it('switches on formats', function() {
+  it('switches on formats', function () {
     const actual = this.colors('#fefced');
     const expected = {
       hex: '#fefced',
@@ -34,7 +34,7 @@ describe('makeNunjucksColors', function() {
     assert.deepEqual(actual, expected);
   });
 
-  it('handles rgba and hsla', function() {
+  it('handles rgba and hsla', function () {
     const colors = makeNunjucksColors({
       herman: {
         displayColors: ['rgba', 'hsla'],
@@ -48,7 +48,7 @@ describe('makeNunjucksColors', function() {
     assert.deepEqual(actual, expected);
   });
 
-  it('passes on unknown format', function() {
+  it('passes on unknown format', function () {
     const colors = makeNunjucksColors({
       herman: {
         displayColors: ['blorble'],
@@ -60,20 +60,20 @@ describe('makeNunjucksColors', function() {
   });
 });
 
-describe('renderHerman', function() {
-  before(function() {
+describe('renderHerman', function () {
+  before(function () {
     this.dest = `${__dirname}/dest`;
   });
 
-  afterEach(function() {
+  afterEach(function () {
     del.sync(`${this.dest}/*`);
   });
 
-  it('renders index template', function(done) {
+  it('renders index template', function (done) {
     prepareContext({
       data: [],
     })
-      .then(ctx => renderHerman(this.dest, ctx))
+      .then((ctx) => renderHerman(this.dest, ctx))
       .then(() => access(`${this.dest}/index.html`))
       .then(() => {
         assert.ok(true);
@@ -82,14 +82,14 @@ describe('renderHerman', function() {
       .catch(done);
   });
 
-  it('copies an internal shortcutIcon', function(done) {
+  it('copies an internal shortcutIcon', function (done) {
     const shortcutIcon = `${__dirname}/fixtures/img/favicon.ico`;
     const expectedShortcutIcon = `${this.dest}/assets/img/favicon.ico`;
     prepareContext({
       data: [],
       shortcutIcon,
     })
-      .then(ctx => renderHerman(this.dest, ctx))
+      .then((ctx) => renderHerman(this.dest, ctx))
       .then(() => access(expectedShortcutIcon))
       .then(() => {
         assert.ok(true);
@@ -98,13 +98,13 @@ describe('renderHerman', function() {
       .catch(done);
   });
 
-  it('ignores an external shortcutIcon', function(done) {
+  it('ignores an external shortcutIcon', function (done) {
     const expectedShortcutIcon = `${this.dest}/assets/img/favicon.ico`;
     prepareContext({
       data: [],
       shortcutIcon: 'http://example.com/img/favicon.ico',
     })
-      .then(ctx => renderHerman(this.dest, ctx))
+      .then((ctx) => renderHerman(this.dest, ctx))
       .then(() => access(expectedShortcutIcon))
       .then(() => {
         // The file should not have been copied
@@ -117,14 +117,14 @@ describe('renderHerman', function() {
       });
   });
 
-  it('handles customCSS', function(done) {
+  it('handles customCSS', function (done) {
     prepareContext({
       data: [],
       customCSS: {
         path: `${__dirname}/fixtures/css/main.css`,
       },
     })
-      .then(ctx => renderHerman(this.dest, ctx))
+      .then((ctx) => renderHerman(this.dest, ctx))
       .then(() => access(`${this.dest}/assets/custom/main.css`))
       .then(() => {
         assert.ok(true);
@@ -133,7 +133,7 @@ describe('renderHerman', function() {
       .catch(done);
   });
 
-  it('handles customCSSFiles', function(done) {
+  it('handles customCSSFiles', function (done) {
     prepareContext({
       data: [],
       customCSS: {
@@ -141,7 +141,7 @@ describe('renderHerman', function() {
       },
       customCSSFiles: [`${__dirname}/fixtures/icons/not-an-svg-icon.png`],
     })
-      .then(ctx => renderHerman(this.dest, ctx))
+      .then((ctx) => renderHerman(this.dest, ctx))
       .then(() => access(`${this.dest}/assets/custom/not-an-svg-icon.png`))
       .then(() => {
         assert.ok(true);
@@ -150,7 +150,7 @@ describe('renderHerman', function() {
       .catch(done);
   });
 
-  it('resolves local fonts', function(done) {
+  it('resolves local fonts', function (done) {
     prepareContext({
       herman: {
         fontpath: 'fixtures/fonts',
@@ -158,7 +158,7 @@ describe('renderHerman', function() {
       data: [],
       localFonts: [`${__dirname}/fixtures/fonts/sample.ttf`],
     })
-      .then(ctx => {
+      .then((ctx) => {
         ctx.dir = __dirname;
         return renderHerman(this.dest, ctx);
       })
@@ -170,7 +170,7 @@ describe('renderHerman', function() {
       .catch(done);
   });
 
-  it('renders extraDocs', function(done) {
+  it('renders extraDocs', function (done) {
     prepareContext({
       data: [],
       extraDocs: [
@@ -181,7 +181,7 @@ describe('renderHerman', function() {
         },
       ],
     })
-      .then(ctx => renderHerman(this.dest, ctx))
+      .then((ctx) => renderHerman(this.dest, ctx))
       .then(() => access(`${this.dest}/simple.html`))
       .then(() => {
         assert.ok(true);
@@ -190,7 +190,7 @@ describe('renderHerman', function() {
       .catch(done);
   });
 
-  it('renders a page for each group', function(done) {
+  it('renders a page for each group', function (done) {
     prepareContext({
       data: [
         {
@@ -228,7 +228,7 @@ describe('renderHerman', function() {
         access: ['private', 'public'],
       },
     })
-      .then(ctx => {
+      .then((ctx) => {
         // Test group that doesn't exist
         delete ctx.groups.fail;
         return renderHerman(this.dest, ctx);
@@ -242,11 +242,11 @@ describe('renderHerman', function() {
       .catch(done);
   });
 
-  it('generates search data', function(done) {
+  it('generates search data', function (done) {
     prepareContext({
       data: [],
     })
-      .then(ctx => renderHerman(this.dest, ctx))
+      .then((ctx) => renderHerman(this.dest, ctx))
       .then(() => access(`${this.dest}/search-data.json`))
       .then(() => {
         assert.ok(true);

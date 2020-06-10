@@ -19,22 +19,22 @@ const annotations = {
 };
 /* eslint-enable global-require */
 
-describe('icons annotation', function() {
-  beforeEach(function() {
+describe('icons annotation', function () {
+  beforeEach(function () {
     this.env = {
       logger: { warn: sinon.fake() },
     };
     this.icons = annotations.icons(this.env);
   });
 
-  describe('parse', function() {
-    it('returns argument', function() {
+  describe('parse', function () {
+    it('returns argument', function () {
       assert.equal(this.icons.parse('icons/'), 'icons/');
     });
   });
 
-  describe('resolve', function() {
-    it('logs errors on bad icon path', function(done) {
+  describe('resolve', function () {
+    it('logs errors on bad icon path', function (done) {
       const data = [{ icons: 'test/js/fixtures/bad_icons/' }];
 
       this.icons
@@ -46,7 +46,7 @@ describe('icons annotation', function() {
         .catch(done);
     });
 
-    it('bails early if no icons on items', function(done) {
+    it('bails early if no icons on items', function (done) {
       const data = [{}];
       this.icons
         .resolve(data)
@@ -57,7 +57,7 @@ describe('icons annotation', function() {
         .catch(done);
     });
 
-    it('renders icons', function(done) {
+    it('renders icons', function (done) {
       const iconPath = path.normalize('test/js/fixtures/icons');
       const data = [{ icons: iconPath }];
 
@@ -87,13 +87,13 @@ describe('icons annotation', function() {
   });
 });
 
-describe('colors annotation', function() {
-  before(function() {
+describe('colors annotation', function () {
+  before(function () {
     this.colors = annotations.colors();
   });
 
-  describe('parse', function() {
-    it('parses string and returns object', function() {
+  describe('parse', function () {
+    it('parses string and returns object', function () {
       assert.deepEqual(this.colors.parse('foo-bar'), {
         key: 'foo-bar',
       });
@@ -101,8 +101,8 @@ describe('colors annotation', function() {
   });
 });
 
-describe('sizes annotation', function() {
-  before(function() {
+describe('sizes annotation', function () {
+  before(function () {
     this.env = {
       herman: {
         sass: {
@@ -116,8 +116,8 @@ describe('sizes annotation', function() {
     this.sizes = annotations.sizes(this.env);
   });
 
-  describe('parse', function() {
-    it('parses options and returns object', function() {
+  describe('parse', function () {
+    it('parses options and returns object', function () {
       const input = 'key-thing {style}';
       assert.deepEqual(this.sizes.parse(input), {
         key: 'key-thing',
@@ -125,7 +125,7 @@ describe('sizes annotation', function() {
       });
     });
 
-    it('uses defaults if no arguments', function() {
+    it('uses defaults if no arguments', function () {
       const input = '';
       assert.deepEqual(this.sizes.parse(input), {
         key: '',
@@ -134,8 +134,8 @@ describe('sizes annotation', function() {
     });
   });
 
-  describe('resolve', function() {
-    it('bails early if no sizes on items', function(done) {
+  describe('resolve', function () {
+    it('bails early if no sizes on items', function (done) {
       const data = [{}];
       this.sizes
         .resolve(data)
@@ -146,7 +146,7 @@ describe('sizes annotation', function() {
         .catch(done);
     });
 
-    it('fails on missing sassjson sizesData', function(done) {
+    it('fails on missing sassjson sizesData', function (done) {
       const data = [
         {
           sizes: {
@@ -171,7 +171,7 @@ describe('sizes annotation', function() {
         });
     });
 
-    it('renders sizes', function(done) {
+    it('renders sizes', function (done) {
       const data = [
         {
           sizes: {
@@ -192,8 +192,8 @@ describe('sizes annotation', function() {
   });
 });
 
-describe('ratios annotation', function() {
-  before(function() {
+describe('ratios annotation', function () {
+  before(function () {
     this.env = {
       herman: {
         sass: {
@@ -207,16 +207,16 @@ describe('ratios annotation', function() {
     this.ratios = annotations.ratios(this.env);
   });
 
-  describe('parse', function() {
-    it('parses string and returns object', function() {
+  describe('parse', function () {
+    it('parses string and returns object', function () {
       assert.deepEqual(this.ratios.parse('foo-bar'), {
         key: 'foo-bar',
       });
     });
   });
 
-  describe('resolve', function() {
-    it('bails early if no ratios on items', function(done) {
+  describe('resolve', function () {
+    it('bails early if no ratios on items', function (done) {
       const data = [{}];
       this.ratios
         .resolve(data)
@@ -227,7 +227,7 @@ describe('ratios annotation', function() {
         .catch(done);
     });
 
-    it('fails on missing sassjson ratiosData', function(done) {
+    it('fails on missing sassjson ratiosData', function (done) {
       const data = [
         {
           ratios: { key: '' },
@@ -247,7 +247,7 @@ describe('ratios annotation', function() {
         });
     });
 
-    it('renders ratios', function(done) {
+    it('renders ratios', function (done) {
       const data = [{ ratios: { key: 'root-ratios' } }];
 
       this.ratios
@@ -261,14 +261,14 @@ describe('ratios annotation', function() {
   });
 });
 
-describe('font annotation', function() {
-  beforeEach(function() {
+describe('font annotation', function () {
+  beforeEach(function () {
     this.env = {};
     this.font = annotations.font(this.env);
   });
 
-  describe('parse', function() {
-    it('keeps env.fontsHTML if set', function() {
+  describe('parse', function () {
+    it('keeps env.fontsHTML if set', function () {
       const env = {
         fontsHTML: ['<link rel="another-stylesheet">'],
       };
@@ -279,7 +279,7 @@ describe('font annotation', function() {
       assert.deepEqual(env.fontsHTML, ['<link rel="another-stylesheet">']);
     });
 
-    it('parses options and returns object', function() {
+    it('parses options and returns object', function () {
       const input = 'key-thing (variant1, variant2)\n  <link rel="stylesheet">';
       assert.deepEqual(this.font.parse(input), {
         key: 'key-thing',
@@ -289,7 +289,7 @@ describe('font annotation', function() {
       assert.equal(this.env.fontsHTML, '\n<link rel="stylesheet">');
     });
 
-    it('skips HTML if no linebreak', function() {
+    it('skips HTML if no linebreak', function () {
       const input = '"key-thing" (variant1, variant2)';
       assert.deepEqual(this.font.parse(input), {
         key: 'key-thing',
@@ -299,7 +299,7 @@ describe('font annotation', function() {
       assert.equal(this.env.fontsHTML, undefined);
     });
 
-    it('appends obj.html to existing fontsHTML', function() {
+    it('appends obj.html to existing fontsHTML', function () {
       this.env.fontsHTML = '\n<link rel="stylesheet">';
       const input =
         '\'key\' (variant1, variant2)\n  <link rel="another-stylesheet">';
@@ -314,7 +314,7 @@ describe('font annotation', function() {
       );
     });
 
-    it("doesn't set variants if not appropriate bits", function() {
+    it("doesn't set variants if not appropriate bits", function () {
       const input = '';
       assert.deepEqual(this.font.parse(input), {
         key: '',
@@ -325,13 +325,13 @@ describe('font annotation', function() {
     });
   });
 
-  describe('resolve', function() {
-    beforeEach(function() {
+  describe('resolve', function () {
+    beforeEach(function () {
       this.data = [{ font: { key: 'test-font' } }];
       this.origData = Object.assign([], this.data);
     });
 
-    it('warns and exits if no jsonfile defined', function(done) {
+    it('warns and exits if no jsonfile defined', function (done) {
       const env = {
         logger: { warn: sinon.fake() },
         herman: {},
@@ -355,7 +355,7 @@ describe('font annotation', function() {
         });
     });
 
-    it('logs an error if missing Sass jsonfile', function(done) {
+    it('logs an error if missing Sass jsonfile', function (done) {
       const env = {
         logger: { warn: sinon.fake() },
         herman: {
@@ -381,7 +381,7 @@ describe('font annotation', function() {
         .catch(done);
     });
 
-    it('warns and exits if no fontpath', function(done) {
+    it('warns and exits if no fontpath', function (done) {
       const env = {
         logger: { warn: sinon.fake() },
         herman: {},
@@ -413,7 +413,7 @@ describe('font annotation', function() {
         });
     });
 
-    it('adds `@font-face` CSS and localFonts src', function(done) {
+    it('adds `@font-face` CSS and localFonts src', function (done) {
       const env = {
         dir: __dirname,
         logger: { warn: sinon.fake() },
@@ -458,7 +458,7 @@ describe('font annotation', function() {
         .catch(done);
     });
 
-    it('adds `@font-face` CSS for embedded `data:` fonts', function(done) {
+    it('adds `@font-face` CSS for embedded `data:` fonts', function (done) {
       const env = {
         herman: {},
         sassjson: {
@@ -500,7 +500,7 @@ describe('font annotation', function() {
         .catch(done);
     });
 
-    it('adds `@font-face` CSS for `local` names', function(done) {
+    it('adds `@font-face` CSS for `local` names', function (done) {
       const env = {
         dir: __dirname,
         herman: {
@@ -543,7 +543,7 @@ describe('font annotation', function() {
         .catch(done);
     });
 
-    it('adds `@font-face` CSS for `local` without `formats`', function(done) {
+    it('adds `@font-face` CSS for `local` without `formats`', function (done) {
       const env = {
         dir: __dirname,
         herman: {
@@ -579,7 +579,7 @@ describe('font annotation', function() {
         .catch(done);
     });
 
-    it('adds separate `@font-face` for `eot` and `local`', function(done) {
+    it('adds separate `@font-face` for `eot` and `local`', function (done) {
       const env = {
         dir: __dirname,
         herman: {
@@ -626,7 +626,7 @@ describe('font annotation', function() {
         .catch(done);
     });
 
-    it('adds separate `@font-face` for `eot` and `data:`', function(done) {
+    it('adds separate `@font-face` for `eot` and `data:`', function (done) {
       const env = {
         herman: {
           fontpath: '/path',
@@ -664,7 +664,7 @@ describe('font annotation', function() {
         .catch(done);
     });
 
-    it('adds `@font-face` for embedded eot', function(done) {
+    it('adds `@font-face` for embedded eot', function (done) {
       const env = {
         herman: {
           fontpath: '/path',
@@ -700,7 +700,7 @@ describe('font annotation', function() {
         .catch(done);
     });
 
-    it('adds svgid', function(done) {
+    it('adds svgid', function (done) {
       const env = {
         dir: __dirname,
         herman: {
@@ -737,7 +737,7 @@ describe('font annotation', function() {
         .catch(done);
     });
 
-    it('allows setting `local` as a string', function(done) {
+    it('allows setting `local` as a string', function (done) {
       const env = {
         herman: {},
         sassjson: {
@@ -772,7 +772,7 @@ describe('font annotation', function() {
         .catch(done);
     });
 
-    it('stores parsed data for webfonts', function(done) {
+    it('stores parsed data for webfonts', function (done) {
       const env = {
         herman: {},
         sassjson: {
@@ -807,7 +807,7 @@ describe('font annotation', function() {
         .catch(done);
     });
 
-    it('skips items without a font attribute', function(done) {
+    it('skips items without a font attribute', function (done) {
       const env = {};
       const font = annotations.font(env);
       const data = [{}];
@@ -821,7 +821,7 @@ describe('font annotation', function() {
         .catch(done);
     });
 
-    it('skips localFont processing if formats is empty', function(done) {
+    it('skips localFont processing if formats is empty', function (done) {
       const env = {
         herman: {
           fontpath: '/path',
@@ -854,7 +854,7 @@ describe('font annotation', function() {
         .catch(done);
     });
 
-    it('fails on missing sassjson fontData', function(done) {
+    it('fails on missing sassjson fontData', function (done) {
       const env = {
         herman: {
           sass: {
@@ -889,7 +889,7 @@ describe('font annotation', function() {
         });
     });
 
-    it('skips localFonts processing if not a valid format', function(done) {
+    it('skips localFonts processing if not a valid format', function (done) {
       const env = {
         herman: {
           fontpath: '/path',
@@ -924,8 +924,8 @@ describe('font annotation', function() {
   });
 });
 
-describe('example annotation', function() {
-  beforeEach(function() {
+describe('example annotation', function () {
+  beforeEach(function () {
     this.env = {
       herman: {
         nunjucks: {
@@ -937,8 +937,8 @@ describe('example annotation', function() {
     this.example = annotations.example(this.env);
   });
 
-  describe('resolve', function() {
-    it('warns and exits if no templatepath and njk @example used', function() {
+  describe('resolve', function () {
+    it('warns and exits if no templatepath and njk @example used', function () {
       const env = { logger: { warn: sinon.fake() }, herman: {} };
       const example = annotations.example(env);
       const data = [{ example: [{ type: 'njk' }] }];
@@ -953,7 +953,7 @@ describe('example annotation', function() {
       );
     });
 
-    it("doesn't recreate a customNjkEnv", function(done) {
+    it("doesn't recreate a customNjkEnv", function (done) {
       const data = [
         {
           example: [
@@ -985,7 +985,7 @@ describe('example annotation', function() {
         .catch(done);
     });
 
-    it('handles html items', function(done) {
+    it('handles html items', function (done) {
       const data = [
         {
           example: [
@@ -1005,7 +1005,7 @@ describe('example annotation', function() {
         .catch(done);
     });
 
-    it('handles scss items', function(done) {
+    it('handles scss items', function (done) {
       const data = [
         {
           example: [
@@ -1028,7 +1028,7 @@ describe('example annotation', function() {
         .catch(done);
     });
 
-    it('reports errors in sass compilation', function(done) {
+    it('reports errors in sass compilation', function (done) {
       const env = extend(true, {}, this.env, {
         herman: {
           sass: {},
@@ -1061,7 +1061,7 @@ describe('example annotation', function() {
         .catch(done);
     });
 
-    it('injects global imports for scss items [import]', function(done) {
+    it('injects global imports for scss items [import]', function (done) {
       const data = [
         {
           example: [
@@ -1093,7 +1093,7 @@ describe('example annotation', function() {
         .catch(done);
     });
 
-    it('injects global imports for scss items [dart-sass]', function(done) {
+    it('injects global imports for scss items [dart-sass]', function (done) {
       const data = [
         {
           example: [
@@ -1127,7 +1127,7 @@ describe('example annotation', function() {
         .catch(done);
     });
 
-    it('uses custom `outputstyle` setting', function(done) {
+    it('uses custom `outputstyle` setting', function (done) {
       const data = [
         {
           example: [
@@ -1155,7 +1155,7 @@ describe('example annotation', function() {
         .catch(done);
     });
 
-    it('warns, exits if no node-sass and scss @example used', function(done) {
+    it('warns, exits if no node-sass and scss @example used', function (done) {
       const data = [{ example: [{ type: 'scss' }] }];
       sinon.stub(Promise, 'promisify').throws();
 
@@ -1173,7 +1173,7 @@ describe('example annotation', function() {
         });
     });
 
-    it('only requires node-sass once', function(done) {
+    it('only requires node-sass once', function (done) {
       const data = [{ example: [{ type: 'scss', code: '' }] }];
       const data2 = [{ example: [{ type: 'scss', code: '' }] }];
       sinon.spy(Promise, 'promisify');
@@ -1188,7 +1188,7 @@ describe('example annotation', function() {
         });
     });
 
-    it('uses custom `sass.implementation` string [dart-sass]', function(done) {
+    it('uses custom `sass.implementation` string [dart-sass]', function (done) {
       const data = [
         {
           example: [
@@ -1216,7 +1216,7 @@ describe('example annotation', function() {
         .catch(done);
     });
 
-    it('custom `sass.implementation` instance [dart-sass]', function(done) {
+    it('custom `sass.implementation` instance [dart-sass]', function (done) {
       const data = [
         {
           example: [
@@ -1245,7 +1245,7 @@ describe('example annotation', function() {
         .catch(done);
     });
 
-    it('skips non-html, non-njk, non-scss items', function(done) {
+    it('skips non-html, non-njk, non-scss items', function (done) {
       const data = [
         {
           example: [
@@ -1264,7 +1264,7 @@ describe('example annotation', function() {
         .catch(done);
     });
 
-    it('warns only once about missing templatepath', function() {
+    it('warns only once about missing templatepath', function () {
       const env = { logger: { warn: sinon.fake() }, herman: {} };
       const example = annotations.example(env);
       const data = [
@@ -1277,7 +1277,7 @@ describe('example annotation', function() {
       sinon.assert.calledOnce(env.logger.warn);
     });
 
-    it('does not warn if njk @example not used', function() {
+    it('does not warn if njk @example not used', function () {
       const env = { logger: { warn: sinon.fake() }, herman: {} };
       const example = annotations.example(env);
       const data = [{}];
@@ -1288,7 +1288,7 @@ describe('example annotation', function() {
       sinon.assert.notCalled(env.logger.warn);
     });
 
-    it('renders nunjucks example', function(done) {
+    it('renders nunjucks example', function (done) {
       const data = [
         {
           example: [
@@ -1311,11 +1311,11 @@ describe('example annotation', function() {
         .catch(done);
     });
 
-    it('uses custom nunjucks env, if exists', function() {
+    it('uses custom nunjucks env, if exists', function () {
       const nunjucksEnv = nunjucks.configure(
         path.resolve(__dirname, 'fixtures', 'templates')
       );
-      nunjucksEnv.addFilter('plus_one', function(val) {
+      nunjucksEnv.addFilter('plus_one', function (val) {
         return val + 1;
       });
       const env = { herman: { nunjucks: { environment: nunjucksEnv } } };
@@ -1340,19 +1340,19 @@ describe('example annotation', function() {
   });
 });
 
-describe('name annotation', function() {
-  before(function() {
+describe('name annotation', function () {
+  before(function () {
     this.name = annotations.name(this.env);
   });
 
-  describe('parse', function() {
-    it('trims text', function() {
+  describe('parse', function () {
+    it('trims text', function () {
       assert.equal(this.name.parse('foo '), 'foo');
     });
   });
 
-  describe('autofill', function() {
-    it('preserves original context name', function() {
+  describe('autofill', function () {
+    it('preserves original context name', function () {
       const data = { name: 'foo', context: { name: 'bar' } };
 
       this.name.autofill(data);
@@ -1360,7 +1360,7 @@ describe('name annotation', function() {
       assert.deepEqual(data, { context: { name: 'foo', origName: 'bar' } });
     });
 
-    it('does nothing if no item.name', function() {
+    it('does nothing if no item.name', function () {
       const data = { context: { name: 'bar' } };
 
       this.name.autofill(data);

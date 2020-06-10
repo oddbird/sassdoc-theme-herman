@@ -5,8 +5,8 @@ const MarkdownIt = require('markdown-it');
 
 const markdown = require('../../lib/utils/getMarkdown');
 
-describe('getMarkdown', function() {
-  it('returns instance of markdown-it', function() {
+describe('getMarkdown', function () {
+  it('returns instance of markdown-it', function () {
     assert.ok(markdown instanceof MarkdownIt);
   });
 });

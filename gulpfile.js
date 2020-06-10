@@ -64,12 +64,12 @@ const paths = {
 // Try to ensure that all processes are killed on exit
 const spawned = [];
 process.on('exit', () => {
-  spawned.forEach(pcs => {
+  spawned.forEach((pcs) => {
     pcs.kill();
   });
 });
 
-const onError = function(err) {
+const onError = function (err) {
   log.error(chalk.red(err.message || `Task failed with code: ${err}`));
   beeper();
   if (this && this.emit) {
@@ -78,10 +78,10 @@ const onError = function(err) {
 };
 
 // Execute a command, logging output live while process runs
-const spawnTask = function(command, args, cb, failOnError = true) {
+const spawnTask = function (command, args, cb, failOnError = true) {
   spawned.push(
     spawn(command, args, { stdio: 'inherit' })
-      .on('error', err => {
+      .on('error', (err) => {
         if (failOnError) {
           beeper();
           return cb(err);
@@ -89,7 +89,7 @@ const spawnTask = function(command, args, cb, failOnError = true) {
         onError(err);
         return cb();
       })
-      .on('exit', code => {
+      .on('exit', (code) => {
         if (code) {
           if (failOnError) {
             beeper();
@@ -118,7 +118,7 @@ const eslintTask = (src, failOnError, shouldLog) => {
   return stream;
 };
 
-const prettierTask = function(src, shouldLog) {
+const prettierTask = function (src, shouldLog) {
   if (shouldLog) {
     const cmd = `prettier ${src}`;
     log('Running', `'${chalk.cyan(cmd)}'...`);
@@ -168,7 +168,7 @@ gulp.task('sasstest', () =>
   gulp.src(`${paths.SASS_TESTS_DIR}test_sass.js`, { read: false }).pipe(mocha())
 );
 
-const getJsTestArgs = verbose => {
+const getJsTestArgs = (verbose) => {
   const mochaReporter = verbose ? 'spec' : 'dot';
   const covReporters = verbose
     ? ['text', 'html', 'lcovonly']
@@ -198,15 +198,15 @@ const getJsTestArgs = verbose => {
   return args;
 };
 
-gulp.task('jstest', cb => {
+gulp.task('jstest', (cb) => {
   spawnTask('./node_modules/.bin/nyc', getJsTestArgs(true), cb);
 });
 
-gulp.task('jstest-nofail', cb => {
+gulp.task('jstest-nofail', (cb) => {
   spawnTask('./node_modules/.bin/nyc', getJsTestArgs(), cb, false);
 });
 
-const karmaOnBuild = done => exitCode => {
+const karmaOnBuild = (done) => (exitCode) => {
   if (exitCode) {
     beeper();
     done(
@@ -221,7 +221,7 @@ const karmaOnBuild = done => exitCode => {
   process.exit(exitCode); // eslint-disable-line no-process-exit
 };
 
-gulp.task('clienttest', cb => {
+gulp.task('clienttest', (cb) => {
   new KarmaServer(
     { configFile: path.join(__dirname, 'karma.conf.js') },
     karmaOnBuild(cb)
@@ -229,7 +229,7 @@ gulp.task('clienttest', cb => {
 });
 
 // Use karma watcher instead of gulp watcher for tests
-gulp.task('clienttest-watch', cb => {
+gulp.task('clienttest-watch', (cb) => {
   new KarmaServer({
     configFile: path.join(__dirname, 'karma.conf.js'),
     autoWatch: true,
@@ -275,7 +275,7 @@ gulp.task('imagemin', () => {
 
 gulp.task('minify', gulp.parallel('svgmin', 'imagemin'));
 
-const webpackOnBuild = done => (err, stats) => {
+const webpackOnBuild = (done) => (err, stats) => {
   if (err) {
     log.error(chalk.red(err.stack || err));
     if (err.details) {
@@ -301,7 +301,7 @@ const webpackOnBuild = done => (err, stats) => {
 
 gulp.task(
   'webpack',
-  gulp.series('minify', cb => {
+  gulp.series('minify', (cb) => {
     const webpackConfig = require('./webpack.config');
     webpack(webpackConfig).run(webpackOnBuild(cb));
   })
@@ -309,7 +309,7 @@ gulp.task(
 
 gulp.task(
   'webpack-watch',
-  gulp.series('minify', cb => {
+  gulp.series('minify', (cb) => {
     const webpackConfig = require('./webpack.config');
     webpack(webpackConfig).watch(300, webpackOnBuild(cb));
   })
@@ -319,7 +319,7 @@ gulp.task(
   'watch',
   gulp.series(
     'webpack-watch',
-    cb => {
+    (cb) => {
       // run webpack to compile static assets
       gulp.watch(
         [
@@ -367,7 +367,7 @@ gulp.task(
   )
 );
 
-gulp.task('browser-sync', cb => {
+gulp.task('browser-sync', (cb) => {
   browserSync.init(
     {
       open: false,

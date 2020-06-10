@@ -8,7 +8,7 @@ const sassdoc = require('sassdoc');
 const set = require('lodash.set');
 const yaml = require('js-yaml');
 
-const getAsset = function(entry, ext = 'css') {
+const getAsset = function (entry, ext = 'css') {
   if (!entry) {
     return undefined;
   }
@@ -46,7 +46,7 @@ class SassDocPlugin {
   apply(compiler) {
     const self = this;
 
-    compiler.hooks.afterEmit.tapPromise('SassDocPlugin', compilation => {
+    compiler.hooks.afterEmit.tapPromise('SassDocPlugin', (compilation) => {
       if (self.pluginOptions && self.pluginOptions.assetPaths) {
         const statsJSON = compilation.getStats().toJson();
         const outputPath = self.pluginOptions.outputPath || process.cwd();

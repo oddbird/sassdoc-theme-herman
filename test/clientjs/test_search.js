@@ -2,9 +2,9 @@ import lunr from 'lunr';
 
 import * as search from 'search';
 
-describe('search', function() {
-  describe('nunjucksEnv Loader getSource', function() {
-    it('returns a precompiled nunjucks tpl object', function() {
+describe('search', function () {
+  describe('nunjucksEnv Loader getSource', function () {
+    it('returns a precompiled nunjucks tpl object', function () {
       const name = 'foo';
       window.nunjucksPrecompiled = {
         [name]: 'test',
@@ -21,8 +21,8 @@ describe('search', function() {
     });
   });
 
-  describe('highlightSearchResult', function() {
-    beforeEach(function() {
+  describe('highlightSearchResult', function () {
+    beforeEach(function () {
       const ctx = {
         title: 'This is a title',
         contents:
@@ -35,7 +35,7 @@ describe('search', function() {
       this.textEl = this.el.find('[data-result-field="contents"]').get(0);
     });
 
-    it('sets no mark on the title if no title', function() {
+    it('sets no mark on the title if no title', function () {
       const title = [];
       const contents = [
         { start: 4, length: 3 },
@@ -46,7 +46,7 @@ describe('search', function() {
       expect(this.textEl.childNodes.length).to.be.above(1);
     });
 
-    it('sets no mark on the contents if no contents', function() {
+    it('sets no mark on the contents if no contents', function () {
       const title = [{ start: 2, length: 3 }];
       const contents = [{ start: 0, length: 0 }];
       search.highlightSearchResult(this.el, { title, contents });
@@ -54,7 +54,7 @@ describe('search', function() {
       expect(this.textEl.childNodes.length).to.equal(1);
     });
 
-    it('truncates long text between matches', function() {
+    it('truncates long text between matches', function () {
       const title = [];
       // Matches "This" and "minimum"
       const contents = [
@@ -69,7 +69,7 @@ describe('search', function() {
       expect(this.textEl.textContent).to.equal(expected);
     });
 
-    it('truncates long text before initial match', function() {
+    it('truncates long text before initial match', function () {
       const title = [];
       // Matches "minimum"
       const contents = [{ start: 162, length: 7 }];
@@ -80,7 +80,7 @@ describe('search', function() {
       expect(this.textEl.textContent).to.equal(expected);
     });
 
-    it('truncates long text after final match', function() {
+    it('truncates long text after final match', function () {
       const title = [];
       // Matches "This"
       const contents = [{ start: 0, length: 4 }];
@@ -91,8 +91,8 @@ describe('search', function() {
     });
   });
 
-  describe('showResults', function() {
-    beforeEach(function() {
+  describe('showResults', function () {
+    beforeEach(function () {
       this.nunjucksRender = this.sandbox.spy(search.nunjucksEnv, 'render');
       search.setSearchStore({
         'some-key': { title: 'A doc title', contents: 'Some contents' },
@@ -117,13 +117,13 @@ describe('search', function() {
       this.results = $('<div data-page>').appendTo('body');
     });
 
-    afterEach(function() {
+    afterEach(function () {
       this.nunjucksRender.restore();
       search.setSearchStore();
       this.results.remove();
     });
 
-    it('renders each search match', function() {
+    it('renders each search match', function () {
       search.showResults(this.matches, 'val');
       expect(this.nunjucksRender).to.have.been.calledTwice;
       expect(this.results).to.contain('1 result');
@@ -140,7 +140,7 @@ describe('search', function() {
       expect(textEl.html()).to.equal(expectedContents);
     });
 
-    it('does not show contents if no content matches', function() {
+    it('does not show contents if no content matches', function () {
       this.matches[0].matchData.metadata = {
         term1: { title: { position: [1, 2] } },
         term2: { title: { position: [1, 2] } },
@@ -151,7 +151,7 @@ describe('search', function() {
       expect(textEl).to.be.empty;
     });
 
-    it('shows "No results" if no relevant match data', function() {
+    it('shows "No results" if no relevant match data', function () {
       this.matches[0].matchData.metadata = {
         term1: {},
         term2: {},
@@ -163,21 +163,21 @@ describe('search', function() {
     });
   });
 
-  describe('doSearch', function() {
-    beforeEach(function() {
+  describe('doSearch', function () {
+    beforeEach(function () {
       this.indexSearch = sinon.fake();
       this.indexLoad = this.sandbox.stub(lunr.Index, 'load');
       this.indexLoad.returns({ search: this.indexSearch });
       this.results = $('<div data-page>').appendTo('body');
     });
 
-    afterEach(function() {
+    afterEach(function () {
       this.indexLoad.restore();
       search.setSearchStore();
       this.results.remove();
     });
 
-    it('searches an index', function() {
+    it('searches an index', function () {
       search.doSearch({ store: 'store', idx: 'index' }, 'val');
       expect(search.getSearchStore()).to.equal('store');
       expect(this.indexLoad).to.have.been.calledWith('index');
@@ -185,7 +185,7 @@ describe('search', function() {
       expect(this.results).to.contain('No results');
     });
 
-    it('does nothing with missing data', function() {
+    it('does nothing with missing data', function () {
       search.doSearch({ store: 'store', idx: 'index' });
       expect(search.getSearchStore()).to.be.undefined;
       expect(this.indexLoad).to.have.not.been.called;
@@ -194,8 +194,8 @@ describe('search', function() {
     });
   });
 
-  describe('getSearchData', function() {
-    beforeEach(function() {
+  describe('getSearchData', function () {
+    beforeEach(function () {
       this.href = window.location.href;
       window.history.replaceState(null, document.title, '/?q=test');
       this.indexSearch = sinon.fake();
@@ -203,24 +203,24 @@ describe('search', function() {
       this.indexLoad.returns({ search: this.indexSearch });
     });
 
-    afterEach(function() {
+    afterEach(function () {
       window.history.replaceState(null, document.title, this.href);
       this.indexLoad.restore();
       search.setSearchStore();
     });
 
-    it('only searches with a q in the query string', function() {
+    it('only searches with a q in the query string', function () {
       search.getSearchData();
       expect(this.requests.length).to.equal(1);
     });
 
-    it('does nothing without a q in the query string', function() {
+    it('does nothing without a q in the query string', function () {
       window.history.replaceState(null, document.title, '/');
       search.getSearchData();
       expect(this.requests.length).to.equal(0);
     });
 
-    it('handles 200 response', function() {
+    it('handles 200 response', function () {
       search.getSearchData();
       this.respondTo('search-data.json', 200, {
         idx: 'lunr index',
@@ -232,7 +232,7 @@ describe('search', function() {
       expect(this.indexSearch).to.have.been.calledOnceWith('test');
     });
 
-    it('does not search on 404', function() {
+    it('does not search on 404', function () {
       search.getSearchData();
       this.respondTo('search-data.json', 404);
 
@@ -241,7 +241,7 @@ describe('search', function() {
       expect(this.indexSearch).not.to.have.been.called;
     });
 
-    it('does not search on xhr error', function() {
+    it('does not search on xhr error', function () {
       search.getSearchData();
       this.getRequest('GET', 'search-data.json').error();
 

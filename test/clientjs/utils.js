@@ -2,7 +2,7 @@ import chaiJquery from 'chai-jquery';
 
 chai.use(chaiJquery);
 
-before(function() {
+before(function () {
   this.respondTo = (url, status, json, headers) => {
     let matched = false;
     for (const req of this.requests) {
@@ -32,23 +32,23 @@ before(function() {
   };
 });
 
-beforeEach(function() {
+beforeEach(function () {
   this.sandbox = sinon.createSandbox({
     useFakeServer: true,
   });
   this.requests = this.sandbox.server.requests;
 });
 
-afterEach(function() {
+afterEach(function () {
   this.sandbox.restore();
   $(window).off('resize');
   $('body').off('click toggle:close toggle:open target:close target:open');
 });
 
-chai.use(_chai => {
+chai.use((_chai) => {
   const { Assertion } = _chai;
 
-  Assertion.addMethod('containRequest', function(method, url) {
+  Assertion.addMethod('containRequest', function (method, url) {
     const obj = this._obj;
 
     let found = false;

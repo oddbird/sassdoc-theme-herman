@@ -11,16 +11,16 @@ const assets = require('../../lib/utils/assets');
 
 const access = Promise.promisify(fs.access);
 
-describe('assets', function() {
-  before(function() {
+describe('assets', function () {
+  before(function () {
     this.dest = `${__dirname}/dest`;
   });
 
-  afterEach(function() {
+  afterEach(function () {
     del.sync(`${this.dest}/*`);
   });
 
-  it('Copies file from src to dest', function(done) {
+  it('Copies file from src to dest', function (done) {
     assets(__filename, this.dest)
       .then(() => access(`${this.dest}/${path.parse(__filename).base}`))
       .then(() => {
@@ -30,7 +30,7 @@ describe('assets', function() {
       .catch(done);
   });
 
-  it('Parses file', function(done) {
+  it('Parses file', function (done) {
     const parser = sinon.fake();
     const env = 'foo';
     const opts = { parser, env };

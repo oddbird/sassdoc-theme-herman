@@ -1,7 +1,7 @@
 import * as base from 'base';
 
-describe('initializeToggles', function() {
-  beforeEach(function() {
+describe('initializeToggles', function () {
+  beforeEach(function () {
     this.toggle = $(
       '<div data-toggle="button" aria-controls="target &foo">'
     ).appendTo('body');
@@ -36,7 +36,7 @@ describe('initializeToggles', function() {
     base.initializeToggles();
   });
 
-  afterEach(function() {
+  afterEach(function () {
     this.toggle.remove();
     this.toggle2.remove();
     this.syncedToggle.remove();
@@ -45,7 +45,7 @@ describe('initializeToggles', function() {
     this.close.remove();
   });
 
-  it('toggle click toggles aria-pressed and aria-expanded', function() {
+  it('toggle click toggles aria-pressed and aria-expanded', function () {
     this.toggle.click();
 
     expect(this.toggle).to.have.attr('aria-pressed', 'true');
@@ -64,7 +64,7 @@ describe('initializeToggles', function() {
     expect(this.targetClose).to.have.been.calledOnce;
   });
 
-  it('synced toggles remain in sync (both open or both closed)', function() {
+  it('synced toggles remain in sync (both open or both closed)', function () {
     this.syncedToggle.click();
 
     expect(this.syncedToggle).to.have.attr('aria-pressed', 'true');
@@ -81,7 +81,7 @@ describe('initializeToggles', function() {
   it(
     'toggle:close and toggle:open events do not change aria-expanded if ' +
       'triggered on nested elements',
-    function() {
+    function () {
       const targetInner = $('<div data-toggle="target">').appendTo(this.target);
       targetInner.trigger('target:open');
 
@@ -97,7 +97,7 @@ describe('initializeToggles', function() {
     }
   );
 
-  it('close click sets aria-pressed and aria-expanded to "false"', function() {
+  it('close click sets aria-pressed and aria-expanded to "false"', function () {
     this.toggle.attr('aria-pressed', 'true');
     this.close.click();
 
@@ -115,13 +115,13 @@ describe('initializeToggles', function() {
     expect(this.targetClose).to.have.been.calledOnce;
   });
 
-  describe('auto-closing', function() {
-    beforeEach(function() {
+  describe('auto-closing', function () {
+    beforeEach(function () {
       this.target.attr('data-auto-closing', 'true');
       this.toggle.click();
     });
 
-    it('closes on any click outside the target', function() {
+    it('closes on any click outside the target', function () {
       this.target.click();
 
       expect(this.toggle).to.have.attr('aria-pressed', 'true');
@@ -137,7 +137,7 @@ describe('initializeToggles', function() {
       expect(this.targetClose).to.have.been.calledOnce;
     });
 
-    it('does not close if clicked el is removed from DOM', function() {
+    it('does not close if clicked el is removed from DOM', function () {
       const el = $('div').appendTo('body');
       el.on('click', () => {
         el.remove();
@@ -150,7 +150,7 @@ describe('initializeToggles', function() {
       expect(this.targetClose).not.to.have.been.called;
     });
 
-    it('does not close if exception is clicked', function() {
+    it('does not close if exception is clicked', function () {
       this.target.attr('data-auto-closing-exception', '.exception');
       const el = $('<div class="exception">').appendTo('body');
       el.click();
@@ -164,7 +164,7 @@ describe('initializeToggles', function() {
     });
   });
 
-  it('auto-closing-on-any-click toggle closes on any click', function() {
+  it('auto-closing-on-any-click toggle closes on any click', function () {
     this.target.attr('data-auto-closing', 'true');
     this.target.attr('data-auto-closing-on-any-click', 'true');
     this.toggle.click();
@@ -182,7 +182,7 @@ describe('initializeToggles', function() {
     expect(this.targetClose).to.have.been.calledOnce;
   });
 
-  it('multiple auto-closing toggles work independently', function() {
+  it('multiple auto-closing toggles work independently', function () {
     const otherTarget = $(
       '<div data-toggle="target" data-target-id="target2"' +
         ' data-auto-closing="true" aria-expanded="false">'
@@ -218,8 +218,8 @@ describe('initializeToggles', function() {
   });
 });
 
-describe('initializeIframes', function() {
-  it('triggers callbacks on window resize', function() {
+describe('initializeIframes', function () {
+  it('triggers callbacks on window resize', function () {
     this.sandbox.stub($.fn, 'outerHeight').returns(30);
     const iframe = $('<iframe height="20">');
     iframe.appendTo('body');
@@ -243,8 +243,8 @@ describe('initializeIframes', function() {
   });
 });
 
-describe('initializeNav', function() {
-  beforeEach(function() {
+describe('initializeNav', function () {
+  beforeEach(function () {
     this.mql = {
       addListener: sinon.fake(),
       matches: true,
@@ -256,29 +256,29 @@ describe('initializeNav', function() {
     );
   });
 
-  afterEach(function() {
+  afterEach(function () {
     window.matchMedia.restore();
     this.nav.remove();
     this.btn.remove();
   });
 
-  describe('viewport wider than breakpoint', function() {
-    it('sets nav aria-expanded "true"', function() {
+  describe('viewport wider than breakpoint', function () {
+    it('sets nav aria-expanded "true"', function () {
       base.initializeNav();
       expect(this.nav).to.have.attr('aria-expanded', 'true');
     });
   });
 
-  describe('viewport narrower than breakpoint', function() {
-    it('sets nav aria-expanded to match btn aria-pressed', function() {
+  describe('viewport narrower than breakpoint', function () {
+    it('sets nav aria-expanded to match btn aria-pressed', function () {
       this.mql.matches = false;
       base.initializeNav();
       expect(this.nav).to.have.attr('aria-expanded', 'false');
     });
   });
 
-  describe('viewport width changes', function() {
-    it('updates nav aria-expanded', function() {
+  describe('viewport width changes', function () {
+    it('updates nav aria-expanded', function () {
       base.initializeNav();
 
       expect(this.nav).to.have.attr('aria-expanded', 'true');
