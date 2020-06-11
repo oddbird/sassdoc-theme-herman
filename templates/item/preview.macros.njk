@@ -126,17 +126,18 @@
   {%- set stack = data.stack if data.stack and not data.stack|isString else [data.stack] -%}
   {%- set family = [variant.family, stack]|join(',') if not (variant.family in stack) else stack -%}
   <div data-herman-fontface="{{ variant.variant }}">
-    <p data-herman-font="name">
+    <p data-herman-label="font-name">
       {{ variant.variant }}
-
-      {% if path %}
-        (<code>{{ path }}</code>)
-      {% endif %}
     </p>
     <div data-herman-font="sample" style="font-family: {{ font_names(family) }}; font-weight: {{ variant.weight }}; font-style: {{ variant.style }};">
       <div data-herman-font="aa">Aa</div>
       <div data-herman-font="lorem">{{ lorem('alpha') }}</div>
     </div>
+    {% if path %}
+    <p data-herman-label>
+      <code data-herman-code>{{ path }}</code>
+    </p>
+    {% endif %}
   </div>
 {% endmacro %}
 
@@ -207,11 +208,12 @@
 
 
 {% macro size_table(data, style) %}
-  <table data-herman-sizetable="{{ style }}">
+  <table data-herman-table="size {{ style }}">
     <thead>
       <tr>
         <th data-herman-th="name">{{ 'Step' if (style == 'ratio') else 'Name' }}</th>
         <th data-herman-th="value">Value</th>
+        <th data-herman-th="spacer" aria-hidden></th>
       </tr>
     </thead>
 
@@ -226,9 +228,11 @@
         {% set width = width + 'em' %}
 
         {{ size_ruler_row(
-          name='—' if ( result == 1 ) else step,
-          value='base' if ( result == 1 ) else result|round(2),
-          width=width
+          name='base' if ( result == 1 ) else step,
+          value=result|round(2),
+          width=width,
+          highlight=true if ( result == 1 ) else false,
+          compact=true
           ) }}
       {% endfor %}
     {% else %}
@@ -238,7 +242,8 @@
             name=name,
             value=value,
             width=value if ('ruler' in style) else none,
-            text=value if (style == 'text') else none
+            text=value if (style == 'text') else none,
+            compact=true if (style == 'ruler') else false
           ) }}
       {% endfor %}
     {% endif %}
@@ -247,34 +252,57 @@
 {% endmacro %}
 
 
-{% macro size_ruler_row(name, value, width=none, text=none) %}
-  <tr data-herman-size="row{% if value == 'base' %} highlight{% endif %}">
-    <td data-herman-size="name">
+{% macro size_ruler_row(
+  name,
+  value,
+  width=none,
+  text=none,
+  highlight=false,
+  compact=false
+) %}
+  <tr data-herman-size="row{% if highlight %} highlight{% endif %}">
+    <td data-herman-cell="name" data-herman-label>
       {{ name }}
     </td>
-    <td data-herman-size="value">
-      <code>
+    <td data-herman-cell="value" data-herman-label>
+      <code data-herman-code>
         {{ value }}
       </code>
     </td>
+    {% if compact %}
+      {{ size_ruler(width, text) }}
+    {% else %}
+      <td data-herman-cell data-herman-label></td>
+    {% endif %}
   </tr>
 
-  {% if width or text %}
+  {% if (width or text) and not compact %}
     <tr data-herman-size="viz-row" aria-hidden="true">
-      <td data-herman-size="viz-cell" colspan="2">
-        <div data-herman-size="overflow">
-        {% if width %}
-          <span data-herman-size="bar" style="width: {{ width }};">
-            &nbsp;
-          </span>
-        {% elif text %}
-          <span data-herman-size="text" style="font-size: {{ value }};">
-            {{ lorem('title') }}
-          </span>
-        {% endif %}
-        </div>
-      </td>
+      {{ size_ruler(width, text, 3) }}
     </tr>
+  {% endif %}
+{% endmacro %}
+
+
+{% macro size_ruler(
+  width=none,
+  text=none,
+  colspan=none
+) %}
+  {% if width or text %}
+    <td aria-hidden data-herman-cell="viz" {% if colspan %}colspan="{{ colspan }}"{% endif %}>
+      <div data-herman-size="overflow">
+      {% if width %}
+        <div data-herman-viz="bar" style="width: {{ width }};">
+          &nbsp;
+        </div>
+      {% elif text %}
+        <div data-herman-viz="text" style="font-size: {{ value }};">
+          {{ lorem('title') }}
+        </div>
+      {% endif %}
+      </div>
+    </td>
   {% endif %}
 {% endmacro %}
 
