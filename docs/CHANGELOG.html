@@ -282,7 +282,9 @@
 <h2 id="unreleased">UNRELEASED</h2>
 <ul>
 <li>💥 BREAKING: Drop support for Node &lt;<span class="widont">&nbsp;</span>10</li>
-<li>🐛 BUGFIX: Use iframes to properly render size-related previews –
+<li>🐛 BUGFIX: Use iframes to properly render size-related previews (all <code>@font</code>,
+<code>@ratios</code>, and <code>@sizes</code> previews are now each rendered in an <code>&lt;iframe&gt;</code>,
+receiving user-supplied <code>customCSS</code> and a limited subset of Herman styles) –
 <a href="https://github.com/oddbird/sassdoc-theme-herman/issues/339">#339</a></li>
 <li>🏠 INTERNAL: Upgrade<span class="widont">&nbsp;</span>dependencies</li>
 </ul>

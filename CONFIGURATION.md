@@ -105,7 +105,8 @@ Valid options: `hex`, `rgb/rgba`, `hsl/hsla`
 
 Relative path to a custom CSS file,
 which will be included in the `<head>` of rendered
-[`@example` annotations][example-docs].
+[`@font`][font-docs], [`@ratios`][ratio-preview],
+[`@sizes`][size-preview], or [`@example`][example-docs] annotations.
 
 **Notes:**
 
@@ -115,14 +116,14 @@ which will be included in the `<head>` of rendered
   you must document those fonts with the `@font` annotation
   (providing the required extra HTML)
   for them to display properly
-  within rendered `@example` annotations.
+  within rendered annotations.
   See our [`@font` documentation][font-docs-webfonts].
 - If your custom CSS contains internal links
   referenced with `url(...)`
   (e.g. local fonts or background images),
   Herman will attempt to copy in those assets
   so that they are available
-  in your rendered `@example` annotations.
+  in your rendered annotations.
   This means that the paths must either be absolute,
   or relative to the location of the CSS file itself.
   If using Webpack to bundle your Herman `customCSS`,
