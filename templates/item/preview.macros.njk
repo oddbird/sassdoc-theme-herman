@@ -270,7 +270,7 @@
       </code>
     </td>
     {% if compact %}
-      {{ size_ruler(width, text) }}
+      {{ size_ruler(value, width, text) }}
     {% else %}
       <td data-herman-cell data-herman-label></td>
     {% endif %}
@@ -278,13 +278,14 @@
 
   {% if (width or text) and not compact %}
     <tr data-herman-size="viz-row" aria-hidden="true">
-      {{ size_ruler(width, text, 3) }}
+      {{ size_ruler(value, width, text, 3) }}
     </tr>
   {% endif %}
 {% endmacro %}
 
 
 {% macro size_ruler(
+  value,
   width=none,
   text=none,
   colspan=none
