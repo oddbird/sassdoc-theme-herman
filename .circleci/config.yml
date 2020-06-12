@@ -13,9 +13,9 @@ jobs:
       - run:
           name: Install Dependencies
           command: yarn install --frozen-lockfile
-      # - run:
-      #     name: Compile Assets
-      #     command: yarn build
+      - run:
+          name: Compile Assets
+          command: yarn build
       - persist_to_workspace:
           root: .
           paths:
@@ -77,11 +77,6 @@ jobs:
       - attach_workspace:
           at: .
       - run:
-          name: Check Test Coverage
-          command: |
-            yarn nyc check-coverage --temp-dir coverage/src
-            yarn nyc check-coverage --temp-dir coverage/client
-      - run:
           name: Report Test Coverage
           command: |
             cat ./coverage/src/lcov.info | yarn coveralls
@@ -89,6 +84,11 @@ jobs:
             curl -k "https://coveralls.io/webhook?repo_token=${COVERALLS_REPO_TOKEN}" -d "payload[build_num]=${CIRCLE_BUILD_NUM}&payload[status]=done"
           environment:
             COVERALLS_PARALLEL: 'true'
+      - run:
+          name: Check Test Coverage
+          command: |
+            yarn nyc check-coverage --temp-dir coverage/src
+            yarn nyc check-coverage --temp-dir coverage/client
 
 workflows:
   version: 2

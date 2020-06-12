@@ -11,6 +11,7 @@
     "node": ">=10"
   },
   "scripts": {
+    "build": "webpack",
     "prettier:js": "prettier --write \"**/*.js\"",
     "prettier:other": "prettier --write \"**/*.{json,yml}\"",
     "eslint": "yarn lint:js:ci --fix",
