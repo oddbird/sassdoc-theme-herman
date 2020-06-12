@@ -1,9 +1,6 @@
 !.*
 .git/
 .nyc_output/
-.pnp.js
-.vscode/
-.yarn/
 assets/js/vendor/
 coverage/
 dist/

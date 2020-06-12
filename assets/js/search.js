@@ -160,7 +160,4 @@ export const getSearchData = () => {
   }
 };
 
-/* istanbul ignore next */
-$(() => {
-  getSearchData();
-});
+window.getSearchData = getSearchData;

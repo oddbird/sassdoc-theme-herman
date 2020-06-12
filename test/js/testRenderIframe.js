@@ -8,8 +8,8 @@ const sinon = require('sinon');
 const renderIframe = require('../../lib/renderIframe');
 const { nunjucksEnv } = require('../../lib/utils/templates');
 
-describe('renderIframe', function () {
-  describe('example', function () {
+describe('renderIframe', () => {
+  describe('example', () => {
     beforeEach(function () {
       this.env = {
         herman: {
@@ -75,7 +75,7 @@ describe('renderIframe', function () {
     });
   });
 
-  describe('icon', function () {
+  describe('icon', () => {
     beforeEach(function () {
       this.env = {};
     });
@@ -114,7 +114,7 @@ describe('renderIframe', function () {
     });
   });
 
-  describe('font', function () {
+  describe('font', () => {
     beforeEach(function () {
       this.env = {
         herman: {

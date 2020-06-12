@@ -13,7 +13,7 @@
 .sass-cache/
 docs/assets/
 docs/search-data.json
-jscov/
+coverage/
 node_modules/
 npm-debug.log*
 test/js/dest/
@@ -26,7 +26,3 @@ dist/webpack/styleguide_json*
 yarn-debug.log*
 yarn-error.log*
 .yarn-integrity
-.yarn/*
-!.yarn/cache
-!.yarn/releases
-!.yarn/plugins

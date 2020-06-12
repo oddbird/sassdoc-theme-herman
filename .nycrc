@@ -1,4 +1,17 @@
 {
+  "cache": false,
+  "include": [
+    "lib/**/*.js",
+    "index.js"
+  ],
+  "all": true,
+  "report-dir": "./coverage/src/",
+  "reporter": [
+    "text-summary",
+    "html",
+    "lcovonly",
+    "json"
+  ],
   "lines": 100,
   "statements": 100,
   "functions": 100,

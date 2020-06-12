@@ -19,7 +19,7 @@ const annotations = {
 };
 /* eslint-enable global-require */
 
-describe('icons annotation', function () {
+describe('icons annotation', () => {
   beforeEach(function () {
     this.env = {
       logger: { warn: sinon.fake() },
@@ -27,13 +27,13 @@ describe('icons annotation', function () {
     this.icons = annotations.icons(this.env);
   });
 
-  describe('parse', function () {
+  describe('parse', () => {
     it('returns argument', function () {
       assert.equal(this.icons.parse('icons/'), 'icons/');
     });
   });
 
-  describe('resolve', function () {
+  describe('resolve', () => {
     it('logs errors on bad icon path', function (done) {
       const data = [{ icons: 'test/js/fixtures/bad_icons/' }];
 
@@ -87,12 +87,12 @@ describe('icons annotation', function () {
   });
 });
 
-describe('colors annotation', function () {
+describe('colors annotation', () => {
   before(function () {
     this.colors = annotations.colors();
   });
 
-  describe('parse', function () {
+  describe('parse', () => {
     it('parses string and returns object', function () {
       assert.deepEqual(this.colors.parse('foo-bar'), {
         key: 'foo-bar',
@@ -101,7 +101,7 @@ describe('colors annotation', function () {
   });
 });
 
-describe('sizes annotation', function () {
+describe('sizes annotation', () => {
   before(function () {
     this.env = {
       herman: {
@@ -116,7 +116,7 @@ describe('sizes annotation', function () {
     this.sizes = annotations.sizes(this.env);
   });
 
-  describe('parse', function () {
+  describe('parse', () => {
     it('parses options and returns object', function () {
       const input = 'key-thing {style}';
       assert.deepEqual(this.sizes.parse(input), {
@@ -134,7 +134,7 @@ describe('sizes annotation', function () {
     });
   });
 
-  describe('resolve', function () {
+  describe('resolve', () => {
     it('bails early if no sizes on items', function (done) {
       const data = [{}];
       this.sizes
@@ -192,7 +192,7 @@ describe('sizes annotation', function () {
   });
 });
 
-describe('ratios annotation', function () {
+describe('ratios annotation', () => {
   before(function () {
     this.env = {
       herman: {
@@ -207,7 +207,7 @@ describe('ratios annotation', function () {
     this.ratios = annotations.ratios(this.env);
   });
 
-  describe('parse', function () {
+  describe('parse', () => {
     it('parses string and returns object', function () {
       assert.deepEqual(this.ratios.parse('foo-bar'), {
         key: 'foo-bar',
@@ -215,7 +215,7 @@ describe('ratios annotation', function () {
     });
   });
 
-  describe('resolve', function () {
+  describe('resolve', () => {
     it('bails early if no ratios on items', function (done) {
       const data = [{}];
       this.ratios
@@ -261,14 +261,14 @@ describe('ratios annotation', function () {
   });
 });
 
-describe('font annotation', function () {
+describe('font annotation', () => {
   beforeEach(function () {
     this.env = {};
     this.font = annotations.font(this.env);
   });
 
-  describe('parse', function () {
-    it('keeps env.fontsHTML if set', function () {
+  describe('parse', () => {
+    it('keeps env.fontsHTML if set', () => {
       const env = {
         fontsHTML: ['<link rel="another-stylesheet">'],
       };
@@ -325,7 +325,7 @@ describe('font annotation', function () {
     });
   });
 
-  describe('resolve', function () {
+  describe('resolve', () => {
     beforeEach(function () {
       this.data = [{ font: { key: 'test-font' } }];
       this.origData = Object.assign([], this.data);
@@ -772,7 +772,7 @@ describe('font annotation', function () {
         .catch(done);
     });
 
-    it('stores parsed data for webfonts', function (done) {
+    it('stores parsed data for webfonts', (done) => {
       const env = {
         herman: {},
         sassjson: {
@@ -807,7 +807,7 @@ describe('font annotation', function () {
         .catch(done);
     });
 
-    it('skips items without a font attribute', function (done) {
+    it('skips items without a font attribute', (done) => {
       const env = {};
       const font = annotations.font(env);
       const data = [{}];
@@ -821,7 +821,7 @@ describe('font annotation', function () {
         .catch(done);
     });
 
-    it('skips localFont processing if formats is empty', function (done) {
+    it('skips localFont processing if formats is empty', (done) => {
       const env = {
         herman: {
           fontpath: '/path',
@@ -854,7 +854,7 @@ describe('font annotation', function () {
         .catch(done);
     });
 
-    it('fails on missing sassjson fontData', function (done) {
+    it('fails on missing sassjson fontData', (done) => {
       const env = {
         herman: {
           sass: {
@@ -889,7 +889,7 @@ describe('font annotation', function () {
         });
     });
 
-    it('skips localFonts processing if not a valid format', function (done) {
+    it('skips localFonts processing if not a valid format', (done) => {
       const env = {
         herman: {
           fontpath: '/path',
@@ -924,7 +924,7 @@ describe('font annotation', function () {
   });
 });
 
-describe('example annotation', function () {
+describe('example annotation', () => {
   beforeEach(function () {
     this.env = {
       herman: {
@@ -937,8 +937,8 @@ describe('example annotation', function () {
     this.example = annotations.example(this.env);
   });
 
-  describe('resolve', function () {
-    it('warns and exits if no templatepath and njk @example used', function () {
+  describe('resolve', () => {
+    it('warns and exits if no templatepath and njk @example used', () => {
       const env = { logger: { warn: sinon.fake() }, herman: {} };
       const example = annotations.example(env);
       const data = [{ example: [{ type: 'njk' }] }];
@@ -1264,7 +1264,7 @@ describe('example annotation', function () {
         .catch(done);
     });
 
-    it('warns only once about missing templatepath', function () {
+    it('warns only once about missing templatepath', () => {
       const env = { logger: { warn: sinon.fake() }, herman: {} };
       const example = annotations.example(env);
       const data = [
@@ -1277,7 +1277,7 @@ describe('example annotation', function () {
       sinon.assert.calledOnce(env.logger.warn);
     });
 
-    it('does not warn if njk @example not used', function () {
+    it('does not warn if njk @example not used', () => {
       const env = { logger: { warn: sinon.fake() }, herman: {} };
       const example = annotations.example(env);
       const data = [{}];
@@ -1311,13 +1311,11 @@ describe('example annotation', function () {
         .catch(done);
     });
 
-    it('uses custom nunjucks env, if exists', function () {
+    it('uses custom nunjucks env, if exists', () => {
       const nunjucksEnv = nunjucks.configure(
         path.resolve(__dirname, 'fixtures', 'templates'),
       );
-      nunjucksEnv.addFilter('plus_one', function (val) {
-        return val + 1;
-      });
+      nunjucksEnv.addFilter('plus_one', (val) => val + 1);
       const env = { herman: { nunjucks: { environment: nunjucksEnv } } };
       const example = annotations.example(env);
       const data = [
@@ -1340,18 +1338,18 @@ describe('example annotation', function () {
   });
 });
 
-describe('name annotation', function () {
+describe('name annotation', () => {
   before(function () {
     this.name = annotations.name(this.env);
   });
 
-  describe('parse', function () {
+  describe('parse', () => {
     it('trims text', function () {
       assert.equal(this.name.parse('foo '), 'foo');
     });
   });
 
-  describe('autofill', function () {
+  describe('autofill', () => {
     it('preserves original context name', function () {
       const data = { name: 'foo', context: { name: 'bar' } };
 

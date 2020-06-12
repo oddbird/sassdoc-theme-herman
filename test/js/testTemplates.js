@@ -4,8 +4,8 @@ const assert = require('assert');
 
 const { nunjucksEnv } = require('../../lib/utils/templates');
 
-describe('split filter', function () {
-  it('returns array of split str', function () {
+describe('split filter', () => {
+  it('returns array of split str', () => {
     const val = 'foo;bar';
     const expected = ['foo', 'bar'];
     const actual = nunjucksEnv.filters.split(val, ';');
@@ -14,8 +14,8 @@ describe('split filter', function () {
   });
 });
 
-describe('isString filter', function () {
-  it('returns true if val is a string', function () {
+describe('isString filter', () => {
+  it('returns true if val is a string', () => {
     const aString = 'foo';
     const notAString = [];
 

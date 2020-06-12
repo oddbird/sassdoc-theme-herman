@@ -38,9 +38,8 @@ If you do not have `gulp-cli` [installed globally](https://github.com/gulpjs/gul
 or if you have an outdated version (`<2.0.0`) installed --
 first run `npm install -g gulp-cli`.
 
-You can lint the project's JS with `gulp eslint`
-and run the JS unit tests with `gulp jstest`.
-You can run the Sass tests with `gulp sasstest`.
+You can format and lint the project with `yarn lint`
+and run the unit tests with `yarn test`.
 
 To compile and minify the static assets --
 as well as generate the documentation --

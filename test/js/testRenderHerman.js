@@ -11,7 +11,7 @@ const { renderHerman, makeNunjucksColors } = require('../../lib/renderHerman');
 
 const access = Promise.promisify(fs.access);
 
-describe('makeNunjucksColors', function () {
+describe('makeNunjucksColors', () => {
   before(function () {
     this.colors = makeNunjucksColors({
       herman: {
@@ -35,7 +35,7 @@ describe('makeNunjucksColors', function () {
     assert.deepEqual(actual, expected);
   });
 
-  it('handles rgba and hsla', function () {
+  it('handles rgba and hsla', () => {
     const colors = makeNunjucksColors({
       herman: {
         displayColors: ['rgba', 'hsla'],
@@ -49,7 +49,7 @@ describe('makeNunjucksColors', function () {
     assert.deepEqual(actual, expected);
   });
 
-  it('passes on unknown format', function () {
+  it('passes on unknown format', () => {
     const colors = makeNunjucksColors({
       herman: {
         displayColors: ['blorble'],
@@ -61,7 +61,7 @@ describe('makeNunjucksColors', function () {
   });
 });
 
-describe('renderHerman', function () {
+describe('renderHerman', () => {
   before(function () {
     this.dest = `${__dirname}/dest`;
   });

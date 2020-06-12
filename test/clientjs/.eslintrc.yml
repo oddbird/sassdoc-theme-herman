@@ -3,22 +3,22 @@
 parserOptions:
   sourceType: module
 env:
+  jest: true
   browser: true
-  commonjs: true
   jquery: true
-  mocha: true
   node: false
-globals:
-  chai: true
-  expect: true
-  sinon: true
+  mocha: false
 plugins:
   - simple-import-sort
+  - jest
+  - jest-dom
+  - testing-library
+extends:
+  - plugin:jest/recommended
+  - plugin:jest/style
+  - plugin:jest-dom/recommended
+  - plugin:testing-library/recommended
 rules:
   # Import
   simple-import-sort/sort: 1
   import/order: 0
-
-  func-names: 0
-  no-unused-expressions: 0
-  prefer-arrow-callback: 0

@@ -1,11 +1,9 @@
 !.*
 .git/
 .nyc_output/
-.pnp.js
-.vscode/
-.yarn/
 assets/js/vendor/
 coverage/
 dist/
 docs/
+gulpfile.js
 node_modules/

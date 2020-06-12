@@ -12,7 +12,7 @@ const { nunjucksEnv } = require('../../lib/utils/templates');
 
 const readFile = Promise.promisify(fs.readFile);
 
-describe('render', function () {
+describe('render', () => {
   before(function () {
     this.dest = `${__dirname}/dest/base.html`;
     this.tpl = path.resolve(__dirname, 'fixtures', 'templates', 'base.njk');

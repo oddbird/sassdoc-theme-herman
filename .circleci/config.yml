@@ -4,7 +4,7 @@ jobs:
   build:
     working_directory: ~/herman
     docker:
-      - image: circleci/node:latest-browsers
+      - image: circleci/node:latest
     steps:
       - checkout
       - restore_cache:
@@ -13,6 +13,9 @@ jobs:
       - run:
           name: Install Dependencies
           command: yarn install --frozen-lockfile
+      # - run:
+      #     name: Compile Assets
+      #     command: yarn build
       - persist_to_workspace:
           root: .
           paths:
@@ -25,62 +28,62 @@ jobs:
   lint:
     working_directory: ~/herman
     docker:
-      - image: circleci/node:latest-browsers
+      - image: circleci/node:latest
     steps:
       - checkout
       - attach_workspace:
           at: .
       - run:
-          name: Lint JS
-          command: yarn gulp eslint
-      # - run:
-      #     name: Lint Sass
-      #     command: yarn gulp sasslint
+          name: Lint
+          command: yarn lint:ci
 
-  test-sass:
+  test:
     working_directory: ~/herman
     docker:
-      - image: circleci/node:latest-browsers
+      - image: circleci/node:latest
     steps:
       - checkout
       - attach_workspace:
           at: .
       - run:
           name: Test Sass
-          command: yarn gulp sasstest
+          command: yarn test:sass
+      - run:
+          name: Test JS
+          command: yarn test:js:ci
+          environment:
+            JEST_JUNIT_OUTPUT_DIR: './coverage'
+      - store_artifacts:
+          path: coverage
+          destination: js-test-reports
+      - store_test_results:
+          path: coverage
+      - persist_to_workspace:
+          root: .
+          paths:
+            - coverage
 
-  test-js:
+  check-test-coverage:
     working_directory: ~/herman
     docker:
-      - image: circleci/node:latest-browsers
+      - image: circleci/node:latest
     steps:
       - checkout
       - attach_workspace:
           at: .
       - run:
-          name: Run JS Tests
-          command: yarn gulp jstest
-      - run:
-          name: Run Client JS Tests
-          command: yarn gulp clienttest
+          name: Check Test Coverage
+          command: |
+            yarn nyc check-coverage --temp-dir coverage/src
+            yarn nyc check-coverage --temp-dir coverage/client
       - run:
           name: Report Test Coverage
           command: |
-            yarn nyc report --reporter=text-lcov | yarn coveralls
-            yarn nyc report --reporter=text-lcov --temp-directory ./jscov/client/ | yarn coveralls
+            yarn nyc report --reporter=text-lcov --temp-dir coverage/src | yarn coveralls
+            yarn nyc report --reporter=text-lcov --temp-dir coverage/client | yarn coveralls
             curl -k "https://coveralls.io/webhook?repo_token=${COVERALLS_REPO_TOKEN}" -d "payload[build_num]=${CIRCLE_BUILD_NUM}&payload[status]=done"
           environment:
             COVERALLS_PARALLEL: 'true'
-      - run:
-          name: Check Test Coverage
-          command: |
-            yarn nyc check-coverage
-            yarn nyc check-coverage --temp-directory ./jscov/client/
-      - store_artifacts:
-          path: jscov
-          destination: js-reports
-      - store_test_results:
-          path: jscov
 
 workflows:
   version: 2
@@ -90,9 +93,9 @@ workflows:
       - lint:
           requires:
             - build
-      - test-sass:
+      - test:
           requires:
             - build
-      - test-js:
+      - check-test-coverage:
           requires:
-            - build
+            - test

@@ -5,16 +5,16 @@ const path = require('path');
 
 const parse = require('../../lib/utils/parse');
 
-describe('parse', function () {
-  describe('sassJson', function () {
-    it('parses sassJson', function () {
+describe('parse', () => {
+  describe('sassJson', () => {
+    it('parses sassJson', () => {
       const contents = '/*! json-encode: {"a": 1} */';
       const expected = { a: 1 };
 
       assert.deepEqual(parse.sassJson(contents), expected);
     });
 
-    it('parses sassJson with cruft after it', function () {
+    it('parses sassJson with cruft after it', () => {
       const contents =
         '/*! json-encode: {"a": 1} */\n\n' +
         '/*# sourceMappingURL=sass_json.bundle.css.map*/';
@@ -24,8 +24,8 @@ describe('parse', function () {
     });
   });
 
-  describe('font', function () {
-    it('skips invalid variants', function () {
+  describe('font', () => {
+    it('skips invalid variants', () => {
       const font = {
         variants: ['bold'],
       };
@@ -36,7 +36,7 @@ describe('parse', function () {
       assert.deepEqual(actual[0].formats, {});
     });
 
-    it('sets weight and style appropriately', function () {
+    it('sets weight and style appropriately', () => {
       const font = {
         variants: ['italic 100'],
       };
@@ -71,7 +71,7 @@ describe('parse', function () {
     });
   });
 
-  describe('customCSS', function () {
+  describe('customCSS', () => {
     beforeEach(function () {
       this.enc = 'utf-8';
       this.env = {

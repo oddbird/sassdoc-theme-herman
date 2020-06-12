@@ -6,8 +6,8 @@ const sinon = require('sinon');
 
 const getNunjucksEnv = require('../../lib/utils/getNunjucksEnv');
 
-describe('getNunjucksEnv', function () {
-  it('uses an existing nunjucksEnv first', function () {
+describe('getNunjucksEnv', () => {
+  it('uses an existing nunjucksEnv first', () => {
     const env = {
       herman: {
         nunjucks: {
@@ -19,7 +19,7 @@ describe('getNunjucksEnv', function () {
     assert.equal(actual, 'some value');
   });
 
-  it('returns null if env.herman missing', function () {
+  it('returns null if env.herman missing', () => {
     const env = {
       logger: {
         warn: sinon.fake(),
@@ -30,7 +30,7 @@ describe('getNunjucksEnv', function () {
     sinon.assert.calledOnce(env.logger.warn);
   });
 
-  it('runs nunjucks.configure if all is good', function () {
+  it('runs nunjucks.configure if all is good', () => {
     const configure = sinon.stub(nunjucks, 'configure');
     const env = {
       herman: {

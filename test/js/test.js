@@ -10,7 +10,7 @@ const herman = require('../../');
 
 const access = Promise.promisify(fs.access);
 
-describe('herman', function () {
+describe('herman', () => {
   before(function () {
     this.dest = `${__dirname}/dest`;
   });

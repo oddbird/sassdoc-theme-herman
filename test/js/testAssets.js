@@ -12,7 +12,7 @@ const assets = require('../../lib/utils/assets');
 
 const access = Promise.promisify(fs.access);
 
-describe('assets', function () {
+describe('assets', () => {
   before(function () {
     this.dest = `${__dirname}/dest`;
   });

@@ -6,8 +6,8 @@ const sinon = require('sinon');
 
 const prepareContext = require('../../lib/prepareContext');
 
-describe('prepareContext', function () {
-  it('resolves to a context', function (done) {
+describe('prepareContext', () => {
+  it('resolves to a context', (done) => {
     prepareContext({
       data: [],
       description: 'foo',
@@ -40,7 +40,7 @@ describe('prepareContext', function () {
       .catch(done);
   });
 
-  it('sets extraDocs', function (done) {
+  it('sets extraDocs', (done) => {
     const warn = sinon.fake();
     prepareContext({
       data: [],
@@ -84,7 +84,7 @@ describe('prepareContext', function () {
       .catch(done);
   });
 
-  it('sets extraLinks', function (done) {
+  it('sets extraLinks', (done) => {
     prepareContext({
       data: [],
       herman: {
@@ -98,7 +98,7 @@ describe('prepareContext', function () {
       .catch(done);
   });
 
-  it('loads a Sass JSON file', function (done) {
+  it('loads a Sass JSON file', (done) => {
     prepareContext({
       data: [],
       herman: {
@@ -114,7 +114,7 @@ describe('prepareContext', function () {
       .catch(done);
   });
 
-  it('logs a missing Sass JSON file', function (done) {
+  it('logs a missing Sass JSON file', (done) => {
     const warn = sinon.fake();
     prepareContext({
       data: [],
@@ -132,7 +132,7 @@ describe('prepareContext', function () {
       .catch(done);
   });
 
-  it('removes bogus context', function (done) {
+  it('removes bogus context', (done) => {
     const item = {
       commentRange: {
         start: 0,
@@ -194,7 +194,7 @@ describe('prepareContext', function () {
       .catch(done);
   });
 
-  it('warns if prose block uses custom annotation with key', function (done) {
+  it('warns if prose block uses custom annotation with key', (done) => {
     const logger = { warn: sinon.fake() };
     const item = {
       commentRange: {
