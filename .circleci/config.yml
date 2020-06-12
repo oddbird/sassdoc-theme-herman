@@ -61,6 +61,8 @@ jobs:
       - store_artifacts:
           path: coverage
           destination: js-test-reports
+      - store_test_results:
+          path: coverage
       - persist_to_workspace:
           root: .
           paths:
@@ -82,8 +84,8 @@ jobs:
       - run:
           name: Report Test Coverage
           command: |
-            yarn nyc report --reporter=text-lcov --temp-dir coverage/src | yarn coveralls
-            yarn nyc report --reporter=text-lcov --temp-dir coverage/client | yarn coveralls
+            cat ./coverage/src/lcov.info | yarn coveralls
+            cat ./coverage/client/lcov.info | yarn coveralls
             curl -k "https://coveralls.io/webhook?repo_token=${COVERALLS_REPO_TOKEN}" -d "payload[build_num]=${CIRCLE_BUILD_NUM}&payload[status]=done"
           environment:
             COVERALLS_PARALLEL: 'true'
