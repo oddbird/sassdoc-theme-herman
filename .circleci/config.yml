@@ -50,14 +50,17 @@ jobs:
           command: yarn test:sass
       - run:
           name: Test JS
-          command: yarn test:js:ci
+          command: yarn test:js:src:ci
           environment:
-            JEST_JUNIT_OUTPUT_DIR: './coverage'
+            MOCHA_FILE: './coverage/src/junit.xml'
+      - run:
+          name: Test Client JS
+          command: yarn test:js:client:ci
+          environment:
+            JEST_JUNIT_OUTPUT_DIR: './coverage/client'
       - store_artifacts:
           path: coverage
           destination: js-test-reports
-      - store_test_results:
-          path: coverage
       - persist_to_workspace:
           root: .
           paths:
