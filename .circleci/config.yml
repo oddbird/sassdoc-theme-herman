@@ -78,12 +78,7 @@ jobs:
           at: .
       - run:
           name: Report Test Coverage
-          command: |
-            cat ./coverage/src/lcov.info | yarn coveralls
-            cat ./coverage/client/lcov.info | yarn coveralls
-            curl -k "https://coveralls.io/webhook?repo_token=${COVERALLS_REPO_TOKEN}" -d "payload[build_num]=${CIRCLE_BUILD_NUM}&payload[status]=done"
-          environment:
-            COVERALLS_PARALLEL: 'true'
+          command: bash <(curl -s https://codecov.io/bash)
       - run:
           name: Check Test Coverage
           command: |
