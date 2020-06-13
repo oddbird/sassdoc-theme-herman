@@ -6,9 +6,9 @@ import hljs from 'vendor/highlight';
 
 import * as base from './base';
 
-$(() => {
-  window.$ = $;
+window.$ = $;
 
+$(() => {
   hljs.initHighlighting();
   base.initializeToggles();
   base.initializeIframes();

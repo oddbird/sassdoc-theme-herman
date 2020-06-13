@@ -5,5 +5,4 @@ assets/js/vendor/
 coverage/
 dist/
 docs/
-gulpfile.js
 node_modules/

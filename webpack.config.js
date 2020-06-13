@@ -2,7 +2,6 @@
 
 'use strict';
 
-process.env.NODE_ENV = 'production';
 process.env.BROWSERSLIST_CONFIG = './.browserslistrc';
 
 const path = require('path');
@@ -12,9 +11,6 @@ const webpack = require('webpack');
 const sass = require('sass');
 
 const SassDocPlugin = require('./sassdoc-webpack-plugin');
-
-const jsOutput = '[name].min.js';
-const styleOutput = '[name].min.css';
 
 const outputPath = path.join(__dirname, 'dist', 'webpack');
 const sassdocPath = path.join(__dirname, 'docs');
@@ -91,7 +87,7 @@ const sassDocOpts = {
 };
 
 module.exports = {
-  mode: process.env.NODE_ENV || 'development',
+  mode: 'production',
   // context for entry points
   context: path.join(__dirname, 'assets', 'js'),
   // define all the entry point bundles
@@ -105,7 +101,7 @@ module.exports = {
   output: {
     path: outputPath,
     publicPath: '/assets/webpack/',
-    filename: jsOutput,
+    filename: '[name].min.js',
   },
   resolve: {
     // where to look for "required" modules
@@ -132,9 +128,10 @@ module.exports = {
       },
     },
   },
+  devServer: {
+    contentBase: path.join(__dirname, 'docs'),
+  },
   plugins: [
-    // ignore flycheck and Emacs special files when watching
-    new webpack.WatchIgnorePlugin([/flycheck_/, /\.#/, /#$/]),
     // make jquery accessible in all modules that use it
     new webpack.ProvidePlugin({
       $: 'jquery',
@@ -145,7 +142,7 @@ module.exports = {
     new OptimizeCSSAssetsPlugin(),
     // pull all CSS out of JS bundles
     new MiniCssExtractPlugin({
-      filename: styleOutput,
+      filename: '[name].min.css',
     }),
     new SassDocPlugin(sassDocOpts, {
       assetPaths: [
