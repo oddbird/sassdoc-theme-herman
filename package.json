@@ -4,6 +4,11 @@
   "description": "An Odd SassDoc theme.",
   "version": "3.1.0",
   "homepage": "http://oddbird.net/herman/",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/oddbird/sassdoc-theme-herman.git"
+  },
   "keywords": [
     "sassdoc-theme"
   ],
@@ -118,11 +123,6 @@
   },
   "resolutions": {
     "cdocparser": "^0.15.0"
-  },
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/oddbird/sassdoc-theme-herman.git"
   },
   "husky": {
     "hooks": {
