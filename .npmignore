@@ -21,7 +21,7 @@
 appveyor.yml
 assets/
 fonts/
-gulpfile.js
+scripts/
 coverage/
 npm-debug.log*
 postcss.config.js
