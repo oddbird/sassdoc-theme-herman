@@ -17,7 +17,6 @@
 .nyc_output/
 .prettierrc
 .sass-cache/
-.sass-lint.yml
 .yarn-integrity
 appveyor.yml
 assets/
@@ -35,6 +34,7 @@ yarn-error.log*
 yarn.lock
 
 dist/webpack/app_styles.min.js
+dist/webpack/iframe_styles.min.js
 dist/webpack/styleguide_json*
 
 scss/*

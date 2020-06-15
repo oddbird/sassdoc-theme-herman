@@ -21,12 +21,12 @@
         {{ color_palette(data.colors[key]) }}
       {% endif -%}
 
-      {%- if item.ratios and data.ratios[key] %}
-        {{ ratios(data.ratios[key]) }}
+      {%- if item.ratios and data.ratios[key] and item.iframed %}
+        {{ ratios(data.ratios[key], item.iframed) }}
       {% endif -%}
 
-      {%- if item.sizes and data.sizes[key] %}
-        {{ sizes(data.sizes[key], args) }}
+      {%- if item.sizes and data.sizes[key] and item.iframed %}
+        {{ sizes(item.iframed) }}
       {%- endif -%}
     {%- endif -%}
   {%- endif %}
@@ -125,18 +125,19 @@
   {%- set path = data[variant.variant].path or path -%}
   {%- set stack = data.stack if data.stack and not data.stack|isString else [data.stack] -%}
   {%- set family = [variant.family, stack]|join(',') if not (variant.family in stack) else stack -%}
-  <div data-specimen-face="{{ variant.variant }}">
-    <h4 data-specimen="face-name">
+  <div data-herman-fontface="{{ variant.variant }}">
+    <p data-herman-label="font-name">
       {{ variant.variant }}
-
-      {% if path %}
-        (<code>{{ path }}</code>)
-      {% endif %}
-    </h4>
-    <div data-specimen="sample" style="font-family: {{ font_names(family) }}; font-weight: {{ variant.weight }}; font-style: {{ variant.style }};">
-      <div data-specimen="aa">Aa</div>
-      <div data-specimen="lorem">{{ lorem('alpha') }}</div>
+    </p>
+    <div data-herman-font="sample" style="font-family: {{ font_names(family) }}; font-weight: {{ variant.weight }}; font-style: {{ variant.style }};">
+      <div data-herman-font="aa">Aa</div>
+      <div data-herman-font="lorem">{{ lorem('alpha') }}</div>
     </div>
+    {% if path %}
+    <p data-herman-label>
+      <code data-herman-code>{{ path }}</code>
+    </p>
+    {% endif %}
   </div>
 {% endmacro %}
 
@@ -163,67 +164,62 @@
 #}
 {% macro lorem(length) %}
   {% if length == 'title' %}
-    <span data-specimen-lorem="title">
+    <span data-herman-lorem="title">
       Pack my box with five dozen liquor&nbsp;jugs.
     </span>
   {% elif length == 'body' %}
-    <span data-specimen-lorem="body">
+    <span data-herman-lorem="body">
       A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine. I am so happy, my dear friend, so absorbed in the exquisite sense of mere tranquil existence, that I neglect my talents. I should be incapable of drawing a single stroke at the present moment; and yet I feel that I never was a greater artist than&nbsp;now.
     </span>
   {% elif length == 'alpha' %}
-    <span data-specimen-lorem="uppercase">
+    <span data-herman-lorem="uppercase">
       ABCDEFGHIJKLMNOPQRSTUVWXYZ
     </span>
-    <span data-specimen-lorem="lowercase">
+    <span data-herman-lorem="lowercase">
       abcdefghijklmnopqrstuvwxyz
     </span>
-    <span data-specimen-lorem="symbols">
+    <span data-herman-lorem="symbols">
       1234567890([{“‘,.;:?!$&*’”}])
     </span>
   {% endif %}
 {% endmacro %}
 
 
-{% macro ratios(data) %}
+{% macro ratios(data, iframed) %}
   {% for name, value in data %}
-    {% call show.item_section(
-      slug='ratio-preview',
-      title='Ratio',
-      supplement=name + ' (' + value + ')'
-    ) %}
-      {{ size_ruler(data, style='ratio') }}
-    {% endcall %}
+    {% if iframed and iframed[name] %}
+      {% call show.item_section(
+        slug='ratio-preview',
+        title='Ratio',
+        supplement=name + ' (' + value + ')'
+      ) %}
+        <iframe class="render-ratios" srcdoc="{{ iframed[name] }}" width="100%" height="0"></iframe>
+      {% endcall %}
+    {% endif %}
   {% endfor %}
 {% endmacro %}
 
 
-{% macro sizes(data, args) %}
+{% macro sizes(iframed) %}
   {% call show.item_section('size-preview', 'Size Previews') %}
-    {% set style = args.style or 'text' %}
-
-    {% if (style == 'ruler') or (style == 'ruler-large') %}
-      {{ size_ruler(data, style=style) }}
-    {% elif (style == 'text') %}
-      {{ size_text(data) }}
-    {% else %}
-      {{ size_output(data) }}
-    {% endif %}
+    <iframe class="render-sizes" srcdoc="{{ iframed }}" width="100%" height="0"></iframe>
   {% endcall %}
 {% endmacro %}
 
 
-{% macro size_ruler(data, style) %}
-  {% set is_large = (style == 'ruler-large') %}
-  {% set is_ratio = (style == 'ratio') %}
+{% macro size_table(data, style) %}
+  <table data-herman-table="size {{ style }}">
+    <thead>
+      <tr>
+        <th data-herman-th="name">{{ 'Step' if (style == 'ratio') else 'Name' }}</th>
+        <th data-herman-th="value">Value</th>
+        <th data-herman-th="spacer" aria-hidden></th>
+      </tr>
+    </thead>
 
-  <table class="sizes{% if is_large %} is-large{% endif %}">
-    <tr class="is-hidden">
-      <th class="size-name">{{ 'Step' if is_ratio else 'Name' }}</th>
-      <th class="size-value">Value</th>
-      <td class="size-viz"></td>
-    </tr>
-
-    {% if is_ratio %}
+    <tbody>
+    {% if (style == 'ratio') %}
+      {% set value = data %}
       {% set start = 5 %}
       {% set count = range(1, 7) if (value == 'linear') else range(-3, 4) %}
       {% for step in count %}
@@ -232,88 +228,83 @@
         {% set width = width + 'em' %}
 
         {{ size_ruler_row(
-          name='—' if ( result == 1 ) else step,
-          value='base' if ( result == 1 ) else result|round(2),
-          width=width
+          name='base' if ( result == 1 ) else step,
+          value=result|round(2),
+          width=width,
+          highlight=true if ( result == 1 ) else false,
+          compact=true
           ) }}
       {% endfor %}
     {% else %}
       {% for value, items in data|list|groupby('value') %}
         {% set name = items|join(', ', 'key') %}
-        {{ size_ruler_row(
-          name=name,
-          value=value,
-          width=value
-        ) }}
+          {{ size_ruler_row(
+            name=name,
+            value=value,
+            width=value if ('ruler' in style) else none,
+            text=value if (style == 'text') else none,
+            compact=true if (style == 'ruler') else false
+          ) }}
       {% endfor %}
     {% endif %}
+    </tbody>
   </table>
 {% endmacro %}
 
 
-{% macro size_ruler_row(name, value, width=none, text=none) %}
-  <tr class="size{% if value == 'base' %} ratio-base{% endif %}">
-    <td class="size-name">
+{% macro size_ruler_row(
+  name,
+  value,
+  width=none,
+  text=none,
+  highlight=false,
+  compact=false
+) %}
+  <tr data-herman-size="row{% if highlight %} highlight{% endif %}">
+    <td data-herman-cell="name" data-herman-label>
       {{ name }}
     </td>
-    <td class="size-value">
-      <code>
+    <td data-herman-cell="value" data-herman-label>
+      <code data-herman-code>
         {{ value }}
       </code>
     </td>
-    <td class="size-viz{% if text %} is-text{% endif %}">
+    {% if compact %}
+      {{ size_ruler(value, width, text) }}
+    {% else %}
+      <td data-herman-cell data-herman-label></td>
+    {% endif %}
+  </tr>
+
+  {% if (width or text) and not compact %}
+    <tr data-herman-size="viz-row" aria-hidden="true">
+      {{ size_ruler(value, width, text, 3) }}
+    </tr>
+  {% endif %}
+{% endmacro %}
+
+
+{% macro size_ruler(
+  value,
+  width=none,
+  text=none,
+  colspan=none
+) %}
+  {% if width or text %}
+    <td aria-hidden data-herman-cell="viz" {% if colspan %}colspan="{{ colspan }}"{% endif %}>
+      <div data-herman-size="overflow">
       {% if width %}
-        <div class="size-overflow">
-          <span class="size-bar" style="width: {{ width }};">
-            &nbsp;
-          </span>
+        <div data-herman-viz="bar" style="width: {{ width }};">
+          &nbsp;
         </div>
       {% elif text %}
-        <span class="size-text" style="font-size: {{ value }};">
+        <div data-herman-viz="text" style="font-size: {{ value }};">
           {{ lorem('title') }}
-        </span>
+        </div>
       {% endif %}
+      </div>
     </td>
-  </tr>
-{% endmacro %}
-
-
-{% macro size_text(data) %}
-  <table class="sizes">
-    <tr class="is-hidden">
-      <th class="size-name">Name</th>
-      <th class="size-value">Value</th>
-      <td class="size-viz"></td>
-    </tr>
-
-    {% for value, items in data|list|groupby('value') %}
-      {% set name = items|join(', ', 'key') %}
-        {{ size_ruler_row(
-          name=name,
-          value=value,
-          text=value
-        ) }}
-    {% endfor %}
-  </table>
-{% endmacro %}
-
-
-{% macro size_output(data) %}
-  <table class="sizes">
-    <tr class="is-hidden">
-      <th class="size-name">Name</th>
-      <th class="size-value">Value</th>
-      <td class="size-viz"></td>
-    </tr>
-
-    {% for value, items in data|list|groupby('value') %}
-      {% set name = items|join(', ', 'key') %}
-        {{ size_ruler_row(
-          name=name,
-          value=value
-        ) }}
-    {% endfor %}
-  </table>
+  {% endif %}
 {% endmacro %}
 
 

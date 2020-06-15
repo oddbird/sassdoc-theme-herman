@@ -1,7 +1,5 @@
-// Font Specimen
-// =============
-
-.font-specimen {
+[data-herman-preview='font'] {
+  --herman-label-color: #{color('slight')};
   display: flex;
   flex-wrap: wrap;
   margin: size('gutter') negative('shim') 0;
@@ -15,10 +13,7 @@
   }
 }
 
-// Face
-// ----
-
-[data-specimen-face] {
+[data-herman-fontface] {
   align-items: stretch;
   display: flex;
   flex: 1 0 size('font-preview');
@@ -31,14 +26,14 @@
   }
 }
 
-[data-specimen='sample'] {
+[data-herman-font='sample'] {
   align-items: center;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
 }
 
-[data-specimen='lorem'] {
+[data-herman-font='lorem'] {
   flex: 1 1 auto;
   padding-left: size('shim');
 
@@ -47,7 +42,7 @@
   }
 }
 
-[data-specimen='aa'] {
+[data-herman-font='aa'] {
   flex: 0 1 auto;
   font-size: size('specimen-aa');
   padding-left: size('quarter-shim');

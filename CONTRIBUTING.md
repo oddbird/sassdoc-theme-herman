@@ -40,8 +40,7 @@ first run `npm install -g gulp-cli`.
 
 You can lint the project's JS with `gulp eslint`
 and run the JS unit tests with `gulp jstest`.
-You can lint Sass with `gulp sasslint`
-and run the Sass tests with `gulp sasstest`.
+You can run the Sass tests with `gulp sasstest`.
 
 To compile and minify the static assets --
 as well as generate the documentation --

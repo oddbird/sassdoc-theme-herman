@@ -35,14 +35,16 @@ describe('assets', function() {
     const env = 'foo';
     const opts = { parser, env };
 
-    assets(__filename, this.dest, opts).then(() => {
-      const contents = parser.args[0][0].contents.toString();
+    assets(__filename, this.dest, opts)
+      .then(() => {
+        const contents = parser.args[0][0].contents.toString();
 
-      sinon.assert.calledOnce(parser);
-      assert.ok(contents.includes('Parses file'));
-      assert.equal(parser.args[0][2], env);
+        sinon.assert.calledOnce(parser);
+        assert.ok(contents.includes('Parses file'));
+        assert.equal(parser.args[0][2], env);
 
-      done();
-    });
+        done();
+      })
+      .catch(done);
   });
 });

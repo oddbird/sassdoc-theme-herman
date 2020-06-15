@@ -123,7 +123,13 @@ $demo-ratios: (
 /// @group demo_sizes
 $demo-sizes: (
   'root': $root,
+  'responsive': calc(1.5em + 1vw),
   'xlarge': $xlarge,
+);
+
+$demo-sizes-large: (
+  'box': 20em,
+  'page': 75ch,
 );
 
 /// ### Text Sizes
@@ -142,9 +148,9 @@ $demo-sizes: (
 
 /// ### Large Rulers
 /// ```scss
-/// /// @sizes demo-sizes {ruler-large}
+/// /// @sizes demo-sizes-large {ruler-large}
 /// ```
-/// @sizes demo-sizes {ruler-large}
+/// @sizes demo-sizes-large {ruler-large}
 /// @group demo_sizes
 
 /// ### Name/Value Only
@@ -184,3 +190,4 @@ $demo-sizes: (
 /// @link http://oddbird.net/accoutrement Accoutrement
 @include herman-add('ratios', 'demo-ratios', $demo-ratios);
 @include herman-add('sizes', 'demo-sizes', $demo-sizes);
+@include herman-add('sizes', 'demo-sizes-large', $demo-sizes-large);

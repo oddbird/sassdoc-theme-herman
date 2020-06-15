@@ -14,7 +14,6 @@
 /// responsive font-size, fallback font-size, and line-height.
 /// @group style-typography
 :root {
-  // sass-lint:disable-block no-duplicate-properties
   @include font-family('sans');
   font-size: size('root');
   font-size: size('responsive');
