@@ -304,7 +304,7 @@
 <p>Herman provides custom annotations
 for visualizing fonts,
 along with other design tokens.
-See the <a href="CONFIGURATION.html#sass-jsonfile"><code>sass.jsonfile</code> configuration</a>
+See the <a href="CONFIGURATION.html#sass-jsonfile"><code>sass.jsonFile</code> configuration</a>
 to ensure that Herman has access
 to your exported Sass<span class="widont">&nbsp;</span>data.</p>
 <p>Whether you use a webfont CDN like Typekit/Google Fonts,
@@ -840,12 +840,12 @@ included as keys in the font map<span class="widont">&nbsp;</span>itself.</li>
 <pre><code class="lang-scss">/// @font demo-local
 </code></pre>
 <p>In order for this to work,
-you must specify a <code>fontpath</code>
+you must specify a <code>fontPath</code>
 (the path where Herman will look to import local font files),
 in your SassDoc <code>herman</code> configuration object.</p>
 <pre><code class="lang-yaml"># .sassdocrc (yaml)
 herman:
-  fontpath: 'fonts/'
+  fontPath: 'fonts/'
 </code></pre>
 
       

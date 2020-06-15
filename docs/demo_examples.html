@@ -452,28 +452,28 @@ with an API for supporting additional<span class="widont">&nbsp;</span>languages
 <p>Example annotations with language set to <code>sass</code> or <code>scss</code>
 will be compiled by Herman,
 and display the output along with the<span class="widont">&nbsp;</span>source.</p>
-<p>Note that Sass/Scss examples require <code>node-sass</code> or <code>sass</code>
-to be installed, if it isn’t already: <code>npm install node-sass</code>.</p>
+<p>Note that Sass/Scss examples require <code>sass</code> to be installed,
+if it isn’t already: <code>npm install sass</code>.</p>
 <p>All Sass examples must be complete and valid,
 with the ability to import Sass partials inside each example.
 In order for this to work with Sass/Scss,
-you must set an <code>includepaths</code> key
+you must set an <code>includePaths</code> key
 in your sassdoc <code>herman.sass</code> configuration object –
 an array of places to look for Sass<span class="widont">&nbsp;</span>includes:</p>
 <pre><code class="lang-yaml">herman:
   sass:
-    includepaths:
+    includePaths:
       - 'static/sass'
       - 'node_modules'
 </code></pre>
 <p>You can also set an array of default <code>includes</code> or <code>use</code>
-(relative to any <code>includepaths</code>)
+(relative to any <code>includePaths</code>)
 to include for all Sass<span class="widont">&nbsp;</span>examples:</p>
 <p>To <code>@import</code> files:</p>
 <pre><code class="lang-yaml"># .sassdocrc (yaml)
 herman:
   sass:
-    includepaths:
+    includePaths:
       - 'static/sass'
     includes:
       - 'utilities'
@@ -483,21 +483,23 @@ herman:
 <pre><code class="lang-yaml"># .sassdocrc (yaml)
 herman:
   sass:
-    includepaths:
+    includePaths:
       - 'static/sass'
     use:
       - 'config/tools'
+      - file: 'config/other-tools'
+        namespace: 'my-tools'
 </code></pre>
 <p>Generally, included Sass files should not contain
 any CSS output of their own,
 since all compiled output will be displayed with the <code>@example</code>.</p>
 <p>By default, the CSS output will be “expanded”
-(see the <a href="https://github.com/sass/node-sass/#outputstyle">node-sass</a> docs).
-You can override this with the <code>outputstyle</code> option:</p>
+(see the <a href="https://sass-lang.com/documentation/js-api#outputstyle">Sass</a> docs).
+You can override this with the <code>outputStyle</code> option:</p>
 <pre><code class="lang-yaml"># .sassdocrc (yaml)
 herman:
   sass:
-    outputstyle: 'compressed'
+    outputStyle: 'compressed'
 </code></pre>
 
       
@@ -657,18 +659,18 @@ herman:
 <p>Example annotations with language set to <code>njk</code>
 can also be compiled.
 In order for this to work,
-you must either specify a <code>nunjucks.templatepath</code>
+you must either specify a <code>nunjucks.templatePath</code>
 (the path where Nunjucks will look to import templates),
 or a <code>nunjucks.environment</code> (custom <a href="https://mozilla.github.io/nunjucks/api.html#environment">Nunjucks environment</a>).
 Using a custom environment
 is particularly useful if your macros contain custom filters.
 Either can be established
 in your sassdoc <code>herman</code> configuration object:</p>
-<h3 id="setting-nunjucks-templatepath-">Setting <code>nunjucks.templatepath</code>:</h3>
+<h3 id="setting-nunjucks-templatepath-">Setting <code>nunjucks.templatePath</code>:</h3>
 <pre><code class="lang-yaml"># .sassdocrc (yaml)
 herman:
   nunjucks:
-    templatepath: 'templates'
+    templatePath: 'templates'
 </code></pre>
 <h3 id="setting-nunjucks-environment-">Setting <code>nunjucks.environment</code>:</h3>
 <p><em>This is only possible

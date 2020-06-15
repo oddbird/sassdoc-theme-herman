@@ -35,7 +35,7 @@ describe('getNunjucksEnv', () => {
     const env = {
       herman: {
         nunjucks: {
-          templatepath: 'some value',
+          templatePath: 'some value',
         },
       },
     };

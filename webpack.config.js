@@ -8,7 +8,6 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const webpack = require('webpack');
-const sass = require('sass');
 
 const SassDocPlugin = require('./sassdoc-webpack-plugin');
 
@@ -33,17 +32,16 @@ const sassDocOpts = {
     ],
     displayColors: ['hex', 'hsl'],
     customHTML: path.join(__dirname, 'templates', '_icons.svg'),
-    fontpath: path.join(__dirname, 'fonts'),
+    fontPath: path.join(__dirname, 'fonts'),
     nunjucks: {
-      templatepath: path.join(__dirname, 'templates'),
+      templatePath: path.join(__dirname, 'templates'),
     },
     sass: {
-      includepaths: [
+      includePaths: [
         path.join(__dirname, 'scss'),
         path.join(__dirname, 'node_modules'),
       ],
       includes: ['utilities', 'config/manifest'],
-      implementation: sass,
     },
   },
   display: {
@@ -147,7 +145,7 @@ module.exports = {
     new SassDocPlugin(sassDocOpts, {
       assetPaths: [
         { entry: 'app_styles', optPath: 'herman.customCSS' },
-        { entry: 'styleguide_json', optPath: 'herman.sass.jsonfile' },
+        { entry: 'styleguide_json', optPath: 'herman.sass.jsonFile' },
       ],
       outputPath,
     }),

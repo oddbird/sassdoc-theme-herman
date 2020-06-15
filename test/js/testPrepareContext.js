@@ -103,7 +103,7 @@ describe('prepareContext', () => {
       data: [],
       herman: {
         sass: {
-          jsonfile: `${__dirname}/fixtures/css/json.css`,
+          jsonFile: `${__dirname}/fixtures/css/json.css`,
         },
       },
     })
@@ -121,7 +121,7 @@ describe('prepareContext', () => {
       logger: { warn },
       herman: {
         sass: {
-          jsonfile: `${__dirname}/fixtures/css/missing-json.css`,
+          jsonFile: `${__dirname}/fixtures/css/missing-json.css`,
         },
       },
     })

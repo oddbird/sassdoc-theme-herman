@@ -149,7 +149,7 @@ in example output.
 
 [example-docs]: http://oddbird.net/herman/docs/demo_examples.html
 
-## fontpath
+## fontPath
 
 - Type: `String`
 - Default: `''`
@@ -171,12 +171,12 @@ Container for the following [Nunjucks][nunjucks]-related options:
 
 [nunjucks]: https://mozilla.github.io/nunjucks/
 
-### nunjucks.templatepath
+### nunjucks.templatePath
 
 - Type: `String`
 - Default: `''`
 
-_Either `nunjucks.templatepath` or
+_Either `nunjucks.templatePath` or
 [`nunjucks.environment`](#nunjucks-environment) is required if using
 [`@example njk` annotation][example-njk]._
 
@@ -189,7 +189,7 @@ Relative path to a directory containing Nunjucks templates.
 
 [njk-instance]: https://mozilla.github.io/nunjucks/api.html#environment
 
-_Either [`nunjucks.templatepath`](#nunjucks-templatepath) or
+_Either [`nunjucks.templatePath`](#nunjucks-templatePath) or
 `nunjucks.environment` is required if using
 [`@example njk` annotation][example-njk]._
 
@@ -202,7 +202,7 @@ _Either [`nunjucks.templatepath`](#nunjucks-templatepath) or
 
 Container for the following sass-related options:
 
-### sass.jsonfile
+### sass.jsonFile
 
 - Type: `String`
 - Default: `''`
@@ -223,36 +223,24 @@ See [Exporting Styles to JSON][export].
 [export]: http://oddbird.net/herman/docs/api_json-export.html
 [export-mixin]: http://oddbird.net/herman/docs/api_json-export.html#mixin--herman-export
 
-### sass.implementation
-
-- Type: `String` or Sass implementation instance
-- Default: `'node-sass'`
-
-Determines the Sass implementation ([Node Sass][node-sass] or [Dart
-Sass][dart-sass]) to use for Sass compilation if using [`@example njk`
-annotation][example-njk]. Accepts `'node-sass'` or `'sass'`.
-
-[node-sass]: https://github.com/sass/node-sass
-[dart-sass]: https://sass-lang.com/dart-sass
-
-### sass.includepaths
+### sass.includePaths
 
 - Type: `Array`
 - Default: `[]`
 
-Array of paths used to resolve `@import` declarations.
-Passed through to Sass [includepaths] when
+Array of load paths used to resolve `@use` declarations.
+Passed through to Sass [includePaths] when
 compiling `@example sass/scss` annotations.
 See our [`@example` documentation][example-docs-scss].
 
-[includepaths]: https://github.com/sass/node-sass/#includepaths
+[includepaths]: https://sass-lang.com/documentation/js-api#includepaths
 
 ### sass.includes
 
 - Type: `Array`
 - Default: `[]`
 
-List of files (relative to any [`sass.includepaths`](#sass-includepaths)) to
+List of files (relative to any [`sass.includePaths`](#sass-includepaths)) to
 `@import` for all `@example sass/scss` annotations.
 See our [`@example` documentation][example-docs-scss].
 
@@ -269,9 +257,25 @@ as that output will be displayed in every single Sass example.
 - Type: `Array`
 - Default: `[]`
 
-List of files (relative to any [`sass.includepaths`](#sass-includepaths)) to
+List of files (relative to any [`sass.includePaths`](#sass-includepaths)) to
 `@use` for all `@example sass/scss` annotations.
 See our [`@example` documentation][example-docs-scss].
+
+Each item in the array can be a string (path to the file)
+or an object with `file` and `namespace` keys
+(to `@use "<file>" as <namespace>`):
+
+```yaml
+# .sassdocrc
+herman:
+  sass:
+    includePaths:
+      - 'static/sass'
+    use:
+      - 'config/tools'
+      - file: 'config/other-tools'
+        namespace: 'my-tools'
+```
 
 This is useful for including any global
 Sass configuration and toolkit files
@@ -283,7 +287,7 @@ as that output will be displayed in every single Sass example.
 [example-docs-scss]: http://oddbird.net/herman/docs/demo_examples.html#compiling-sass-scss
 [dart-sass-modules]: https://sass-lang.com/blog/the-module-system-is-launched
 
-### sass.outputstyle
+### sass.outputStyle
 
 - Type: `String`
 - Default: `'expanded'`
@@ -291,7 +295,7 @@ as that output will be displayed in every single Sass example.
 Determines the output format of the final CSS
 of compiled `@example sass/scss` annotations.
 Passed through to Sass [outputStyle] option.
-Accepts `'nested'`, `'expanded'`, `'compact'`, or `'compressed'`.
+Accepts `'expanded'` or `'compressed'`.
 See our [`@example` documentation][example-docs-scss].
 
-[outputstyle]: https://github.com/sass/node-sass/#outputstyle
+[outputstyle]: https://sass-lang.com/documentation/js-api#outputstyle

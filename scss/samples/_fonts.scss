@@ -6,7 +6,7 @@
 /// Herman provides custom annotations
 /// for visualizing fonts,
 /// along with other design tokens.
-/// See the [`sass.jsonfile` configuration][json]
+/// See the [`sass.jsonFile` configuration][json]
 /// to ensure that Herman has access
 /// to your exported Sass data.
 ///
@@ -112,14 +112,14 @@ $demo-cdn: (
 /// ```
 ///
 /// In order for this to work,
-/// you must specify a `fontpath`
+/// you must specify a `fontPath`
 /// (the path where Herman will look to import local font files),
 /// in your SassDoc `herman` configuration object.
 ///
 /// ```yaml
 /// # .sassdocrc (yaml)
 /// herman:
-///   fontpath: 'fonts/'
+///   fontPath: 'fonts/'
 /// ```
 ///
 /// @font

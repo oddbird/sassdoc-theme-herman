@@ -117,7 +117,7 @@ describe('parse', () => {
       const env = Object.assign(this.env, {
         localFonts: [path.resolve(__dirname, 'myfonts', 'font.ttf')],
         herman: {
-          fontpath: 'myfonts',
+          fontPath: 'myfonts',
         },
       });
       parse.customCSS(file, this.enc, env);

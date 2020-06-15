@@ -106,7 +106,7 @@ describe('sizes annotation', () => {
     this.env = {
       herman: {
         sass: {
-          jsonfile: `${__dirname}/fixtures/css/json.css`,
+          jsonFile: `${__dirname}/fixtures/css/json.css`,
         },
       },
       logger: {
@@ -197,7 +197,7 @@ describe('ratios annotation', () => {
     this.env = {
       herman: {
         sass: {
-          jsonfile: `${__dirname}/fixtures/css/json.css`,
+          jsonFile: `${__dirname}/fixtures/css/json.css`,
         },
       },
       logger: {
@@ -331,7 +331,7 @@ describe('font annotation', () => {
       this.origData = Object.assign([], this.data);
     });
 
-    it('warns and exits if no jsonfile defined', function (done) {
+    it('warns and exits if no jsonFile defined', function (done) {
       const env = {
         logger: { warn: sinon.fake() },
         herman: {},
@@ -355,12 +355,12 @@ describe('font annotation', () => {
         });
     });
 
-    it('logs an error if missing Sass jsonfile', function (done) {
+    it('logs an error if missing Sass jsonFile', function (done) {
       const env = {
         logger: { warn: sinon.fake() },
         herman: {
           sass: {
-            jsonfile: `${__dirname}/no/such/file.json`,
+            jsonFile: `${__dirname}/no/such/file.json`,
           },
         },
       };
@@ -370,10 +370,10 @@ describe('font annotation', () => {
         .then(() => {
           const errMsg =
             'ENOENT: no such file or directory, open ' +
-            `'${env.herman.sass.jsonfile}'`;
+            `'${env.herman.sass.jsonFile}'`;
           assert(
             env.logger.warn.calledWith(
-              `Error reading file: ${env.herman.sass.jsonfile}\n${errMsg}`,
+              `Error reading file: ${env.herman.sass.jsonFile}\n${errMsg}`,
             ),
           );
           done();
@@ -381,7 +381,7 @@ describe('font annotation', () => {
         .catch(done);
     });
 
-    it('warns and exits if no fontpath', function (done) {
+    it('warns and exits if no fontPath', function (done) {
       const env = {
         logger: { warn: sinon.fake() },
         herman: {},
@@ -406,7 +406,7 @@ describe('font annotation', () => {
           assert.deepEqual(this.data, this.origData);
           sinon.assert.calledWith(
             env.logger.warn,
-            'Must pass in a `fontpath` if using @font annotation with local ' +
+            'Must pass in a `fontPath` if using @font annotation with local ' +
               'fonts.',
           );
           done();
@@ -418,9 +418,9 @@ describe('font annotation', () => {
         dir: __dirname,
         logger: { warn: sinon.fake() },
         herman: {
-          fontpath: path.normalize('/path'),
+          fontPath: path.normalize('/path'),
           sass: {
-            jsonfile: '/json',
+            jsonFile: '/json',
           },
         },
         sassjson: {
@@ -504,7 +504,7 @@ describe('font annotation', () => {
       const env = {
         dir: __dirname,
         herman: {
-          fontpath: path.normalize('/path'),
+          fontPath: path.normalize('/path'),
         },
         sassjson: {
           fonts: {
@@ -547,7 +547,7 @@ describe('font annotation', () => {
       const env = {
         dir: __dirname,
         herman: {
-          fontpath: path.normalize('/path'),
+          fontPath: path.normalize('/path'),
         },
         sassjson: {
           fonts: {
@@ -583,7 +583,7 @@ describe('font annotation', () => {
       const env = {
         dir: __dirname,
         herman: {
-          fontpath: path.normalize('/path'),
+          fontPath: path.normalize('/path'),
         },
         sassjson: {
           fonts: {
@@ -629,7 +629,7 @@ describe('font annotation', () => {
     it('adds separate `@font-face` for `eot` and `data:`', function (done) {
       const env = {
         herman: {
-          fontpath: '/path',
+          fontPath: '/path',
         },
         sassjson: {
           fonts: {
@@ -667,7 +667,7 @@ describe('font annotation', () => {
     it('adds `@font-face` for embedded eot', function (done) {
       const env = {
         herman: {
-          fontpath: '/path',
+          fontPath: '/path',
         },
         sassjson: {
           fonts: {
@@ -704,7 +704,7 @@ describe('font annotation', () => {
       const env = {
         dir: __dirname,
         herman: {
-          fontpath: path.normalize('/path'),
+          fontPath: path.normalize('/path'),
         },
         sassjson: {
           fonts: {
@@ -824,7 +824,7 @@ describe('font annotation', () => {
     it('skips localFont processing if formats is empty', (done) => {
       const env = {
         herman: {
-          fontpath: '/path',
+          fontPath: '/path',
         },
         sassjson: {
           fonts: {
@@ -858,9 +858,9 @@ describe('font annotation', () => {
       const env = {
         herman: {
           sass: {
-            jsonfile: `${__dirname}/fixtures/css/json.css`,
+            jsonFile: `${__dirname}/fixtures/css/json.css`,
           },
-          fontpath: '/path',
+          fontPath: '/path',
         },
         logger: {
           warn: sinon.fake(),
@@ -892,7 +892,7 @@ describe('font annotation', () => {
     it('skips localFonts processing if not a valid format', (done) => {
       const env = {
         herman: {
-          fontpath: '/path',
+          fontPath: '/path',
         },
         sassjson: {
           fonts: {
@@ -929,7 +929,7 @@ describe('example annotation', () => {
     this.env = {
       herman: {
         nunjucks: {
-          templatepath: path.resolve(__dirname, 'fixtures', 'templates'),
+          templatePath: path.resolve(__dirname, 'fixtures', 'templates'),
         },
       },
       logger: { warn: sinon.fake() },
@@ -938,7 +938,7 @@ describe('example annotation', () => {
   });
 
   describe('resolve', () => {
-    it('warns and exits if no templatepath and njk @example used', () => {
+    it('warns and exits if no templatePath and njk @example used', () => {
       const env = { logger: { warn: sinon.fake() }, herman: {} };
       const example = annotations.example(env);
       const data = [{ example: [{ type: 'njk' }] }];
@@ -948,7 +948,7 @@ describe('example annotation', () => {
       assert.deepEqual(data, [{ example: [{ type: 'njk' }] }]);
       assert(
         env.logger.warn.calledWith(
-          'Must pass in a nunjucks.templatepath if using Nunjucks @example.',
+          'Must pass in a nunjucks.templatePath if using Nunjucks @example.',
         ),
       );
     });
@@ -1019,10 +1019,7 @@ describe('example annotation', () => {
       this.example
         .resolve(data)
         .then(() => {
-          assert.equal(
-            data[0].example[0].rendered,
-            `${data[0].example[0].code}\n`,
-          );
+          assert.equal(data[0].example[0].rendered, data[0].example[0].code);
           done();
         })
         .catch(done);
@@ -1048,14 +1045,11 @@ describe('example annotation', () => {
       example
         .resolve(data)
         .then(() => {
-          const errMsg =
-            'Invalid CSS after "...t some bad sass": expected "{", was ""';
           const sassData = data[0].example[0].code;
           sinon.assert.calledOnce(this.env.logger.warn);
-          sinon.assert.calledWith(
-            this.env.logger.warn,
-            `Error compiling @example scss: \n${errMsg}\n${sassData}`,
-          );
+          const warning = this.env.logger.warn.args[0][0];
+          assert.ok(warning.includes('Error compiling @example scss'));
+          assert.ok(warning.includes(sassData));
           done();
         })
         .catch(done);
@@ -1076,41 +1070,7 @@ describe('example annotation', () => {
         herman: {
           sass: {
             includes: ['~accoutrement/sass/core/parser', 'import'],
-            includepaths: [path.join(__dirname, 'fixtures', 'scss')],
-          },
-        },
-      });
-      const example = annotations.example(env);
-      example
-        .resolve(data)
-        .then(() => {
-          assert.equal(
-            data[0].example[0].rendered,
-            `body {\n  border: 1px;\n}\n\n${data[0].example[0].code}\n`,
-          );
-          done();
-        })
-        .catch(done);
-    });
-
-    it('injects global imports for scss items [dart-sass]', function (done) {
-      const data = [
-        {
-          example: [
-            {
-              type: 'scss',
-              code: '/* just a placeholder */',
-            },
-          ],
-        },
-      ];
-      const env = extend(true, {}, this.env, {
-        herman: {
-          sass: {
-            use: ['~accoutrement/sass/core/parser', 'import'],
-            includepaths: [path.join(__dirname, 'fixtures', 'scss')],
-            // eslint-disable-next-line global-require
-            implementation: require('sass'),
+            includePaths: [path.join(__dirname, 'fixtures', 'scss')],
           },
         },
       });
@@ -1127,7 +1087,44 @@ describe('example annotation', () => {
         .catch(done);
     });
 
-    it('uses custom `outputstyle` setting', function (done) {
+    it('injects global imports for scss items', function (done) {
+      const data = [
+        {
+          example: [
+            {
+              type: 'scss',
+              code: 'body { @include my-tools.color; }',
+            },
+          ],
+        },
+      ];
+      const env = extend(true, {}, this.env, {
+        herman: {
+          sass: {
+            use: [
+              '~accoutrement/sass/core/parser',
+              'import',
+              { file: 'tools', namespace: 'my-tools' },
+              {},
+            ],
+            includePaths: [path.join(__dirname, 'fixtures', 'scss')],
+          },
+        },
+      });
+      const example = annotations.example(env);
+      example
+        .resolve(data)
+        .then(() => {
+          assert.equal(
+            data[0].example[0].rendered,
+            `body {\n  border: 1px;\n}\n\nbody {\n  color: red;\n}`,
+          );
+          done();
+        })
+        .catch(done);
+    });
+
+    it('uses custom `outputStyle` setting', function (done) {
       const data = [
         {
           example: [
@@ -1141,7 +1138,7 @@ describe('example annotation', () => {
       const env = extend(true, {}, this.env, {
         herman: {
           sass: {
-            outputstyle: 'compressed',
+            outputStyle: 'compressed',
           },
         },
       });
@@ -1155,7 +1152,7 @@ describe('example annotation', () => {
         .catch(done);
     });
 
-    it('warns, exits if no node-sass and scss @example used', function (done) {
+    it('warns, exits if no sass and scss @example used', function (done) {
       const data = [{ example: [{ type: 'scss' }] }];
       sinon.stub(Promise, 'promisify').throws();
 
@@ -1173,7 +1170,7 @@ describe('example annotation', () => {
         });
     });
 
-    it('only requires node-sass once', function (done) {
+    it('only requires sass once', function (done) {
       const data = [{ example: [{ type: 'scss', code: '' }] }];
       const data2 = [{ example: [{ type: 'scss', code: '' }] }];
       sinon.spy(Promise, 'promisify');
@@ -1186,63 +1183,6 @@ describe('example annotation', () => {
           Promise.promisify.restore();
           done();
         });
-    });
-
-    it('uses custom `sass.implementation` string [dart-sass]', function (done) {
-      const data = [
-        {
-          example: [
-            {
-              type: 'scss',
-              code: '/* just a placeholder */',
-            },
-          ],
-        },
-      ];
-      const env = extend(true, {}, this.env, {
-        herman: {
-          sass: {
-            implementation: 'sass',
-          },
-        },
-      });
-      const example = annotations.example(env);
-      example
-        .resolve(data)
-        .then(() => {
-          assert.equal(data[0].example[0].rendered, data[0].example[0].code);
-          done();
-        })
-        .catch(done);
-    });
-
-    it('custom `sass.implementation` instance [dart-sass]', function (done) {
-      const data = [
-        {
-          example: [
-            {
-              type: 'scss',
-              code: '/* just a placeholder */',
-            },
-          ],
-        },
-      ];
-      const env = extend(true, {}, this.env, {
-        herman: {
-          sass: {
-            // eslint-disable-next-line global-require
-            implementation: require('sass'),
-          },
-        },
-      });
-      const example = annotations.example(env);
-      example
-        .resolve(data)
-        .then(() => {
-          assert.equal(data[0].example[0].rendered, data[0].example[0].code);
-          done();
-        })
-        .catch(done);
     });
 
     it('skips non-html, non-njk, non-scss items', function (done) {
@@ -1264,7 +1204,7 @@ describe('example annotation', () => {
         .catch(done);
     });
 
-    it('warns only once about missing templatepath', () => {
+    it('warns only once about missing templatePath', () => {
       const env = { logger: { warn: sinon.fake() }, herman: {} };
       const example = annotations.example(env);
       const data = [

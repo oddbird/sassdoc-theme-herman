@@ -41,14 +41,14 @@ and more.
 npm install sassdoc sassdoc-theme-herman
 ```
 
-Note: A Sass implementation (`node-sass` or `sass`)
+Note: Dart Sass (`sass`)
 is required to use Herman
 to display samples of Sass/Scss code.
 If it's not already installed in your project,
 install it along with Herman:
 
 ```bash
-npm install node-sass
+npm install sass
 ```
 
 See the [SassDoc documentation](http://sassdoc.com/getting-started/)

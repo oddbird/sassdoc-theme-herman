@@ -3,6 +3,17 @@
 ## UNRELEASED
 
 - 💥 BREAKING: Drop support for Node < 10
+- 💥 BREAKING: Switch to Dart Sass throughout and remove `sass.implementation`
+  option
+- 💥 BREAKING: Convert Herman-specific options to camelCase (`fontPath`,
+  `nunjucks.templatePath`, `sass.jsonFile`, `sass.includePaths`,
+  `sass.outputStyle`)
+- 🚀 NEW: Add support for using [namespaced Sass
+  modules](https://sass-lang.com/documentation/at-rules/use#choosing-a-namespace)
+  in `@example scss` annotations with
+  [`sass.use`](https://www.oddbird.net/herman/docs/configuration#sass-use)
+  option
+- 🏠 INTERNAL: Upgrade dependencies
 
 ## UNRELEASED
 
@@ -132,15 +143,15 @@ _No changes from `v1.0.0-rc.8`. Changes since `v0.5.5`:_
 - Remove `@macro` annotation (replaced by `@example njk`) --
   [#182](https://github.com/oddbird/sassdoc-theme-herman/issues/182)
 - `@icons` annotation now only requires path to a folder of SVG icons: relative
-  to the project directory, no longer relative to the `templatepath` option --
+  to the project directory, no longer relative to the `templatePath` option --
   [#47](https://github.com/oddbird/sassdoc-theme-herman/issues/47)
 - Herman-specific options are now nested under top-level `herman` object in
   SassDoc configuration
 - Remove `minifiedIcons` option (replaced with new `customHTML` option)
 - Remove `customHead` option (replaced by multiline `@font` annotation)
 - Sass-specific options are now nested under `herman.sass` object
-- Remove top-level `templatepath` and `nunjucksEnv` options -- now nested
-  under new `nunjucks` options object: `nunjucks.templatepath` and
+- Remove top-level `templatePath` and `nunjucksEnv` options -- now nested
+  under new `nunjucks` options object: `nunjucks.templatePath` and
   `nunjucks.environment`
 - `customCSS` is only included in rendered `@example` annotation iframes
 - Group navigation is now ordered according to config `groups` order --
@@ -297,8 +308,8 @@ _No changes from `v1.0.0-rc.8`. Changes since `v0.5.5`:_
   [#47](https://github.com/oddbird/sassdoc-theme-herman/issues/47)
 - BREAKING: Replace `minifiedIcons` option with `customHTML` option
   (only included in rendered `@example` annotations).
-- BREAKING: Nest `templatepath` and `nunjucksEnv` options under new `nunjucks`
-  options object: `nunjucks.templatepath` and `nunjucks.environment`.
+- BREAKING: Nest `templatePath` and `nunjucksEnv` options under new `nunjucks`
+  options object: `nunjucks.templatePath` and `nunjucks.environment`.
 - NEW: Add attribution/link to Herman/OddBird in nav footer --
   [#154](https://github.com/oddbird/sassdoc-theme-herman/issues/154)
 - CHANGE: Use Herman logo for favicon. --
@@ -384,7 +395,7 @@ _No changes from `v1.0.0-rc.8`. Changes since `v0.5.5`:_
 - BUGFIX: Added styles for blockquotes.
 - BREAKING: `minifiedIcons` option and the first argument to the `@icons`
   annotation are both paths relative to the project directory, no longer
-  relative to the `templatepath` option.
+  relative to the `templatePath` option.
 
 ## 1.0.0-alpha.6: 2017-06-14
 

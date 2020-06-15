@@ -154,7 +154,7 @@ describe('renderHerman', () => {
   it('resolves local fonts', function (done) {
     prepareContext({
       herman: {
-        fontpath: 'fixtures/fonts',
+        fontPath: 'fixtures/fonts',
       },
       data: [],
       localFonts: [`${__dirname}/fixtures/fonts/sample.ttf`],

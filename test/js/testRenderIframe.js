@@ -119,7 +119,7 @@ describe('renderIframe', () => {
       this.env = {
         herman: {
           sass: {
-            jsonfile: path.resolve(__dirname, 'fixtures', 'css', 'json.css'),
+            jsonFile: path.resolve(__dirname, 'fixtures', 'css', 'json.css'),
           },
         },
         logger: {
@@ -146,7 +146,7 @@ describe('renderIframe', () => {
 
     it('logs the error on a bad sassjson', function (done) {
       const env = extend({}, this.env);
-      env.herman.sass.jsonfile = 'foo.bar';
+      env.herman.sass.jsonFile = 'foo.bar';
       const item = {
         font: {
           key: true,

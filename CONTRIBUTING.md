@@ -42,7 +42,7 @@ run `yarn build`.
 
 You can start up a local development server with `yarn serve`.
 
-Access the running server at `http://localhost:3000`.
+Access the running server at `http://localhost:8080`.
 
 ## Code of Conduct
 
