@@ -1,12 +1,12 @@
 environment:
   matrix:
-    - nodejs_version: "6"
-    - nodejs_version: "LTS"
-    - nodejs_version: "Current"
+    - nodejs_version: '6'
+    - nodejs_version: 'LTS'
+    - nodejs_version: 'Current'
 
 install:
   - ps: Install-Product node $env:nodejs_version
-  - appveyor-retry yarn
+  - appveyor-retry yarn install --frozen-lockfile
 
 test_script:
   - SET PATH=.\node_modules\.bin;%PATH%

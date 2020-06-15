@@ -33,7 +33,7 @@ jobs:
             - herman-node6-{{ checksum "yarn.lock" }}
       - run:
           name: Install Dependencies
-          command: yarn install --frozen-lockfile --ignore-engines
+          command: yarn install --frozen-lockfile
       - save_cache:
           key: herman-node6-modules-{{ checksum "yarn.lock" }}
           paths:
