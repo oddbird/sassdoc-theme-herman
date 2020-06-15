@@ -7,7 +7,7 @@ const fs = require('fs');
 const path = require('path');
 const chalk = require('chalk');
 
-const generateSprites = require('../lib/utils/icons');
+const generateSprites = require('../lib/utils/sprites');
 
 const output = path.join(__dirname, '../templates/_icons.svg');
 

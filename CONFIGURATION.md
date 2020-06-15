@@ -228,7 +228,7 @@ See [Exporting Styles to JSON][export].
 - Type: `Array`
 - Default: `[]`
 
-Array of load paths used to resolve `@use` declarations.
+Array of load paths used to resolve `@use` and `@import` declarations.
 Passed through to Sass [includePaths] when
 compiling `@example sass/scss` annotations.
 See our [`@example` documentation][example-docs-scss].

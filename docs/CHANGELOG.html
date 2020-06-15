@@ -420,15 +420,15 @@ and <code>@ratios</code> annotations) –
 <li>Remove <code>@macro</code> annotation (replaced by <code>@example njk</code>) –
 <a href="https://github.com/oddbird/sassdoc-theme-herman/issues/182">#182</a></li>
 <li><code>@icons</code> annotation now only requires path to a folder of SVG icons: relative
-to the project directory, no longer relative to the <code>templatePath</code> option –
+to the project directory, no longer relative to the <code>templatepath</code> option –
 <a href="https://github.com/oddbird/sassdoc-theme-herman/issues/47">#47</a></li>
 <li>Herman-specific options are now nested under top-level <code>herman</code> object in
 SassDoc<span class="widont">&nbsp;</span>configuration</li>
 <li>Remove <code>minifiedIcons</code> option (replaced with new <code>customHTML</code> option)</li>
 <li>Remove <code>customHead</code> option (replaced by multiline <code>@font</code> annotation)</li>
 <li>Sass-specific options are now nested under <code>herman.sass</code> object</li>
-<li>Remove top-level <code>templatePath</code> and <code>nunjucksEnv</code> options – now nested
-under new <code>nunjucks</code> options object: <code>nunjucks.templatePath</code> and
+<li>Remove top-level <code>templatepath</code> and <code>nunjucksEnv</code> options – now nested
+under new <code>nunjucks</code> options object: <code>nunjucks.templatepath</code> and
 <code>nunjucks.environment</code></li>
 <li><code>customCSS</code> is only included in rendered <code>@example</code> annotation iframes</li>
 <li>Group navigation is now ordered according to config <code>groups</code> order –
@@ -581,8 +581,8 @@ parsing with quote beautification –
 <a href="https://github.com/oddbird/sassdoc-theme-herman/issues/47">#47</a></li>
 <li>BREAKING: Replace <code>minifiedIcons</code> option with <code>customHTML</code> option
 (only included in rendered <code>@example</code> annotations).</li>
-<li>BREAKING: Nest <code>templatePath</code> and <code>nunjucksEnv</code> options under new <code>nunjucks</code>
-options object: <code>nunjucks.templatePath</code> and <code>nunjucks.environment</code>.</li>
+<li>BREAKING: Nest <code>templatepath</code> and <code>nunjucksEnv</code> options under new <code>nunjucks</code>
+options object: <code>nunjucks.templatepath</code> and <code>nunjucks.environment</code>.</li>
 <li>NEW: Add attribution/link to Herman/OddBird in nav footer –
 <a href="https://github.com/oddbird/sassdoc-theme-herman/issues/154">#154</a></li>
 <li>CHANGE: Use Herman logo for favicon. –
@@ -667,7 +667,7 @@ while adding to both <code>$herman</code> and the appropriate accoutrement globa
 <li>BUGFIX: Added styles for<span class="widont">&nbsp;</span>blockquotes.</li>
 <li>BREAKING: <code>minifiedIcons</code> option and the first argument to the <code>@icons</code>
 annotation are both paths relative to the project directory, no longer
-relative to the <code>templatePath</code> option.</li>
+relative to the <code>templatepath</code> option.</li>
 </ul>
 <h2 id="1-0-0-alpha-6-2017-06-14">1.0.0-alpha.6: 2017-06-14</h2>
 <ul>
