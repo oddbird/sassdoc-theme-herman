@@ -206,7 +206,7 @@ gulp.task('jstest-nofail', cb => {
   spawnTask('./node_modules/.bin/nyc', getJsTestArgs(), cb, false);
 });
 
-gulp.task('jstest-node6', () =>
+gulp.task('jstest-node8', () =>
   gulp
     .src(`${paths.JS_TESTS_DIR}*.js`, { read: false })
     .pipe(mocha({ fgrep: '[dart-sass]', invert: true }))
