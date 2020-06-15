@@ -81,14 +81,6 @@ jobs:
           name: Run Client JS Tests
           command: yarn gulp clienttest
       - run:
-          name: Report Test Coverage
-          command: |
-            yarn nyc report --reporter=text-lcov | yarn coveralls
-            yarn nyc report --reporter=text-lcov --temp-directory ./jscov/client/ | yarn coveralls
-            curl -k "https://coveralls.io/webhook?repo_token=${COVERALLS_REPO_TOKEN}" -d "payload[build_num]=${CIRCLE_BUILD_NUM}&payload[status]=done"
-          environment:
-            COVERALLS_PARALLEL: 'true'
-      - run:
           name: Check Test Coverage
           command: |
             yarn nyc check-coverage
