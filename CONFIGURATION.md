@@ -107,6 +107,10 @@ Relative path to a custom CSS file,
 which will be included in the `<head>` of rendered
 [`@font`][font-docs], [`@ratios`][ratio-preview],
 [`@sizes`][size-preview], or [`@example`][example-docs] annotations.
+The Herman font, size, and ratio previews
+are built on semantic HTML (tables & paragraphs),
+so it's possible for project CSS
+to impact the design of those previews.
 
 **Notes:**
 
