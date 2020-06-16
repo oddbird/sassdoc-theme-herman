@@ -1,9 +1,7 @@
 # Herman Changelog
 
-## UNRELEASED
+## 3.2.0: 2020-06-16
 
-- 💥/🏠 BREAKING/INTERNAL: Explicitly require Node >= 8 (Node v6 was technically
-  supported but already broken in practice)
 - 🐛 BUGFIX: Use iframes to properly render size-related previews (all `@font`,
   `@ratios`, and `@sizes` previews are now each rendered in an `<iframe>`,
   receiving user-supplied `customCSS` and a limited subset of Herman styles) --
