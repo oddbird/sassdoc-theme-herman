@@ -13,6 +13,7 @@
   in `@example scss` annotations with
   [`sass.use`](https://www.oddbird.net/herman/docs/configuration#sass-use)
   option
+- 📝 DOCS: Fix broken links in Changelog
 - 🏠 INTERNAL: Upgrade dependencies
 
 ## 3.2.0: 2020-06-16
@@ -497,8 +498,8 @@ _No changes from `v1.0.0-rc.8`. Changes since `v0.5.5`:_
 
 - Inject preview data directly into HTML,
   so that previews don't have to be styled locally
-- Add [Sass Utilities](sass-utilities.html) file,
-  for help with setting/exporting Sass data
+- Add [Sass Utilities](https://www.oddbird.net/herman/docs/api_json-export.html)
+  file, for help with setting/exporting Sass data
 - `herman-add-color` mixin now exports hex, rgba, and hsla colors.
 - Simplified font previews don't require size input
 - Color, font, ratio, and size previews accept `key` argument,
@@ -508,8 +509,8 @@ _No changes from `v1.0.0-rc.8`. Changes since `v0.5.5`:_
   determining how many instances of the ratio to display
   (default is `6`)
 - Size preview accepts `style` argument [`text` | `ruler` | `output-only`],
-  determining the type of preview to display
-  (default is `text`, see [scale](scale.html) for examples)
+  determining the type of preview to display (default is `text`, see
+  [scale](https://www.oddbird.net/herman/docs/demo_sizes.html) for examples)
 
 ## 0.3.2: 2016-09-29
 
