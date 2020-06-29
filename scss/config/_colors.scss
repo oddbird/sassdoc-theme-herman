@@ -6,14 +6,14 @@
 /// We use OddBird's [Accoutrement][ac] Color plugin
 /// to store and manage colors directly in Sass map objects.
 ///
-/// [ac]: http://oddbird.net/accoutrement/
+/// [ac]: https://www.oddbird.net/accoutrement/
 ///
 /// For help documenting your brand colors,
 /// see the "[Documenting Colors][colors]" page.
 ///
 /// [colors]: demo_colors.html
 /// @group config-colors
-/// @link http://oddbird.net/accoutrement/docs/
+/// @link https://www.oddbird.net/accoutrement/docs/
 ///   Accoutrement
 
 // Brand Colors
@@ -35,7 +35,7 @@
 ///   or previously-defined key,
 ///   followed by an optional map of adjustments
 ///   (as defined in
-///   [Accoutrement](http://oddbird.net/accoutrement/docs/)).
+///   [Accoutrement](https://www.oddbird.net/accoutrement/docs/)).
 $brand-colors: (
   'brand-orange': hsl(24, 100%, 39%),
   'brand-blue': hsl(195, 85%, 35%),

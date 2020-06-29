@@ -57,6 +57,6 @@ a welcoming, challenging, fun, and fair place to contribute.
 See our [Code of Conduct][coc] for details.
 We also recommend following the [Sass community guidelines][sass].
 
-[oddbird]: http://oddbird.net/
-[coc]: http://oddbird.net/conduct/
+[oddbird]: https://www.oddbird.net/
+[coc]: https://www.oddbird.net/conduct/
 [sass]: http://sass-lang.com/community-guidelines

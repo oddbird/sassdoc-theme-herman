@@ -26,7 +26,7 @@ $basic-value: if(not 'social', $private, 'hello world');
 /// @requires $basic-value -
 ///   We can require other variables, and explain why
 /// @requires $private -
-///   We can also override the link <http://oddbird.net>
+///   We can also override the link <https://www.oddbird.net>
 /// @property {string} 'morning' [$basic-value] -
 ///   What to say in the morning when you get up
 /// @property {string} 'evening' [$private] -

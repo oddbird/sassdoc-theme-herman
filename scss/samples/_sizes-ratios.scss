@@ -45,7 +45,7 @@ $xlarge: 3rem;
 /// to store and access ratios
 /// directly in a Herman-friendly map.
 ///
-/// [ac]: http://oddbird.net/accoutrement/
+/// [ac]: https://www.oddbird.net/accoutrement/
 ///
 /// ```scss
 /// $demo-ratios: (
@@ -86,7 +86,7 @@ $demo-ratios: (
 /// to store and access sizes
 /// directly in a Herman-friendly map.
 ///
-/// [ac]: http://oddbird.net/accoutrement/
+/// [ac]: https://www.oddbird.net/accoutrement/
 ///
 /// ```scss
 /// $demo-sizes: (
@@ -187,7 +187,7 @@ $demo-sizes-large: (
 /// @see herman-add
 /// @see herman-export
 /// @group demo_sizes
-/// @link http://oddbird.net/accoutrement Accoutrement
+/// @link https://www.oddbird.net/accoutrement Accoutrement
 @include herman-add('ratios', 'demo-ratios', $demo-ratios);
 @include herman-add('sizes', 'demo-sizes', $demo-sizes);
 @include herman-add('sizes', 'demo-sizes-large', $demo-sizes-large);

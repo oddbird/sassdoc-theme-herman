@@ -27,7 +27,7 @@ const sassDocOpts = {
     extraLinks: [
       {
         name: 'Accoutrement',
-        url: 'http://oddbird.net/accoutrement/',
+        url: 'https://www.oddbird.net/accoutrement/',
       },
     ],
     displayColors: ['hex', 'hsl'],

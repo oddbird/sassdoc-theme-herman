@@ -43,7 +43,7 @@ $brand-pink: hsl(330, 85%, 48%);
 /// to store and access colors
 /// directly in a Herman-friendly map.
 ///
-/// [ac]: http://oddbird.net/accoutrement/
+/// [ac]: https://www.oddbird.net/accoutrement/
 ///
 /// Create as many maps as you like
 /// to organize different palettes --
@@ -165,7 +165,7 @@ $demo-noncolors: (
 /// before they can be exported to Herman.
 /// Using [accoutrement][ac], our maps look like this:
 ///
-/// [ac]: http://oddbird.net/accoutrement
+/// [ac]: https://www.oddbird.net/accoutrement
 ///
 /// ```scss
 /// $demo-noncolors: (
@@ -204,7 +204,7 @@ $demo-noncolors: (
 ///   /* #{$key}: #{inspect($value)} */
 ///   }
 /// @group demo_colors
-/// @link http://oddbird.net/accoutrement Accoutrement
+/// @link https://www.oddbird.net/accoutrement Accoutrement
 @include herman-add(
   'colors',
   'demo-noncolors',

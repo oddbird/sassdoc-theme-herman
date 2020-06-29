@@ -8,7 +8,7 @@
 > Documentation should become the default --
 > an integrated part of the development process.
 >
-> <cite>---<a href="http://oddbird.net/authors/miriam/">Miriam Suzanne</a></cite>
+> <cite>---<a href="https://www.oddbird.net/authors/miriam/">Miriam Suzanne</a></cite>
 
 At [OddBird][oddbird],
 we wanted better tools for documenting
@@ -29,11 +29,11 @@ with additional support for
 [compiled languages][example-docs], Nunjucks/Jinja macros, HTML previews,
 and more.
 
-[font-docs]: http://oddbird.net/herman/docs/demo_fonts.html
-[color-preview]: http://oddbird.net/herman/docs/demo_colors.html
-[size-preview]: http://oddbird.net/herman/docs/demo_sizes.html
-[icon-docs]: http://oddbird.net/herman/docs/demo_icons.html
-[example-docs]: http://oddbird.net/herman/docs/demo_examples.html
+[font-docs]: https://www.oddbird.net/herman/docs/demo_fonts.html
+[color-preview]: https://www.oddbird.net/herman/docs/demo_colors.html
+[size-preview]: https://www.oddbird.net/herman/docs/demo_sizes.html
+[icon-docs]: https://www.oddbird.net/herman/docs/demo_icons.html
+[example-docs]: https://www.oddbird.net/herman/docs/demo_examples.html
 
 ## Getting Started
 
@@ -101,13 +101,13 @@ and `@colors`, `@sizes`, and `@ratios` annotations
 for displaying [color-palettes][color-preview],
 [text and spacing sizes, and modular ratios][size-preview].
 
-[herman]: http://oddbird.net/herman/
-[oddbird]: http://oddbird.net/
+[herman]: https://www.oddbird.net/herman/
+[oddbird]: https://www.oddbird.net/
 [sassdoc]: http://sassdoc.com/
 
 [See the full documentation for details »][docs]
 
-[docs]: http://oddbird.net/herman/docs/CONFIGURATION.html
+[docs]: https://www.oddbird.net/herman/docs/CONFIGURATION.html
 
 ## SassDoc Extras
 

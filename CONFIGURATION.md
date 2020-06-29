@@ -96,7 +96,7 @@ Configures which color value formats are shown
 when using the [`@colors` annotation][color-preview].
 Valid options: `hex`, `rgb/rgba`, `hsl/hsla`
 
-[color-preview]: http://oddbird.net/herman/docs/demo_colors.html
+[color-preview]: https://www.oddbird.net/herman/docs/demo_colors.html
 
 ## customCSS
 
@@ -135,7 +135,7 @@ to impact the design of those previews.
   for this CSS file (e.g. `publicPath: ''`),
   or [disabling Webpack's `url()` pre-processing][css-loader] entirely.
 
-[font-docs-webfonts]: http://oddbird.net/herman/docs/demo_fonts.html#displaying-webfonts
+[font-docs-webfonts]: https://www.oddbird.net/herman/docs/demo_fonts.html#displaying-cdn-hosted-webfonts
 [public-path]: https://github.com/webpack-contrib/mini-css-extract-plugin#publicpath
 [css-loader]: https://github.com/webpack-contrib/css-loader#url
 
@@ -151,7 +151,7 @@ See our [`@example` documentation][example-docs].
 This is particularly useful for including svg sprite sheets
 in example output.
 
-[example-docs]: http://oddbird.net/herman/docs/demo_examples.html
+[example-docs]: https://www.oddbird.net/herman/docs/demo_examples.html
 
 ## fontPath
 
@@ -164,7 +164,7 @@ files._
 Relative path to a directory containing local font files.
 See our [`@font` documentation][font-docs-local].
 
-[font-docs-local]: http://oddbird.net/herman/docs/demo_fonts.html#displaying-local-fonts
+[font-docs-local]: https://www.oddbird.net/herman/docs/demo_fonts.html#displaying-local-fonts
 
 ## nunjucks
 
@@ -197,7 +197,7 @@ _Either [`nunjucks.templatePath`](#nunjucks-templatePath) or
 `nunjucks.environment` is required if using
 [`@example njk` annotation][example-njk]._
 
-[example-njk]: http://oddbird.net/herman/docs/demo_examples.html#compiling-nunjucks
+[example-njk]: https://www.oddbird.net/herman/docs/demo_examples.html#compiling-nunjucks
 
 ## sass
 
@@ -221,11 +221,11 @@ The JSON contents will be added under the
 and used to display colors, fonts, ratios, and sizes.
 See [Exporting Styles to JSON][export].
 
-[font-docs]: http://oddbird.net/herman/docs/demo_fonts.html
-[ratio-preview]: http://oddbird.net/herman/docs/demo_sizes.html#preview-ratios
-[size-preview]: http://oddbird.net/herman/docs/demo_sizes.html#preview-sizes
-[export]: http://oddbird.net/herman/docs/api_json-export.html
-[export-mixin]: http://oddbird.net/herman/docs/api_json-export.html#mixin--herman-export
+[font-docs]: https://www.oddbird.net/herman/docs/demo_fonts.html
+[ratio-preview]: https://www.oddbird.net/herman/docs/demo_sizes.html#preview-ratios
+[size-preview]: https://www.oddbird.net/herman/docs/demo_sizes.html#preview-sizes
+[export]: https://www.oddbird.net/herman/docs/api_json-export.html
+[export-mixin]: https://www.oddbird.net/herman/docs/api_json-export.html#mixin--herman-export
 
 ### sass.includePaths
 
@@ -254,7 +254,7 @@ that may be used by any example.
 It's best to avoid files with output CSS,
 as that output will be displayed in every single Sass example.
 
-[example-docs-scss]: http://oddbird.net/herman/docs/demo_examples.html#compiling-sass-scss
+[example-docs-scss]: https://www.oddbird.net/herman/docs/demo_examples.html#compiling-sass-scss
 
 ### sass.use
 
@@ -288,7 +288,7 @@ using the [Dart Sass module system][dart-sass-modules].
 It's best to avoid files with output CSS,
 as that output will be displayed in every single Sass example.
 
-[example-docs-scss]: http://oddbird.net/herman/docs/demo_examples.html#compiling-sass-scss
+[example-docs-scss]: https://www.oddbird.net/herman/docs/demo_examples.html#compiling-sass-scss
 [dart-sass-modules]: https://sass-lang.com/blog/the-module-system-is-launched
 
 ### sass.outputStyle

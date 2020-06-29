@@ -70,7 +70,7 @@
 ///
 /// [examples]: demo_examples.html
 ///
-/// [ac]: http://oddbird.net/accoutrement/
+/// [ac]: https://www.oddbird.net/accoutrement/
 ///
 /// @example scss
 ///   // @font demo-cdn (normal, bold, bold italic)
@@ -162,6 +162,6 @@ $demo-local: (
 /// @see herman-add
 /// @see herman-export
 /// @group demo_fonts
-/// @link http://oddbird.net/accoutrement Accoutrement
+/// @link https://www.oddbird.net/accoutrement Accoutrement
 @include herman-add('font', 'demo-cdn', $demo-cdn);
 @include herman-add('font', 'demo-local', $demo-local);

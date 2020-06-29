@@ -88,11 +88,11 @@ describe('prepareContext', () => {
     prepareContext({
       data: [],
       herman: {
-        extraLinks: ['http://oddbird.net'],
+        extraLinks: ['https://www.oddbird.net'],
       },
     })
       .then((ctx) => {
-        assert.deepEqual(ctx.extraLinks, ['http://oddbird.net']);
+        assert.deepEqual(ctx.extraLinks, ['https://www.oddbird.net']);
         done();
       })
       .catch(done);
