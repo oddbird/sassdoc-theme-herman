@@ -59,4 +59,4 @@ We also recommend following the [Sass community guidelines][sass].
 
 [oddbird]: https://www.oddbird.net/
 [coc]: https://www.oddbird.net/conduct/
-[sass]: http://sass-lang.com/community-guidelines
+[sass]: https://sass-lang.com/community-guidelines
