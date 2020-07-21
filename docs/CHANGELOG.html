@@ -21,10 +21,10 @@
 <body data-herman="body">
   <svg xmlns="http://www.w3.org/2000/svg" hidden>
   <symbol id="icon-logo" viewBox="0 0 16 16">
-    <path d="M.2 8L0 7.8v-.2C.8 6.9 1.9 5.9 2.7 5l.4.3c-.5.8-1.1 1.6-1.8 2.3 1 1.2 1 1.3 1.7 2.4l-.4.3c-.4-.4-.5-.6-1-1C1 8.6 1.1 8.7.2 8zM13 10c.6-1.1.7-1.1 1.7-2.4-.6-.6-1.3-1.5-1.7-2.3l.3-.3c.8.8 1.8 1.8 2.7 2.6v.2l-.8.7c-.3.3-1.2 1.1-1.8 1.7L13 10z"/><path d="M2.6 13.1H3c.9 0 1.1-.2 1.1-1.4V4.2c0-1.1-.2-1.4-1.1-1.4h-.4v-.6h4.5v.7h-.3c-.9 0-1.1.2-1.1 1.4v3.2h4.6V4.2c0-1.1-.2-1.4-1.1-1.4h-.3v-.6h4.5v.7H13c-.9 0-1.1.2-1.1 1.4v7.5c0 1.1.2 1.4 1.1 1.4h.4v.7H8.9v-.7h.3c.9 0 1.1-.2 1.1-1.4V8.2H5.7v3.5c0 1.1.2 1.4 1.1 1.4h.3v.7H2.6v-.7z"/>
+     <path d="M.2 8L0 7.8v-.2C.8 6.9 1.9 5.9 2.7 5l.4.3c-.5.8-1.1 1.6-1.8 2.3 1 1.2 1 1.3 1.7 2.4l-.4.3c-.4-.4-.5-.6-1-1C1 8.6 1.1 8.7.2 8zM13 10c.6-1.1.7-1.1 1.7-2.4-.6-.6-1.3-1.5-1.7-2.3l.3-.3c.8.8 1.8 1.8 2.7 2.6v.2l-.8.7c-.3.3-1.2 1.1-1.8 1.7L13 10z"/> <path d="M2.6 13.1H3c.9 0 1.1-.2 1.1-1.4V4.2c0-1.1-.2-1.4-1.1-1.4h-.4v-.6h4.5v.7h-.3c-.9 0-1.1.2-1.1 1.4v3.2h4.6V4.2c0-1.1-.2-1.4-1.1-1.4h-.3v-.6h4.5v.7H13c-.9 0-1.1.2-1.1 1.4v7.5c0 1.1.2 1.4 1.1 1.4h.4v.7H8.9v-.7h.3c.9 0 1.1-.2 1.1-1.4V8.2H5.7v3.5c0 1.1.2 1.4 1.1 1.4h.3v.7H2.6v-.7z"/> 
   </symbol>
   <symbol id="icon-menu" viewBox="0 0 24 28">
-    <path d="M24 21v2c0 .547-.453 1-1 1H1c-.547 0-1-.453-1-1v-2c0-.547.453-1 1-1h22c.547 0 1 .453 1 1zm0-8v2c0 .547-.453 1-1 1H1c-.547 0-1-.453-1-1v-2c0-.547.453-1 1-1h22c.547 0 1 .453 1 1zm0-8v2c0 .547-.453 1-1 1H1c-.547 0-1-.453-1-1V5c0-.547.453-1 1-1h22c.547 0 1 .453 1 1z"/>
+     <path d="M24 21v2c0 0.547-0.453 1-1 1h-22c-0.547 0-1-0.453-1-1v-2c0-0.547 0.453-1 1-1h22c0.547 0 1 0.453 1 1zM24 13v2c0 0.547-0.453 1-1 1h-22c-0.547 0-1-0.453-1-1v-2c0-0.547 0.453-1 1-1h22c0.547 0 1 0.453 1 1zM24 5v2c0 0.547-0.453 1-1 1h-22c-0.547 0-1-0.453-1-1v-2c0-0.547 0.453-1 1-1h22c0.547 0 1 0.453 1 1z"/> 
   </symbol>
 </svg>
 
@@ -287,13 +287,20 @@ option</li>
 <li>💥 BREAKING: Convert Herman-specific options to camelCase (<code>fontPath</code>,
 <code>nunjucks.templatePath</code>, <code>sass.jsonFile</code>, <code>sass.includePaths</code>,
 <code>sass.outputStyle</code>)</li>
+<li>💥 BREAKING: Herman no longer automatically optimizes SVG icons using<span class="widont">&nbsp;</span>SVGO</li>
 <li>🚀 NEW: Add support for using <a href="https://sass-lang.com/documentation/at-rules/use#choosing-a-namespace">namespaced Sass
 modules</a>
 in <code>@example scss</code> annotations with
 <a href="https://www.oddbird.net/herman/docs/configuration#sass-use"><code>sass.use</code></a>
 option</li>
 <li>📝 DOCS: Fix broken links in<span class="widont">&nbsp;</span>Changelog</li>
-<li>🏠 INTERNAL: Upgrade<span class="widont">&nbsp;</span>dependencies</li>
+<li>🏠 INTERNAL: Upgrade dependencies:
+<ul>
+<li>Remove <code>gulp-imagemin</code> and <code>svgo</code> –
+<a href="https://github.com/oddbird/sassdoc-theme-herman/issues/343">343</a></li>
+<li>Replace <code>through2</code> with Node’s native <code>readable-stream</code></li>
+</ul>
+</li>
 </ul>
 <h2 id="3-2-0-2020-06-16">3.2.0: 2020-06-16</h2>
 <ul>

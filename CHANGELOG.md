@@ -8,13 +8,17 @@
 - 💥 BREAKING: Convert Herman-specific options to camelCase (`fontPath`,
   `nunjucks.templatePath`, `sass.jsonFile`, `sass.includePaths`,
   `sass.outputStyle`)
+- 💥 BREAKING: Herman no longer automatically optimizes SVG icons using SVGO
 - 🚀 NEW: Add support for using [namespaced Sass
   modules](https://sass-lang.com/documentation/at-rules/use#choosing-a-namespace)
   in `@example scss` annotations with
   [`sass.use`](https://www.oddbird.net/herman/docs/configuration#sass-use)
   option
 - 📝 DOCS: Fix broken links in Changelog
-- 🏠 INTERNAL: Upgrade dependencies
+- 🏠 INTERNAL: Upgrade dependencies:
+  - Remove `gulp-imagemin` and `svgo` --
+    [343](https://github.com/oddbird/sassdoc-theme-herman/issues/343)
+  - Replace `through2` with Node's native `readable-stream`
 
 ## 3.2.0: 2020-06-16
 
