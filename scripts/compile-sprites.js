@@ -11,7 +11,7 @@ const generateSprites = require('../lib/utils/sprites');
 
 const output = path.join(__dirname, '../templates/_icons.svg');
 
-generateSprites('assets/svg/')
+generateSprites('assets/svg/', true)
   .then((result) =>
     fs.writeFile(output, result, (err) => {
       if (err) {
