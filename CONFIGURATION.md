@@ -171,9 +171,9 @@ See our [`@font` documentation][font-docs-local].
 - Type: `Object`
 - Default: `{}`
 
-Container for the following [Nunjucks][nunjucks]-related options:
+Container for the following [Nunjucks][]-related options:
 
-[nunjucks]: https://mozilla.github.io/nunjucks/
+[Nunjucks]: https://mozilla.github.io/nunjucks/
 
 ### nunjucks.templatePath
 
@@ -232,10 +232,14 @@ See [Exporting Styles to JSON][export].
 - Type: Sass implementation instance
 - Default: Dart Sass instance
 
-Determines the Sass implementation (defaults to [Dart Sass][dart-sass])
-to use for Sass compilation if using [`@example njk`annotation][example-njk].
+Determines the Sass implementation (defaults to [Dart Sass][dart-sass]) to use
+for Sass compilation if using [`@example njk`annotation][example-njk]. This
+option expects an implementation providing a `renderSync` method with the [same
+signature][] as Dart Sass, and support for the [Sass module system][].
 
 [dart-sass]: https://sass-lang.com/dart-sass
+[same signature]: https://sass-lang.com/documentation/js-api#rendersync
+[Sass module system]: https://sass-lang.com/blog/the-module-system-is-launched
 
 ### sass.importer
 
