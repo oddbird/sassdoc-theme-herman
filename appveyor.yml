@@ -6,10 +6,9 @@ environment:
 
 install:
   - ps: Install-Product node $env:nodejs_version
-  - appveyor-retry yarn install --frozen-lockfile
+  - appveyor-retry yarn install --immutable --immutable-cache
 
 test_script:
-  - SET PATH=.\node_modules\.bin;%PATH%
   - node --version
   - yarn --version
   - mocha --timeout=10000 ".\test\js\*.js"

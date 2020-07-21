@@ -4,31 +4,36 @@ jobs:
   build:
     working_directory: ~/herman
     docker:
-      - image: circleci/node:latest
+      - image: circleci/node:lts
     steps:
       - checkout
       - restore_cache:
           keys:
-            - herman-yarn-{{ checksum "yarn.lock" }}
+            - herman-yarn-{{ checksum ".pnp.js" }}-{{ checksum "yarn.lock" }}
+            - herman-yarn-
       - run:
           name: Install Dependencies
-          command: yarn install --frozen-lockfile
+          command: yarn install --immutable --immutable-cache
       - run:
           name: Compile Assets
           command: yarn build
       - persist_to_workspace:
           root: .
           paths:
-            - ./node_modules
+            - ./.yarn/unplugged
+            - ./.yarn/build-state.yml
+            - ./.yarn/install-state.gz
       - save_cache:
-          key: herman-yarn-{{ checksum "yarn.lock" }}
+          key: herman-yarn-{{ checksum ".pnp.js" }}-{{ checksum "yarn.lock" }}
           paths:
-            - ./node_modules
+            - ./.yarn/unplugged
+            - ./.yarn/build-state.yml
+            - ./.yarn/install-state.gz
 
   lint:
     working_directory: ~/herman
     docker:
-      - image: circleci/node:latest
+      - image: circleci/node:lts
     steps:
       - checkout
       - attach_workspace:
@@ -40,7 +45,7 @@ jobs:
   test:
     working_directory: ~/herman
     docker:
-      - image: circleci/node:latest
+      - image: circleci/node:lts
     steps:
       - checkout
       - attach_workspace:
@@ -71,7 +76,7 @@ jobs:
   check-test-coverage:
     working_directory: ~/herman
     docker:
-      - image: circleci/node:latest
+      - image: circleci/node:lts
     steps:
       - checkout
       - attach_workspace:
