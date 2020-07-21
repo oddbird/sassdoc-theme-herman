@@ -227,6 +227,30 @@ See [Exporting Styles to JSON][export].
 [export]: https://www.oddbird.net/herman/docs/api_json-export.html
 [export-mixin]: https://www.oddbird.net/herman/docs/api_json-export.html#mixin--herman-export
 
+### sass.implementation
+
+- Type: Sass implementation instance
+- Default: Dart Sass instance
+
+Determines the Sass implementation (defaults to [Dart Sass][dart-sass])
+to use for Sass compilation if using [`@example njk`annotation][example-njk].
+
+[dart-sass]: https://sass-lang.com/dart-sass
+
+### sass.importer
+
+- Type: `Array` || `Function`
+- Default: [Custom Herman Sass importer][sass-importer]
+
+Function (or array of functions)
+used to resolve `@use` and `@import` file paths.
+Passed through to Sass [importer] when
+compiling `@example sass/scss` annotations.
+See our [`@example` documentation][example-docs-scss].
+
+[sass-importer]: https://github.com/oddbird/sassdoc-theme-herman/blob/master/lib/utils/sassImporter.js
+[importer]: https://sass-lang.com/documentation/js-api#importer
+
 ### sass.includePaths
 
 - Type: `Array`

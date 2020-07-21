@@ -1,6 +1,7 @@
 'use strict';
 
 const assert = require('assert');
+
 const extend = require('extend');
 const sinon = require('sinon');
 

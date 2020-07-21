@@ -1,8 +1,8 @@
 'use strict';
 
 const fs = require('fs');
-
 const assert = require('assert');
+
 const del = require('del');
 const Promise = require('bluebird');
 

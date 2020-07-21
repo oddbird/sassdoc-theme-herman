@@ -1,17 +1,14 @@
 'use strict';
 
 const path = require('path');
+
 const sassTrue = require('sass-true');
 const sass = require('sass');
 
-const importer = function (url) {
-  let file = url;
-  if (url.startsWith('~')) {
-    file = path.resolve('node_modules', url.substr(1));
-  }
-
-  return { file };
-};
+const sassImporter = require('../../lib/utils/sassImporter');
 
 const sassFile = path.join(__dirname, 'test.scss');
-sassTrue.runSass({ importer, file: sassFile }, { sass, describe, it });
+sassTrue.runSass(
+  { file: sassFile, importer: sassImporter },
+  { sass, describe, it },
+);

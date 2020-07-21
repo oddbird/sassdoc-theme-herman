@@ -2,6 +2,7 @@
 
 const assert = require('assert');
 const path = require('path');
+
 const Promise = require('bluebird');
 const extend = require('extend');
 const nunjucks = require('nunjucks');
@@ -1087,7 +1088,7 @@ describe('example annotation', () => {
         .catch(done);
     });
 
-    it('injects global imports for scss items', function (done) {
+    it('injects global imports for scss items [use]', function (done) {
       const data = [
         {
           example: [
@@ -1108,6 +1109,8 @@ describe('example annotation', () => {
               {},
             ],
             includePaths: [path.join(__dirname, 'fixtures', 'scss')],
+            // eslint-disable-next-line global-require
+            implementation: require('sass'),
           },
         },
       });
@@ -1118,6 +1121,38 @@ describe('example annotation', () => {
           assert.equal(
             data[0].example[0].rendered,
             `body {\n  border: 1px;\n}\n\nbody {\n  color: red;\n}`,
+          );
+          done();
+        })
+        .catch(done);
+    });
+
+    it('uses custom `importer` setting', function (done) {
+      const data = [
+        {
+          example: [
+            {
+              type: 'scss',
+              code: '@import "foo"',
+            },
+          ],
+        },
+      ];
+      const env = extend(true, {}, this.env, {
+        herman: {
+          sass: {
+            importer: (url, prev, cb) => cb({ file: 'import' }),
+            includePaths: [path.join(__dirname, 'fixtures', 'scss')],
+          },
+        },
+      });
+      const example = annotations.example(env);
+      example
+        .resolve(data)
+        .then(() => {
+          assert.equal(
+            data[0].example[0].rendered,
+            `body {\n  border: 1px;\n}`,
           );
           done();
         })

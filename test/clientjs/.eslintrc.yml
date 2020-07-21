@@ -12,12 +12,10 @@ plugins:
   - simple-import-sort
   - jest
   - jest-dom
-  - testing-library
 extends:
   - plugin:jest/recommended
   - plugin:jest/style
   - plugin:jest-dom/recommended
-  - plugin:testing-library/recommended
 rules:
   # Import
   simple-import-sort/sort: 1

@@ -66,7 +66,7 @@ module.exports = {
   // maxWorkers: "50%",
 
   // An array of directory names to be searched recursively up from the requiring module's location
-  moduleDirectories: ['assets/js', 'scss', 'node_modules'],
+  moduleDirectories: ['scss', 'node_modules'],
 
   // An array of file extensions your modules use
   // moduleFileExtensions: [

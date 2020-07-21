@@ -2,6 +2,7 @@
 
 const assert = require('assert');
 const path = require('path');
+
 const extend = require('extend');
 const sinon = require('sinon');
 

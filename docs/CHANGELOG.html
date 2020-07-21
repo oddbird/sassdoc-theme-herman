@@ -282,8 +282,8 @@
 <h2 id="unreleased">UNRELEASED</h2>
 <ul>
 <li>💥 BREAKING: Drop support for Node &lt;<span class="widont">&nbsp;</span>10</li>
-<li>💥 BREAKING: Switch to Dart Sass throughout and remove <code>sass.implementation</code>
-option</li>
+<li>💥 BREAKING: Switch to Dart Sass throughout, and use as default
+<code>sass.implementation</code> option</li>
 <li>💥 BREAKING: Convert Herman-specific options to camelCase (<code>fontPath</code>,
 <code>nunjucks.templatePath</code>, <code>sass.jsonFile</code>, <code>sass.includePaths</code>,
 <code>sass.outputStyle</code>)</li>
@@ -293,9 +293,14 @@ modules</a>
 in <code>@example scss</code> annotations with
 <a href="https://www.oddbird.net/herman/docs/configuration#sass-use"><code>sass.use</code></a>
 option</li>
+<li>🚀 NEW: Default Sass importer (used by <code>@example scss</code>) now supports <code>~</code>
+imports of external modules in <a href="https://yarnpkg.com/">Yarn 2</a> PnP<span class="widont">&nbsp;</span>environments</li>
+<li>🚀 NEW: Allow using custom Sass importer with <code>@example scss</code> via
+new <code>sass.importer</code> option</li>
 <li>📝 DOCS: Fix broken links in<span class="widont">&nbsp;</span>Changelog</li>
 <li>🏠 INTERNAL: Upgrade dependencies:
 <ul>
+<li>Switch to <a href="https://yarnpkg.com/">Yarn<span class="widont">&nbsp;</span>2</a></li>
 <li>Remove <code>gulp-imagemin</code> and <code>svgo</code> –
 <a href="https://github.com/oddbird/sassdoc-theme-herman/issues/343">343</a></li>
 <li>Replace <code>through2</code> with Node’s native <code>readable-stream</code></li>

@@ -3,8 +3,8 @@
 'use strict';
 
 const fs = require('fs');
-
 const path = require('path');
+
 const sassdoc = require('sassdoc');
 const set = require('lodash/set');
 const yaml = require('js-yaml');

@@ -5,8 +5,10 @@
 process.env.BROWSERSLIST_CONFIG = './.browserslistrc';
 
 const path = require('path');
+
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const PnpWebpackPlugin = require(`pnp-webpack-plugin`);
 const webpack = require('webpack');
 
 const SassDocPlugin = require('./sassdoc-webpack-plugin');
@@ -102,14 +104,16 @@ module.exports = {
     filename: '[name].min.js',
   },
   resolve: {
+    plugins: [PnpWebpackPlugin],
     // where to look for "required" modules
-    modules: ['assets/js', 'templates/client', 'scss', 'node_modules'],
+    modules: ['templates/client', 'scss', 'node_modules'],
     alias: {
       jquery: 'jquery/dist/jquery.slim',
       nunjucks: 'nunjucks/browser/nunjucks-slim',
     },
   },
   resolveLoader: {
+    plugins: [PnpWebpackPlugin],
     alias: { sassjson: path.join(__dirname, 'sass-json-loader') },
   },
   optimization: {

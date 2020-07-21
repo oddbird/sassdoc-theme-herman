@@ -1,6 +1,10 @@
 !.*
 .git/
 .nyc_output/
+.pnp.js
+.vscode/
+.yarn/
+.yarnrc.yml
 assets/js/vendor/
 coverage/
 dist/

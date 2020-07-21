@@ -1,6 +1,7 @@
 'use strict';
 
 const assert = require('assert');
+
 const nunjucks = require('nunjucks');
 const sinon = require('sinon');
 

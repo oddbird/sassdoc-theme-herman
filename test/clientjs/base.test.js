@@ -1,4 +1,4 @@
-import * as base from 'base';
+import * as base from '@/base';
 
 describe('initializeToggles', () => {
   let toggle,

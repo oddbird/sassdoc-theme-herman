@@ -12,11 +12,11 @@ plugins:
   - import
 settings:
   import/resolver:
+    node: {}
     webpack:
       config:
         resolve:
           modules:
-            - assets/js
             - templates/client
             - scss
             - node_modules
