@@ -1,6 +1,22 @@
 // Map Utility Tests
 // =================
 
+@use 'sass:color';
+@use 'sass:map';
+@use 'sass:meta';
+
+@use 'true';
+@use '~accoutrement/sass/tools' with (
+  $functions: (
+    'darken': meta.get-function('darken'),
+    'desaturate': meta.get-function('desaturate'),
+    'convert': '#convert-units',
+  ),
+);
+
+@use '../../../scss/utilities/json-api' as *;
+@use '../../../scss/utilities/maps' as *;
+
 $colors-initial: (
   'brand-blue': hsl(195, 85%, 35%),
   'light-gray': '#brand-blue'
@@ -49,18 +65,18 @@ $sizes-compiled: (
 
 // Map Compile
 // -----------
-@include describe('herman-map-compile [function]') {
-  @include it('returns a map with values run through a given function') {
-    @include assert-equal(
-      herman-map-compile($sizes, get-function('size')),
+@include true.describe('map-compile [function]') {
+  @include true.it('returns a map with values run through a given function') {
+    @include true.assert-equal(
+      compile($sizes, meta.get-function('size', $module: 'tools')),
       $sizes-compiled,
       $inspect: true
     );
   }
 
-  @include it('allows extra args be passed in') {
-    @include assert-equal(
-      herman-map-compile($colors-compiled, get-function('darken'), 20%),
+  @include true.it('allows extra args be passed in') {
+    @include true.assert-equal(
+      compile($colors-compiled, meta.get-function('darken'), 20%),
       $darken,
       $inspect: true
     );
@@ -69,46 +85,46 @@ $sizes-compiled: (
 
 // Herman Add
 // ----------
-@include describe('herman-add [mixin]') {
+@include true.describe('add [mixin]') {
   $herman: () !global;
   $empty: ();
 
-  @include it('adds a map to the $herman global') {
-    @include assert-equal($herman, $empty);
+  @include true.it('adds a map to the $herman global') {
+    @include true.assert-equal($herman, $empty);
 
-    @include herman-add('colors', 'compiled', $colors-compiled);
+    @include add('colors', 'compiled', $colors-compiled);
     $expect: (
       'colors': (
         'compiled': $colors-compiled,
       ),
     );
 
-    @include assert-equal($herman, $expect);
+    @include true.assert-equal($herman, $expect);
   }
 
-  @include it('adds to existing data of the type') {
-    @include herman-add('colors', 'darken', $darken);
-    $existing: map-get($herman, 'colors');
+  @include true.it('adds to existing data of the type') {
+    @include add('colors', 'darken', $darken);
+    $existing: map.get($herman, 'colors');
     $new: (
       'compiled': $colors-compiled,
     );
     $expect: (
-      'colors': map-merge($existing, $new),
+      'colors': map.merge($existing, $new),
     );
 
-    @include assert-equal($herman, $expect);
+    @include true.assert-equal($herman, $expect);
   }
 
-  @include it('accepts compilation functions') {
+  @include true.it('accepts compilation functions') {
     $herman: () !global;
 
-    @include assert-equal($herman, $empty);
+    @include true.assert-equal($herman, $empty);
 
-    @include herman-add(
+    @include add(
       'colors',
       'dark',
       $colors-compiled,
-      get-function('darken'),
+      meta.get-function('darken'),
       20%
     );
     $expect: (
@@ -117,6 +133,6 @@ $sizes-compiled: (
       ),
     );
 
-    @include assert-equal($herman, $expect, $inspect: true);
+    @include true.assert-equal($herman, $expect, $inspect: true);
   }
 }

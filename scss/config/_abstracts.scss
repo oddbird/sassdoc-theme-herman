@@ -60,15 +60,15 @@ $functions: (
 @mixin config($type, $name, $value) {
   @if index('color' 'colors', $type) {
     @include add-colors($value);
-    @include herman-add($type, $name, $value, get-function('color'));
+    @include add($type, $name, $value, get-function('color'));
   } @else if index('size' 'sizes', $type) {
     @include add-sizes($value);
-    @include herman-add($type, $name, $value, get-function('size'));
+    @include add($type, $name, $value, get-function('size'));
   } @else if index('ratio' 'ratios', $type) {
     @include add-ratios($value);
-    @include herman-add($type, $name, $value, get-function('ratio'));
+    @include add($type, $name, $value, get-function('ratio'));
   } @else if index('font' 'fonts', $type) {
     @include add-font($name, $value);
-    @include herman-add($type, $name, font($name));
+    @include add($type, $name, font($name));
   }
 }

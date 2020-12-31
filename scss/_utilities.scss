@@ -9,7 +9,5 @@
 ///
 /// @group config_api-utilities
 
-@import 'utilities/config';
-@import 'utilities/json-encode';
-@import 'utilities/json-api';
-@import 'utilities/maps';
+@forward 'utilities/json-api';
+@forward 'utilities/maps';

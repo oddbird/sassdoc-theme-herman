@@ -21,7 +21,7 @@ $hljs-colors: (
   'hljs-formula': #eee8d5,
 );
 
-@include herman-add('colors', 'hljs-colors', $hljs-colors);
+@include add('colors', 'hljs-colors', $hljs-colors);
 
 .hljs-comment,
 .hljs-quote {

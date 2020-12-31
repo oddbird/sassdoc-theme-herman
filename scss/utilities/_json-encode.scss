@@ -9,7 +9,7 @@
 ///
 /// @param {*} $value [$herman] -
 ///   Data to be encoded for JSON exporting
-@function _herman-encode($value) {
+@function encode($value) {
   $type: type-of($value);
 
   @if ($type == 'bool') {
@@ -17,14 +17,14 @@
   } @else if ($type == 'null') {
     @return 'null';
   } @else if ($type == 'list') {
-    @return _herman-encode-list($value);
+    @return encode-list($value);
   } @else if ($type == 'map') {
-    @return _herman-encode-map($value);
+    @return encode-map($value);
   } @else if ($type == 'number') {
-    @return _herman-encode-number($value);
+    @return encode-number($value);
   }
 
-  @return _herman-quote($value);
+  @return quote($value);
 }
 
 // Encode List
@@ -36,12 +36,12 @@
 ///
 /// @param {list} $list -
 ///   List to be encoded for JSON exporting
-@function _herman-encode-list($list) {
+@function encode-list($list) {
   $str: '';
 
   @each $item in $list {
     $str: if($str != '', $str + ', ', $str);
-    $str: $str + _herman-encode($item);
+    $str: $str + encode($item);
   }
 
   @return '[#{$str}]';
@@ -56,12 +56,12 @@
 ///
 /// @param {map} $map -
 ///   Map to be encoded for JSON exporting
-@function _herman-encode-map($map) {
+@function encode-map($map) {
   $str: '';
 
   @each $key, $value in $map {
     $str: if($str != '', $str + ', ', $str);
-    $str: $str + _herman-quote($key) + ': ' + _herman-encode($value);
+    $str: $str + quote($key) + ': ' + encode($value);
   }
 
   @return '{#{$str}}';
@@ -76,12 +76,12 @@
 ///
 /// @param {number} $number -
 ///   Number to be encoded for JSON exporting
-@function _herman-encode-number($number) {
+@function encode-number($number) {
   @if unitless($number) {
     @return inspect($number);
   }
 
-  @return _herman-quote($number);
+  @return quote($number);
 }
 
 // Quote
@@ -93,10 +93,10 @@
 ///
 /// @param {*} $value -
 ///   The value to inspect and quote.
-@function _herman-quote($value) {
+@function quote($value) {
   $value: '#{$value}';
-  $value: _herman-escape-backslashes($value);
-  $value: _herman-escape-quotes($value);
+  $value: escape-backslashes($value);
+  $value: escape-quotes($value);
   @return '"#{$value}"';
 }
 
@@ -109,7 +109,7 @@
 ///
 /// @param {string} $string -
 ///   The string to be manipulated
-@function _herman-escape-quotes($string) {
+@function escape-quotes($string) {
   $return: $string;
   $old: '"';
   $new: '\\"';
@@ -121,7 +121,7 @@
   } @else if $i {
     $a: if($i > 1, str-slice($string, 1, $i - 1), '');
     $z: str-slice($string, $i + $n);
-    $z: _herman-escape-quotes($z);
+    $z: escape-quotes($z);
 
     $return: $a + if($new, $new, '') + $z;
   }
@@ -138,7 +138,7 @@
 ///
 /// @param {string} $string -
 ///   The string to be manipulated
-@function _herman-escape-backslashes($string) {
+@function escape-backslashes($string) {
   $return: $string;
   $old: '\\';
   $new: '\\\\';
@@ -150,7 +150,7 @@
   } @else if $i {
     $a: if($i > 1, str-slice($string, 1, $i - 1), '');
     $z: str-slice($string, $i + $n);
-    $z: _herman-escape-backslashes($z);
+    $z: escape-backslashes($z);
 
     $return: $a + if($new, $new, '') + $z;
   }

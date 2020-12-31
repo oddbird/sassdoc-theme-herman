@@ -1,22 +1,25 @@
 // JSON Encoding Tests
 // ===================
 
+@use 'true';
+@use '../../../scss/utilities/json-encode' as *;
+
 // JSON Encode
 // -----------
-@include describe('herman-encode [function]') {
-  @include it('returns a boolean without encoding') {
-    @include assert-equal(_herman-encode(true), true);
+@include true.describe('encode [function]') {
+  @include true.it('returns a boolean without encoding') {
+    @include true.assert-equal(encode(true), true);
   }
 
-  @include it('returns a string for null values') {
-    @include assert-equal(_herman-encode(null), 'null');
+  @include true.it('returns a string for null values') {
+    @include true.assert-equal(encode(null), 'null');
   }
 
-  @include it('encodes each value in a list') {
-    @include assert-equal(_herman-encode(one two 3), '["one", "two", 3]');
+  @include true.it('encodes each value in a list') {
+    @include true.assert-equal(encode(one two 3), '["one", "two", 3]');
   }
 
-  @include it('encodes each key/value in a map') {
+  @include true.it('encodes each key/value in a map') {
     $map: (
       1: (
         a,
@@ -27,50 +30,47 @@
       'three' 'four': 'hello "world"',
     );
 
-    @include assert-equal(
-      _herman-encode($map),
+    @include true.assert-equal(
+      encode($map),
       '{"1": ["a", "b", "c"], "two": "3em", "three four": "hello \\"world\\""}'
     );
   }
 
-  @include it('returns a string value of unitless numbers') {
-    @include assert-equal(_herman-encode(3), '3');
+  @include true.it('returns a string value of unitless numbers') {
+    @include true.assert-equal(encode(3), '3');
   }
 
-  @include it('returns quoted color strings') {
+  @include true.it('returns quoted color strings') {
     $hex: #333;
     $rgba: rgba(0, 255, 130, 0.75);
     $hsla: hsla(120, 50%, 80%, 0.75);
 
     @each $color in ($hex, $rgba, $hsla) {
-      @include assert-equal(_herman-encode($color), '"#{$color}"');
+      @include true.assert-equal(encode($color), '"#{$color}"');
     }
   }
 
-  @include it('returns quoted and escaped strings') {
-    @include assert-equal(
-      _herman-encode('hello "world"'),
-      '"hello \\"world\\""'
-    );
+  @include true.it('returns quoted and escaped strings') {
+    @include true.assert-equal(encode('hello "world"'), '"hello \\"world\\""');
   }
 
-  @include it('returns escaped backslashes in strings') {
-    @include assert-equal(_herman-encode('hello\\world'), '"hello\\\\world"');
+  @include true.it('returns escaped backslashes in strings') {
+    @include true.assert-equal(encode('hello\\world'), '"hello\\\\world"');
   }
 }
 
 // Encode List
 // -----------
-@include describe('herman-encode-list [function]') {
-  @include it('encodes each value in a list') {
-    @include assert-equal(_herman-encode-list(one two 3), '["one", "two", 3]');
+@include true.describe('encode-list [function]') {
+  @include true.it('encodes each value in a list') {
+    @include true.assert-equal(encode-list(one two 3), '["one", "two", 3]');
   }
 }
 
 // Encode Map
 // ----------
-@include describe('herman-encode-map [function]') {
-  @include it('encodes each key/value in a map') {
+@include true.describe('encode-map [function]') {
+  @include true.it('encodes each key/value in a map') {
     $map: (
       1: (
         a,
@@ -81,8 +81,8 @@
       three four: 'hello "world"',
     );
 
-    @include assert-equal(
-      _herman-encode-map($map),
+    @include true.assert-equal(
+      encode-map($map),
       '{"1": ["a", "b", "c"], "two": "3em", "three four": "hello \\"world\\""}'
     );
   }
@@ -90,35 +90,32 @@
 
 // Encode Number
 // -------------
-@include describe('herman-encode-number [function]') {
-  @include it('returns a string value of unitless numbers') {
-    @include assert-equal(_herman-encode-number(3), '3');
+@include true.describe('encode-number [function]') {
+  @include true.it('returns a string value of unitless numbers') {
+    @include true.assert-equal(encode-number(3), '3');
   }
 
-  @include it('returns a scare-quoted value of lengths') {
-    @include assert-equal(_herman-encode-number(3em), '"3em"');
+  @include true.it('returns a scare-quoted value of lengths') {
+    @include true.assert-equal(encode-number(3em), '"3em"');
   }
 }
 
 // Herman Quote
 // ------------
-@include describe('herman-quote [function]') {
-  @include it('converts values to strings') {
-    @include assert-equal(_herman-quote(1em), '"1em"');
+@include true.describe('quote [function]') {
+  @include true.it('converts values to strings') {
+    @include true.assert-equal(quote(1em), '"1em"');
 
-    @include assert-equal(
-      _herman-quote('one' 'two' 'three'),
-      '"one two three"'
-    );
+    @include true.assert-equal(quote('one' 'two' 'three'), '"one two three"');
   }
 }
 
 // String Replace
 // --------------
-@include describe('herman-escape-quotes [function]') {
-  @include it('replaces a single sub-string') {
-    @include assert-equal(
-      _herman-escape-quotes('hello "world"'),
+@include true.describe('escape-quotes [function]') {
+  @include true.it('replaces a single sub-string') {
+    @include true.assert-equal(
+      escape-quotes('hello "world"'),
       'hello \\"world\\"'
     );
   }
@@ -126,10 +123,10 @@
 
 // Escape Backslashes
 // ------------------
-@include describe('herman-escape-backslashes [function]') {
-  @include it('escapes backslashes in string') {
-    @include assert-equal(
-      _herman-escape-backslashes('hello\\world'),
+@include true.describe('escape-backslashes [function]') {
+  @include true.it('escapes backslashes in string') {
+    @include true.assert-equal(
+      escape-backslashes('hello\\world'),
       'hello\\\\world'
     );
   }

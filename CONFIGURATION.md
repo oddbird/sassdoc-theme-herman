@@ -215,7 +215,7 @@ _Required if using [`@font`][font-docs], [`@colors`][color-preview],
 [`@ratios`][ratio-preview], or [`@sizes`][size-preview] annotations._
 
 Relative path to a `sass-json file`
-(created with the [`herman-export` mixin][export-mixin]).
+(created with the [`export` mixin][export-mixin]).
 The JSON contents will be added under the
 `sassjson` key of the sassdoc context,
 and used to display colors, fonts, ratios, and sizes.
@@ -225,7 +225,7 @@ See [Exporting Styles to JSON][export].
 [ratio-preview]: https://www.oddbird.net/herman/docs/demo_sizes.html#preview-ratios
 [size-preview]: https://www.oddbird.net/herman/docs/demo_sizes.html#preview-sizes
 [export]: https://www.oddbird.net/herman/docs/api_json-export.html
-[export-mixin]: https://www.oddbird.net/herman/docs/api_json-export.html#mixin--herman-export
+[export-mixin]: https://www.oddbird.net/herman/docs/api_json-export.html#mixin--export
 
 ### sass.implementation
 
