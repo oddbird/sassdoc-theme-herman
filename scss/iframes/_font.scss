@@ -1,25 +1,30 @@
+@use '~accoutrement/sass/tools';
+
 [data-herman-preview='font'] {
-  --herman-label-color: #{color('slight')};
+  --herman-label-color: #{tools.color('slight')};
   display: flex;
   flex-wrap: wrap;
-  margin: size('gutter') negative('shim') 0;
+  margin: tools.size('gutter') tools.negative('shim') 0;
 
   @supports (display: grid) {
     display: grid;
     grid-auto-rows: auto;
-    grid-gap: size('gutter');
-    grid-template-columns: repeat(auto-fit, minmax(size('font-preview'), 1fr));
-    margin: size('gutter') 0 0;
+    grid-gap: tools.size('gutter');
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(tools.size('font-preview'), 1fr)
+    );
+    margin: tools.size('gutter') 0 0;
   }
 }
 
 [data-herman-fontface] {
   align-items: stretch;
   display: flex;
-  flex: 1 0 size('font-preview');
+  flex: 1 0 tools.size('font-preview');
   flex-direction: column;
-  font-size: size('code');
-  margin: size('shim');
+  font-size: tools.size('code');
+  margin: tools.size('shim');
 
   @supports (display: grid) {
     margin: 0;
@@ -35,7 +40,7 @@
 
 [data-herman-font='lorem'] {
   flex: 1 1 auto;
-  padding-left: size('shim');
+  padding-left: tools.size('shim');
 
   span {
     display: block;
@@ -44,6 +49,6 @@
 
 [data-herman-font='aa'] {
   flex: 0 1 auto;
-  font-size: size('specimen-aa');
-  padding-left: size('quarter-shim');
+  font-size: tools.size('specimen-aa');
+  padding-left: tools.size('quarter-shim');
 }

@@ -1927,16 +1927,16 @@ each on their own line, for more visible<span class="widont">&nbsp;</span>space.
 <p>In order to preview the <code>$demo-ratios</code> and <code>$demo-sizes</code> maps,
 we also need to <a href="api_json-export.html">export the data to<span class="widont">&nbsp;</span>JSON</a>.</p>
 <p>You can add data to the <code>$herman</code> export-map by hand,
-or use the provided <code>herman-add</code> mixin
+or use the provided <code>add</code> mixin
 to combine existing maps into the proper structure.
 <a href="api_json-export.html#sizes-ratios">See the size/ratio map documentation for details<span class="widont">&nbsp;</span>»</a></p>
-<pre><code class="lang-scss"> @include herman-add('ratios', 'demo-ratios', $demo-ratios);
- @include herman-add('sizes', 'demo-sizes', $demo-sizes);
+<pre><code class="lang-scss"> @include add('ratios', 'demo-ratios', $demo-ratios);
+ @include add('sizes', 'demo-sizes', $demo-sizes);
 </code></pre>
 <p>If your map needs to be parsed or compiled before export,
-you can pass additional compilation functions and arguments to <code>herman-add</code>.
+you can pass additional compilation functions and arguments to <code>add</code>.
 Once your data is all stored in the <code>$herman</code> map,
-it can be converted to JSON using <code>herman-export</code>.</p>
+it can be converted to JSON using <code>export</code>.</p>
 
       
   
@@ -2039,7 +2039,7 @@ it can be converted to JSON using <code>herman-export</code>.</p>
       <span class="item-type">@mixin</span>
       
         <a href="
-  api_json-export.html#mixin--herman-add" class="item-name">herman-add()</a>
+  api_json-export.html#mixin--add" class="item-name">add()</a>
       
       
       
@@ -2064,7 +2064,7 @@ it can be converted to JSON using <code>herman-export</code>.</p>
       <span class="item-type">@mixin</span>
       
         <a href="
-  api_json-export.html#mixin--herman-export" class="item-name">herman-export()</a>
+  api_json-export.html#mixin--export" class="item-name">export()</a>
       
       
       

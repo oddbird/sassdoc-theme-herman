@@ -687,31 +687,7 @@ ferrove finis longave, pignus duros<span class="widont">&nbsp;</span>nubifer!</p
       
       
       <pre class="hljs-pre"><code class="lang-scss">.example::before {
-  content: herman-sample(1, 2);
-}</code></pre>
-    </div>
-  
-
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            css
-          </span>
-
-          
-            <span class='code-description'>
-              compiled
-            </span>
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-css">.example::before {
-  content: herman-sample(1, 2);
+  content: samples.herman-sample(1, 2);
 }</code></pre>
     </div>
   
@@ -1371,33 +1347,8 @@ it is separated from documented code by one or more<span class="widont">&nbsp;</
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">@import &#39;samples/variables&#39;;
-.private::after {
-  content: $private;
-}</code></pre>
-    </div>
-  
-
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            css
-          </span>
-
-          
-            <span class='code-description'>
-              compiled
-            </span>
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-css">.private::after {
-  content: &quot;for internal use only&quot;;
+      <pre class="hljs-pre"><code class="lang-scss">.private::after {
+  content: samples.$private;
 }</code></pre>
     </div>
   
@@ -1723,37 +1674,10 @@ and any passed-in styled<span class="widont">&nbsp;</span>applied.</p>
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">@import &#39;samples/mixins-functions&#39;;
-
-.item {
-  @include before-sample(&#39;Test One: &#39;) {
+      <pre class="hljs-pre"><code class="lang-scss">.item {
+  @include samples.before-sample(&#39;Test One: &#39;) {
     color: red;
   }
-}</code></pre>
-    </div>
-  
-
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            css
-          </span>
-
-          
-            <span class='code-description'>
-              compiled
-            </span>
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-css">.item::before {
-  content: &quot;Test One: &quot;;
-  color: red;
 }</code></pre>
     </div>
   

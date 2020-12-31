@@ -1,19 +1,24 @@
 // Preview Layouts
 // ===============
 
+@use '~accoutrement/sass/tools';
+
 // Color Preview
 // -------------
 
 .color-palette {
   display: flex;
   flex-wrap: wrap;
-  margin: negative('shim');
+  margin: tools.negative('shim');
 
   @supports (display: grid) {
     display: grid;
     grid-auto-rows: auto;
-    grid-gap: size('gutter');
-    grid-template-columns: repeat(auto-fit, minmax(size('color-preview'), 1fr));
+    grid-gap: tools.size('gutter');
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(tools.size('color-preview'), 1fr)
+    );
     margin: 0;
   }
 }
@@ -21,10 +26,10 @@
 .color-preview {
   align-items: stretch;
   display: flex;
-  flex: 1 0 size('color-preview');
+  flex: 1 0 tools.size('color-preview');
   flex-direction: column;
-  font-size: size('code');
-  margin: size('shim');
+  font-size: tools.size('code');
+  margin: tools.size('shim');
 
   @supports (display: grid) {
     margin: 0;
@@ -35,15 +40,15 @@
 // ------------
 
 .color-swatch {
-  border: 1px solid color('border');
-  height: size('color-swatch');
-  min-width: size('color-swatch');
+  border: 1px solid tools.color('border');
+  height: tools.size('color-swatch');
+  min-width: tools.size('color-swatch');
   position: relative;
 }
 
 .transparency-grid,
 .color-overlay {
-  @include position(0);
+  @include tools.position(0);
 }
 
 .transparency-grid {
@@ -59,7 +64,7 @@
 .color-name,
 .color-value {
   display: block;
-  padding: size('half-shim');
+  padding: tools.size('half-shim');
 }
 
 .color-name-option {
@@ -67,11 +72,11 @@
 }
 
 .color-value {
-  background-color: color('slight');
-  border-radius: size('quarter-shim');
-  box-shadow: 0 0 size('quarter-shim') color('code-shadow') inset;
-  color: color('text-light');
+  background-color: tools.color('slight');
+  border-radius: tools.size('quarter-shim');
+  box-shadow: 0 0 tools.size('quarter-shim') tools.color('code-shadow') inset;
+  color: tools.color('text-light');
   font-weight: normal;
-  margin-top: size('quarter-shim');
+  margin-top: tools.size('quarter-shim');
   white-space: nowrap;
 }

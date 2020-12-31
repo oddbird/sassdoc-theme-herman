@@ -310,7 +310,7 @@ to help visualize these abstract patterns,
 but they require access to the raw Sass data.
 We do that using Sass maps
 (<code>key:value</code> object variables)
-and the <code>herman-export</code> mixin
+and the <code>export</code> mixin
 to generate JSON out of Sass<span class="widont">&nbsp;</span>variables.</p>
 <p>See the <a href="CONFIGURATION.html#sass-jsonfile"><code>sass.jsonFile</code> configuration</a>
 to ensure that Herman has access
@@ -382,7 +382,7 @@ to your exported Sass<span class="widont">&nbsp;</span>data.</p>
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">$herman: (
+      <pre class="hljs-pre"><code class="lang-scss">utilities.$herman: (
   &#39;colors&#39;: (
     &#39;brand-colors&#39;: (
       &#39;brand-orange&#39;: #c75000,
@@ -391,29 +391,7 @@ to your exported Sass<span class="widont">&nbsp;</span>data.</p>
   ),
 );
 
-@include herman-export($herman);</code></pre>
-    </div>
-  
-
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            css
-          </span>
-
-          
-            <span class='code-description'>
-              compiled
-            </span>
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-css">/*! json-encode: {&quot;colors&quot;: {&quot;brand-colors&quot;: {&quot;brand-orange&quot;: &quot;#c75000&quot;, &quot;brand-blue&quot;: &quot;#0d7fa5&quot;}}} */</code></pre>
+@include utilities.export($herman);</code></pre>
     </div>
   
 
@@ -455,7 +433,7 @@ to your exported Sass<span class="widont">&nbsp;</span>data.</p>
       <span class="item-type">@mixin</span>
       
         <a href="
-  api_json-export.html#mixin--herman-export" class="item-name">herman-export()</a>
+  api_json-export.html#mixin--export" class="item-name">export()</a>
       
       
       
@@ -569,7 +547,7 @@ color, font, size, and ratio values for<span class="widont">&nbsp;</span>export.
 <p>The <code>$herman</code> map should be structured
 with top-level keys for each type of data,
 and nested maps of the individual items to preview.
-Use the <code>herman-add</code> mixin to automatically populate
+Use the <code>add</code> mixin to automatically populate
 fonts, colors, sizes, and ratios from existing maps –
 or construct your <code>$herman</code> map by hand,
 following these<span class="widont">&nbsp;</span>guidelines…</p>
@@ -736,7 +714,7 @@ per format (e.g. <code>ttf</code>, <code>otf</code>, <code>woff2</code>, etc.)</
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">$herman: (
+      <pre class="hljs-pre"><code class="lang-scss">utilities.$herman: (
   &#39;colors&#39;: (
     &#39;brand-colors&#39;: (
       &#39;brand-orange&#39;: &#39;#c75000&#39;,
@@ -819,7 +797,7 @@ per format (e.g. <code>ttf</code>, <code>otf</code>, <code>woff2</code>, etc.)</
       <span class="item-type">@mixin</span>
       
         <a href="
-  api_json-export.html#mixin--herman-add" class="item-name">herman-add()</a>
+  api_json-export.html#mixin--add" class="item-name">add()</a>
       
       
       
@@ -876,7 +854,7 @@ per format (e.g. <code>ttf</code>, <code>otf</code>, <code>woff2</code>, etc.)</
 
 
 
-<section class="item" id="mixin--herman-export">
+<section class="item" id="mixin--export">
   
     
   
@@ -894,7 +872,7 @@ per format (e.g. <code>ttf</code>, <code>otf</code>, <code>woff2</code>, etc.)</
       
 
       
-        <a href="#mixin--herman-export" class="item-name">herman-export()</a>
+        <a href="#mixin--export" class="item-name">export()</a>
       
 
       
@@ -1042,29 +1020,7 @@ and print to CSS output as a persistent<span class="widont">&nbsp;</span>comment
       
       
       <pre class="hljs-pre"><code class="lang-scss">// Export to JSON
-@include herman-export;</code></pre>
-    </div>
-  
-
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            css
-          </span>
-
-          
-            <span class='code-description'>
-              compiled
-            </span>
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-css">/*! json-encode: {&quot;colors&quot;: {&quot;brand-colors&quot;: {&quot;brand-orange&quot;: &quot;#c75000&quot;, &quot;brand-blue&quot;: &quot;#0d7fa5&quot;, &quot;brand-pink&quot;: &quot;#aa0e5c&quot;}, &quot;neutral-colors&quot;: {&quot;light-gray&quot;: &quot;#dedede&quot;, &quot;gray&quot;: &quot;#555b5e&quot;, &quot;contrast-light&quot;: &quot;#fff&quot;, &quot;contrast-dark&quot;: &quot;#3b4042&quot;}, &quot;theme-colors&quot;: {&quot;theme-dark&quot;: &quot;#0d7fa5&quot;, &quot;theme-light&quot;: &quot;#cfe5ed&quot;, &quot;background&quot;: &quot;#fff&quot;, &quot;text&quot;: &quot;#3b4042&quot;, &quot;text-light&quot;: &quot;#555b5e&quot;, &quot;action&quot;: &quot;#b81e6c&quot;, &quot;focus&quot;: &quot;#0d7fa5&quot;, &quot;underline&quot;: &quot;#edc7da&quot;, &quot;border&quot;: &quot;#555b5e&quot;, &quot;border-light&quot;: &quot;#dedede&quot;, &quot;shadow&quot;: &quot;rgba(85, 91, 94, 0.5)&quot;, &quot;callout&quot;: &quot;#cfe5ed&quot;, &quot;slight&quot;: &quot;#fafcfd&quot;, &quot;code&quot;: &quot;#0d7fa5&quot;, &quot;code-shadow&quot;: &quot;rgba(13, 127, 165, 0.2)&quot;}}, &quot;ratios&quot;: {&quot;text-ratios&quot;: {&quot;line-height&quot;: 1.4}}, &quot;sizes&quot;: {&quot;root-sizes&quot;: {&quot;root&quot;: &quot;18px&quot;, &quot;responsive&quot;: &quot;calc(1em + 0.125vw)&quot;, &quot;large&quot;: &quot;calc(1rem + 0.5vw)&quot;, &quot;small&quot;: &quot;0.9rem&quot;}, &quot;text-sizes&quot;: {&quot;reset&quot;: &quot;1rem&quot;, &quot;h1&quot;: &quot;calc(1rem + 2vw)&quot;, &quot;h2&quot;: &quot;calc(1rem + 1vw)&quot;, &quot;h3&quot;: &quot;calc(1rem + 0.5vw)&quot;, &quot;quote&quot;: &quot;calc(1rem + 0.5vw)&quot;, &quot;code&quot;: &quot;0.9rem&quot;, &quot;footer&quot;: &quot;0.9rem&quot;, &quot;search&quot;: &quot;0.9rem&quot;}, &quot;spacing-sizes&quot;: {&quot;rhythm&quot;: &quot;1.4rem&quot;, &quot;gutter&quot;: &quot;1.4rem&quot;, &quot;gutter-plus&quot;: &quot;2.1rem&quot;, &quot;double-gutter&quot;: &quot;2.8rem&quot;, &quot;flex-gutter&quot;: &quot;calc(0.7rem + 2.5vw)&quot;, &quot;spacer&quot;: &quot;calc(4.2rem + 2.5vw)&quot;, &quot;gutter-minus&quot;: &quot;1.05rem&quot;, &quot;shim&quot;: &quot;0.7rem&quot;, &quot;half-shim&quot;: &quot;0.35rem&quot;, &quot;quarter-shim&quot;: &quot;0.175rem&quot;}, &quot;pattern-sizes&quot;: {&quot;nav-underline&quot;: &quot;4px&quot;, &quot;nav-icon&quot;: &quot;28px&quot;, &quot;arrow-border&quot;: &quot;8px&quot;, &quot;arrow-depth&quot;: &quot;0.7rem&quot;, &quot;arrow-side&quot;: &quot;1.4rem&quot;, &quot;font-preview&quot;: &quot;24em&quot;, &quot;specimen-aa&quot;: &quot;4.2rem&quot;, &quot;color-preview&quot;: &quot;16em&quot;, &quot;color-swatch&quot;: &quot;5.6rem&quot;, &quot;footer-logo&quot;: &quot;2.8rem&quot;}, &quot;layout-sizes&quot;: {&quot;page&quot;: &quot;50rem&quot;, &quot;item-break&quot;: &quot;40em&quot;, &quot;page-break&quot;: &quot;50em&quot;, &quot;nav-break&quot;: &quot;65em&quot;}}, &quot;fonts&quot;: {&quot;sans&quot;: {&quot;name&quot;: &quot;Source Sans Pro&quot;, &quot;source&quot;: &quot;https://fonts.google.com/specimen/Source+Sans+Pro&quot;, &quot;stack&quot;: [&quot;Source Sans Pro&quot;, &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, &quot;Arial&quot;, &quot;sans-serif&quot;]}, &quot;code&quot;: {&quot;name&quot;: &quot;Source Code Pro&quot;, &quot;source&quot;: &quot;https://fonts.google.com/specimen/Source+Code+Pro&quot;, &quot;stack&quot;: [&quot;Source Code Pro&quot;, &quot;Consolas&quot;, &quot;Menlo&quot;, &quot;Monaco&quot;, &quot;Lucida Console&quot;, &quot;Liberation Mono&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Bitstream Vera Sans Mono&quot;, &quot;Courier New&quot;, &quot;monospace&quot;, &quot;sans-serif&quot;]}}} */</code></pre>
+@include utilities.export;</code></pre>
     </div>
   
 
@@ -1117,11 +1073,11 @@ and print to CSS output as a persistent<span class="widont">&nbsp;</span>comment
       <span class="item-type">@function</span>
       
         <a href="
-  config_api-utilities.html#function--_herman-encode" class="item-name">_herman-encode()</a>
+  config_api-utilities.html#function--encode" class="item-name">encode()</a>
       
       
       
-      <span class="item-note">[private]</span>
+      
     </h4>
 
     
@@ -1164,7 +1120,7 @@ and print to CSS output as a persistent<span class="widont">&nbsp;</span>comment
 
 
 
-<section class="item" id="mixin--herman-add">
+<section class="item" id="mixin--add">
   
     
   
@@ -1182,7 +1138,7 @@ and print to CSS output as a persistent<span class="widont">&nbsp;</span>comment
       
 
       
-        <a href="#mixin--herman-add" class="item-name">herman-add()</a>
+        <a href="#mixin--add" class="item-name">add()</a>
       
 
       
@@ -1439,38 +1395,19 @@ and any additional arguments for the<span class="widont">&nbsp;</span>function</
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">$herman: ();
+      <pre class="hljs-pre"><code class="lang-scss">@use &#39;~accoutrement/sass/tools&#39;;
+@use &#39;sass:meta&#39;;
+
+utilities.$herman: ();
 $brand-colors: (
   &#39;brand-blue&#39;: hsl(195, 85%, 35%),
   &#39;light-gray&#39;: &#39;#brand-blue&#39; (&#39;tint&#39;: 80%, &#39;desaturate&#39;: 80%),
 );
-@include herman-add(&#39;colors&#39;, &#39;brand-colors&#39;, $brand-colors, get-function(&#39;color&#39;));
+@include utilities.add(&#39;colors&#39;, &#39;brand-colors&#39;, $brand-colors, meta.get-function(&#39;color&#39;, $module: &#39;tools&#39;));
 
 @each $key, $value in $herman {
-/* #{$key}: #{inspect($value)} */
+/* #{$key}: #{meta.inspect($value)} */
 }</code></pre>
-    </div>
-  
-
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            css
-          </span>
-
-          
-            <span class='code-description'>
-              compiled
-            </span>
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-css">/* colors: (&quot;brand-colors&quot;: (&quot;brand-blue&quot;: #0d7fa5, &quot;light-gray&quot;: #dedede)) */</code></pre>
     </div>
   
 
@@ -1488,8 +1425,7 @@ $brand-colors: (
   
   
   
-    <div class="requires-wrapper">
-      
+    
     
   <div data-item-section="requires">
     
@@ -1524,7 +1460,7 @@ $brand-colors: (
       <span class="item-type">@function</span>
       
         <a href="
-  api_json-export.html#function--herman-map-compile" class="item-name">herman-map-compile()</a>
+  api_json-export.html#function--compile" class="item-name">compile()</a>
       
       
       
@@ -1559,7 +1495,7 @@ $brand-colors: (
       
       
         <a href="
-  config_api-utilities.html#variable--_herman-plural-types" class="item-name">$_herman-plural-types</a>
+  config_api-utilities.html#variable--plural-types" class="item-name">$plural-types</a>
       
       
       <span class="value-type">(map)</span>
@@ -1629,69 +1565,9 @@ $brand-colors: (
   </div>
 
   
-      
-  
     
-  <div data-item-section="used-by">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Used By</span>
-        
-      </h3>
-    
-
-    
-      
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
   
 
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@mixin</span>
-      
-        <a href="
-  config-utils.html#mixin--config" class="item-name">config()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-
-        
-      
-        
-
-        
-      
-        
-
-        
-      
-    
-  </div>
-
-  
-
-    </div>
   
 
   
@@ -1719,7 +1595,7 @@ $brand-colors: (
 
 
 
-<section class="item" id="function--herman-map-compile">
+<section class="item" id="function--compile">
   
     
   
@@ -1737,7 +1613,7 @@ $brand-colors: (
       
 
       
-        <a href="#function--herman-map-compile" class="item-name">herman-map-compile()</a>
+        <a href="#function--compile" class="item-name">compile()</a>
       
 
       
@@ -1761,7 +1637,7 @@ $brand-colors: (
       <p>Pass the values of any map through a given function
 (with optional arguments)
 and return the compiled map.
-This is used by <code>herman-add</code>,
+This is used by <code>add</code>,
 but can also be accessed<span class="widont">&nbsp;</span>directly.</p>
 
       
@@ -1967,40 +1843,19 @@ and converted to json-ready<span class="widont">&nbsp;</span>strings</p>
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">$brand-colors: (
+      <pre class="hljs-pre"><code class="lang-scss">@use &#39;~accoutrement/sass/tools&#39;;
+@use &#39;sass:meta&#39;;
+
+$brand-colors: (
   &#39;brand-orange&#39;: hsl(24, 100%, 39%),
   &#39;brand-blue&#39;: hsl(195, 85%, 35%),
   &#39;light-gray&#39;: &#39;brand-blue&#39; (&#39;tint&#39;: 80%, &#39;desaturate&#39;: 80%),
 );
-$compiled: herman-map-compile($brand-colors, get-function(&#39;color&#39;));
+$compiled: utilities.compile($brand-colors, meta.get-function(&#39;color&#39;, $module: &#39;tools&#39;));
 
 @each $key, $value in $compiled {
 /* #{$key}: #{$value} */
 }</code></pre>
-    </div>
-  
-
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            css
-          </span>
-
-          
-            <span class='code-description'>
-              compiled
-            </span>
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-css">/* brand-orange: #c75000 */
-/* brand-blue: #0d7fa5 */
-/* light-gray: #dedede */</code></pre>
     </div>
   
 
@@ -2051,7 +1906,7 @@ $compiled: herman-map-compile($brand-colors, get-function(&#39;color&#39;));
       <span class="item-type">@mixin</span>
       
         <a href="
-  api_json-export.html#mixin--herman-add" class="item-name">herman-add()</a>
+  api_json-export.html#mixin--add" class="item-name">add()</a>
       
       
       

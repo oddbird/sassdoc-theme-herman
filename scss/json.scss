@@ -2,10 +2,10 @@
 // ===================
 
 // Import the utilities and data
-@import 'utilities';
-@import 'config/manifest';
-@import 'previews/highlight';
-@import 'samples/manifest';
+@use 'utilities';
+@use 'config';
+@use 'previews/highlight';
+@use 'samples' as manifest2;
 
 // Export to JSON
-@include export;
+@include utilities.export;

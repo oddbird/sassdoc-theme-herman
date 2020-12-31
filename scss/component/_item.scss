@@ -1,30 +1,32 @@
 // Item Styles
 // ===========
 
+@use '~accoutrement/sass/tools';
+
 .item {
-  margin-bottom: size('spacer');
+  margin-bottom: tools.size('spacer');
 }
 
 [data-item-section] {
-  margin-bottom: size('gutter-plus');
+  margin-bottom: tools.size('gutter-plus');
 }
 
 [data-item-section='header'] {
   .code-block,
   .text-block {
-    margin-bottom: size('shim');
+    margin-bottom: tools.size('shim');
   }
 }
 
 .item-title {
-  font-size: size('h2');
+  font-size: tools.size('h2');
 }
 
 .item-subtitle {
-  border-bottom: 1px solid color('border-light');
-  color: color('text-light');
+  border-bottom: 1px solid tools.color('border-light');
+  color: tools.color('text-light');
   font-weight: normal;
-  margin-bottom: size('shim');
+  margin-bottom: tools.size('shim');
 }
 
 .item-subtitle-main {
@@ -32,21 +34,21 @@
   text-transform: uppercase;
 
   &:not(:last-child) {
-    @include after(': ');
+    @include tools.after(': ');
   }
 }
 
 .item-subtitle-supplement {
-  @include font-family('code');
+  @include tools.font-family('code');
   letter-spacing: 0;
-  padding-left: size('half-shim');
+  padding-left: tools.size('half-shim');
 }
 
 .item-type,
 .item-name,
 .item-value,
 .alias-title {
-  @include font-family('code');
+  @include tools.font-family('code');
   display: inline-block;
 }
 
@@ -54,13 +56,13 @@
 .item-value,
 .value-type,
 .item-note {
-  color: color('text-light');
+  color: tools.color('text-light');
   display: inline-block;
   font-weight: normal;
 }
 
 .alias {
-  color: color('text-light');
+  color: tools.color('text-light');
   font-style: italic;
 }
 
@@ -70,28 +72,28 @@
 }
 
 .param-list {
-  margin-bottom: size('shim');
+  margin-bottom: tools.size('shim');
 }
 
 .param-title {
-  color: color('text-light');
-  font-size: size('h3');
+  color: tools.color('text-light');
+  font-size: tools.size('h3');
 }
 
 .param-details {
-  margin-top: size('half-shim');
+  margin-top: tools.size('half-shim');
 
-  @include above('item-break') {
-    margin-left: size('gutter');
+  @include tools.above('item-break') {
+    margin-left: tools.size('gutter');
   }
 }
 
 // Requires
 // --------
 .requires-wrapper {
-  @include above('item-break') {
+  @include tools.above('item-break') {
     display: flex;
-    margin-bottom: size('gutter-plus');
+    margin-bottom: tools.size('gutter-plus');
 
     [data-item-section] {
       flex: 1 1 40%;
@@ -99,7 +101,7 @@
       max-width: 100%;
 
       &:first-child {
-        margin-right: size('gutter');
+        margin-right: tools.size('gutter');
       }
     }
   }

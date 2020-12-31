@@ -1,6 +1,9 @@
 // Typography Patterns
 // ===================
 
+@use '~accoutrement/sass/tools';
+@use '../config';
+
 // Text Blocks
 // -----------
 /// There are some typographic elements
@@ -50,14 +53,14 @@
   h2,
   h3,
   h4 {
-    color: color('text');
+    color: tools.color('text');
 
     a {
-      #{$link} {
+      #{config.$link} {
         text-decoration-color: transparent;
       }
 
-      #{$focus} {
+      #{config.$focus} {
         text-decoration-color: currentColor;
       }
     }
@@ -69,13 +72,13 @@
   }
 
   h1 {
-    font-size: size('h1');
-    margin-bottom: size('shim');
+    font-size: tools.size('h1');
+    margin-bottom: tools.size('shim');
   }
 
   h2,
   h3 {
-    margin-top: size('gutter-plus');
+    margin-top: tools.size('gutter-plus');
   }
 
   > h2,
@@ -86,51 +89,51 @@
   }
 
   h2 {
-    font-size: size('h2');
-    margin-bottom: size('shim');
+    font-size: tools.size('h2');
+    margin-bottom: tools.size('shim');
   }
 
   h3 {
-    font-size: size('h3');
+    font-size: tools.size('h3');
     font-weight: normal;
-    margin-bottom: size('shim');
+    margin-bottom: tools.size('shim');
   }
 
   p,
   pre {
-    margin-bottom: size('gutter-minus');
+    margin-bottom: tools.size('gutter-minus');
   }
 
   ol,
   ul {
-    margin: 0 size('gutter') size('gutter-minus');
+    margin: 0 tools.size('gutter') tools.size('gutter-minus');
   }
 
   li {
     > p {
-      margin: size('shim') 0;
+      margin: tools.size('shim') 0;
     }
   }
 
   blockquote {
-    border-left: size('half-shim') solid color('border-light');
-    font-size: size('quote');
-    margin-left: negative('gutter');
-    padding-left: size('shim') + size('half-shim');
+    border-left: tools.size('half-shim') solid tools.color('border-light');
+    font-size: tools.size('quote');
+    margin-left: tools.negative('gutter');
+    padding-left: tools.size('shim') + tools.size('half-shim');
 
     > p {
       &:not(:last-child) {
         text-indent: -0.4em;
 
-        @include wrap-content {
-          color: color('theme-dark');
+        @include tools.wrap-content {
+          color: tools.color('theme-dark');
         }
       }
     }
 
     cite {
       display: block;
-      font-size: size('reset');
+      font-size: tools.size('reset');
       font-style: normal;
     }
   }
@@ -147,6 +150,6 @@
 ///   <div class="invert-colors" style="padding: 1em;">
 ///     You shall sojourn at <a href="#">Paris, Rome, and Naples</a>.
 ///   </div>
-.invert-colors {
-  @include invert-colors;
+.config.invert-colors {
+  @include config.invert-colors;
 }

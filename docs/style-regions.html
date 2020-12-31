@@ -677,12 +677,12 @@ as well as the <code>app</code> and <code>container</code> wrapping regions.</p>
       
       
       <pre class="hljs-pre"><code class="lang-scss">[data-region=&#39;container&#39;] {
-  @include clearfix;
+  @include tools.clearfix;
   display: flex;
   flex: 1 1 auto;
   position: relative;
 
-  @include above(&#39;page-break&#39;) {
+  @include tools.above(&#39;page-break&#39;) {
     justify-content: flex-end;
   }
 }</code></pre>

@@ -233,7 +233,7 @@ See [Exporting Styles to JSON][export].
 - Default: Dart Sass instance
 
 Determines the Sass implementation (defaults to [Dart Sass][dart-sass]) to use
-for Sass compilation if using [`@example njk`annotation][example-njk]. This
+for Sass compilation if using [`@example scss` annotation][example-docs-scss]. This
 option expects an implementation providing a `renderSync` method with the [same
 signature][] as Dart Sass, and support for the [Sass module system][].
 

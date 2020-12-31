@@ -32,15 +32,18 @@
 /// @output
 ///   Updated `$herman` map, ready for JSON export
 /// @example scss
-///   $herman: ();
+///   @use '~accoutrement/sass/tools';
+///   @use 'sass:meta';
+///
+///   utilities.$herman: ();
 ///   $brand-colors: (
 ///     'brand-blue': hsl(195, 85%, 35%),
 ///     'light-gray': '#brand-blue' ('tint': 80%, 'desaturate': 80%),
 ///   );
-///   @include add('colors', 'brand-colors', $brand-colors, get-function('color'));
+///   @include utilities.add('colors', 'brand-colors', $brand-colors, meta.get-function('color', $module: 'tools'));
 ///
 ///   @each $key, $value in $herman {
-///   /* #{$key}: #{inspect($value)} */
+///   /* #{$key}: #{meta.inspect($value)} */
 ///   }
 @mixin add($type, $key, $map, $args...) {
   // pluralize type
@@ -90,12 +93,15 @@
 ///   with values compiled by a third-party function,
 ///   and converted to json-ready strings
 /// @example scss
+///   @use '~accoutrement/sass/tools';
+///   @use 'sass:meta';
+///
 ///   $brand-colors: (
 ///     'brand-orange': hsl(24, 100%, 39%),
 ///     'brand-blue': hsl(195, 85%, 35%),
 ///     'light-gray': 'brand-blue' ('tint': 80%, 'desaturate': 80%),
 ///   );
-///   $compiled: compile($brand-colors, get-function('color'));
+///   $compiled: utilities.compile($brand-colors, meta.get-function('color', $module: 'tools'));
 ///
 ///   @each $key, $value in $compiled {
 ///   /* #{$key}: #{$value} */

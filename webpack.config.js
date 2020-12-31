@@ -39,11 +39,12 @@ const sassDocOpts = {
       templatePath: path.join(__dirname, 'templates'),
     },
     sass: {
+      implementation: 'sass',
       includePaths: [
         path.join(__dirname, 'scss'),
         path.join(__dirname, 'node_modules'),
       ],
-      includes: ['utilities', 'config/manifest'],
+      use: ['utilities', 'config', 'samples'],
     },
   },
   display: {

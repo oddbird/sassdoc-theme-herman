@@ -1,6 +1,9 @@
 // Root Typography
 // ===============
 
+@use '~accoutrement/sass/tools';
+@use '../config';
+
 /// # Herman Typography
 /// Initial styling for typographic elements in Herman.
 /// Some typography is also inherited from the
@@ -14,10 +17,10 @@
 /// responsive font-size, fallback font-size, and line-height.
 /// @group style-typography
 :root {
-  @include font-family('sans');
-  font-size: size('root');
-  font-size: size('responsive');
-  line-height: ratio('herman');
+  @include tools.font-family('sans');
+  font-size: tools.size('root');
+  font-size: tools.size('responsive');
+  line-height: tools.ratio('herman');
 }
 
 // Selection
@@ -25,7 +28,7 @@
 /// Selected text uses a light color from the Herman color palette.
 /// @group style-typography
 ::selection {
-  background-color: color('callout');
+  background-color: tools.color('callout');
 }
 
 // Mark
@@ -33,9 +36,9 @@
 /// For search-results, we mark target text with a background color.
 /// @group style-typography
 mark {
-  background-color: color('callout');
+  background-color: tools.color('callout');
   display: inline-block;
-  padding: 0 size('quarter-shim');
+  padding: 0 tools.size('quarter-shim');
 }
 
 // Links
@@ -46,15 +49,15 @@ mark {
 /// @see $link
 /// @see $focus
 [href] {
-  #{$link} {
-    color: color('action');
-    text-decoration-color: color('underline');
+  #{config.$link} {
+    color: tools.color('action');
+    text-decoration-color: tools.color('underline');
     text-decoration-skip: auto;
     transition: text-decoration-color 250ms, color 200ms;
   }
 
-  #{$focus} {
-    color: color('focus');
+  #{config.$focus} {
+    color: tools.color('focus');
     text-decoration-color: currentColor;
   }
 }
@@ -65,8 +68,8 @@ mark {
 /// and a smaller font-size.
 /// @group style-typography
 pre {
-  @include font-family('code');
-  font-size: size('code');
+  @include tools.font-family('code');
+  font-size: tools.size('code');
 }
 
 // Code
@@ -78,7 +81,7 @@ pre {
 /// @group style-typography
 /// @see {css} Code Blocks
 code {
-  @include font-family('code');
+  @include tools.font-family('code');
   font-weight: bolder;
 
   pre & {
@@ -93,5 +96,5 @@ code {
 /// can be visually hidden without removing from the DOM.
 /// @group style-typography
 .is-hidden {
-  @include is-hidden;
+  @include tools.is-hidden;
 }

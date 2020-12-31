@@ -4,6 +4,8 @@
 /// So you always know where you are…
 /// @group component-breadcrumb
 
+@use '~accoutrement/sass/tools';
+
 // Breadcrumb
 // ----------
 /// @group component-breadcrumb
@@ -13,8 +15,8 @@
 ///     <strong>_Component: Breadcrumb</strong>
 ///   </nav>
 .breadcrumb {
-  background: color('callout');
-  padding: size('shim') size('flex-gutter');
+  background: tools.color('callout');
+  padding: tools.size('shim') tools.size('flex-gutter');
 
   a,
   span,

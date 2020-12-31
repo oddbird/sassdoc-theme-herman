@@ -1,3 +1,5 @@
+@use "../utilities";
+
 // Font Specimen Samples
 // =====================
 
@@ -163,5 +165,5 @@ $demo-local: (
 /// @see export
 /// @group demo_fonts
 /// @link https://www.oddbird.net/accoutrement Accoutrement
-@include add('font', 'demo-cdn', $demo-cdn);
-@include add('font', 'demo-local', $demo-local);
+@include utilities.add('font', 'demo-cdn', $demo-cdn);
+@include utilities.add('font', 'demo-local', $demo-local);

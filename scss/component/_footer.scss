@@ -23,15 +23,18 @@
 ///     </span>
 ///   </aside>
 
+@use '~accoutrement/sass/tools';
+@use '../config';
+
 /// Layout for the footer credit.
 /// @group component-footer
 .footer-credit {
-  @include clearfix;
-  border-top: 1px solid color('theme-light');
+  @include tools.clearfix;
+  border-top: 1px solid tools.color('theme-light');
   flex: 0 0 auto;
-  font-size: size('footer');
-  line-height: size('rhythm');
-  padding-top: size('gutter');
+  font-size: tools.size('footer');
+  line-height: tools.size('rhythm');
+  padding-top: tools.size('gutter');
 
   span {
     display: block;
@@ -43,22 +46,22 @@
 /// Layout for the footer logo-icon.
 /// @group component-footer
 .footer-icon {
-  #{$link} {
+  #{config.$link} {
     color: inherit;
     float: left;
-    margin-right: size('half-shim');
+    margin-right: tools.size('half-shim');
   }
 }
 
 /// Special styles for the footer links.
 /// @group component-footer
 .footer-link {
-  #{$link} {
+  #{config.$link} {
     font-weight: bold;
     text-decoration-color: transparent;
   }
 
-  #{$focus} {
+  #{config.$focus} {
     text-decoration-color: currentColor;
   }
 }

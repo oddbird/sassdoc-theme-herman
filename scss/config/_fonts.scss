@@ -1,3 +1,5 @@
+@use "abstracts";
+
 // Font Settings
 // =============
 
@@ -25,7 +27,7 @@ $sans-font: (
   ),
 );
 
-@include config('font', 'sans', $sans-font);
+@include abstracts.add('font', 'sans', $sans-font);
 
 // Code Font
 // ---------
@@ -51,4 +53,4 @@ $code-font: (
   ),
 );
 
-@include config('font', 'code', $code-font);
+@include abstracts.add('font', 'code', $code-font);

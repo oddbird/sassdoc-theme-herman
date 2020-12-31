@@ -414,18 +414,18 @@
       
       
       <pre class="hljs-pre"><code class="lang-scss">[data-region=&#39;nav&#39;] {
-  @include invert-colors;
-  @include z-index(&#39;sidebar&#39;);
+  @include config.invert-colors;
+  @include tools.z-index(&#39;sidebar&#39;);
   align-items: stretch;
   display: flex;
   flex-direction: column;
-  padding: size(&#39;gutter&#39;);
+  padding: tools.size(&#39;gutter&#39;);
   white-space: nowrap;
   width: auto;
 
-  @include below(&#39;nav-break&#39;) {
-    @include position(0 null 0 0);
-    box-shadow: 0 0 size(&#39;half-shim&#39;) color(&#39;shadow&#39;);
+  @include tools.below(&#39;nav-break&#39;) {
+    @include tools.position(0 null 0 0);
+    box-shadow: 0 0 tools.size(&#39;half-shim&#39;) tools.color(&#39;shadow&#39;);
     transform: translateX(-102%);
     transition: transform 0.4s;
 
@@ -434,7 +434,7 @@
     }
   }
 
-  @include above(&#39;nav-break&#39;) {
+  @include tools.above(&#39;nav-break&#39;) {
     flex: 0 0 auto;
   }
 }</code></pre>

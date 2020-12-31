@@ -1,11 +1,11 @@
 // Herman SassDoc Theme
 // ====================
 
-@import 'utilities';
-@import 'config/manifest';
-@import 'initial/manifest';
-@import 'layout/manifest';
-@import 'patterns/manifest';
-@import 'component/manifest';
-@import 'previews/manifest';
-@import 'samples/manifest';
+@use 'utilities';
+@use 'config';
+@use 'initial';
+@use 'layout';
+@use 'patterns';
+@use 'component';
+@use 'previews';
+@use 'samples';

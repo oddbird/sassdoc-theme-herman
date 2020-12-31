@@ -457,7 +457,7 @@ for both user and machine-generated code<span class="widont">&nbsp;</span>sample
   display: flex;
   flex: 1 1 20em;
   flex-direction: column;
-  max-height: size(&#39;rhythm&#39;) * 12;
+  max-height: tools.size(&#39;rhythm&#39;) * 12;
   max-width: 100%;
   overflow: hidden;
 }</code></pre>
@@ -573,9 +573,9 @@ for both user and machine-generated code<span class="widont">&nbsp;</span>sample
       
       
       <pre class="hljs-pre"><code class="lang-scss">.code-header {
-  @include contrasted(&#39;theme-light&#39;);
+  @include tools.contrasted(&#39;theme-light&#39;);
   flex: 0 0 auto;
-  padding: 0 size(&#39;shim&#39;);
+  padding: 0 tools.size(&#39;shim&#39;);
 }</code></pre>
     </div>
   
@@ -689,7 +689,7 @@ for both user and machine-generated code<span class="widont">&nbsp;</span>sample
       
       
       <pre class="hljs-pre"><code class="lang-scss">.code-description {
-  @include before(&#39; – &#39;);
+  @include tools.before(&#39; – &#39;);
 }</code></pre>
     </div>
   
@@ -805,14 +805,14 @@ for both user and machine-generated code<span class="widont">&nbsp;</span>sample
       
       <pre class="hljs-pre"><code class="lang-scss">.hljs-pre,
 .text-block pre {
-  background-color: color(&#39;slight&#39;);
-  border: 1px solid color(&#39;callout&#39;);
-  color: color(&#39;code&#39;);
+  background-color: tools.color(&#39;slight&#39;);
+  border: 1px solid tools.color(&#39;callout&#39;);
+  color: tools.color(&#39;code&#39;);
   flex: 1 1 auto;
   flex-wrap: wrap;
 
   code {
-    padding: size(&#39;shim&#39;);
+    padding: tools.size(&#39;shim&#39;);
   }
 }</code></pre>
     </div>

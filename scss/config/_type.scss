@@ -1,6 +1,8 @@
 // Typography Config
 // =================
 
+@use '~accoutrement/sass/tools';
+
 /// ## macro `link_if()`
 /// This Nunjucks utility macro returns either
 /// an anchor tag, or span, depending on
@@ -28,7 +30,7 @@
 /// @group config-utils
 /// @example scss
 ///   a {
-///     #{$link} {
+///     #{config.$link} {
 ///       color: blue;
 ///     }
 ///   }
@@ -40,7 +42,7 @@ $link: '&:link, &:visited';
 /// @group config-utils
 /// @example scss
 ///   a {
-///     #{$focus} {
+///     #{config.$focus} {
 ///       color: red;
 ///     }
 ///   }
@@ -52,14 +54,14 @@ $focus: '&:hover, &:focus, &:active';
 /// @group config-utils
 /// @example scss
 ///   .invert-colors {
-///     @include invert-colors;
+///     @include config.invert-colors;
 ///   }
 /// @example html
 ///   <div class="invert-colors" style="padding: 1em;">
 ///     You shall sojourn at <a href="#">Paris, Rome, and Naples</a>.
 ///   </div>
 @mixin invert-colors {
-  @include contrasted('theme-dark');
+  @include tools.contrasted('theme-dark');
 
   [href] {
     #{$link} {

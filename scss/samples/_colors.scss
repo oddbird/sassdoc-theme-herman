@@ -1,3 +1,7 @@
+@use "sass:meta";
+@use "../utilities";
+@use '~accoutrement/sass/tools';
+
 // Color Samples
 // =============
 
@@ -139,7 +143,7 @@ $demo-colors: (
 /// @see $herman
 /// @see add
 /// @group demo_colors
-@include add('colors', 'demo-colors', $demo-colors);
+@include utilities.add('colors', 'demo-colors', $demo-colors);
 
 $demo-noncolors: (
   'light-gray': '#brand-blue'
@@ -188,26 +192,29 @@ $demo-noncolors: (
 ///
 /// @colors demo-noncolors
 /// @example scss
-///   $herman: ();
+///   @use '~accoutrement/sass/tools';
+///   @use 'sass:meta';
+///
+///   utilities.$herman: ();
 ///   $demo-noncolors: (
 ///     'light-gray': '#brand-blue' ('tint': 80%, 'desaturate': 80%),
 ///     'gray': '#brand-blue' ('desaturate': 80%),
 ///     'black': '#brand-blue' ('shade': 30%, 'desaturate': 80%),
 ///   );
 ///
-///   @include add(
+///   @include utilities.add(
 ///     'colors', 'demo-noncolors', $demo-noncolors,
-///     get-function('color') // function
+///     meta.get-function('color', $module: 'tools') // function
 ///   );
 ///
 ///   @each $key, $value in $herman {
-///   /* #{$key}: #{inspect($value)} */
+///   /* #{$key}: #{meta.inspect($value)} */
 ///   }
 /// @group demo_colors
 /// @link https://www.oddbird.net/accoutrement Accoutrement
-@include add(
+@include utilities.add(
   'colors',
   'demo-noncolors',
   $demo-noncolors,
-  get-function('color')
+  meta.get-function('color', $module: 'tools')
 );

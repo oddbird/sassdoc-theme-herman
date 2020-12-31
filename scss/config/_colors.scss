@@ -1,3 +1,5 @@
+@use "abstracts";
+
 // Color Settings
 // ==============
 
@@ -45,7 +47,7 @@ $brand-colors: (
     ),
 );
 
-@include config('colors', 'brand-colors', $brand-colors);
+@include abstracts.add('colors', 'brand-colors', $brand-colors);
 
 // Neutral Colors
 // --------------
@@ -74,7 +76,7 @@ $neutral-colors: (
     ),
 );
 
-@include config('colors', 'neutral-colors', $neutral-colors);
+@include abstracts.add('colors', 'neutral-colors', $neutral-colors);
 
 // Theme Colors
 // ------------
@@ -120,4 +122,4 @@ $theme-colors: (
     ),
 );
 
-@include config('colors', 'theme-colors', $theme-colors);
+@include abstracts.add('colors', 'theme-colors', $theme-colors);

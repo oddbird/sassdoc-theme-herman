@@ -1,3 +1,5 @@
+@use "../utilities";
+
 // Ratio & Size Samples
 // ====================
 
@@ -188,6 +190,6 @@ $demo-sizes-large: (
 /// @see export
 /// @group demo_sizes
 /// @link https://www.oddbird.net/accoutrement Accoutrement
-@include add('ratios', 'demo-ratios', $demo-ratios);
-@include add('sizes', 'demo-sizes', $demo-sizes);
-@include add('sizes', 'demo-sizes-large', $demo-sizes-large);
+@include utilities.add('ratios', 'demo-ratios', $demo-ratios);
+@include utilities.add('sizes', 'demo-sizes', $demo-sizes);
+@include utilities.add('sizes', 'demo-sizes-large', $demo-sizes-large);

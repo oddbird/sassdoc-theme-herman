@@ -421,8 +421,8 @@
 
   &amp; + .nav-item {
     border-top: 1px solid;
-    margin-top: size(&#39;double-gutter&#39;);
-    padding-top: size(&#39;gutter&#39;);
+    margin-top: tools.size(&#39;double-gutter&#39;);
+    padding-top: tools.size(&#39;gutter&#39;);
   }
 }</code></pre>
     </div>
@@ -551,9 +551,9 @@
       
       
       <pre class="hljs-pre"><code class="lang-scss">.nav-home {
-  font-size: size(&#39;large&#39;);
+  font-size: tools.size(&#39;large&#39;);
   font-weight: bold;
-  margin-top: size(&#39;gutter-plus&#39;);
+  margin-top: tools.size(&#39;gutter-plus&#39;);
 }</code></pre>
     </div>
   
@@ -683,8 +683,8 @@
       <pre class="hljs-pre"><code class="lang-scss">.nav-title {
   border-top: 1px solid;
   font-weight: bold;
-  margin: size(&#39;double-gutter&#39;) 0 size(&#39;gutter&#39;);
-  padding-top: size(&#39;quarter-shim&#39;);
+  margin: tools.size(&#39;double-gutter&#39;) 0 tools.size(&#39;gutter&#39;);
+  padding-top: tools.size(&#39;quarter-shim&#39;);
 }</code></pre>
     </div>
   
@@ -813,7 +813,7 @@
       
       <pre class="hljs-pre"><code class="lang-scss">.nav-item {
   list-style: none;
-  margin: size(&#39;half-shim&#39;) 0;
+  margin: tools.size(&#39;half-shim&#39;) 0;
 }</code></pre>
     </div>
   
@@ -941,19 +941,19 @@
       
       
       <pre class="hljs-pre"><code class="lang-scss">[data-nav] {
-  #{$link} {
-    color: color(&#39;background&#39;);
+  #{config.$link} {
+    color: tools.color(&#39;background&#39;);
     line-height: 1.1;
-    padding-bottom: size(&#39;quarter-shim&#39;);
+    padding-bottom: tools.size(&#39;quarter-shim&#39;);
     position: relative;
     text-decoration: none;
     transition: color 0.4s;
 
     // Animated underlines
-    @include before(&#39;&#39;) {
-      @include position(null null 0 0);
-      background: color(&#39;theme-light&#39;);
-      height: size(&#39;nav-underline&#39;);
+    @include tools.before(&#39;&#39;) {
+      @include tools.position(null null 0 0);
+      background: tools.color(&#39;theme-light&#39;);
+      height: tools.size(&#39;nav-underline&#39;);
       transform: scale3d(0, 1, 1);
       transform-origin: center left;
       transition: transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
@@ -962,17 +962,17 @@
     }
   }
 
-  #{$focus} {
-    @include before(&#39;&#39;) {
+  #{config.$focus} {
+    @include tools.before(&#39;&#39;) {
       transform: scale3d(1, 1, 1);
       transition-delay: 0s;
     }
   }
 
   &amp;[data-nav=&#39;is-active&#39;] {
-    #{$link},
-    #{$focus} {
-      @include before(&#39;&#39;) {
+    #{config.$link},
+    #{config.$focus} {
+      @include tools.before(&#39;&#39;) {
         transform: scale3d(1, 1, 1);
         transition-delay: 0s;
       }

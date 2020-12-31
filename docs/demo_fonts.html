@@ -1148,14 +1148,14 @@ herman:
 <p>In order to preview the <code>$demo-cdn</code> and <code>$demo-local</code> maps,
 we also need to <a href="api_json-export.html">export the data to<span class="widont">&nbsp;</span>JSON</a>.</p>
 <p>You can add data to the <code>$herman</code> export-map by hand,
-or use the provided <code>herman-add</code> mixin
+or use the provided <code>add</code> mixin
 to combine existing maps into the proper structure.
 <a href="api_json-export.html#fonts">See the font map documentation for<span class="widont">&nbsp;</span>details</a>.</p>
-<pre><code class="lang-scss"> @include herman-add('font', 'demo-code', $demo-code);
- @include herman-add('font', 'demo-local', $demo-local);
+<pre><code class="lang-scss"> @include add('font', 'demo-code', $demo-code);
+ @include add('font', 'demo-local', $demo-local);
 </code></pre>
 <p>After adding your data to the <code>$herman</code> map,
-it can be converted to JSON using <code>herman-export</code>.</p>
+it can be converted to JSON using <code>export</code>.</p>
 
       
   
@@ -1258,7 +1258,7 @@ it can be converted to JSON using <code>herman-export</code>.</p>
       <span class="item-type">@mixin</span>
       
         <a href="
-  api_json-export.html#mixin--herman-add" class="item-name">herman-add()</a>
+  api_json-export.html#mixin--add" class="item-name">add()</a>
       
       
       
@@ -1283,7 +1283,7 @@ it can be converted to JSON using <code>herman-export</code>.</p>
       <span class="item-type">@mixin</span>
       
         <a href="
-  api_json-export.html#mixin--herman-export" class="item-name">herman-export()</a>
+  api_json-export.html#mixin--export" class="item-name">export()</a>
       
       
       

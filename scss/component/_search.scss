@@ -1,12 +1,14 @@
 // Search
 // ======
 
+@use '~accoutrement/sass/tools';
+
 .search-heading {
-  font-size: size('h1');
+  font-size: tools.size('h1');
 }
 
 .search-term {
-  @include font-family('code');
+  @include tools.font-family('code');
 }
 
 .search-results {
@@ -14,9 +16,9 @@
 }
 
 .search-result {
-  margin: size('flex-gutter') 0;
+  margin: tools.size('flex-gutter') 0;
 }
 
 [data-result-field='contents'] {
-  color: color('text-light');
+  color: tools.color('text-light');
 }

@@ -28,7 +28,7 @@
 /// @see export
 ///
 /// @example scss
-///   $herman: (
+///   utilities.$herman: (
 ///     'colors': (
 ///       'brand-colors': (
 ///         'brand-orange': #c75000,
@@ -37,7 +37,7 @@
 ///     ),
 ///   );
 ///
-///   @include export($herman);
+///   @include utilities.export($herman);
 
 // Herman
 // ------
@@ -160,7 +160,7 @@
 /// @group api_json-export
 ///
 /// @example scss - sample map structure
-///   $herman: (
+///   utilities.$herman: (
 ///     'colors': (
 ///       'brand-colors': (
 ///         'brand-orange': '#c75000',
@@ -207,7 +207,7 @@ $herman: () !default;
 ///
 /// @example scss
 ///   // Export to JSON
-///   @include export;
+///   @include utilities.export;
 @mixin export($map: $herman) {
   /*! json-encode: #{json.encode($map)} */
 }

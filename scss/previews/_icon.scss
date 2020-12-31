@@ -1,22 +1,24 @@
 // Icon Preview
 // ============
 
+@use '~accoutrement/sass/tools';
+
 [data-sassdoc='icon-preview'] {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  margin: 0 negative('shim');
+  margin: 0 tools.negative('shim');
 }
 
 [data-sassdoc-icon] {
-  margin: size('gutter') size('shim');
-  min-width: size('rhythm') * 5;
+  margin: tools.size('gutter') tools.size('shim');
+  min-width: tools.size('rhythm') * 5;
 
   [data-icon] {
-    @include square('h1');
-    margin-bottom: size('shim');
+    @include tools.square('h1');
+    margin-bottom: tools.size('shim');
   }
 }
 
 [data-sassdoc='icon-info'] {
-  font-size: size('code');
+  font-size: tools.size('code');
 }

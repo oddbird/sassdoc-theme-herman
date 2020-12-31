@@ -583,12 +583,12 @@ using the <a href="http://sassdoc.com/customising-the-view/#watermark-display">S
       
       
       <pre class="hljs-pre"><code class="lang-scss">.footer-credit {
-  @include clearfix;
-  border-top: 1px solid color(&#39;theme-light&#39;);
+  @include tools.clearfix;
+  border-top: 1px solid tools.color(&#39;theme-light&#39;);
   flex: 0 0 auto;
-  font-size: size(&#39;footer&#39;);
-  line-height: size(&#39;rhythm&#39;);
-  padding-top: size(&#39;gutter&#39;);
+  font-size: tools.size(&#39;footer&#39;);
+  line-height: tools.size(&#39;rhythm&#39;);
+  padding-top: tools.size(&#39;gutter&#39;);
 
   span {
     display: block;
@@ -722,10 +722,10 @@ using the <a href="http://sassdoc.com/customising-the-view/#watermark-display">S
       
       
       <pre class="hljs-pre"><code class="lang-scss">.footer-icon {
-  #{$link} {
+  #{config.$link} {
     color: inherit;
     float: left;
-    margin-right: size(&#39;half-shim&#39;);
+    margin-right: tools.size(&#39;half-shim&#39;);
   }
 }</code></pre>
     </div>
@@ -854,12 +854,12 @@ using the <a href="http://sassdoc.com/customising-the-view/#watermark-display">S
       
       
       <pre class="hljs-pre"><code class="lang-scss">.footer-link {
-  #{$link} {
+  #{config.$link} {
     font-weight: bold;
     text-decoration-color: transparent;
   }
 
-  #{$focus} {
+  #{config.$focus} {
     text-decoration-color: currentColor;
   }
 }</code></pre>

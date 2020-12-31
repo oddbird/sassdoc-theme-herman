@@ -365,7 +365,7 @@
 
 
 
-<section class="item" id="variable--functions">
+<section class="item" id="css--tools.%24functions%3A%20(%0A%20%20&#39;darken&#39;%3A%20meta.get-function(&#39;darken&#39;)%2C%0A%20%20&#39;desaturate&#39;%3A%20meta.get-function(&#39;desaturate&#39;)%2C%0A%20%20&#39;rgba&#39;%3A%20meta.get-function(&#39;rgba&#39;)%2C%0A%20%20&#39;convert&#39;%3A%20&#39;%23convert-units&#39;%0A)%3B%0A%0A%2F%2F%20Config%0A%2F%2F%20------%0A%2F%2F%2F%20Internal%20utility%20for%20managing%20Herman%20and%20Accoutrement%20maps%0A%2F%2F%2F%20in%20one%20single%20mixin.%0A%2F%2F%2F%20In%20preparation%20for%20the%20Sass%203.5%2B%20modular%20syntax%2C%0A%2F%2F%2F%20this%20can%20only%20be%20done%20in%20the%20project%20being%20documented%2C%0A%2F%2F%2F%20and%20is%20not%20included%20as%20part%20of%20the%20Herman%20API.%0A%2F%2F%2F%0A%2F%2F%2F%20%40group%20config-utils%0A%2F%2F%2F%20%40link%20https%3A%2F%2Fwww.oddbird.net%2Faccoutrement%20Accoutrement%0A%2F%2F%2F%0A%2F%2F%2F%20%40param">
   
     
   
@@ -383,11 +383,27 @@
       
 
       
-        <a href="#variable--functions" class="item-name">$functions</a>
+        <a href="#css--tools.%24functions%3A%20(%0A%20%20&#39;darken&#39;%3A%20meta.get-function(&#39;darken&#39;)%2C%0A%20%20&#39;desaturate&#39;%3A%20meta.get-function(&#39;desaturate&#39;)%2C%0A%20%20&#39;rgba&#39;%3A%20meta.get-function(&#39;rgba&#39;)%2C%0A%20%20&#39;convert&#39;%3A%20&#39;%23convert-units&#39;%0A)%3B%0A%0A%2F%2F%20Config%0A%2F%2F%20------%0A%2F%2F%2F%20Internal%20utility%20for%20managing%20Herman%20and%20Accoutrement%20maps%0A%2F%2F%2F%20in%20one%20single%20mixin.%0A%2F%2F%2F%20In%20preparation%20for%20the%20Sass%203.5%2B%20modular%20syntax%2C%0A%2F%2F%2F%20this%20can%20only%20be%20done%20in%20the%20project%20being%20documented%2C%0A%2F%2F%2F%20and%20is%20not%20included%20as%20part%20of%20the%20Herman%20API.%0A%2F%2F%2F%0A%2F%2F%2F%20%40group%20config-utils%0A%2F%2F%2F%20%40link%20https%3A%2F%2Fwww.oddbird.net%2Faccoutrement%20Accoutrement%0A%2F%2F%2F%0A%2F%2F%2F%20%40param" class="item-name">tools.$functions: (
+  &#39;darken&#39;: meta.get-function(&#39;darken&#39;),
+  &#39;desaturate&#39;: meta.get-function(&#39;desaturate&#39;),
+  &#39;rgba&#39;: meta.get-function(&#39;rgba&#39;),
+  &#39;convert&#39;: &#39;#convert-units&#39;
+);
+
+// Config
+// ------
+/// Internal utility for managing Herman and Accoutrement maps
+/// in one single mixin.
+/// In preparation for the Sass 3.5+ modular syntax,
+/// this can only be done in the project being documented,
+/// and is not included as part of the Herman API.
+///
+/// @group config-utils
+/// @link https://www.oddbird.net/accoutrement Accoutrement
+///
+///<span class="widont">&nbsp;</span>@param</a>
       
 
-      
-        <span class="value-type">(map)</span>
       
 
       
@@ -414,12 +430,27 @@
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">$functions: (
-  &#39;darken&#39;: get-function(&#39;darken&#39;),
-  &#39;desaturate&#39;: get-function(&#39;desaturate&#39;),
-  &#39;rgba&#39;: get-function(&#39;rgba&#39;),
-  &#39;convert&#39;: &#39;#convert-units&#39;,
-);</code></pre>
+      <pre class="hljs-pre"><code class="lang-scss">tools.$functions: (
+  &#39;darken&#39;: meta.get-function(&#39;darken&#39;),
+  &#39;desaturate&#39;: meta.get-function(&#39;desaturate&#39;),
+  &#39;rgba&#39;: meta.get-function(&#39;rgba&#39;),
+  &#39;convert&#39;: &#39;#convert-units&#39;
+);
+
+// Config
+// ------
+/// Internal utility for managing Herman and Accoutrement maps
+/// in one single mixin.
+/// In preparation for the Sass 3.5+ modular syntax,
+/// this can only be done in the project being documented,
+/// and is not included as part of the Herman API.
+///
+/// @group config-utils
+/// @link https://www.oddbird.net/accoutrement Accoutrement
+///
+/// @param {
+  string
+}</code></pre>
     </div>
   
 
@@ -459,62 +490,6 @@ or establish alias names for existing<span class="widont">&nbsp;</span>functions
   
   
   
-
-  
-    
-  <div data-item-section="property">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Map Properties</span>
-        
-      </h3>
-    
-
-    
-      
-        
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">&lt;alias&gt;:</span>
-      
-      
-      <span class="value-type">(function |<span class="widont">&nbsp;</span>string)</span>
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>Use <code>get-function()</code> to capture a first-class function,
-or use a string to reference existing functions and<span class="widont">&nbsp;</span>alias-keys</p>
-
-      </div>
-    
-  </div>
-
-
-      
-
-      
-  
-
-      
-  
-
-      
-  
-
-      
-  
-
-    
-  </div>
 
   
 
@@ -596,7 +571,7 @@ or use a string to reference existing functions and<span class="widont">&nbsp;</
 
 
 
-<section class="item" id="mixin--config">
+<section class="item" id="mixin--add">
   
     
   
@@ -614,7 +589,7 @@ or use a string to reference existing functions and<span class="widont">&nbsp;</
       
 
       
-        <a href="#mixin--config" class="item-name">config()</a>
+        <a href="#mixin--add" class="item-name">add()</a>
       
 
       
@@ -828,7 +803,7 @@ Accoutrement globals and Herman<span class="widont">&nbsp;</span>export.</p>
   &#39;brand-pink&#39;: hsl(330, 85%, 48%) (&#39;shade&#39;: 25%),
 );
 
-@include config(&#39;colors&#39;, &#39;brand-colors&#39;, $brand-colors);</code></pre>
+@include config.add(&#39;colors&#39;, &#39;brand-colors&#39;, $brand-colors);</code></pre>
     </div>
   
 
@@ -885,75 +860,6 @@ Accoutrement globals and Herman<span class="widont">&nbsp;</span>export.</p>
   
   
     
-    
-  <div data-item-section="requires">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Requires</span>
-        
-      </h3>
-    
-
-    
-      
-      
-        
-        
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@mixin</span>
-      
-        <a href="
-  api_json-export.html#mixin--herman-add" class="item-name">herman-add()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-        
-        
-
-        
-      
-        
-        
-        
-
-        
-      
-        
-        
-        
-
-        
-      
-    
-  </div>
-
-  
     
   
 
@@ -1322,33 +1228,9 @@ to include on the returned link or<span class="widont">&nbsp;</span>span.</li>
       
       
       <pre class="hljs-pre"><code class="lang-scss">a {
-  #{$link} {
+  #{config.$link} {
     color: blue;
   }
-}</code></pre>
-    </div>
-  
-
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            css
-          </span>
-
-          
-            <span class='code-description'>
-              compiled
-            </span>
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-css">a:link, a:visited {
-  color: blue;
 }</code></pre>
     </div>
   
@@ -1575,33 +1457,9 @@ to include on the returned link or<span class="widont">&nbsp;</span>span.</li>
       
       
       <pre class="hljs-pre"><code class="lang-scss">a {
-  #{$focus} {
+  #{config.$focus} {
     color: red;
   }
-}</code></pre>
-    </div>
-  
-
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            css
-          </span>
-
-          
-            <span class='code-description'>
-              compiled
-            </span>
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-css">a:hover, a:focus, a:active {
-  color: red;
 }</code></pre>
     </div>
   
@@ -1761,35 +1619,7 @@ to include on the returned link or<span class="widont">&nbsp;</span>span.</li>
       
       
       <pre class="hljs-pre"><code class="lang-scss">.invert-colors {
-  @include invert-colors;
-}</code></pre>
-    </div>
-  
-
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            css
-          </span>
-
-          
-            <span class='code-description'>
-              compiled
-            </span>
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-css">.invert-colors {
-  background-color: #0d7fa5;
-  color: #fff;
-}
-.invert-colors [href]:link, .invert-colors [href]:visited {
-  color: inherit;
+  @include config.invert-colors;
 }</code></pre>
     </div>
   
@@ -1977,7 +1807,7 @@ to include on the returned link or<span class="widont">&nbsp;</span>span.</li>
       
       
         <a href="
-  style-typography.html#css--.invert-colors" class="item-name">.invert-colors</a>
+  style-typography.html#css--.config.invert-colors" class="item-name">.config.invert-colors</a>
       
       
       
@@ -2023,65 +1853,16 @@ to include on the returned link or<span class="widont">&nbsp;</span>span.</li>
 
 
 
-<section class="item" id="variable--z-index">
+<section class="item" >
   
     
   
   
-
-  
-  
-  
-  
-
-  <div data-item-section="header">
-    <h2 class="item-title">
-      
-        <span class="item-type"></span>
-      
-
-      
-        <a href="#variable--z-index" class="item-name">$z-index</a>
-      
-
-      
-
-      
-    </h2>
-
-    
-  
-
-
-    
-    
-    
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            scss
-          </span>
-
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-scss">$z-index: (&#39;main&#39;, &#39;sidebar&#39;, &#39;banner&#39;);</code></pre>
-    </div>
-  
-
-    
-  
-  
   
   
 
   
-    <div class="text-block">
+    <div data-item-section="prose" class="text-block">
       <p>List of named z-index layers for Herman’s layout.
 The order they are defined
 will be the integer they are<span class="widont">&nbsp;</span>assigned.</p>
@@ -2097,8 +1878,6 @@ will be the integer they are<span class="widont">&nbsp;</span>assigned.</p>
 
     </div>
   
-
-  </div>
 
   
 

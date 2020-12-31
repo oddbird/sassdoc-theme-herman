@@ -1,10 +1,12 @@
 // Z-Index
 // =======
 
+@use '~accoutrement/sass/tools';
+
 /// List of named z-index layers for Herman's layout.
 /// The order they are defined
 /// will be the integer they are assigned.
 /// @group config-utils
 /// @link https://www.oddbird.net/accoutrement/docs/layout-z-index.html
 ///   Accoutrement Layout: Z-Index
-$z-index: ('main', 'sidebar', 'banner');
+tools.$z-index: ('main', 'sidebar', 'banner');

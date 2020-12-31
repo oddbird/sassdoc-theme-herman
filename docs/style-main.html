@@ -414,9 +414,9 @@
       
       
       <pre class="hljs-pre"><code class="lang-scss">[data-region=&#39;main&#39;] {
-  @include z-index(&#39;main&#39;);
+  @include tools.z-index(&#39;main&#39;);
 
-  @include above(&#39;page-break&#39;) {
+  @include tools.above(&#39;page-break&#39;) {
     overflow: hidden;
   }
 }</code></pre>
@@ -546,7 +546,7 @@
       
       
       <pre class="hljs-pre"><code class="lang-scss">[data-page] {
-  padding: size(&#39;flex-gutter&#39;);
+  padding: tools.size(&#39;flex-gutter&#39;);
   position: relative;
 }</code></pre>
     </div>

@@ -1,6 +1,9 @@
 // Banner Styles
 // =============
 
+@use '~accoutrement/sass/tools';
+@use '../config';
+
 // Banner Region
 // -------------
 /// Layout styles for Herman's top-banner region.
@@ -18,11 +21,11 @@
 ///     </div>
 ///   </header>
 [data-region='banner'] {
-  @include banner-arrow;
-  @include z-index('banner');
+  @include config.banner-arrow;
+  @include tools.z-index('banner');
   align-items: center;
   display: flex;
-  padding: size('shim');
+  padding: tools.size('shim');
 }
 
 // Project Title
@@ -51,12 +54,12 @@
 /// @example html
 ///   <a href="index.html" rel="home" class="project-name">Herman</a>
 .project-name {
-  font-size: size('h1');
+  font-size: tools.size('h1');
   font-weight: bold;
-  padding-left: size('half-shim');
-  padding-right: size('half-shim');
+  padding-left: tools.size('half-shim');
+  padding-right: tools.size('half-shim');
 
-  #{$link} {
+  #{config.$link} {
     text-decoration: none;
   }
 }
@@ -69,9 +72,9 @@
 /// @example html
 ///   <span class="project-version">1.0.0</span>
 .project-version {
-  @include font-family('sans');
-  color: color('text-light');
-  font-size: size('h3');
+  @include tools.font-family('sans');
+  color: tools.color('text-light');
+  font-size: tools.size('h3');
 }
 
 // Nav Toggle
@@ -85,21 +88,21 @@
 ///     {{ utility.icon('menu', size='nav-icon') }}
 ///   </button>
 [data-nav-toggle] {
-  color: color('action');
-  padding: size('half-shim');
+  color: tools.color('action');
+  padding: tools.size('half-shim');
 
-  @include above('page-break') {
-    padding-left: size('shim');
-    padding-right: size('shim');
+  @include tools.above('page-break') {
+    padding-left: tools.size('shim');
+    padding-right: tools.size('shim');
   }
 
-  @include above('nav-break') {
+  @include tools.above('nav-break') {
     display: none;
   }
 
-  #{$focus},
+  #{config.$focus},
   &[aria-pressed='true'] {
-    color: color('focus');
+    color: tools.color('focus');
     outline: 0;
   }
 }
