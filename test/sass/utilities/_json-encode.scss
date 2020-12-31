@@ -104,9 +104,9 @@
 // ------------
 @include true.describe('quote [function]') {
   @include true.it('converts values to strings') {
-    @include true.assert-equal(quote(1em), '"1em"');
+    @include true.assert-equal(quotes(1em), '"1em"');
 
-    @include true.assert-equal(quote('one' 'two' 'three'), '"one two three"');
+    @include true.assert-equal(quotes('one' 'two' 'three'), '"one two three"');
   }
 }
 

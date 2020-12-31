@@ -15,6 +15,7 @@
 /// with optional functions/args for compiling raw values.
 ///
 /// @group api_json-export
+/// @since 4.0.0 Name changed from `herman-add`
 ///
 /// @param {String} $type -
 ///   The type of map being added,
@@ -79,6 +80,7 @@
 /// but can also be accessed directly.
 ///
 /// @group api_json-export
+/// @since 4.0.0 Name changed from `herman-map-compile`
 ///
 /// @param {Map} $map -
 ///   A sass map with values that need to be compiled,

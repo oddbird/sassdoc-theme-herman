@@ -9,6 +9,10 @@
   `nunjucks.templatePath`, `sass.jsonFile`, `sass.includePaths`,
   `sass.outputStyle`)
 - 💥 BREAKING: Herman no longer automatically optimizes SVG icons using SVGO
+- 💥 BREAKING: Remove `herman-` prefix from Sass JSON utilities:
+  - `herman-add()` => `add()`
+  - `herman-export()` => `export()`
+  - `herman-map-compile()` => `compile()`
 - 🚀 NEW: Add support for using [namespaced Sass
   modules](https://sass-lang.com/documentation/at-rules/use#choosing-a-namespace)
   in `@example scss` annotations with

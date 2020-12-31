@@ -24,7 +24,7 @@
     @return encode-number($value);
   }
 
-  @return quote($value);
+  @return quotes($value);
 }
 
 // Encode List
@@ -61,7 +61,7 @@
 
   @each $key, $value in $map {
     $str: if($str != '', $str + ', ', $str);
-    $str: $str + quote($key) + ': ' + encode($value);
+    $str: $str + quotes($key) + ': ' + encode($value);
   }
 
   @return '{#{$str}}';
@@ -81,7 +81,7 @@
     @return inspect($number);
   }
 
-  @return quote($number);
+  @return quotes($number);
 }
 
 // Quote
@@ -93,7 +93,7 @@
 ///
 /// @param {*} $value -
 ///   The value to inspect and quote.
-@function quote($value) {
+@function quotes($value) {
   $value: '#{$value}';
   $value: escape-backslashes($value);
   $value: escape-quotes($value);

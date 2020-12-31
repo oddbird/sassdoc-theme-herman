@@ -201,6 +201,7 @@ $herman: () !default;
 /// and print to CSS output as a persistent comment.
 ///
 /// @group api_json-export
+/// @since 4.0.0 Name changed from `herman-export`
 ///
 /// @param {map} $map [$herman] -
 ///   Map to be encoded for JSON exporting
