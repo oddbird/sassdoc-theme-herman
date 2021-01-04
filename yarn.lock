@@ -5,12 +5,6 @@ __metadata:
   version: 4
   cacheKey: 7
 
-"@@link:./assets/js::locator=sassdoc-theme-herman%40workspace%3A.":
-  version: 0.0.0-use.local
-  resolution: "@@link:./assets/js::locator=sassdoc-theme-herman%40workspace%3A."
-  languageName: node
-  linkType: soft
-
 "@arcanis/slice-ansi@npm:^1.0.2":
   version: 1.0.2
   resolution: "@arcanis/slice-ansi@npm:1.0.2"
@@ -13054,7 +13048,6 @@ fsevents@~2.1.2:
   version: 0.0.0-use.local
   resolution: "sassdoc-theme-herman@workspace:."
   dependencies:
-    "@": "link:./assets/js"
     "@babel/core": ^7.12.10
     "@babel/preset-env": ^7.12.11
     "@testing-library/dom": ^7.29.1

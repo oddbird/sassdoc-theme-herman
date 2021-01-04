@@ -37,7 +37,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         [null, {
           "packageLocation": "./",
           "packageDependencies": [
-            ["@", "link:./assets/js::locator=sassdoc-theme-herman%40workspace%3A."],
             ["@babel/core", "npm:7.12.10"],
             ["@babel/preset-env", "virtual:878b150fb95c14b92e1a083a8cdd5b07d75bde54934ebaf95859474dcc5db3d63d39a688ccdf72c7af702ac8d88c00a5b7e8d26a82dab7e202b18226de2a7429#npm:7.12.11"],
             ["@testing-library/dom", "npm:7.29.1"],
@@ -115,16 +114,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["webpack-dev-server", "virtual:878b150fb95c14b92e1a083a8cdd5b07d75bde54934ebaf95859474dcc5db3d63d39a688ccdf72c7af702ac8d88c00a5b7e8d26a82dab7e202b18226de2a7429#npm:4.0.0-beta.0"]
           ],
           "linkType": "SOFT",
-        }]
-      ]],
-      ["@", [
-        ["link:./assets/js::locator=sassdoc-theme-herman%40workspace%3A.", {
-          "packageLocation": "./assets/js/",
-          "packageDependencies": [
-            ["@", "link:./assets/js::locator=sassdoc-theme-herman%40workspace%3A."]
-          ],
-          "linkType": "SOFT",
-          "discardFromLookup": true
         }]
       ]],
       ["@arcanis/slice-ansi", [
@@ -15912,7 +15901,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",
           "packageDependencies": [
             ["sassdoc-theme-herman", "workspace:."],
-            ["@", "link:./assets/js::locator=sassdoc-theme-herman%40workspace%3A."],
             ["@babel/core", "npm:7.12.10"],
             ["@babel/preset-env", "virtual:878b150fb95c14b92e1a083a8cdd5b07d75bde54934ebaf95859474dcc5db3d63d39a688ccdf72c7af702ac8d88c00a5b7e8d26a82dab7e202b18226de2a7429#npm:7.12.11"],
             ["@testing-library/dom", "npm:7.29.1"],

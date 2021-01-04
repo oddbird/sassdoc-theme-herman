@@ -1,7 +1,6 @@
 import lunr from 'lunr';
 
-import * as search from '@/search';
-
+import * as search from '../../assets/js/search';
 import { createXHRmock } from './utils';
 
 jest.spyOn(search.nunjucksEnv, 'render').mockImplementation((name, ctx) => {

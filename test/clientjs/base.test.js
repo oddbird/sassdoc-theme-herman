@@ -1,4 +1,4 @@
-import * as base from '@/base';
+import * as base from '../../assets/js/base';
 
 describe('initializeToggles', () => {
   let toggle,
