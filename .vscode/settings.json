@@ -16,7 +16,6 @@
   ],
   "css.validate": false,
   "scss.validate": false,
-  "eslint.enable": true,
   "eslint.nodePath": ".yarn/sdks",
   "prettier.prettierPath": ".yarn/sdks/prettier/index.js",
   "stylelint.stylelintPath": ".yarn/sdks/stylelint/lib/index.js",
@@ -29,7 +28,9 @@
     ".vscode": true,
     ".yarn": true,
     "src/docs": true,
-    "yarn.lock": true
+    "yarn.lock": true,
+    "**/.yarn": true,
+    "**/.pnp.*": true
   },
   "[markdown]": {
     "files.trimTrailingWhitespace": false,

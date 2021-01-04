@@ -40,7 +40,6 @@ rules:
   function-url-no-scheme-relative: true
   media-feature-name-no-vendor-prefix: true
   property-no-vendor-prefix: true
-  selector-max-empty-lines: 0
   selector-no-vendor-prefix: true
   shorthand-property-no-redundant-values: true
   value-no-vendor-prefix: true

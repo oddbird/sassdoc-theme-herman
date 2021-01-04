@@ -7,8 +7,7 @@ process.env.BROWSERSLIST_CONFIG = './.browserslistrc';
 const path = require('path');
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const PnpWebpackPlugin = require(`pnp-webpack-plugin`);
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const webpack = require('webpack');
 
 const SassDocPlugin = require('./sassdoc-webpack-plugin');
@@ -104,7 +103,6 @@ module.exports = {
     filename: '[name].min.js',
   },
   resolve: {
-    plugins: [PnpWebpackPlugin],
     // where to look for "required" modules
     modules: ['templates/client', 'scss', 'node_modules'],
     alias: {
@@ -113,10 +111,11 @@ module.exports = {
     },
   },
   resolveLoader: {
-    plugins: [PnpWebpackPlugin],
     alias: { sassjson: path.join(__dirname, 'sass-json-loader') },
   },
   optimization: {
+    minimizer: ['...', new CssMinimizerPlugin()],
+    moduleIds: 'deterministic',
     runtimeChunk: 'single',
     splitChunks: {
       cacheGroups: {
@@ -131,7 +130,7 @@ module.exports = {
     },
   },
   devServer: {
-    contentBase: path.join(__dirname, 'docs'),
+    static: [path.join(__dirname, 'docs')],
   },
   plugins: [
     // make jquery accessible in all modules that use it
@@ -141,7 +140,6 @@ module.exports = {
       'window.jQuery': 'jquery',
       'root.jQuery': 'jquery',
     }),
-    new OptimizeCSSAssetsPlugin(),
     // pull all CSS out of JS bundles
     new MiniCssExtractPlugin({
       filename: '[name].min.css',
@@ -156,7 +154,6 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production'),
     }),
-    new webpack.HashedModuleIdsPlugin(),
   ],
   module: {
     rules: [

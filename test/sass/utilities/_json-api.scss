@@ -16,10 +16,7 @@
         c,
       ),
       'two': 3em,
-      (
-          three four,
-        ):
-        'hello "world"',
+      (three four): 'hello "world"',
     );
 
     @include true.assert {

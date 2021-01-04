@@ -15,7 +15,7 @@
 .livereload
 .npm
 .nyc_output/
-.prettierrc
+.prettierrc.yml
 .sass-cache/
 .yarn-integrity
 appveyor.yml

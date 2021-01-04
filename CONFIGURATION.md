@@ -173,7 +173,7 @@ See our [`@font` documentation][font-docs-local].
 
 Container for the following [Nunjucks][]-related options:
 
-[Nunjucks]: https://mozilla.github.io/nunjucks/
+[nunjucks]: https://mozilla.github.io/nunjucks/
 
 ### nunjucks.templatePath
 
@@ -239,7 +239,7 @@ signature][] as Dart Sass, and support for the [Sass module system][].
 
 [dart-sass]: https://sass-lang.com/dart-sass
 [same signature]: https://sass-lang.com/documentation/js-api#rendersync
-[Sass module system]: https://sass-lang.com/blog/the-module-system-is-launched
+[sass module system]: https://sass-lang.com/blog/the-module-system-is-launched
 
 ### sass.importer
 

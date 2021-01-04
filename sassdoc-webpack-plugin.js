@@ -28,7 +28,7 @@ class SassDocPlugin {
     if (!options) {
       try {
         // Load .sassdocrc configuration
-        options = yaml.safeLoad(
+        options = yaml.load(
           fs.readFileSync(path.join(process.cwd(), '.sassdocrc'), 'utf-8'),
         );
       } catch (err) {
