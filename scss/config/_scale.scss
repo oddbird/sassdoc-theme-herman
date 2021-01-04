@@ -1,9 +1,11 @@
+@use 'abstracts';
+
 // Scale Settings
 // ==============
 
 /// # Herman Config: Sizes
 /// @group config-scale
-/// @link http://oddbird.net/accoutrement/docs/
+/// @link https://www.oddbird.net/accoutrement/docs/
 ///   Accoutrement
 
 // Text Ratios
@@ -17,7 +19,7 @@ $text-ratios: (
   'line-height': 1.4,
 );
 
-@include config('ratios', 'text-ratios', $text-ratios);
+@include abstracts.add('ratios', 'text-ratios', $text-ratios);
 
 // Root Sizes
 // ----------
@@ -42,7 +44,7 @@ $root-sizes: (
   'small': 0.9rem,
 );
 
-@include config('sizes', 'root-sizes', $root-sizes);
+@include abstracts.add('sizes', 'root-sizes', $root-sizes);
 
 // Text Sizes
 // ----------
@@ -64,7 +66,7 @@ $text-sizes: (
   'search': '#small',
 );
 
-@include config('sizes', 'text-sizes', $text-sizes);
+@include abstracts.add('sizes', 'text-sizes', $text-sizes);
 
 // Spacing Sizes
 // -------------
@@ -115,7 +117,7 @@ $spacing-sizes: (
     ),
 );
 
-@include config('sizes', 'spacing-sizes', $spacing-sizes);
+@include abstracts.add('sizes', 'spacing-sizes', $spacing-sizes);
 
 // Pattern Sizes
 // -------------
@@ -146,7 +148,7 @@ $pattern-sizes: (
     ),
 );
 
-@include config('sizes', 'pattern-sizes', $pattern-sizes);
+@include abstracts.add('sizes', 'pattern-sizes', $pattern-sizes);
 
 // Layout Sizes
 // -------------
@@ -162,4 +164,4 @@ $layout-sizes: (
   'nav-break': 65em,
 );
 
-@include config('sizes', 'layout-sizes', $layout-sizes);
+@include abstracts.add('sizes', 'layout-sizes', $layout-sizes);

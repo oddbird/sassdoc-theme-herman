@@ -234,7 +234,7 @@
         <ul>
           
             <li class="nav-item">
-              <a href="http://oddbird.net/accoutrement/" data-nav="is-not-active">Accoutrement</a>
+              <a href="https://www.oddbird.net/accoutrement/" data-nav="is-not-active">Accoutrement</a>
             </li>
           
         </ul>
@@ -243,7 +243,7 @@
 
     
       <aside class="footer-credit">
-        <a href="http://oddbird.net/herman/" class="footer-icon">
+        <a href="https://www.oddbird.net/herman/" class="footer-icon">
           
   <svg data-icon="logo" data-icon-size="footer-logo" ><use xlink:href="#icon-logo" />
   </svg>
@@ -251,13 +251,13 @@
         </a>
         <span>
           Documented with
-          <a href="http://oddbird.net/herman/" class="footer-link">
+          <a href="https://www.oddbird.net/herman/" class="footer-link">
             Herman
           </a>
         </span>
         <span>
           by
-          <a href="http://oddbird.net/" class="footer-link">
+          <a href="https://www.oddbird.net/" class="footer-link">
             OddBird
           </a>
         </span>
@@ -415,9 +415,9 @@
       
       
       <pre class="hljs-pre"><code class="lang-scss">$functions: (
-  &#39;darken&#39;: get-function(&#39;darken&#39;),
-  &#39;desaturate&#39;: get-function(&#39;desaturate&#39;),
-  &#39;rgba&#39;: get-function(&#39;rgba&#39;),
+  &#39;darken&#39;: meta.get-function(&#39;darken&#39;),
+  &#39;desaturate&#39;: meta.get-function(&#39;desaturate&#39;),
+  &#39;rgba&#39;: meta.get-function(&#39;rgba&#39;),
   &#39;convert&#39;: &#39;#convert-units&#39;,
 );</code></pre>
     </div>
@@ -544,7 +544,7 @@ or use a string to reference existing functions and<span class="widont">&nbsp;</
     <h4 class="param-title">
       
       
-        <a href="http://oddbird.net/accoutrement" class="item-name">Accoutrement</a>
+        <a href="https://www.oddbird.net/accoutrement" class="item-name">Accoutrement</a>
       
       
       
@@ -596,7 +596,7 @@ or use a string to reference existing functions and<span class="widont">&nbsp;</
 
 
 
-<section class="item" id="mixin--config">
+<section class="item" id="mixin--add">
   
     
   
@@ -614,7 +614,7 @@ or use a string to reference existing functions and<span class="widont">&nbsp;</
       
 
       
-        <a href="#mixin--config" class="item-name">config()</a>
+        <a href="#mixin--add" class="item-name">add()</a>
       
 
       
@@ -828,7 +828,7 @@ Accoutrement globals and Herman<span class="widont">&nbsp;</span>export.</p>
   &#39;brand-pink&#39;: hsl(330, 85%, 48%) (&#39;shade&#39;: 25%),
 );
 
-@include config(&#39;colors&#39;, &#39;brand-colors&#39;, $brand-colors);</code></pre>
+@include config.add(&#39;colors&#39;, &#39;brand-colors&#39;, $brand-colors);</code></pre>
     </div>
   
 
@@ -863,7 +863,7 @@ Accoutrement globals and Herman<span class="widont">&nbsp;</span>export.</p>
     <h4 class="param-title">
       
       
-        <a href="http://oddbird.net/accoutrement" class="item-name">Accoutrement</a>
+        <a href="https://www.oddbird.net/accoutrement" class="item-name">Accoutrement</a>
       
       
       
@@ -885,75 +885,6 @@ Accoutrement globals and Herman<span class="widont">&nbsp;</span>export.</p>
   
   
     
-    
-  <div data-item-section="requires">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Requires</span>
-        
-      </h3>
-    
-
-    
-      
-      
-        
-        
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@mixin</span>
-      
-        <a href="
-  api_json-export.html#mixin--herman-add" class="item-name">herman-add()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-        
-        
-
-        
-      
-        
-        
-        
-
-        
-      
-        
-        
-        
-
-        
-      
-    
-  </div>
-
-  
     
   
 
@@ -1322,7 +1253,7 @@ to include on the returned link or<span class="widont">&nbsp;</span>span.</li>
       
       
       <pre class="hljs-pre"><code class="lang-scss">a {
-  #{$link} {
+  #{config.$link} {
     color: blue;
   }
 }</code></pre>
@@ -1575,7 +1506,7 @@ to include on the returned link or<span class="widont">&nbsp;</span>span.</li>
       
       
       <pre class="hljs-pre"><code class="lang-scss">a {
-  #{$focus} {
+  #{config.$focus} {
     color: red;
   }
 }</code></pre>
@@ -1761,7 +1692,7 @@ to include on the returned link or<span class="widont">&nbsp;</span>span.</li>
       
       
       <pre class="hljs-pre"><code class="lang-scss">.invert-colors {
-  @include invert-colors;
+  @include config.invert-colors;
 }</code></pre>
     </div>
   
@@ -1977,7 +1908,7 @@ to include on the returned link or<span class="widont">&nbsp;</span>span.</li>
       
       
         <a href="
-  style-typography.html#css--.invert-colors" class="item-name">.invert-colors</a>
+  style-typography.html#css--.config.invert-colors" class="item-name">.config.invert-colors</a>
       
       
       
@@ -2023,65 +1954,16 @@ to include on the returned link or<span class="widont">&nbsp;</span>span.</li>
 
 
 
-<section class="item" id="variable--z-index">
+<section class="item" >
   
     
   
   
-
-  
-  
-  
-  
-
-  <div data-item-section="header">
-    <h2 class="item-title">
-      
-        <span class="item-type"></span>
-      
-
-      
-        <a href="#variable--z-index" class="item-name">$z-index</a>
-      
-
-      
-
-      
-    </h2>
-
-    
-  
-
-
-    
-    
-    
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            scss
-          </span>
-
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-scss">$z-index: (&#39;main&#39;, &#39;sidebar&#39;, &#39;banner&#39;);</code></pre>
-    </div>
-  
-
-    
-  
-  
   
   
 
   
-    <div class="text-block">
+    <div data-item-section="prose" class="text-block">
       <p>List of named z-index layers for Herman’s layout.
 The order they are defined
 will be the integer they are<span class="widont">&nbsp;</span>assigned.</p>
@@ -2097,8 +1979,6 @@ will be the integer they are<span class="widont">&nbsp;</span>assigned.</p>
 
     </div>
   
-
-  </div>
 
   
 
@@ -2137,7 +2017,7 @@ will be the integer they are<span class="widont">&nbsp;</span>assigned.</p>
     <h4 class="param-title">
       
       
-        <a href="http://oddbird.net/accoutrement/docs/layout-z-index.html" class="item-name">Accoutrement Layout: Z-Index</a>
+        <a href="https://www.oddbird.net/accoutrement/docs/layout-z-index.html" class="item-name">Accoutrement Layout: Z-Index</a>
       
       
       

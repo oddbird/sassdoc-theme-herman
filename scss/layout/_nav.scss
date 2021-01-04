@@ -4,6 +4,9 @@
 /// Styles related to the navigation sidebar in generated Herman docs.
 /// @group style-nav
 
+@use '~accoutrement/sass/tools';
+@use '../config';
+
 // Nav Region
 // ==========
 /// Layout and styles for the navigation region.
@@ -22,18 +25,18 @@
 ///     </main>
 ///   </div>
 [data-region='nav'] {
-  @include invert-colors;
-  @include z-index('sidebar');
+  @include config.invert-colors;
+  @include tools.z-index('sidebar');
   align-items: stretch;
   display: flex;
   flex-direction: column;
-  padding: size('gutter');
+  padding: tools.size('gutter');
   white-space: nowrap;
   width: auto;
 
-  @include below('nav-break') {
-    @include position(0 null 0 0);
-    box-shadow: 0 0 size('half-shim') color('shadow');
+  @include tools.below('nav-break') {
+    @include tools.position(0 null 0 0);
+    box-shadow: 0 0 tools.size('half-shim') tools.color('shadow');
     transform: translateX(-102%);
     transition: transform 0.4s;
 
@@ -42,7 +45,7 @@
     }
   }
 
-  @include above('nav-break') {
+  @include tools.above('nav-break') {
     flex: 0 0 auto;
   }
 }

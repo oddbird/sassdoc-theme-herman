@@ -3,6 +3,9 @@
 /// # Herman Navigation Components
 /// @group component-nav
 
+@use '~accoutrement/sass/tools';
+@use '../config';
+
 // Nav Subsections
 // ---------------
 /// Group the main navigation into sub-sections…
@@ -16,8 +19,8 @@
 
   & + .nav-item {
     border-top: 1px solid;
-    margin-top: size('double-gutter');
-    padding-top: size('gutter');
+    margin-top: tools.size('double-gutter');
+    padding-top: tools.size('gutter');
   }
 }
 
@@ -26,9 +29,9 @@
 /// There is a home link at the top of the navigation…
 /// @group component-nav
 .nav-home {
-  font-size: size('large');
+  font-size: tools.size('large');
   font-weight: bold;
-  margin-top: size('gutter-plus');
+  margin-top: tools.size('gutter-plus');
 }
 
 // Nav Titles
@@ -38,8 +41,8 @@
 .nav-title {
   border-top: 1px solid;
   font-weight: bold;
-  margin: size('double-gutter') 0 size('gutter');
-  padding-top: size('quarter-shim');
+  margin: tools.size('double-gutter') 0 tools.size('gutter');
+  padding-top: tools.size('quarter-shim');
 }
 
 // Nav Items
@@ -48,7 +51,7 @@
 /// @group component-nav
 .nav-item {
   list-style: none;
-  margin: size('half-shim') 0;
+  margin: tools.size('half-shim') 0;
 }
 
 // Nav Links
@@ -61,19 +64,19 @@
 ///     <a href="#" data-nav="is-active">active</a>
 ///   </div>
 [data-nav] {
-  #{$link} {
-    color: color('background');
+  #{config.$link} {
+    color: tools.color('background');
     line-height: 1.1;
-    padding-bottom: size('quarter-shim');
+    padding-bottom: tools.size('quarter-shim');
     position: relative;
     text-decoration: none;
     transition: color 0.4s;
 
     // Animated underlines
-    @include before('') {
-      @include position(null null 0 0);
-      background: color('theme-light');
-      height: size('nav-underline');
+    @include tools.before('') {
+      @include tools.position(null null 0 0);
+      background: tools.color('theme-light');
+      height: tools.size('nav-underline');
       transform: scale3d(0, 1, 1);
       transform-origin: center left;
       transition: transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
@@ -82,17 +85,17 @@
     }
   }
 
-  #{$focus} {
-    @include before('') {
+  #{config.$focus} {
+    @include tools.before('') {
       transform: scale3d(1, 1, 1);
       transition-delay: 0s;
     }
   }
 
   &[data-nav='is-active'] {
-    #{$link},
-    #{$focus} {
-      @include before('') {
+    #{config.$link},
+    #{config.$focus} {
+      @include tools.before('') {
         transform: scale3d(1, 1, 1);
         transition-delay: 0s;
       }

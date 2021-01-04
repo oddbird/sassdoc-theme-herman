@@ -6,6 +6,8 @@
 /// @group style-code
 /// @link https://highlightjs.org/ Highlight.JS
 
+@use '~accoutrement/sass/tools';
+
 // Code Blocks
 // -----------
 /// @name Code Blocks
@@ -15,7 +17,7 @@
   display: flex;
   flex: 1 1 20em;
   flex-direction: column;
-  max-height: size('rhythm') * 12;
+  max-height: tools.size('rhythm') * 12;
   max-width: 100%;
   overflow: hidden;
 }
@@ -24,16 +26,16 @@
 // -----------
 /// @group style-code
 .code-header {
-  @include contrasted('theme-light');
+  @include tools.contrasted('theme-light');
   flex: 0 0 auto;
-  padding: 0 size('shim');
+  padding: 0 tools.size('shim');
 }
 
 // Code Description
 // ----------------
 /// @group style-code
 .code-description {
-  @include before(' – ');
+  @include tools.before(' – ');
 }
 
 // Pre
@@ -41,13 +43,13 @@
 /// @group style-code
 .hljs-pre,
 .text-block pre {
-  background-color: color('slight');
-  border: 1px solid color('callout');
-  color: color('code');
+  background-color: tools.color('slight');
+  border: 1px solid tools.color('callout');
+  color: tools.color('code');
   flex: 1 1 auto;
   flex-wrap: wrap;
 
   code {
-    padding: size('shim');
+    padding: tools.size('shim');
   }
 }

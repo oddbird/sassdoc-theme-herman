@@ -1,14 +1,17 @@
 // Project Meta Styles
 // ===================
 
+@use '~accoutrement/sass/tools';
+@use '../config';
+
 .project-links {
   display: flex;
   justify-content: flex-end;
   margin-left: 0;
   margin-right: 0;
 
-  @include below('page-break') {
-    margin-bottom: size('shim');
+  @include tools.below('page-break') {
+    margin-bottom: tools.size('shim');
   }
 }
 
@@ -17,21 +20,21 @@
   list-style: none;
 
   & + & {
-    margin-left: size('shim');
+    margin-left: tools.size('shim');
   }
 }
 
 .project-link {
-  #{$link} {
-    border: 1px solid color('action');
-    border-radius: size('gutter');
-    padding: size('half-shim') size('gutter');
+  #{config.$link} {
+    border: 1px solid tools.color('action');
+    border-radius: tools.size('gutter');
+    padding: tools.size('half-shim') tools.size('gutter');
     text-align: center;
     text-decoration: none;
     transition: background-color 0.4s;
   }
 
-  #{$focus} {
-    @include contrasted('action');
+  #{config.$focus} {
+    @include tools.contrasted('action');
   }
 }

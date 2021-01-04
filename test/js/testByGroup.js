@@ -4,8 +4,8 @@ const assert = require('assert');
 
 const byGroup = require('../../lib/utils/byGroup');
 
-describe('byGroup', function() {
-  it('returns data ordered by groups', function() {
+describe('byGroup', () => {
+  it('returns data ordered by groups', () => {
     const data = [
       { id: 1, group: ['g1'] },
       { id: 2, group: ['g2'] },

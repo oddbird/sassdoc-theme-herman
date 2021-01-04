@@ -1,5 +1,34 @@
 # Herman Changelog
 
+## UNRELEASED
+
+- 💥 BREAKING: Drop support for Node < 10
+- 💥 BREAKING: Switch to Dart Sass throughout, and use as default
+  `sass.implementation` option
+- 💥 BREAKING: Convert Herman-specific options to camelCase (`fontPath`,
+  `nunjucks.templatePath`, `sass.jsonFile`, `sass.includePaths`,
+  `sass.outputStyle`)
+- 💥 BREAKING: Herman no longer automatically optimizes SVG icons using SVGO
+- 💥 BREAKING: Remove `herman-` prefix from Sass JSON utilities:
+  - `herman-add()` => `add()`
+  - `herman-export()` => `export()`
+  - `herman-map-compile()` => `compile()`
+- 🚀 NEW: Add support for using [namespaced Sass
+  modules](https://sass-lang.com/documentation/at-rules/use#choosing-a-namespace)
+  in `@example scss` annotations with
+  [`sass.use`](https://www.oddbird.net/herman/docs/configuration#sass-use)
+  option
+- 🚀 NEW: Default Sass importer (used by `@example scss`) now supports `~`
+  imports of external modules in [Yarn 2](https://yarnpkg.com/) PnP environments
+- 🚀 NEW: Allow using custom Sass importer with `@example scss` via
+  new `sass.importer` option
+- 📝 DOCS: Fix broken links in Changelog
+- 🏠 INTERNAL: Upgrade dependencies:
+  - Switch to [Yarn 2](https://yarnpkg.com/)
+  - Remove `gulp-imagemin` and `svgo` --
+    [343](https://github.com/oddbird/sassdoc-theme-herman/issues/343)
+  - Replace `through2` with Node's native `readable-stream`
+
 ## 3.2.0: 2020-06-16
 
 - 🐛 BUGFIX: Use iframes to properly render size-related previews (all `@font`,
@@ -482,8 +511,8 @@ _No changes from `v1.0.0-rc.8`. Changes since `v0.5.5`:_
 
 - Inject preview data directly into HTML,
   so that previews don't have to be styled locally
-- Add [Sass Utilities](sass-utilities.html) file,
-  for help with setting/exporting Sass data
+- Add [Sass Utilities](https://www.oddbird.net/herman/docs/api_json-export.html)
+  file, for help with setting/exporting Sass data
 - `herman-add-color` mixin now exports hex, rgba, and hsla colors.
 - Simplified font previews don't require size input
 - Color, font, ratio, and size previews accept `key` argument,
@@ -493,8 +522,8 @@ _No changes from `v1.0.0-rc.8`. Changes since `v0.5.5`:_
   determining how many instances of the ratio to display
   (default is `6`)
 - Size preview accepts `style` argument [`text` | `ruler` | `output-only`],
-  determining the type of preview to display
-  (default is `text`, see [scale](scale.html) for examples)
+  determining the type of preview to display (default is `text`, see
+  [scale](https://www.oddbird.net/herman/docs/demo_sizes.html) for examples)
 
 ## 0.3.2: 2016-09-29
 

@@ -1,17 +1,19 @@
 // Forms
 // =====
 
+@use '~accoutrement/sass/tools';
+
 ::placeholder {
   color: currentColor;
   opacity: 0.5;
 }
 
 input {
-  border: 1px solid color('border-light');
+  border: 1px solid tools.color('border-light');
   color: inherit;
-  font-size: size('search');
-  margin-bottom: size('half-shim');
-  padding: size('quarter-shim') size('half-shim');
+  font-size: tools.size('search');
+  margin-bottom: tools.size('half-shim');
+  padding: tools.size('quarter-shim') tools.size('half-shim');
   width: 100%;
 
   &:focus {

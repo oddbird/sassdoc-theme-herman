@@ -1,3 +1,8 @@
+@use 'sass:list';
+@use 'sass:meta';
+@use '../utilities';
+@use '~accoutrement/sass/tools';
+
 // Accoutrement Utils
 // ==================
 
@@ -15,17 +20,19 @@
 /// @group config-utils
 /// @type map
 ///
-/// @link http://oddbird.net/accoutrement Accoutrement
+/// @link https://www.oddbird.net/accoutrement Accoutrement
 ///
 /// @prop {function | string} <alias> -
 ///   Use `get-function()` to capture a first-class function,
 ///   or use a string to reference existing functions and alias-keys
 $functions: (
-  'darken': get-function('darken'),
-  'desaturate': get-function('desaturate'),
-  'rgba': get-function('rgba'),
+  'darken': meta.get-function('darken'),
+  'desaturate': meta.get-function('desaturate'),
+  'rgba': meta.get-function('rgba'),
   'convert': '#convert-units',
 );
+
+tools.$functions: $functions;
 
 // Config
 // ------
@@ -36,7 +43,7 @@ $functions: (
 /// and is not included as part of the Herman API.
 ///
 /// @group config-utils
-/// @link http://oddbird.net/accoutrement Accoutrement
+/// @link https://www.oddbird.net/accoutrement Accoutrement
 ///
 /// @param {string} $type -
 ///   The type of data being added, e.g.
@@ -56,19 +63,34 @@ $functions: (
 ///     'brand-pink': hsl(330, 85%, 48%) ('shade': 25%),
 ///   );
 ///
-///   @include config('colors', 'brand-colors', $brand-colors);
-@mixin config($type, $name, $value) {
-  @if index('color' 'colors', $type) {
-    @include add-colors($value);
-    @include herman-add($type, $name, $value, get-function('color'));
-  } @else if index('size' 'sizes', $type) {
-    @include add-sizes($value);
-    @include herman-add($type, $name, $value, get-function('size'));
-  } @else if index('ratio' 'ratios', $type) {
-    @include add-ratios($value);
-    @include herman-add($type, $name, $value, get-function('ratio'));
-  } @else if index('font' 'fonts', $type) {
-    @include add-font($name, $value);
-    @include herman-add($type, $name, font($name));
+///   @include config.add('colors', 'brand-colors', $brand-colors);
+@mixin add($type, $name, $value) {
+  @if list.index('color' 'colors', $type) {
+    @include tools.add-colors($value);
+    @include utilities.add(
+      $type,
+      $name,
+      $value,
+      meta.get-function('color', $module: 'tools')
+    );
+  } @else if list.index('size' 'sizes', $type) {
+    @include tools.add-sizes($value);
+    @include utilities.add(
+      $type,
+      $name,
+      $value,
+      meta.get-function('size', $module: 'tools')
+    );
+  } @else if list.index('ratio' 'ratios', $type) {
+    @include tools.add-ratios($value);
+    @include utilities.add(
+      $type,
+      $name,
+      $value,
+      meta.get-function('ratio', $module: 'tools')
+    );
+  } @else if list.index('font' 'fonts', $type) {
+    @include tools.add-font($name, $value);
+    @include utilities.add($type, $name, tools.font($name));
   }
 }

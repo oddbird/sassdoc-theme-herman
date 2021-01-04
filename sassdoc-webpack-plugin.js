@@ -4,11 +4,12 @@
 
 const fs = require('fs');
 const path = require('path');
+
 const sassdoc = require('sassdoc');
-const set = require('lodash.set');
+const set = require('lodash/set');
 const yaml = require('js-yaml');
 
-const getAsset = function(entry, ext = 'css') {
+const getAsset = function (entry, ext = 'css') {
   if (!entry) {
     return undefined;
   }
@@ -22,12 +23,13 @@ const getAsset = function(entry, ext = 'css') {
 };
 
 class SassDocPlugin {
-  constructor(options, pluginOptions) {
+  constructor(opts, pluginOptions) {
+    let options = opts;
     if (!options) {
       try {
         // Load .sassdocrc configuration
-        options = yaml.safeLoad(
-          fs.readFileSync(path.join(process.cwd(), '.sassdocrc'), 'utf-8')
+        options = yaml.load(
+          fs.readFileSync(path.join(process.cwd(), '.sassdocrc'), 'utf-8'),
         );
       } catch (err) {
         console.warn(err);
@@ -46,7 +48,7 @@ class SassDocPlugin {
   apply(compiler) {
     const self = this;
 
-    compiler.hooks.afterEmit.tapPromise('SassDocPlugin', compilation => {
+    compiler.hooks.afterEmit.tapPromise('SassDocPlugin', (compilation) => {
       if (self.pluginOptions && self.pluginOptions.assetPaths) {
         const statsJSON = compilation.getStats().toJson();
         const outputPath = self.pluginOptions.outputPath || process.cwd();

@@ -234,7 +234,7 @@
         <ul>
           
             <li class="nav-item">
-              <a href="http://oddbird.net/accoutrement/" data-nav="is-not-active">Accoutrement</a>
+              <a href="https://www.oddbird.net/accoutrement/" data-nav="is-not-active">Accoutrement</a>
             </li>
           
         </ul>
@@ -243,7 +243,7 @@
 
     
       <aside class="footer-credit">
-        <a href="http://oddbird.net/herman/" class="footer-icon">
+        <a href="https://www.oddbird.net/herman/" class="footer-icon">
           
   <svg data-icon="logo" data-icon-size="footer-logo" ><use xlink:href="#icon-logo" />
   </svg>
@@ -251,13 +251,13 @@
         </a>
         <span>
           Documented with
-          <a href="http://oddbird.net/herman/" class="footer-link">
+          <a href="https://www.oddbird.net/herman/" class="footer-link">
             Herman
           </a>
         </span>
         <span>
           by
-          <a href="http://oddbird.net/" class="footer-link">
+          <a href="https://www.oddbird.net/" class="footer-link">
             OddBird
           </a>
         </span>
@@ -304,7 +304,7 @@
 <p>Herman provides custom annotations
 for visualizing fonts,
 along with other design tokens.
-See the <a href="CONFIGURATION.html#sass-jsonfile"><code>sass.jsonfile</code> configuration</a>
+See the <a href="CONFIGURATION.html#sass-jsonfile"><code>sass.jsonFile</code> configuration</a>
 to ensure that Herman has access
 to your exported Sass<span class="widont">&nbsp;</span>data.</p>
 <p>Whether you use a webfont CDN like Typekit/Google Fonts,
@@ -840,12 +840,12 @@ included as keys in the font map<span class="widont">&nbsp;</span>itself.</li>
 <pre><code class="lang-scss">/// @font demo-local
 </code></pre>
 <p>In order for this to work,
-you must specify a <code>fontpath</code>
+you must specify a <code>fontPath</code>
 (the path where Herman will look to import local font files),
 in your SassDoc <code>herman</code> configuration object.</p>
 <pre><code class="lang-yaml"># .sassdocrc (yaml)
 herman:
-  fontpath: 'fonts/'
+  fontPath: 'fonts/'
 </code></pre>
 
       
@@ -1148,14 +1148,14 @@ herman:
 <p>In order to preview the <code>$demo-cdn</code> and <code>$demo-local</code> maps,
 we also need to <a href="api_json-export.html">export the data to<span class="widont">&nbsp;</span>JSON</a>.</p>
 <p>You can add data to the <code>$herman</code> export-map by hand,
-or use the provided <code>herman-add</code> mixin
+or use the provided <code>add</code> mixin
 to combine existing maps into the proper structure.
 <a href="api_json-export.html#fonts">See the font map documentation for<span class="widont">&nbsp;</span>details</a>.</p>
-<pre><code class="lang-scss"> @include herman-add('font', 'demo-code', $demo-code);
- @include herman-add('font', 'demo-local', $demo-local);
+<pre><code class="lang-scss"> @include add('font', 'demo-code', $demo-code);
+ @include add('font', 'demo-local', $demo-local);
 </code></pre>
 <p>After adding your data to the <code>$herman</code> map,
-it can be converted to JSON using <code>herman-export</code>.</p>
+it can be converted to JSON using <code>export</code>.</p>
 
       
   
@@ -1206,7 +1206,7 @@ it can be converted to JSON using <code>herman-export</code>.</p>
     <h4 class="param-title">
       
       
-        <a href="http://oddbird.net/accoutrement" class="item-name">Accoutrement</a>
+        <a href="https://www.oddbird.net/accoutrement" class="item-name">Accoutrement</a>
       
       
       
@@ -1258,7 +1258,7 @@ it can be converted to JSON using <code>herman-export</code>.</p>
       <span class="item-type">@mixin</span>
       
         <a href="
-  api_json-export.html#mixin--herman-add" class="item-name">herman-add()</a>
+  api_json-export.html#mixin--add" class="item-name">add()</a>
       
       
       
@@ -1283,7 +1283,7 @@ it can be converted to JSON using <code>herman-export</code>.</p>
       <span class="item-type">@mixin</span>
       
         <a href="
-  api_json-export.html#mixin--herman-export" class="item-name">herman-export()</a>
+  api_json-export.html#mixin--export" class="item-name">export()</a>
       
       
       

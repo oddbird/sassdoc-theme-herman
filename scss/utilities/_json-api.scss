@@ -1,6 +1,8 @@
 // JSON Export Utilities
 // ---------------------
 
+@use 'json-encode' as json;
+
 /// # Exporting Styles to JSON
 ///
 /// While many UX patterns will be rendered as HTML components,
@@ -13,20 +15,20 @@
 /// but they require access to the raw Sass data.
 /// We do that using Sass maps
 /// (`key:value` object variables)
-/// and the `herman-export` mixin
+/// and the `export` mixin
 /// to generate JSON out of Sass variables.
 ///
-/// See the [`sass.jsonfile` configuration][json]
+/// See the [`sass.jsonFile` configuration][json]
 /// to ensure that Herman has access
 /// to your exported Sass data.
 ///
 /// [json]: CONFIGURATION.html#sass-jsonfile
 ///
 /// @group api_json-export
-/// @see herman-export
+/// @see export
 ///
 /// @example scss
-///   $herman: (
+///   utilities.$herman: (
 ///     'colors': (
 ///       'brand-colors': (
 ///         'brand-orange': #c75000,
@@ -35,7 +37,7 @@
 ///     ),
 ///   );
 ///
-///   @include herman-export($herman);
+///   @include utilities.export(utilities.$herman);
 
 // Herman
 // ------
@@ -45,7 +47,7 @@
 /// The `$herman` map should be structured
 /// with top-level keys for each type of data,
 /// and nested maps of the individual items to preview.
-/// Use the `herman-add` mixin to automatically populate
+/// Use the `add` mixin to automatically populate
 /// fonts, colors, sizes, and ratios from existing maps --
 /// or construct your `$herman` map by hand,
 /// following these guidelines...
@@ -59,16 +61,16 @@
 /// $herman: (
 ///   'colors': (
 ///     /* color maps */
-///   );
+///   ),
 ///   'sizes': (
 ///     /* size maps */
-///   );
+///   ),
 ///   'ratios': (
 ///     /* ratio maps */
-///   );
+///   ),
 ///   'fonts': (
 ///     /* font maps */
-///   );
+///   ),
 /// );
 /// ```
 ///
@@ -150,7 +152,7 @@
 ///     'path': 'sans/sourcesanspro-bold-webfont',
 ///     'local': 'source-sans-pro-bold',
 ///     'ttf': 'sans-ttf/sourcesanspro-bold-webfont',
-///     'woff': 'data:application/x-font-woff;charset=utf-8;base64...'
+///     'woff': 'data:application/x-font-woff;charset=utf-8;base64...',
 ///   ),
 /// )
 /// ```
@@ -158,7 +160,7 @@
 /// @group api_json-export
 ///
 /// @example scss - sample map structure
-///   $herman: (
+///   utilities.$herman: (
 ///     'colors': (
 ///       'brand-colors': (
 ///         'brand-orange': '#c75000',
@@ -180,7 +182,7 @@
 ///           'path': 'sans/sourcesanspro-bold-webfont',
 ///           'local': 'source-sans-pro-bold',
 ///           'ttf': 'sans-ttf/sourcesanspro-bold-webfont',
-///           'woff': 'data:application/x-font-woff;charset=utf-8;base64...'
+///           'woff': 'data:application/x-font-woff;charset=utf-8;base64...',
 ///         ),
 ///       ),
 ///     ),
@@ -199,14 +201,14 @@ $herman: () !default;
 /// and print to CSS output as a persistent comment.
 ///
 /// @group api_json-export
+/// @since 4.0.0 Name changed from `herman-export`
 ///
 /// @param {map} $map [$herman] -
 ///   Map to be encoded for JSON exporting
 ///
 /// @example scss
 ///   // Export to JSON
-///   @include herman-export;
-@mixin herman-export($map: $herman) {
-  $json: _herman-encode($map);
-  /*! json-encode: #{$json} */
+///   @include utilities.export;
+@mixin export($map: $herman) {
+  /*! json-encode: #{json.encode($map)} */
 }

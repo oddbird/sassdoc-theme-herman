@@ -1,0 +1,15 @@
+!.*
+.git/
+.nyc_output/
+.pnp.js
+.vscode/
+.yarn/
+.yarnrc.yml
+assets/js/vendor/
+coverage/
+dist/
+docs/
+node_modules/
+
+# @@@ https://github.com/prettier/prettier/issues/10000
+test/sass/utilities/_json-api.scss

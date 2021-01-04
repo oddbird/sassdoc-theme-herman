@@ -1,6 +1,8 @@
 // Icons
 // =====
 
+@use '~accoutrement/sass/tools';
+
 /// # Herman Icons
 /// Herman doesn't use very many icons internally…
 /// @icons assets/svg/
@@ -32,7 +34,7 @@
 /// and default to a `1em` square if no other dimensions are provided.
 /// @group style-icons
 [data-icon] {
-  @include square(1em);
+  @include tools.square(1em);
   fill: currentColor;
 }
 
@@ -41,7 +43,7 @@
 /// Used for the menu-bar icon.
 /// @group style-icons
 [data-icon-size='nav-icon'] {
-  @include square('nav-icon');
+  @include tools.square('nav-icon');
 }
 
 // Icon-Size: Footer Logo
@@ -49,5 +51,5 @@
 /// Used for the footer Herman logo.
 /// @group style-icons
 [data-icon-size='footer-logo'] {
-  @include square('footer-logo');
+  @include tools.square('footer-logo');
 }

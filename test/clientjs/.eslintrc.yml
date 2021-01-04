@@ -1,20 +1,22 @@
-# http://eslint.org/docs/rules/
+# https://eslint.org/docs/rules/
 
 parserOptions:
   sourceType: module
-  ecmaFeatures:
-    impliedStrict: true
 env:
+  jest: true
   browser: true
-  commonjs: true
   jquery: true
-  mocha: true
   node: false
-globals:
-  chai: true
-  expect: true
-  sinon: true
+  mocha: false
+plugins:
+  - simple-import-sort
+  - jest
+  - jest-dom
+extends:
+  - plugin:jest/recommended
+  - plugin:jest/style
+  - plugin:jest-dom/recommended
 rules:
-  func-names: 0
-  no-unused-expressions: 0
-  prefer-arrow-callback: 0
+  # Import
+  simple-import-sort/imports: 1
+  import/order: 0

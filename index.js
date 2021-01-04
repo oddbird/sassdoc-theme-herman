@@ -2,7 +2,6 @@
 
 const prepareContext = require('./lib/prepareContext');
 const { renderHerman } = require('./lib/renderHerman');
-
 const colors = require('./lib/annotations/colors');
 const example = require('./lib/annotations/example');
 const font = require('./lib/annotations/font');
@@ -16,8 +15,8 @@ const sizes = require('./lib/annotations/sizes');
  * and the context variables `ctx`.
  */
 const herman = (dest, ctx) =>
-  prepareContext(ctx).then(preparedContext =>
-    renderHerman(dest, preparedContext)
+  prepareContext(ctx).then((preparedContext) =>
+    renderHerman(dest, preparedContext),
   );
 
 herman.annotations = [icons, colors, sizes, ratios, font, example, name];

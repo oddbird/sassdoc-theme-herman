@@ -29,11 +29,15 @@
 ///
 /// @group demo_test-sassdoc
 /// @see {function} sample-alias
-/// @link http://oddbird.net OddBird Home Page
+/// @link https://www.oddbird.net OddBird Home Page
 /// @todo Create more samples like this one
 /// @todo Add more todo items
-/// @author [Miriam Suzanne](http://oddbird.net/authors/miriam/)
-/// @since 1.0.0-alpha.1 Adding samples files to the documentation.
+/// @author [Miriam Suzanne](https://www.oddbird.net/authors/miriam/)
+/// @since 1.0.0 Adding samples files to the documentation.
+/// @example scss - describe examples if you want...
+///   .example::before {
+///     content: samples.herman-sample(1, 2);
+///   }
 /// @param {number} $one -
 ///   The first parameter is required, because no default is given
 /// @param {number} $two [$one] -
@@ -41,10 +45,6 @@
 /// @param {string} $three ['three'] -
 ///   Looks like this one takes a string instead
 /// @returns {list} All three of the arguments in order
-/// @example scss - describe examples if you want...
-///   .example::before {
-///     content: herman-sample(1, 2);
-///   }
 @function herman-sample($one, $two: $one, $three: 'three') {
   @if (not $one) or (not $two) or (not $three) {
     @error 'Please provide values for all three parameters';
@@ -86,9 +86,8 @@
 ///
 /// Prose blocks can also include examples, and other annotations.
 /// @example scss
-///   @import 'samples/variables';
 ///   .private::after {
-///     content: $private;
+///     content: samples.$private;
 ///   }
 /// @link http://sassdoc.com/annotations/
 /// @group demo_test-sassdoc
@@ -110,10 +109,8 @@
 ///   with the <code>content</code> property established,
 ///   and any passed-in styled applied.
 /// @example scss
-///   @import 'samples/mixins-functions';
-///
 ///   .item {
-///     @include before-sample('Test One: ') {
+///     @include samples.before-sample('Test One: ') {
 ///       color: red;
 ///     }
 ///   }

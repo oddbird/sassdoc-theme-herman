@@ -1,3 +1,7 @@
+@use 'sass:meta';
+@use '../utilities';
+@use '~accoutrement/sass/tools';
+
 // Color Samples
 // =============
 
@@ -6,7 +10,7 @@
 /// Herman provides custom annotations
 /// for visualizing color palettes,
 /// along with other design tokens.
-/// See the [`sass.jsonfile` configuration][json]
+/// See the [`sass.jsonFile` configuration][json]
 /// to ensure that Herman has access
 /// to your exported Sass data.
 ///
@@ -43,7 +47,7 @@ $brand-pink: hsl(330, 85%, 48%);
 /// to store and access colors
 /// directly in a Herman-friendly map.
 ///
-/// [ac]: http://oddbird.net/accoutrement/
+/// [ac]: https://www.oddbird.net/accoutrement/
 ///
 /// Create as many maps as you like
 /// to organize different palettes --
@@ -97,11 +101,11 @@ $demo-colors: (
 /// and then creating a sass file to do the actual export.
 /// We provide shortcuts to help with both.
 ///
-/// Use the `herman-add` mixin to add individual data maps
+/// Use the `add` mixin to add individual data maps
 /// to the global export map.
 ///
 /// ```scss
-///  @include herman-add('colors', 'demo-colors', $demo-colors);
+///  @include add('colors', 'demo-colors', $demo-colors);
 /// ```
 ///
 /// - The first argument tells Herman what type of data is being added --
@@ -112,7 +116,7 @@ $demo-colors: (
 ///   so colors defined in Sass can be accessed in JavaScript.
 /// - The second argument sets a `key` name
 ///   for accessing this particular group of colors.
-///   The `herman-add` key should match
+///   The `add` key should match
 ///   the key provided to `@colors`.
 /// - The third argument provides the actual map of data
 ///   to be added to the `$herman` export map.
@@ -137,9 +141,9 @@ $demo-colors: (
 /// [color-docs]: api_json-export.html#colors
 ///
 /// @see $herman
-/// @see herman-add
+/// @see add
 /// @group demo_colors
-@include herman-add('colors', 'demo-colors', $demo-colors);
+@include utilities.add('colors', 'demo-colors', $demo-colors);
 
 $demo-noncolors: (
   'light-gray': '#brand-blue'
@@ -165,7 +169,7 @@ $demo-noncolors: (
 /// before they can be exported to Herman.
 /// Using [accoutrement][ac], our maps look like this:
 ///
-/// [ac]: http://oddbird.net/accoutrement
+/// [ac]: https://www.oddbird.net/accoutrement
 ///
 /// ```scss
 /// $demo-noncolors: (
@@ -180,7 +184,7 @@ $demo-noncolors: (
 /// In order to export real color data to Herman,
 /// we want to run every value in our map
 /// through the color function before exporting.
-/// `herman-add` accepts additional arguments at the end,
+/// `add` accepts additional arguments at the end,
 /// for passing each map-value through a function.
 /// Provide a function name (Sass 3.4-),
 /// or first-class function (Sass 3.5+)
@@ -188,26 +192,29 @@ $demo-noncolors: (
 ///
 /// @colors demo-noncolors
 /// @example scss
-///   $herman: ();
+///   @use '~accoutrement/sass/tools';
+///   @use 'sass:meta';
+///
+///   utilities.$herman: ();
 ///   $demo-noncolors: (
 ///     'light-gray': '#brand-blue' ('tint': 80%, 'desaturate': 80%),
 ///     'gray': '#brand-blue' ('desaturate': 80%),
 ///     'black': '#brand-blue' ('shade': 30%, 'desaturate': 80%),
 ///   );
 ///
-///   @include herman-add(
+///   @include utilities.add(
 ///     'colors', 'demo-noncolors', $demo-noncolors,
-///     get-function('color') // function
+///     meta.get-function('color', $module: 'tools') // function
 ///   );
 ///
-///   @each $key, $value in $herman {
-///   /* #{$key}: #{inspect($value)} */
+///   @each $key, $value in utilities.$herman {
+///   /* #{$key}: #{meta.inspect($value)} */
 ///   }
 /// @group demo_colors
-/// @link http://oddbird.net/accoutrement Accoutrement
-@include herman-add(
+/// @link https://www.oddbird.net/accoutrement Accoutrement
+@include utilities.add(
   'colors',
   'demo-noncolors',
   $demo-noncolors,
-  get-function('color')
+  meta.get-function('color', $module: 'tools')
 );

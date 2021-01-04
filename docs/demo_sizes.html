@@ -234,7 +234,7 @@
         <ul>
           
             <li class="nav-item">
-              <a href="http://oddbird.net/accoutrement/" data-nav="is-not-active">Accoutrement</a>
+              <a href="https://www.oddbird.net/accoutrement/" data-nav="is-not-active">Accoutrement</a>
             </li>
           
         </ul>
@@ -243,7 +243,7 @@
 
     
       <aside class="footer-credit">
-        <a href="http://oddbird.net/herman/" class="footer-icon">
+        <a href="https://www.oddbird.net/herman/" class="footer-icon">
           
   <svg data-icon="logo" data-icon-size="footer-logo" ><use xlink:href="#icon-logo" />
   </svg>
@@ -251,13 +251,13 @@
         </a>
         <span>
           Documented with
-          <a href="http://oddbird.net/herman/" class="footer-link">
+          <a href="https://www.oddbird.net/herman/" class="footer-link">
             Herman
           </a>
         </span>
         <span>
           by
-          <a href="http://oddbird.net/" class="footer-link">
+          <a href="https://www.oddbird.net/" class="footer-link">
             OddBird
           </a>
         </span>
@@ -304,7 +304,7 @@
 <p>Herman provides custom annotations
 for visualizing sizes and ratios,
 along with other design tokens.
-See the <a href="CONFIGURATION.html#sass-jsonfile"><code>sass.jsonfile</code> configuration</a>
+See the <a href="CONFIGURATION.html#sass-jsonfile"><code>sass.jsonFile</code> configuration</a>
 to ensure that Herman has access
 to your exported Sass<span class="widont">&nbsp;</span>data.</p>
 <p>In addition to documenting colors and fonts,
@@ -448,7 +448,7 @@ we’ll want to combine them into maps
 of name/value pairs.
 Sass does not provide any shortcuts for automating this step,
 or removing the duplication,
-but you can use a tool like our <a href="http://oddbird.net/accoutrement/">Accoutrement</a>
+but you can use a tool like our <a href="https://www.oddbird.net/accoutrement/">Accoutrement</a>
 to store and access ratios
 directly in a Herman-friendly<span class="widont">&nbsp;</span>map.</p>
 <pre><code class="lang-scss">$demo-ratios: (
@@ -913,7 +913,7 @@ used when adding this data to <code>$herman</code>.</p>
 sizes can be combined into any number of maps
 to preview with Herman.
 you can build these maps out of existing variables,
-or use a tool like our <a href="http://oddbird.net/accoutrement/">Accoutrement</a>
+or use a tool like our <a href="https://www.oddbird.net/accoutrement/">Accoutrement</a>
 to store and access sizes
 directly in a Herman-friendly<span class="widont">&nbsp;</span>map.</p>
 <pre><code class="lang-scss">$demo-sizes: (
@@ -1927,16 +1927,16 @@ each on their own line, for more visible<span class="widont">&nbsp;</span>space.
 <p>In order to preview the <code>$demo-ratios</code> and <code>$demo-sizes</code> maps,
 we also need to <a href="api_json-export.html">export the data to<span class="widont">&nbsp;</span>JSON</a>.</p>
 <p>You can add data to the <code>$herman</code> export-map by hand,
-or use the provided <code>herman-add</code> mixin
+or use the provided <code>add</code> mixin
 to combine existing maps into the proper structure.
 <a href="api_json-export.html#sizes-ratios">See the size/ratio map documentation for details<span class="widont">&nbsp;</span>»</a></p>
-<pre><code class="lang-scss"> @include herman-add('ratios', 'demo-ratios', $demo-ratios);
- @include herman-add('sizes', 'demo-sizes', $demo-sizes);
+<pre><code class="lang-scss"> @include add('ratios', 'demo-ratios', $demo-ratios);
+ @include add('sizes', 'demo-sizes', $demo-sizes);
 </code></pre>
 <p>If your map needs to be parsed or compiled before export,
-you can pass additional compilation functions and arguments to <code>herman-add</code>.
+you can pass additional compilation functions and arguments to <code>add</code>.
 Once your data is all stored in the <code>$herman</code> map,
-it can be converted to JSON using <code>herman-export</code>.</p>
+it can be converted to JSON using <code>export</code>.</p>
 
       
   
@@ -1987,7 +1987,7 @@ it can be converted to JSON using <code>herman-export</code>.</p>
     <h4 class="param-title">
       
       
-        <a href="http://oddbird.net/accoutrement" class="item-name">Accoutrement</a>
+        <a href="https://www.oddbird.net/accoutrement" class="item-name">Accoutrement</a>
       
       
       
@@ -2039,7 +2039,7 @@ it can be converted to JSON using <code>herman-export</code>.</p>
       <span class="item-type">@mixin</span>
       
         <a href="
-  api_json-export.html#mixin--herman-add" class="item-name">herman-add()</a>
+  api_json-export.html#mixin--add" class="item-name">add()</a>
       
       
       
@@ -2064,7 +2064,7 @@ it can be converted to JSON using <code>herman-export</code>.</p>
       <span class="item-type">@mixin</span>
       
         <a href="
-  api_json-export.html#mixin--herman-export" class="item-name">herman-export()</a>
+  api_json-export.html#mixin--export" class="item-name">export()</a>
       
       
       

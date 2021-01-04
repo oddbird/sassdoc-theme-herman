@@ -234,7 +234,7 @@
         <ul>
           
             <li class="nav-item">
-              <a href="http://oddbird.net/accoutrement/" data-nav="is-not-active">Accoutrement</a>
+              <a href="https://www.oddbird.net/accoutrement/" data-nav="is-not-active">Accoutrement</a>
             </li>
           
         </ul>
@@ -243,7 +243,7 @@
 
     
       <aside class="footer-credit">
-        <a href="http://oddbird.net/herman/" class="footer-icon">
+        <a href="https://www.oddbird.net/herman/" class="footer-icon">
           
   <svg data-icon="logo" data-icon-size="footer-logo" ><use xlink:href="#icon-logo" />
   </svg>
@@ -251,13 +251,13 @@
         </a>
         <span>
           Documented with
-          <a href="http://oddbird.net/herman/" class="footer-link">
+          <a href="https://www.oddbird.net/herman/" class="footer-link">
             Herman
           </a>
         </span>
         <span>
           by
-          <a href="http://oddbird.net/" class="footer-link">
+          <a href="https://www.oddbird.net/" class="footer-link">
             OddBird
           </a>
         </span>
@@ -279,6 +279,41 @@
           
   <div class="text-block">
     <h1 id="herman-changelog">Herman Changelog</h1>
+<h2 id="unreleased">UNRELEASED</h2>
+<ul>
+<li>💥 BREAKING: Drop support for Node &lt;<span class="widont">&nbsp;</span>10</li>
+<li>💥 BREAKING: Switch to Dart Sass throughout, and use as default
+<code>sass.implementation</code> option</li>
+<li>💥 BREAKING: Convert Herman-specific options to camelCase (<code>fontPath</code>,
+<code>nunjucks.templatePath</code>, <code>sass.jsonFile</code>, <code>sass.includePaths</code>,
+<code>sass.outputStyle</code>)</li>
+<li>💥 BREAKING: Herman no longer automatically optimizes SVG icons using<span class="widont">&nbsp;</span>SVGO</li>
+<li>💥 BREAKING: Remove <code>herman-</code> prefix from Sass JSON utilities:
+<ul>
+<li><code>herman-add()</code> =&gt; <code>add()</code></li>
+<li><code>herman-export()</code> =&gt; <code>export()</code></li>
+<li><code>herman-map-compile()</code> =&gt; <code>compile()</code></li>
+</ul>
+</li>
+<li>🚀 NEW: Add support for using <a href="https://sass-lang.com/documentation/at-rules/use#choosing-a-namespace">namespaced Sass
+modules</a>
+in <code>@example scss</code> annotations with
+<a href="https://www.oddbird.net/herman/docs/configuration#sass-use"><code>sass.use</code></a>
+option</li>
+<li>🚀 NEW: Default Sass importer (used by <code>@example scss</code>) now supports <code>~</code>
+imports of external modules in <a href="https://yarnpkg.com/">Yarn 2</a> PnP<span class="widont">&nbsp;</span>environments</li>
+<li>🚀 NEW: Allow using custom Sass importer with <code>@example scss</code> via
+new <code>sass.importer</code> option</li>
+<li>📝 DOCS: Fix broken links in<span class="widont">&nbsp;</span>Changelog</li>
+<li>🏠 INTERNAL: Upgrade dependencies:
+<ul>
+<li>Switch to <a href="https://yarnpkg.com/">Yarn<span class="widont">&nbsp;</span>2</a></li>
+<li>Remove <code>gulp-imagemin</code> and <code>svgo</code> –
+<a href="https://github.com/oddbird/sassdoc-theme-herman/issues/343">343</a></li>
+<li>Replace <code>through2</code> with Node’s native <code>readable-stream</code></li>
+</ul>
+</li>
+</ul>
 <h2 id="3-2-0-2020-06-16">3.2.0: 2020-06-16</h2>
 <ul>
 <li>🐛 BUGFIX: Use iframes to properly render size-related previews (all <code>@font</code>,
@@ -754,8 +789,8 @@ and <code>data-sassdoc-table'&lt;annotation&gt;'</code> for tables
 <ul>
 <li>Inject preview data directly into HTML,
 so that previews don’t have to be styled<span class="widont">&nbsp;</span>locally</li>
-<li>Add <a href="sass-utilities.html">Sass Utilities</a> file,
-for help with setting/exporting Sass<span class="widont">&nbsp;</span>data</li>
+<li>Add <a href="https://www.oddbird.net/herman/docs/api_json-export.html">Sass Utilities</a>
+file, for help with setting/exporting Sass<span class="widont">&nbsp;</span>data</li>
 <li><code>herman-add-color</code> mixin now exports hex, rgba, and hsla<span class="widont">&nbsp;</span>colors.</li>
 <li>Simplified font previews don’t require size<span class="widont">&nbsp;</span>input</li>
 <li>Color, font, ratio, and size previews accept <code>key</code> argument,
@@ -765,8 +800,8 @@ in case the JSON key doesn’t match the variable name
 determining how many instances of the ratio to display
 (default is <code>6</code>)</li>
 <li>Size preview accepts <code>style</code> argument [<code>text</code> | <code>ruler</code> | <code>output-only</code>],
-determining the type of preview to display
-(default is <code>text</code>, see <a href="scale.html">scale</a> for<span class="widont">&nbsp;</span>examples)</li>
+determining the type of preview to display (default is <code>text</code>, see
+<a href="https://www.oddbird.net/herman/docs/demo_sizes.html">scale</a> for<span class="widont">&nbsp;</span>examples)</li>
 </ul>
 <h2 id="0-3-2-2016-09-29">0.3.2: 2016-09-29</h2>
 <ul>

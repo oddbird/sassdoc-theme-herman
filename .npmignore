@@ -15,14 +15,14 @@
 .livereload
 .npm
 .nyc_output/
-.prettierrc
+.prettierrc.yml
 .sass-cache/
 .yarn-integrity
 appveyor.yml
 assets/
 fonts/
-gulpfile.js
-jscov/
+scripts/
+coverage/
 npm-debug.log*
 postcss.config.js
 sass-json-loader.js

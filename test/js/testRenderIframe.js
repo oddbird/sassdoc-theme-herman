@@ -1,16 +1,17 @@
 'use strict';
 
 const assert = require('assert');
-const extend = require('extend');
 const path = require('path');
+
+const extend = require('extend');
 const sinon = require('sinon');
 
 const renderIframe = require('../../lib/renderIframe');
 const { nunjucksEnv } = require('../../lib/utils/templates');
 
-describe('renderIframe', function() {
-  describe('example', function() {
-    beforeEach(function() {
+describe('renderIframe', () => {
+  describe('example', () => {
+    beforeEach(function () {
       this.env = {
         herman: {
           customCSS: 'test/js/fixtures/css/main.css',
@@ -21,7 +22,7 @@ describe('renderIframe', function() {
       };
     });
 
-    it('renders', function(done) {
+    it('renders', function (done) {
       sinon.stub(nunjucksEnv, 'render').returns('some iframed');
       const item = {
         rendered: true,
@@ -42,7 +43,7 @@ describe('renderIframe', function() {
         .catch(done);
     });
 
-    it("doesn't render if no item.rendered", function(done) {
+    it("doesn't render if no item.rendered", function (done) {
       const item = {
         rendered: false,
       };
@@ -58,7 +59,7 @@ describe('renderIframe', function() {
         .catch(done);
     });
 
-    it('inserts raw HTML if env.herman.customHTML is bad path', function(done) {
+    it('inserts HTML if env.herman.customHTML is bad path', function (done) {
       const env = extend({}, this.env);
       env.herman.customHTML = 'foo.bar';
       const item = {
@@ -75,12 +76,12 @@ describe('renderIframe', function() {
     });
   });
 
-  describe('icon', function() {
-    beforeEach(function() {
+  describe('icon', () => {
+    beforeEach(function () {
       this.env = {};
     });
 
-    it('renders', function(done) {
+    it('renders', function (done) {
       sinon.stub(nunjucksEnv, 'render').returns('some iframed');
       const item = {
         icons: [{}],
@@ -98,7 +99,7 @@ describe('renderIframe', function() {
         .catch(done);
     });
 
-    it("doesn't render if no item.icons", function(done) {
+    it("doesn't render if no item.icons", function (done) {
       const item = {
         icons: [],
       };
@@ -114,12 +115,12 @@ describe('renderIframe', function() {
     });
   });
 
-  describe('font', function() {
-    beforeEach(function() {
+  describe('font', () => {
+    beforeEach(function () {
       this.env = {
         herman: {
           sass: {
-            jsonfile: path.resolve(__dirname, 'fixtures', 'css', 'json.css'),
+            jsonFile: path.resolve(__dirname, 'fixtures', 'css', 'json.css'),
           },
         },
         logger: {
@@ -128,7 +129,7 @@ describe('renderIframe', function() {
       };
     });
 
-    it('sets sassjson', function(done) {
+    it('sets sassjson', function (done) {
       const item = {
         font: {
           key: true,
@@ -144,9 +145,9 @@ describe('renderIframe', function() {
         .catch(done);
     });
 
-    it('logs the error on a bad sassjson', function(done) {
+    it('logs the error on a bad sassjson', function (done) {
       const env = extend({}, this.env);
-      env.herman.sass.jsonfile = 'foo.bar';
+      env.herman.sass.jsonFile = 'foo.bar';
       const item = {
         font: {
           key: true,

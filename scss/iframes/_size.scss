@@ -1,12 +1,14 @@
+@use '~accoutrement/sass/tools';
+
 [data-herman-size='overflow'] {
   max-width: 100%;
   overflow-x: auto;
 }
 
 [data-herman-size~='highlight'] {
-  --herman-size-bar: #{color('action')};
-  --herman-cell-color: #{color('callout')};
-  --herman-label-color: #{color('callout')};
+  --herman-size-bar: #{tools.color('action')};
+  --herman-cell-color: #{tools.color('callout')};
+  --herman-label-color: #{tools.color('callout')};
 }
 
 [data-herman-viz] {
@@ -24,20 +26,20 @@
 [data-herman-table~='text'] {
   --herman-viz-before: 1rem;
   --herman-viz-after: 1rem;
-  --herman-label-color: #{color('callout')};
+  --herman-label-color: #{tools.color('callout')};
 }
 
 [data-herman-viz='bar'] {
-  background-color: var(--herman-size-bar, #{color('border')});
+  background-color: var(--herman-size-bar, #{tools.color('border')});
   background-image: linear-gradient(
       to left,
-      color('underline') 1px,
+      tools.color('underline') 1px,
       transparent 1px,
       transparent
     ),
     linear-gradient(
       to left,
-      color(
+      tools.color(
           'border-light',
           (
             'rgba': 0.5,
@@ -49,7 +51,7 @@
     ),
     linear-gradient(
       to left,
-      color(
+      tools.color(
           'border-light',
           (
             'rgba': 0.25,
@@ -62,7 +64,7 @@
   background-position: 0 100%;
   background-repeat: repeat-x;
   background-size: 100px 75%, 10px 50%, 5px 25%;
-  border-radius: size('quarter-shim');
+  border-radius: tools.size('quarter-shim');
   display: block;
   min-height: 1.5em;
 }

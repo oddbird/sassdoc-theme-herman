@@ -2,18 +2,15 @@
 
 'use strict';
 
-process.env.NODE_ENV = 'production';
 process.env.BROWSERSLIST_CONFIG = './.browserslistrc';
 
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const SassDocPlugin = require('./sassdoc-webpack-plugin');
 const path = require('path');
-const webpack = require('webpack');
-const sass = require('sass');
 
-const jsOutput = '[name].min.js';
-const styleOutput = '[name].min.css';
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const webpack = require('webpack');
+
+const SassDocPlugin = require('./sassdoc-webpack-plugin');
 
 const outputPath = path.join(__dirname, 'dist', 'webpack');
 const sassdocPath = path.join(__dirname, 'docs');
@@ -31,22 +28,21 @@ const sassDocOpts = {
     extraLinks: [
       {
         name: 'Accoutrement',
-        url: 'http://oddbird.net/accoutrement/',
+        url: 'https://www.oddbird.net/accoutrement/',
       },
     ],
     displayColors: ['hex', 'hsl'],
     customHTML: path.join(__dirname, 'templates', '_icons.svg'),
-    fontpath: path.join(__dirname, 'fonts'),
+    fontPath: path.join(__dirname, 'fonts'),
     nunjucks: {
-      templatepath: path.join(__dirname, 'templates'),
+      templatePath: path.join(__dirname, 'templates'),
     },
     sass: {
-      includepaths: [
+      includePaths: [
         path.join(__dirname, 'scss'),
         path.join(__dirname, 'node_modules'),
       ],
-      includes: ['utilities', 'config/manifest'],
-      implementation: sass,
+      use: ['utilities', 'config', 'samples'],
     },
   },
   display: {
@@ -90,7 +86,7 @@ const sassDocOpts = {
 };
 
 module.exports = {
-  mode: process.env.NODE_ENV || 'development',
+  mode: 'production',
   // context for entry points
   context: path.join(__dirname, 'assets', 'js'),
   // define all the entry point bundles
@@ -104,11 +100,11 @@ module.exports = {
   output: {
     path: outputPath,
     publicPath: '/assets/webpack/',
-    filename: jsOutput,
+    filename: '[name].min.js',
   },
   resolve: {
     // where to look for "required" modules
-    modules: ['assets/js', 'templates/client', 'scss', 'node_modules'],
+    modules: ['templates/client', 'scss', 'node_modules'],
     alias: {
       jquery: 'jquery/dist/jquery.slim',
       nunjucks: 'nunjucks/browser/nunjucks-slim',
@@ -118,6 +114,8 @@ module.exports = {
     alias: { sassjson: path.join(__dirname, 'sass-json-loader') },
   },
   optimization: {
+    minimizer: ['...', new CssMinimizerPlugin()],
+    moduleIds: 'deterministic',
     runtimeChunk: 'single',
     splitChunks: {
       cacheGroups: {
@@ -131,9 +129,14 @@ module.exports = {
       },
     },
   },
+  performance: {
+    hints: false,
+  },
+  devServer: {
+    static: [path.join(__dirname, 'docs')],
+    hot: false,
+  },
   plugins: [
-    // ignore flycheck and Emacs special files when watching
-    new webpack.WatchIgnorePlugin([/flycheck_/, /\.#/, /#$/]),
     // make jquery accessible in all modules that use it
     new webpack.ProvidePlugin({
       $: 'jquery',
@@ -141,22 +144,20 @@ module.exports = {
       'window.jQuery': 'jquery',
       'root.jQuery': 'jquery',
     }),
-    new OptimizeCSSAssetsPlugin(),
     // pull all CSS out of JS bundles
     new MiniCssExtractPlugin({
-      filename: styleOutput,
+      filename: '[name].min.css',
     }),
     new SassDocPlugin(sassDocOpts, {
       assetPaths: [
         { entry: 'app_styles', optPath: 'herman.customCSS' },
-        { entry: 'styleguide_json', optPath: 'herman.sass.jsonfile' },
+        { entry: 'styleguide_json', optPath: 'herman.sass.jsonFile' },
       ],
       outputPath,
     }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production'),
     }),
-    new webpack.HashedModuleIdsPlugin(),
   ],
   module: {
     rules: [

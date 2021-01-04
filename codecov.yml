@@ -1,0 +1,11 @@
+codecov:
+  require_ci_to_pass: no
+comment: false
+parsers:
+  javascript:
+    enable_partials: yes
+coverage:
+  status:
+    project:
+      default:
+        target: 100%

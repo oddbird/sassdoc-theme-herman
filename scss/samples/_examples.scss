@@ -43,7 +43,7 @@
 /// with an API for supporting additional languages.
 ///
 /// [sassdoc]: http://sassdoc.com/annotations/#example
-/// [sass]: http://sass-lang.com/
+/// [sass]: https://sass-lang.com/
 /// [njk]: https://mozilla.github.io/nunjucks/
 /// [vue]: https://vuejs.org/
 ///
@@ -56,26 +56,26 @@
 /// will be compiled by Herman,
 /// and display the output along with the source.
 ///
-/// Note that Sass/Scss examples require `node-sass` or `sass`
-/// to be installed, if it isn't already: `npm install node-sass`.
+/// Note that Sass/Scss examples require `sass` to be installed,
+/// if it isn't already: `npm install sass`.
 ///
 /// All Sass examples must be complete and valid,
 /// with the ability to import Sass partials inside each example.
 /// In order for this to work with Sass/Scss,
-/// you must set an `includepaths` key
+/// you must set an `includePaths` key
 /// in your sassdoc `herman.sass` configuration object --
 /// an array of places to look for Sass includes:
 ///
 /// ```yaml
 /// herman:
 ///   sass:
-///     includepaths:
+///     includePaths:
 ///       - 'static/sass'
 ///       - 'node_modules'
 /// ```
 ///
 /// You can also set an array of default `includes` or `use`
-/// (relative to any `includepaths`)
+/// (relative to any `includePaths`)
 /// to include for all Sass examples:
 ///
 /// To `@import` files:
@@ -84,11 +84,11 @@
 /// # .sassdocrc (yaml)
 /// herman:
 ///   sass:
-///     includepaths:
+///     includePaths:
 ///       - 'static/sass'
 ///     includes:
 ///       - 'utilities'
-///       - 'config/manifest'
+///       - 'config'
 /// ```
 ///
 /// Or to `@use` files:
@@ -97,10 +97,12 @@
 /// # .sassdocrc (yaml)
 /// herman:
 ///   sass:
-///     includepaths:
+///     includePaths:
 ///       - 'static/sass'
 ///     use:
 ///       - 'config/tools'
+///       - file: 'config/other-tools'
+///         namespace: 'my-tools'
 /// ```
 ///
 /// Generally, included Sass files should not contain
@@ -108,16 +110,16 @@
 /// since all compiled output will be displayed with the `@example`.
 ///
 /// By default, the CSS output will be "expanded"
-/// (see the [node-sass] docs).
-/// You can override this with the `outputstyle` option:
+/// (see the [Sass] docs).
+/// You can override this with the `outputStyle` option:
 ///
-/// [node-sass]: https://github.com/sass/node-sass/#outputstyle
+/// [Sass]: https://sass-lang.com/documentation/js-api#outputstyle
 ///
 /// ```yaml
 /// # .sassdocrc (yaml)
 /// herman:
 ///   sass:
-///     outputstyle: 'compressed'
+///     outputStyle: 'compressed'
 /// ```
 ///
 /// @group demo_examples
@@ -134,7 +136,7 @@
 /// Example annotations with language set to `njk`
 /// can also be compiled.
 /// In order for this to work,
-/// you must either specify a `nunjucks.templatepath`
+/// you must either specify a `nunjucks.templatePath`
 /// (the path where Nunjucks will look to import templates),
 /// or a `nunjucks.environment` (custom [Nunjucks environment][njk-instance]).
 /// Using a custom environment
@@ -144,13 +146,13 @@
 ///
 /// [njk-instance]: https://mozilla.github.io/nunjucks/api.html#environment
 ///
-/// ### Setting `nunjucks.templatepath`:
+/// ### Setting `nunjucks.templatePath`:
 ///
 /// ```yaml
 /// # .sassdocrc (yaml)
 /// herman:
 ///   nunjucks:
-///     templatepath: 'templates'
+///     templatePath: 'templates'
 /// ```
 ///
 /// ### Setting `nunjucks.environment`:

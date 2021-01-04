@@ -1,3 +1,5 @@
+@use '../utilities';
+
 // Font Specimen Samples
 // =====================
 
@@ -6,7 +8,7 @@
 /// Herman provides custom annotations
 /// for visualizing fonts,
 /// along with other design tokens.
-/// See the [`sass.jsonfile` configuration][json]
+/// See the [`sass.jsonFile` configuration][json]
 /// to ensure that Herman has access
 /// to your exported Sass data.
 ///
@@ -70,7 +72,7 @@
 ///
 /// [examples]: demo_examples.html
 ///
-/// [ac]: http://oddbird.net/accoutrement/
+/// [ac]: https://www.oddbird.net/accoutrement/
 ///
 /// @example scss
 ///   // @font demo-cdn (normal, bold, bold italic)
@@ -112,14 +114,14 @@ $demo-cdn: (
 /// ```
 ///
 /// In order for this to work,
-/// you must specify a `fontpath`
+/// you must specify a `fontPath`
 /// (the path where Herman will look to import local font files),
 /// in your SassDoc `herman` configuration object.
 ///
 /// ```yaml
 /// # .sassdocrc (yaml)
 /// herman:
-///   fontpath: 'fonts/'
+///   fontPath: 'fonts/'
 /// ```
 ///
 /// @font
@@ -143,25 +145,25 @@ $demo-local: (
 /// we also need to [export the data to JSON][export].
 ///
 /// You can add data to the `$herman` export-map by hand,
-/// or use the provided `herman-add` mixin
+/// or use the provided `add` mixin
 /// to combine existing maps into the proper structure.
 /// [See the font map documentation for details][font-docs].
 ///
 /// ```scss
-///  @include herman-add('font', 'demo-code', $demo-code);
-///  @include herman-add('font', 'demo-local', $demo-local);
+///  @include add('font', 'demo-code', $demo-code);
+///  @include add('font', 'demo-local', $demo-local);
 /// ```
 ///
 /// After adding your data to the `$herman` map,
-/// it can be converted to JSON using `herman-export`.
+/// it can be converted to JSON using `export`.
 ///
 /// [export]: api_json-export.html
 /// [font-docs]: api_json-export.html#fonts
 ///
 /// @see $herman
-/// @see herman-add
-/// @see herman-export
+/// @see add
+/// @see export
 /// @group demo_fonts
-/// @link http://oddbird.net/accoutrement Accoutrement
-@include herman-add('font', 'demo-cdn', $demo-cdn);
-@include herman-add('font', 'demo-local', $demo-local);
+/// @link https://www.oddbird.net/accoutrement Accoutrement
+@include utilities.add('font', 'demo-cdn', $demo-cdn);
+@include utilities.add('font', 'demo-local', $demo-local);

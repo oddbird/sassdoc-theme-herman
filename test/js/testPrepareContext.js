@@ -1,18 +1,19 @@
 'use strict';
 
 const assert = require('assert');
+
 const extend = require('extend');
 const sinon = require('sinon');
 
 const prepareContext = require('../../lib/prepareContext');
 
-describe('prepareContext', function() {
-  it('resolves to a context', function(done) {
+describe('prepareContext', () => {
+  it('resolves to a context', (done) => {
     prepareContext({
       data: [],
       description: 'foo',
     })
-      .then(ctx => {
+      .then((ctx) => {
         const expected = {
           display: {
             access: ['public', 'private'],
@@ -40,7 +41,7 @@ describe('prepareContext', function() {
       .catch(done);
   });
 
-  it('sets extraDocs', function(done) {
+  it('sets extraDocs', (done) => {
     const warn = sinon.fake();
     prepareContext({
       data: [],
@@ -61,7 +62,7 @@ describe('prepareContext', function() {
         warn,
       },
     })
-      .then(ctx => {
+      .then((ctx) => {
         const simple = {
           filename: 'simple',
           name: 'simple',
@@ -84,44 +85,44 @@ describe('prepareContext', function() {
       .catch(done);
   });
 
-  it('sets extraLinks', function(done) {
+  it('sets extraLinks', (done) => {
     prepareContext({
       data: [],
       herman: {
-        extraLinks: ['http://oddbird.net'],
+        extraLinks: ['https://www.oddbird.net'],
       },
     })
-      .then(ctx => {
-        assert.deepEqual(ctx.extraLinks, ['http://oddbird.net']);
+      .then((ctx) => {
+        assert.deepEqual(ctx.extraLinks, ['https://www.oddbird.net']);
         done();
       })
       .catch(done);
   });
 
-  it('loads a Sass JSON file', function(done) {
+  it('loads a Sass JSON file', (done) => {
     prepareContext({
       data: [],
       herman: {
         sass: {
-          jsonfile: `${__dirname}/fixtures/css/json.css`,
+          jsonFile: `${__dirname}/fixtures/css/json.css`,
         },
       },
     })
-      .then(ctx => {
+      .then((ctx) => {
         assert.ok(ctx.sassjson.colors !== undefined);
         done();
       })
       .catch(done);
   });
 
-  it('logs a missing Sass JSON file', function(done) {
+  it('logs a missing Sass JSON file', (done) => {
     const warn = sinon.fake();
     prepareContext({
       data: [],
       logger: { warn },
       herman: {
         sass: {
-          jsonfile: `${__dirname}/fixtures/css/missing-json.css`,
+          jsonFile: `${__dirname}/fixtures/css/missing-json.css`,
         },
       },
     })
@@ -132,7 +133,7 @@ describe('prepareContext', function() {
       .catch(done);
   });
 
-  it('removes bogus context', function(done) {
+  it('removes bogus context', (done) => {
     const item = {
       commentRange: {
         start: 0,
@@ -187,14 +188,14 @@ describe('prepareContext', function() {
     prepareContext({
       data: [item, item2],
     })
-      .then(ctx => {
+      .then((ctx) => {
         assert.deepEqual(ctx.data, expected);
         done();
       })
       .catch(done);
   });
 
-  it('warns if prose block uses custom annotation with key', function(done) {
+  it('warns if prose block uses custom annotation with key', (done) => {
     const logger = { warn: sinon.fake() };
     const item = {
       commentRange: {
@@ -231,7 +232,7 @@ describe('prepareContext', function() {
       logger,
       data: [item],
     })
-      .then(ctx => {
+      .then((ctx) => {
         assert.deepEqual(ctx.data, expected);
         sinon.assert.calledOnce(logger.warn);
         done();

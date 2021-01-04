@@ -2,57 +2,59 @@
   "package": {
     "description": "Test markdown description."
   },
-  "data": [{
-    "description": "Test: function markdown.\n",
-    "output": "Markdown output",
-    "deprecated": "deprecated",
-    "context": {
-      "type": "function",
-      "name": "test-func-markdown"
-    },
-    "author": [
-      "Hugo Giraudel"
-    ],
-    "todo": [
-      "Todo description"
-    ],
-    "example": [{
-      "type": "scss",
-      "code": "text",
-      "description": "Example description"
-    }],
-    "parameter": [
-      {
-        "type": "String",
-        "name": "one",
-        "description": "Param 'one' --- description"
+  "data": [
+    {
+      "description": "Test: function markdown.\n",
+      "output": "Markdown output",
+      "deprecated": "deprecated",
+      "context": {
+        "type": "function",
+        "name": "test-func-markdown"
       },
-      {
-        "type": "String",
-        "name": "two",
-        "description": "Param \"two\" -- description"
+      "author": ["Hugo Giraudel"],
+      "todo": ["Todo description"],
+      "example": [
+        {
+          "type": "scss",
+          "code": "text",
+          "description": "Example description"
+        }
+      ],
+      "parameter": [
+        {
+          "type": "String",
+          "name": "one",
+          "description": "Param 'one' --- description"
+        },
+        {
+          "type": "String",
+          "name": "two",
+          "description": "Param \"two\" -- description"
+        },
+        {
+          "type": "String",
+          "name": "three"
+        }
+      ],
+      "property": [
+        {
+          "type": "Map",
+          "description": "Property description"
+        }
+      ],
+      "since": [
+        {
+          "description": "Since description"
+        }
+      ],
+      "throw": ["Throws description"],
+      "return": {
+        "type": "*",
+        "description": "Returns description"
       },
-      {
-        "type": "String",
-        "name": "three"
+      "content": {
+        "description": "This should be `'parsed'` as Markdown..."
       }
-    ],
-    "property": [{
-      "type": "Map",
-      "description": "Property description"
-    }],
-    "since": [{
-      "description": "Since description"
-    }],
-    "throw": [
-      "Throws description"
-    ],
-    "return": {
-      "type": "*",
-      "description": "Returns description"
-    },
-    "content": {
-      "description": "This should be `'parsed'` as Markdown..."
     }
-  }]
+  ]
 }

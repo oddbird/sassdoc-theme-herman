@@ -96,7 +96,7 @@ Configures which color value formats are shown
 when using the [`@colors` annotation][color-preview].
 Valid options: `hex`, `rgb/rgba`, `hsl/hsla`
 
-[color-preview]: http://oddbird.net/herman/docs/demo_colors.html
+[color-preview]: https://www.oddbird.net/herman/docs/demo_colors.html
 
 ## customCSS
 
@@ -131,12 +131,12 @@ to impact the design of those previews.
   This means that the paths must either be absolute,
   or relative to the location of the CSS file itself.
   If using Webpack to bundle your Herman `customCSS`,
-  this likely means [disabling the `publicPath` setting][extract-text]
+  this likely means [disabling the `publicPath` setting][public-path]
   for this CSS file (e.g. `publicPath: ''`),
   or [disabling Webpack's `url()` pre-processing][css-loader] entirely.
 
-[font-docs-webfonts]: http://oddbird.net/herman/docs/demo_fonts.html#displaying-webfonts
-[extract-text]: https://github.com/webpack-contrib/extract-text-webpack-plugin#extract
+[font-docs-webfonts]: https://www.oddbird.net/herman/docs/demo_fonts.html#displaying-cdn-hosted-webfonts
+[public-path]: https://github.com/webpack-contrib/mini-css-extract-plugin#publicpath
 [css-loader]: https://github.com/webpack-contrib/css-loader#url
 
 ## customHTML
@@ -151,9 +151,9 @@ See our [`@example` documentation][example-docs].
 This is particularly useful for including svg sprite sheets
 in example output.
 
-[example-docs]: http://oddbird.net/herman/docs/demo_examples.html
+[example-docs]: https://www.oddbird.net/herman/docs/demo_examples.html
 
-## fontpath
+## fontPath
 
 - Type: `String`
 - Default: `''`
@@ -164,23 +164,23 @@ files._
 Relative path to a directory containing local font files.
 See our [`@font` documentation][font-docs-local].
 
-[font-docs-local]: http://oddbird.net/herman/docs/demo_fonts.html#displaying-local-fonts
+[font-docs-local]: https://www.oddbird.net/herman/docs/demo_fonts.html#displaying-local-fonts
 
 ## nunjucks
 
 - Type: `Object`
 - Default: `{}`
 
-Container for the following [Nunjucks][nunjucks]-related options:
+Container for the following [Nunjucks][]-related options:
 
 [nunjucks]: https://mozilla.github.io/nunjucks/
 
-### nunjucks.templatepath
+### nunjucks.templatePath
 
 - Type: `String`
 - Default: `''`
 
-_Either `nunjucks.templatepath` or
+_Either `nunjucks.templatePath` or
 [`nunjucks.environment`](#nunjucks-environment) is required if using
 [`@example njk` annotation][example-njk]._
 
@@ -193,11 +193,11 @@ Relative path to a directory containing Nunjucks templates.
 
 [njk-instance]: https://mozilla.github.io/nunjucks/api.html#environment
 
-_Either [`nunjucks.templatepath`](#nunjucks-templatepath) or
+_Either [`nunjucks.templatePath`](#nunjucks-templatePath) or
 `nunjucks.environment` is required if using
 [`@example njk` annotation][example-njk]._
 
-[example-njk]: http://oddbird.net/herman/docs/demo_examples.html#compiling-nunjucks
+[example-njk]: https://www.oddbird.net/herman/docs/demo_examples.html#compiling-nunjucks
 
 ## sass
 
@@ -206,7 +206,7 @@ _Either [`nunjucks.templatepath`](#nunjucks-templatepath) or
 
 Container for the following sass-related options:
 
-### sass.jsonfile
+### sass.jsonFile
 
 - Type: `String`
 - Default: `''`
@@ -215,48 +215,64 @@ _Required if using [`@font`][font-docs], [`@colors`][color-preview],
 [`@ratios`][ratio-preview], or [`@sizes`][size-preview] annotations._
 
 Relative path to a `sass-json file`
-(created with the [`herman-export` mixin][export-mixin]).
+(created with the [`export` mixin][export-mixin]).
 The JSON contents will be added under the
 `sassjson` key of the sassdoc context,
 and used to display colors, fonts, ratios, and sizes.
 See [Exporting Styles to JSON][export].
 
-[font-docs]: http://oddbird.net/herman/docs/demo_fonts.html
-[ratio-preview]: http://oddbird.net/herman/docs/demo_sizes.html#preview-ratios
-[size-preview]: http://oddbird.net/herman/docs/demo_sizes.html#preview-sizes
-[export]: http://oddbird.net/herman/docs/api_json-export.html
-[export-mixin]: http://oddbird.net/herman/docs/api_json-export.html#mixin--herman-export
+[font-docs]: https://www.oddbird.net/herman/docs/demo_fonts.html
+[ratio-preview]: https://www.oddbird.net/herman/docs/demo_sizes.html#preview-ratios
+[size-preview]: https://www.oddbird.net/herman/docs/demo_sizes.html#preview-sizes
+[export]: https://www.oddbird.net/herman/docs/api_json-export.html
+[export-mixin]: https://www.oddbird.net/herman/docs/api_json-export.html#mixin--export
 
 ### sass.implementation
 
-- Type: `String` or Sass implementation instance
-- Default: `'node-sass'`
+- Type: Sass implementation instance
+- Default: Dart Sass instance
 
-Determines the Sass implementation ([Node Sass][node-sass] or [Dart
-Sass][dart-sass]) to use for Sass compilation if using [`@example njk`
-annotation][example-njk]. Accepts `'node-sass'` or `'sass'`.
+Determines the Sass implementation (defaults to [Dart Sass][dart-sass]) to use
+for Sass compilation if using [`@example scss` annotation][example-docs-scss]. This
+option expects an implementation providing a `renderSync` method with the [same
+signature][] as Dart Sass, and support for the [Sass module system][].
 
-[node-sass]: https://github.com/sass/node-sass
 [dart-sass]: https://sass-lang.com/dart-sass
+[same signature]: https://sass-lang.com/documentation/js-api#rendersync
+[sass module system]: https://sass-lang.com/blog/the-module-system-is-launched
 
-### sass.includepaths
+### sass.importer
+
+- Type: `Array` || `Function`
+- Default: [Custom Herman Sass importer][sass-importer]
+
+Function (or array of functions)
+used to resolve `@use` and `@import` file paths.
+Passed through to Sass [importer] when
+compiling `@example sass/scss` annotations.
+See our [`@example` documentation][example-docs-scss].
+
+[sass-importer]: https://github.com/oddbird/sassdoc-theme-herman/blob/master/lib/utils/sassImporter.js
+[importer]: https://sass-lang.com/documentation/js-api#importer
+
+### sass.includePaths
 
 - Type: `Array`
 - Default: `[]`
 
-Array of paths used to resolve `@import` declarations.
-Passed through to Sass [includepaths] when
+Array of load paths used to resolve `@use` and `@import` declarations.
+Passed through to Sass [includePaths] when
 compiling `@example sass/scss` annotations.
 See our [`@example` documentation][example-docs-scss].
 
-[includepaths]: https://github.com/sass/node-sass/#includepaths
+[includepaths]: https://sass-lang.com/documentation/js-api#includepaths
 
 ### sass.includes
 
 - Type: `Array`
 - Default: `[]`
 
-List of files (relative to any [`sass.includepaths`](#sass-includepaths)) to
+List of files (relative to any [`sass.includePaths`](#sass-includepaths)) to
 `@import` for all `@example sass/scss` annotations.
 See our [`@example` documentation][example-docs-scss].
 
@@ -266,16 +282,32 @@ that may be used by any example.
 It's best to avoid files with output CSS,
 as that output will be displayed in every single Sass example.
 
-[example-docs-scss]: http://oddbird.net/herman/docs/demo_examples.html#compiling-sass-scss
+[example-docs-scss]: https://www.oddbird.net/herman/docs/demo_examples.html#compiling-sass-scss
 
 ### sass.use
 
 - Type: `Array`
 - Default: `[]`
 
-List of files (relative to any [`sass.includepaths`](#sass-includepaths)) to
+List of files (relative to any [`sass.includePaths`](#sass-includepaths)) to
 `@use` for all `@example sass/scss` annotations.
 See our [`@example` documentation][example-docs-scss].
+
+Each item in the array can be a string (path to the file)
+or an object with `file` and `namespace` keys
+(to `@use "<file>" as <namespace>`):
+
+```yaml
+# .sassdocrc
+herman:
+  sass:
+    includePaths:
+      - 'static/sass'
+    use:
+      - 'config/tools'
+      - file: 'config/other-tools'
+        namespace: 'my-tools'
+```
 
 This is useful for including any global
 Sass configuration and toolkit files
@@ -284,10 +316,9 @@ using the [Dart Sass module system][dart-sass-modules].
 It's best to avoid files with output CSS,
 as that output will be displayed in every single Sass example.
 
-[example-docs-scss]: http://oddbird.net/herman/docs/demo_examples.html#compiling-sass-scss
 [dart-sass-modules]: https://sass-lang.com/blog/the-module-system-is-launched
 
-### sass.outputstyle
+### sass.outputStyle
 
 - Type: `String`
 - Default: `'expanded'`
@@ -295,7 +326,7 @@ as that output will be displayed in every single Sass example.
 Determines the output format of the final CSS
 of compiled `@example sass/scss` annotations.
 Passed through to Sass [outputStyle] option.
-Accepts `'nested'`, `'expanded'`, `'compact'`, or `'compressed'`.
+Accepts `'expanded'` or `'compressed'`.
 See our [`@example` documentation][example-docs-scss].
 
-[outputstyle]: https://github.com/sass/node-sass/#outputstyle
+[outputstyle]: https://sass-lang.com/documentation/js-api#outputstyle

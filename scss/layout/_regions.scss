@@ -6,6 +6,8 @@
 /// as well as the `app` and `container` wrapping regions.
 /// @group style-regions
 
+@use '~accoutrement/sass/tools';
+
 // General
 // -------
 /// All regions are full-width by default.
@@ -36,12 +38,12 @@
 ///
 /// @group style-regions
 [data-region='container'] {
-  @include clearfix;
+  @include tools.clearfix;
   display: flex;
   flex: 1 1 auto;
   position: relative;
 
-  @include above('page-break') {
+  @include tools.above('page-break') {
     justify-content: flex-end;
   }
 }

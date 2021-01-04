@@ -1,3 +1,5 @@
+@use '../utilities';
+
 // Ratio & Size Samples
 // ====================
 
@@ -6,7 +8,7 @@
 /// Herman provides custom annotations
 /// for visualizing sizes and ratios,
 /// along with other design tokens.
-/// See the [`sass.jsonfile` configuration][json]
+/// See the [`sass.jsonFile` configuration][json]
 /// to ensure that Herman has access
 /// to your exported Sass data.
 ///
@@ -45,7 +47,7 @@ $xlarge: 3rem;
 /// to store and access ratios
 /// directly in a Herman-friendly map.
 ///
-/// [ac]: http://oddbird.net/accoutrement/
+/// [ac]: https://www.oddbird.net/accoutrement/
 ///
 /// ```scss
 /// $demo-ratios: (
@@ -86,7 +88,7 @@ $demo-ratios: (
 /// to store and access sizes
 /// directly in a Herman-friendly map.
 ///
-/// [ac]: http://oddbird.net/accoutrement/
+/// [ac]: https://www.oddbird.net/accoutrement/
 ///
 /// ```scss
 /// $demo-sizes: (
@@ -166,28 +168,28 @@ $demo-sizes-large: (
 /// we also need to [export the data to JSON][export].
 ///
 /// You can add data to the `$herman` export-map by hand,
-/// or use the provided `herman-add` mixin
+/// or use the provided `add` mixin
 /// to combine existing maps into the proper structure.
 /// [See the size/ratio map documentation for details »][size-docs]
 ///
 /// ```scss
-///  @include herman-add('ratios', 'demo-ratios', $demo-ratios);
-///  @include herman-add('sizes', 'demo-sizes', $demo-sizes);
+///  @include add('ratios', 'demo-ratios', $demo-ratios);
+///  @include add('sizes', 'demo-sizes', $demo-sizes);
 /// ```
 ///
 /// If your map needs to be parsed or compiled before export,
-/// you can pass additional compilation functions and arguments to `herman-add`.
+/// you can pass additional compilation functions and arguments to `add`.
 /// Once your data is all stored in the `$herman` map,
-/// it can be converted to JSON using `herman-export`.
+/// it can be converted to JSON using `export`.
 ///
 /// [export]: api_json-export.html
 /// [size-docs]: api_json-export.html#sizes-ratios
 ///
 /// @see $herman
-/// @see herman-add
-/// @see herman-export
+/// @see add
+/// @see export
 /// @group demo_sizes
-/// @link http://oddbird.net/accoutrement Accoutrement
-@include herman-add('ratios', 'demo-ratios', $demo-ratios);
-@include herman-add('sizes', 'demo-sizes', $demo-sizes);
-@include herman-add('sizes', 'demo-sizes-large', $demo-sizes-large);
+/// @link https://www.oddbird.net/accoutrement Accoutrement
+@include utilities.add('ratios', 'demo-ratios', $demo-ratios);
+@include utilities.add('sizes', 'demo-sizes', $demo-sizes);
+@include utilities.add('sizes', 'demo-sizes-large', $demo-sizes-large);

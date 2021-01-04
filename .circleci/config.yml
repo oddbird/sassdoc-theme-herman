@@ -4,126 +4,103 @@ jobs:
   build:
     working_directory: ~/herman
     docker:
-      - image: circleci/node:latest-browsers
+      - image: circleci/node:lts
     steps:
       - checkout
       - restore_cache:
           keys:
-            - herman-yarn-{{ checksum "yarn.lock" }}
+            - herman-yarn-{{ checksum ".pnp.js" }}-{{ checksum "yarn.lock" }}
+            - herman-yarn-
       - run:
           name: Install Dependencies
-          command: yarn install --frozen-lockfile
+          command: yarn install --immutable --immutable-cache
+      - run:
+          name: Compile Assets
+          command: yarn build
       - persist_to_workspace:
           root: .
           paths:
-            - ./node_modules
+            - ./.yarn/unplugged
+            - ./.yarn/build-state.yml
+            - ./.yarn/install-state.gz
       - save_cache:
-          key: herman-yarn-{{ checksum "yarn.lock" }}
+          key: herman-yarn-{{ checksum ".pnp.js" }}-{{ checksum "yarn.lock" }}
           paths:
-            - ./node_modules
-
-  build-node-8:
-    working_directory: ~/herman
-    docker:
-      - image: node:8
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - herman-node8-{{ checksum "yarn.lock" }}
-      - run:
-          name: Install Dependencies
-          command: yarn install --frozen-lockfile
-      - save_cache:
-          key: herman-node8-modules-{{ checksum "yarn.lock" }}
-          paths:
-            - ./node_modules
+            - ./.yarn/unplugged
+            - ./.yarn/build-state.yml
+            - ./.yarn/install-state.gz
 
   lint:
     working_directory: ~/herman
     docker:
-      - image: circleci/node:latest-browsers
+      - image: circleci/node:lts
     steps:
       - checkout
       - attach_workspace:
           at: .
       - run:
-          name: Lint JS
-          command: yarn gulp eslint
-      # - run:
-      #     name: Lint Sass
-      #     command: yarn gulp sasslint
+          name: Lint
+          command: yarn lint:ci
 
-  test-sass:
+  test:
     working_directory: ~/herman
     docker:
-      - image: circleci/node:latest-browsers
+      - image: circleci/node:lts
     steps:
       - checkout
       - attach_workspace:
           at: .
       - run:
           name: Test Sass
-          command: yarn gulp sasstest
+          command: yarn test:sass
+      - run:
+          name: Test JS
+          command: yarn test:js:src:ci
+          environment:
+            MOCHA_FILE: './coverage/src/junit.xml'
+      - run:
+          name: Test Client JS
+          command: yarn test:js:client:ci
+          environment:
+            JEST_JUNIT_OUTPUT_DIR: './coverage/client'
+      - store_artifacts:
+          path: coverage
+          destination: js-test-reports
+      - store_test_results:
+          path: coverage
+      - persist_to_workspace:
+          root: .
+          paths:
+            - coverage
 
-  test-js:
+  check-test-coverage:
     working_directory: ~/herman
     docker:
-      - image: circleci/node:latest-browsers
+      - image: circleci/node:lts
     steps:
       - checkout
       - attach_workspace:
           at: .
       - run:
-          name: Run JS Tests
-          command: yarn gulp jstest
-      - run:
-          name: Run Client JS Tests
-          command: yarn gulp clienttest
+          name: Report Test Coverage
+          command: bash <(curl -s https://codecov.io/bash)
       - run:
           name: Check Test Coverage
           command: |
-            yarn nyc check-coverage
-            yarn nyc check-coverage --temp-directory ./jscov/client/
-      - store_artifacts:
-          path: jscov
-          destination: js-reports
-      - store_test_results:
-          path: jscov
-
-  test-node-8:
-    working_directory: ~/herman
-    docker:
-      - image: node:8
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - herman-node8-modules-{{ checksum "yarn.lock" }}
-      - run:
-          name: Run JS Tests [node 8]
-          command: yarn gulp jstest-node8
-      - store_artifacts:
-          path: jscov
-          destination: js-reports
-      - store_test_results:
-          path: jscov
+            yarn nyc check-coverage --temp-dir coverage/src
+            yarn nyc check-coverage --temp-dir coverage/client
 
 workflows:
   version: 2
   build-and-test:
     jobs:
       - build
-      - build-node-8
       - lint:
           requires:
             - build
-      - test-sass:
+      - test:
           requires:
             - build
-      - test-js:
+      - check-test-coverage:
           requires:
-            - build
-      - test-node-8:
-          requires:
-            - build-node-8
+            - test

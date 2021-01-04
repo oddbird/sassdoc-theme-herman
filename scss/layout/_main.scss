@@ -4,15 +4,17 @@
 /// Styles related to the main content area in generated Herman docs.
 /// @group style-main
 
+@use '~accoutrement/sass/tools';
+
 // Main Region
 // -----------
 /// Layout and styles for the main content region.
 ///
 /// @group style-main
 [data-region='main'] {
-  @include z-index('main');
+  @include tools.z-index('main');
 
-  @include above('page-break') {
+  @include tools.above('page-break') {
     overflow: hidden;
   }
 }
@@ -23,6 +25,6 @@
 ///
 /// @group style-main
 [data-page] {
-  padding: size('flex-gutter');
+  padding: tools.size('flex-gutter');
   position: relative;
 }

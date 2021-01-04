@@ -2,12 +2,13 @@
 
 const assert = require('assert');
 
-const expected = require('./fixtures/markdown/expected');
-const input = require('./fixtures/markdown/input');
 const markdown = require('../../lib/utils/markdown');
 
-describe('markdown', function() {
-  it('should match expected ctx', function() {
+const expected = require('./fixtures/markdown/expected');
+const input = require('./fixtures/markdown/input');
+
+describe('markdown', () => {
+  it('should match expected ctx', () => {
     markdown(input);
 
     assert.deepEqual(input, expected);

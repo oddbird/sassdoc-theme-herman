@@ -234,7 +234,7 @@
         <ul>
           
             <li class="nav-item">
-              <a href="http://oddbird.net/accoutrement/" data-nav="is-not-active">Accoutrement</a>
+              <a href="https://www.oddbird.net/accoutrement/" data-nav="is-not-active">Accoutrement</a>
             </li>
           
         </ul>
@@ -243,7 +243,7 @@
 
     
       <aside class="footer-credit">
-        <a href="http://oddbird.net/herman/" class="footer-icon">
+        <a href="https://www.oddbird.net/herman/" class="footer-icon">
           
   <svg data-icon="logo" data-icon-size="footer-logo" ><use xlink:href="#icon-logo" />
   </svg>
@@ -251,13 +251,13 @@
         </a>
         <span>
           Documented with
-          <a href="http://oddbird.net/herman/" class="footer-link">
+          <a href="https://www.oddbird.net/herman/" class="footer-link">
             Herman
           </a>
         </span>
         <span>
           by
-          <a href="http://oddbird.net/" class="footer-link">
+          <a href="https://www.oddbird.net/" class="footer-link">
             OddBird
           </a>
         </span>
@@ -304,7 +304,7 @@
 <p>Herman provides custom annotations
 for visualizing color palettes,
 along with other design tokens.
-See the <a href="CONFIGURATION.html#sass-jsonfile"><code>sass.jsonfile</code> configuration</a>
+See the <a href="CONFIGURATION.html#sass-jsonfile"><code>sass.jsonFile</code> configuration</a>
 to ensure that Herman has access
 to your exported Sass<span class="widont">&nbsp;</span>data.</p>
 <p>Whether you store colors as individual variables
@@ -450,7 +450,7 @@ we’ll want to combine them into a map
 of name/value pairs.
 Sass does not provide any shortcuts for automating this step,
 or removing the duplication,
-but you can use a tool like our <a href="http://oddbird.net/accoutrement/">Accoutrement</a>
+but you can use a tool like our <a href="https://www.oddbird.net/accoutrement/">Accoutrement</a>
 to store and access colors
 directly in a Herman-friendly<span class="widont">&nbsp;</span>map.</p>
 <p>Create as many maps as you like
@@ -638,9 +638,9 @@ That’s a two-step process:
 first building the export-map,
 and then creating a sass file to do the actual export.
 We provide shortcuts to help with<span class="widont">&nbsp;</span>both.</p>
-<p>Use the <code>herman-add</code> mixin to add individual data maps
+<p>Use the <code>add</code> mixin to add individual data maps
 to the global export<span class="widont">&nbsp;</span>map.</p>
-<pre><code class="lang-scss"> @include herman-add('colors', 'demo-colors', $demo-colors);
+<pre><code class="lang-scss"> @include add('colors', 'demo-colors', $demo-colors);
 </code></pre>
 <ul>
 <li>The first argument tells Herman what type of data is being added –
@@ -651,7 +651,7 @@ passing the exported colors to application-js as well as Herman,
 so colors defined in Sass can be accessed in<span class="widont">&nbsp;</span>JavaScript.</li>
 <li>The second argument sets a <code>key</code> name
 for accessing this particular group of colors.
-The <code>herman-add</code> key should match
+The <code>add</code> key should match
 the key provided to <code>@colors</code>.</li>
 <li>The third argument provides the actual map of data
 to be added to the <code>$herman</code> export map.</li>
@@ -750,7 +750,7 @@ to be added to the <code>$herman</code> export map.</li>
       <span class="item-type">@mixin</span>
       
         <a href="
-  api_json-export.html#mixin--herman-add" class="item-name">herman-add()</a>
+  api_json-export.html#mixin--add" class="item-name">add()</a>
       
       
       
@@ -814,7 +814,7 @@ to be added to the <code>$herman</code> export map.</li>
 <p>At OddBird, we store our colors in more complex maps,
 where the values need to be parsed and compiled
 before they can be exported to Herman.
-Using <a href="http://oddbird.net/accoutrement">accoutrement</a>, our maps look like<span class="widont">&nbsp;</span>this:</p>
+Using <a href="https://www.oddbird.net/accoutrement">accoutrement</a>, our maps look like<span class="widont">&nbsp;</span>this:</p>
 <pre><code class="lang-scss">$demo-noncolors: (
   'light-gray': '#brand-blue' ('tint': 80%, 'desaturate': 80%),
   'gray': '#brand-blue' ('desaturate': 80%),
@@ -826,7 +826,7 @@ and compile actual colors based on our map notation.
 In order to export real color data to Herman,
 we want to run every value in our map
 through the color function before exporting.
-<code>herman-add</code> accepts additional arguments at the end,
+<code>add</code> accepts additional arguments at the end,
 for passing each map-value through a function.
 Provide a function name (Sass 3.4-),
 or first-class function (Sass 3.5+)
@@ -898,20 +898,23 @@ along with any additional arguments required for that<span class="widont">&nbsp;
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">$herman: ();
+      <pre class="hljs-pre"><code class="lang-scss">@use &#39;~accoutrement/sass/tools&#39;;
+@use &#39;sass:meta&#39;;
+
+utilities.$herman: ();
 $demo-noncolors: (
   &#39;light-gray&#39;: &#39;#brand-blue&#39; (&#39;tint&#39;: 80%, &#39;desaturate&#39;: 80%),
   &#39;gray&#39;: &#39;#brand-blue&#39; (&#39;desaturate&#39;: 80%),
   &#39;black&#39;: &#39;#brand-blue&#39; (&#39;shade&#39;: 30%, &#39;desaturate&#39;: 80%),
 );
 
-@include herman-add(
+@include utilities.add(
   &#39;colors&#39;, &#39;demo-noncolors&#39;, $demo-noncolors,
-  get-function(&#39;color&#39;) // function
+  meta.get-function(&#39;color&#39;, $module: &#39;tools&#39;) // function
 );
 
-@each $key, $value in $herman {
-/* #{$key}: #{inspect($value)} */
+@each $key, $value in utilities.$herman {
+/* #{$key}: #{meta.inspect($value)} */
 }</code></pre>
     </div>
   
@@ -969,7 +972,7 @@ $demo-noncolors: (
     <h4 class="param-title">
       
       
-        <a href="http://oddbird.net/accoutrement" class="item-name">Accoutrement</a>
+        <a href="https://www.oddbird.net/accoutrement" class="item-name">Accoutrement</a>
       
       
       

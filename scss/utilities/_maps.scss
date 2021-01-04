@@ -1,6 +1,12 @@
 // Map Utilities
 // =============
 
+@use 'config';
+@use 'json-api' as *;
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:meta';
+
 // Herman Add
 // ----------
 /// Add a map of colors, fonts, sizes, ratios, etc
@@ -9,6 +15,7 @@
 /// with optional functions/args for compiling raw values.
 ///
 /// @group api_json-export
+/// @since 4.0.0 Name changed from `herman-add`
 ///
 /// @param {String} $type -
 ///   The type of map being added,
@@ -26,28 +33,31 @@
 /// @output
 ///   Updated `$herman` map, ready for JSON export
 /// @example scss
-///   $herman: ();
+///   @use '~accoutrement/sass/tools';
+///   @use 'sass:meta';
+///
+///   utilities.$herman: ();
 ///   $brand-colors: (
 ///     'brand-blue': hsl(195, 85%, 35%),
 ///     'light-gray': '#brand-blue' ('tint': 80%, 'desaturate': 80%),
 ///   );
-///   @include herman-add('colors', 'brand-colors', $brand-colors, get-function('color'));
+///   @include utilities.add('colors', 'brand-colors', $brand-colors, meta.get-function('color', $module: 'tools'));
 ///
-///   @each $key, $value in $herman {
-///   /* #{$key}: #{inspect($value)} */
+///   @each $key, $value in utilities.$herman {
+///   /* #{$key}: #{meta.inspect($value)} */
 ///   }
-@mixin herman-add($type, $key, $map, $args...) {
+@mixin add($type, $key, $map, $args...) {
   // pluralize type
-  $type: map-get($_herman-plural-types, $type) or $type;
+  $type: map.get(config.$plural-types, $type) or $type;
 
   // compile maps as needed
   @if (length($args) > 0) {
-    $map: herman-map-compile($map, $args...);
+    $map: compile($map, $args...);
   }
 
   // Update nested map by type
-  $nested: map-get($herman, $type) or ();
-  $nested: map-merge(
+  $nested: map.get($herman, $type) or ();
+  $nested: map.merge(
     $nested,
     (
       $key: $map,
@@ -58,7 +68,7 @@
   );
 
   // Merge nested map back into $herman
-  $herman: map-merge($herman, $nested) !global;
+  $herman: map.merge($herman, $nested) !global;
 }
 
 // Map Compile
@@ -66,10 +76,11 @@
 /// Pass the values of any map through a given function
 /// (with optional arguments)
 /// and return the compiled map.
-/// This is used by `herman-add`,
+/// This is used by `add`,
 /// but can also be accessed directly.
 ///
 /// @group api_json-export
+/// @since 4.0.0 Name changed from `herman-map-compile`
 ///
 /// @param {Map} $map -
 ///   A sass map with values that need to be compiled,
@@ -84,32 +95,27 @@
 ///   with values compiled by a third-party function,
 ///   and converted to json-ready strings
 /// @example scss
+///   @use '~accoutrement/sass/tools';
+///   @use 'sass:meta';
+///
 ///   $brand-colors: (
 ///     'brand-orange': hsl(24, 100%, 39%),
 ///     'brand-blue': hsl(195, 85%, 35%),
 ///     'light-gray': 'brand-blue' ('tint': 80%, 'desaturate': 80%),
 ///   );
-///   $compiled: herman-map-compile($brand-colors, get-function('color'));
+///   $compiled: utilities.compile($brand-colors, meta.get-function('color', $module: 'tools'));
 ///
 ///   @each $key, $value in $compiled {
 ///   /* #{$key}: #{$value} */
 ///   }
-@function herman-map-compile($map, $function, $args...) {
+@function compile($map, $function, $args...) {
   $output: ();
 
   @each $key, $value in $map {
-    @if length($args) > 0 {
-      $value: append((), $value);
-      $value: join($value, $args);
-      $value: call($function, $value...);
-    } @else {
-      $value: call($function, $value);
-    }
-
-    $output: map-merge(
+    $output: map.merge(
       $output,
       (
-        $key: $value,
+        $key: meta.call($function, $value, $args...),
       )
     );
   }

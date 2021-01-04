@@ -4,6 +4,8 @@
 /// Styles related to the top banner in generated Herman docs.
 /// @group style-banner
 
+@use '~accoutrement/sass/tools';
+
 // Banner Arrow
 // ------------
 /// Apply a bottom-border with centered down-arrow triangle,
@@ -19,36 +21,36 @@
 ///
 /// @example scss
 ///   [data-region='banner'] {
-///     @include banner-arrow;
+///     @include config.banner-arrow;
 ///   }
 /// @example html
 ///   <header data-region="banner">
 ///     Hello World
 ///   </header>
 @mixin banner-arrow($color: 'theme-dark', $background: 'background') {
-  border-bottom: size('arrow-border') solid color($color);
-  box-shadow: 0 2px 2px color('shadow');
+  border-bottom: tools.size('arrow-border') solid tools.color($color);
+  box-shadow: 0 2px 2px tools.color('shadow');
   display: block;
   position: relative;
   width: 100%;
 
-  @include wrap-content('') {
-    border: size('arrow-depth') solid transparent;
-    border-top-color: color($color);
-    border-width: size('arrow-depth') size('arrow-side') 0;
+  @include tools.wrap-content('') {
+    border: tools.size('arrow-depth') solid transparent;
+    border-top-color: tools.color($color);
+    border-width: tools.size('arrow-depth') tools.size('arrow-side') 0;
     left: 50%;
     position: absolute;
     top: 100%;
     transition: border-width 200ms;
   }
 
-  @include before('') {
-    margin-top: size('arrow-border');
+  @include tools.before('') {
+    margin-top: tools.size('arrow-border');
     transform: translateX(-50%) translateY(-2px);
   }
 
-  @include after('') {
-    border-top-color: color($background);
+  @include tools.after('') {
+    border-top-color: tools.color($background);
     transform: translateX(-50%) translateY(-4px);
   }
 }
