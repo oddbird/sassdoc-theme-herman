@@ -2,7 +2,7 @@
   "name": "sassdoc-theme-herman",
   "title": "Herman",
   "description": "An Odd SassDoc theme.",
-  "version": "4.0.0-rc.1",
+  "version": "4.0.0",
   "homepage": "https://www.oddbird.net/herman/",
   "license": "MIT",
   "repository": {

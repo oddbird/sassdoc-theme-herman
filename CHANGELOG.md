@@ -1,5 +1,9 @@
 # Herman Changelog
 
+## 4.0.0: 2021-01-04
+
+- No changes from v4.0.0-rc.1
+
 ## 4.0.0-rc.1: 2021-01-04
 
 - 💥 BREAKING: Drop support for Node < 10
