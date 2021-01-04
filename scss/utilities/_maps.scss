@@ -43,7 +43,7 @@
 ///   );
 ///   @include utilities.add('colors', 'brand-colors', $brand-colors, meta.get-function('color', $module: 'tools'));
 ///
-///   @each $key, $value in $herman {
+///   @each $key, $value in utilities.$herman {
 ///   /* #{$key}: #{meta.inspect($value)} */
 ///   }
 @mixin add($type, $key, $map, $args...) {

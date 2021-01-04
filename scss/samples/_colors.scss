@@ -1,5 +1,5 @@
-@use "sass:meta";
-@use "../utilities";
+@use 'sass:meta';
+@use '../utilities';
 @use '~accoutrement/sass/tools';
 
 // Color Samples
@@ -207,7 +207,7 @@ $demo-noncolors: (
 ///     meta.get-function('color', $module: 'tools') // function
 ///   );
 ///
-///   @each $key, $value in $herman {
+///   @each $key, $value in utilities.$herman {
 ///   /* #{$key}: #{meta.inspect($value)} */
 ///   }
 /// @group demo_colors

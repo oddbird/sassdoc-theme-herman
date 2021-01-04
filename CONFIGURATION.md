@@ -316,7 +316,6 @@ using the [Dart Sass module system][dart-sass-modules].
 It's best to avoid files with output CSS,
 as that output will be displayed in every single Sass example.
 
-[example-docs-scss]: https://www.oddbird.net/herman/docs/demo_examples.html#compiling-sass-scss
 [dart-sass-modules]: https://sass-lang.com/blog/the-module-system-is-launched
 
 ### sass.outputStyle

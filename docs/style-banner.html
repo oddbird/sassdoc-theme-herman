@@ -565,6 +565,54 @@ used to make it an arrow-outline rather than a solid<span class="widont">&nbsp;<
     </div>
   
 
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+            <span class='code-description'>
+              compiled
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-css">[data-region=banner] {
+  border-bottom: 8px solid #0d7fa5;
+  box-shadow: 0 2px 2px rgba(85, 91, 94, 0.5);
+  display: block;
+  position: relative;
+  width: 100%;
+}
+[data-region=banner]::before, [data-region=banner]::after {
+  content: &quot;&quot;;
+  border: 0.7rem solid transparent;
+  border-top-color: #0d7fa5;
+  border-width: 0.7rem 1.4rem 0;
+  left: 50%;
+  position: absolute;
+  top: 100%;
+  transition: border-width 200ms;
+}
+[data-region=banner]::before {
+  content: &quot;&quot;;
+  margin-top: 8px;
+  transform: translateX(-50%) translateY(-2px);
+}
+[data-region=banner]::after {
+  content: &quot;&quot;;
+  border-top-color: #fff;
+  transform: translateX(-50%) translateY(-4px);
+}</code></pre>
+    </div>
+  
+
     </div>
 
     
