@@ -129,8 +129,12 @@ module.exports = {
       },
     },
   },
+  performance: {
+    hints: false,
+  },
   devServer: {
     static: [path.join(__dirname, 'docs')],
+    hot: false,
   },
   plugins: [
     // make jquery accessible in all modules that use it

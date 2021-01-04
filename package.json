@@ -20,7 +20,7 @@
     "serve": "run-s build:sprites serve:webpack",
     "lint": "run-p lint:js lint:sass prettier:other",
     "test": "run-s test:sass test:js",
-    "serve:webpack": "webpack-dev-server",
+    "serve:webpack": "webpack serve",
     "build:webpack": "webpack",
     "build:sprites": "node scripts/compile-sprites.js",
     "prettier:js": "prettier --write \"**/*.js\"",
