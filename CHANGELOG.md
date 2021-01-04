@@ -1,6 +1,6 @@
 # Herman Changelog
 
-## UNRELEASED
+## 4.0.0-rc.1: 2021-01-04
 
 - 💥 BREAKING: Drop support for Node < 10
 - 💥 BREAKING: Switch to Dart Sass throughout, and use as default
