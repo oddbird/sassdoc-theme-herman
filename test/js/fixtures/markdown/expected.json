@@ -11,7 +11,7 @@
         "type": "function",
         "name": "test-func-markdown"
       },
-      "author": ["<p>Hugo Giraudel</p>\n"],
+      "author": ["<p>Kitty Giraudel</p>\n"],
       "todo": ["<p>Todo description</p>\n"],
       "example": [
         {
