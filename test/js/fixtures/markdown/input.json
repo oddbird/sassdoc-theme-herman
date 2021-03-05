@@ -11,7 +11,7 @@
         "type": "function",
         "name": "test-func-markdown"
       },
-      "author": ["Hugo Giraudel"],
+      "author": ["Kitty Giraudel"],
       "todo": ["Todo description"],
       "example": [
         {
