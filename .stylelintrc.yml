@@ -1,4 +1,4 @@
-# See https://github.com/stylelint/stylelint/blob/master/docs/user-guide/rules.md
+# See https://github.com/stylelint/stylelint/blob/master/docs/user-guide/configure.md#rules
 # Also https://github.com/kristerkari/stylelint-scss#list-of-rules
 
 extends:

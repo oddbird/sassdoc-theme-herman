@@ -1,8 +1,8 @@
 # [Herman][herman] [a [SassDoc][sassdoc] theme]
 
-[![CircleCI](https://circleci.com/gh/oddbird/sassdoc-theme-herman/tree/master.svg?style=svg)](https://circleci.com/gh/oddbird/sassdoc-theme-herman/tree/master)
-[![AppVeyor](https://ci.appveyor.com/api/projects/status/w02fa9k998fywntl/branch/master?svg=true)](https://ci.appveyor.com/project/jgerigmeyer/sassdoc-theme-herman)
-[![Codecov](https://codecov.io/gh/oddbird/sassdoc-theme-herman/branch/master/graph/badge.svg)](https://codecov.io/gh/oddbird/sassdoc-theme-herman)
+[![CircleCI](https://circleci.com/gh/oddbird/sassdoc-theme-herman/tree/main.svg?style=svg)](https://circleci.com/gh/oddbird/sassdoc-theme-herman/tree/main)
+[![AppVeyor](https://ci.appveyor.com/api/projects/status/w02fa9k998fywntl/branch/main?svg=true)](https://ci.appveyor.com/project/jgerigmeyer/sassdoc-theme-herman/branch/main)
+[![Codecov](https://codecov.io/gh/oddbird/sassdoc-theme-herman/branch/main/graph/badge.svg?token=dy36BBNFFu)](https://codecov.io/gh/oddbird/sassdoc-theme-herman)
 
 > **If it's not documented, it doesn't exist.**
 > Documentation should become the default --

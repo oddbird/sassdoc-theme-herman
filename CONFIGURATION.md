@@ -252,7 +252,7 @@ Passed through to Sass [importer] when
 compiling `@example sass/scss` annotations.
 See our [`@example` documentation][example-docs-scss].
 
-[sass-importer]: https://github.com/oddbird/sassdoc-theme-herman/blob/master/lib/utils/sassImporter.js
+[sass-importer]: https://github.com/oddbird/sassdoc-theme-herman/blob/main/lib/utils/sassImporter.js
 [importer]: https://sass-lang.com/documentation/js-api#importer
 
 ### sass.includePaths
