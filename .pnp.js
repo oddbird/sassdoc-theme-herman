@@ -87,7 +87,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["npm-run-all", "npm:4.1.5"],
             ["nunjucks", "virtual:52792dd97726a8ac96fccda7b634faa131bd0f56fcc15a206c0c204bed1397175438b7399a7938f9596b13ab7ea75b93a582eff85132ab61b54a00023bf57ea1#npm:3.2.3"],
             ["nyc", "npm:15.1.0"],
-            ["pinst", "npm:2.1.6"],
             ["postcss", "npm:8.2.14"],
             ["postcss-loader", "virtual:878b150fb95c14b92e1a083a8cdd5b07d75bde54934ebaf95859474dcc5db3d63d39a688ccdf72c7af702ac8d88c00a5b7e8d26a82dab7e202b18226de2a7429#npm:5.2.0"],
             ["prettier", "npm:2.2.1"],
@@ -14103,16 +14102,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
-      ["pinst", [
-        ["npm:2.1.6", {
-          "packageLocation": "./.yarn/cache/pinst-npm-2.1.6-750cbdedeb-ac950620de.zip/node_modules/pinst/",
-          "packageDependencies": [
-            ["pinst", "npm:2.1.6"],
-            ["fromentries", "npm:1.3.2"]
-          ],
-          "linkType": "HARD",
-        }]
-      ]],
       ["pirates", [
         ["npm:4.0.1", {
           "packageLocation": "./.yarn/cache/pirates-npm-4.0.1-377058e8fc-21604008c3.zip/node_modules/pirates/",
@@ -16494,7 +16483,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["npm-run-all", "npm:4.1.5"],
             ["nunjucks", "virtual:52792dd97726a8ac96fccda7b634faa131bd0f56fcc15a206c0c204bed1397175438b7399a7938f9596b13ab7ea75b93a582eff85132ab61b54a00023bf57ea1#npm:3.2.3"],
             ["nyc", "npm:15.1.0"],
-            ["pinst", "npm:2.1.6"],
             ["postcss", "npm:8.2.14"],
             ["postcss-loader", "virtual:878b150fb95c14b92e1a083a8cdd5b07d75bde54934ebaf95859474dcc5db3d63d39a688ccdf72c7af702ac8d88c00a5b7e8d26a82dab7e202b18226de2a7429#npm:5.2.0"],
             ["prettier", "npm:2.2.1"],

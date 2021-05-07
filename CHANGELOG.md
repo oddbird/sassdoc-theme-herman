@@ -1,5 +1,9 @@
 # Herman Changelog
 
+## 4.0.2: 2021-05-07
+
+- 🐛 BUGFIX: Fix build error on package install
+
 ## 4.0.1: 2021-05-07
 
 - 🐛 BUGFIX: Pin [cheerio](https://github.com/cheeriojs/cheerio) dependency to
