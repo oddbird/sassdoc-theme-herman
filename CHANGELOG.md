@@ -1,5 +1,11 @@
 # Herman Changelog
 
+## 4.0.1: 2021-05-07
+
+- 🐛 BUGFIX: Pin [cheerio](https://github.com/cheeriojs/cheerio) dependency to
+  fix breaking change
+- 🏠 INTERNAL: Upgrade dependencies
+
 ## 4.0.0: 2021-01-04
 
 - No changes from v4.0.0-rc.1
