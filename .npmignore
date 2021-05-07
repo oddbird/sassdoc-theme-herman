@@ -12,6 +12,7 @@
 .eslintrc.yml
 .github/
 .gitignore
+.husky/
 .livereload
 .npm
 .nvmrc
