@@ -17,7 +17,7 @@ describe('getNunjucksEnv', () => {
       },
     };
     const actual = getNunjucksEnv(null, env, null);
-    assert.equal(actual, 'some value');
+    assert.strictEqual(actual, 'some value');
   });
 
   it('returns null if env.herman missing', () => {
@@ -27,7 +27,7 @@ describe('getNunjucksEnv', () => {
       },
     };
     const actual = getNunjucksEnv(null, env, null);
-    assert.equal(actual, null);
+    assert.strictEqual(actual, null);
     sinon.assert.calledOnce(env.logger.warn);
   });
 

@@ -82,8 +82,9 @@ export const initializeToggles = () => {
 
   const autoClose = (newTarget, target) => {
     const targetID = target.attr('data-target-id');
-    const toggleClicked = newTarget.closest(`[aria-controls="${targetID}"]`)
-      .length;
+    const toggleClicked = newTarget.closest(
+      `[aria-controls="${targetID}"]`,
+    ).length;
     const clickedElInDOM = document.contains(newTarget.get(0));
     const clickedOutsideTarget = !newTarget.closest(target).length;
     const exception = target.attr('data-auto-closing-exception');

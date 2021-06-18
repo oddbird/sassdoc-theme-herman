@@ -7,4 +7,7 @@ const sassTrue = require('sass-true');
 const sassImporter = require('../../lib/utils/sassImporter');
 
 const sassFile = path.join(__dirname, 'test.scss');
-sassTrue.runSass({ file: sassFile, importer: sassImporter }, { describe, it });
+sassTrue.runSass(
+  { file: sassFile, importer: sassImporter, quietDeps: true },
+  { describe, it },
+);

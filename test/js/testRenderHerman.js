@@ -1,10 +1,10 @@
 'use strict';
 
-const fs = require('fs');
 const assert = require('assert');
+const fs = require('fs');
 
-const del = require('del');
 const Promise = require('bluebird');
+const del = require('del');
 
 const prepareContext = require('../../lib/prepareContext');
 const { renderHerman, makeNunjucksColors } = require('../../lib/renderHerman');
@@ -22,7 +22,7 @@ describe('makeNunjucksColors', () => {
 
   it('exits early on invalid colors', function () {
     const actual = this.colors('not a color');
-    assert.equal(actual, undefined);
+    assert.strictEqual(actual, null);
   });
 
   it('switches on formats', function () {
@@ -32,7 +32,7 @@ describe('makeNunjucksColors', () => {
       rgb: 'rgb(254, 252, 237)',
       hsl: 'hsl(53, 89%, 96%)',
     };
-    assert.deepEqual(actual, expected);
+    assert.deepStrictEqual(actual, expected);
   });
 
   it('handles rgba and hsla', () => {
@@ -46,7 +46,7 @@ describe('makeNunjucksColors', () => {
       rgb: 'rgb(254, 252, 237)',
       hsl: 'hsl(53, 89%, 96%)',
     };
-    assert.deepEqual(actual, expected);
+    assert.deepStrictEqual(actual, expected);
   });
 
   it('passes on unknown format', () => {
@@ -57,7 +57,7 @@ describe('makeNunjucksColors', () => {
     });
     const actual = colors('#fefced');
     const expected = {};
-    assert.deepEqual(actual, expected);
+    assert.deepStrictEqual(actual, expected);
   });
 });
 
