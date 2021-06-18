@@ -43,6 +43,9 @@ const sassDocOpts = {
         path.join(__dirname, 'node_modules'),
       ],
       use: ['utilities', 'config', 'samples'],
+      sassOptions: {
+        quietDeps: true,
+      },
     },
   },
   display: {
