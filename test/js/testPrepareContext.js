@@ -35,7 +35,7 @@ describe('prepareContext', () => {
           byGroup: {},
         };
 
-        assert.deepEqual(ctx, expected);
+        assert.deepStrictEqual(ctx, expected);
         done();
       })
       .catch(done);
@@ -66,19 +66,19 @@ describe('prepareContext', () => {
         const simple = {
           filename: 'simple',
           name: 'simple',
-          text: '<h1 id="a-simple-file">A simple file</h1>\n',
+          text: '<h1 id="a-simple-file" tabindex="-1">A simple file</h1>\n',
         };
         const complex = {
           filename: 'complex',
           name: 'A complex doc',
-          text: '<h1 id="a-complex-file">A complex file</h1>\n',
+          text: '<h1 id="a-complex-file" tabindex="-1">A complex file</h1>\n',
         };
         const complex2 = {
           filename: 'complex',
           name: 'complex',
-          text: '<h1 id="a-complex-file">A complex file</h1>\n',
+          text: '<h1 id="a-complex-file" tabindex="-1">A complex file</h1>\n',
         };
-        assert.deepEqual(ctx.extraDocs, [simple, complex, complex2]);
+        assert.deepStrictEqual(ctx.extraDocs, [simple, complex, complex2]);
         sinon.assert.calledOnce(warn);
         done();
       })
@@ -93,7 +93,7 @@ describe('prepareContext', () => {
       },
     })
       .then((ctx) => {
-        assert.deepEqual(ctx.extraLinks, ['https://www.oddbird.net']);
+        assert.deepStrictEqual(ctx.extraLinks, ['https://www.oddbird.net']);
         done();
       })
       .catch(done);
@@ -189,7 +189,7 @@ describe('prepareContext', () => {
       data: [item, item2],
     })
       .then((ctx) => {
-        assert.deepEqual(ctx.data, expected);
+        assert.deepStrictEqual(ctx.data, expected);
         done();
       })
       .catch(done);
@@ -233,7 +233,7 @@ describe('prepareContext', () => {
       data: [item],
     })
       .then((ctx) => {
-        assert.deepEqual(ctx.data, expected);
+        assert.deepStrictEqual(ctx.data, expected);
         sinon.assert.calledOnce(logger.warn);
         done();
       })

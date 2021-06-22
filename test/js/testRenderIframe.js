@@ -30,9 +30,9 @@ describe('renderIframe', () => {
 
       renderIframe(this.env, item, 'example')
         .then(() => {
-          assert.equal(item.iframed, 'some iframed');
+          assert.strictEqual(item.iframed, 'some iframed');
           assert.ok(this.env.customHTML);
-          assert.deepEqual(this.env.customCSS, {
+          assert.deepStrictEqual(this.env.customCSS, {
             path: path.resolve(__dirname, 'test/js/fixtures/css/main.css'),
             url: 'assets/custom/main.css',
           });
@@ -50,9 +50,9 @@ describe('renderIframe', () => {
 
       renderIframe(this.env, item, 'example')
         .then(() => {
-          assert.equal(item.iframed, undefined);
-          assert.equal(this.env.customHTML, undefined);
-          assert.equal(this.env.customCSS, undefined);
+          assert.strictEqual(item.iframed, undefined);
+          assert.strictEqual(this.env.customHTML, undefined);
+          assert.strictEqual(this.env.customCSS, undefined);
 
           done();
         })
@@ -68,7 +68,7 @@ describe('renderIframe', () => {
 
       renderIframe(this.env, item, 'example')
         .then(() => {
-          assert.equal(this.env.customHTML, this.env.herman.customHTML);
+          assert.strictEqual(this.env.customHTML, this.env.herman.customHTML);
 
           done();
         })
@@ -90,7 +90,7 @@ describe('renderIframe', () => {
 
       renderIframe(this.env, item, 'icon')
         .then(() => {
-          assert.equal(item.iframed, 'some iframed');
+          assert.strictEqual(item.iframed, 'some iframed');
           assert.ok(this.env.iconsSvg);
 
           nunjucksEnv.render.restore();
@@ -106,8 +106,8 @@ describe('renderIframe', () => {
 
       renderIframe(this.env, item, 'icon')
         .then(() => {
-          assert.equal(item.iframed, undefined);
-          assert.equal(this.env.iconsSvg, undefined);
+          assert.strictEqual(item.iframed, undefined);
+          assert.strictEqual(this.env.iconsSvg, undefined);
 
           done();
         })

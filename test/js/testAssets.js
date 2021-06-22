@@ -1,11 +1,11 @@
 'use strict';
 
-const fs = require('fs');
 const assert = require('assert');
+const fs = require('fs');
 const path = require('path');
 
-const del = require('del');
 const Promise = require('bluebird');
+const del = require('del');
 const sinon = require('sinon');
 
 const assets = require('../../lib/utils/assets');
@@ -42,7 +42,7 @@ describe('assets', () => {
 
         sinon.assert.calledOnce(parser);
         assert.ok(contents.includes('Parses file'));
-        assert.equal(parser.args[0][2], env);
+        assert.strictEqual(parser.args[0][2], env);
 
         done();
       })

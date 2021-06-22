@@ -1,5 +1,9 @@
 # Herman Changelog
 
+## UNRELEASED
+
+- 🏠 INTERNAL: Upgrade dependencies
+
 ## 4.0.2: 2021-05-07
 
 - 🐛 BUGFIX: Fix build error on package install

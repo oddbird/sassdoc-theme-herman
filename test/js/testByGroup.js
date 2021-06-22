@@ -29,6 +29,6 @@ describe('byGroup', () => {
         { id: 3, group: ['g1'] },
       ],
     };
-    assert.deepEqual(actual, expected, JSON.stringify(actual));
+    assert.deepStrictEqual(actual, expected, JSON.stringify(actual));
   });
 });

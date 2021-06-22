@@ -278,7 +278,7 @@
         <div data-page="CONFIGURATION">
           
   <div class="text-block">
-    <h1 id="herman-configuration-options">Herman Configuration Options</h1>
+    <h1 id="herman-configuration-options" tabindex="-1">Herman Configuration Options</h1>
 <p>Nest all Herman-specific options
 under <code>herman</code> object in <a href="http://sassdoc.com/configuration/">SassDoc<span class="widont">&nbsp;</span>config</a>.</p>
 <pre><code class="lang-yaml"># .sassdocrc
@@ -298,7 +298,7 @@ sassdoc('./scss', {
 });
 </code></pre>
 <p>All relative paths are relative to the SassDoc config file or the <code>cwd</code>.</p>
-<h2 id="sassdoc-groups">SassDoc: groups</h2>
+<h2 id="sassdoc-groups" tabindex="-1">SassDoc: groups</h2>
 <ul>
 <li>Type: <code>Object</code></li>
 <li>Default: <code>{ undefined: 'General' }</code></li>
@@ -325,7 +325,7 @@ groups:
     config-colors: _Colors
     config-fonts: _Fonts
 </code></pre>
-<h2 id="extradocs">extraDocs</h2>
+<h2 id="extradocs" tabindex="-1">extraDocs</h2>
 <ul>
 <li>Type: <code>Array</code></li>
 <li>Default: <code>[]</code></li>
@@ -340,7 +340,7 @@ or a <code>String</code> path
 <p>This is useful for including additional documents,
 such as a changelog, quickstart guide,
 or instructions for<span class="widont">&nbsp;</span>contributing.</p>
-<h2 id="extralinks">extraLinks</h2>
+<h2 id="extralinks" tabindex="-1">extraLinks</h2>
 <ul>
 <li>Type: <code>Array</code></li>
 <li>Default: <code>[]</code></li>
@@ -349,7 +349,7 @@ or instructions for<span class="widont">&nbsp;</span>contributing.</p>
 Each value in the list should be an <code>Object</code> with keys <code>name</code> and <code>url</code>.</p>
 <p>This is useful for linking to additional documentation
 for dependencies or other third-party<span class="widont">&nbsp;</span>integrations.</p>
-<h2 id="displaycolors">displayColors</h2>
+<h2 id="displaycolors" tabindex="-1">displayColors</h2>
 <ul>
 <li>Type: <code>Array</code></li>
 <li>Default: <code>['hex', 'rgb', 'hsl']</code></li>
@@ -357,7 +357,7 @@ for dependencies or other third-party<span class="widont">&nbsp;</span>integrati
 <p>Configures which color value formats are shown
 when using the <a href="https://www.oddbird.net/herman/docs/demo_colors.html"><code>@colors</code> annotation</a>.
 Valid options: <code>hex</code>, <code>rgb/rgba</code>, <code>hsl/hsla</code></p>
-<h2 id="customcss">customCSS</h2>
+<h2 id="customcss" tabindex="-1">customCSS</h2>
 <ul>
 <li>Type: <code>String</code></li>
 <li>Default: <code>''</code></li>
@@ -393,7 +393,7 @@ this likely means <a href="https://github.com/webpack-contrib/mini-css-extract-p
 for this CSS file (e.g. <code>publicPath: ''</code>),
 or <a href="https://github.com/webpack-contrib/css-loader#url">disabling Webpack’s <code>url()</code> pre-processing</a> entirely.</li>
 </ul>
-<h2 id="customhtml">customHTML</h2>
+<h2 id="customhtml" tabindex="-1">customHTML</h2>
 <ul>
 <li>Type: <code>String</code></li>
 <li>Default: <code>''</code></li>
@@ -404,7 +404,7 @@ for all rendered <code>@example html</code> and <code>@example njk</code> annota
 See our <a href="https://www.oddbird.net/herman/docs/demo_examples.html"><code>@example</code> documentation</a>.
 This is particularly useful for including svg sprite sheets
 in example<span class="widont">&nbsp;</span>output.</p>
-<h2 id="fontpath">fontPath</h2>
+<h2 id="fontpath" tabindex="-1">fontPath</h2>
 <ul>
 <li>Type: <code>String</code></li>
 <li>Default: <code>''</code></li>
@@ -412,13 +412,13 @@ in example<span class="widont">&nbsp;</span>output.</p>
 <p><em>Required if using <a href="https://www.oddbird.net/herman/docs/demo_fonts.html#displaying-local-fonts"><code>@font</code> annotation</a> with local font<span class="widont">&nbsp;</span>files.</em></p>
 <p>Relative path to a directory containing local font files.
 See our <a href="https://www.oddbird.net/herman/docs/demo_fonts.html#displaying-local-fonts"><code>@font</code> documentation</a>.</p>
-<h2 id="nunjucks">nunjucks</h2>
+<h2 id="nunjucks" tabindex="-1">nunjucks</h2>
 <ul>
 <li>Type: <code>Object</code></li>
 <li>Default: <code>{}</code></li>
 </ul>
 <p>Container for the following <a href="https://mozilla.github.io/nunjucks/">Nunjucks</a>-related options:</p>
-<h3 id="nunjucks-templatepath">nunjucks.templatePath</h3>
+<h3 id="nunjucks-templatepath" tabindex="-1">nunjucks.templatePath</h3>
 <ul>
 <li>Type: <code>String</code></li>
 <li>Default: <code>''</code></li>
@@ -427,7 +427,7 @@ See our <a href="https://www.oddbird.net/herman/docs/demo_fonts.html#displaying-
 <a href="#nunjucks-environment"><code>nunjucks.environment</code></a> is required if using
 <a href="https://www.oddbird.net/herman/docs/demo_examples.html#compiling-nunjucks"><code>@example njk</code> annotation</a>.</em></p>
 <p>Relative path to a directory containing Nunjucks<span class="widont">&nbsp;</span>templates.</p>
-<h3 id="nunjucks-environment">nunjucks.environment</h3>
+<h3 id="nunjucks-environment" tabindex="-1">nunjucks.environment</h3>
 <ul>
 <li>Type: <a href="https://mozilla.github.io/nunjucks/api.html#environment">Nunjucks <code>Environment</code> instance</a></li>
 <li>Default: <code>undefined</code></li>
@@ -435,13 +435,13 @@ See our <a href="https://www.oddbird.net/herman/docs/demo_fonts.html#displaying-
 <p><em>Either <a href="#nunjucks-templatePath"><code>nunjucks.templatePath</code></a> or
 <code>nunjucks.environment</code> is required if using
 <a href="https://www.oddbird.net/herman/docs/demo_examples.html#compiling-nunjucks"><code>@example njk</code> annotation</a>.</em></p>
-<h2 id="sass">sass</h2>
+<h2 id="sass" tabindex="-1">sass</h2>
 <ul>
 <li>Type: <code>Object</code></li>
 <li>Default: <code>{}</code></li>
 </ul>
 <p>Container for the following sass-related<span class="widont">&nbsp;</span>options:</p>
-<h3 id="sass-jsonfile">sass.jsonFile</h3>
+<h3 id="sass-jsonfile" tabindex="-1">sass.jsonFile</h3>
 <ul>
 <li>Type: <code>String</code></li>
 <li>Default: <code>''</code></li>
@@ -454,7 +454,7 @@ The JSON contents will be added under the
 <code>sassjson</code> key of the sassdoc context,
 and used to display colors, fonts, ratios, and sizes.
 See <a href="https://www.oddbird.net/herman/docs/api_json-export.html">Exporting Styles to<span class="widont">&nbsp;</span>JSON</a>.</p>
-<h3 id="sass-implementation">sass.implementation</h3>
+<h3 id="sass-implementation" tabindex="-1">sass.implementation</h3>
 <ul>
 <li>Type: Sass implementation<span class="widont">&nbsp;</span>instance</li>
 <li>Default: Dart Sass<span class="widont">&nbsp;</span>instance</li>
@@ -463,7 +463,7 @@ See <a href="https://www.oddbird.net/herman/docs/api_json-export.html">Exporting
 for Sass compilation if using <a href="https://www.oddbird.net/herman/docs/demo_examples.html#compiling-sass-scss"><code>@example scss</code> annotation</a>. This
 option expects an implementation providing a <code>renderSync</code> method with the <a href="https://sass-lang.com/documentation/js-api#rendersync">same
 signature</a> as Dart Sass, and support for the <a href="https://sass-lang.com/blog/the-module-system-is-launched">Sass module<span class="widont">&nbsp;</span>system</a>.</p>
-<h3 id="sass-importer">sass.importer</h3>
+<h3 id="sass-importer" tabindex="-1">sass.importer</h3>
 <ul>
 <li>Type: <code>Array</code> || <code>Function</code></li>
 <li>Default: <a href="https://github.com/oddbird/sassdoc-theme-herman/blob/main/lib/utils/sassImporter.js">Custom Herman Sass<span class="widont">&nbsp;</span>importer</a></li>
@@ -473,7 +473,7 @@ used to resolve <code>@use</code> and <code>@import</code> file paths.
 Passed through to Sass <a href="https://sass-lang.com/documentation/js-api#importer">importer</a> when
 compiling <code>@example sass/scss</code> annotations.
 See our <a href="https://www.oddbird.net/herman/docs/demo_examples.html#compiling-sass-scss"><code>@example</code> documentation</a>.</p>
-<h3 id="sass-includepaths">sass.includePaths</h3>
+<h3 id="sass-includepaths" tabindex="-1">sass.includePaths</h3>
 <ul>
 <li>Type: <code>Array</code></li>
 <li>Default: <code>[]</code></li>
@@ -482,7 +482,7 @@ See our <a href="https://www.oddbird.net/herman/docs/demo_examples.html#compilin
 Passed through to Sass <a href="https://sass-lang.com/documentation/js-api#includepaths">includePaths</a> when
 compiling <code>@example sass/scss</code> annotations.
 See our <a href="https://www.oddbird.net/herman/docs/demo_examples.html#compiling-sass-scss"><code>@example</code> documentation</a>.</p>
-<h3 id="sass-includes">sass.includes</h3>
+<h3 id="sass-includes" tabindex="-1">sass.includes</h3>
 <ul>
 <li>Type: <code>Array</code></li>
 <li>Default: <code>[]</code></li>
@@ -495,7 +495,7 @@ Sass configuration and toolkit files
 that may be used by any example.
 It’s best to avoid files with output CSS,
 as that output will be displayed in every single Sass<span class="widont">&nbsp;</span>example.</p>
-<h3 id="sass-use">sass.use</h3>
+<h3 id="sass-use" tabindex="-1">sass.use</h3>
 <ul>
 <li>Type: <code>Array</code></li>
 <li>Default: <code>[]</code></li>
@@ -522,7 +522,7 @@ that may be used by any example,
 using the <a href="https://sass-lang.com/blog/the-module-system-is-launched">Dart Sass module system</a>.
 It’s best to avoid files with output CSS,
 as that output will be displayed in every single Sass<span class="widont">&nbsp;</span>example.</p>
-<h3 id="sass-outputstyle">sass.outputStyle</h3>
+<h3 id="sass-outputstyle" tabindex="-1">sass.outputStyle</h3>
 <ul>
 <li>Type: <code>String</code></li>
 <li>Default: <code>'expanded'</code></li>

@@ -18,6 +18,6 @@ describe('groupName', () => {
 
     delete input.logger;
 
-    assert.deepEqual(input, expected);
+    assert.deepStrictEqual(input, expected);
   });
 });

@@ -30,7 +30,7 @@ describe('icons annotation', () => {
 
   describe('parse', () => {
     it('returns argument', function () {
-      assert.equal(this.icons.parse('icons/'), 'icons/');
+      assert.strictEqual(this.icons.parse('icons/'), 'icons/');
     });
   });
 
@@ -52,7 +52,7 @@ describe('icons annotation', () => {
       this.icons
         .resolve(data)
         .then(() => {
-          assert.deepEqual(data, [{}]);
+          assert.deepStrictEqual(data, [{}]);
           done();
         })
         .catch(done);
@@ -65,7 +65,7 @@ describe('icons annotation', () => {
       this.icons
         .resolve(data)
         .then(() => {
-          assert.deepEqual(data[0].icons, [
+          assert.deepStrictEqual(data[0].icons, [
             {
               name: 'ok',
               path: `${iconPath}${path.sep}`,
@@ -95,7 +95,7 @@ describe('colors annotation', () => {
 
   describe('parse', () => {
     it('parses string and returns object', function () {
-      assert.deepEqual(this.colors.parse('foo-bar'), {
+      assert.deepStrictEqual(this.colors.parse('foo-bar'), {
         key: 'foo-bar',
       });
     });
@@ -120,7 +120,7 @@ describe('sizes annotation', () => {
   describe('parse', () => {
     it('parses options and returns object', function () {
       const input = 'key-thing {style}';
-      assert.deepEqual(this.sizes.parse(input), {
+      assert.deepStrictEqual(this.sizes.parse(input), {
         key: 'key-thing',
         style: 'style',
       });
@@ -128,7 +128,7 @@ describe('sizes annotation', () => {
 
     it('uses defaults if no arguments', function () {
       const input = '';
-      assert.deepEqual(this.sizes.parse(input), {
+      assert.deepStrictEqual(this.sizes.parse(input), {
         key: '',
         style: '',
       });
@@ -141,7 +141,7 @@ describe('sizes annotation', () => {
       this.sizes
         .resolve(data)
         .then(() => {
-          assert.deepEqual(data, [{}]);
+          assert.deepStrictEqual(data, [{}]);
           done();
         })
         .catch(done);
@@ -210,7 +210,7 @@ describe('ratios annotation', () => {
 
   describe('parse', () => {
     it('parses string and returns object', function () {
-      assert.deepEqual(this.ratios.parse('foo-bar'), {
+      assert.deepStrictEqual(this.ratios.parse('foo-bar'), {
         key: 'foo-bar',
       });
     });
@@ -222,7 +222,7 @@ describe('ratios annotation', () => {
       this.ratios
         .resolve(data)
         .then(() => {
-          assert.deepEqual(data, [{}]);
+          assert.deepStrictEqual(data, [{}]);
           done();
         })
         .catch(done);
@@ -277,39 +277,41 @@ describe('font annotation', () => {
       const input =
         'key (variant1, variant2)\n  <link rel="another-stylesheet">';
       font.parse(input);
-      assert.deepEqual(env.fontsHTML, ['<link rel="another-stylesheet">']);
+      assert.deepStrictEqual(env.fontsHTML, [
+        '<link rel="another-stylesheet">',
+      ]);
     });
 
     it('parses options and returns object', function () {
       const input = 'key-thing (variant1, variant2)\n  <link rel="stylesheet">';
-      assert.deepEqual(this.font.parse(input), {
+      assert.deepStrictEqual(this.font.parse(input), {
         key: 'key-thing',
         variants: ['variant1', 'variant2'],
         html: '<link rel="stylesheet">',
       });
-      assert.equal(this.env.fontsHTML, '\n<link rel="stylesheet">');
+      assert.strictEqual(this.env.fontsHTML, '\n<link rel="stylesheet">');
     });
 
     it('skips HTML if no linebreak', function () {
       const input = '"key-thing" (variant1, variant2)';
-      assert.deepEqual(this.font.parse(input), {
+      assert.deepStrictEqual(this.font.parse(input), {
         key: 'key-thing',
         variants: ['variant1', 'variant2'],
         html: '',
       });
-      assert.equal(this.env.fontsHTML, undefined);
+      assert.strictEqual(this.env.fontsHTML, undefined);
     });
 
     it('appends obj.html to existing fontsHTML', function () {
       this.env.fontsHTML = '\n<link rel="stylesheet">';
       const input =
         '\'key\' (variant1, variant2)\n  <link rel="another-stylesheet">';
-      assert.deepEqual(this.font.parse(input), {
+      assert.deepStrictEqual(this.font.parse(input), {
         key: 'key',
         variants: ['variant1', 'variant2'],
         html: '<link rel="another-stylesheet">',
       });
-      assert.equal(
+      assert.strictEqual(
         this.env.fontsHTML,
         '\n<link rel="stylesheet">\n<link rel="another-stylesheet">',
       );
@@ -317,12 +319,12 @@ describe('font annotation', () => {
 
     it("doesn't set variants if not appropriate bits", function () {
       const input = '';
-      assert.deepEqual(this.font.parse(input), {
+      assert.deepStrictEqual(this.font.parse(input), {
         key: '',
         variants: [],
         html: '',
       });
-      assert.equal(this.env.fontsHTML, undefined);
+      assert.strictEqual(this.env.fontsHTML, undefined);
     });
   });
 
@@ -346,7 +348,7 @@ describe('font annotation', () => {
           done();
         })
         .catch(() => {
-          assert.deepEqual(this.data, this.origData);
+          assert.deepStrictEqual(this.data, this.origData);
           assert(
             env.logger.warn.calledWith(
               'Must pass in a `sassjson` file if using @font annotation.',
@@ -404,7 +406,7 @@ describe('font annotation', () => {
           done();
         })
         .catch(() => {
-          assert.deepEqual(this.data, this.origData);
+          assert.deepStrictEqual(this.data, this.origData);
           sinon.assert.calledWith(
             env.logger.warn,
             'Must pass in a `fontPath` if using @font annotation with local ' +
@@ -449,8 +451,8 @@ describe('font annotation', () => {
             '  font-style: normal;\n' +
             '}\n';
 
-          assert.equal(this.data[0].font.localFontCSS, css);
-          assert.deepEqual(env.localFonts, [
+          assert.strictEqual(this.data[0].font.localFontCSS, css);
+          assert.deepStrictEqual(env.localFonts, [
             path.resolve('/path/font/font.eot'),
             path.resolve('/path/font/font.ttf'),
           ]);
@@ -494,8 +496,8 @@ describe('font annotation', () => {
             '  font-style: normal;\n' +
             '}\n';
 
-          assert.equal(this.data[0].font.localFontCSS, css);
-          assert.deepEqual(env.localFonts, []);
+          assert.strictEqual(this.data[0].font.localFontCSS, css);
+          assert.deepStrictEqual(env.localFonts, []);
           done();
         })
         .catch(done);
@@ -535,8 +537,8 @@ describe('font annotation', () => {
             '  font-style: normal;\n' +
             '}\n';
 
-          assert.equal(this.data[0].font.localFontCSS, css);
-          assert.deepEqual(env.localFonts, [
+          assert.strictEqual(this.data[0].font.localFontCSS, css);
+          assert.deepStrictEqual(env.localFonts, [
             path.resolve('/path/font/font.ttf'),
           ]);
           done();
@@ -573,8 +575,8 @@ describe('font annotation', () => {
             '  font-style: normal;\n' +
             '}\n';
 
-          assert.equal(this.data[0].font.localFontCSS, css);
-          assert.deepEqual(env.localFonts, []);
+          assert.strictEqual(this.data[0].font.localFontCSS, css);
+          assert.deepStrictEqual(env.localFonts, []);
           done();
         })
         .catch(done);
@@ -618,8 +620,8 @@ describe('font annotation', () => {
             '  font-style: normal;\n' +
             '}\n';
 
-          assert.equal(this.data[0].font.localFontCSS, css);
-          assert.deepEqual(env.localFonts, [
+          assert.strictEqual(this.data[0].font.localFontCSS, css);
+          assert.deepStrictEqual(env.localFonts, [
             path.resolve('/path/font/font.eot'),
           ]);
           done();
@@ -658,8 +660,8 @@ describe('font annotation', () => {
             '  font-style: normal;\n' +
             '}\n';
 
-          assert.equal(this.data[0].font.localFontCSS, css);
-          assert.deepEqual(env.localFonts, []);
+          assert.strictEqual(this.data[0].font.localFontCSS, css);
+          assert.deepStrictEqual(env.localFonts, []);
           done();
         })
         .catch(done);
@@ -694,8 +696,8 @@ describe('font annotation', () => {
             '  font-style: normal;\n' +
             '}\n';
 
-          assert.equal(this.data[0].font.localFontCSS, css);
-          assert.deepEqual(env.localFonts, []);
+          assert.strictEqual(this.data[0].font.localFontCSS, css);
+          assert.deepStrictEqual(env.localFonts, []);
           done();
         })
         .catch(done);
@@ -731,8 +733,10 @@ describe('font annotation', () => {
             '  font-style: normal;\n' +
             '}\n';
 
-          assert.equal(this.data[0].font.localFontCSS, css);
-          assert.deepEqual(env.localFonts, [path.resolve('/path/my/font.svg')]);
+          assert.strictEqual(this.data[0].font.localFontCSS, css);
+          assert.deepStrictEqual(env.localFonts, [
+            path.resolve('/path/my/font.svg'),
+          ]);
           done();
         })
         .catch(done);
@@ -766,8 +770,8 @@ describe('font annotation', () => {
             '  font-style: normal;\n' +
             '}\n';
 
-          assert.equal(this.data[0].font.localFontCSS, css);
-          assert.deepEqual(env.localFonts, []);
+          assert.strictEqual(this.data[0].font.localFontCSS, css);
+          assert.deepStrictEqual(env.localFonts, []);
           done();
         })
         .catch(done);
@@ -802,7 +806,7 @@ describe('font annotation', () => {
             },
           ];
 
-          assert.deepEqual(data[0].font.parsedVariants, expected);
+          assert.deepStrictEqual(data[0].font.parsedVariants, expected);
           done();
         })
         .catch(done);
@@ -816,7 +820,7 @@ describe('font annotation', () => {
       font
         .resolve(data)
         .then(() => {
-          assert.deepEqual(data, [{}]);
+          assert.deepStrictEqual(data, [{}]);
           done();
         })
         .catch(done);
@@ -847,9 +851,9 @@ describe('font annotation', () => {
       font
         .resolve(data)
         .then(() => {
-          assert.deepEqual(env.localFonts, []);
-          assert.equal(data[0].font.localFontCSS, undefined);
-          assert.notEqual(data[0].iframed, undefined);
+          assert.deepStrictEqual(env.localFonts, []);
+          assert.strictEqual(data[0].font.localFontCSS, undefined);
+          assert.notStrictEqual(data[0].iframed, undefined);
           done();
         })
         .catch(done);
@@ -916,8 +920,8 @@ describe('font annotation', () => {
       font
         .resolve(data)
         .then(() => {
-          assert.equal(data[0].font.localFontCSS, undefined);
-          assert.deepEqual(env.localFonts, []);
+          assert.strictEqual(data[0].font.localFontCSS, undefined);
+          assert.deepStrictEqual(env.localFonts, []);
           done();
         })
         .catch(done);
@@ -946,7 +950,7 @@ describe('example annotation', () => {
 
       example.resolve(data);
 
-      assert.deepEqual(data, [{ example: [{ type: 'njk' }] }]);
+      assert.deepStrictEqual(data, [{ example: [{ type: 'njk' }] }]);
       assert(
         env.logger.warn.calledWith(
           'Must pass in a nunjucks.templatePath if using Nunjucks @example.',
@@ -1000,7 +1004,10 @@ describe('example annotation', () => {
       this.example
         .resolve(data)
         .then(() => {
-          assert.equal(data[0].example[0].rendered, data[0].example[0].code);
+          assert.strictEqual(
+            data[0].example[0].rendered,
+            data[0].example[0].code,
+          );
           done();
         })
         .catch(done);
@@ -1020,7 +1027,10 @@ describe('example annotation', () => {
       this.example
         .resolve(data)
         .then(() => {
-          assert.equal(data[0].example[0].rendered, data[0].example[0].code);
+          assert.strictEqual(
+            data[0].example[0].rendered,
+            data[0].example[0].code,
+          );
           done();
         })
         .catch(done);
@@ -1079,7 +1089,7 @@ describe('example annotation', () => {
       example
         .resolve(data)
         .then(() => {
-          assert.equal(
+          assert.strictEqual(
             data[0].example[0].rendered,
             `body {\n  border: 1px;\n}\n\n${data[0].example[0].code}`,
           );
@@ -1118,7 +1128,7 @@ describe('example annotation', () => {
       example
         .resolve(data)
         .then(() => {
-          assert.equal(
+          assert.strictEqual(
             data[0].example[0].rendered,
             `body {\n  border: 1px;\n}\n\nbody {\n  color: red;\n}`,
           );
@@ -1150,7 +1160,7 @@ describe('example annotation', () => {
       example
         .resolve(data)
         .then(() => {
-          assert.equal(
+          assert.strictEqual(
             data[0].example[0].rendered,
             `body {\n  border: 1px;\n}`,
           );
@@ -1181,7 +1191,7 @@ describe('example annotation', () => {
       example
         .resolve(data)
         .then(() => {
-          assert.equal(data[0].example[0].rendered, '');
+          assert.strictEqual(data[0].example[0].rendered, '');
           done();
         })
         .catch(done);
@@ -1195,7 +1205,7 @@ describe('example annotation', () => {
         .resolve(data)
         .then(() => {
           sinon.assert.calledTwice(this.env.logger.warn);
-          assert.deepEqual(data, [
+          assert.deepStrictEqual(data, [
             { example: [{ type: 'scss', rendered: undefined }] },
           ]);
         })
@@ -1233,7 +1243,7 @@ describe('example annotation', () => {
       this.example
         .resolve(data)
         .then(() => {
-          assert.equal(data[0].example[0].rendered, undefined);
+          assert.strictEqual(data[0].example[0].rendered, undefined);
           done();
         })
         .catch(done);
@@ -1259,7 +1269,7 @@ describe('example annotation', () => {
 
       example.resolve(data);
 
-      assert.deepEqual(data, [{}]);
+      assert.deepStrictEqual(data, [{}]);
       sinon.assert.notCalled(env.logger.warn);
     });
 
@@ -1279,7 +1289,7 @@ describe('example annotation', () => {
       this.example
         .resolve(data)
         .then(() => {
-          assert.equal(data[0].example[0].rendered, '1 then 2.');
+          assert.strictEqual(data[0].example[0].rendered, '1 then 2.');
           assert.ok(data[0].example[0].iframed !== undefined);
           done();
         })
@@ -1308,7 +1318,7 @@ describe('example annotation', () => {
 
       example.resolve(data);
 
-      assert.equal(data[0].example[0].rendered, '6');
+      assert.strictEqual(data[0].example[0].rendered, '6');
     });
   });
 });
@@ -1320,7 +1330,7 @@ describe('name annotation', () => {
 
   describe('parse', () => {
     it('trims text', function () {
-      assert.equal(this.name.parse('foo '), 'foo');
+      assert.strictEqual(this.name.parse('foo '), 'foo');
     });
   });
 
@@ -1330,7 +1340,9 @@ describe('name annotation', () => {
 
       this.name.autofill(data);
 
-      assert.deepEqual(data, { context: { name: 'foo', origName: 'bar' } });
+      assert.deepStrictEqual(data, {
+        context: { name: 'foo', origName: 'bar' },
+      });
     });
 
     it('does nothing if no item.name', function () {
@@ -1338,7 +1350,7 @@ describe('name annotation', () => {
 
       this.name.autofill(data);
 
-      assert.deepEqual(data, { context: { name: 'bar' } });
+      assert.deepStrictEqual(data, { context: { name: 'bar' } });
     });
   });
 });

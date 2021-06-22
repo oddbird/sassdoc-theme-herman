@@ -10,7 +10,7 @@ describe('split filter', () => {
     const expected = ['foo', 'bar'];
     const actual = nunjucksEnv.filters.split(val, ';');
 
-    assert.deepEqual(actual, expected);
+    assert.deepStrictEqual(actual, expected);
   });
 });
 
@@ -20,6 +20,6 @@ describe('isString filter', () => {
     const notAString = [];
 
     assert.ok(nunjucksEnv.filters.isString(aString));
-    assert.equal(nunjucksEnv.filters.isString(notAString), false);
+    assert.strictEqual(nunjucksEnv.filters.isString(notAString), false);
   });
 });

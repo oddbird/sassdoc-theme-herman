@@ -1,11 +1,11 @@
 'use strict';
 
-const fs = require('fs');
 const assert = require('assert');
+const fs = require('fs');
 const path = require('path');
 
-const del = require('del');
 const Promise = require('bluebird');
+const del = require('del');
 
 const render = require('../../lib/utils/render');
 const { nunjucksEnv } = require('../../lib/utils/templates');
@@ -52,7 +52,7 @@ describe('render', () => {
 
     render(nunjucksEnv, this.tpl, this.dest, ctx, rendered)
       .then(() => {
-        assert.deepEqual(rendered, expected);
+        assert.deepStrictEqual(rendered, expected);
         done();
       })
       .catch(done);

@@ -6,8 +6,8 @@ process.env.BROWSERSLIST_CONFIG = './.browserslistrc';
 
 const path = require('path');
 
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
 
 const SassDocPlugin = require('./sassdoc-webpack-plugin');
@@ -193,6 +193,11 @@ module.exports = {
           },
           {
             loader: 'sass-loader',
+            options: {
+              sassOptions: {
+                quietDeps: true,
+              },
+            },
           },
         ],
       },

@@ -5,9 +5,9 @@
 const fs = require('fs');
 const path = require('path');
 
-const sassdoc = require('sassdoc');
-const set = require('lodash/set');
 const yaml = require('js-yaml');
+const set = require('lodash/set');
+const sassdoc = require('sassdoc');
 
 const getAsset = function (entry, ext = 'css') {
   if (!entry) {

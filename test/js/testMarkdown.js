@@ -11,6 +11,6 @@ describe('markdown', () => {
   it('should match expected ctx', () => {
     markdown(input);
 
-    assert.deepEqual(input, expected);
+    assert.deepStrictEqual(input, expected);
   });
 });
