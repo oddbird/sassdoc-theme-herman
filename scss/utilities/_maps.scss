@@ -68,7 +68,7 @@
   );
 
   // Merge nested map back into $herman
-  $herman: map.merge($herman, $nested) !global;
+  $herman: map.deep-merge($herman, $nested) !global;
 }
 
 // Map Compile
