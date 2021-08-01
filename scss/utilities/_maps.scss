@@ -7,6 +7,10 @@
 @use 'sass:map';
 @use 'sass:meta';
 
+////
+/// @todo add `@use '~/sassdoc-theme-herman/scss/utilities';` at the top of every file you intend to use this.
+////
+
 // Herman Add
 // ----------
 /// Add a map of colors, fonts, sizes, ratios, etc
