@@ -3,6 +3,10 @@
 
 @use 'json-encode' as json;
 
+////
+/// @todo add `@use '~/sassdoc-theme-herman/scss/utilities';` at the top of every file you intend to use this.
+////
+
 /// # Exporting Styles to JSON
 ///
 /// While many UX patterns will be rendered as HTML components,
