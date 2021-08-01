@@ -22,8 +22,10 @@
 /// and the `export` mixin
 /// to generate JSON out of Sass variables.
 ///
-/// See the [`sass.jsonFile` configuration][json]
-/// to ensure that Herman has access
+/// Create a prefixed by `_` sass file, to avoid parsing it
+/// by mistake. You need compiled it to the CSS file set
+/// at [`sass.jsonFile` configuration][json].
+/// Make sure that Herman has access
 /// to your exported Sass data.
 ///
 /// [json]: CONFIGURATION.html#sass-jsonfile
