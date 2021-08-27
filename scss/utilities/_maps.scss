@@ -17,6 +17,8 @@
 /// @group api_json-export
 /// @since 4.0.0 Name changed from `herman-add`
 ///
+/// @since 4.1.0 Data submited to `utilities.add()` is deeply merged instead of overridden
+///
 /// @param {String} $type -
 ///   The type of map being added,
 ///   e.g. `colors`, `fonts`,
@@ -68,7 +70,7 @@
   );
 
   // Merge nested map back into $herman
-  $herman: map.merge($herman, $nested) !global;
+  $herman: map.deep-merge($herman, $nested) !global;
 }
 
 // Map Compile
