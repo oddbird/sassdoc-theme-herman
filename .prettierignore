@@ -2,7 +2,8 @@
 .git/
 .husky/
 .nyc_output/
-.pnp.js
+.pnp.cjs
+.pnp.loader.mjs
 .vscode/
 .yarn/
 .yarnrc.yml
