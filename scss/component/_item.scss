@@ -40,6 +40,7 @@
 
 .item-subtitle-supplement {
   @include tools.font-family('code');
+
   letter-spacing: 0;
   padding-left: tools.size('half-shim');
 }
@@ -49,6 +50,7 @@
 .item-value,
 .alias-title {
   @include tools.font-family('code');
+
   display: inline-block;
 }
 

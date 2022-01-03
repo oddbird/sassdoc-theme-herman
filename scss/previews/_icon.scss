@@ -15,6 +15,7 @@
 
   [data-icon] {
     @include tools.square('h1');
+
     margin-bottom: tools.size('shim');
   }
 }

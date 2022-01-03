@@ -252,7 +252,7 @@ describe('initializeIframes', () => {
   });
 
   it('triggers callbacks on window resize', () => {
-    expect(iframe.get(0).height).toEqual('30');
+    expect(iframe.get(0).height).toBe('30');
     expect($.fn.outerHeight).toHaveBeenCalledTimes(1);
     expect($.fn.outerHeight).toHaveBeenCalledWith(true);
 

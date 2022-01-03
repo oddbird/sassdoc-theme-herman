@@ -18,6 +18,7 @@
 /// @group style-typography
 :root {
   @include tools.font-family('sans');
+
   font-size: tools.size('root');
   font-size: tools.size('responsive');
   line-height: tools.ratio('herman');
@@ -69,6 +70,7 @@ mark {
 /// @group style-typography
 pre {
   @include tools.font-family('code');
+
   font-size: tools.size('code');
 }
 
@@ -82,6 +84,7 @@ pre {
 /// @see {css} Code Blocks
 code {
   @include tools.font-family('code');
+
   font-weight: bolder;
 
   pre & {

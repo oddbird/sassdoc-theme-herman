@@ -30,6 +30,7 @@
 /// @group component-footer
 .footer-credit {
   @include tools.clearfix;
+
   border-top: 1px solid tools.color('theme-light');
   flex: 0 0 auto;
   font-size: tools.size('footer');

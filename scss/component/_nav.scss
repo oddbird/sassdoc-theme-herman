@@ -75,6 +75,7 @@
     // Animated underlines
     @include tools.before('') {
       @include tools.position(null null 0 0);
+
       background: tools.color('theme-light');
       height: tools.size('nav-underline');
       transform: scale3d(0, 1, 1);

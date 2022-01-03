@@ -2,6 +2,7 @@
 
 ## UNRELEASED
 
+- 💥 BREAKING: Drop support for Node < 12
 - 🚀 NEW: Allow `utilities.add()` to merge data, instead of override
 - 🏠 INTERNAL: Upgrade dependencies
 

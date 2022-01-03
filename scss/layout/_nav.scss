@@ -27,6 +27,7 @@
 [data-region='nav'] {
   @include config.invert-colors;
   @include tools.z-index('sidebar');
+
   align-items: stretch;
   display: flex;
   flex-direction: column;
@@ -36,6 +37,7 @@
 
   @include tools.below('nav-break') {
     @include tools.position(0 null 0 0);
+
     box-shadow: 0 0 tools.size('half-shim') tools.color('shadow');
     transform: translateX(-102%);
     transition: transform 0.4s;

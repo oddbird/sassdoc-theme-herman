@@ -209,7 +209,7 @@ describe('doSearch', () => {
 
   it('searches an index', () => {
     search.doSearch({ store: 'store', idx: 'index' }, 'val');
-    expect(search.getSearchStore()).toEqual('store');
+    expect(search.getSearchStore()).toBe('store');
     expect(lunr.Index.load).toHaveBeenCalledWith('index');
     expect(indexSearch).toHaveBeenCalledWith('val');
     expect(results.text()).toMatch('No results');
@@ -262,7 +262,7 @@ describe('getSearchData', () => {
       }),
     });
 
-    expect(search.getSearchStore()).toEqual('Hey there');
+    expect(search.getSearchStore()).toBe('Hey there');
     expect(lunr.Index.load).toHaveBeenCalledTimes(1);
     expect(lunr.Index.load).toHaveBeenCalledWith('lunr index');
     expect(indexSearch).toHaveBeenCalledTimes(1);

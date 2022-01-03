@@ -11,14 +11,14 @@
     'darken': meta.get-function('darken'),
     'desaturate': meta.get-function('desaturate'),
     'convert': '#convert-units',
-  ),
+  )
 );
 
 @use '../../../scss/utilities/json-api' as *;
 @use '../../../scss/utilities/maps' as *;
 
 $colors-initial: (
-  'brand-blue': hsl(195, 85%, 35%),
+  'brand-blue': hsl(195deg, 85%, 35%),
   'light-gray': '#brand-blue'
     (
       'tint': 80%,
@@ -34,21 +34,18 @@ $colors-initial: (
       'desaturate': 80%,
     ),
 );
-
 $colors-compiled: (
   'brand-blue': #0d7fa5,
   'light-gray': #dedede,
   'gray': #555b5e,
   'black': #3b4042,
 );
-
 $darken: (
   'brand-blue': #063646,
   'light-gray': #ababab,
   'gray': #252728,
   'black': #0b0c0c,
 );
-
 $sizes: (
   'root': 20px,
   'rhythm': '#root'
@@ -57,7 +54,6 @@ $sizes: (
       'convert': 'rem',
     ),
 );
-
 $sizes-compiled: (
   'root': 20px,
   'rhythm': 1.5rem,
@@ -93,6 +89,7 @@ $sizes-compiled: (
     @include true.assert-equal($herman, $empty);
 
     @include add('colors', 'compiled', $colors-compiled);
+
     $expect: (
       'colors': (
         'compiled': $colors-compiled,
@@ -104,6 +101,7 @@ $sizes-compiled: (
 
   @include true.it('adds to existing data of the type') {
     @include add('colors', 'darken', $darken);
+
     $existing: map.get($herman, 'colors');
     $new: (
       'compiled': $colors-compiled,
@@ -127,6 +125,7 @@ $sizes-compiled: (
       meta.get-function('darken'),
       20%
     );
+
     $expect: (
       'colors': (
         'dark': $darken,

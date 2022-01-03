@@ -2,6 +2,7 @@
 
 [data-herman-preview='font'] {
   --herman-label-color: #{tools.color('slight')};
+
   display: flex;
   flex-wrap: wrap;
   margin: tools.size('gutter') tools.negative('shim') 0;
