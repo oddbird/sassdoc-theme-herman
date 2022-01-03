@@ -17,6 +17,14 @@
 @use '../../../scss/utilities/json-api' as *;
 @use '../../../scss/utilities/maps' as *;
 
+@function compile-keys-test($key, $map) {
+  @if map.has-key($map, $key) {
+    @return 'great!';
+  }
+
+  @return null;
+}
+
 $colors-initial: (
   'brand-blue': hsl(195, 85%, 35%),
   'light-gray': '#brand-blue'
@@ -79,6 +87,19 @@ $sizes-compiled: (
       compile($colors-compiled, meta.get-function('darken'), 20%),
       $darken,
       $inspect: true
+    );
+  }
+
+  @include true.it('runs compilation on the key rather than the map') {
+    $test: (
+      'a': 'hello world',
+    );
+
+    @include true.assert-equal(
+      compile($test, meta.get-function('compile-keys-test'), $test),
+      (
+        'a': 'great!',
+      )
     );
   }
 }

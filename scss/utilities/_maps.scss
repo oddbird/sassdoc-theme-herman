@@ -117,7 +117,7 @@
     $output: map.merge(
       $output,
       (
-        $key: meta.call($function, $value, $args...),
+        $key: meta.call($function, $key, $args...),
       )
     );
   }
