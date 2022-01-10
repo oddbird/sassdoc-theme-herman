@@ -28,6 +28,14 @@
 // ---------
 /// Selected text uses a light color from the Herman color palette.
 /// @group style-typography
+[hidden] {
+  display: none !important; /* stylelint-disable-line declaration-no-important */
+}
+
+// Selection
+// ---------
+/// Selected text uses a light color from the Herman color palette.
+/// @group style-typography
 ::selection {
   background-color: tools.color('callout');
 }

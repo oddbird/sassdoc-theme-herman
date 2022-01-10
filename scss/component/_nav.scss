@@ -6,6 +6,16 @@
 @use '~accoutrement/sass/tools';
 @use '../config';
 
+// Nav Lists
+// ---------
+/// Remove list styles from navigation lists
+/// @group component-nav
+[data-region='nav'] ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
 // Nav Subsections
 // ---------------
 /// Group the main navigation into sub-sections…
@@ -65,41 +75,29 @@
 ///   </div>
 [data-nav] {
   #{config.$link} {
+    background: linear-gradient(
+        to right,
+        tools.color('theme-light'),
+        tools.color('theme-light')
+      )
+      no-repeat;
+    background-size: 0 tools.size('nav-underline');
+    background-position: bottom left;
     color: tools.color('background');
     line-height: 1.1;
     padding-bottom: tools.size('quarter-shim');
-    position: relative;
     text-decoration: none;
-    transition: color 0.4s;
-
-    // Animated underlines
-    @include tools.before('') {
-      @include tools.position(null null 0 0);
-
-      background: tools.color('theme-light');
-      height: tools.size('nav-underline');
-      transform: scale3d(0, 1, 1);
-      transform-origin: center left;
-      transition: transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
-      transition-delay: 0.2s;
-      width: 100%;
-    }
+    transition: color 0.4s, background-size 0.4s;
   }
 
   #{config.$focus} {
-    @include tools.before('') {
-      transform: scale3d(1, 1, 1);
-      transition-delay: 0s;
-    }
+    background-size: 100% tools.size('nav-underline');
   }
 
   &[data-nav='is-active'] {
     #{config.$link},
     #{config.$focus} {
-      @include tools.before('') {
-        transform: scale3d(1, 1, 1);
-        transition-delay: 0s;
-      }
+      background-size: 100% tools.size('nav-underline');
     }
   }
 }

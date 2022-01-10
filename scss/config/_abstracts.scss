@@ -66,29 +66,17 @@ tools.$functions: $functions;
 ///   @include config.add('colors', 'brand-colors', $brand-colors);
 @mixin add($type, $name, $value) {
   @if list.index('color' 'colors', $type) {
+    $fn: meta.get-function('color', $module: 'tools');
     @include tools.add-colors($value);
-    @include utilities.add(
-      $type,
-      $name,
-      $value,
-      meta.get-function('color', $module: 'tools')
-    );
+    @include utilities.add($type, $name, utilities.each-key($value, $fn));
   } @else if list.index('size' 'sizes', $type) {
+    $fn: meta.get-function('size', $module: 'tools');
     @include tools.add-sizes($value);
-    @include utilities.add(
-      $type,
-      $name,
-      $value,
-      meta.get-function('size', $module: 'tools')
-    );
+    @include utilities.add($type, $name, utilities.each-key($value, $fn));
   } @else if list.index('ratio' 'ratios', $type) {
+    $fn: meta.get-function('ratio', $module: 'tools');
     @include tools.add-ratios($value);
-    @include utilities.add(
-      $type,
-      $name,
-      $value,
-      meta.get-function('ratio', $module: 'tools')
-    );
+    @include utilities.add($type, $name, utilities.each-key($value, $fn));
   } @else if list.index('font' 'fonts', $type) {
     @include tools.add-font($name, $value);
     @include utilities.add($type, $name, tools.font($name));

@@ -2582,10 +2582,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"accoutrement@npm:^3.0.1":
-  version: 3.0.1
-  resolution: "accoutrement@npm:3.0.1"
-  checksum: 65d0385a1a7ec161b2c763257667714b353af7e649cdd3de5a943cdaa8089184a573870ff2171de3566cd836aaedcb3c779a8224190f6eb58aad8a9adc96c0d9
+"accoutrement@npm:4.0.0-beta.2":
+  version: 4.0.0-beta.2
+  resolution: "accoutrement@npm:4.0.0-beta.2"
+  checksum: 052b8475ab58423acb1ed247579e504289bb73931d4f5a75182e5c5350c836e25c871a397e65f5ba22d489fef2101277ea491919415527871d7656ef5bd04666
   languageName: node
   linkType: hard
 
@@ -4443,6 +4443,13 @@ __metadata:
   version: 0.3.8
   resolution: "cssom@npm:0.3.8"
   checksum: 24beb3087c76c0d52dd458be9ee1fbc80ac771478a9baef35dd258cdeb527c68eb43204dd439692bb2b1ae5272fa5f2946d10946edab0d04f1078f85e06bc7f6
+  languageName: node
+  linkType: hard
+
+"cssremedy@npm:^0.1.0-beta.2":
+  version: 0.1.0-beta.2
+  resolution: "cssremedy@npm:0.1.0-beta.2"
+  checksum: d3b8dbd4f423a209398bae2c3a0c3018f4d879ecb7a94b7aadd6f020d7e660286d40c7361595d519c14d2af2776e62f1e6dfa95d34ab438596cce9f343b0aeca
   languageName: node
   linkType: hard
 
@@ -11422,7 +11429,7 @@ __metadata:
     "@testing-library/dom": ^8.11.1
     "@testing-library/jest-dom": ^5.16.1
     "@yarnpkg/sdks": ^2.6.0-rc.1
-    accoutrement: ^3.0.1
+    accoutrement: 4.0.0-beta.2
     autoprefixer: ^10.4.1
     babel-jest: ^27.4.5
     babel-loader: ^8.2.3
@@ -11432,6 +11439,7 @@ __metadata:
     core-js: ^3.20.2
     css-loader: ^6.5.1
     css-minimizer-webpack-plugin: ^3.3.1
+    cssremedy: ^0.1.0-beta.2
     del: ^6.0.0
     eslint: ^8.6.0
     eslint-config-prettier: ^8.3.0

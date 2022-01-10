@@ -80,7 +80,7 @@ $text-sizes: (
 $spacing-sizes: (
   'rhythm': 1rem
     (
-      'line-height': 1,
+      'scale': 'line-height' 1,
     ),
   'gutter': '#rhythm',
   'gutter-plus': '#gutter'
@@ -91,14 +91,12 @@ $spacing-sizes: (
     (
       'times': 2,
     ),
-  'flex-gutter': 'calc(#shim + 2.5vw)',
-  'spacer': 'calc(%s + 2.5vw)'
+  'triple-gutter': '#gutter'
     (
-      '%s': '#gutter'
-        (
-          'times': 3,
-        ),
+      'times': 3,
     ),
+  'flex-gutter': 'calc(#shim + 2.5vw)',
+  'spacer': 'calc(#triple-gutter + 2.5vw)',
   'gutter-minus': '#gutter'
     (
       'minus': '#half-shim',

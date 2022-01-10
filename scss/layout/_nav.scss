@@ -36,9 +36,9 @@
   width: auto;
 
   @include tools.below('nav-break') {
-    @include tools.position(0 null 0 0);
-
     box-shadow: 0 0 tools.size('half-shim') tools.color('shadow');
+    inset: 0 auto 0 0;
+    position: absolute;
     transform: translateX(-102%);
     transition: transform 0.4s;
 

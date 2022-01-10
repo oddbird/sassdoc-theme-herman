@@ -452,9 +452,9 @@ using the <a href="http://sassdoc.com/customising-the-view/#watermark-display">S
   
     &lt;!-- Custom Font HTML --&gt;
     
+&lt;link href=&quot;https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700&quot; rel=&quot;stylesheet&quot;&gt;
 &lt;link href=&quot;https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700,700i&quot; rel=&quot;stylesheet&quot;&gt;
 &lt;link href=&quot;https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600&quot; rel=&quot;stylesheet&quot;&gt;
-&lt;link href=&quot;https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700&quot; rel=&quot;stylesheet&quot;&gt;
   
 &lt;/head&gt;
 &lt;body&gt;
@@ -583,9 +583,8 @@ using the <a href="http://sassdoc.com/customising-the-view/#watermark-display">S
       
       
       <pre class="hljs-pre"><code class="lang-scss">.footer-credit {
-  @include tools.clearfix;
-
   border-top: 1px solid tools.color(&#39;theme-light&#39;);
+  display: flow-root;
   flex: 0 0 auto;
   font-size: tools.size(&#39;footer&#39;);
   line-height: tools.size(&#39;rhythm&#39;);

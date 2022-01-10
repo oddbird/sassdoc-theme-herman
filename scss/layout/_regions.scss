@@ -38,8 +38,6 @@
 ///
 /// @group style-regions
 [data-region='container'] {
-  @include tools.clearfix;
-
   display: flex;
   flex: 1 1 auto;
   position: relative;

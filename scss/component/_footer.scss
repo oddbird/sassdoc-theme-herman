@@ -29,9 +29,8 @@
 /// Layout for the footer credit.
 /// @group component-footer
 .footer-credit {
-  @include tools.clearfix;
-
   border-top: 1px solid tools.color('theme-light');
+  display: flow-root;
   flex: 0 0 auto;
   font-size: tools.size('footer');
   line-height: tools.size('rhythm');

@@ -7,11 +7,10 @@
 .project-links {
   display: flex;
   justify-content: flex-end;
-  margin-left: 0;
-  margin-right: 0;
+  margin: 0 0 tools.size('shim');
 
-  @include tools.below('page-break') {
-    margin-bottom: tools.size('shim');
+  @include tools.above('page-break') {
+    margin-bottom: tools.size('gutter');
   }
 }
 

@@ -48,7 +48,8 @@
 
 .transparency-grid,
 .color-overlay {
-  @include tools.position(0);
+  inset: 0;
+  position: absolute;
 }
 
 .transparency-grid {

@@ -425,9 +425,9 @@
   width: auto;
 
   @include tools.below(&#39;nav-break&#39;) {
-    @include tools.position(0 null 0 0);
-
     box-shadow: 0 0 tools.size(&#39;half-shim&#39;) tools.color(&#39;shadow&#39;);
+    inset: 0 auto 0 0;
+    position: absolute;
     transform: translateX(-102%);
     transition: transform 0.4s;
 
@@ -556,9 +556,9 @@
   
     &lt;!-- Custom Font HTML --&gt;
     
+&lt;link href=&quot;https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700&quot; rel=&quot;stylesheet&quot;&gt;
 &lt;link href=&quot;https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700,700i&quot; rel=&quot;stylesheet&quot;&gt;
 &lt;link href=&quot;https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600&quot; rel=&quot;stylesheet&quot;&gt;
-&lt;link href=&quot;https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700&quot; rel=&quot;stylesheet&quot;&gt;
   
 &lt;/head&gt;
 &lt;body&gt;
