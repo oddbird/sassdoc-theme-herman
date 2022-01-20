@@ -24,12 +24,23 @@
   line-height: tools.ratio('herman');
 }
 
-// Selection
-// ---------
+// Hidden
+// ------
 /// Selected text uses a light color from the Herman color palette.
 /// @group style-typography
 [hidden] {
   display: none !important; /* stylelint-disable-line declaration-no-important */
+}
+
+// Images
+// ------
+/// Undo the block image display
+/// caused by changing our reset
+/// from accoutrement/init to cssremedy -
+/// since that would be a noticeable user-facing change.
+/// @group style-typography
+img {
+  display: revert;
 }
 
 // Selection

@@ -40,7 +40,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@testing-library/dom", "npm:8.11.1"],
             ["@testing-library/jest-dom", "npm:5.16.1"],
             ["@yarnpkg/sdks", "npm:2.6.0-rc.2"],
-            ["accoutrement", "npm:4.0.0-beta.2"],
+            ["accoutrement", "npm:4.0.0-beta.3"],
             ["autoprefixer", "virtual:878b150fb95c14b92e1a083a8cdd5b07d75bde54934ebaf95859474dcc5db3d63d39a688ccdf72c7af702ac8d88c00a5b7e8d26a82dab7e202b18226de2a7429#npm:10.4.2"],
             ["babel-jest", "virtual:878b150fb95c14b92e1a083a8cdd5b07d75bde54934ebaf95859474dcc5db3d63d39a688ccdf72c7af702ac8d88c00a5b7e8d26a82dab7e202b18226de2a7429#npm:27.4.6"],
             ["babel-loader", "virtual:878b150fb95c14b92e1a083a8cdd5b07d75bde54934ebaf95859474dcc5db3d63d39a688ccdf72c7af702ac8d88c00a5b7e8d26a82dab7e202b18226de2a7429#npm:8.2.3"],
@@ -3991,10 +3991,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["accoutrement", [
-        ["npm:4.0.0-beta.2", {
-          "packageLocation": "./.yarn/cache/accoutrement-npm-4.0.0-beta.2-70d54dd418-052b8475ab.zip/node_modules/accoutrement/",
+        ["npm:4.0.0-beta.3", {
+          "packageLocation": "./.yarn/cache/accoutrement-npm-4.0.0-beta.3-c255d9d435-98f4813562.zip/node_modules/accoutrement/",
           "packageDependencies": [
-            ["accoutrement", "npm:4.0.0-beta.2"]
+            ["accoutrement", "npm:4.0.0-beta.3"]
           ],
           "linkType": "HARD",
         }]
@@ -14964,7 +14964,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@testing-library/dom", "npm:8.11.1"],
             ["@testing-library/jest-dom", "npm:5.16.1"],
             ["@yarnpkg/sdks", "npm:2.6.0-rc.2"],
-            ["accoutrement", "npm:4.0.0-beta.2"],
+            ["accoutrement", "npm:4.0.0-beta.3"],
             ["autoprefixer", "virtual:878b150fb95c14b92e1a083a8cdd5b07d75bde54934ebaf95859474dcc5db3d63d39a688ccdf72c7af702ac8d88c00a5b7e8d26a82dab7e202b18226de2a7429#npm:10.4.2"],
             ["babel-jest", "virtual:878b150fb95c14b92e1a083a8cdd5b07d75bde54934ebaf95859474dcc5db3d63d39a688ccdf72c7af702ac8d88c00a5b7e8d26a82dab7e202b18226de2a7429#npm:27.4.6"],
             ["babel-loader", "virtual:878b150fb95c14b92e1a083a8cdd5b07d75bde54934ebaf95859474dcc5db3d63d39a688ccdf72c7af702ac8d88c00a5b7e8d26a82dab7e202b18226de2a7429#npm:8.2.3"],

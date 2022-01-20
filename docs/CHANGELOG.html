@@ -282,6 +282,20 @@
 <h2 id="unreleased" tabindex="-1">UNRELEASED</h2>
 <ul>
 <li>💥 BREAKING: Drop support for Node &lt;<span class="widont">&nbsp;</span>12</li>
+<li>💥 BREAKING: <code>utilities.add()</code>
+no longer supports map-compilation functions and arguments,
+since there are two reasonable approaches.
+Maps that need to be compiled for Herman
+must now be compiled before they are added.
+That can still be done using either:
+<ul>
+<li>🚀 NEW: <code>utilities.each-value()</code> will pass each <em>value</em> of a map
+through a given function
+(this is the previous behavior of passing args to <code>add()</code>)</li>
+<li>🚀 NEW: <code>utilities.each-key()</code> will pass each <em>key</em> of a map
+through a given<span class="widont">&nbsp;</span>function</li>
+</ul>
+</li>
 <li>🚀 NEW: Allow <code>utilities.add()</code> to merge data, instead of<span class="widont">&nbsp;</span>override</li>
 <li>🏠 INTERNAL: Upgrade<span class="widont">&nbsp;</span>dependencies</li>
 </ul>

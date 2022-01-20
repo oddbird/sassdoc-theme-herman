@@ -2580,10 +2580,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"accoutrement@npm:4.0.0-beta.2":
-  version: 4.0.0-beta.2
-  resolution: "accoutrement@npm:4.0.0-beta.2"
-  checksum: 052b8475ab58423acb1ed247579e504289bb73931d4f5a75182e5c5350c836e25c871a397e65f5ba22d489fef2101277ea491919415527871d7656ef5bd04666
+"accoutrement@npm:pre":
+  version: 4.0.0-beta.3
+  resolution: "accoutrement@npm:4.0.0-beta.3"
+  checksum: 98f4813562eaad4818c285b667cd4666d0f1d27653b258f32c506d1a12708b68dcbf553b243bfa9c162292c75688689a70a22df46a4033e9844f276ca78737fb
   languageName: node
   linkType: hard
 
@@ -11426,7 +11426,7 @@ __metadata:
     "@testing-library/dom": ^8.11.1
     "@testing-library/jest-dom": ^5.16.1
     "@yarnpkg/sdks": ^2.6.0-rc.2
-    accoutrement: 4.0.0-beta.2
+    accoutrement: pre
     autoprefixer: ^10.4.2
     babel-jest: ^27.4.6
     babel-loader: ^8.2.3
