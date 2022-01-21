@@ -13,6 +13,19 @@
 /// @link https://www.oddbird.net/accoutrement/ Accoutrement
 /// @group style-typography
 
+// Block Reset
+// -----------
+/// Since this was initially built with accoutrement/init --
+/// a more opinionated reset --
+/// this simplified block reset
+/// helps cover the basic assumptions of the code-base
+/// @group style-typography
+* {
+  border: solid 0 currentColor;
+  margin: 0;
+  padding: 0;
+}
+
 /// The root typographic styles provide a default font,
 /// responsive font-size, fallback font-size, and line-height.
 /// @group style-typography
@@ -91,6 +104,7 @@ pre {
   @include tools.font-family('code');
 
   font-size: tools.size('code');
+  overflow: auto;
 }
 
 // Code
