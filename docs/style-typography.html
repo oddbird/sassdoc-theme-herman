@@ -454,7 +454,7 @@ Some typography is also inherited from the
       
       
       <pre class="hljs-pre"><code class="lang-scss">* {
-  border: solid 0 currentColor;
+  border: solid 0 currentcolor;
   margin: 0;
   padding: 0;
 }</code></pre>
@@ -1246,7 +1246,7 @@ since that would be a noticeable user-facing<span class="widont">&nbsp;</span>ch
 
   #{config.$focus} {
     color: tools.color(&#39;focus&#39;);
-    text-decoration-color: currentColor;
+    text-decoration-color: currentcolor;
   }
 }</code></pre>
     </div>
@@ -1445,6 +1445,7 @@ to stand out from basic<span class="widont">&nbsp;</span>text.</p>
       
       <pre class="hljs-pre"><code class="lang-scss">pre {
   @include tools.font-family(&#39;code&#39;);
+
   font-size: tools.size(&#39;code&#39;);
   overflow: auto;
   white-space: pre;
@@ -1899,7 +1900,7 @@ can be visually hidden without removing from the<span class="widont">&nbsp;</spa
       }
 
       #{config.$focus} {
-        text-decoration-color: currentColor;
+        text-decoration-color: currentcolor;
       }
     }
 

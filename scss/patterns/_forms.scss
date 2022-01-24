@@ -4,7 +4,7 @@
 @use '~accoutrement/sass/tools';
 
 ::placeholder {
-  color: currentColor;
+  color: currentcolor;
   opacity: 0.5;
 }
 
@@ -18,7 +18,7 @@ input {
   width: 100%;
 
   &:focus {
-    border-color: currentColor;
+    border-color: currentcolor;
     outline: 0;
   }
 }

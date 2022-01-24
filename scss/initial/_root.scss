@@ -21,7 +21,7 @@
 /// helps cover the basic assumptions of the code-base
 /// @group style-typography
 * {
-  border: solid 0 currentColor;
+  border: solid 0 currentcolor;
   margin: 0;
   padding: 0;
 }
@@ -91,7 +91,7 @@ mark {
 
   #{config.$focus} {
     color: tools.color('focus');
-    text-decoration-color: currentColor;
+    text-decoration-color: currentcolor;
   }
 }
 
