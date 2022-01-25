@@ -13,14 +13,49 @@
 /// @link https://www.oddbird.net/accoutrement/ Accoutrement
 /// @group style-typography
 
+// Block Reset
+// -----------
+/// Since this was initially built with accoutrement/init --
+/// a more opinionated reset --
+/// this simplified block reset
+/// helps cover the basic assumptions of the code-base
+/// @group style-typography
+* {
+  border: solid 0 currentcolor;
+  font-size: inherit;
+  line-height: inherit;
+  margin: 0;
+  padding: 0;
+}
+
 /// The root typographic styles provide a default font,
 /// responsive font-size, fallback font-size, and line-height.
 /// @group style-typography
 :root {
   @include tools.font-family('sans');
+
   font-size: tools.size('root');
   font-size: tools.size('responsive');
-  line-height: tools.ratio('herman');
+  line-height: tools.ratio('line-height');
+}
+
+// Hidden
+// ------
+/// Selected text uses a light color from the Herman color palette.
+/// @group style-typography
+[hidden] {
+  display: none !important; /* stylelint-disable-line declaration-no-important */
+}
+
+// Images
+// ------
+/// Undo the block image display
+/// caused by changing our reset
+/// from accoutrement/init to cssremedy -
+/// since that would be a noticeable user-facing change.
+/// @group style-typography
+img {
+  display: revert;
 }
 
 // Selection
@@ -58,7 +93,7 @@ mark {
 
   #{config.$focus} {
     color: tools.color('focus');
-    text-decoration-color: currentColor;
+    text-decoration-color: currentcolor;
   }
 }
 
@@ -69,7 +104,10 @@ mark {
 /// @group style-typography
 pre {
   @include tools.font-family('code');
+
   font-size: tools.size('code');
+  overflow: auto;
+  white-space: pre;
 }
 
 // Code
@@ -82,6 +120,7 @@ pre {
 /// @see {css} Code Blocks
 code {
   @include tools.font-family('code');
+
   font-weight: bolder;
 
   pre & {

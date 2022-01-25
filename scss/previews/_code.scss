@@ -27,6 +27,7 @@
 /// @group style-code
 .code-header {
   @include tools.contrasted('theme-light');
+
   flex: 0 0 auto;
   padding: 0 tools.size('shim');
 }

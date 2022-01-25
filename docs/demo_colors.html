@@ -826,8 +826,9 @@ and compile actual colors based on our map notation.
 In order to export real color data to Herman,
 we want to run every value in our map
 through the color function before exporting.
-<code>add</code> accepts additional arguments at the end,
-for passing each map-value through a function.
+While Accoutrement has that functionality built in,
+you can also use the <code>each-key</code> or <code>each-value</code> utilities
+to pass each map key or value through a given function.
 Provide a function name (Sass 3.4-),
 or first-class function (Sass 3.5+)
 along with any additional arguments required for that<span class="widont">&nbsp;</span>function.</p>
@@ -908,9 +909,13 @@ $demo-noncolors: (
   &#39;black&#39;: &#39;#brand-blue&#39; (&#39;shade&#39;: 30%, &#39;desaturate&#39;: 80%),
 );
 
+$compiled: utilities.each-key(
+  $demo-noncolors,
+  meta.get-function(&#39;color&#39;, $module: &#39;tools&#39;),
+);
+
 @include utilities.add(
-  &#39;colors&#39;, &#39;demo-noncolors&#39;, $demo-noncolors,
-  meta.get-function(&#39;color&#39;, $module: &#39;tools&#39;) // function
+  &#39;colors&#39;, &#39;demo-noncolors&#39;, $compiled,
 );
 
 @each $key, $value in utilities.$herman {
@@ -937,7 +942,7 @@ $demo-noncolors: (
 
       
       
-      <pre class="hljs-pre"><code class="lang-css">/* colors: (&quot;demo-noncolors&quot;: (&quot;light-gray&quot;: #dedede, &quot;gray&quot;: #555b5e, &quot;black&quot;: #515151)) */</code></pre>
+      <pre class="hljs-pre"><code class="lang-css">/* colors: (&quot;demo-noncolors&quot;: (&quot;light-gray&quot;: #dedede, &quot;gray&quot;: #555b5e, &quot;black&quot;: null)) */</code></pre>
     </div>
   
 

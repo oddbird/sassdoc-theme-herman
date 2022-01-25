@@ -22,13 +22,16 @@ dist/webpack/app_styles.min.js
 dist/webpack/iframe_styles.min.js
 dist/webpack/styleguide_json*
 
+!.vscode/
+
 # Yarn
 yarn-debug.log*
 yarn-error.log*
 .yarn-integrity
 .yarn/*
 !.yarn/cache
-!.yarn/releases
+!.yarn/patches
 !.yarn/plugins
+!.yarn/releases
 !.yarn/sdks
 !.yarn/versions

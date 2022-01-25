@@ -67,28 +67,13 @@ tools.$functions: $functions;
 @mixin add($type, $name, $value) {
   @if list.index('color' 'colors', $type) {
     @include tools.add-colors($value);
-    @include utilities.add(
-      $type,
-      $name,
-      $value,
-      meta.get-function('color', $module: 'tools')
-    );
+    @include utilities.add($type, $name, tools.compile-colors($value));
   } @else if list.index('size' 'sizes', $type) {
     @include tools.add-sizes($value);
-    @include utilities.add(
-      $type,
-      $name,
-      $value,
-      meta.get-function('size', $module: 'tools')
-    );
+    @include utilities.add($type, $name, tools.compile-sizes($value));
   } @else if list.index('ratio' 'ratios', $type) {
     @include tools.add-ratios($value);
-    @include utilities.add(
-      $type,
-      $name,
-      $value,
-      meta.get-function('ratio', $module: 'tools')
-    );
+    @include utilities.add($type, $name, tools.compile-ratios($value));
   } @else if list.index('font' 'fonts', $type) {
     @include tools.add-font($name, $value);
     @include utilities.add($type, $name, tools.font($name));

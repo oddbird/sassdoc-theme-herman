@@ -18,7 +18,8 @@
 .nvmrc
 .nyc_output/
 .nycrc
-.pnp.js
+.pnp.cjs
+.pnp.loader.mjs
 .prettierignore
 .prettierrc.yml
 .sass-cache/

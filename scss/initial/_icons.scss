@@ -35,7 +35,8 @@
 /// @group style-icons
 [data-icon] {
   @include tools.square(1em);
-  fill: currentColor;
+
+  fill: currentcolor;
 }
 
 // Icon-Size: Nav

@@ -2,6 +2,18 @@
 
 ## UNRELEASED
 
+- 💥 BREAKING: Drop support for Node < 12
+- 💥 BREAKING: `utilities.add()`
+  no longer supports map-compilation functions and arguments,
+  since there are two reasonable approaches.
+  Maps that need to be compiled for Herman
+  must now be compiled before they are added.
+  That can still be done using either:
+  - 🚀 NEW: `utilities.each-value()` will pass each _value_ of a map
+    through a given function
+    (this is the previous behavior of passing args to `add()`)
+  - 🚀 NEW: `utilities.each-key()` will pass each _key_ of a map
+    through a given function
 - 🚀 NEW: Allow `utilities.add()` to merge data, instead of override
 - 🏠 INTERNAL: Upgrade dependencies
 

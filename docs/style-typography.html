@@ -406,6 +406,141 @@ Some typography is also inherited from the
 
 
 
+<section class="item" id="css--*">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type"></span>
+      
+
+      
+        <a href="#css--*" class="item-name">*</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+    
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">* {
+  border: solid 0 currentcolor;
+  font-size: inherit;
+  line-height: inherit;
+  margin: 0;
+  padding: 0;
+}</code></pre>
+    </div>
+  
+
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>Since this was initially built with accoutrement/init –
+a more opinionated reset –
+this simplified block reset
+helps cover the basic assumptions of the<span class="widont">&nbsp;</span>code-base</p>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
 <section class="item" id="css--%3Aroot">
   
     
@@ -455,9 +590,10 @@ Some typography is also inherited from the
       
       <pre class="hljs-pre"><code class="lang-scss">:root {
   @include tools.font-family(&#39;sans&#39;);
+
   font-size: tools.size(&#39;root&#39;);
   font-size: tools.size(&#39;responsive&#39;);
-  line-height: tools.ratio(&#39;herman&#39;);
+  line-height: tools.ratio(&#39;line-height&#39;);
 }</code></pre>
     </div>
   
@@ -472,6 +608,265 @@ Some typography is also inherited from the
     <div class="text-block">
       <p>The root typographic styles provide a default font,
 responsive font-size, fallback font-size, and<span class="widont">&nbsp;</span>line-height.</p>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="css--%5Bhidden%5D">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type"></span>
+      
+
+      
+        <a href="#css--%5Bhidden%5D" class="item-name">[hidden]</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+    
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">[hidden] {
+  display: none !important; /* stylelint-disable-line declaration-no-important */
+}</code></pre>
+    </div>
+  
+
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>Selected text uses a light color from the Herman color<span class="widont">&nbsp;</span>palette.</p>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="css--img">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type"></span>
+      
+
+      
+        <a href="#css--img" class="item-name">img</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+    
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">img {
+  display: revert;
+}</code></pre>
+    </div>
+  
+
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>Undo the block image display
+caused by changing our reset
+from accoutrement/init to cssremedy -
+since that would be a noticeable user-facing<span class="widont">&nbsp;</span>change.</p>
 
       
   
@@ -853,7 +1248,7 @@ responsive font-size, fallback font-size, and<span class="widont">&nbsp;</span>l
 
   #{config.$focus} {
     color: tools.color(&#39;focus&#39;);
-    text-decoration-color: currentColor;
+    text-decoration-color: currentcolor;
   }
 }</code></pre>
     </div>
@@ -1052,7 +1447,10 @@ to stand out from basic<span class="widont">&nbsp;</span>text.</p>
       
       <pre class="hljs-pre"><code class="lang-scss">pre {
   @include tools.font-family(&#39;code&#39;);
+
   font-size: tools.size(&#39;code&#39;);
+  overflow: auto;
+  white-space: pre;
 }</code></pre>
     </div>
   
@@ -1182,6 +1580,7 @@ and a smaller<span class="widont">&nbsp;</span>font-size.</p>
       
       <pre class="hljs-pre"><code class="lang-scss">code {
   @include tools.font-family(&#39;code&#39;);
+
   font-weight: bolder;
 
   pre &amp; {
@@ -1494,6 +1893,15 @@ can be visually hidden without removing from the<span class="widont">&nbsp;</spa
   h1,
   h2,
   h3,
+  h4,
+  h5,
+  h6 {
+    margin-top: 0;
+  }
+
+  h1,
+  h2,
+  h3,
   h4 {
     color: tools.color(&#39;text&#39;);
 
@@ -1503,7 +1911,7 @@ can be visually hidden without removing from the<span class="widont">&nbsp;</spa
       }
 
       #{config.$focus} {
-        text-decoration-color: currentColor;
+        text-decoration-color: currentcolor;
       }
     }
 

@@ -4,12 +4,12 @@ jobs:
   build:
     working_directory: ~/herman
     docker:
-      - image: circleci/node:lts
+      - image: cimg/node:lts
     steps:
       - checkout
       - restore_cache:
           keys:
-            - herman-yarn-{{ checksum ".pnp.js" }}-{{ checksum "yarn.lock" }}
+            - herman-yarn-{{ checksum ".pnp.cjs" }}-{{ checksum "yarn.lock" }}
             - herman-yarn-
       - run:
           name: Install Dependencies
@@ -24,7 +24,7 @@ jobs:
             - ./.yarn/build-state.yml
             - ./.yarn/install-state.gz
       - save_cache:
-          key: herman-yarn-{{ checksum ".pnp.js" }}-{{ checksum "yarn.lock" }}
+          key: herman-yarn-{{ checksum ".pnp.cjs" }}-{{ checksum "yarn.lock" }}
           paths:
             - ./.yarn/unplugged
             - ./.yarn/build-state.yml
@@ -33,7 +33,7 @@ jobs:
   lint:
     working_directory: ~/herman
     docker:
-      - image: circleci/node:lts
+      - image: cimg/node:lts
     steps:
       - checkout
       - attach_workspace:
@@ -45,7 +45,7 @@ jobs:
   test:
     working_directory: ~/herman
     docker:
-      - image: circleci/node:lts
+      - image: cimg/node:lts
     steps:
       - checkout
       - attach_workspace:
@@ -76,7 +76,7 @@ jobs:
   check-test-coverage:
     working_directory: ~/herman
     docker:
-      - image: circleci/node:lts
+      - image: cimg/node:lts
     steps:
       - checkout
       - attach_workspace:

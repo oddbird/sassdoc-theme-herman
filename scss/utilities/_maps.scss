@@ -11,13 +11,19 @@
 // ----------
 /// Add a map of colors, fonts, sizes, ratios, etc
 /// to the `$herman` map for JSON-export,
-/// converting values to JSON-ready strings,
-/// with optional functions/args for compiling raw values.
+/// converting values to JSON-ready strings.
 ///
 /// @group api_json-export
-/// @since 4.0.0 Name changed from `herman-add`
-///
-/// @since 4.1.0 Data submited to `utilities.add()` is deeply merged instead of overridden
+/// @since 4.0.0
+///   Name changed from `herman-add`
+/// @since 4.1.0
+///   Data supplied to `utilities.add()`
+///   is deeply merged instead of overridden
+/// @since 5.0.0
+///   No longer accepts map-compile arguments,
+///   since there is not an obvious default between
+///   running compilation on keys vs values.
+///   Use `each-value` or `each-key` to handle compilations manually.
 ///
 /// @param {String} $type -
 ///   The type of map being added,
@@ -43,19 +49,18 @@
 ///     'brand-blue': hsl(195, 85%, 35%),
 ///     'light-gray': '#brand-blue' ('tint': 80%, 'desaturate': 80%),
 ///   );
-///   @include utilities.add('colors', 'brand-colors', $brand-colors, meta.get-function('color', $module: 'tools'));
+///   $brand-compiled: utilities.each-key(
+///     $brand-colors,
+///     meta.get-function('color', $module: 'tools'),
+///   );
+///   @include utilities.add('colors', 'brand-colors', $brand-compiled);
 ///
 ///   @each $key, $value in utilities.$herman {
 ///   /* #{$key}: #{meta.inspect($value)} */
 ///   }
-@mixin add($type, $key, $map, $args...) {
+@mixin add($type, $key, $map) {
   // pluralize type
   $type: map.get(config.$plural-types, $type) or $type;
-
-  // compile maps as needed
-  @if (length($args) > 0) {
-    $map: compile($map, $args...);
-  }
 
   // Update nested map by type
   $nested: map.get($herman, $type) or ();
@@ -73,8 +78,8 @@
   $herman: map.deep-merge($herman, $nested) !global;
 }
 
-// Map Compile
-// -----------
+// Each Value
+// ----------
 /// Pass the values of any map through a given function
 /// (with optional arguments)
 /// and return the compiled map.
@@ -82,11 +87,55 @@
 /// but can also be accessed directly.
 ///
 /// @group api_json-export
-/// @since 4.0.0 Name changed from `herman-map-compile`
+/// @since 4.0.0
+///   Name changed from `herman-map-compile` to `compile`
+/// @since 5.0.0
+///   Name changed from `compile` to `each-value`
 ///
 /// @param {Map} $map -
 ///   A sass map with values that need to be compiled,
-///   such as Accoutrement Colors or Sizes with adjustments
+///   by running each value through a given function.
+/// @param {String | Function} $function -
+///   The function (or function name) to use in compiling values,
+///   such as Accoutrement `color` and `size` functions
+/// @param {Arglist} $args… -
+///   Pass in any additional arguments for the function
+/// @return {String | Any} -
+///   An updated map,
+///   with values compiled by a third-party function,
+///   and converted to json-ready strings
+@function each-value($map, $function, $args...) {
+  $output: ();
+
+  @each $key, $value in $map {
+    $output: map.merge(
+      $output,
+      (
+        $key: meta.call($function, $value, $args...),
+      )
+    );
+  }
+
+  @return $output;
+}
+
+// Each Key
+// --------
+/// Pass the keys of any map through a given function
+/// (with optional arguments)
+/// and return the compiled map.
+/// This is used by `add`,
+/// but can also be accessed directly.
+///
+/// @group api_json-export
+/// @since 4.0.0
+///   Name changed from `herman-map-compile` to `compile`
+/// @since 5.0.0
+///   Name changed from `compile` to `each-value`
+///
+/// @param {Map} $map -
+///   A sass map with values that need to be compiled,
+///   by running each key through a given function.
 /// @param {String | Function} $function -
 ///   The function (or function name) to use in compiling values,
 ///   such as Accoutrement `color` and `size` functions
@@ -105,19 +154,19 @@
 ///     'brand-blue': hsl(195, 85%, 35%),
 ///     'light-gray': 'brand-blue' ('tint': 80%, 'desaturate': 80%),
 ///   );
-///   $compiled: utilities.compile($brand-colors, meta.get-function('color', $module: 'tools'));
+///   $compiled: utilities.each-key($brand-colors, meta.get-function('color', $module: 'tools'));
 ///
 ///   @each $key, $value in $compiled {
 ///   /* #{$key}: #{$value} */
 ///   }
-@function compile($map, $function, $args...) {
+@function each-key($map, $function, $args...) {
   $output: ();
 
-  @each $key, $value in $map {
+  @each $key in map.keys($map) {
     $output: map.merge(
       $output,
       (
-        $key: meta.call($function, $value, $args...),
+        $key: meta.call($function, $key, $args...),
       )
     );
   }

@@ -10,30 +10,11 @@
   $functions: (
     'darken': meta.get-function('darken'),
     'desaturate': meta.get-function('desaturate'),
-    'convert': '#convert-units',
-  ),
+  )
 );
 
 @use '../../../scss/utilities/json-api' as *;
 @use '../../../scss/utilities/maps' as *;
-
-$colors-initial: (
-  'brand-blue': hsl(195, 85%, 35%),
-  'light-gray': '#brand-blue'
-    (
-      'tint': 80%,
-      'desaturate': 80%,
-    ),
-  'gray': '#brand-blue'
-    (
-      'desaturate': 80%,
-    ),
-  'black': '#brand-blue'
-    (
-      'shade': 30% #000,
-      'desaturate': 80%,
-    ),
-);
 
 $colors-compiled: (
   'brand-blue': #0d7fa5,
@@ -41,21 +22,19 @@ $colors-compiled: (
   'gray': #555b5e,
   'black': #3b4042,
 );
-
 $darken: (
   'brand-blue': #063646,
   'light-gray': #ababab,
   'gray': #252728,
   'black': #0b0c0c,
 );
-
-$sizes: (
+tools.$sizes: (
   'root': 20px,
   'rhythm': '#root'
     (
-      '_fifth': 1,
+      'scale': '_fifth' 1,
       'convert': 'rem',
-    ),
+    )
 );
 
 $sizes-compiled: (
@@ -63,21 +42,25 @@ $sizes-compiled: (
   'rhythm': 1.5rem,
 );
 
-// Map Compile
-// -----------
-@include true.describe('map-compile [function]') {
+// Each Value
+// ----------
+@include true.describe('each-value [function]') {
   @include true.it('returns a map with values run through a given function') {
     @include true.assert-equal(
-      compile($sizes, meta.get-function('size', $module: 'tools')),
-      $sizes-compiled,
+      each-value($colors-compiled, meta.get-function('darken'), 20%),
+      $darken,
       $inspect: true
     );
   }
+}
 
-  @include true.it('allows extra args be passed in') {
+// Map Compile
+// -----------
+@include true.describe('each-key [function]') {
+  @include true.it('returns a map with keys run through a given function') {
     @include true.assert-equal(
-      compile($colors-compiled, meta.get-function('darken'), 20%),
-      $darken,
+      each-key(tools.$sizes, meta.get-function('size', $module: 'tools')),
+      $sizes-compiled,
       $inspect: true
     );
   }
@@ -93,6 +76,7 @@ $sizes-compiled: (
     @include true.assert-equal($herman, $empty);
 
     @include add('colors', 'compiled', $colors-compiled);
+
     $expect: (
       'colors': (
         'compiled': $colors-compiled,
@@ -104,6 +88,7 @@ $sizes-compiled: (
 
   @include true.it('adds to existing data of the type') {
     @include add('colors', 'darken', $darken);
+
     $existing: map.get($herman, 'colors');
     $new: (
       'compiled': $colors-compiled,
@@ -113,26 +98,5 @@ $sizes-compiled: (
     );
 
     @include true.assert-equal($herman, $expect);
-  }
-
-  @include true.it('accepts compilation functions') {
-    $herman: () !global;
-
-    @include true.assert-equal($herman, $empty);
-
-    @include add(
-      'colors',
-      'dark',
-      $colors-compiled,
-      meta.get-function('darken'),
-      20%
-    );
-    $expect: (
-      'colors': (
-        'dark': $darken,
-      ),
-    );
-
-    @include true.assert-equal($herman, $expect, $inspect: true);
   }
 }

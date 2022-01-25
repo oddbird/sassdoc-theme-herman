@@ -42,8 +42,8 @@
 
   @include true.it('returns quoted color strings') {
     $hex: #333;
-    $rgba: rgba(0, 255, 130, 0.75);
-    $hsla: hsla(120, 50%, 80%, 0.75);
+    $rgba: rgba(0, 255, 130, 75%);
+    $hsla: hsla(120deg, 50%, 80%, 75%);
 
     @each $color in ($hex, $rgba, $hsla) {
       @include true.assert-equal(encode($color), '"#{$color}"');

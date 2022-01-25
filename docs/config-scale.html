@@ -1664,7 +1664,7 @@ to use directly in component<span class="widont">&nbsp;</span>styles.</p>
       <pre class="hljs-pre"><code class="lang-scss">$spacing-sizes: (
   &#39;rhythm&#39;: 1rem
     (
-      &#39;line-height&#39;: 1,
+      &#39;scale&#39;: &#39;line-height&#39; 1,
     ),
   &#39;gutter&#39;: &#39;#rhythm&#39;,
   &#39;gutter-plus&#39;: &#39;#gutter&#39;
@@ -1675,14 +1675,12 @@ to use directly in component<span class="widont">&nbsp;</span>styles.</p>
     (
       &#39;times&#39;: 2,
     ),
-  &#39;flex-gutter&#39;: &#39;calc(#shim + 2.5vw)&#39;,
-  &#39;spacer&#39;: &#39;calc(%s + 2.5vw)&#39;
+  &#39;triple-gutter&#39;: &#39;#gutter&#39;
     (
-      &#39;%s&#39;: &#39;#gutter&#39;
-        (
-          &#39;times&#39;: 3,
-        ),
+      &#39;times&#39;: 3,
     ),
+  &#39;flex-gutter&#39;: &#39;calc(#shim + 2.5vw)&#39;,
+  &#39;spacer&#39;: &#39;calc(#triple-gutter + 2.5vw)&#39;,
   &#39;gutter-minus&#39;: &#39;#gutter&#39;
     (
       &#39;minus&#39;: &#39;#half-shim&#39;,
@@ -1896,6 +1894,37 @@ and provide site<span class="widont">&nbsp;</span>hierarchy.</p>
       &lt;div data-herman-size=&quot;overflow&quot;&gt;
       
         &lt;div data-herman-viz=&quot;bar&quot; style=&quot;width: 2.8rem;&quot;&gt;
+          &amp;nbsp;
+        &lt;/div&gt;
+      
+      &lt;/div&gt;
+    &lt;/td&gt;
+  
+
+    
+  &lt;/tr&gt;
+
+  
+
+      
+        
+          
+  &lt;tr data-herman-size=&quot;row&quot;&gt;
+    &lt;td data-herman-cell=&quot;name&quot; data-herman-label&gt;
+      triple-gutter
+    &lt;/td&gt;
+    &lt;td data-herman-cell=&quot;value&quot; data-herman-label&gt;
+      &lt;code data-herman-code&gt;
+        4.2rem
+      &lt;/code&gt;
+    &lt;/td&gt;
+    
+      
+  
+    &lt;td aria-hidden data-herman-cell=&quot;viz&quot; &gt;
+      &lt;div data-herman-size=&quot;overflow&quot;&gt;
+      
+        &lt;div data-herman-viz=&quot;bar&quot; style=&quot;width: 4.2rem;&quot;&gt;
           &amp;nbsp;
         &lt;/div&gt;
       

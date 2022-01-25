@@ -23,6 +23,7 @@
 [data-region='banner'] {
   @include config.banner-arrow;
   @include tools.z-index('banner');
+
   align-items: center;
   display: flex;
   padding: tools.size('shim');
@@ -73,6 +74,7 @@
 ///   <span class="project-version">1.0.0</span>
 .project-version {
   @include tools.font-family('sans');
+
   color: tools.color('text-light');
   font-size: tools.size('h3');
 }

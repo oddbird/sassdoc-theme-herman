@@ -33,8 +33,8 @@
 ///
 /// @group demo_colors
 
-$brand-blue: hsl(195, 85%, 35%);
-$brand-pink: hsl(330, 85%, 48%);
+$brand-blue: hsl(195deg, 85%, 35%);
+$brand-pink: hsl(330deg, 85%, 48%);
 
 /// ## Preview color maps as palettes
 ///
@@ -184,8 +184,9 @@ $demo-noncolors: (
 /// In order to export real color data to Herman,
 /// we want to run every value in our map
 /// through the color function before exporting.
-/// `add` accepts additional arguments at the end,
-/// for passing each map-value through a function.
+/// While Accoutrement has that functionality built in,
+/// you can also use the `each-key` or `each-value` utilities
+/// to pass each map key or value through a given function.
 /// Provide a function name (Sass 3.4-),
 /// or first-class function (Sass 3.5+)
 /// along with any additional arguments required for that function.
@@ -202,9 +203,13 @@ $demo-noncolors: (
 ///     'black': '#brand-blue' ('shade': 30%, 'desaturate': 80%),
 ///   );
 ///
+///   $compiled: utilities.each-key(
+///     $demo-noncolors,
+///     meta.get-function('color', $module: 'tools'),
+///   );
+///
 ///   @include utilities.add(
-///     'colors', 'demo-noncolors', $demo-noncolors,
-///     meta.get-function('color', $module: 'tools') // function
+///     'colors', 'demo-noncolors', $compiled,
 ///   );
 ///
 ///   @each $key, $value in utilities.$herman {
@@ -215,6 +220,8 @@ $demo-noncolors: (
 @include utilities.add(
   'colors',
   'demo-noncolors',
-  $demo-noncolors,
-  meta.get-function('color', $module: 'tools')
+  utilities.each-key(
+    $demo-noncolors,
+    meta.get-function('color', $module: 'tools')
+  )
 );

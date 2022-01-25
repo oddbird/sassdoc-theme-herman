@@ -1080,7 +1080,7 @@ describe('example annotation', () => {
       const env = extend(true, {}, this.env, {
         herman: {
           sass: {
-            includes: ['~accoutrement/sass/core/parser', 'import'],
+            includes: ['~accoutrement/sass/color', 'import'],
             includePaths: [path.join(__dirname, 'fixtures', 'scss')],
           },
         },
@@ -1113,7 +1113,7 @@ describe('example annotation', () => {
         herman: {
           sass: {
             use: [
-              '~accoutrement/sass/core/parser',
+              '~accoutrement/sass/color',
               'import',
               { file: 'tools', namespace: 'my-tools' },
               {},

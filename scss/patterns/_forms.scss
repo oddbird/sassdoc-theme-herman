@@ -4,11 +4,12 @@
 @use '~accoutrement/sass/tools';
 
 ::placeholder {
-  color: currentColor;
+  color: currentcolor;
   opacity: 0.5;
 }
 
 input {
+  background: none;
   border: 1px solid tools.color('border-light');
   color: inherit;
   font-size: tools.size('search');
@@ -17,7 +18,7 @@ input {
   width: 100%;
 
   &:focus {
-    border-color: currentColor;
+    border-color: currentcolor;
     outline: 0;
   }
 }

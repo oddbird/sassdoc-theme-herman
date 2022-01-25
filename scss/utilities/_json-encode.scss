@@ -1,3 +1,6 @@
+@use 'sass:meta';
+@use 'sass:string';
+
 // Json Encoding
 // =============
 
@@ -10,7 +13,7 @@
 /// @param {*} $value [$herman] -
 ///   Data to be encoded for JSON exporting
 @function encode($value) {
-  $type: type-of($value);
+  $type: meta.type-of($value);
 
   @if ($type == 'bool') {
     @return $value;
@@ -113,16 +116,15 @@
   $return: $string;
   $old: '"';
   $new: '\\"';
-  $i: str-index($string, $old);
-  $n: str-length($old);
+  $i: string.index($string, $old);
+  $n: string.length($old);
 
   @if ($string == $old) {
     $return: $new;
   } @else if $i {
-    $a: if($i > 1, str-slice($string, 1, $i - 1), '');
-    $z: str-slice($string, $i + $n);
+    $a: if($i > 1, string.slice($string, 1, $i - 1), '');
+    $z: string.slice($string, $i + $n);
     $z: escape-quotes($z);
-
     $return: $a + if($new, $new, '') + $z;
   }
 
@@ -142,16 +144,15 @@
   $return: $string;
   $old: '\\';
   $new: '\\\\';
-  $i: str-index($string, $old);
-  $n: str-length($old);
+  $i: string.index($string, $old);
+  $n: string.length($old);
 
   @if ($string == $old) {
     $return: $new;
   } @else if $i {
-    $a: if($i > 1, str-slice($string, 1, $i - 1), '');
-    $z: str-slice($string, $i + $n);
+    $a: if($i > 1, string.slice($string, 1, $i - 1), '');
+    $z: string.slice($string, $i + $n);
     $z: escape-backslashes($z);
-
     $return: $a + if($new, $new, '') + $z;
   }
 
