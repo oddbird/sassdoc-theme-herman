@@ -22,6 +22,8 @@
 /// @group style-typography
 * {
   border: solid 0 currentcolor;
+  font-size: inherit;
+  line-height: inherit;
   margin: 0;
   padding: 0;
 }
@@ -34,7 +36,7 @@
 
   font-size: tools.size('root');
   font-size: tools.size('responsive');
-  line-height: tools.ratio('herman');
+  line-height: tools.ratio('line-height');
 }
 
 // Hidden

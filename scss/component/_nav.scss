@@ -48,8 +48,9 @@
 /// @group component-nav
 .nav-title {
   border-top: 1px solid;
+  font-size: inherit;
   font-weight: bold;
-  margin: tools.size('double-gutter') 0 tools.size('gutter');
+  margin: tools.size('gutter-plus') 0 tools.size('shim');
   padding-top: tools.size('quarter-shim');
 }
 

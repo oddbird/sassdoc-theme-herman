@@ -10,7 +10,7 @@
   margin: 0 0 tools.size('shim');
 
   @include tools.above('page-break') {
-    margin-bottom: tools.size('gutter');
+    margin-bottom: 0;
   }
 }
 
