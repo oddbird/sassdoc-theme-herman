@@ -1072,7 +1072,7 @@ describe('example annotation', () => {
           example: [
             {
               type: 'scss',
-              code: '/* just a placeholder */',
+              code: 'body { @include color; }',
             },
           ],
         },
@@ -1080,7 +1080,7 @@ describe('example annotation', () => {
       const env = extend(true, {}, this.env, {
         herman: {
           sass: {
-            includes: ['~accoutrement/sass/color', 'import'],
+            includes: ['~accoutrement/sass/color', 'import', 'tools'],
             includePaths: [path.join(__dirname, 'fixtures', 'scss')],
           },
         },
@@ -1091,7 +1091,7 @@ describe('example annotation', () => {
         .then(() => {
           assert.strictEqual(
             data[0].example[0].rendered,
-            `body {\n  border: 1px;\n}\n\n${data[0].example[0].code}`,
+            `body {\n  border: 1px;\n}\n\nbody {\n  color: red;\n}`,
           );
           done();
         })
