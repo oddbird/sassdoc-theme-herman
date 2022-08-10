@@ -15,6 +15,7 @@
   - 🚀 NEW: `utilities.each-key()` will pass each _key_ of a map
     through a given function
 - 🚀 NEW: Allow `utilities.add()` to merge data, instead of override
+- 🚀 NEW: Include source-maps with JS & CSS assets
 - 🏠 INTERNAL: Upgrade dependencies
 
 ## 4.0.2: 2021-05-07

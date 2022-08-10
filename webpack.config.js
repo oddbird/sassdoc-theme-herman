@@ -203,5 +203,5 @@ module.exports = {
       },
     ],
   },
-  devtool: false,
+  devtool: 'source-map',
 };
