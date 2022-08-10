@@ -17,6 +17,8 @@
 - 🚀 NEW: Allow `utilities.add()` to merge data, instead of override
 - 🚀 NEW: Font-map variant keys can be comma-separated --
   [#338](https://github.com/oddbird/sassdoc-theme-herman/issues/338)
+- 🚀 NEW: Add support for non-standard CSS font-weight names --
+  [#250](https://github.com/oddbird/sassdoc-theme-herman/issues/250)
 - 🏠 INTERNAL: Upgrade dependencies
 
 ## 4.0.2: 2021-05-07
