@@ -15,6 +15,8 @@
   - 🚀 NEW: `utilities.each-key()` will pass each _key_ of a map
     through a given function
 - 🚀 NEW: Allow `utilities.add()` to merge data, instead of override
+- 🚀 NEW: Font-map variant keys can be comma-separated --
+  [#338](https://github.com/oddbird/sassdoc-theme-herman/issues/338)
 - 🏠 INTERNAL: Upgrade dependencies
 
 ## 4.0.2: 2021-05-07
