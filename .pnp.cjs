@@ -3570,10 +3570,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@types/semver", [\
-        ["npm:7.3.10", {\
-          "packageLocation": "./.yarn/cache/@types-semver-npm-7.3.10-bcda8eb925-7047c2822b.zip/node_modules/@types/semver/",\
+        ["npm:7.3.11", {\
+          "packageLocation": "./.yarn/cache/@types-semver-npm-7.3.11-ddb1803b31-20c3fcc624.zip/node_modules/@types/semver/",\
           "packageDependencies": [\
-            ["@types/semver", "npm:7.3.10"]\
+            ["@types/semver", "npm:7.3.11"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -4042,7 +4042,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["@yarnpkg/core", "npm:4.0.0-rc.14"],\
             ["@arcanis/slice-ansi", "npm:1.1.1"],\
-            ["@types/semver", "npm:7.3.10"],\
+            ["@types/semver", "npm:7.3.11"],\
             ["@types/treeify", "npm:1.0.0"],\
             ["@yarnpkg/fslib", "npm:3.0.0-rc.14"],\
             ["@yarnpkg/libzip", "npm:3.0.0-rc.14"],\
