@@ -28,6 +28,9 @@
 /// @see export
 ///
 /// @example scss
+///   // Import the `utilities` module (if you haven't already):
+///   // e.g. @use '~/sassdoc-theme-herman/scss/utilities';
+///
 ///   utilities.$herman: (
 ///     'colors': (
 ///       'brand-colors': (
@@ -160,6 +163,9 @@
 /// @group api_json-export
 ///
 /// @example scss - sample map structure
+///   // Import the `utilities` module (if you haven't already):
+///   // e.g. @use '~/sassdoc-theme-herman/scss/utilities';
+///
 ///   utilities.$herman: (
 ///     'colors': (
 ///       'brand-colors': (

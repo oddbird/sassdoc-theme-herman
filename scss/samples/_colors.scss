@@ -193,8 +193,10 @@ $demo-noncolors: (
 ///
 /// @colors demo-noncolors
 /// @example scss
-///   @use '~accoutrement/sass/tools';
 ///   @use 'sass:meta';
+///   @use '~accoutrement/sass/tools';
+///   // Import the `utilities` module (if you haven't already):
+///   // e.g. @use '~/sassdoc-theme-herman/scss/utilities';
 ///
 ///   utilities.$herman: ();
 ///   $demo-noncolors: (

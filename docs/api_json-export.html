@@ -382,7 +382,10 @@ to your exported Sass<span class="widont">&nbsp;</span>data.</p>
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">utilities.$herman: (
+      <pre class="hljs-pre"><code class="lang-scss">// Import the `utilities` module (if you haven&#39;t already):
+// e.g. @use &#39;~/sassdoc-theme-herman/scss/utilities&#39;;
+
+utilities.$herman: (
   &#39;colors&#39;: (
     &#39;brand-colors&#39;: (
       &#39;brand-orange&#39;: #c75000,
@@ -736,7 +739,10 @@ per format (e.g. <code>ttf</code>, <code>otf</code>, <code>woff2</code>, etc.)</
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">utilities.$herman: (
+      <pre class="hljs-pre"><code class="lang-scss">// Import the `utilities` module (if you haven&#39;t already):
+// e.g. @use &#39;~/sassdoc-theme-herman/scss/utilities&#39;;
+
+utilities.$herman: (
   &#39;colors&#39;: (
     &#39;brand-colors&#39;: (
       &#39;brand-orange&#39;: &#39;#c75000&#39;,
@@ -1470,8 +1476,10 @@ and any additional arguments for the<span class="widont">&nbsp;</span>function</
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">@use &#39;~accoutrement/sass/tools&#39;;
-@use &#39;sass:meta&#39;;
+      <pre class="hljs-pre"><code class="lang-scss">@use &#39;sass:meta&#39;;
+@use &#39;~accoutrement/sass/tools&#39;;
+// Import the `utilities` module (if you haven&#39;t already):
+// e.g. @use &#39;~/sassdoc-theme-herman/scss/utilities&#39;;
 
 utilities.$herman: ();
 $brand-colors: (
