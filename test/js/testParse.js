@@ -69,6 +69,40 @@ describe('parse', () => {
 
       assert.deepStrictEqual(actual, expected);
     });
+
+    it('accepts comma-separated variants', () => {
+      const font = {
+        variants: ['bold, italic'],
+      };
+      const data = {
+        formats: 'woff',
+        'bold, italic': {
+          path: 'font/path',
+          svgid: 'svgid',
+        },
+      };
+      const actual = parse.font(font, data);
+      const expected = [
+        {
+          variant: 'bold, italic',
+          isLocal: true,
+          hasEmbedded: false,
+          family: undefined,
+          formats: {
+            woff: {
+              src: path.normalize('font/path.woff'),
+              dest: 'assets/fonts/font/path.woff',
+            },
+          },
+          style: 'italic',
+          svgid: 'svgid',
+          weight: 'bold',
+          local: undefined,
+        },
+      ];
+
+      assert.deepStrictEqual(actual, expected);
+    });
   });
 
   describe('customCSS', () => {
