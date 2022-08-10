@@ -2,7 +2,7 @@
 
 ## UNRELEASED
 
-- 💥 BREAKING: Drop support for Node < 12
+- 💥 BREAKING: Drop support for Node < 14
 - 💥 BREAKING: `utilities.add()`
   no longer supports map-compilation functions and arguments,
   since there are two reasonable approaches.

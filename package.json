@@ -29,7 +29,7 @@
     "CHANGELOG.md"
   ],
   "engines": {
-    "node": ">=12"
+    "node": ">=14"
   },
   "scripts": {
     "build": "run-s build:sprites build:webpack",
