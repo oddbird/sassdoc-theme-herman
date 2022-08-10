@@ -1091,7 +1091,7 @@ describe('example annotation', () => {
         .then(() => {
           assert.strictEqual(
             data[0].example[0].rendered,
-            `body {\n  border: 1px;\n}\n\n${data[0].example[0].code}`,
+            `body {\n  border: 1px;\n} ${data[0].example[0].code}`,
           );
           done();
         })
