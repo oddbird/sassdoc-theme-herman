@@ -6583,6 +6583,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"highlight.js@npm:^11.6.0":
+  version: 11.6.0
+  resolution: "highlight.js@npm:11.6.0"
+  checksum: 3908eb34a4b442ca1e20c1ae6415ea935fbbcdb2b532a89948d82b0fa4ad41fc5de3802a0de4e88a0bcb7d97d4445579048cd2aab1d105ac47f59dd58a9a98ae
+  languageName: node
+  linkType: hard
+
 "hosted-git-info@npm:^2.1.4":
   version: 2.8.9
   resolution: "hosted-git-info@npm:2.8.9"
@@ -11613,6 +11620,7 @@ __metadata:
     extend: ^3.0.2
     gulp-rename: ^2.0.0
     gulp-svg-symbols: ^3.2.3
+    highlight.js: ^11.6.0
     html: ^1.0.0
     husky: ^8.0.1
     jest: ^28.1.3

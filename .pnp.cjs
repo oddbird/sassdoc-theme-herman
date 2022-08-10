@@ -62,6 +62,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["extend", "npm:3.0.2"],\
             ["gulp-rename", "npm:2.0.0"],\
             ["gulp-svg-symbols", "npm:3.2.3"],\
+            ["highlight.js", "npm:11.6.0"],\
             ["html", "npm:1.0.0"],\
             ["husky", "npm:8.0.1"],\
             ["jest", "virtual:878b150fb95c14b92e1a083a8cdd5b07d75bde54934ebaf95859474dcc5db3d63d39a688ccdf72c7af702ac8d88c00a5b7e8d26a82dab7e202b18226de2a7429#npm:28.1.3"],\
@@ -9138,6 +9139,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["highlight.js", [\
+        ["npm:11.6.0", {\
+          "packageLocation": "./.yarn/cache/highlight.js-npm-11.6.0-ea3d017805-3908eb34a4.zip/node_modules/highlight.js/",\
+          "packageDependencies": [\
+            ["highlight.js", "npm:11.6.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["hosted-git-info", [\
         ["npm:2.8.9", {\
           "packageLocation": "./.yarn/cache/hosted-git-info-npm-2.8.9-62c44fa93f-c955394bda.zip/node_modules/hosted-git-info/",\
@@ -15238,6 +15248,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["extend", "npm:3.0.2"],\
             ["gulp-rename", "npm:2.0.0"],\
             ["gulp-svg-symbols", "npm:3.2.3"],\
+            ["highlight.js", "npm:11.6.0"],\
             ["html", "npm:1.0.0"],\
             ["husky", "npm:8.0.1"],\
             ["jest", "virtual:878b150fb95c14b92e1a083a8cdd5b07d75bde54934ebaf95859474dcc5db3d63d39a688ccdf72c7af702ac8d88c00a5b7e8d26a82dab7e202b18226de2a7429#npm:28.1.3"],\
