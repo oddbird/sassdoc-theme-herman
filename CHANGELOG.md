@@ -17,6 +17,8 @@
 - 🚀 NEW: Allow `utilities.add()` to merge data, instead of override
 - 🚀 NEW: Include source-maps with JS & CSS assets
 - 🏠 INTERNAL: Upgrade dependencies
+- 🏠 INTERNAL: Remove documentation static-site from repository
+- 🏠 INTERNAL: Limit size of NPM package
 
 ## 4.0.2: 2021-05-07
 

@@ -11,8 +11,8 @@
 .npm
 .nyc_output/
 .sass-cache/
-docs/assets/
-docs/search-data.json
+dist/
+docs/
 coverage/
 node_modules/
 npm-debug.log*

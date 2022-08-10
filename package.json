@@ -9,8 +9,24 @@
     "type": "git",
     "url": "https://github.com/oddbird/sassdoc-theme-herman.git"
   },
+  "bugs": {
+    "url": "https://github.com/oddbird/sassdoc-theme-herman/issues"
+  },
   "keywords": [
     "sassdoc-theme"
+  ],
+  "files": [
+    "index.js",
+    "docs/",
+    "dist/",
+    "!dist/webpack/app_styles.min.js",
+    "!dist/webpack/iframe_styles.min.js",
+    "!dist/webpack/styleguide_json*",
+    "lib/",
+    "templates/",
+    "scss/utilities/",
+    "scss/_utilities.scss",
+    "CHANGELOG.md"
   ],
   "engines": {
     "node": ">=12"
@@ -40,7 +56,8 @@
     "test:sass": "mocha -R dot test/sass/test_sass.js",
     "postinstall": "husky install",
     "prepublishOnly": "pinst --disable",
-    "postpublish": "pinst --enable"
+    "postpublish": "pinst --enable",
+    "prepack": "yarn build"
   },
   "dependencies": {
     "bluebird": "^3.7.2",
