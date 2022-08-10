@@ -16,6 +16,7 @@
     through a given function
 - 🚀 NEW: Allow `utilities.add()` to merge data, instead of override
 - 🏠 INTERNAL: Upgrade dependencies
+- 📝 DOCS: Add samples for `@use '~/sassdoc-theme-herman/scss/utilities';`
 
 ## 4.0.2: 2021-05-07
 
