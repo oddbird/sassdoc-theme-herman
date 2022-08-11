@@ -1,6 +1,13 @@
 'use strict';
 
-const sassdocAnnotations = require('sassdoc/dist/annotation/annotations');
+const accessAnnotation =
+  require('sassdoc/dist/annotation/annotations/access').default;
+const contentAnnotation =
+  require('sassdoc/dist/annotation/annotations/content').default;
+const requireAnnotation =
+  require('sassdoc/dist/annotation/annotations/require').default;
+const throwAnnotation =
+  require('sassdoc/dist/annotation/annotations/throw').default;
 
 const colors = require('./lib/annotations/colors');
 const example = require('./lib/annotations/example');
@@ -21,7 +28,7 @@ const herman = (dest, ctx) =>
     renderHerman(dest, preparedContext),
   );
 
-let annotations = sassdocAnnotations;
+let annotations = [];
 
 // eslint-disable-next-line no-process-env
 if (!process.env.HERMAN_ENABLE_AUTOFILL) {
@@ -29,8 +36,13 @@ if (!process.env.HERMAN_ENABLE_AUTOFILL) {
   // Because Herman handles "prose" blocks differently than SassDoc,
   // autofilled annotations are often incorrect when used with Herman.
   // See: https://www.oddbird.net/herman/docs/configuration#herman_enable_autofill-environment-variable
-  annotations = sassdocAnnotations.map((a) => () => ({
-    ...a(),
+  annotations = [
+    accessAnnotation,
+    contentAnnotation,
+    requireAnnotation,
+    throwAnnotation,
+  ].map((a) => () => ({
+    ...a({ logger: console }),
     autofill: undefined,
   }));
 }
