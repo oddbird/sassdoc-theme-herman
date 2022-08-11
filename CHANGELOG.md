@@ -19,6 +19,7 @@
 - 🏠 INTERNAL: Upgrade dependencies
 - 🏠 INTERNAL: Remove documentation static-site from repository
 - 🏠 INTERNAL: Limit size of NPM package
+- 📝 DOCS: Add samples for `@use '~/sassdoc-theme-herman/scss/utilities';`
 
 ## 4.0.2: 2021-05-07
 

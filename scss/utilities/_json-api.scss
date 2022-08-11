@@ -28,6 +28,8 @@
 /// @see export
 ///
 /// @example scss
+///   @use 'utilities';
+///
 ///   utilities.$herman: (
 ///     'colors': (
 ///       'brand-colors': (
@@ -160,6 +162,8 @@
 /// @group api_json-export
 ///
 /// @example scss - sample map structure
+///   @use 'utilities';
+///
 ///   utilities.$herman: (
 ///     'colors': (
 ///       'brand-colors': (
@@ -207,6 +211,8 @@ $herman: () !default;
 ///   Map to be encoded for JSON exporting
 ///
 /// @example scss
+///   @use 'utilities';
+///
 ///   // Export to JSON
 ///   @include utilities.export;
 @mixin export($map: $herman) {
