@@ -369,6 +369,230 @@ so you can see what they look like in<span class="widont">&nbsp;</span>Herman.</
 
 
 
+<section class="item" >
+  
+    
+  
+  
+  
+  
+
+  
+    <div data-item-section="prose" class="text-block">
+      <h1 id="extra-commentary" tabindex="-1">Extra Commentary</h1>
+<p>Herman allows you to write “prose” markdown blocks,
+to help introduce groups,
+or add narrative flow between documented<span class="widont">&nbsp;</span>items.</p>
+<p>Note that while SassDoc allows annotation comments
+to be separated from the documented code by newlines,
+Herman considers documentation to be free-floating “prose” if
+it is separated from documented code by one or more<span class="widont">&nbsp;</span>newlines.</p>
+<p>This change often breaks the <code>autofill</code> functionality
+of the core SassDoc annotations, so <strong>Herman disables all
+annotation <code>autofill</code> functionality by default</strong> since v5.0.0.
+To allow autofilled annotations, set the <code>HERMAN_ENABLE_AUTOFILL</code>
+environment variable to a truthy value before running<span class="widont">&nbsp;</span>SassDoc.</p>
+<p>Prose blocks can also include examples, and other<span class="widont">&nbsp;</span>annotations.</p>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+    
+
+    <div data-item-section="examples">
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Example</span>
+      </h3>
+
+      
+        
+  
+  
+
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <div class="example">
+    <div class="example-code">
+      
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-scss">.private::after {
+  content: samples.$private;
+}</code></pre>
+    </div>
+  
+
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            css
+          </span>
+
+          
+            <span class='code-description'>
+              compiled
+            </span>
+          
+        </div>
+      
+
+      
+      
+      <pre class="hljs-pre"><code class="lang-css">.private::after {
+  content: &quot;for internal use only&quot;;
+}</code></pre>
+    </div>
+  
+
+    </div>
+
+    
+  </div>
+
+      
+    </div>
+  
+
+
+  
+
+    
+  <div data-item-section="related">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Related</span>
+        
+      </h3>
+    
+
+    
+      
+        
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <a href="http://sassdoc.com/annotations/" class="item-name">http://sassdoc.com/annotations/</a>
+      
+      
+      
+      <span class="item-note">[external]</span>
+    </h4>
+
+    
+  </div>
+
+
+      
+        
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <a href="http://sassdoc.com/configuration/#autofill" class="item-name">http://sassdoc.com/configuration/#autofill</a>
+      
+      
+      
+      <span class="item-note">[external]</span>
+    </h4>
+
+    
+  </div>
+
+
+      
+
+      
+    
+  </div>
+
+  
+  
+  
+  
+    
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
 <section class="item" id="function--herman-sample">
   
     
@@ -609,30 +833,6 @@ ferrove finis longave, pignus duros<span class="widont">&nbsp;</span>nubifer!</p
 
       
   
-    
-      
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <span class="item-name">@error</span>
-      
-      
-      
-      
-    </h4>
-
-    
-      
-      <div class="param-details text-block">
-        <p>Please provide values for all three<span class="widont">&nbsp;</span>parameters</p>
-
-      </div>
-    
-  </div>
-
-    
-  
 
     
   </div>
@@ -796,84 +996,6 @@ ferrove finis longave, pignus duros<span class="widont">&nbsp;</span>nubifer!</p
     
     
   
-    
-  <div data-item-section="used-by">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Used By</span>
-        
-      </h3>
-    
-
-    
-      
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <a href="
-  demo_test-sassdoc.html#function--sample-alias" class="item-name">sample-alias()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <a href="
-  demo_test-sassdoc.html#function--sample-alias-two" class="item-name">sample-alias-two()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-    
-  </div>
-
-  
 
   
 
@@ -1027,57 +1149,6 @@ ferrove finis longave, pignus duros<span class="widont">&nbsp;</span>nubifer!</p
   
     
     
-  <div data-item-section="requires">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Requires</span>
-        
-      </h3>
-    
-
-    
-      
-      
-        
-        
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <a href="
-  demo_test-sassdoc.html#function--herman-sample" class="item-name">herman-sample()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-    
-  </div>
-
-  
-    
   
 
   
@@ -1198,256 +1269,6 @@ ferrove finis longave, pignus duros<span class="widont">&nbsp;</span>nubifer!</p
   
   
 
-
-  
-  
-  
-  
-    
-    
-  <div data-item-section="requires">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Requires</span>
-        
-      </h3>
-    
-
-    
-      
-      
-        
-        
-        
-
-        
-          
-          
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      <span class="item-type">@function</span>
-      
-        <a href="
-  demo_test-sassdoc.html#function--herman-sample" class="item-name">herman-sample()</a>
-      
-      
-      
-      
-    </h4>
-
-    
-  </div>
-
-
-        
-      
-    
-  </div>
-
-  
-    
-  
-
-  
-
-  
-  
-
-
-  
-  
-
-  
-  
-
-</section>
-
-  
-    
-    
-
-
-
-
-
-
-
-
-
-
-<section class="item" >
-  
-    
-  
-  
-  
-  
-
-  
-    <div data-item-section="prose" class="text-block">
-      <h1 id="extra-commentary" tabindex="-1">Extra Commentary</h1>
-<p>Herman allows you to write “prose” markdown blocks,
-to help introduce groups,
-or add narrative flow between documented<span class="widont">&nbsp;</span>items.</p>
-<p>Note that while SassDoc allows annotation comments
-to be separated from the documented code by newlines,
-Herman considers documentation to be free-floating “prose” if
-it is separated from documented code by one or more<span class="widont">&nbsp;</span>newlines.</p>
-<p>Prose blocks can also include examples, and other<span class="widont">&nbsp;</span>annotations.</p>
-
-      
-  
-
-      
-  
-
-      
-  
-
-    </div>
-  
-
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-
-  
-  
-    
-
-    <div data-item-section="examples">
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Example</span>
-      </h3>
-
-      
-        
-  
-  
-
-  
-  
-  
-
-  
-  
-
-  
-  
-
-  
-  <div class="example">
-    <div class="example-code">
-      
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            scss
-          </span>
-
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-scss">.private::after {
-  content: samples.$private;
-}</code></pre>
-    </div>
-  
-
-  
-    <div class="code-block">
-      
-        <div class="code-header">
-          <span class="code-language">
-            css
-          </span>
-
-          
-            <span class='code-description'>
-              compiled
-            </span>
-          
-        </div>
-      
-
-      
-      
-      <pre class="hljs-pre"><code class="lang-css">.private::after {
-  content: &quot;for internal use only&quot;;
-}</code></pre>
-    </div>
-  
-
-    </div>
-
-    
-  </div>
-
-      
-    </div>
-  
-
-
-  
-
-    
-  <div data-item-section="related">
-    
-      <h3 class="item-subtitle">
-        <span class="item-subtitle-main">Related</span>
-        
-      </h3>
-    
-
-    
-      
-        
-  
-
-  
-  <div class="param-list">
-    <h4 class="param-title">
-      
-      
-        <a href="http://sassdoc.com/annotations/" class="item-name">http://sassdoc.com/annotations/</a>
-      
-      
-      
-      <span class="item-note">[external]</span>
-    </h4>
-
-    
-  </div>
-
-
-      
-
-      
-    
-  </div>
 
   
   

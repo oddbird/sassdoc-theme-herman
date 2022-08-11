@@ -7,7 +7,32 @@
 /// [SassDoc annotations](http://sassdoc.com/annotations/).
 /// This page includes samples of every core annotation type,
 /// so you can see what they look like in Herman.
+/// @group demo_test-sassdoc
+
+/// Extra Commentary
+/// ================
+/// Herman allows you to write "prose" markdown blocks,
+/// to help introduce groups,
+/// or add narrative flow between documented items.
 ///
+/// Note that while SassDoc allows annotation comments
+/// to be separated from the documented code by newlines,
+/// Herman considers documentation to be free-floating "prose" if
+/// it is separated from documented code by one or more newlines.
+///
+/// This change often breaks the `autofill` functionality
+/// of the core SassDoc annotations, so **Herman disables all
+/// annotation `autofill` functionality by default** since v5.0.0.
+/// To allow autofilled annotations, set the `HERMAN_ENABLE_AUTOFILL`
+/// environment variable to a truthy value before running SassDoc.
+///
+/// Prose blocks can also include examples, and other annotations.
+/// @example scss
+///   .private::after {
+///     content: samples.$private;
+///   }
+/// @link http://sassdoc.com/annotations/
+/// @link http://sassdoc.com/configuration/#autofill
 /// @group demo_test-sassdoc
 
 // Herman Sample
@@ -72,25 +97,6 @@
 @function sample-alias-two($one, $two: $one, $three: 'three') {
   @return herman-sample($one, $two, $three);
 }
-
-/// Extra Commentary
-/// ================
-/// Herman allows you to write "prose" markdown blocks,
-/// to help introduce groups,
-/// or add narrative flow between documented items.
-///
-/// Note that while SassDoc allows annotation comments
-/// to be separated from the documented code by newlines,
-/// Herman considers documentation to be free-floating "prose" if
-/// it is separated from documented code by one or more newlines.
-///
-/// Prose blocks can also include examples, and other annotations.
-/// @example scss
-///   .private::after {
-///     content: samples.$private;
-///   }
-/// @link http://sassdoc.com/annotations/
-/// @group demo_test-sassdoc
 
 // Mixin with Content
 // ------------------
