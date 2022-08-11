@@ -7,7 +7,6 @@
 .vscode/
 .yarn/
 .yarnrc.yml
-assets/js/vendor/
 coverage/
 dist/
 docs/

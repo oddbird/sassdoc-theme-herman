@@ -2,7 +2,7 @@
 
 ## UNRELEASED
 
-- 💥 BREAKING: Drop support for Node < 12
+- 💥 BREAKING: Drop support for Node < 14
 - 💥 BREAKING: `utilities.add()`
   no longer supports map-compilation functions and arguments,
   since there are two reasonable approaches.
@@ -19,7 +19,11 @@
   [#338](https://github.com/oddbird/sassdoc-theme-herman/issues/338)
 - 🚀 NEW: Add support for non-standard CSS font-weight names --
   [#250](https://github.com/oddbird/sassdoc-theme-herman/issues/250)
+- 🏠 INTERNAL: Include source-maps with Herman JS & CSS assets
 - 🏠 INTERNAL: Upgrade dependencies
+- 🏠 INTERNAL: Remove documentation static-site from repository
+- 🏠 INTERNAL: Limit size of NPM package
+- 📝 DOCS: Add samples for `@use '~/sassdoc-theme-herman/scss/utilities';`
 
 ## 4.0.2: 2021-05-07
 

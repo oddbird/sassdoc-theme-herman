@@ -26,7 +26,8 @@
     ".pnp.js": true,
     ".vscode": true,
     ".yarn": true,
-    "src/docs": true,
+    "dist": true,
+    "docs": true,
     "yarn.lock": true,
     "**/.yarn": true,
     "**/.pnp.*": true
