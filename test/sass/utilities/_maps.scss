@@ -87,16 +87,28 @@ $sizes-compiled: (
   }
 
   @include true.it('adds to existing data of the type') {
-    @include add('colors', 'darken', $darken);
-
     $existing: map.get($herman, 'colors');
     $new: (
-      'compiled': $colors-compiled,
+      'darken': $darken,
     );
     $expect: (
       'colors': map.merge($existing, $new),
     );
 
+    @include add('colors', 'darken', $darken);
+    @include true.assert-equal($herman, $expect);
+  }
+
+  @include true.it('fixes pluralization mistakes with known data types') {
+    $existing: map.get($herman, 'colors');
+    $new: (
+      'darken-2': $darken,
+    );
+    $expect: (
+      'colors': map.merge($existing, $new),
+    );
+
+    @include add('color', 'darken-2', $darken);
     @include true.assert-equal($herman, $expect);
   }
 }
