@@ -8,6 +8,7 @@
 /// This page includes samples of every core annotation type,
 /// so you can see what they look like in Herman.
 /// @group demo_test-sassdoc
+/// @link http://sassdoc.com/annotations/
 
 /// Extra Commentary
 /// ================
@@ -26,12 +27,19 @@
 /// To allow autofilled annotations, set the `HERMAN_ENABLE_AUTOFILL`
 /// environment variable to any value before running SassDoc.
 ///
-/// Prose blocks can also include examples, and other annotations.
+/// Prose blocks can also include examples, and other annotations:
+/// ```
+/// /// Prose blocks can also include examples, and other annotations:
+/// /// @example scss
+/// ///   .private::after {
+/// ///     content: samples.$private;
+/// ///   }
+/// /// @link http://sassdoc.com/configuration/#autofill
+/// ```
 /// @example scss
 ///   .private::after {
 ///     content: samples.$private;
 ///   }
-/// @link http://sassdoc.com/annotations/
 /// @link http://sassdoc.com/configuration/#autofill
 /// @group demo_test-sassdoc
 
