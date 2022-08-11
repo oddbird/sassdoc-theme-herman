@@ -42,7 +42,7 @@ const sassDocOpts = {
         path.join(__dirname, 'scss'),
         path.join(__dirname, 'node_modules'),
       ],
-      use: ['utilities', 'config', 'samples'],
+      use: ['config', 'samples'],
     },
   },
   display: {
@@ -163,7 +163,7 @@ module.exports = {
     rules: [
       {
         test: /(assets\/js\/.*\.js$|test\/clientjs\/.*\.js$)/,
-        exclude: /(node_modules|vendor)/,
+        exclude: /node_modules/,
         use: ['babel-loader'],
       },
       {
@@ -203,5 +203,5 @@ module.exports = {
       },
     ],
   },
-  devtool: false,
+  devtool: 'source-map',
 };

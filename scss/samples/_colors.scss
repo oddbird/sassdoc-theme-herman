@@ -193,8 +193,9 @@ $demo-noncolors: (
 ///
 /// @colors demo-noncolors
 /// @example scss
-///   @use '~accoutrement/sass/tools';
 ///   @use 'sass:meta';
+///   @use '~accoutrement/sass/tools';
+///   @use 'utilities';
 ///
 ///   utilities.$herman: ();
 ///   $demo-noncolors: (

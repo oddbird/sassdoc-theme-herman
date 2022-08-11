@@ -11,16 +11,12 @@
 .npm
 .nyc_output/
 .sass-cache/
-docs/assets/
-docs/search-data.json
+dist/webpack/
+docs/
 coverage/
 node_modules/
 npm-debug.log*
 test/js/dest/
-
-dist/webpack/app_styles.min.js
-dist/webpack/iframe_styles.min.js
-dist/webpack/styleguide_json*
 
 !.vscode/
 

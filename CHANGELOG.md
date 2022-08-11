@@ -6,7 +6,7 @@
   This can be reverted by setting the `HERMAN_ENABLE_AUTOFILL`
   environment variable to any value
   (e.g. `HERMAN_ENABLE_AUTOFILL=1 sassdoc`).
-- 💥 BREAKING: Drop support for Node < 12
+- 💥 BREAKING: Drop support for Node < 14
 - 💥 BREAKING: `utilities.add()`
   no longer supports map-compilation functions and arguments,
   since there are two reasonable approaches.
@@ -19,7 +19,11 @@
   - 🚀 NEW: `utilities.each-key()` will pass each _key_ of a map
     through a given function
 - 🚀 NEW: Allow `utilities.add()` to merge data, instead of override
+- 🏠 INTERNAL: Include source-maps with Herman JS & CSS assets
 - 🏠 INTERNAL: Upgrade dependencies
+- 🏠 INTERNAL: Remove documentation static-site from repository
+- 🏠 INTERNAL: Limit size of NPM package
+- 📝 DOCS: Add samples for `@use '~/sassdoc-theme-herman/scss/utilities';`
 
 ## 4.0.2: 2021-05-07
 
