@@ -38,7 +38,7 @@ This change often breaks the [autofill functionality]
 of the core SassDoc annotations, so **Herman disables all
 annotation `autofill` functionality by default** since v5.0.0.
 To allow autofilled annotations, set the `HERMAN_ENABLE_AUTOFILL`
-environment variable to a truthy value before running SassDoc.
+environment variable to any value before running SassDoc.
 
 [autofill functionality]: http://sassdoc.com/configuration/#autofill
 

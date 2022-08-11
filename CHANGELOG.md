@@ -4,7 +4,7 @@
 
 - 💥 BREAKING: Disable all `autofill` annotations by default.
   This can be reverted by setting the `HERMAN_ENABLE_AUTOFILL`
-  environment variable to a truthy value
+  environment variable to any value
   (e.g. `HERMAN_ENABLE_AUTOFILL=1 sassdoc`).
 - 💥 BREAKING: Drop support for Node < 12
 - 💥 BREAKING: `utilities.add()`

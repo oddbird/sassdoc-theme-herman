@@ -39,8 +39,8 @@
     "test:js:watch": "yarn test:js:client --watchAll",
     "test:sass": "mocha -R dot test/sass/test_sass.js",
     "postinstall": "husky install",
-    "prepublishOnly": "pinst --disable",
-    "postpublish": "pinst --enable"
+    "prepack": "pinst --disable",
+    "postpack": "pinst --enable"
   },
   "dependencies": {
     "bluebird": "^3.7.2",
