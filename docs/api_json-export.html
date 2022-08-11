@@ -382,8 +382,7 @@ to your exported Sass<span class="widont">&nbsp;</span>data.</p>
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">// Import the `utilities` module (if you haven&#39;t already):
-// e.g. @use &#39;~/sassdoc-theme-herman/scss/utilities&#39;;
+      <pre class="hljs-pre"><code class="lang-scss">@use &#39;utilities&#39;;
 
 utilities.$herman: (
   &#39;colors&#39;: (
@@ -739,8 +738,7 @@ per format (e.g. <code>ttf</code>, <code>otf</code>, <code>woff2</code>, etc.)</
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">// Import the `utilities` module (if you haven&#39;t already):
-// e.g. @use &#39;~/sassdoc-theme-herman/scss/utilities&#39;;
+      <pre class="hljs-pre"><code class="lang-scss">@use &#39;utilities&#39;;
 
 utilities.$herman: (
   &#39;colors&#39;: (
@@ -1055,7 +1053,9 @@ and print to CSS output as a persistent<span class="widont">&nbsp;</span>comment
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">// Export to JSON
+      <pre class="hljs-pre"><code class="lang-scss">@use &#39;utilities&#39;;
+
+// Export to JSON
 @include utilities.export;</code></pre>
     </div>
   
@@ -1478,8 +1478,7 @@ and any additional arguments for the<span class="widont">&nbsp;</span>function</
       
       <pre class="hljs-pre"><code class="lang-scss">@use &#39;sass:meta&#39;;
 @use &#39;~accoutrement/sass/tools&#39;;
-// Import the `utilities` module (if you haven&#39;t already):
-// e.g. @use &#39;~/sassdoc-theme-herman/scss/utilities&#39;;
+@use &#39;utilities&#39;;
 
 utilities.$herman: ();
 $brand-colors: (
@@ -2190,8 +2189,9 @@ and converted to json-ready<span class="widont">&nbsp;</span>strings</p>
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">@use &#39;~accoutrement/sass/tools&#39;;
-@use &#39;sass:meta&#39;;
+      <pre class="hljs-pre"><code class="lang-scss">@use &#39;sass:meta&#39;;
+@use &#39;~accoutrement/sass/tools&#39;;
+@use &#39;utilities&#39;;
 
 $brand-colors: (
   &#39;brand-orange&#39;: hsl(24, 100%, 39%),

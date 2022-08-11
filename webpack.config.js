@@ -42,7 +42,7 @@ const sassDocOpts = {
         path.join(__dirname, 'scss'),
         path.join(__dirname, 'node_modules'),
       ],
-      use: ['utilities', 'config', 'samples'],
+      use: ['config', 'samples'],
     },
   },
   display: {
