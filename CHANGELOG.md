@@ -15,7 +15,7 @@
   - 🚀 NEW: `utilities.each-key()` will pass each _key_ of a map
     through a given function
 - 🚀 NEW: Allow `utilities.add()` to merge data, instead of override
-- 🚀 NEW: Include source-maps with JS & CSS assets
+- 🏠 INTERNAL: Include source-maps with Herman JS & CSS assets
 - 🏠 INTERNAL: Upgrade dependencies
 - 🏠 INTERNAL: Remove documentation static-site from repository
 - 🏠 INTERNAL: Limit size of NPM package
