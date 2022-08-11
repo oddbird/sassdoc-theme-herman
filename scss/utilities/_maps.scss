@@ -41,8 +41,9 @@
 /// @output
 ///   Updated `$herman` map, ready for JSON export
 /// @example scss
-///   @use '~accoutrement/sass/tools';
 ///   @use 'sass:meta';
+///   @use '~accoutrement/sass/tools';
+///   @use 'utilities';
 ///
 ///   utilities.$herman: ();
 ///   $brand-colors: (
@@ -146,8 +147,9 @@
 ///   with values compiled by a third-party function,
 ///   and converted to json-ready strings
 /// @example scss
-///   @use '~accoutrement/sass/tools';
 ///   @use 'sass:meta';
+///   @use '~accoutrement/sass/tools';
+///   @use 'utilities';
 ///
 ///   $brand-colors: (
 ///     'brand-orange': hsl(24, 100%, 39%),
