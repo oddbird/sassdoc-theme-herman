@@ -130,8 +130,12 @@
 ///   `ttf`, `otf`, `woff`, `woff2`, `svg`, `svgz`, and `eot`
 /// - `<variant>`: describe any number of relative paths to locally-hosted
 ///   font-files, or embedded `data:...` font strings
-///   per variant (e.g. `normal`, `bold italic`, etc.) --
-///   optionally, the value can also be a nested object
+///   per variant (e.g. `normal`, `bold italic`, etc.).
+///   Multi-word variants can be space-separated or comma-separated
+///   (e.g. `bold italic` or `bold, italic` or `bold,italic`),
+///   and non-standard variants are also accepted
+///   (e.g. `extra-bold`, `thin`, `light`, etc.).
+///   Optionally, the value can also be a nested object
 ///   with the following variant-specific keys:
 ///   - `path`: variant-specific relative path to locally-hosted font-files
 ///   - `local`: font name (or space-separated list of font names)

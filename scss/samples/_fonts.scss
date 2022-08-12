@@ -56,8 +56,8 @@
 ///   so it doesn't matter what key is used --
 ///   as long as the key given here matches the group-name
 ///   used when adding this data to `$herman`.
-/// - The second argument (in parentheses) is an optional list
-///   of font variants to display in the preview.
+/// - The second argument (in parentheses) is an optional comma-separated
+///   list of font variants to display in the preview.
 ///   If omitted, it defaults to any variants
 ///   included as keys in the font map itself.
 /// - The third argument (on the following line, nested with two spaces)
@@ -75,8 +75,8 @@
 /// [ac]: https://www.oddbird.net/accoutrement/
 ///
 /// @example scss
-///   // @font demo-cdn (normal, bold, bold italic)
-///   //   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" rel="stylesheet">
+///   /// @font demo-cdn (normal, bold, bold italic)
+///   ///   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" rel="stylesheet">
 ///
 /// @font (normal, bold, bold italic)
 ///   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" rel="stylesheet">
@@ -104,8 +104,8 @@ $demo-cdn: (
 ///   so it doesn't matter what key is used --
 ///   as long as the key given here matches the group-name
 ///   used when adding this data to `$herman`.
-/// - The second argument (in parentheses) is an optional list
-///   of font variants to display in the preview.
+/// - The second argument (in parentheses) is an optional comma-separated
+///   list of font variants to display in the preview.
 ///   If omitted, it defaults to all variants
 ///   included as keys in the font map itself.
 ///
