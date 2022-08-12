@@ -2,6 +2,8 @@
 
 ## UNRELEASED
 
+- 🚀 NEW: Add `customSourceMap` option (default: `customCSS` option + `.map`)
+  to allow copying source-map file along with `customCSS` file
 - 💥 BREAKING: Drop support for Node < 14
 - 💥 BREAKING: `utilities.add()`
   no longer supports map-compilation functions and arguments,

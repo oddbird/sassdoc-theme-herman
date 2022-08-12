@@ -101,6 +101,7 @@ module.exports = {
     path: outputPath,
     publicPath: '/assets/webpack/',
     filename: '[name].min.js',
+    clean: true,
   },
   resolve: {
     // where to look for "required" modules
@@ -148,6 +149,10 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: '[name].min.css',
     }),
+    new webpack.SourceMapDevToolPlugin({
+      exclude: /json/,
+      filename: '[file].map',
+    }),
     new SassDocPlugin(sassDocOpts, {
       assetPaths: [
         { entry: 'app_styles', optPath: 'herman.customCSS' },
@@ -186,10 +191,12 @@ module.exports = {
             options: {
               url: false,
               importLoaders: 2,
+              sourceMap: true,
             },
           },
           {
             loader: 'postcss-loader',
+            options: { sourceMap: true },
           },
           {
             loader: 'sass-loader',
@@ -197,11 +204,12 @@ module.exports = {
               sassOptions: {
                 quietDeps: true,
               },
+              sourceMap: true,
             },
           },
         ],
       },
     ],
   },
-  devtool: 'source-map',
+  devtool: false,
 };

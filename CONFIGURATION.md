@@ -139,6 +139,17 @@ to impact the design of those previews.
 [public-path]: https://github.com/webpack-contrib/mini-css-extract-plugin#publicpath
 [css-loader]: https://github.com/webpack-contrib/css-loader#url
 
+## customSourceMap
+
+- Type: `String` or `false`
+- Default: `customCSS + '.map'` if `customCSS` option is defined, otherwise `''`
+
+Relative path to a custom CSS source-map file,
+presumably referenced from the file specified in the `customCSS` option.
+If `customCSS` is defined, this defaults to the `customCSS` path
+with `'.map'` appended.
+To opt out of this feature, set `customSourceMap` to `false`.
+
 ## customHTML
 
 - Type: `String`

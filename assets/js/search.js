@@ -31,7 +31,7 @@ export const setSearchStore = (val) => {
 
 export const getSearchStore = () => searchStore;
 
-export const getUrlParams = () => deparam(window.location.search.substr(1));
+export const getUrlParams = () => deparam(window.location.search.substring(1));
 
 const getSearchResultsByField = (matches) => {
   const results = {

@@ -127,11 +127,62 @@ describe('renderHerman', () => {
     })
       .then((ctx) => renderHerman(this.dest, ctx))
       .then(() => access(`${this.dest}/assets/custom/main.css`))
+      .then(() => access(`${this.dest}/assets/custom/main.css.map`))
       .then(() => {
         assert.ok(true);
         done();
       })
       .catch(done);
+  });
+
+  it('handles customSourceMap option', function (done) {
+    prepareContext({
+      data: [],
+      customCSS: {
+        path: `${__dirname}/fixtures/css/main.css`,
+      },
+      herman: {
+        customSourceMap: `${__dirname}/fixtures/css/other.css.map`,
+      },
+    })
+      .then((ctx) => renderHerman(this.dest, ctx))
+      .then(() => access(`${this.dest}/assets/custom/other.css.map`))
+      .then(() => {
+        assert.ok(true);
+      })
+      .then(() => access(`${this.dest}/assets/custom/main.css.map`))
+      .then(() => {
+        // The file should not have been copied
+        assert.fail();
+        done();
+      })
+      .catch(() => {
+        assert.ok(true);
+        done();
+      });
+  });
+
+  it('handles customSourceMap: false', function (done) {
+    prepareContext({
+      data: [],
+      customCSS: {
+        path: `${__dirname}/fixtures/css/main.css`,
+      },
+      herman: {
+        customSourceMap: false,
+      },
+    })
+      .then((ctx) => renderHerman(this.dest, ctx))
+      .then(() => access(`${this.dest}/assets/custom/main.css.map`))
+      .then(() => {
+        // The file should not have been copied
+        assert.fail();
+        done();
+      })
+      .catch(() => {
+        assert.ok(true);
+        done();
+      });
   });
 
   it('handles customCSSFiles', function (done) {
