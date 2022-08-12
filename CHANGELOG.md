@@ -2,6 +2,9 @@
 
 ## UNRELEASED
 
+- 💥 BREAKING: Disable all `autofill` annotations for comments
+  that Herman treats as "prose" (i.e. separated from documented code
+  by one or more newlines).
 - 💥 BREAKING: Drop support for Node < 14
 - 💥 BREAKING: `utilities.add()`
   no longer supports map-compilation functions and arguments,

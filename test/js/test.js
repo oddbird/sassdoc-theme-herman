@@ -28,4 +28,39 @@ describe('herman', () => {
       })
       .catch(done);
   });
+
+  it('skips autofill for prose block', () => {
+    const prose = {
+      commentRange: {
+        start: 0,
+        end: 5,
+      },
+      context: {
+        name: 'Test\nItem',
+        line: {
+          start: 8,
+          end: 10,
+        },
+        code: '@content',
+      },
+    };
+    const notProse = {
+      commentRange: {
+        start: 0,
+        end: 6,
+      },
+      context: {
+        name: 'Test\nItem',
+        line: {
+          start: 8,
+          end: 10,
+        },
+        code: '@content',
+      },
+    };
+    const annotation = herman.annotations.find((a) => a().name === 'content')();
+
+    assert.ok(annotation.autofill(prose) === undefined);
+    assert.ok(annotation.autofill(notProse) !== undefined);
+  });
 });
