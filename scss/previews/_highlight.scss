@@ -1,73 +1,60 @@
-@use '../utilities';
 @use '~accoutrement/sass/tools';
 
-// Syntax Highlighting
-// ===================
-// Orginal Style from ethanschoonover.com/solarized
-// (c) Jeremy Hull <sourdrums@gmail.com>
-
-// hljs colors
-// -----------
-/// Colors for code-highlighting with hljs,
-/// based on [Solarized-Light](https://ethanschoonover.com/solarized/)
-/// & the Herman brand.
+/// ## Syntax Highlighting
+///
+/// Orginal Style from ethanschoonover.com/solarized
+/// (c) Jeremy Hull <sourdrums@gmail.com>
 /// @group style-code
-/// @colors
-$hljs-colors: (
-  'hljs-comment': #93a1a1,
-  'hljs-green': #859900,
-  'hljs-cyan': #2aa198,
-  'hljs-blue': #268bd2,
-  'hljs-yellow': #b58900,
-  'hljs-orange': #cb4b16,
-  'hljs-red': #dc322f,
-  'hljs-formula': #eee8d5,
-);
+/// @see $hljs-colors
 
-@include utilities.add('colors', 'hljs-colors', $hljs-colors);
-
+/// @group style-code
 .hljs-comment,
 .hljs-quote {
-  color: tools.color('hljs-comment', $source: $hljs-colors);
+  color: tools.color('hljs-comment');
 }
 
 // Solarized Green
+/// @group style-code
 .hljs-keyword,
 .hljs-selector-tag,
 .hljs-addition {
-  color: tools.color('hljs-green', $source: $hljs-colors);
+  color: tools.color('hljs-green');
 }
 
 // Solarized Cyan
+/// @group style-code
 .hljs-number,
 .hljs-string,
 .hljs-meta .hljs-meta-string,
 .hljs-literal,
 .hljs-doctag,
 .hljs-regexp {
-  color: tools.color('hljs-cyan', $source: $hljs-colors);
+  color: tools.color('hljs-cyan');
 }
 
 // Solarized Blue
+/// @group style-code
 .hljs-title,
 .hljs-section,
 .hljs-name,
 .hljs-selector-id,
 .hljs-selector-class {
-  color: tools.color('hljs-blue', $source: $hljs-colors);
+  color: tools.color('hljs-blue');
 }
 
 // Solarized Yellow
+/// @group style-code
 .hljs-attribute,
 .hljs-attr,
 .hljs-variable,
 .hljs-template-variable,
 .hljs-class .hljs-title,
 .hljs-type {
-  color: tools.color('hljs-yellow', $source: $hljs-colors);
+  color: tools.color('hljs-yellow');
 }
 
 // Solarized Orange
+/// @group style-code
 .hljs-symbol,
 .hljs-bullet,
 .hljs-subst,
@@ -76,23 +63,27 @@ $hljs-colors: (
 .hljs-selector-attr,
 .hljs-selector-pseudo,
 .hljs-link {
-  color: tools.color('hljs-orange', $source: $hljs-colors);
+  color: tools.color('hljs-orange');
 }
 
 // Solarized Red
+/// @group style-code
 .hljs-built_in,
 .hljs-deletion {
-  color: tools.color('hljs-red', $source: $hljs-colors);
+  color: tools.color('hljs-red');
 }
 
+/// @group style-code
 .hljs-formula {
-  background: tools.color('hljs-formula', $source: $hljs-colors);
+  background: tools.color('hljs-formula');
 }
 
+/// @group style-code
 .hljs-emphasis {
   font-style: italic;
 }
 
+/// @group style-code
 .hljs-strong {
   font-weight: bolder;
 }
