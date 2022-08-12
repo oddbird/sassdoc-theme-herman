@@ -1,6 +1,6 @@
 # Herman Changelog
 
-## UNRELEASED
+## 5.0.0-beta.0: 2022-08-12
 
 - 💥 BREAKING: Disable all `autofill` annotations for comments
   that Herman treats as "prose" (i.e. separated from documented code

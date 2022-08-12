@@ -2,7 +2,7 @@
   "name": "sassdoc-theme-herman",
   "title": "Herman",
   "description": "An Odd SassDoc theme.",
-  "version": "4.0.2",
+  "version": "5.0.0-beta.0",
   "homepage": "https://www.oddbird.net/herman/",
   "license": "MIT",
   "repository": {
@@ -134,7 +134,7 @@
     "sassdoc": "^2.7.4",
     "sinon": "^14.0.0",
     "srcdoc-polyfill": "^1.0.0",
-    "stylelint": "^14.9.1",
+    "stylelint": "^14.10.0",
     "stylelint-config-prettier": "^9.0.3",
     "stylelint-config-standard-scss": "^5.0.0",
     "stylelint-prettier": "^2.0.0",
