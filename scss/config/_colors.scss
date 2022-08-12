@@ -123,3 +123,23 @@ $theme-colors: (
 );
 
 @include abstracts.add('colors', 'theme-colors', $theme-colors);
+
+// hljs colors
+// -----------
+/// Colors for code-highlighting with hljs,
+/// based on [Solarized-Light](https://ethanschoonover.com/solarized/)
+/// & the Herman brand.
+/// @group config-colors
+/// @colors
+$hljs-colors: (
+  'hljs-comment': #93a1a1,
+  'hljs-green': #859900,
+  'hljs-cyan': #2aa198,
+  'hljs-blue': #268bd2,
+  'hljs-yellow': #b58900,
+  'hljs-orange': #cb4b16,
+  'hljs-red': #dc322f,
+  'hljs-formula': #eee8d5,
+);
+
+@include abstracts.add('colors', 'hljs-colors', $hljs-colors);

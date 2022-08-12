@@ -4,8 +4,7 @@
 // Import the utilities and data
 @use 'utilities';
 @use 'config';
-@use 'previews/highlight';
-@use 'samples' as manifest2;
+@use 'samples';
 
 // Export to JSON
 @include utilities.export;
