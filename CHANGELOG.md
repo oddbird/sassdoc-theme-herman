@@ -2,6 +2,8 @@
 
 ## UNRELEASED
 
+- 🚀 NEW: Add `customSourceMap` option (default: `customCSS` option + `.map`)
+  to allow copying source-map file along with `customCSS` file
 - 💥 BREAKING: Disable all `autofill` annotations for comments
   that Herman treats as "prose" (i.e. separated from documented code
   by one or more newlines).
