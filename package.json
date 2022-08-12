@@ -54,9 +54,9 @@
     "test:js:src:ci": "nyc mocha -R dot -R mocha-junit-reporter test/js",
     "test:js:watch": "yarn test:js:client --watchAll",
     "test:sass": "mocha -R dot test/sass/test_sass.js",
-    "postinstall": "husky install",
-    "prepack": "pinst --disable && yarn build",
-    "postpack": "pinst --enable"
+    "postinstall": "yarn husky install",
+    "prepack": "yarn pinst --disable && yarn build",
+    "postpack": "yarn pinst --enable"
   },
   "dependencies": {
     "bluebird": "^3.7.2",
