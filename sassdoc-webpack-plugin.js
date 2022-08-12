@@ -15,7 +15,7 @@ const getAsset = function (entry, ext = 'css') {
   }
   let asset;
   for (const thisPath of entry) {
-    if (thisPath.substr(0 - (ext.length + 1)) === `.${ext}`) {
+    if (thisPath.slice(0 - (ext.length + 1)) === `.${ext}`) {
       asset = thisPath;
     }
   }

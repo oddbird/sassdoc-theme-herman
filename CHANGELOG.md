@@ -2,6 +2,9 @@
 
 ## UNRELEASED
 
+- 💥 BREAKING: Disable all `autofill` annotations for comments
+  that Herman treats as "prose" (i.e. separated from documented code
+  by one or more newlines).
 - 💥 BREAKING: Drop support for Node < 14
 - 💥 BREAKING: `utilities.add()`
   no longer supports map-compilation functions and arguments,
@@ -15,6 +18,12 @@
   - 🚀 NEW: `utilities.each-key()` will pass each _key_ of a map
     through a given function
 - 🚀 NEW: Allow `utilities.add()` to merge data, instead of override
+- 🚀 NEW: Add `customSourceMap` option (default: `customCSS` option + `.map`)
+  to allow copying source-map file along with `customCSS` file
+- 🚀 NEW: Font-map variant keys can be comma-separated --
+  [#338](https://github.com/oddbird/sassdoc-theme-herman/issues/338)
+- 🚀 NEW: Add support for non-standard CSS font-weight names --
+  [#250](https://github.com/oddbird/sassdoc-theme-herman/issues/250)
 - 🏠 INTERNAL: Include source-maps with Herman JS & CSS assets
 - 🏠 INTERNAL: Upgrade dependencies
 - 🏠 INTERNAL: Remove documentation static-site from repository
