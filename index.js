@@ -1,5 +1,8 @@
 'use strict';
 
+const sassdocAnnotations = require('sassdoc/dist/annotation/annotations');
+
+const access = require('./lib/annotations/access');
 const colors = require('./lib/annotations/colors');
 const example = require('./lib/annotations/example');
 const font = require('./lib/annotations/font');
@@ -9,6 +12,7 @@ const ratios = require('./lib/annotations/ratios');
 const sizes = require('./lib/annotations/sizes');
 const prepareContext = require('./lib/prepareContext');
 const { renderHerman } = require('./lib/renderHerman');
+const { isProse } = require('./lib/utils/prose');
 
 /**
  * Actual theme function. It takes the destination directory `dest`,
@@ -19,7 +23,53 @@ const herman = (dest, ctx) =>
     renderHerman(dest, preparedContext),
   );
 
-herman.annotations = [icons, colors, sizes, ratios, font, example, name];
+// Because Herman handles "prose" blocks differently than SassDoc,
+// autofilled annotations are often incorrect when used with Herman.
+// So we iterate through the core annotations that have autofill logic,
+// and override that to abort if the item will be treated as "prose" by Herman.
+// See: https://www.oddbird.net/herman/docs/demo_test-sassdoc#extra-commentary
+const customAnnotationNames = [
+  'access',
+  'colors',
+  'example',
+  'font',
+  'icons',
+  'name',
+  'ratios',
+  'sizes',
+];
+const annotations = sassdocAnnotations
+  .filter((a) => {
+    const obj = a({ logger: console });
+    return (
+      !customAnnotationNames.includes(obj.name) &&
+      Object.prototype.hasOwnProperty.call(obj, 'autofill')
+    );
+  })
+  .map((a) => () => {
+    const obj = a({ logger: console });
+    return {
+      ...obj,
+      autofill: (item) => {
+        if (isProse(item)) {
+          return undefined;
+        }
+        return obj.autofill(item);
+      },
+    };
+  });
+
+herman.annotations = [
+  ...annotations,
+  access,
+  colors,
+  example,
+  font,
+  icons,
+  name,
+  ratios,
+  sizes,
+];
 
 // make sure sassdoc will preserve comments not attached to Sass
 herman.includeUnknownContexts = true;
