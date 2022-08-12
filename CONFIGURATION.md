@@ -27,21 +27,6 @@ sassdoc('./scss', {
 
 All relative paths are relative to the SassDoc config file or the `cwd`.
 
-## `HERMAN_ENABLE_AUTOFILL` environment variable
-
-While SassDoc allows annotation comments
-to be separated from the documented code by newlines,
-Herman considers documentation to be free-floating "prose" if
-it is separated from documented code by one or more newlines.
-
-This change often breaks the [autofill functionality]
-of the core SassDoc annotations, so **Herman disables all
-annotation `autofill` functionality by default** since v5.0.0.
-To allow autofilled annotations, set the `HERMAN_ENABLE_AUTOFILL`
-environment variable to any value before running SassDoc.
-
-[autofill functionality]: http://sassdoc.com/configuration/#autofill
-
 ## SassDoc: groups
 
 - Type: `Object`

@@ -1,5 +1,3 @@
-/* eslint-disable global-require, no-process-env */
-
 'use strict';
 
 const assert = require('assert');
@@ -7,6 +5,8 @@ const fs = require('fs');
 
 const Promise = require('bluebird');
 const del = require('del');
+
+const herman = require('../../');
 
 const access = Promise.promisify(fs.access);
 
@@ -20,11 +20,6 @@ describe('herman', () => {
   });
 
   it('renders herman', function (done) {
-    const herman = require('../../');
-    const requireAnnotation = herman.annotations.find(
-      (a) => a().name === 'require',
-    );
-    assert.strictEqual(requireAnnotation().autofill, undefined);
     herman(this.dest, { data: [] })
       .then(() => access(`${this.dest}/index.html`))
       .then(() => {
@@ -34,14 +29,38 @@ describe('herman', () => {
       .catch(done);
   });
 
-  it('can override default autofill setting', () => {
-    process.env.HERMAN_ENABLE_AUTOFILL = 1;
-    delete require.cache[require.resolve('../../')];
-    const herman = require('../../');
-    const requireAnnotation = herman.annotations.find(
-      (a) => a().name === 'require',
-    );
-    assert.strictEqual(requireAnnotation, undefined);
-    delete process.env.HERMAN_ENABLE_AUTOFILL;
+  it('skips autofill for prose block', () => {
+    const prose = {
+      commentRange: {
+        start: 0,
+        end: 5,
+      },
+      context: {
+        name: 'Test\nItem',
+        line: {
+          start: 8,
+          end: 10,
+        },
+        code: '@content',
+      },
+    };
+    const notProse = {
+      commentRange: {
+        start: 0,
+        end: 6,
+      },
+      context: {
+        name: 'Test\nItem',
+        line: {
+          start: 8,
+          end: 10,
+        },
+        code: '@content',
+      },
+    };
+    const annotation = herman.annotations.find((a) => a().name === 'content')();
+
+    assert.ok(annotation.autofill(prose) === undefined);
+    assert.ok(annotation.autofill(notProse) !== undefined);
   });
 });

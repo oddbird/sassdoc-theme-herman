@@ -10,6 +10,7 @@ const sinon = require('sinon');
 
 /* eslint-disable global-require */
 const annotations = {
+  access: require('../../lib/annotations/access'),
   icons: require('../../lib/annotations/icons'),
   colors: require('../../lib/annotations/colors'),
   sizes: require('../../lib/annotations/sizes'),
@@ -19,6 +20,99 @@ const annotations = {
   name: require('../../lib/annotations/name'),
 };
 /* eslint-enable global-require */
+
+describe('access annotation', () => {
+  const access = annotations.access({});
+
+  it('should skip autofill for prose item', () => {
+    const prose = {
+      commentRange: {
+        start: 0,
+        end: 5,
+      },
+      context: {
+        name: 'Test\nItem',
+        line: {
+          start: 8,
+          end: 10,
+        },
+      },
+      access: 'auto',
+    };
+    assert.equal(access.autofill(prose), undefined);
+  });
+
+  it('should autofill based on default', () => {
+    assert.equal(
+      access.autofill({ context: { name: 'non-private' }, access: 'auto' }),
+      'public',
+    );
+    assert.equal(
+      access.autofill({ context: { name: '_private-name' }, access: 'auto' }),
+      'private',
+    );
+    assert.equal(
+      access.autofill({ context: { name: '-private-name' }, access: 'auto' }),
+      'private',
+    );
+  });
+
+  it('should ignore autofill if privatePrefix is false', () => {
+    const accessEnv = annotations.access({ privatePrefix: false });
+    assert.equal(
+      accessEnv.autofill({ context: { name: 'non-private' }, access: 'auto' }),
+      undefined,
+    );
+    assert.equal(
+      accessEnv.autofill({
+        context: { name: '_private-name' },
+        access: 'auto',
+      }),
+      undefined,
+    );
+    assert.equal(
+      accessEnv.autofill({
+        context: { name: '-private-name' },
+        access: 'auto',
+      }),
+      undefined,
+    );
+  });
+
+  it('should autofill based on privatePrefix', () => {
+    const accessEnv = annotations.access({ privatePrefix: '^--' });
+    assert.equal(
+      accessEnv.autofill({ context: { name: '-non-private' }, access: 'auto' }),
+      'public',
+    );
+    assert.equal(
+      accessEnv.autofill({ context: { name: '_non-private' }, access: 'auto' }),
+      'public',
+    );
+    assert.equal(
+      accessEnv.autofill({
+        context: { name: '--private-name' },
+        access: 'auto',
+      }),
+      'private',
+    );
+  });
+
+  it('should respect explicit access', () => {
+    assert.equal(
+      access.autofill({ context: { name: 'non-private' }, access: 'public' }),
+      undefined,
+    );
+    assert.equal(
+      access.autofill({ context: { name: 'private' }, access: 'private' }),
+      undefined,
+    );
+    assert.equal(
+      access.autofill({ context: { name: '_private-name' }, access: 'auto' }),
+      'private',
+    );
+  });
+});
 
 describe('icons annotation', () => {
   beforeEach(function () {
