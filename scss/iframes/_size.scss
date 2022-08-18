@@ -29,12 +29,7 @@
   --herman-label-color: #{tools.color('callout')};
 }
 
-[data-herman-border] {
-  --herman-size-bar: #{tools.color('slight')};
-  --herman-size-bar-image: none;
-}
-
-[data-herman-viz='bar'] {
+[data-herman-viz~='bar'] {
   background-color: var(--herman-size-bar, #{tools.color('border')});
   background-image: var(
     --herman-size-bar-image,
@@ -75,4 +70,9 @@
   border-radius: tools.size('quarter-shim');
   display: block;
   min-height: 1.5em;
+}
+
+[data-herman-viz~='border'] {
+  --herman-size-bar: #{tools.color('slight')};
+  --herman-size-bar-image: none;
 }
