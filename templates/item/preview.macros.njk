@@ -294,7 +294,7 @@
     <td aria-hidden data-herman-cell="viz" {% if colspan %}colspan="{{ colspan }}"{% endif %}>
       <div data-herman-size="overflow">
         {% if width %}
-          {% if value == 'thin' or value == 'thick' or value == 'medium' %}
+          {% if value in ['thin', 'thick', 'medium'] %}
             <div data-herman-viz="bar" data-herman-border style="border-width: {{ width }};">
           {% else %}
             <div data-herman-viz="bar" style="width: {{ width }};">

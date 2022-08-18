@@ -136,6 +136,9 @@ module.exports = {
   devServer: {
     static: [path.join(__dirname, 'docs')],
     hot: false,
+    devMiddleware: {
+      writeToDisk: true,
+    },
   },
   plugins: [
     // make jquery accessible in all modules that use it
