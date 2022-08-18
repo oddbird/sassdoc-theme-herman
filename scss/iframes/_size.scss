@@ -29,9 +29,16 @@
   --herman-label-color: #{tools.color('callout')};
 }
 
+[data-herman-border] {
+  --herman-size-bar: #{tools.color('slight')};
+  --herman-size-bar-image: none;
+}
+
 [data-herman-viz='bar'] {
   background-color: var(--herman-size-bar, #{tools.color('border')});
-  background-image: linear-gradient(
+  background-image: var(
+    --herman-size-bar-image,
+    linear-gradient(
       to left,
       tools.color('underline') 1px,
       transparent 1px,
@@ -60,7 +67,8 @@
         1px,
       transparent 1px,
       transparent
-    );
+    )
+  );
   background-position: 0 100%;
   background-repeat: repeat-x;
   background-size: 100px 75%, 10px 50%, 5px 25%;
