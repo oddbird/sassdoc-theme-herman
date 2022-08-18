@@ -24,6 +24,7 @@
   [#338](https://github.com/oddbird/sassdoc-theme-herman/issues/338)
 - 🚀 NEW: Add support for non-standard CSS font-weight names --
   [#250](https://github.com/oddbird/sassdoc-theme-herman/issues/250)
+- 🚀 NEW: Length keywords in `@sizes {ruler}` maps will display as a border
 - 🏠 INTERNAL: Include source-maps with Herman JS & CSS assets
 - 🏠 INTERNAL: Upgrade dependencies
 - 🏠 INTERNAL: Remove documentation static-site from repository
