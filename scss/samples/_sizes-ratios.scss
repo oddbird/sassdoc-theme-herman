@@ -91,7 +91,7 @@ $demo-ratios: (
 /// [ac]: https://www.oddbird.net/accoutrement/
 ///
 /// ```scss
-/// $demo-sizes: (
+/// $demo-sizes-text: (
 ///   'root': $root,
 ///   'xlarge': $xlarge
 /// );
@@ -123,10 +123,18 @@ $demo-ratios: (
 ///   - `output-only`: Displays values only, without demonstration.
 ///
 /// @group demo_sizes
-$demo-sizes: (
+$demo-sizes-text: (
   'root': $root,
   'responsive': calc(1.5em + 1vw),
   'xlarge': $xlarge,
+);
+$demo-sizes-theme: (
+  'icon': 1rem,
+  'card': 30vw,
+  'quote': 50%,
+  'outline': thin,
+  'border': medium,
+  'separator': thick,
 );
 $demo-sizes-large: (
   'box': 20em,
@@ -135,16 +143,16 @@ $demo-sizes-large: (
 
 /// ### Text Sizes
 /// ```scss
-/// /// @sizes demo-sizes {text}
+/// /// @sizes demo-sizes-text {text}
 /// ```
-/// @sizes demo-sizes {text}
+/// @sizes demo-sizes-text {text}
 /// @group demo_sizes
 
 /// ### Rulers
 /// ```scss
-/// /// @sizes demo-sizes {ruler}
+/// /// @sizes demo-sizes-theme {ruler}
 /// ```
-/// @sizes demo-sizes {ruler}
+/// @sizes demo-sizes-theme {ruler}
 /// @group demo_sizes
 
 /// ### Large Rulers
@@ -156,14 +164,14 @@ $demo-sizes-large: (
 
 /// ### Name/Value Only
 /// ```scss
-/// /// @sizes demo-sizes {output-only}
+/// /// @sizes demo-sizes-text {output-only}
 /// ```
-/// @sizes demo-sizes {output-only}
+/// @sizes demo-sizes-text {output-only}
 /// @group demo_sizes
 
 /// ## Add ratio/size data to $herman
 ///
-/// In order to preview the `$demo-ratios` and `$demo-sizes` maps,
+/// In order to preview the `$demo-ratios` and `$demo-sizes-*` maps,
 /// we also need to [export the data to JSON][export].
 ///
 /// You can add data to the `$herman` export-map by hand,
@@ -173,7 +181,9 @@ $demo-sizes-large: (
 ///
 /// ```scss
 ///  @include add('ratios', 'demo-ratios', $demo-ratios);
-///  @include add('sizes', 'demo-sizes', $demo-sizes);
+///  @include add('sizes', 'demo-sizes-text', $demo-sizes-text);
+///  @include add('sizes', 'demo-sizes-theme', $demo-sizes-theme);
+///  @include add('sizes', 'demo-sizes-large', $demo-sizes-large);
 /// ```
 ///
 /// If your map needs to be parsed or compiled before export,
@@ -190,5 +200,6 @@ $demo-sizes-large: (
 /// @group demo_sizes
 /// @link https://www.oddbird.net/accoutrement Accoutrement
 @include utilities.add('ratios', 'demo-ratios', $demo-ratios);
-@include utilities.add('sizes', 'demo-sizes', $demo-sizes);
+@include utilities.add('sizes', 'demo-sizes-text', $demo-sizes-text);
+@include utilities.add('sizes', 'demo-sizes-theme', $demo-sizes-theme);
 @include utilities.add('sizes', 'demo-sizes-large', $demo-sizes-large);

@@ -293,8 +293,12 @@
   {% if width or text %}
     <td aria-hidden data-herman-cell="viz" {% if colspan %}colspan="{{ colspan }}"{% endif %}>
       <div data-herman-size="overflow">
-      {% if width %}
-        <div data-herman-viz="bar" style="width: {{ width }};">
+        {% if width %}
+          {% if value in ['thin', 'thick', 'medium'] %}
+            <div data-herman-viz="bar" data-herman-border style="border-width: {{ width }};">
+          {% else %}
+            <div data-herman-viz="bar" style="width: {{ width }};">
+          {% endif %}
           &nbsp;
         </div>
       {% elif text %}
