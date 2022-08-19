@@ -23,14 +23,14 @@
 /// allow you to import external partials:
 ///
 /// ```scss
-///  // This is a widget that we use on our site…
-///  // @example scss
-///  //   [data-widget] {
-///  //     @include widget-style;
-///  //   }
-///  // @example njk
-///  //  {% import 'macros.njk' as macros %}
-///  //  {{ macros.widget(1, 2) }}
+///  /// This is a widget that we use on our site…
+///  /// @example scss
+///  ///   [data-widget] {
+///  ///     @include widget-style;
+///  ///   }
+///  /// @example njk
+///  ///  {% import 'macros.njk' as macros %}
+///  ///  {{ macros.widget(1, 2) }}
 ///  @mixin widget-style { … }
 /// ```
 ///
