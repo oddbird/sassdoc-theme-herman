@@ -75,4 +75,7 @@
 [data-herman-viz~='border'] {
   --herman-size-bar: #{tools.color('slight')};
   --herman-size-bar-image: none;
+
+  border-color: var(--herman-border-color, #{tools.color('border')});
+  border-style: solid;
 }
