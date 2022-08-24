@@ -1,5 +1,10 @@
 # Herman Changelog
 
+## 5.0.0-beta.2: 2022-08-24
+
+- 🐛 BUGFIX: Add border color/style for length keywords in `@sizes {ruler}` maps
+- 🏠 INTERNAL: Upgrade dependencies
+
 ## 5.0.0-beta.1: 2022-08-19
 
 - 🚀 NEW: Length keywords in `@sizes {ruler}` maps will display as a border
