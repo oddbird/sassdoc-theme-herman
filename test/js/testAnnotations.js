@@ -184,7 +184,17 @@ describe('icons annotation', () => {
 
 describe('colors annotation', () => {
   before(function () {
-    this.colors = annotations.colors();
+    this.env = {
+      herman: {
+        sass: {
+          jsonFile: `${__dirname}/fixtures/css/json.css`,
+        },
+      },
+      logger: {
+        warn: sinon.fake(),
+      },
+    };
+    this.colors = annotations.colors(this.env);
   });
 
   describe('parse', () => {
@@ -192,6 +202,57 @@ describe('colors annotation', () => {
       assert.deepStrictEqual(this.colors.parse('foo-bar'), {
         key: 'foo-bar',
       });
+    });
+  });
+
+  describe('resolve', () => {
+    it('bails early if no colors on items', function (done) {
+      const data = [{}];
+      this.colors
+        .resolve(data)
+        .then(() => {
+          assert.deepStrictEqual(data, [{}]);
+          done();
+        })
+        .catch(done);
+    });
+
+    it('fails on missing sassjson colorsData', function (done) {
+      const data = [
+        {
+          colors: { key: '' },
+          context: { name: 'foo' },
+        },
+      ];
+
+      this.colors
+        .resolve(data)
+        .then(() => {
+          assert.fail('The promise should be rejected');
+          done();
+        })
+        .catch(() => {
+          sinon.assert.calledOnce(this.env.logger.warn);
+          done();
+        });
+    });
+
+    it('renders colors', function (done) {
+      const data = [
+        {
+          colors: {
+            key: 'brand-color',
+          },
+        },
+      ];
+
+      this.colors
+        .resolve(data)
+        .then(() => {
+          assert.ok(data[0].iframed !== undefined);
+          done();
+        })
+        .catch(done);
     });
   });
 });
