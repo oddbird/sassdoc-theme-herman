@@ -7,7 +7,9 @@ const extend = require('extend');
 const sinon = require('sinon');
 
 const renderIframe = require('../../lib/renderIframe');
-const { nunjucksEnv } = require('../../lib/utils/templates');
+const { getNunjucksEnv } = require('../../lib/utils/templates');
+
+const nunjucksEnv = getNunjucksEnv({});
 
 describe('renderIframe', () => {
   describe('example', () => {

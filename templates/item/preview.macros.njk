@@ -39,33 +39,33 @@
   Display color palettes based on JSON map output.
 #}
 {% macro color_palette(data) %}
-    <div class="color-palette">
-      {% for value, items in data|list|groupby('value') %}
-        <div class="color-preview">
-          <div class="color-swatch">
-            <div class="transparency-grid"></div>
-            <div class="color-overlay" style="background-color: {{ value }};"></div>
-          </div>
-          <div class="color-info">
-            <strong class="color-name">
-              {% for item in items %}
-                <span class="color-name-option">{{ item.key }}{% if not loop.last %},&nbsp;{% endif %}</span>
-              {% endfor %}
-            </strong>
-            {% set color = value|colors %}
-            {% if color %}
-              {% for format in ['hex', 'rgb', 'hsl'] %}
-                {% if color[format] %}
-                  <code class="color-value">{{ color[format] }}</code>
-                {% endif %}
-              {% endfor %}
-            {% else %}
-              <code class="color-value">{{ value }}</code>
-            {% endif %}
-          </div>
+  <div class="color-palette">
+    {% for value, items in data|list|groupby('value') %}
+      <div class="color-preview">
+        <div class="color-swatch">
+          <div class="transparency-grid"></div>
+          <div class="color-overlay" style="background-color: {{ value }};"></div>
         </div>
-      {% endfor %}
-    </div>
+        <div class="color-info">
+          <strong class="color-name">
+            {% for item in items %}
+              <span class="color-name-option">{{ item.key }}{% if not loop.last %},&nbsp;{% endif %}</span>
+            {% endfor %}
+          </strong>
+          {% set color = value|colors %}
+          {% if color %}
+            {% for format in ['hex', 'rgb', 'hsl'] %}
+              {% if color[format] %}
+                <code class="color-value">{{ color[format] }}</code>
+              {% endif %}
+            {% endfor %}
+          {% else %}
+            <code class="color-value">{{ value }}</code>
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
 {% endmacro %}
 
 
@@ -197,11 +197,13 @@
   {% endfor %}
 {% endmacro %}
 
+
 {% macro colors(iframed) %}
  {% call show.item_section('color-palette', 'Color Previews') %}
     <iframe class="render-colors" srcdoc="{{ iframed }}" width="100%" height="0"></iframe>
   {% endcall %}
 {% endmacro %}
+
 
 {% macro sizes(iframed) %}
   {% call show.item_section('size-preview', 'Size Previews') %}

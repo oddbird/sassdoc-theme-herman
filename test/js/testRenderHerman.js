@@ -7,59 +7,9 @@ const Promise = require('bluebird');
 const del = require('del');
 
 const prepareContext = require('../../lib/prepareContext');
-const { renderHerman, makeNunjucksColors } = require('../../lib/renderHerman');
+const { renderHerman } = require('../../lib/renderHerman');
 
 const access = Promise.promisify(fs.access);
-
-describe('makeNunjucksColors', () => {
-  before(function () {
-    this.colors = makeNunjucksColors({
-      herman: {
-        displayColors: undefined,
-      },
-    });
-  });
-
-  it('exits early on invalid colors', function () {
-    const actual = this.colors('not a color');
-    assert.strictEqual(actual, null);
-  });
-
-  it('switches on formats', function () {
-    const actual = this.colors('#fefced');
-    const expected = {
-      hex: '#fefced',
-      rgb: 'rgb(254, 252, 237)',
-      hsl: 'hsl(53, 89%, 96%)',
-    };
-    assert.deepStrictEqual(actual, expected);
-  });
-
-  it('handles rgba and hsla', () => {
-    const colors = makeNunjucksColors({
-      herman: {
-        displayColors: ['rgba', 'hsla'],
-      },
-    });
-    const actual = colors('#fefced');
-    const expected = {
-      rgb: 'rgb(254, 252, 237)',
-      hsl: 'hsl(53, 89%, 96%)',
-    };
-    assert.deepStrictEqual(actual, expected);
-  });
-
-  it('passes on unknown format', () => {
-    const colors = makeNunjucksColors({
-      herman: {
-        displayColors: ['blorble'],
-      },
-    });
-    const actual = colors('#fefced');
-    const expected = {};
-    assert.deepStrictEqual(actual, expected);
-  });
-});
 
 describe('renderHerman', () => {
   before(function () {

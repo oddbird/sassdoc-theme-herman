@@ -8,9 +8,10 @@ const Promise = require('bluebird');
 const del = require('del');
 
 const render = require('../../lib/utils/render');
-const { nunjucksEnv } = require('../../lib/utils/templates');
+const { getNunjucksEnv } = require('../../lib/utils/templates');
 
 const readFile = Promise.promisify(fs.readFile);
+const nunjucksEnv = getNunjucksEnv({});
 
 describe('render', () => {
   before(function () {
