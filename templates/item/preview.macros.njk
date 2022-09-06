@@ -18,7 +18,7 @@
       {% endif -%}
 
       {%- if item.colors and data.colors[key] and item.iframed %}
-        {{ color_palette(data.colors[key], item.iframed) }}
+        {{ colors(item.iframed) }}
       {% endif -%}
 
       {%- if item.ratios and data.ratios[key] and item.iframed %}
@@ -38,8 +38,7 @@
   -------------
   Display color palettes based on JSON map output.
 #}
-{% macro color_palette(data, iframed) %}
-  {% call show.item_section('color-palette', 'Color Previews') %}
+{% macro color_palette(data) %}
     <div class="color-palette">
       {% for value, items in data|list|groupby('value') %}
         <div class="color-preview">
@@ -67,8 +66,6 @@
         </div>
       {% endfor %}
     </div>
-     <iframe class="render-colors" srcdoc="{{ iframed }}" width="100%" height="0"></iframe>
-  {% endcall %}
 {% endmacro %}
 
 
@@ -200,6 +197,11 @@
   {% endfor %}
 {% endmacro %}
 
+{% macro colors(iframed) %}
+ {% call show.item_section('color-palette', 'Color Previews') %}
+    <iframe class="render-colors" srcdoc="{{ iframed }}" width="100%" height="0"></iframe>
+  {% endcall %}
+{% endmacro %}
 
 {% macro sizes(iframed) %}
   {% call show.item_section('size-preview', 'Size Previews') %}

@@ -23,7 +23,10 @@
   {% endif %}
 </head>
 <body data-herman-preview='colors'>
+  {%- set args = item.colors -%}
 
-
+  {{ preview.color_palette(
+    data=sassjson.colors[args.key]
+  ) }}
 </body>
 </html>
