@@ -1,6 +1,5 @@
 # Herman Changelog
 
-
 ## UNRELEASED
 
 - 🚀 NEW: Color previews are now rendered in an `<iframe>` which allows them to make use of user-supplied `customCSS` and a limited subset of Herman styles.
