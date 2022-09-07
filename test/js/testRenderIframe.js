@@ -165,4 +165,26 @@ describe('renderIframe', () => {
         .catch(done);
     });
   });
+
+  describe('colors', () => {
+    beforeEach(function () {
+      this.env = {};
+    });
+
+    it('renders', function (done) {
+      sinon.stub(nunjucksEnv, 'render').returns('some iframed');
+      const item = {
+        colors: [{}],
+      };
+
+      renderIframe(this.env, item, 'colors')
+        .then(() => {
+          assert.strictEqual(item.iframed, 'some iframed');
+
+          nunjucksEnv.render.restore();
+          done();
+        })
+        .catch(done);
+    });
+  });
 });

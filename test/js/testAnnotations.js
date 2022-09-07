@@ -241,7 +241,7 @@ describe('colors annotation', () => {
       const data = [
         {
           colors: {
-            key: 'brand-color',
+            key: 'brand-colors',
           },
         },
       ];
