@@ -45,6 +45,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["bluebird", "npm:3.7.2"],\
             ["chalk", "npm:4.1.2"],\
             ["cheerio", "npm:1.0.0-rc.12"],\
+            ["colorjs.io", "npm:0.4.0"],\
             ["core-js", "npm:3.25.1"],\
             ["css-loader", "virtual:878b150fb95c14b92e1a083a8cdd5b07d75bde54934ebaf95859474dcc5db3d63d39a688ccdf72c7af702ac8d88c00a5b7e8d26a82dab7e202b18226de2a7429#npm:6.7.1"],\
             ["css-minimizer-webpack-plugin", "virtual:878b150fb95c14b92e1a083a8cdd5b07d75bde54934ebaf95859474dcc5db3d63d39a688ccdf72c7af702ac8d88c00a5b7e8d26a82dab7e202b18226de2a7429#npm:4.0.0"],\
@@ -104,7 +105,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["stylelint-config-standard-scss", "virtual:878b150fb95c14b92e1a083a8cdd5b07d75bde54934ebaf95859474dcc5db3d63d39a688ccdf72c7af702ac8d88c00a5b7e8d26a82dab7e202b18226de2a7429#npm:5.0.0"],\
             ["stylelint-prettier", "virtual:878b150fb95c14b92e1a083a8cdd5b07d75bde54934ebaf95859474dcc5db3d63d39a688ccdf72c7af702ac8d88c00a5b7e8d26a82dab7e202b18226de2a7429#npm:2.0.0"],\
             ["svgo", "npm:2.8.0"],\
-            ["tinycolor2", "npm:1.4.2"],\
             ["typogr", "npm:0.6.8"],\
             ["unixify", "npm:1.0.0"],\
             ["vinyl-fs", "npm:3.0.3"],\
@@ -5856,6 +5856,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/colorette-npm-2.0.19-f73dfe6a4e-888cf5493f.zip/node_modules/colorette/",\
           "packageDependencies": [\
             ["colorette", "npm:2.0.19"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["colorjs.io", [\
+        ["npm:0.4.0", {\
+          "packageLocation": "./.yarn/cache/colorjs.io-npm-0.4.0-d0609bc738-480e298b99.zip/node_modules/colorjs.io/",\
+          "packageDependencies": [\
+            ["colorjs.io", "npm:0.4.0"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -15155,6 +15164,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["bluebird", "npm:3.7.2"],\
             ["chalk", "npm:4.1.2"],\
             ["cheerio", "npm:1.0.0-rc.12"],\
+            ["colorjs.io", "npm:0.4.0"],\
             ["core-js", "npm:3.25.1"],\
             ["css-loader", "virtual:878b150fb95c14b92e1a083a8cdd5b07d75bde54934ebaf95859474dcc5db3d63d39a688ccdf72c7af702ac8d88c00a5b7e8d26a82dab7e202b18226de2a7429#npm:6.7.1"],\
             ["css-minimizer-webpack-plugin", "virtual:878b150fb95c14b92e1a083a8cdd5b07d75bde54934ebaf95859474dcc5db3d63d39a688ccdf72c7af702ac8d88c00a5b7e8d26a82dab7e202b18226de2a7429#npm:4.0.0"],\
@@ -15214,7 +15224,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["stylelint-config-standard-scss", "virtual:878b150fb95c14b92e1a083a8cdd5b07d75bde54934ebaf95859474dcc5db3d63d39a688ccdf72c7af702ac8d88c00a5b7e8d26a82dab7e202b18226de2a7429#npm:5.0.0"],\
             ["stylelint-prettier", "virtual:878b150fb95c14b92e1a083a8cdd5b07d75bde54934ebaf95859474dcc5db3d63d39a688ccdf72c7af702ac8d88c00a5b7e8d26a82dab7e202b18226de2a7429#npm:2.0.0"],\
             ["svgo", "npm:2.8.0"],\
-            ["tinycolor2", "npm:1.4.2"],\
             ["typogr", "npm:0.6.8"],\
             ["unixify", "npm:1.0.0"],\
             ["vinyl-fs", "npm:3.0.3"],\
@@ -16540,15 +16549,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/time-stamp-npm-1.1.0-b7291e619a-4c46e9739d.zip/node_modules/time-stamp/",\
           "packageDependencies": [\
             ["time-stamp", "npm:1.1.0"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
-      ["tinycolor2", [\
-        ["npm:1.4.2", {\
-          "packageLocation": "./.yarn/cache/tinycolor2-npm-1.4.2-462ba30c26-57ed262e08.zip/node_modules/tinycolor2/",\
-          "packageDependencies": [\
-            ["tinycolor2", "npm:1.4.2"]\
           ],\
           "linkType": "HARD"\
         }]\

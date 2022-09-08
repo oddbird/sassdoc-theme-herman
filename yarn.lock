@@ -4051,6 +4051,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"colorjs.io@npm:^0.4.0":
+  version: 0.4.0
+  resolution: "colorjs.io@npm:0.4.0"
+  checksum: 480e298b99b40adcec8bb679587bb8d1309d72be803e39b2af7c53c079e72bd19a5608f21250c1fbb6fc9c3349de5cc10ad275c3014f05e99c9dbb705bf3cc61
+  languageName: node
+  linkType: hard
+
 "combined-stream@npm:^1.0.8":
   version: 1.0.8
   resolution: "combined-stream@npm:1.0.8"
@@ -11515,6 +11522,7 @@ __metadata:
     bluebird: ^3.7.2
     chalk: ^4.1.2
     cheerio: 1.0.0-rc.12
+    colorjs.io: ^0.4.0
     core-js: ^3.25.1
     css-loader: ^6.7.1
     css-minimizer-webpack-plugin: ^4.0.0
@@ -11574,7 +11582,6 @@ __metadata:
     stylelint-config-standard-scss: ^5.0.0
     stylelint-prettier: ^2.0.0
     svgo: ^2.8.0
-    tinycolor2: ^1.4.2
     typogr: ^0.6.8
     unixify: ^1.0.0
     vinyl-fs: ^3.0.3
@@ -12735,13 +12742,6 @@ __metadata:
   version: 1.1.0
   resolution: "time-stamp@npm:1.1.0"
   checksum: 4c46e9739dab997fa8ba787c644cb2b9ea9867eb281acbbb8ba23c4f5edcbe8cc16f0aa5b7981a4c96df76b99dd1f54b0895865c15f3c0e49d1edd8c208717fd
-  languageName: node
-  linkType: hard
-
-"tinycolor2@npm:^1.4.2":
-  version: 1.4.2
-  resolution: "tinycolor2@npm:1.4.2"
-  checksum: 57ed262e08815a4ab0ed933edafdbc6555a17081781766149813b44a080ecbe58b3ee281e81c0e75b42e4d41679f138cfa98eabf043f829e0683c04adb12c031
   languageName: node
   linkType: hard
 

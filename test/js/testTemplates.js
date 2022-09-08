@@ -2,6 +2,8 @@
 
 const assert = require('assert');
 
+const sinon = require('sinon');
+
 const {
   makeNunjucksColors,
   getNunjucksEnv,
@@ -31,24 +33,29 @@ describe('isString filter', () => {
 
 describe('makeNunjucksColors', () => {
   before(function () {
-    this.colors = makeNunjucksColors({
+    this.ctx = {
       herman: {
         displayColors: undefined,
       },
-    });
+      logger: {
+        warn: sinon.fake(),
+      },
+    };
+    this.colors = makeNunjucksColors(this.ctx);
   });
 
   it('exits early on invalid colors', function () {
     const actual = this.colors('not a color');
     assert.strictEqual(actual, null);
+    sinon.assert.calledOnce(this.ctx.logger.warn);
   });
 
   it('switches on formats', function () {
     const actual = this.colors('#fefced');
     const expected = {
       hex: '#fefced',
-      rgb: 'rgb(254, 252, 237)',
-      hsl: 'hsl(53, 89%, 96%)',
+      rgb: 'rgb(99.608% 98.824% 92.941%)',
+      hsl: 'hsl(52.941 89.474% 96.275%)',
     };
     assert.deepStrictEqual(actual, expected);
   });
@@ -59,10 +66,10 @@ describe('makeNunjucksColors', () => {
         displayColors: ['rgba', 'hsla'],
       },
     });
-    const actual = colors('#fefced');
+    const actual = colors('hsl(53deg 89% 96% / 0.5)');
     const expected = {
-      rgb: 'rgb(254, 252, 237)',
-      hsl: 'hsl(53, 89%, 96%)',
+      rgb: 'rgb(99.56% 98.729% 92.44% / 0.5)',
+      hsl: 'hsl(53 89% 96% / 0.5)',
     };
     assert.deepStrictEqual(actual, expected);
   });
