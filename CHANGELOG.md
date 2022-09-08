@@ -4,6 +4,7 @@
 
 - 🚀 NEW: Color previews are now rendered in an `<iframe>` which allows them to
   make use of user-supplied `customCSS` and a limited subset of Herman styles.
+- 🏠 INTERNAL: Upgrade dependencies
 
 ## 5.0.0-beta.2: 2022-08-24
 
