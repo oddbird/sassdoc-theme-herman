@@ -45,7 +45,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["bluebird", "npm:3.7.2"],\
             ["chalk", "npm:4.1.2"],\
             ["cheerio", "npm:1.0.0-rc.12"],\
-            ["colorjs.io", "npm:0.4.0"],\
+            ["colorjs.io", "https://github.com/oddbird/color.js.git#commit=54cb7e1a31dacf6b18396049fe05386c1336b891"],\
             ["core-js", "npm:3.25.1"],\
             ["css-loader", "virtual:878b150fb95c14b92e1a083a8cdd5b07d75bde54934ebaf95859474dcc5db3d63d39a688ccdf72c7af702ac8d88c00a5b7e8d26a82dab7e202b18226de2a7429#npm:6.7.1"],\
             ["css-minimizer-webpack-plugin", "virtual:878b150fb95c14b92e1a083a8cdd5b07d75bde54934ebaf95859474dcc5db3d63d39a688ccdf72c7af702ac8d88c00a5b7e8d26a82dab7e202b18226de2a7429#npm:4.0.0"],\
@@ -5861,10 +5861,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["colorjs.io", [\
-        ["npm:0.4.0", {\
-          "packageLocation": "./.yarn/cache/colorjs.io-npm-0.4.0-d0609bc738-480e298b99.zip/node_modules/colorjs.io/",\
+        ["https://github.com/oddbird/color.js.git#commit=54cb7e1a31dacf6b18396049fe05386c1336b891", {\
+          "packageLocation": "./.yarn/cache/colorjs.io-https-4a153cd228-ee28983834.zip/node_modules/colorjs.io/",\
           "packageDependencies": [\
-            ["colorjs.io", "npm:0.4.0"]\
+            ["colorjs.io", "https://github.com/oddbird/color.js.git#commit=54cb7e1a31dacf6b18396049fe05386c1336b891"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -15164,7 +15164,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["bluebird", "npm:3.7.2"],\
             ["chalk", "npm:4.1.2"],\
             ["cheerio", "npm:1.0.0-rc.12"],\
-            ["colorjs.io", "npm:0.4.0"],\
+            ["colorjs.io", "https://github.com/oddbird/color.js.git#commit=54cb7e1a31dacf6b18396049fe05386c1336b891"],\
             ["core-js", "npm:3.25.1"],\
             ["css-loader", "virtual:878b150fb95c14b92e1a083a8cdd5b07d75bde54934ebaf95859474dcc5db3d63d39a688ccdf72c7af702ac8d88c00a5b7e8d26a82dab7e202b18226de2a7429#npm:6.7.1"],\
             ["css-minimizer-webpack-plugin", "virtual:878b150fb95c14b92e1a083a8cdd5b07d75bde54934ebaf95859474dcc5db3d63d39a688ccdf72c7af702ac8d88c00a5b7e8d26a82dab7e202b18226de2a7429#npm:4.0.0"],\

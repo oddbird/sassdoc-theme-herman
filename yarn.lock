@@ -4051,10 +4051,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"colorjs.io@npm:^0.4.0":
+"colorjs.io@git+https://github.com/oddbird/color.js#node12-built":
   version: 0.4.0
-  resolution: "colorjs.io@npm:0.4.0"
-  checksum: 480e298b99b40adcec8bb679587bb8d1309d72be803e39b2af7c53c079e72bd19a5608f21250c1fbb6fc9c3349de5cc10ad275c3014f05e99c9dbb705bf3cc61
+  resolution: "colorjs.io@https://github.com/oddbird/color.js.git#commit=54cb7e1a31dacf6b18396049fe05386c1336b891"
+  checksum: ee2898383435b35cc3237dbc38bf53c4020a06f1e9673de65029397a952420e201f6d29477eddfaac6c3fb7c360e8ac131be7870c2b435439d7e65262853d045
   languageName: node
   linkType: hard
 
@@ -11522,7 +11522,7 @@ __metadata:
     bluebird: ^3.7.2
     chalk: ^4.1.2
     cheerio: 1.0.0-rc.12
-    colorjs.io: ^0.4.0
+    colorjs.io: "git+https://github.com/oddbird/color.js#node12-built"
     core-js: ^3.25.1
     css-loader: ^6.7.1
     css-minimizer-webpack-plugin: ^4.0.0
