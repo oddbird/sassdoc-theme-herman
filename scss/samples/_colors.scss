@@ -94,15 +94,13 @@ $demo-colors: (
 
 /// ## CSS custom properties
 ///
-/// At Oddbird, we convert color tokens into CSS custom
-/// properties using [Accoutrement][ac]. Color values stored
-/// as custom properties can also be
-/// previewed as palettes.
+/// At OddBird, we convert color tokens into
+/// CSS custom properties using [Accoutrement][ac].
+/// Color values stored as custom properties
+/// can also be previewed as palettes.
 ///
 /// [ac]: https://www.oddbird.net/accoutrement
 ///
-/// @group demo_colors
-
 /// @colors
 /// @group demo_colors
 $custom-property-colors: (
