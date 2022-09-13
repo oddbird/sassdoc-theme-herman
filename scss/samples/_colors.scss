@@ -92,6 +92,30 @@ $demo-colors: (
   'brand-pink': $brand-pink,
 );
 
+/// ## CSS custom properties
+///
+/// At Oddbird, we convert color tokens into CSS custom
+/// properties using [Accoutrement][ac]. Color values stored
+/// as custom properties can also be
+/// previewed as palettes.
+///
+/// [ac]: https://www.oddbird.net/accoutrement
+///
+/// @group demo_colors
+
+/// @colors
+/// @group demo_colors
+$custom-property-colors: (
+  'accent': var(--callout),
+  'link': var(--action),
+  'btn-text': var(--contrast-light),
+);
+@include utilities.add(
+  'colors',
+  'custom-property-colors',
+  $custom-property-colors
+);
+
 /// ## Add color-data to $herman
 ///
 /// In order to preview the `$demo-colors` palette,
