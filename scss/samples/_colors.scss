@@ -95,18 +95,29 @@ $demo-colors: (
 /// ## CSS custom properties
 ///
 /// At OddBird, we convert color tokens into
-/// CSS custom properties using [Accoutrement][ac].
-/// Color values stored as custom properties
+/// CSS custom properties using [Accoutrement][cv].
+/// These color values stored as custom properties
 /// can also be previewed as palettes.
 ///
-/// [ac]: https://www.oddbird.net/accoutrement
+/// In the `$custom-property-colors` map, we have
+/// created two new tokens, `link` and `link-action`,
+/// based on tokens stored in Herman's
+/// [$brand-colors][bc] map (which uses a darkened
+/// version of OddBird pink).
+///
+/// The values in the `$brand-colors` map have been
+/// converted to CSS custom properties using
+/// Accoutrement's [colors\--()][cm] mixin.
+///
+/// [cv]: https://www.oddbird.net/accoutrement/docs/color-vars
+/// [bc]: https://www.oddbird.net/herman/docs/config-colors#variable--brand-colors
+/// [cm]: https://www.oddbird.net/accoutrement/docs/color-vars.html#mixin--colors--
 ///
 /// @colors
 /// @group demo_colors
 $custom-property-colors: (
-  'accent': var(--callout),
-  'link': var(--action),
-  'btn-text': var(--contrast-light),
+  'link': var(--brand-blue),
+  'link-action': var(--brand-pink),
 );
 @include utilities.add(
   'colors',
