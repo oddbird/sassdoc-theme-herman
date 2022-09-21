@@ -109,6 +109,10 @@ $demo-colors: (
 /// converted to CSS custom properties using
 /// Accoutrement's [colors\--()][cm] mixin.
 ///
+/// When displaying colors defined as CSS custom properties,
+/// the color name and variable name are displayed,
+/// but the `herman.displayColors` option is not used.
+///
 /// [cv]: https://www.oddbird.net/accoutrement/docs/color-vars
 /// [bc]: https://www.oddbird.net/herman/docs/config-colors#variable--brand-colors
 /// [cm]: https://www.oddbird.net/accoutrement/docs/color-vars.html#mixin--colors--
