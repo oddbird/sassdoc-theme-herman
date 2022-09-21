@@ -6,6 +6,10 @@
 // Color Preview
 // -------------
 
+[data-herman-preview='colors'] {
+  @include tools.colors--;
+}
+
 .color-palette {
   display: flex;
   flex-wrap: wrap;

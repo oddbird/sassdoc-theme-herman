@@ -7,7 +7,9 @@ const extend = require('extend');
 const sinon = require('sinon');
 
 const renderIframe = require('../../lib/renderIframe');
-const { nunjucksEnv } = require('../../lib/utils/templates');
+const { getNunjucksEnv } = require('../../lib/utils/templates');
+
+const nunjucksEnv = getNunjucksEnv({});
 
 describe('renderIframe', () => {
   describe('example', () => {
@@ -158,6 +160,28 @@ describe('renderIframe', () => {
         .then(() => {
           sinon.assert.calledOnce(env.logger.warn);
 
+          done();
+        })
+        .catch(done);
+    });
+  });
+
+  describe('colors', () => {
+    beforeEach(function () {
+      this.env = {};
+    });
+
+    it('renders', function (done) {
+      sinon.stub(nunjucksEnv, 'render').returns('some iframed');
+      const item = {
+        colors: [{}],
+      };
+
+      renderIframe(this.env, item, 'colors')
+        .then(() => {
+          assert.strictEqual(item.iframed, 'some iframed');
+
+          nunjucksEnv.render.restore();
           done();
         })
         .catch(done);

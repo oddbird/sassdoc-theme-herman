@@ -5,9 +5,9 @@ const assert = require('assert');
 const nunjucks = require('nunjucks');
 const sinon = require('sinon');
 
-const getNunjucksEnv = require('../../lib/utils/getNunjucksEnv');
+const getCustomNunjucksEnv = require('../../lib/utils/getCustomNunjucksEnv');
 
-describe('getNunjucksEnv', () => {
+describe('getCustomNunjucksEnv', () => {
   it('uses an existing nunjucksEnv first', () => {
     const env = {
       herman: {
@@ -16,7 +16,7 @@ describe('getNunjucksEnv', () => {
         },
       },
     };
-    const actual = getNunjucksEnv(null, env, null);
+    const actual = getCustomNunjucksEnv(null, env, null);
     assert.strictEqual(actual, 'some value');
   });
 
@@ -26,7 +26,7 @@ describe('getNunjucksEnv', () => {
         warn: sinon.fake(),
       },
     };
-    const actual = getNunjucksEnv(null, env, null);
+    const actual = getCustomNunjucksEnv(null, env, null);
     assert.strictEqual(actual, null);
     sinon.assert.calledOnce(env.logger.warn);
   });
@@ -41,7 +41,7 @@ describe('getNunjucksEnv', () => {
       },
     };
     // Look for side-effects:
-    getNunjucksEnv(null, env, null);
+    getCustomNunjucksEnv(null, env, null);
     assert(configure.calledWith('some value'));
   });
 });

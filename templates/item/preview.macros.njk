@@ -17,8 +17,8 @@
         {{ font_specimen(key, data.fonts[key], item.iframed) }}
       {% endif -%}
 
-      {%- if item.colors and data.colors[key] %}
-        {{ color_palette(data.colors[key]) }}
+      {%- if item.colors and data.colors[key] and item.iframed %}
+        {{ colors(item.iframed) }}
       {% endif -%}
 
       {%- if item.ratios and data.ratios[key] and item.iframed %}
@@ -39,35 +39,33 @@
   Display color palettes based on JSON map output.
 #}
 {% macro color_palette(data) %}
-  {% call show.item_section('color-palette', 'Color Previews') %}
-    <div class="color-palette">
-      {% for value, items in data|list|groupby('value') %}
-        <div class="color-preview">
-          <div class="color-swatch">
-            <div class="transparency-grid"></div>
-            <div class="color-overlay" style="background-color: {{ value }};"></div>
-          </div>
-          <div class="color-info">
-            <strong class="color-name">
-              {% for item in items %}
-                <span class="color-name-option">{{ item.key }}{% if not loop.last %},&nbsp;{% endif %}</span>
-              {% endfor %}
-            </strong>
-            {% set color = value|colors %}
-            {% if color %}
-              {% for format in ['hex', 'rgb', 'hsl'] %}
-                {% if color[format] %}
-                  <code class="color-value">{{ color[format] }}</code>
-                {% endif %}
-              {% endfor %}
-            {% else %}
-              <code class="color-value">{{ value }}</code>
-            {% endif %}
-          </div>
+  <div class="color-palette">
+    {% for value, items in data|list|groupby('value') %}
+      <div class="color-preview">
+        <div class="color-swatch">
+          <div class="transparency-grid"></div>
+          <div class="color-overlay" style="background-color: {{ value }};"></div>
         </div>
-      {% endfor %}
-    </div>
-  {% endcall %}
+        <div class="color-info">
+          <strong class="color-name">
+            {% for item in items %}
+              <span class="color-name-option">{{ item.key }}{% if not loop.last %},&nbsp;{% endif %}</span>
+            {% endfor %}
+          </strong>
+          {% set color = value|colors %}
+          {% if color %}
+            {% for format in ['hex', 'rgb', 'hsl'] %}
+              {% if color[format] %}
+                <code class="color-value">{{ color[format] }}</code>
+              {% endif %}
+            {% endfor %}
+          {% else %}
+            <code class="color-value">{{ value }}</code>
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
 {% endmacro %}
 
 
@@ -197,6 +195,13 @@
       {% endcall %}
     {% endif %}
   {% endfor %}
+{% endmacro %}
+
+
+{% macro colors(iframed) %}
+ {% call show.item_section('color-palette', 'Color Previews') %}
+    <iframe class="render-colors" srcdoc="{{ iframed }}" width="100%" height="0"></iframe>
+  {% endcall %}
 {% endmacro %}
 
 

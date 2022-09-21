@@ -1,0 +1,32 @@
+{% import 'item/preview.macros.njk' as preview %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <base target="_parent">
+
+  <title>colors</title>
+
+  {% if customCSS and customCSS.url %}
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ customCSS.url }}" />
+  {% endif %}
+
+  <!-- Herman iframe styles -->
+  <link rel="stylesheet" href="assets/webpack/iframe_styles.min.css" />
+
+  {% if fontsHTML %}
+    <!-- Custom Font HTML -->
+    {{ fontsHTML|safe }}
+  {% endif %}
+</head>
+<body data-herman-preview='colors'>
+  {%- set args = item.colors -%}
+
+  {{ preview.color_palette(
+    data=sassjson.colors[args.key]
+  ) }}
+</body>
+</html>
