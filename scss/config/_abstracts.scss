@@ -1,7 +1,9 @@
 @use 'sass:list';
 @use 'sass:meta';
 @use '../utilities';
-@use '~accoutrement/sass/tools';
+@use '~accoutrement/sass/tools' with (
+  $color-var-prefix: ''
+);
 
 // Accoutrement Utils
 // ==================
