@@ -61,7 +61,7 @@
   "dependencies": {
     "bluebird": "^3.7.2",
     "cheerio": "1.0.0-rc.12",
-    "colorjs.io": "^0.4.1",
+    "colorjs.io": "0.4.1-patch.1",
     "extend": "^3.0.2",
     "gulp-rename": "^2.0.0",
     "gulp-svg-symbols": "^3.2.3",
@@ -89,7 +89,7 @@
     "accoutrement": "^4.0.3",
     "autoprefixer": "^10.4.13",
     "babel-jest": "^29.2.2",
-    "babel-loader": "^9.0.0",
+    "babel-loader": "^9.0.1",
     "chalk": "^4.1.2",
     "core-js": "^3.26.0",
     "css-loader": "^6.7.1",
