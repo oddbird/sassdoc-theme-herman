@@ -32,7 +32,7 @@ describe('isString filter', () => {
 });
 
 describe('makeNunjucksColors', () => {
-  before(function () {
+  beforeEach(function () {
     this.ctx = {
       herman: {
         displayColors: undefined,
