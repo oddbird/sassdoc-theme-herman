@@ -50,6 +50,12 @@ describe('makeNunjucksColors', () => {
     sinon.assert.calledOnce(this.ctx.logger.warn);
   });
 
+  it('exits early on CSS custom properties', function () {
+    const actual = this.colors('var(--my-color)');
+    assert.strictEqual(actual, null);
+    sinon.assert.notCalled(this.ctx.logger.warn);
+  });
+
   it('switches on formats', function () {
     const actual = this.colors('#fefced');
     const expected = {
