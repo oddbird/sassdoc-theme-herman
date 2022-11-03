@@ -17,7 +17,6 @@
   ],
   "files": [
     "index.js",
-    "docs/",
     "dist/",
     "!dist/webpack/app_styles.min.js",
     "!dist/webpack/iframe_styles.min.js",
