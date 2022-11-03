@@ -47,7 +47,7 @@ jobs:
           cp -r ${{ github.workspace }}/docs/ herman/
           git config user.name github-actions
           git config user.email github-actions@github.com
-          git add -A
+          git add -A .
           git commit --allow-empty \
           -m "Update from https://github.com/${{ github.repository }}/commit/$SHA" \
           -m "Full log: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
