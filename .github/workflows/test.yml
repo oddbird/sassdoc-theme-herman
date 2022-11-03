@@ -1,0 +1,93 @@
+name: Lint & Test
+
+on:
+  push:
+  pull_request:
+    types: [reopened]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 'lts/*'
+          cache: yarn
+      - run: yarn install --immutable --immutable-cache
+      - run: yarn build
+
+  test-old-node:
+    name: Test on Node v14
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+          cache: yarn
+      - run: yarn install
+      - run: yarn mocha --timeout=10000 ".\test\js\*.js"
+
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 'lts/*'
+          cache: yarn
+      - run: yarn install
+      - run: yarn lint:ci
+
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 'lts/*'
+          cache: yarn
+      - run: yarn install
+      - run: yarn test:sass
+      - env:
+          MOCHA_FILE: './coverage/src/junit.xml'
+        run: yarn test:js:src:ci
+      - env:
+          JEST_JUNIT_OUTPUT_DIR: './coverage/client'
+        run: yarn test:js:client:ci
+      - name: Upload coverage results
+        uses: actions/upload-artifact@v3
+        with:
+          name: frontend-coverage
+          path: coverage
+
+  coverage:
+    name: Check coverage
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 'lts/*'
+          cache: yarn
+      - run: yarn install
+      - name: Download coverage results
+        uses: actions/download-artifact@v3
+        with:
+          name: frontend-coverage
+          path: coverage
+      - name: Check src coverage
+        run: yarn nyc check-coverage --temp-dir coverage/src
+      - name: Check client coverage
+        run: yarn nyc check-coverage --temp-dir coverage/client
