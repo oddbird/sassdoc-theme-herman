@@ -9,6 +9,7 @@
   fix bug displaying colors that use hue angle notation.
 - 🏠 INTERNAL: Remove documentation from npm package
 - 🏠 INTERNAL: Upgrade dependencies
+- 🏠 INTERNAL: Replace CircleCI, Codecov, and AppVeyor with GitHub Actions
 
 ## 5.0.0-beta.2: 2022-08-24
 
