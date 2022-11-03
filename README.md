@@ -107,7 +107,7 @@ for displaying [color-palettes][color-preview],
 
 [See the full documentation for details »][docs]
 
-[docs]: https://www.oddbird.net/herman/docs/CONFIGURATION.html
+[docs]: https://www.oddbird.net/herman/docs/configuration
 
 ## SassDoc Extras
 
