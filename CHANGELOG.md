@@ -7,6 +7,7 @@
 - 🐛 BUGFIX: Switch from [tinycolor](https://github.com/bgrins/TinyColor) to
   [colorjs.io](https://github.com/LeaVerou/color.js) for color conversions, to
   fix bug displaying colors that use hue angle notation.
+- 🏠 INTERNAL: Remove documentation from npm package
 - 🏠 INTERNAL: Upgrade dependencies
 - 🏠 INTERNAL: Replace CircleCI, Codecov, and AppVeyor with GitHub Actions
 
