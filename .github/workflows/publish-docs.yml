@@ -43,7 +43,8 @@ jobs:
           SHA=$(git rev-parse HEAD)
           cd docs-branch
           rm -rf herman/docs
-          cp -r ${{ github.workspace }}/docs herman/
+          mkdir -p herman/docs
+          cp -r ${{ github.workspace }}/docs/ herman/
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add -A
