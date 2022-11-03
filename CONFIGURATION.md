@@ -204,7 +204,7 @@ Relative path to a directory containing Nunjucks templates.
 
 [njk-instance]: https://mozilla.github.io/nunjucks/api.html#environment
 
-_Either [`nunjucks.templatePath`](#nunjucks-templatePath) or
+_Either [`nunjucks.templatePath`](#nunjucks-templatepath) or
 `nunjucks.environment` is required if using
 [`@example njk` annotation][example-njk]._
 
