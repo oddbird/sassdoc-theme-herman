@@ -1,6 +1,6 @@
 # Herman Changelog
 
-## UNRELEASED
+## 5.0.0-beta.3: 2022-11-07
 
 - 🚀 NEW: Color previews are now rendered in an `<iframe>` which allows them to
   make use of user-supplied `customCSS` and a limited subset of Herman styles.
