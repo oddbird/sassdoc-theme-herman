@@ -48,19 +48,19 @@
         </div>
         <div class="color-info">
           <strong class="color-name">
-            {% for item in items %}
-              <span class="color-name-option">{{ item.key }}{% if not loop.last %},&nbsp;{% endif %}</span>
-            {% endfor %}
+            {%- for item in items -%}
+              <span class="color-name-option">{{ item.key }}{%- if not loop.last %},&nbsp;{% endif -%}</span>
+            {%- endfor -%}
           </strong>
           {% set color = value|colors %}
           {% if color %}
             {% for format in ['hex', 'rgb', 'hsl'] %}
               {% if color[format] %}
-                <code class="color-value">{{ color[format] }}</code>
+                <code data-herman-code class="color-value">{{ color[format] }}</code>
               {% endif %}
             {% endfor %}
           {% else %}
-            <code class="color-value">{{ value }}</code>
+            <code data-herman-code class="color-value">{{ value }}</code>
           {% endif %}
         </div>
       </div>
