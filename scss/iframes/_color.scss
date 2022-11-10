@@ -8,6 +8,8 @@
 
 [data-herman-preview='colors'] {
   @include tools.colors--;
+
+  margin: 0;
 }
 
 .color-palette {
@@ -70,6 +72,10 @@
 .color-value {
   display: block;
   padding: tools.size('half-shim');
+}
+
+.color-name {
+  margin-top: tools.size('half-shim');
 }
 
 .color-name-option {
