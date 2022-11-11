@@ -8,9 +8,11 @@
 
 [data-herman-preview='colors'] {
   @include tools.colors--;
+
+  margin: 0;
 }
 
-.color-palette {
+[data-herman-color-palette] {
   display: flex;
   flex-wrap: wrap;
   margin: tools.negative('shim');
@@ -27,7 +29,7 @@
   }
 }
 
-.color-preview {
+[data-herman-color-preview] {
   align-items: stretch;
   display: flex;
   flex: 1 0 tools.size('color-preview');
@@ -43,20 +45,20 @@
 // Color Swatch
 // ------------
 
-.color-swatch {
+[data-herman-color-swatch] {
   border: 1px solid tools.color('border');
   height: tools.size('color-swatch');
   min-width: tools.size('color-swatch');
   position: relative;
 }
 
-.transparency-grid,
-.color-overlay {
+[data-herman-transparency-grid],
+[data-herman-color-overlay] {
   inset: 0;
   position: absolute;
 }
 
-.transparency-grid {
+[data-herman-transparency-grid] {
   background: url('data:image/svg+xml;utf8,<svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 20 20"><rect width="10" height="10"/><rect x="10" y="10" width="10" height="10"/></svg>')
     center repeat scroll;
   background-size: 0.5em 0.5em;
@@ -66,17 +68,21 @@
 // Color Info
 // ----------
 
-.color-name,
-.color-value {
+[data-herman-color-name],
+[data-herman-color-value] {
   display: block;
   padding: tools.size('half-shim');
 }
 
-.color-name-option {
+[data-herman-label='color'] {
+  --herman-label-margin: #{tools.size('half-shim')} 0 0;
+}
+
+[data-herman-color-name-option] {
   display: inline-block;
 }
 
-.color-value {
+[data-herman-color-value] {
   background-color: tools.color('slight');
   border-radius: tools.size('quarter-shim');
   box-shadow: 0 0 tools.size('quarter-shim') tools.color('code-shadow') inset;
