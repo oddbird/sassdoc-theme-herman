@@ -1,5 +1,9 @@
 # Herman Changelog
 
+## UNRELEASED
+
+- 🐛 BUGFIX: Add missing styles for color previews
+
 ## 5.0.0-beta.3: 2022-11-07
 
 - 🚀 NEW: Color previews are now rendered in an `<iframe>` which allows them to
