@@ -1,6 +1,6 @@
 # Herman Changelog
 
-## UNRELEASED
+## 5.0.0-beta.4: 2022-11-11
 
 - 🐛 BUGFIX: Add missing styles for color previews
 
