@@ -1,6 +1,5 @@
 [data-herman-label],
-[data-herman-th],
-.color-name {
+[data-herman-th] {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
     Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -27,7 +26,7 @@
 
 [data-herman-label] {
   background: var(--herman-label-color);
-  margin: 0.5em 0;
+  margin: var(--herman-label-margin, 0.5em 0);
   padding: var(--herman-label-padding, 0.25em 0);
 }
 

@@ -74,8 +74,8 @@
   padding: tools.size('half-shim');
 }
 
-.color-name {
-  margin-top: tools.size('half-shim');
+[data-herman-label='color'] {
+  --herman-label-margin: #{tools.size('half-shim')} 0 0;
 }
 
 .color-name-option {

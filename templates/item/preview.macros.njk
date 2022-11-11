@@ -47,7 +47,7 @@
           <div class="color-overlay" style="background-color: {{ value }};"></div>
         </div>
         <div class="color-info">
-          <strong class="color-name">
+          <strong class="color-name" data-herman-label="color">
             {%- for item in items -%}
               <span class="color-name-option">{{ item.key }}{%- if not loop.last %},&nbsp;{% endif -%}</span>
             {%- endfor -%}
