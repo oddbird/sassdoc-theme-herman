@@ -2,7 +2,7 @@
 @use 'sass:meta';
 @use '../utilities';
 @use '~accoutrement/sass/tools' with (
-  $color-var-prefix: ''
+  $color-var-prefix: 'herman-'
 );
 
 // Accoutrement Utils

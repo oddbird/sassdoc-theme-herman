@@ -101,27 +101,27 @@ $demo-colors: (
 ///
 /// In the `$custom-property-colors` map, we have
 /// created two new tokens, `link` and `link-action`,
-/// based on tokens stored in Herman's
-/// [$brand-colors][bc] map (which uses a darkened
-/// version of OddBird pink).
+/// based on tokens stored in the
+/// [$demo-colors][dc] map.
 ///
-/// The values in the `$brand-colors` map have been
-/// converted to CSS custom properties using
-/// Accoutrement's [colors\--()][cm] mixin.
+/// The values in the `$demo-colors` map have been
+/// converted to CSS custom properties (with an added
+/// `herman-` prefix) using Accoutrement's
+/// [colors\--()][cm] mixin.
 ///
 /// When displaying colors defined as CSS custom properties,
 /// the color name and variable name are displayed,
 /// but the `herman.displayColors` option is not used.
 ///
 /// [cv]: https://www.oddbird.net/accoutrement/docs/color-vars
-/// [bc]: https://www.oddbird.net/herman/docs/config-colors#variable--brand-colors
+/// [dc]: demo_colors.html#variable--demo-colors
 /// [cm]: https://www.oddbird.net/accoutrement/docs/color-vars.html#mixin--colors--
 ///
 /// @colors
 /// @group demo_colors
 $custom-property-colors: (
-  'link': var(--brand-blue),
-  'link-action': var(--brand-pink),
+  'link': var(--herman-brand-blue),
+  'link-action': var(--herman-brand-pink),
 );
 @include utilities.add(
   'colors',
