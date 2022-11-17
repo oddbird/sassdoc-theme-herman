@@ -2,6 +2,7 @@
 // ===============
 
 @use '~accoutrement/sass/tools';
+@use 'samples/colors';
 @use '../config';
 
 /// # Herman Typography
@@ -30,6 +31,7 @@
 /// @group style-typography
 :root {
   @include tools.font-family('sans');
+  @include tools.colors--(colors.$demo-colors);
 
   font-size: tools.size('root');
   font-size: tools.size('responsive');

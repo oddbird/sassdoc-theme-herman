@@ -44,6 +44,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["core-js", "npm:3.26.0"],\
             ["css-loader", "virtual:878b150fb95c14b92e1a083a8cdd5b07d75bde54934ebaf95859474dcc5db3d63d39a688ccdf72c7af702ac8d88c00a5b7e8d26a82dab7e202b18226de2a7429#npm:6.7.1"],\
             ["css-minimizer-webpack-plugin", "virtual:878b150fb95c14b92e1a083a8cdd5b07d75bde54934ebaf95859474dcc5db3d63d39a688ccdf72c7af702ac8d88c00a5b7e8d26a82dab7e202b18226de2a7429#npm:4.2.2"],\
+            ["css-tree", "npm:2.2.1"],\
             ["cssremedy", "npm:0.1.0-beta.2"],\
             ["del", "npm:6.1.1"],\
             ["eslint", "npm:8.27.0"],\
@@ -15392,6 +15393,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["core-js", "npm:3.26.0"],\
             ["css-loader", "virtual:878b150fb95c14b92e1a083a8cdd5b07d75bde54934ebaf95859474dcc5db3d63d39a688ccdf72c7af702ac8d88c00a5b7e8d26a82dab7e202b18226de2a7429#npm:6.7.1"],\
             ["css-minimizer-webpack-plugin", "virtual:878b150fb95c14b92e1a083a8cdd5b07d75bde54934ebaf95859474dcc5db3d63d39a688ccdf72c7af702ac8d88c00a5b7e8d26a82dab7e202b18226de2a7429#npm:4.2.2"],\
+            ["css-tree", "npm:2.2.1"],\
             ["cssremedy", "npm:0.1.0-beta.2"],\
             ["del", "npm:6.1.1"],\
             ["eslint", "npm:8.27.0"],\

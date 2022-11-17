@@ -2,14 +2,11 @@
 // ===============
 
 @use '~accoutrement/sass/tools';
-@use 'samples/colors';
 
 // Color Preview
 // -------------
 
 [data-herman-preview='colors'] {
-  @include tools.colors--(colors.$demo-colors);
-
   margin: 0;
 }
 

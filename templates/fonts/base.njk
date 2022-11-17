@@ -9,9 +9,11 @@
 
   <title>fonts</title>
 
-  {% if customCSS and customCSS.url %}
+  {% if customCSSProps %}
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="{{ customCSS.url }}" />
+    <style>
+      {{ customCSSProps | safe }}
+    </style>
   {% endif %}
 
   <!-- Herman iframe styles -->

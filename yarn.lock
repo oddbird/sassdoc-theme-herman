@@ -11715,6 +11715,7 @@ __metadata:
     core-js: ^3.26.0
     css-loader: ^6.7.1
     css-minimizer-webpack-plugin: ^4.2.2
+    css-tree: ^2.2.1
     cssremedy: ^0.1.0-beta.2
     del: ^6.1.1
     eslint: ^8.27.0
