@@ -1,5 +1,10 @@
 @use '~accoutrement/sass/tools';
 
+:root {
+  font-size: tools.size('root');
+  line-height: tools.ratio('line-height');
+}
+
 [data-herman-label],
 [data-herman-th] {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
