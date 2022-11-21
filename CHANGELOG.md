@@ -7,6 +7,9 @@
   are made available via the new (🚀) `customPropertiesCSS` or existing
   `customCSS` options. To be included, custom properties must be declared on
   `html`, `body`, or `:root`.
+- 🏠 INTERNAL: Replace [Bluebird](https://github.com/petkaantonov/bluebird/)
+  dependency with native promises.
+- 🏠 INTERNAL: Upgrade dependencies
 
 ## 5.0.0-beta.4: 2022-11-11
 

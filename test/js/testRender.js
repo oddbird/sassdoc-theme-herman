@@ -1,16 +1,14 @@
 'use strict';
 
 const assert = require('assert');
-const fs = require('fs');
+const fs = require('fs/promises');
 const path = require('path');
 
-const Promise = require('bluebird');
 const del = require('del');
 
 const render = require('../../lib/utils/render');
 const { getNunjucksEnv } = require('../../lib/utils/templates');
 
-const readFile = Promise.promisify(fs.readFile);
 const nunjucksEnv = getNunjucksEnv({});
 
 describe('render', () => {
@@ -27,7 +25,7 @@ describe('render', () => {
     const ctx = { name: 'World' };
 
     render(nunjucksEnv, this.tpl, this.dest, ctx)
-      .then(() => readFile(this.dest, 'utf-8'))
+      .then(() => fs.readFile(this.dest, 'utf-8'))
       .then((data) => {
         assert.ok(data.includes('<title>Title | Herman Documentation</title>'));
         assert.ok(

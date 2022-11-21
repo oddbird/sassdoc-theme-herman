@@ -2,8 +2,8 @@
 
 const assert = require('assert');
 const path = require('path');
+const util = require('util');
 
-const Promise = require('bluebird');
 const extend = require('extend');
 const nunjucks = require('nunjucks');
 const sinon = require('sinon');
@@ -1354,7 +1354,7 @@ describe('example annotation', () => {
 
     it('warns, exits if no sass and scss @example used', function (done) {
       const data = [{ example: [{ type: 'scss' }] }];
-      sinon.stub(Promise, 'promisify').throws();
+      sinon.stub(util, 'promisify').throws();
 
       this.example
         .resolve(data)
@@ -1365,7 +1365,7 @@ describe('example annotation', () => {
           ]);
         })
         .finally(() => {
-          Promise.promisify.restore();
+          util.promisify.restore();
           done();
         });
     });
@@ -1373,14 +1373,14 @@ describe('example annotation', () => {
     it('only requires sass once', function (done) {
       const data = [{ example: [{ type: 'scss', code: '' }] }];
       const data2 = [{ example: [{ type: 'scss', code: '' }] }];
-      sinon.spy(Promise, 'promisify');
+      sinon.spy(util, 'promisify');
 
       Promise.all([this.example.resolve(data), this.example.resolve(data2)])
         .then(() => {
-          sinon.assert.calledOnce(Promise.promisify);
+          sinon.assert.calledOnce(util.promisify);
         })
         .finally(() => {
-          Promise.promisify.restore();
+          util.promisify.restore();
           done();
         });
     });
