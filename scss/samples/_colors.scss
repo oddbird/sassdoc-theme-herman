@@ -115,6 +115,10 @@ $demo-colors: (
 /// set as the [`herman.customPropertiesCSS` configuration option][config-cpcss].
 /// If that option is not set, the [`herman.customCSS`][config-ccss] stylesheet
 /// will be used instead.
+/// Custom properties are read
+/// in the order they are defined in the stylesheet,
+/// so later properties will override earlier properties
+/// with the same name.
 ///
 /// When displaying colors defined as CSS custom properties,
 /// the color name and variable name are displayed,
