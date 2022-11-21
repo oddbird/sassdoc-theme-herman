@@ -1,0 +1,10 @@
+// Herman Custom Properties for <iframe> Previews
+// ==============================================
+
+@use 'config';
+@use '~accoutrement/sass/tools';
+@use 'samples/colors';
+
+:root {
+  @include tools.colors--(colors.$demo-colors);
+}

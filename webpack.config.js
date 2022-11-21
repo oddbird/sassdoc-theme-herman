@@ -96,6 +96,7 @@ module.exports = {
     app_styles: ['main.scss'],
     iframe_styles: ['iframes.scss'],
     styleguide_json: ['json.scss'],
+    styleguide_custom_props: ['custom-props.scss'],
   },
   output: {
     path: outputPath,
@@ -159,6 +160,10 @@ module.exports = {
     new SassDocPlugin(sassDocOpts, {
       assetPaths: [
         { entry: 'app_styles', optPath: 'herman.customCSS' },
+        {
+          entry: 'styleguide_custom_props',
+          optPath: 'herman.customPropertiesCSS',
+        },
         { entry: 'styleguide_json', optPath: 'herman.sass.jsonFile' },
       ],
       outputPath,

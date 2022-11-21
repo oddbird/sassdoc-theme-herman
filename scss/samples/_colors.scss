@@ -14,7 +14,7 @@
 /// to ensure that Herman has access
 /// to your exported Sass data.
 ///
-/// [json]: CONFIGURATION.html#sass-jsonfile
+/// [json]: https://www.oddbird.net/herman/docs/configuration#sass-jsonfile
 ///
 /// Whether you store colors as individual variables
 /// or group them into a map,
@@ -109,13 +109,23 @@ $demo-colors: (
 /// `herman-` prefix) using Accoutrement's
 /// [colors\--()][cm] mixin.
 ///
+/// To display color values stored as custom properties,
+/// the custom properties must be declared
+/// on `html`, `body`, or `:root` in the stylesheet
+/// set as the [`herman.customPropertiesCSS` configuration option][config-cpcss].
+/// If that option is not set, the [`herman.customCSS`][config-ccss] stylesheet
+/// will be used instead.
+///
 /// When displaying colors defined as CSS custom properties,
 /// the color name and variable name are displayed,
-/// but the `herman.displayColors` option is not used.
+/// but the [`herman.displayColors` option][config-dc] is not used.
 ///
 /// [cv]: https://www.oddbird.net/accoutrement/docs/color-vars
-/// [dc]: demo_colors.html#variable--demo-colors
-/// [cm]: https://www.oddbird.net/accoutrement/docs/color-vars.html#mixin--colors--
+/// [dc]: https://www.oddbird.net/herman/docs/demo_colors#variable--demo-colors
+/// [cm]: https://www.oddbird.net/accoutrement/docs/color-vars#mixin--colors--
+/// [config-cpcss]: https://www.oddbird.net/herman/docs/configuration#custompropertiescss
+/// [config-ccss]: https://www.oddbird.net/herman/docs/configuration#customcss
+/// [config-dc]: https://www.oddbird.net/herman/docs/configuration#displaycolors
 ///
 /// @colors
 /// @group demo_colors
@@ -175,7 +185,7 @@ $custom-property-colors: (
 ///
 /// [See the color map documentation for details »][color-docs]
 ///
-/// [color-docs]: api_json-export.html#colors
+/// [color-docs]: https://www.oddbird.net/herman/docs/api_json-export#colors
 ///
 /// @see $herman
 /// @see add

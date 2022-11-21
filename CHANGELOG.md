@@ -1,5 +1,13 @@
 # Herman Changelog
 
+## UNRELEASED
+
+- 💥 BREAKING: Font, ratio, size, and color previews are now rendered without
+  user-provided stylesheets (to avoid style conflicts). CSS custom properties
+  are made available via the new (🚀) `customPropertiesCSS` or existing
+  `customCSS` options. To be included, custom properties must be declared on
+  `html`, `body`, or `:root`.
+
 ## 5.0.0-beta.4: 2022-11-11
 
 - 🐛 BUGFIX: Add missing styles for color previews
@@ -580,7 +588,7 @@ _No changes from `v1.0.0-rc.8`. Changes since `v0.5.5`:_
 
 - Inject preview data directly into HTML,
   so that previews don't have to be styled locally
-- Add [Sass Utilities](https://www.oddbird.net/herman/docs/api_json-export.html)
+- Add [Sass Utilities](https://www.oddbird.net/herman/docs/api_json-export)
   file, for help with setting/exporting Sass data
 - `herman-add-color` mixin now exports hex, rgba, and hsla colors.
 - Simplified font previews don't require size input
@@ -592,7 +600,7 @@ _No changes from `v1.0.0-rc.8`. Changes since `v0.5.5`:_
   (default is `6`)
 - Size preview accepts `style` argument [`text` | `ruler` | `output-only`],
   determining the type of preview to display (default is `text`, see
-  [scale](https://www.oddbird.net/herman/docs/demo_sizes.html) for examples)
+  [scale](https://www.oddbird.net/herman/docs/demo_sizes) for examples)
 
 ## 0.3.2: 2016-09-29
 

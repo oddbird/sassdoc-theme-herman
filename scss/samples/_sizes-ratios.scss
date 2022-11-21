@@ -12,7 +12,7 @@
 /// to ensure that Herman has access
 /// to your exported Sass data.
 ///
-/// [json]: CONFIGURATION.html#sass-jsonfile
+/// [json]: https://www.oddbird.net/herman/docs/configuration#sass-jsonfile
 ///
 /// In addition to documenting colors and fonts,
 /// you can use Herman to document and display ratios and sizes.
@@ -20,7 +20,7 @@
 /// but we'll start with individual ratios/sizes,
 /// and build the export from there.
 ///
-/// [color-preview]: demo_colors.html
+/// [color-preview]: https://www.oddbird.net/herman/docs/demo_colors
 ///
 /// Let's start with a ratio and two sizes:
 ///
@@ -191,8 +191,8 @@ $demo-sizes-large: (
 /// Once your data is all stored in the `$herman` map,
 /// it can be converted to JSON using `export`.
 ///
-/// [export]: api_json-export.html
-/// [size-docs]: api_json-export.html#sizes-ratios
+/// [export]: https://www.oddbird.net/herman/docs/api_json-export
+/// [size-docs]: https://www.oddbird.net/herman/docs/api_json-export#sizes-ratios
 ///
 /// @see $herman
 /// @see add
