@@ -305,7 +305,7 @@ as that output will be displayed in every single Sass example.
 
 [dart-sass-modules]: https://sass-lang.com/blog/the-module-system-is-launched
 
-### sass.includes
+### sass.includes [deprecated]
 
 - Type: `Array`
 - Default: `[]`
