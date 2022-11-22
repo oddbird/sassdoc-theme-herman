@@ -2,6 +2,18 @@
 
 ## UNRELEASED
 
+- 💥 BREAKING: Require Dart Sass (`^1.45.0`) for `@example scss` annotations,
+  using the updated [Dart Sass JavaScript
+  API](https://sass-lang.com/documentation/js-api/). The `sass.implementation`
+  option is removed, along with support for `node-sass`.
+- 💥 BREAKING: Rename `sass.importer` option to `sass.importers`, matching the
+  [Dart Sass
+  option](https://sass-lang.com/documentation/js-api/interfaces/Options#importers).
+- 💥 BREAKING: Remove `sass.includePaths` and `sass.outputStyle` options. These
+  are replaced with a new `sass.sassOptions` option, which accepts any options
+  that Dart Sass accepts (e.g. `loadPaths` or `style`). See the [Dart Sass
+  documentation](https://sass-lang.com/documentation/js-api/modules#compileStringAsync)
+  for more details.
 - 💥 BREAKING: Font, ratio, size, and color previews are now rendered without
   user-provided stylesheets (to avoid style conflicts). CSS custom properties
   are made available via the new (🚀) `customPropertiesCSS` or existing

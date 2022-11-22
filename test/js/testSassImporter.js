@@ -3,19 +3,19 @@
 const assert = require('assert');
 const path = require('path');
 
-const importer = require('../../lib/utils/sassImporter');
+const { findFileUrl } = require('../../lib/utils/sassImporter');
 
 describe('sassImporter', () => {
   it('returns resolved path', () => {
     assert.ok(
-      importer('~sass-true').file.startsWith(
-        path.resolve(process.cwd(), '.yarn/cache'),
-      ),
+      findFileUrl('~sass-true')
+        .toString()
+        .startsWith(`file://${path.resolve(process.cwd(), '.yarn/')}`),
     );
     assert.ok(
-      importer('~@babel/core').file.startsWith(
-        path.resolve(process.cwd(), '.yarn/cache'),
-      ),
+      findFileUrl('~@babel/core')
+        .toString()
+        .startsWith(`file://${path.resolve(process.cwd(), '.yarn/')}`),
     );
   });
 });

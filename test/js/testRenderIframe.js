@@ -3,7 +3,6 @@
 const assert = require('assert');
 const path = require('path');
 
-const extend = require('extend');
 const sinon = require('sinon');
 
 const renderIframe = require('../../lib/renderIframe');
@@ -62,7 +61,7 @@ describe('renderIframe', () => {
     });
 
     it('inserts HTML if env.herman.customHTML is bad path', function (done) {
-      const env = extend({}, this.env);
+      const env = Object.assign({}, this.env);
       env.herman.customHTML = 'foo.bar';
       const item = {
         rendered: true,
@@ -148,7 +147,7 @@ describe('renderIframe', () => {
     });
 
     it('logs the error on a bad sassjson', function (done) {
-      const env = extend({}, this.env);
+      const env = Object.assign({}, this.env);
       env.herman.sass.jsonFile = 'foo.bar';
       const item = {
         font: {
@@ -203,7 +202,7 @@ describe('renderIframe', () => {
       });
 
       it('logs error on a bad filepath', function (done) {
-        const env = extend({}, this.env);
+        const env = Object.assign({}, this.env);
         env.herman.customPropertiesCSS = 'foo.bar';
 
         renderIframe(this.env, this.item, 'colors')
@@ -252,7 +251,7 @@ describe('renderIframe', () => {
       });
 
       it('logs error on a bad filepath', function (done) {
-        const env = extend({}, this.env);
+        const env = Object.assign({}, this.env);
         env.herman.customCSS = 'foo.bar';
 
         renderIframe(this.env, this.item, 'colors')
