@@ -211,9 +211,6 @@ module.exports = {
           {
             loader: 'sass-loader',
             options: {
-              sassOptions: {
-                quietDeps: true,
-              },
               sourceMap: true,
             },
           },

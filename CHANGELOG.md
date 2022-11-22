@@ -1,6 +1,6 @@
 # Herman Changelog
 
-## UNRELEASED
+## 5.0.0-beta.5: 2022-11-22
 
 - 💥 BREAKING: Require Dart Sass (`^1.45.0`) for `@example scss` annotations,
   using the updated [Dart Sass JavaScript
