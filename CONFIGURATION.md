@@ -254,70 +254,29 @@ See [Exporting Styles to JSON][export].
 [export]: https://www.oddbird.net/herman/docs/api_json-export
 [export-mixin]: https://www.oddbird.net/herman/docs/api_json-export#mixin--export
 
-### sass.implementation
+### sass.importers
 
-- Type: Sass implementation instance
-- Default: Dart Sass instance
+- Type: `Array`
+- Default: `Array` containing the [Herman Sass importer][sass-importer],
+  which supports `~` imports for external modules installed via npm or Yarn.
 
-Determines the Sass implementation (defaults to [Dart Sass][dart-sass]) to use
-for Sass compilation if using [`@example scss` annotation][example-docs-scss]. This
-option expects an implementation providing a `renderSync` method with the [same
-signature][] as Dart Sass, and support for the [Sass module system][].
-
-[dart-sass]: https://sass-lang.com/dart-sass
-[same signature]: https://sass-lang.com/documentation/js-api#rendersync
-[sass module system]: https://sass-lang.com/blog/the-module-system-is-launched
-
-### sass.importer
-
-- Type: `Array` || `Function`
-- Default: [Custom Herman Sass importer][sass-importer]
-
-Function (or array of functions)
+Array of functions
 used to resolve `@use` and `@import` file paths.
-Passed through to Sass [importer] when
+Passed through to Sass [importers] option when
 compiling `@example sass/scss` annotations.
 See our [`@example` documentation][example-docs-scss].
 
 [sass-importer]: https://github.com/oddbird/sassdoc-theme-herman/blob/main/lib/utils/sassImporter.js
-[importer]: https://sass-lang.com/documentation/js-api#importer
-
-### sass.includePaths
-
-- Type: `Array`
-- Default: `[]`
-
-Array of load paths used to resolve `@use` and `@import` declarations.
-Passed through to Sass [includePaths] when
-compiling `@example sass/scss` annotations.
-See our [`@example` documentation][example-docs-scss].
-
-[includepaths]: https://sass-lang.com/documentation/js-api#includepaths
-
-### sass.includes
-
-- Type: `Array`
-- Default: `[]`
-
-List of files (relative to any [`sass.includePaths`](#sass-includepaths)) to
-`@import` for all `@example sass/scss` annotations.
-See our [`@example` documentation][example-docs-scss].
-
-This is useful for including any global
-Sass configuration and toolkit files
-that may be used by any example.
-It's best to avoid files with output CSS,
-as that output will be displayed in every single Sass example.
-
-[example-docs-scss]: https://www.oddbird.net/herman/docs/demo_examples#compiling-sass-scss
+[importers]: https://sass-lang.com/documentation/js-api/interfaces/Importer
 
 ### sass.use
 
 - Type: `Array`
 - Default: `[]`
 
-List of files (relative to any [`sass.includePaths`](#sass-includepaths)) to
-`@use` for all `@example sass/scss` annotations.
+List of files (relative to any
+[`sass.sassOptions.loadPaths`](#sass-sassoptions)) to `@use`
+for all `@example sass/scss` annotations.
 See our [`@example` documentation][example-docs-scss].
 
 Each item in the array can be a string (path to the file)
@@ -328,12 +287,13 @@ or an object with `file` and `namespace` keys
 # .sassdocrc
 herman:
   sass:
-    includePaths:
-      - 'static/sass'
     use:
       - 'config/tools'
       - file: 'config/other-tools'
         namespace: 'my-tools'
+    sassOptions:
+      loadPaths:
+        - 'static/sass'
 ```
 
 This is useful for including any global
@@ -345,15 +305,36 @@ as that output will be displayed in every single Sass example.
 
 [dart-sass-modules]: https://sass-lang.com/blog/the-module-system-is-launched
 
-### sass.outputStyle
+### sass.includes
 
-- Type: `String`
-- Default: `'expanded'`
+- Type: `Array`
+- Default: `[]`
 
-Determines the output format of the final CSS
-of compiled `@example sass/scss` annotations.
-Passed through to Sass [outputStyle] option.
-Accepts `'expanded'` or `'compressed'`.
+List of files (relative to any
+[`sass.sassOptions.loadPaths`](#sass-sassoptions)) to `@import`
+for all `@example sass/scss` annotations.
 See our [`@example` documentation][example-docs-scss].
 
-[outputstyle]: https://sass-lang.com/documentation/js-api#outputstyle
+This is useful for including any global
+Sass configuration and toolkit files
+that may be used by any example.
+It's best to avoid files with output CSS,
+as that output will be displayed in every single Sass example.
+
+**Note:** Use of `@import` is [discouraged];
+prefer the [`sass.use` option](#sass-use) instead.
+
+[example-docs-scss]: https://www.oddbird.net/herman/docs/demo_examples#compiling-sass-scss
+[discouraged]: https://sass-lang.com/documentation/at-rules/import
+
+### sass.sassOptions
+
+- Type: `Object`
+- Default: `{}`
+
+Options (e.g. `loadPaths` or `style`) that are passed
+directly through to Dart Sass
+when compiling `@example sass/scss` annotations.
+See the [Dart Sass documentation][dart-sass-docs] for more info.
+
+[dart-sass-docs]: https://sass-lang.com/documentation/js-api/modules#compileStringAsync
