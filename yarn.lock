@@ -4065,7 +4065,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"colorjs.io@npm:0.4.2":
+"colorjs.io@npm:^0.4.2":
   version: 0.4.2
   resolution: "colorjs.io@npm:0.4.2"
   checksum: b825dcfe9d098dc7960bb484c67946d5ca2bfe8161c70bce02ac1635774cca0a3acb933359739bc768a94cb3cdfc561282ea8131e0c1024be5a3d92210d3da78
@@ -11686,7 +11686,7 @@ __metadata:
     babel-loader: ^9.1.0
     chalk: ^4.1.2
     cheerio: 1.0.0-rc.12
-    colorjs.io: 0.4.2
+    colorjs.io: ^0.4.2
     core-js: ^3.26.1
     css-loader: ^6.7.2
     css-minimizer-webpack-plugin: ^4.2.2
