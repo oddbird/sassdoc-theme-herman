@@ -27,11 +27,11 @@ with additional support for
 [compiled languages][example-docs], Nunjucks/Jinja macros, HTML previews,
 and more.
 
-[font-docs]: https://www.oddbird.net/herman/docs/demo_fonts.html
-[color-preview]: https://www.oddbird.net/herman/docs/demo_colors.html
-[size-preview]: https://www.oddbird.net/herman/docs/demo_sizes.html
-[icon-docs]: https://www.oddbird.net/herman/docs/demo_icons.html
-[example-docs]: https://www.oddbird.net/herman/docs/demo_examples.html
+[font-docs]: https://www.oddbird.net/herman/docs/demo_fonts
+[color-preview]: https://www.oddbird.net/herman/docs/demo_colors
+[size-preview]: https://www.oddbird.net/herman/docs/demo_sizes
+[icon-docs]: https://www.oddbird.net/herman/docs/demo_icons
+[example-docs]: https://www.oddbird.net/herman/docs/demo_examples
 
 ## Getting Started
 

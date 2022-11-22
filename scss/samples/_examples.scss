@@ -62,20 +62,21 @@
 /// All Sass examples must be complete and valid,
 /// with the ability to import Sass partials inside each example.
 /// In order for this to work with Sass/Scss,
-/// you must set an `includePaths` key
-/// in your sassdoc `herman.sass` configuration object --
+/// you must set a `loadPaths` key
+/// in your sassdoc `herman.sass.sassOptions` configuration object --
 /// an array of places to look for Sass includes:
 ///
 /// ```yaml
 /// herman:
 ///   sass:
-///     includePaths:
-///       - 'static/sass'
-///       - 'node_modules'
+///     sassOptions:
+///       loadPaths:
+///         - 'static/sass'
+///         - 'node_modules'
 /// ```
 ///
 /// You can also set an array of default `includes` or `use`
-/// (relative to any `includePaths`)
+/// (relative to any `loadPaths`)
 /// to include for all Sass examples:
 ///
 /// To `@import` files:
@@ -84,8 +85,9 @@
 /// # .sassdocrc (yaml)
 /// herman:
 ///   sass:
-///     includePaths:
-///       - 'static/sass'
+///     sassOptions:
+///       loadPaths:
+///         - 'static/sass'
 ///     includes:
 ///       - 'utilities'
 ///       - 'config'
@@ -97,8 +99,9 @@
 /// # .sassdocrc (yaml)
 /// herman:
 ///   sass:
-///     includePaths:
-///       - 'static/sass'
+///     sassOptions:
+///       loadPaths:
+///         - 'static/sass'
 ///     use:
 ///       - 'config/tools'
 ///       - file: 'config/other-tools'
@@ -111,15 +114,16 @@
 ///
 /// By default, the CSS output will be "expanded"
 /// (see the [Sass] docs).
-/// You can override this with the `outputStyle` option:
+/// You can override this with the `style` option:
 ///
-/// [Sass]: https://sass-lang.com/documentation/js-api#outputstyle
+/// [Sass]: https://sass-lang.com/documentation/js-api/interfaces/StringOptionsWithoutImporter#style
 ///
 /// ```yaml
 /// # .sassdocrc (yaml)
 /// herman:
 ///   sass:
-///     outputStyle: 'compressed'
+///     sassOptions:
+///       style: 'compressed'
 /// ```
 ///
 /// @group demo_examples

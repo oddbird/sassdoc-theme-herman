@@ -3,7 +3,6 @@
 const assert = require('assert');
 const path = require('path');
 
-const extend = require('extend');
 const sinon = require('sinon');
 
 const renderIframe = require('../../lib/renderIframe');
@@ -62,7 +61,7 @@ describe('renderIframe', () => {
     });
 
     it('inserts HTML if env.herman.customHTML is bad path', function (done) {
-      const env = extend({}, this.env);
+      const env = Object.assign({}, this.env);
       env.herman.customHTML = 'foo.bar';
       const item = {
         rendered: true,
@@ -148,7 +147,7 @@ describe('renderIframe', () => {
     });
 
     it('logs the error on a bad sassjson', function (done) {
-      const env = extend({}, this.env);
+      const env = Object.assign({}, this.env);
       env.herman.sass.jsonFile = 'foo.bar';
       const item = {
         font: {
@@ -167,24 +166,102 @@ describe('renderIframe', () => {
   });
 
   describe('colors', () => {
-    beforeEach(function () {
-      this.env = {};
+    describe('customPropertiesCSS', () => {
+      beforeEach(function () {
+        this.env = {
+          herman: {
+            customPropertiesCSS: 'test/js/fixtures/css/custom-props.css',
+          },
+          logger: { warn: sinon.fake() },
+          dir: __dirname,
+        };
+        this.item = {
+          colors: [{}],
+        };
+        sinon.stub(nunjucksEnv, 'render').returns('some iframed');
+      });
+
+      afterEach(() => {
+        nunjucksEnv.render.restore();
+      });
+
+      it('renders', function (done) {
+        renderIframe(this.env, this.item, 'colors')
+          .then(() => {
+            assert.strictEqual(this.item.iframed, 'some iframed');
+            assert.ok(
+              this.env.customCSSProps.includes('--herman-test-color: #e2127a'),
+            );
+            assert.ok(
+              !this.env.customCSSProps.includes('--herman-other-color'),
+            );
+
+            done();
+          })
+          .catch(done);
+      });
+
+      it('logs error on a bad filepath', function (done) {
+        const env = Object.assign({}, this.env);
+        env.herman.customPropertiesCSS = 'foo.bar';
+
+        renderIframe(this.env, this.item, 'colors')
+          .then(() => {
+            sinon.assert.calledOnce(env.logger.warn);
+
+            done();
+          })
+          .catch(done);
+      });
     });
 
-    it('renders', function (done) {
-      sinon.stub(nunjucksEnv, 'render').returns('some iframed');
-      const item = {
-        colors: [{}],
-      };
+    describe('customCSS', () => {
+      beforeEach(function () {
+        this.env = {
+          herman: {
+            customCSS: 'test/js/fixtures/css/main.css',
+          },
+          logger: { warn: sinon.fake() },
+          dir: __dirname,
+        };
+        this.item = {
+          colors: [{}],
+        };
+        sinon.stub(nunjucksEnv, 'render').returns('some iframed');
+      });
 
-      renderIframe(this.env, item, 'colors')
-        .then(() => {
-          assert.strictEqual(item.iframed, 'some iframed');
+      afterEach(() => {
+        nunjucksEnv.render.restore();
+      });
 
-          nunjucksEnv.render.restore();
-          done();
-        })
-        .catch(done);
+      it('renders', function (done) {
+        renderIframe(this.env, this.item, 'colors')
+          .then(() => {
+            assert.strictEqual(this.item.iframed, 'some iframed');
+            assert.ok(
+              this.env.customCSSProps.includes('--herman-test-color: #e2127a'),
+            );
+            assert.ok(
+              !this.env.customCSSProps.includes('--herman-other-color'),
+            );
+
+            done();
+          })
+          .catch(done);
+      });
+
+      it('logs error on a bad filepath', function (done) {
+        const env = Object.assign({}, this.env);
+        env.herman.customCSS = 'foo.bar';
+
+        renderIframe(this.env, this.item, 'colors')
+          .then(() => {
+            sinon.assert.calledOnce(env.logger.warn);
+
+            done();
+          })
+          .catch(done);
+      });
     });
   });
 });

@@ -1,3 +1,7 @@
+@use '~accoutrement/sass/tools' with (
+  $color-var-prefix: 'herman-'
+);
+
 // Base Manifest
 // =============
 

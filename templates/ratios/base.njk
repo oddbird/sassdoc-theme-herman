@@ -9,9 +9,11 @@
 
   <title>ratios</title>
 
-  {% if customCSS and customCSS.url %}
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="{{ customCSS.url }}" />
+  {% if customCSSProps %}
+    <!-- App CSS custom properties -->
+    <style>
+      {{ customCSSProps | safe }}
+    </style>
   {% endif %}
 
   <!-- Herman iframe styles -->

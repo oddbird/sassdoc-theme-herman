@@ -1,15 +1,12 @@
 'use strict';
 
 const assert = require('assert');
-const fs = require('fs');
+const fs = require('fs/promises');
 
-const Promise = require('bluebird');
 const del = require('del');
 
 const prepareContext = require('../../lib/prepareContext');
 const { renderHerman } = require('../../lib/renderHerman');
-
-const access = Promise.promisify(fs.access);
 
 describe('renderHerman', () => {
   before(function () {
@@ -25,7 +22,7 @@ describe('renderHerman', () => {
       data: [],
     })
       .then((ctx) => renderHerman(this.dest, ctx))
-      .then(() => access(`${this.dest}/index.html`))
+      .then(() => fs.access(`${this.dest}/index.html`))
       .then(() => {
         assert.ok(true);
         done();
@@ -41,7 +38,7 @@ describe('renderHerman', () => {
       shortcutIcon,
     })
       .then((ctx) => renderHerman(this.dest, ctx))
-      .then(() => access(expectedShortcutIcon))
+      .then(() => fs.access(expectedShortcutIcon))
       .then(() => {
         assert.ok(true);
         done();
@@ -56,7 +53,7 @@ describe('renderHerman', () => {
       shortcutIcon: 'http://example.com/img/favicon.ico',
     })
       .then((ctx) => renderHerman(this.dest, ctx))
-      .then(() => access(expectedShortcutIcon))
+      .then(() => fs.access(expectedShortcutIcon))
       .then(() => {
         // The file should not have been copied
         assert.fail();
@@ -76,8 +73,8 @@ describe('renderHerman', () => {
       },
     })
       .then((ctx) => renderHerman(this.dest, ctx))
-      .then(() => access(`${this.dest}/assets/custom/main.css`))
-      .then(() => access(`${this.dest}/assets/custom/main.css.map`))
+      .then(() => fs.access(`${this.dest}/assets/custom/main.css`))
+      .then(() => fs.access(`${this.dest}/assets/custom/main.css.map`))
       .then(() => {
         assert.ok(true);
         done();
@@ -96,11 +93,11 @@ describe('renderHerman', () => {
       },
     })
       .then((ctx) => renderHerman(this.dest, ctx))
-      .then(() => access(`${this.dest}/assets/custom/other.css.map`))
+      .then(() => fs.access(`${this.dest}/assets/custom/other.css.map`))
       .then(() => {
         assert.ok(true);
       })
-      .then(() => access(`${this.dest}/assets/custom/main.css.map`))
+      .then(() => fs.access(`${this.dest}/assets/custom/main.css.map`))
       .then(() => {
         // The file should not have been copied
         assert.fail();
@@ -123,7 +120,7 @@ describe('renderHerman', () => {
       },
     })
       .then((ctx) => renderHerman(this.dest, ctx))
-      .then(() => access(`${this.dest}/assets/custom/main.css.map`))
+      .then(() => fs.access(`${this.dest}/assets/custom/main.css.map`))
       .then(() => {
         // The file should not have been copied
         assert.fail();
@@ -144,7 +141,7 @@ describe('renderHerman', () => {
       customCSSFiles: [`${__dirname}/fixtures/icons/not-an-svg-icon.png`],
     })
       .then((ctx) => renderHerman(this.dest, ctx))
-      .then(() => access(`${this.dest}/assets/custom/not-an-svg-icon.png`))
+      .then(() => fs.access(`${this.dest}/assets/custom/not-an-svg-icon.png`))
       .then(() => {
         assert.ok(true);
         done();
@@ -164,7 +161,7 @@ describe('renderHerman', () => {
         ctx.dir = __dirname;
         return renderHerman(this.dest, ctx);
       })
-      .then(() => access(`${this.dest}/assets/fonts/sample.ttf`))
+      .then(() => fs.access(`${this.dest}/assets/fonts/sample.ttf`))
       .then(() => {
         assert.ok(true);
         done();
@@ -184,7 +181,7 @@ describe('renderHerman', () => {
       ],
     })
       .then((ctx) => renderHerman(this.dest, ctx))
-      .then(() => access(`${this.dest}/simple.html`))
+      .then(() => fs.access(`${this.dest}/simple.html`))
       .then(() => {
         assert.ok(true);
         done();
@@ -235,8 +232,8 @@ describe('renderHerman', () => {
         delete ctx.groups.fail;
         return renderHerman(this.dest, ctx);
       })
-      .then(() => access(`${this.dest}/group1.html`))
-      .then(() => access(`${this.dest}/group2.html`))
+      .then(() => fs.access(`${this.dest}/group1.html`))
+      .then(() => fs.access(`${this.dest}/group2.html`))
       .then(() => {
         assert.ok(true);
         done();
@@ -249,7 +246,7 @@ describe('renderHerman', () => {
       data: [],
     })
       .then((ctx) => renderHerman(this.dest, ctx))
-      .then(() => access(`${this.dest}/search-data.json`))
+      .then(() => fs.access(`${this.dest}/search-data.json`))
       .then(() => {
         assert.ok(true);
         done();

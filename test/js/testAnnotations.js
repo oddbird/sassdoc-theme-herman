@@ -2,9 +2,8 @@
 
 const assert = require('assert');
 const path = require('path');
+const { pathToFileURL } = require('url');
 
-const Promise = require('bluebird');
-const extend = require('extend');
 const nunjucks = require('nunjucks');
 const sinon = require('sinon');
 
@@ -1091,6 +1090,9 @@ describe('example annotation', () => {
         nunjucks: {
           templatePath: path.resolve(__dirname, 'fixtures', 'templates'),
         },
+        sass: {
+          sassOptions: {},
+        },
       },
       logger: { warn: sinon.fake() },
     };
@@ -1192,7 +1194,7 @@ describe('example annotation', () => {
     });
 
     it('reports errors in sass compilation', function (done) {
-      const env = extend(true, {}, this.env, {
+      const env = Object.assign({}, this.env, {
         herman: {
           sass: {},
         },
@@ -1232,11 +1234,13 @@ describe('example annotation', () => {
           ],
         },
       ];
-      const env = extend(true, {}, this.env, {
+      const env = Object.assign({}, this.env, {
         herman: {
           sass: {
             includes: ['~accoutrement/sass/color', 'import', 'tools'],
-            includePaths: [path.join(__dirname, 'fixtures', 'scss')],
+            sassOptions: {
+              loadPaths: [path.join(__dirname, 'fixtures', 'scss')],
+            },
           },
         },
       });
@@ -1264,7 +1268,7 @@ describe('example annotation', () => {
           ],
         },
       ];
-      const env = extend(true, {}, this.env, {
+      const env = Object.assign({}, this.env, {
         herman: {
           sass: {
             use: [
@@ -1273,9 +1277,9 @@ describe('example annotation', () => {
               { file: 'tools', namespace: 'my-tools' },
               {},
             ],
-            includePaths: [path.join(__dirname, 'fixtures', 'scss')],
-            // eslint-disable-next-line global-require
-            implementation: require('sass'),
+            sassOptions: {
+              loadPaths: [path.join(__dirname, 'fixtures', 'scss')],
+            },
           },
         },
       });
@@ -1292,7 +1296,7 @@ describe('example annotation', () => {
         .catch(done);
     });
 
-    it('uses custom `importer` setting', function (done) {
+    it('uses custom `importers` setting', function (done) {
       const data = [
         {
           example: [
@@ -1303,11 +1307,19 @@ describe('example annotation', () => {
           ],
         },
       ];
-      const env = extend(true, {}, this.env, {
+      const env = Object.assign({}, this.env, {
         herman: {
           sass: {
-            importer: (url, prev, cb) => cb({ file: 'import' }),
-            includePaths: [path.join(__dirname, 'fixtures', 'scss')],
+            importers: [
+              {
+                findFileUrl: () =>
+                  new URL(
+                    pathToFileURL(
+                      path.join(__dirname, 'fixtures', 'scss', 'import'),
+                    ),
+                  ),
+              },
+            ],
           },
         },
       });
@@ -1324,7 +1336,7 @@ describe('example annotation', () => {
         .catch(done);
     });
 
-    it('uses custom `outputStyle` setting', function (done) {
+    it('respects sass `style` setting', function (done) {
       const data = [
         {
           example: [
@@ -1335,10 +1347,12 @@ describe('example annotation', () => {
           ],
         },
       ];
-      const env = extend(true, {}, this.env, {
+      const env = Object.assign({}, this.env, {
         herman: {
           sass: {
-            outputStyle: 'compressed',
+            sassOptions: {
+              style: 'compressed',
+            },
           },
         },
       });
@@ -1350,39 +1364,6 @@ describe('example annotation', () => {
           done();
         })
         .catch(done);
-    });
-
-    it('warns, exits if no sass and scss @example used', function (done) {
-      const data = [{ example: [{ type: 'scss' }] }];
-      sinon.stub(Promise, 'promisify').throws();
-
-      this.example
-        .resolve(data)
-        .then(() => {
-          sinon.assert.calledTwice(this.env.logger.warn);
-          assert.deepStrictEqual(data, [
-            { example: [{ type: 'scss', rendered: undefined }] },
-          ]);
-        })
-        .finally(() => {
-          Promise.promisify.restore();
-          done();
-        });
-    });
-
-    it('only requires sass once', function (done) {
-      const data = [{ example: [{ type: 'scss', code: '' }] }];
-      const data2 = [{ example: [{ type: 'scss', code: '' }] }];
-      sinon.spy(Promise, 'promisify');
-
-      Promise.all([this.example.resolve(data), this.example.resolve(data2)])
-        .then(() => {
-          sinon.assert.calledOnce(Promise.promisify);
-        })
-        .finally(() => {
-          Promise.promisify.restore();
-          done();
-        });
     });
 
     it('skips non-html, non-njk, non-scss items', function (done) {

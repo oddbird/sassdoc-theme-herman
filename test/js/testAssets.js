@@ -1,16 +1,13 @@
 'use strict';
 
 const assert = require('assert');
-const fs = require('fs');
+const fs = require('fs/promises');
 const path = require('path');
 
-const Promise = require('bluebird');
 const del = require('del');
 const sinon = require('sinon');
 
 const assets = require('../../lib/utils/assets');
-
-const access = Promise.promisify(fs.access);
 
 describe('assets', () => {
   before(function () {
@@ -23,7 +20,7 @@ describe('assets', () => {
 
   it('Copies file from src to dest', function (done) {
     assets(__filename, this.dest)
-      .then(() => access(`${this.dest}/${path.parse(__filename).base}`))
+      .then(() => fs.access(`${this.dest}/${path.parse(__filename).base}`))
       .then(() => {
         assert.ok(true);
         done();
