@@ -260,9 +260,9 @@ See [Exporting Styles to JSON][export].
 - Default: `Array` containing the [Herman Sass importer][sass-importer],
   which supports `~` imports for external modules installed via npm or Yarn.
 
-Array of functions
+Array of importer objects
 used to resolve `@use` and `@import` file paths.
-Passed through to Sass [importers] option when
+Passed through to the Dart Sass [importers] option when
 compiling `@example sass/scss` annotations.
 See our [`@example` documentation][example-docs-scss].
 

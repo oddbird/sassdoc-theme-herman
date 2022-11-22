@@ -13,7 +13,7 @@
   are replaced with a new `sass.sassOptions` option, which accepts any options
   that Dart Sass accepts (e.g. `loadPaths` or `style`). See the [Dart Sass
   documentation](https://sass-lang.com/documentation/js-api/modules#compileStringAsync)
-  for more info.
+  for more details.
 - 💥 BREAKING: Font, ratio, size, and color previews are now rendered without
   user-provided stylesheets (to avoid style conflicts). CSS custom properties
   are made available via the new (🚀) `customPropertiesCSS` or existing

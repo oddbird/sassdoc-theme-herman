@@ -2,7 +2,6 @@
 
 const assert = require('assert');
 
-const extend = require('extend');
 const sinon = require('sinon');
 
 const prepareContext = require('../../lib/prepareContext');
@@ -28,7 +27,9 @@ describe('prepareContext', () => {
           sort: ['group', 'file', 'line', 'access'],
           herman: {
             nunjucks: {},
-            sass: {},
+            sass: {
+              sassOptions: {},
+            },
           },
           description: '<p>foo</p>\n',
           data: [],
@@ -167,7 +168,7 @@ describe('prepareContext', () => {
       access: 'public',
     };
     const expected = [
-      extend({}, item, {
+      Object.assign({}, item, {
         context: {
           type: 'prose',
           line: {
@@ -179,7 +180,7 @@ describe('prepareContext', () => {
           test: 'test',
         },
       }),
-      extend({}, item2, {
+      Object.assign({}, item2, {
         groupName: {
           test: 'test',
         },
@@ -215,7 +216,7 @@ describe('prepareContext', () => {
       access: 'public',
     };
     const expected = [
-      extend({}, item, {
+      Object.assign({}, item, {
         context: {
           type: 'prose',
           line: {
