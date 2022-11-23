@@ -1,5 +1,10 @@
 # Herman Changelog
 
+## 5.0.0-beta.6: 2022-11-23
+
+- 🐛 BUGFIX: Add missing CSS custom properties for font, ratio, and size
+  previews
+
 ## 5.0.0-beta.5: 2022-11-22
 
 - 💥 BREAKING: Require Dart Sass (`^1.45.0`) for `@example scss` annotations,
