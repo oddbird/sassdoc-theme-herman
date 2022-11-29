@@ -166,11 +166,11 @@ describe('renderIframe', () => {
   });
 
   describe('colors', () => {
-    describe('customPropertiesCSS', () => {
+    describe('customPreviewCSS', () => {
       beforeEach(function () {
         this.env = {
           herman: {
-            customPropertiesCSS: 'test/js/fixtures/css/custom-props.css',
+            customPreviewCSS: 'test/js/fixtures/css/custom-preview.css',
           },
           logger: { warn: sinon.fake() },
           dir: __dirname,
@@ -190,10 +190,14 @@ describe('renderIframe', () => {
           .then(() => {
             assert.strictEqual(this.item.iframed, 'some iframed');
             assert.ok(
-              this.env.customCSSProps.includes('--herman-test-color: #e2127a'),
+              this.env.customPreviewCSS.includes(
+                '--herman-test-color: #e2127a',
+              ),
             );
+            assert.ok(this.env.customPreviewCSS.includes('fantasy'));
+            assert.ok(this.env.customPreviewCSS.includes('font-family'));
             assert.ok(
-              !this.env.customCSSProps.includes('--herman-other-color'),
+              !this.env.customPreviewCSS.includes('--herman-other-color'),
             );
 
             done();
@@ -203,7 +207,7 @@ describe('renderIframe', () => {
 
       it('logs error on a bad filepath', function (done) {
         const env = Object.assign({}, this.env);
-        env.herman.customPropertiesCSS = 'foo.bar';
+        env.herman.customPreviewCSS = 'foo.bar';
 
         renderIframe(this.env, this.item, 'colors')
           .then(() => {
@@ -239,10 +243,12 @@ describe('renderIframe', () => {
           .then(() => {
             assert.strictEqual(this.item.iframed, 'some iframed');
             assert.ok(
-              this.env.customCSSProps.includes('--herman-test-color: #e2127a'),
+              this.env.customPreviewCSS.includes(
+                '--herman-test-color: #e2127a',
+              ),
             );
             assert.ok(
-              !this.env.customCSSProps.includes('--herman-other-color'),
+              !this.env.customPreviewCSS.includes('--herman-other-color'),
             );
 
             done();

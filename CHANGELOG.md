@@ -1,5 +1,14 @@
 # Herman Changelog
 
+## UNRELEASED
+
+- 💥 BREAKING: Rename `customPropertiesCSS` option to `customPreviewCSS`
+- 🐛 BUGFIX: Add missing font-related CSS (e.g. `font-family`, `font-size`,
+  `@font-face`) to color, font, ratio, and size previews. To be included,
+  declarations must be declared on `html`, `body`, or `:root` in the stylesheet
+  set via `customPreviewCSS` or `customCSS` settings. (All `@font-face` at-rules
+  are included.)
+
 ## 5.0.0-beta.6: 2022-11-23
 
 - 🐛 BUGFIX: Add missing CSS custom properties for font, ratio, and size
