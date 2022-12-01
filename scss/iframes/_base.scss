@@ -1,9 +1,19 @@
 @use '~accoutrement/sass/tools';
 
 :root {
-  font-size: tools.size('root');
-  font-size: tools.size('responsive');
+  --herman-font-size: 0.8em;
+
   line-height: tools.ratio('line-height');
+}
+
+body {
+  overflow-x: hidden;
+}
+
+[data-herman-label],
+[data-herman-th],
+[data-herman-code] {
+  font-size: var(--herman-font-size);
 }
 
 [data-herman-label],
@@ -16,7 +26,6 @@
 [data-herman-code] {
   font-family: Consolas, Menlo, Monaco, 'Lucida Console', 'Liberation Mono',
     'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace;
-  font-size: tools.size('code');
   font-weight: inherit;
 }
 
