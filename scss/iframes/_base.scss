@@ -11,6 +11,9 @@ body {
 [data-herman-label],
 [data-herman-th],
 [data-herman-code] {
+  // These items are purposely sized without root-based
+  // units in order to make them appear similar in size
+  // no matter what the default root size is in a project.
   font-size: clamp(14px, calc(60% + 0.8vw), 18px);
 }
 
