@@ -1,8 +1,6 @@
 @use '~accoutrement/sass/tools';
 
 :root {
-  --herman-font-size: 0.8em;
-
   line-height: tools.ratio('line-height');
 }
 
@@ -13,7 +11,7 @@ body {
 [data-herman-label],
 [data-herman-th],
 [data-herman-code] {
-  font-size: var(--herman-font-size);
+  font-size: clamp(14px, calc(50% + 0.8vw), 18px);
 }
 
 [data-herman-label],
