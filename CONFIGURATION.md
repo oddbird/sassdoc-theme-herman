@@ -107,11 +107,12 @@ Relative path to a custom CSS file,
 which will be included in the `<head>` of rendered
 [`@example`][example-docs] annotations.
 
-If the [`customPropertiesCSS` option](#custompropertiescss) is not set,
-any CSS custom properties declared in `html`, `body`, or `:root`
-in this `customCSS` stylesheet will be included in rendered
-[`@font`][font-docs], [`@ratios`][ratio-preview],
-[`@sizes`][size-preview], and [`@colors`][color-preview] annotations.
+If the [`customPreviewCSS` option](#custompreviewcss) is not set, any CSS custom
+properties or font-related declarations (e.g. `font-family` or `font-size`)
+declared in `html`, `body`, or `:root` -- and all `@font-face` at-rules -- in
+this `customCSS` stylesheet will be included in rendered [`@font`][font-docs],
+[`@ratios`][ratio-preview], [`@sizes`][size-preview], and
+[`@colors`][color-preview] annotations.
 
 **Notes:**
 
@@ -140,17 +141,16 @@ in this `customCSS` stylesheet will be included in rendered
 [public-path]: https://github.com/webpack-contrib/mini-css-extract-plugin#publicpath
 [css-loader]: https://github.com/webpack-contrib/css-loader#url
 
-## customPropertiesCSS
+## customPreviewCSS
 
 - Type: `String`
 - Default: `''`
 
-Relative path to a custom CSS file
-containing CSS custom properties
-to be included in rendered
-[`@font`][font-docs], [`@ratios`][ratio-preview],
-[`@sizes`][size-preview], and [`@colors`][color-preview] annotations.
-Custom properties must be declared on `html`, `body`, or `:root`.
+Relative path to a custom CSS file containing CSS custom properties or
+font-related CSS to be included in rendered [`@font`][font-docs],
+[`@ratios`][ratio-preview], [`@sizes`][size-preview], and
+[`@colors`][color-preview] annotations. Custom properties and font declarations
+must be declared on `html`, `body`, or `:root`.
 
 If this option is not set,
 the [`customCSS` option](#customcss) will be used instead.
