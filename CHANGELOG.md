@@ -1,6 +1,6 @@
 # Herman Changelog
 
-## UNRELEASED
+## 5.0.0-beta.7: 2022-12-07
 
 - 💥 BREAKING: Rename `customPropertiesCSS` option to `customPreviewCSS`
 - 🐛 BUGFIX: Add missing font-related CSS (e.g. `font-family`, `font-size`,
