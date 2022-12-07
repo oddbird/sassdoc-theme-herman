@@ -8,6 +8,7 @@
   declarations must be declared on `html`, `body`, or `:root` in the stylesheet
   set via `customPreviewCSS` or `customCSS` settings. (All `@font-face` at-rules
   are included.)
+- 🏠 INTERNAL: Upgrade dependencies
 
 ## 5.0.0-beta.6: 2022-11-23
 
