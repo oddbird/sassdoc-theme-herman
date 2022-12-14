@@ -1,5 +1,9 @@
 # Herman Changelog
 
+## 5.0.1: 2022-12-14
+
+- 🏠 INTERNAL: Upgrade dependencies
+
 ## 5.0.0: 2022-12-14
 
 _No changes from `v5.0.0-beta.7`. Changes since `v4.0.2`:_

@@ -1360,13 +1360,13 @@ __metadata:
   linkType: hard
 
 "@humanwhocodes/config-array@npm:^0.11.6":
-  version: 0.11.7
-  resolution: "@humanwhocodes/config-array@npm:0.11.7"
+  version: 0.11.8
+  resolution: "@humanwhocodes/config-array@npm:0.11.8"
   dependencies:
     "@humanwhocodes/object-schema": ^1.2.1
     debug: ^4.1.1
     minimatch: ^3.0.5
-  checksum: cf506dc45d9488af7fbf108ea6ac2151ba1a25e6d2b94b9b4fc36d2c1e4099b89ff560296dbfa13947e44604d4ca4a90d97a4fb167370bf8dd01a6ca2b6d83ac
+  checksum: 0fd6b3c54f1674ce0a224df09b9c2f9846d20b9e54fabae1281ecfc04f2e6ad69bf19e1d6af6a28f88e8aa3990168b6cb9e1ef755868c3256a630605ec2cb1d3
   languageName: node
   linkType: hard
 
@@ -2717,10 +2717,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"accoutrement@npm:^4.0.3":
-  version: 4.0.3
-  resolution: "accoutrement@npm:4.0.3"
-  checksum: 01544df26a7d740ab49c9cb521f48df3186e8682638d0c8e19fe380d9aa9f79edc495bacf7900ba8e1901e61bbba67d5e73e04d3386fcb10d687164e44f469b6
+"accoutrement@npm:^4.0.4":
+  version: 4.0.4
+  resolution: "accoutrement@npm:4.0.4"
+  checksum: df614efbcd2c048359f621629c54139334f9c634533f5c8b52c5c6fead1782ff16e605b98abe8b216e224c8a2aadfe1b43cae17fb0ab9296d52571397a913852
   languageName: node
   linkType: hard
 
@@ -7759,7 +7759,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-diff@npm:^29.0.3, jest-diff@npm:^29.3.1":
+"jest-diff@npm:^29.3.1":
   version: 29.3.1
   resolution: "jest-diff@npm:29.3.1"
   dependencies:
@@ -11629,17 +11629,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass-true@npm:^7.0.0-beta.0":
-  version: 7.0.0-beta.0
-  resolution: "sass-true@npm:7.0.0-beta.0"
+"sass-true@npm:^7.0.0":
+  version: 7.0.0
+  resolution: "sass-true@npm:7.0.0"
   dependencies:
     "@types/css": ^0.0.33
     css: ^3.0.0
-    jest-diff: ^29.0.3
+    jest-diff: ^29.3.1
     lodash: ^4.17.21
   peerDependencies:
     sass: ">=1.45.0"
-  checksum: df25c48040daff55d078f9092bb530d12dd2863b2b5918868c13575ecb5aa99810d9b1339f147153e53e29c9d5588c090c4ed777b0c756b5ded5b82e77cd6c0b
+  checksum: 2af304dc45628d776a572eb6a381e297d2e357d90abf2086c26af6a1f73c4eaea76760561f4067b8de82afcde60852c58d89769ef3c6122c8e620c32d35dc308
   languageName: node
   linkType: hard
 
@@ -11700,7 +11700,7 @@ __metadata:
     "@testing-library/dom": ^8.19.0
     "@testing-library/jest-dom": ^5.16.5
     "@yarnpkg/sdks": ^3.0.0-rc.33
-    accoutrement: ^4.0.3
+    accoutrement: ^4.0.4
     autoprefixer: ^10.4.13
     babel-jest: ^29.3.1
     babel-loader: ^9.1.0
@@ -11755,7 +11755,7 @@ __metadata:
     readable-stream: ^4.2.0
     sass: ^1.56.2
     sass-loader: ^13.2.0
-    sass-true: ^7.0.0-beta.0
+    sass-true: ^7.0.0
     sassdoc: ^2.7.4
     sassdoc-extras: ^3.0.0
     sinon: ^15.0.0
