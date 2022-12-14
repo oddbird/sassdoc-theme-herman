@@ -42,7 +42,7 @@
       <div class="project-title">
         <a href="index.html" rel="home" class="project-name">Herman</a>
         
-          <span class="project-version">4.0.2</span>
+          <span class="project-version">5.0.0</span>
         
       </div>
     </header>
@@ -300,11 +300,11 @@
 
   
     <div data-item-section="prose" class="text-block">
-      <h1 id="documenting-fonts">Documenting fonts</h1>
+      <h1 id="documenting-fonts" tabindex="-1">Documenting fonts</h1>
 <p>Herman provides custom annotations
 for visualizing fonts,
 along with other design tokens.
-See the <a href="CONFIGURATION.html#sass-jsonfile"><code>sass.jsonFile</code> configuration</a>
+See the <a href="https://www.oddbird.net/herman/docs/configuration#sass-jsonfile"><code>sass.jsonFile</code> configuration</a>
 to ensure that Herman has access
 to your exported Sass<span class="widont">&nbsp;</span>data.</p>
 <p>Whether you use a webfont CDN like Typekit/Google Fonts,
@@ -317,7 +317,7 @@ Then we can build and<span class="widont">&nbsp;</span>export.</p>
 <p>We store all font data in maps,
 with the syntax used by both Herman (for JSON exporting)
 and our [Accoutrement][ac] toolkit.
-<a href="api_json-export.html#fonts">See the font map documentation for details<span class="widont">&nbsp;</span>»</a></p>
+<a href="https://www.oddbird.net/herman/docs/api_json-export#fonts">See the font map documentation for details<span class="widont">&nbsp;</span>»</a></p>
 <p>Each font family will be displayed individually,
 using the <code>@font</code> annotation:</p>
 <pre><code class="lang-scss">/// @font my-font (normal, bold)
@@ -456,7 +456,7 @@ using the <code>@font</code> annotation:</p>
 
   
     <div class="text-block">
-      <h2 id="displaying-cdn-hosted-webfonts">Displaying CDN-hosted webfonts</h2>
+      <h2 id="displaying-cdn-hosted-webfonts" tabindex="-1">Displaying CDN-hosted webfonts</h2>
 <p>For remotely-hosted fonts,
 the <code>@font</code> annotation accepts three<span class="widont">&nbsp;</span>arguments:</p>
 <pre><code class="lang-scss">/// @font font-key (list of, variants, to show)
@@ -469,8 +469,8 @@ That key will be used to access the data from JSON,
 so it doesn’t matter what key is used –
 as long as the key given here matches the group-name
 used when adding this data to <code>$herman</code>.</li>
-<li>The second argument (in parentheses) is an optional list
-of font variants to display in the preview.
+<li>The second argument (in parentheses) is an optional comma-separated
+list of font variants to display in the preview.
 If omitted, it defaults to any variants
 included as keys in the font map<span class="widont">&nbsp;</span>itself.</li>
 <li>The third argument (on the following line, nested with two spaces)
@@ -480,7 +480,7 @@ required to use the webfont.
 This code will be inserted
 into the rendered iframe <code>&lt;head&gt;</code>
 for this font preview
-and all <a href="demo_examples.html">Herman examples</a>,
+and all <a href="https://www.oddbird.net/herman/docs/demo_examples">Herman examples</a>,
 making your webfont available to other<span class="widont">&nbsp;</span>components.</li>
 </ul>
 
@@ -552,8 +552,8 @@ making your webfont available to other<span class="widont">&nbsp;</span>componen
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">// @font demo-cdn (normal, bold, bold italic)
-//   &lt;link href=&quot;https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700&quot; rel=&quot;stylesheet&quot;&gt;</code></pre>
+      <pre class="hljs-pre"><code class="lang-scss">/// @font demo-cdn (normal, bold, bold italic)
+///   &lt;link href=&quot;https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700&quot; rel=&quot;stylesheet&quot;&gt;</code></pre>
     </div>
   
 
@@ -641,8 +641,16 @@ making your webfont available to other<span class="widont">&nbsp;</span>componen
   &lt;title&gt;fonts&lt;/title&gt;
 
   
-    &lt;!-- Custom CSS --&gt;
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;assets/custom/app_styles.min.css&quot; /&gt;
+    &lt;!-- App preview CSS --&gt;
+    &lt;style&gt;
+      :root {
+  font-family:Source Sans Pro,Helvetica Neue,Helvetica,Arial,sans-serif;
+  font-size:18px;
+  font-size:calc(1em + .125vw);
+  --herman-brand-blue:#0d7fa5;
+  --herman-brand-pink:#e2127a;
+}
+    &lt;/style&gt;
   
 
   &lt;!-- Herman iframe styles --&gt;
@@ -822,7 +830,7 @@ making your webfont available to other<span class="widont">&nbsp;</span>componen
 
   
     <div class="text-block">
-      <h2 id="displaying-local-fonts">Displaying local fonts</h2>
+      <h2 id="displaying-local-fonts" tabindex="-1">Displaying local fonts</h2>
 <p>For locally-hosted fonts,
 the <code>@font</code> annotation accepts two<span class="widont">&nbsp;</span>arguments:</p>
 <ul>
@@ -832,8 +840,8 @@ That key will be used to access the data from JSON,
 so it doesn’t matter what key is used –
 as long as the key given here matches the group-name
 used when adding this data to <code>$herman</code>.</li>
-<li>The second argument (in parentheses) is an optional list
-of font variants to display in the preview.
+<li>The second argument (in parentheses) is an optional comma-separated
+list of font variants to display in the preview.
 If omitted, it defaults to all variants
 included as keys in the font map<span class="widont">&nbsp;</span>itself.</li>
 </ul>
@@ -952,8 +960,16 @@ herman:
   &lt;title&gt;fonts&lt;/title&gt;
 
   
-    &lt;!-- Custom CSS --&gt;
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;assets/custom/app_styles.min.css&quot; /&gt;
+    &lt;!-- App preview CSS --&gt;
+    &lt;style&gt;
+      :root {
+  font-family:Source Sans Pro,Helvetica Neue,Helvetica,Arial,sans-serif;
+  font-size:18px;
+  font-size:calc(1em + .125vw);
+  --herman-brand-blue:#0d7fa5;
+  --herman-brand-pink:#e2127a;
+}
+    &lt;/style&gt;
   
 
   &lt;!-- Herman iframe styles --&gt;
@@ -1144,13 +1160,13 @@ herman:
 
   
     <div data-item-section="prose" class="text-block">
-      <h2 id="add-font-data-to-herman">Add font data to<span class="widont">&nbsp;</span>$herman</h2>
+      <h2 id="add-font-data-to-herman" tabindex="-1">Add font data to<span class="widont">&nbsp;</span>$herman</h2>
 <p>In order to preview the <code>$demo-cdn</code> and <code>$demo-local</code> maps,
-we also need to <a href="api_json-export.html">export the data to<span class="widont">&nbsp;</span>JSON</a>.</p>
+we also need to <a href="https://www.oddbird.net/herman/docs/api_json-export">export the data to<span class="widont">&nbsp;</span>JSON</a>.</p>
 <p>You can add data to the <code>$herman</code> export-map by hand,
 or use the provided <code>add</code> mixin
 to combine existing maps into the proper structure.
-<a href="api_json-export.html#fonts">See the font map documentation for<span class="widont">&nbsp;</span>details</a>.</p>
+<a href="https://www.oddbird.net/herman/docs/api_json-export#fonts">See the font map documentation for<span class="widont">&nbsp;</span>details</a>.</p>
 <pre><code class="lang-scss"> @include add('font', 'demo-code', $demo-code);
  @include add('font', 'demo-local', $demo-local);
 </code></pre>

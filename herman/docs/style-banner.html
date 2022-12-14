@@ -42,7 +42,7 @@
       <div class="project-title">
         <a href="index.html" rel="home" class="project-name">Herman</a>
         
-          <span class="project-version">4.0.2</span>
+          <span class="project-version">5.0.0</span>
         
       </div>
     </header>
@@ -300,7 +300,7 @@
 
   
     <div data-item-section="prose" class="text-block">
-      <h1 id="herman-banner-region">Herman Banner Region</h1>
+      <h1 id="herman-banner-region" tabindex="-1">Herman Banner Region</h1>
 <p>Styles related to the top banner in generated Herman<span class="widont">&nbsp;</span>docs.</p>
 
       
@@ -584,7 +584,7 @@ used to make it an arrow-outline rather than a solid<span class="widont">&nbsp;<
       
       
       <pre class="hljs-pre"><code class="lang-css">[data-region=banner] {
-  border-bottom: 8px solid #0d7fa5;
+  border-bottom: 8px solid hsl(195deg, 85%, 35%);
   box-shadow: 0 2px 2px rgba(85, 91, 94, 0.5);
   display: block;
   position: relative;
@@ -593,7 +593,7 @@ used to make it an arrow-outline rather than a solid<span class="widont">&nbsp;<
 [data-region=banner]::before, [data-region=banner]::after {
   content: &quot;&quot;;
   border: 0.7rem solid transparent;
-  border-top-color: #0d7fa5;
+  border-top-color: hsl(195deg, 85%, 35%);
   border-width: 0.7rem 1.4rem 0;
   left: 50%;
   position: absolute;
@@ -792,6 +792,7 @@ used to make it an arrow-outline rather than a solid<span class="widont">&nbsp;<
       <pre class="hljs-pre"><code class="lang-scss">[data-region=&#39;banner&#39;] {
   @include config.banner-arrow;
   @include tools.z-index(&#39;banner&#39;);
+
   align-items: center;
   display: flex;
   padding: tools.size(&#39;shim&#39;);
@@ -1523,6 +1524,7 @@ including both the name and version of the<span class="widont">&nbsp;</span>proj
       
       <pre class="hljs-pre"><code class="lang-scss">.project-version {
   @include tools.font-family(&#39;sans&#39;);
+
   color: tools.color(&#39;text-light&#39;);
   font-size: tools.size(&#39;h3&#39;);
 }</code></pre>

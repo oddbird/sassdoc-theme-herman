@@ -42,7 +42,7 @@
       <div class="project-title">
         <a href="index.html" rel="home" class="project-name">Herman</a>
         
-          <span class="project-version">4.0.2</span>
+          <span class="project-version">5.0.0</span>
         
       </div>
     </header>
@@ -300,12 +300,12 @@
 
   
     <div data-item-section="prose" class="text-block">
-      <h1 id="herman-config-color-palettes">Herman Config: Color<span class="widont">&nbsp;</span>Palettes</h1>
+      <h1 id="herman-config-color-palettes" tabindex="-1">Herman Config: Color<span class="widont">&nbsp;</span>Palettes</h1>
 <p>This page contains documentation of the colors used by Herman.
 We use OddBird’s <a href="https://www.oddbird.net/accoutrement/">Accoutrement</a> Color plugin
 to store and manage colors directly in Sass map<span class="widont">&nbsp;</span>objects.</p>
 <p>For help documenting your brand colors,
-see the “<a href="demo_colors.html">Documenting Colors</a>” page.</p>
+see the “<a href="https://www.oddbird.net/herman/docs/demo_colors">Documenting Colors</a>” page.</p>
 
       
   
@@ -458,9 +458,9 @@ see the “<a href="demo_colors.html">Documenting Colors</a>” page.</p>
       
       
       <pre class="hljs-pre"><code class="lang-scss">$brand-colors: (
-  &#39;brand-orange&#39;: hsl(24, 100%, 39%),
-  &#39;brand-blue&#39;: hsl(195, 85%, 35%),
-  &#39;brand-pink&#39;: hsl(330, 85%, 48%)
+  &#39;brand-orange&#39;: hsl(24deg, 100%, 39%),
+  &#39;brand-blue&#39;: hsl(195deg, 85%, 35%),
+  &#39;brand-pink&#39;: hsl(330deg, 85%, 48%)
     (
       &#39;shade&#39;: 25%,
     ),
@@ -592,7 +592,7 @@ followed by an optional map of adjustments
   
   
         
-  
+ 
   <div data-item-section="color-palette">
     
       <h3 class="item-subtitle">
@@ -602,93 +602,121 @@ followed by an optional map of adjustments
     
 
     
-    <div class="color-palette">
-      
-        <div class="color-preview">
-          <div class="color-swatch">
-            <div class="transparency-grid"></div>
-            <div class="color-overlay" style="background-color: #c75000;"></div>
-          </div>
-          <div class="color-info">
-            <strong class="color-name">
-              
-                <span class="color-name-option">brand-orange</span>
-              
-            </strong>
-            
-            
-              
-                
-                  <code class="color-value">#c75000</code>
-                
-              
-                
-              
-                
-                  <code class="color-value">hsl(24, 100%, 39%)</code>
-                
-              
-            
-          </div>
-        </div>
-      
-        <div class="color-preview">
-          <div class="color-swatch">
-            <div class="transparency-grid"></div>
-            <div class="color-overlay" style="background-color: #0d7fa5;"></div>
-          </div>
-          <div class="color-info">
-            <strong class="color-name">
-              
-                <span class="color-name-option">brand-blue</span>
-              
-            </strong>
-            
-            
-              
-                
-                  <code class="color-value">#0d7fa5</code>
-                
-              
-                
-              
-                
-                  <code class="color-value">hsl(195, 85%, 35%)</code>
-                
-              
-            
-          </div>
-        </div>
-      
-        <div class="color-preview">
-          <div class="color-swatch">
-            <div class="transparency-grid"></div>
-            <div class="color-overlay" style="background-color: #aa0e5c;"></div>
-          </div>
-          <div class="color-info">
-            <strong class="color-name">
-              
-                <span class="color-name-option">brand-pink</span>
-              
-            </strong>
-            
+    <iframe class="render-colors" srcdoc="
+
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot; /&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;base target=&quot;_parent&quot;&gt;
+
+  &lt;title&gt;colors&lt;/title&gt;
+
+  
+    &lt;!-- App preview CSS --&gt;
+    &lt;style&gt;
+      :root {
+  font-family:Source Sans Pro,Helvetica Neue,Helvetica,Arial,sans-serif;
+  font-size:18px;
+  font-size:calc(1em + .125vw);
+  --herman-brand-blue:#0d7fa5;
+  --herman-brand-pink:#e2127a;
+}
+    &lt;/style&gt;
+  
+
+  &lt;!-- Herman iframe styles --&gt;
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;assets/webpack/iframe_styles.min.css&quot; /&gt;
+
+  
+    &lt;!-- Custom Font HTML --&gt;
+    
+&lt;link href=&quot;https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700,700i&quot; rel=&quot;stylesheet&quot;&gt;
+&lt;link href=&quot;https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600&quot; rel=&quot;stylesheet&quot;&gt;
+&lt;link href=&quot;https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700&quot; rel=&quot;stylesheet&quot;&gt;
+  
+&lt;/head&gt;
+&lt;body data-herman-preview=&#39;colors&#39;&gt;
+  &lt;div data-herman-color-palette&gt;
+    
+      &lt;div data-herman-color-preview&gt;
+        &lt;div data-herman-color-swatch&gt;
+          &lt;div data-herman-transparency-grid&gt;&lt;/div&gt;
+          &lt;div data-herman-color-overlay style=&quot;background-color: hsl(24deg, 100%, 39%);&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div data-herman-color-info&gt;
+          &lt;strong data-herman-color-name data-herman-label=&quot;color&quot;&gt;&lt;span data-herman-color-name-option&gt;brand-orange&lt;/span&gt;&lt;/strong&gt;
+          
+          
             
               
-                
-                  <code class="color-value">#aa0e5c</code>
-                
-              
-                
-              
-                
-                  <code class="color-value">hsl(330, 85%, 36%)</code>
-                
+                &lt;code data-herman-code data-herman-color-value&gt;#c75000&lt;/code&gt;
               
             
-          </div>
-        </div>
-      
-    </div>
+              
+            
+              
+                &lt;code data-herman-code data-herman-color-value&gt;hsl(24 100% 39%)&lt;/code&gt;
+              
+            
+          
+        &lt;/div&gt;
+      &lt;/div&gt;
+    
+      &lt;div data-herman-color-preview&gt;
+        &lt;div data-herman-color-swatch&gt;
+          &lt;div data-herman-transparency-grid&gt;&lt;/div&gt;
+          &lt;div data-herman-color-overlay style=&quot;background-color: hsl(195deg, 85%, 35%);&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div data-herman-color-info&gt;
+          &lt;strong data-herman-color-name data-herman-label=&quot;color&quot;&gt;&lt;span data-herman-color-name-option&gt;brand-blue&lt;/span&gt;&lt;/strong&gt;
+          
+          
+            
+              
+                &lt;code data-herman-code data-herman-color-value&gt;#0d7fa5&lt;/code&gt;
+              
+            
+              
+            
+              
+                &lt;code data-herman-code data-herman-color-value&gt;hsl(195 85% 35%)&lt;/code&gt;
+              
+            
+          
+        &lt;/div&gt;
+      &lt;/div&gt;
+    
+      &lt;div data-herman-color-preview&gt;
+        &lt;div data-herman-color-swatch&gt;
+          &lt;div data-herman-transparency-grid&gt;&lt;/div&gt;
+          &lt;div data-herman-color-overlay style=&quot;background-color: #aa0e5c;&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div data-herman-color-info&gt;
+          &lt;strong data-herman-color-name data-herman-label=&quot;color&quot;&gt;&lt;span data-herman-color-name-option&gt;brand-pink&lt;/span&gt;&lt;/strong&gt;
+          
+          
+            
+              
+                &lt;code data-herman-code data-herman-color-value&gt;#aa0e5c&lt;/code&gt;
+              
+            
+              
+            
+              
+                &lt;code data-herman-code data-herman-color-value&gt;hsl(330 84.783% 36.078%)&lt;/code&gt;
+              
+            
+          
+        &lt;/div&gt;
+      &lt;/div&gt;
+    
+  &lt;/div&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+" width="100%" height="0"></iframe>
   
   </div>
 
@@ -840,7 +868,7 @@ before they are used in styling patterns and<span class="widont">&nbsp;</span>co
   
   
         
-  
+ 
   <div data-item-section="color-palette">
     
       <h3 class="item-subtitle">
@@ -850,121 +878,145 @@ before they are used in styling patterns and<span class="widont">&nbsp;</span>co
     
 
     
-    <div class="color-palette">
-      
-        <div class="color-preview">
-          <div class="color-swatch">
-            <div class="transparency-grid"></div>
-            <div class="color-overlay" style="background-color: #dedede;"></div>
-          </div>
-          <div class="color-info">
-            <strong class="color-name">
-              
-                <span class="color-name-option">light-gray</span>
-              
-            </strong>
-            
-            
-              
-                
-                  <code class="color-value">#dedede</code>
-                
-              
-                
-              
-                
-                  <code class="color-value">hsl(0, 0%, 87%)</code>
-                
-              
-            
-          </div>
-        </div>
-      
-        <div class="color-preview">
-          <div class="color-swatch">
-            <div class="transparency-grid"></div>
-            <div class="color-overlay" style="background-color: #555b5e;"></div>
-          </div>
-          <div class="color-info">
-            <strong class="color-name">
-              
-                <span class="color-name-option">gray</span>
-              
-            </strong>
-            
-            
-              
-                
-                  <code class="color-value">#555b5e</code>
-                
-              
-                
-              
-                
-                  <code class="color-value">hsl(200, 5%, 35%)</code>
-                
-              
-            
-          </div>
-        </div>
-      
-        <div class="color-preview">
-          <div class="color-swatch">
-            <div class="transparency-grid"></div>
-            <div class="color-overlay" style="background-color: #fff;"></div>
-          </div>
-          <div class="color-info">
-            <strong class="color-name">
-              
-                <span class="color-name-option">contrast-light</span>
-              
-            </strong>
-            
+    <iframe class="render-colors" srcdoc="
+
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot; /&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;base target=&quot;_parent&quot;&gt;
+
+  &lt;title&gt;colors&lt;/title&gt;
+
+  
+    &lt;!-- App preview CSS --&gt;
+    &lt;style&gt;
+      :root {
+  font-family:Source Sans Pro,Helvetica Neue,Helvetica,Arial,sans-serif;
+  font-size:18px;
+  font-size:calc(1em + .125vw);
+  --herman-brand-blue:#0d7fa5;
+  --herman-brand-pink:#e2127a;
+}
+    &lt;/style&gt;
+  
+
+  &lt;!-- Herman iframe styles --&gt;
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;assets/webpack/iframe_styles.min.css&quot; /&gt;
+
+  
+    &lt;!-- Custom Font HTML --&gt;
+    
+&lt;link href=&quot;https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700,700i&quot; rel=&quot;stylesheet&quot;&gt;
+&lt;link href=&quot;https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600&quot; rel=&quot;stylesheet&quot;&gt;
+&lt;link href=&quot;https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700&quot; rel=&quot;stylesheet&quot;&gt;
+  
+&lt;/head&gt;
+&lt;body data-herman-preview=&#39;colors&#39;&gt;
+  &lt;div data-herman-color-palette&gt;
+    
+      &lt;div data-herman-color-preview&gt;
+        &lt;div data-herman-color-swatch&gt;
+          &lt;div data-herman-transparency-grid&gt;&lt;/div&gt;
+          &lt;div data-herman-color-overlay style=&quot;background-color: #dedede;&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div data-herman-color-info&gt;
+          &lt;strong data-herman-color-name data-herman-label=&quot;color&quot;&gt;&lt;span data-herman-color-name-option&gt;light-gray&lt;/span&gt;&lt;/strong&gt;
+          
+          
             
               
-                
-                  <code class="color-value">#ffffff</code>
-                
-              
-                
-              
-                
-                  <code class="color-value">hsl(0, 0%, 100%)</code>
-                
+                &lt;code data-herman-code data-herman-color-value&gt;#dedede&lt;/code&gt;
               
             
-          </div>
-        </div>
-      
-        <div class="color-preview">
-          <div class="color-swatch">
-            <div class="transparency-grid"></div>
-            <div class="color-overlay" style="background-color: #3b4042;"></div>
-          </div>
-          <div class="color-info">
-            <strong class="color-name">
-              
-                <span class="color-name-option">contrast-dark</span>
-              
-            </strong>
-            
-            
-              
-                
-                  <code class="color-value">#3b4042</code>
-                
-              
-                
-              
-                
-                  <code class="color-value">hsl(197, 6%, 25%)</code>
-                
               
             
-          </div>
-        </div>
-      
-    </div>
+              
+                &lt;code data-herman-code data-herman-color-value&gt;hsl(0 0% 87.059%)&lt;/code&gt;
+              
+            
+          
+        &lt;/div&gt;
+      &lt;/div&gt;
+    
+      &lt;div data-herman-color-preview&gt;
+        &lt;div data-herman-color-swatch&gt;
+          &lt;div data-herman-transparency-grid&gt;&lt;/div&gt;
+          &lt;div data-herman-color-overlay style=&quot;background-color: #555b5e;&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div data-herman-color-info&gt;
+          &lt;strong data-herman-color-name data-herman-label=&quot;color&quot;&gt;&lt;span data-herman-color-name-option&gt;gray&lt;/span&gt;&lt;/strong&gt;
+          
+          
+            
+              
+                &lt;code data-herman-code data-herman-color-value&gt;#555b5e&lt;/code&gt;
+              
+            
+              
+            
+              
+                &lt;code data-herman-code data-herman-color-value&gt;hsl(200 5.0279% 35.098%)&lt;/code&gt;
+              
+            
+          
+        &lt;/div&gt;
+      &lt;/div&gt;
+    
+      &lt;div data-herman-color-preview&gt;
+        &lt;div data-herman-color-swatch&gt;
+          &lt;div data-herman-transparency-grid&gt;&lt;/div&gt;
+          &lt;div data-herman-color-overlay style=&quot;background-color: #fff;&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div data-herman-color-info&gt;
+          &lt;strong data-herman-color-name data-herman-label=&quot;color&quot;&gt;&lt;span data-herman-color-name-option&gt;contrast-light&lt;/span&gt;&lt;/strong&gt;
+          
+          
+            
+              
+                &lt;code data-herman-code data-herman-color-value&gt;#fff&lt;/code&gt;
+              
+            
+              
+            
+              
+                &lt;code data-herman-code data-herman-color-value&gt;hsl(0 0% 100%)&lt;/code&gt;
+              
+            
+          
+        &lt;/div&gt;
+      &lt;/div&gt;
+    
+      &lt;div data-herman-color-preview&gt;
+        &lt;div data-herman-color-swatch&gt;
+          &lt;div data-herman-transparency-grid&gt;&lt;/div&gt;
+          &lt;div data-herman-color-overlay style=&quot;background-color: #3b4042;&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div data-herman-color-info&gt;
+          &lt;strong data-herman-color-name data-herman-label=&quot;color&quot;&gt;&lt;span data-herman-color-name-option&gt;contrast-dark&lt;/span&gt;&lt;/strong&gt;
+          
+          
+            
+              
+                &lt;code data-herman-code data-herman-color-value&gt;#3b4042&lt;/code&gt;
+              
+            
+              
+            
+              
+                &lt;code data-herman-code data-herman-color-value&gt;hsl(197.14 5.6% 24.51%)&lt;/code&gt;
+              
+            
+          
+        &lt;/div&gt;
+      &lt;/div&gt;
+    
+  &lt;/div&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+" width="100%" height="0"></iframe>
   
   </div>
 
@@ -1133,7 +1185,7 @@ in our pattern/component<span class="widont">&nbsp;</span>styles.</p>
   
   
         
-  
+ 
   <div data-item-section="color-palette">
     
       <h3 class="item-subtitle">
@@ -1143,325 +1195,701 @@ in our pattern/component<span class="widont">&nbsp;</span>styles.</p>
     
 
     
-    <div class="color-palette">
+    <iframe class="render-colors" srcdoc="
+
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot; /&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;base target=&quot;_parent&quot;&gt;
+
+  &lt;title&gt;colors&lt;/title&gt;
+
+  
+    &lt;!-- App preview CSS --&gt;
+    &lt;style&gt;
+      :root {
+  font-family:Source Sans Pro,Helvetica Neue,Helvetica,Arial,sans-serif;
+  font-size:18px;
+  font-size:calc(1em + .125vw);
+  --herman-brand-blue:#0d7fa5;
+  --herman-brand-pink:#e2127a;
+}
+    &lt;/style&gt;
+  
+
+  &lt;!-- Herman iframe styles --&gt;
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;assets/webpack/iframe_styles.min.css&quot; /&gt;
+
+  
+    &lt;!-- Custom Font HTML --&gt;
+    
+&lt;link href=&quot;https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700,700i&quot; rel=&quot;stylesheet&quot;&gt;
+&lt;link href=&quot;https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600&quot; rel=&quot;stylesheet&quot;&gt;
+&lt;link href=&quot;https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700&quot; rel=&quot;stylesheet&quot;&gt;
+  
+&lt;/head&gt;
+&lt;body data-herman-preview=&#39;colors&#39;&gt;
+  &lt;div data-herman-color-palette&gt;
+    
+      &lt;div data-herman-color-preview&gt;
+        &lt;div data-herman-color-swatch&gt;
+          &lt;div data-herman-transparency-grid&gt;&lt;/div&gt;
+          &lt;div data-herman-color-overlay style=&quot;background-color: hsl(195deg, 85%, 35%);&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div data-herman-color-info&gt;
+          &lt;strong data-herman-color-name data-herman-label=&quot;color&quot;&gt;&lt;span data-herman-color-name-option&gt;theme-dark,&amp;nbsp;&lt;/span&gt;&lt;span data-herman-color-name-option&gt;focus,&amp;nbsp;&lt;/span&gt;&lt;span data-herman-color-name-option&gt;code&lt;/span&gt;&lt;/strong&gt;
+          
+          
+            
+              
+                &lt;code data-herman-code data-herman-color-value&gt;#0d7fa5&lt;/code&gt;
+              
+            
+              
+            
+              
+                &lt;code data-herman-code data-herman-color-value&gt;hsl(195 85% 35%)&lt;/code&gt;
+              
+            
+          
+        &lt;/div&gt;
+      &lt;/div&gt;
+    
+      &lt;div data-herman-color-preview&gt;
+        &lt;div data-herman-color-swatch&gt;
+          &lt;div data-herman-transparency-grid&gt;&lt;/div&gt;
+          &lt;div data-herman-color-overlay style=&quot;background-color: #cfe5ed;&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div data-herman-color-info&gt;
+          &lt;strong data-herman-color-name data-herman-label=&quot;color&quot;&gt;&lt;span data-herman-color-name-option&gt;theme-light,&amp;nbsp;&lt;/span&gt;&lt;span data-herman-color-name-option&gt;callout&lt;/span&gt;&lt;/strong&gt;
+          
+          
+            
+              
+                &lt;code data-herman-code data-herman-color-value&gt;#cfe5ed&lt;/code&gt;
+              
+            
+              
+            
+              
+                &lt;code data-herman-code data-herman-color-value&gt;hsl(196 45.455% 87.059%)&lt;/code&gt;
+              
+            
+          
+        &lt;/div&gt;
+      &lt;/div&gt;
+    
+      &lt;div data-herman-color-preview&gt;
+        &lt;div data-herman-color-swatch&gt;
+          &lt;div data-herman-transparency-grid&gt;&lt;/div&gt;
+          &lt;div data-herman-color-overlay style=&quot;background-color: #fff;&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div data-herman-color-info&gt;
+          &lt;strong data-herman-color-name data-herman-label=&quot;color&quot;&gt;&lt;span data-herman-color-name-option&gt;background&lt;/span&gt;&lt;/strong&gt;
+          
+          
+            
+              
+                &lt;code data-herman-code data-herman-color-value&gt;#fff&lt;/code&gt;
+              
+            
+              
+            
+              
+                &lt;code data-herman-code data-herman-color-value&gt;hsl(0 0% 100%)&lt;/code&gt;
+              
+            
+          
+        &lt;/div&gt;
+      &lt;/div&gt;
+    
+      &lt;div data-herman-color-preview&gt;
+        &lt;div data-herman-color-swatch&gt;
+          &lt;div data-herman-transparency-grid&gt;&lt;/div&gt;
+          &lt;div data-herman-color-overlay style=&quot;background-color: #3b4042;&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div data-herman-color-info&gt;
+          &lt;strong data-herman-color-name data-herman-label=&quot;color&quot;&gt;&lt;span data-herman-color-name-option&gt;text&lt;/span&gt;&lt;/strong&gt;
+          
+          
+            
+              
+                &lt;code data-herman-code data-herman-color-value&gt;#3b4042&lt;/code&gt;
+              
+            
+              
+            
+              
+                &lt;code data-herman-code data-herman-color-value&gt;hsl(197.14 5.6% 24.51%)&lt;/code&gt;
+              
+            
+          
+        &lt;/div&gt;
+      &lt;/div&gt;
+    
+      &lt;div data-herman-color-preview&gt;
+        &lt;div data-herman-color-swatch&gt;
+          &lt;div data-herman-transparency-grid&gt;&lt;/div&gt;
+          &lt;div data-herman-color-overlay style=&quot;background-color: #555b5e;&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div data-herman-color-info&gt;
+          &lt;strong data-herman-color-name data-herman-label=&quot;color&quot;&gt;&lt;span data-herman-color-name-option&gt;text-light,&amp;nbsp;&lt;/span&gt;&lt;span data-herman-color-name-option&gt;border&lt;/span&gt;&lt;/strong&gt;
+          
+          
+            
+              
+                &lt;code data-herman-code data-herman-color-value&gt;#555b5e&lt;/code&gt;
+              
+            
+              
+            
+              
+                &lt;code data-herman-code data-herman-color-value&gt;hsl(200 5.0279% 35.098%)&lt;/code&gt;
+              
+            
+          
+        &lt;/div&gt;
+      &lt;/div&gt;
+    
+      &lt;div data-herman-color-preview&gt;
+        &lt;div data-herman-color-swatch&gt;
+          &lt;div data-herman-transparency-grid&gt;&lt;/div&gt;
+          &lt;div data-herman-color-overlay style=&quot;background-color: #b81e6c;&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div data-herman-color-info&gt;
+          &lt;strong data-herman-color-name data-herman-label=&quot;color&quot;&gt;&lt;span data-herman-color-name-option&gt;action&lt;/span&gt;&lt;/strong&gt;
+          
+          
+            
+              
+                &lt;code data-herman-code data-herman-color-value&gt;#b81e6c&lt;/code&gt;
+              
+            
+              
+            
+              
+                &lt;code data-herman-code data-herman-color-value&gt;hsl(329.61 71.963% 41.961%)&lt;/code&gt;
+              
+            
+          
+        &lt;/div&gt;
+      &lt;/div&gt;
+    
+      &lt;div data-herman-color-preview&gt;
+        &lt;div data-herman-color-swatch&gt;
+          &lt;div data-herman-transparency-grid&gt;&lt;/div&gt;
+          &lt;div data-herman-color-overlay style=&quot;background-color: #edc7da;&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div data-herman-color-info&gt;
+          &lt;strong data-herman-color-name data-herman-label=&quot;color&quot;&gt;&lt;span data-herman-color-name-option&gt;underline&lt;/span&gt;&lt;/strong&gt;
+          
+          
+            
+              
+                &lt;code data-herman-code data-herman-color-value&gt;#edc7da&lt;/code&gt;
+              
+            
+              
+            
+              
+                &lt;code data-herman-code data-herman-color-value&gt;hsl(330 51.351% 85.49%)&lt;/code&gt;
+              
+            
+          
+        &lt;/div&gt;
+      &lt;/div&gt;
+    
+      &lt;div data-herman-color-preview&gt;
+        &lt;div data-herman-color-swatch&gt;
+          &lt;div data-herman-transparency-grid&gt;&lt;/div&gt;
+          &lt;div data-herman-color-overlay style=&quot;background-color: #dedede;&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div data-herman-color-info&gt;
+          &lt;strong data-herman-color-name data-herman-label=&quot;color&quot;&gt;&lt;span data-herman-color-name-option&gt;border-light&lt;/span&gt;&lt;/strong&gt;
+          
+          
+            
+              
+                &lt;code data-herman-code data-herman-color-value&gt;#dedede&lt;/code&gt;
+              
+            
+              
+            
+              
+                &lt;code data-herman-code data-herman-color-value&gt;hsl(0 0% 87.059%)&lt;/code&gt;
+              
+            
+          
+        &lt;/div&gt;
+      &lt;/div&gt;
+    
+      &lt;div data-herman-color-preview&gt;
+        &lt;div data-herman-color-swatch&gt;
+          &lt;div data-herman-transparency-grid&gt;&lt;/div&gt;
+          &lt;div data-herman-color-overlay style=&quot;background-color: rgba(85, 91, 94, 0.5);&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div data-herman-color-info&gt;
+          &lt;strong data-herman-color-name data-herman-label=&quot;color&quot;&gt;&lt;span data-herman-color-name-option&gt;shadow&lt;/span&gt;&lt;/strong&gt;
+          
+          
+            
+              
+                &lt;code data-herman-code data-herman-color-value&gt;#555b5e80&lt;/code&gt;
+              
+            
+              
+            
+              
+                &lt;code data-herman-code data-herman-color-value&gt;hsl(200 5.0279% 35.098% / 0.5)&lt;/code&gt;
+              
+            
+          
+        &lt;/div&gt;
+      &lt;/div&gt;
+    
+      &lt;div data-herman-color-preview&gt;
+        &lt;div data-herman-color-swatch&gt;
+          &lt;div data-herman-transparency-grid&gt;&lt;/div&gt;
+          &lt;div data-herman-color-overlay style=&quot;background-color: #fafcfd;&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div data-herman-color-info&gt;
+          &lt;strong data-herman-color-name data-herman-label=&quot;color&quot;&gt;&lt;span data-herman-color-name-option&gt;slight&lt;/span&gt;&lt;/strong&gt;
+          
+          
+            
+              
+                &lt;code data-herman-code data-herman-color-value&gt;#fafcfd&lt;/code&gt;
+              
+            
+              
+            
+              
+                &lt;code data-herman-code data-herman-color-value&gt;hsl(200 42.857% 98.627%)&lt;/code&gt;
+              
+            
+          
+        &lt;/div&gt;
+      &lt;/div&gt;
+    
+      &lt;div data-herman-color-preview&gt;
+        &lt;div data-herman-color-swatch&gt;
+          &lt;div data-herman-transparency-grid&gt;&lt;/div&gt;
+          &lt;div data-herman-color-overlay style=&quot;background-color: rgba(13, 127, 165, 0.2);&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div data-herman-color-info&gt;
+          &lt;strong data-herman-color-name data-herman-label=&quot;color&quot;&gt;&lt;span data-herman-color-name-option&gt;code-shadow&lt;/span&gt;&lt;/strong&gt;
+          
+          
+            
+              
+                &lt;code data-herman-code data-herman-color-value&gt;#0d7fa533&lt;/code&gt;
+              
+            
+              
+            
+              
+                &lt;code data-herman-code data-herman-color-value&gt;hsl(195 85.393% 34.902% / 0.2)&lt;/code&gt;
+              
+            
+          
+        &lt;/div&gt;
+      &lt;/div&gt;
+    
+  &lt;/div&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+" width="100%" height="0"></iframe>
+  
+  </div>
+
+
       
-        <div class="color-preview">
-          <div class="color-swatch">
-            <div class="transparency-grid"></div>
-            <div class="color-overlay" style="background-color: #0d7fa5;"></div>
-          </div>
-          <div class="color-info">
-            <strong class="color-name">
-              
-                <span class="color-name-option">theme-dark,&nbsp;</span>
-              
-                <span class="color-name-option">focus,&nbsp;</span>
-              
-                <span class="color-name-option">code</span>
-              
-            </strong>
-            
-            
-              
-                
-                  <code class="color-value">#0d7fa5</code>
-                
-              
-                
-              
-                
-                  <code class="color-value">hsl(195, 85%, 35%)</code>
-                
-              
-            
-          </div>
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="variable--hljs-colors">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type"></span>
+      
+
+      
+        <a href="#variable--hljs-colors" class="item-name">$hljs-colors</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+    
+  
+    <div class="code-block">
+      
+        <div class="code-header">
+          <span class="code-language">
+            scss
+          </span>
+
+          
         </div>
       
-        <div class="color-preview">
-          <div class="color-swatch">
-            <div class="transparency-grid"></div>
-            <div class="color-overlay" style="background-color: #cfe5ed;"></div>
-          </div>
-          <div class="color-info">
-            <strong class="color-name">
-              
-                <span class="color-name-option">theme-light,&nbsp;</span>
-              
-                <span class="color-name-option">callout</span>
-              
-            </strong>
-            
-            
-              
-                
-                  <code class="color-value">#cfe5ed</code>
-                
-              
-                
-              
-                
-                  <code class="color-value">hsl(196, 45%, 87%)</code>
-                
-              
-            
-          </div>
-        </div>
+
       
-        <div class="color-preview">
-          <div class="color-swatch">
-            <div class="transparency-grid"></div>
-            <div class="color-overlay" style="background-color: #fff;"></div>
-          </div>
-          <div class="color-info">
-            <strong class="color-name">
-              
-                <span class="color-name-option">background</span>
-              
-            </strong>
-            
-            
-              
-                
-                  <code class="color-value">#ffffff</code>
-                
-              
-                
-              
-                
-                  <code class="color-value">hsl(0, 0%, 100%)</code>
-                
-              
-            
-          </div>
-        </div>
       
-        <div class="color-preview">
-          <div class="color-swatch">
-            <div class="transparency-grid"></div>
-            <div class="color-overlay" style="background-color: #3b4042;"></div>
-          </div>
-          <div class="color-info">
-            <strong class="color-name">
-              
-                <span class="color-name-option">text</span>
-              
-            </strong>
-            
-            
-              
-                
-                  <code class="color-value">#3b4042</code>
-                
-              
-                
-              
-                
-                  <code class="color-value">hsl(197, 6%, 25%)</code>
-                
-              
-            
-          </div>
-        </div>
-      
-        <div class="color-preview">
-          <div class="color-swatch">
-            <div class="transparency-grid"></div>
-            <div class="color-overlay" style="background-color: #555b5e;"></div>
-          </div>
-          <div class="color-info">
-            <strong class="color-name">
-              
-                <span class="color-name-option">text-light,&nbsp;</span>
-              
-                <span class="color-name-option">border</span>
-              
-            </strong>
-            
-            
-              
-                
-                  <code class="color-value">#555b5e</code>
-                
-              
-                
-              
-                
-                  <code class="color-value">hsl(200, 5%, 35%)</code>
-                
-              
-            
-          </div>
-        </div>
-      
-        <div class="color-preview">
-          <div class="color-swatch">
-            <div class="transparency-grid"></div>
-            <div class="color-overlay" style="background-color: #b81e6c;"></div>
-          </div>
-          <div class="color-info">
-            <strong class="color-name">
-              
-                <span class="color-name-option">action</span>
-              
-            </strong>
-            
-            
-              
-                
-                  <code class="color-value">#b81e6c</code>
-                
-              
-                
-              
-                
-                  <code class="color-value">hsl(330, 72%, 42%)</code>
-                
-              
-            
-          </div>
-        </div>
-      
-        <div class="color-preview">
-          <div class="color-swatch">
-            <div class="transparency-grid"></div>
-            <div class="color-overlay" style="background-color: #edc7da;"></div>
-          </div>
-          <div class="color-info">
-            <strong class="color-name">
-              
-                <span class="color-name-option">underline</span>
-              
-            </strong>
-            
-            
-              
-                
-                  <code class="color-value">#edc7da</code>
-                
-              
-                
-              
-                
-                  <code class="color-value">hsl(330, 51%, 85%)</code>
-                
-              
-            
-          </div>
-        </div>
-      
-        <div class="color-preview">
-          <div class="color-swatch">
-            <div class="transparency-grid"></div>
-            <div class="color-overlay" style="background-color: #dedede;"></div>
-          </div>
-          <div class="color-info">
-            <strong class="color-name">
-              
-                <span class="color-name-option">border-light</span>
-              
-            </strong>
-            
-            
-              
-                
-                  <code class="color-value">#dedede</code>
-                
-              
-                
-              
-                
-                  <code class="color-value">hsl(0, 0%, 87%)</code>
-                
-              
-            
-          </div>
-        </div>
-      
-        <div class="color-preview">
-          <div class="color-swatch">
-            <div class="transparency-grid"></div>
-            <div class="color-overlay" style="background-color: rgba(85, 91, 94, 0.5);"></div>
-          </div>
-          <div class="color-info">
-            <strong class="color-name">
-              
-                <span class="color-name-option">shadow</span>
-              
-            </strong>
-            
-            
-              
-                
-                  <code class="color-value">#555b5e</code>
-                
-              
-                
-              
-                
-                  <code class="color-value">hsla(200, 5%, 35%, 0.5)</code>
-                
-              
-            
-          </div>
-        </div>
-      
-        <div class="color-preview">
-          <div class="color-swatch">
-            <div class="transparency-grid"></div>
-            <div class="color-overlay" style="background-color: #fafcfd;"></div>
-          </div>
-          <div class="color-info">
-            <strong class="color-name">
-              
-                <span class="color-name-option">slight</span>
-              
-            </strong>
-            
-            
-              
-                
-                  <code class="color-value">#fafcfd</code>
-                
-              
-                
-              
-                
-                  <code class="color-value">hsl(200, 43%, 99%)</code>
-                
-              
-            
-          </div>
-        </div>
-      
-        <div class="color-preview">
-          <div class="color-swatch">
-            <div class="transparency-grid"></div>
-            <div class="color-overlay" style="background-color: rgba(13, 127, 165, 0.2);"></div>
-          </div>
-          <div class="color-info">
-            <strong class="color-name">
-              
-                <span class="color-name-option">code-shadow</span>
-              
-            </strong>
-            
-            
-              
-                
-                  <code class="color-value">#0d7fa5</code>
-                
-              
-                
-              
-                
-                  <code class="color-value">hsla(195, 85%, 35%, 0.2)</code>
-                
-              
-            
-          </div>
-        </div>
-      
+      <pre class="hljs-pre"><code class="lang-scss">$hljs-colors: (
+  &#39;hljs-comment&#39;: #93a1a1,
+  &#39;hljs-green&#39;: #859900,
+  &#39;hljs-cyan&#39;: #2aa198,
+  &#39;hljs-blue&#39;: #268bd2,
+  &#39;hljs-yellow&#39;: #b58900,
+  &#39;hljs-orange&#39;: #cb4b16,
+  &#39;hljs-red&#39;: #dc322f,
+  &#39;hljs-formula&#39;: #eee8d5,
+);</code></pre>
     </div>
+  
+
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>Colors for code-highlighting with hljs,
+based on <a href="https://ethanschoonover.com/solarized/">Solarized-Light</a>
+&amp; the Herman<span class="widont">&nbsp;</span>brand.</p>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+        
+ 
+  <div data-item-section="color-palette">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Color Previews</span>
+        
+      </h3>
+    
+
+    
+    <iframe class="render-colors" srcdoc="
+
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot; /&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;base target=&quot;_parent&quot;&gt;
+
+  &lt;title&gt;colors&lt;/title&gt;
+
+  
+    &lt;!-- App preview CSS --&gt;
+    &lt;style&gt;
+      :root {
+  font-family:Source Sans Pro,Helvetica Neue,Helvetica,Arial,sans-serif;
+  font-size:18px;
+  font-size:calc(1em + .125vw);
+  --herman-brand-blue:#0d7fa5;
+  --herman-brand-pink:#e2127a;
+}
+    &lt;/style&gt;
+  
+
+  &lt;!-- Herman iframe styles --&gt;
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;assets/webpack/iframe_styles.min.css&quot; /&gt;
+
+  
+    &lt;!-- Custom Font HTML --&gt;
+    
+&lt;link href=&quot;https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700,700i&quot; rel=&quot;stylesheet&quot;&gt;
+&lt;link href=&quot;https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600&quot; rel=&quot;stylesheet&quot;&gt;
+&lt;link href=&quot;https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700&quot; rel=&quot;stylesheet&quot;&gt;
+  
+&lt;/head&gt;
+&lt;body data-herman-preview=&#39;colors&#39;&gt;
+  &lt;div data-herman-color-palette&gt;
+    
+      &lt;div data-herman-color-preview&gt;
+        &lt;div data-herman-color-swatch&gt;
+          &lt;div data-herman-transparency-grid&gt;&lt;/div&gt;
+          &lt;div data-herman-color-overlay style=&quot;background-color: #93a1a1;&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div data-herman-color-info&gt;
+          &lt;strong data-herman-color-name data-herman-label=&quot;color&quot;&gt;&lt;span data-herman-color-name-option&gt;hljs-comment&lt;/span&gt;&lt;/strong&gt;
+          
+          
+            
+              
+                &lt;code data-herman-code data-herman-color-value&gt;#93a1a1&lt;/code&gt;
+              
+            
+              
+            
+              
+                &lt;code data-herman-code data-herman-color-value&gt;hsl(180 6.9307% 60.392%)&lt;/code&gt;
+              
+            
+          
+        &lt;/div&gt;
+      &lt;/div&gt;
+    
+      &lt;div data-herman-color-preview&gt;
+        &lt;div data-herman-color-swatch&gt;
+          &lt;div data-herman-transparency-grid&gt;&lt;/div&gt;
+          &lt;div data-herman-color-overlay style=&quot;background-color: #859900;&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div data-herman-color-info&gt;
+          &lt;strong data-herman-color-name data-herman-label=&quot;color&quot;&gt;&lt;span data-herman-color-name-option&gt;hljs-green&lt;/span&gt;&lt;/strong&gt;
+          
+          
+            
+              
+                &lt;code data-herman-code data-herman-color-value&gt;#859900&lt;/code&gt;
+              
+            
+              
+            
+              
+                &lt;code data-herman-code data-herman-color-value&gt;hsl(67.843 100% 30%)&lt;/code&gt;
+              
+            
+          
+        &lt;/div&gt;
+      &lt;/div&gt;
+    
+      &lt;div data-herman-color-preview&gt;
+        &lt;div data-herman-color-swatch&gt;
+          &lt;div data-herman-transparency-grid&gt;&lt;/div&gt;
+          &lt;div data-herman-color-overlay style=&quot;background-color: #2aa198;&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div data-herman-color-info&gt;
+          &lt;strong data-herman-color-name data-herman-label=&quot;color&quot;&gt;&lt;span data-herman-color-name-option&gt;hljs-cyan&lt;/span&gt;&lt;/strong&gt;
+          
+          
+            
+              
+                &lt;code data-herman-code data-herman-color-value&gt;#2aa198&lt;/code&gt;
+              
+            
+              
+            
+              
+                &lt;code data-herman-code data-herman-color-value&gt;hsl(175.46 58.621% 39.804%)&lt;/code&gt;
+              
+            
+          
+        &lt;/div&gt;
+      &lt;/div&gt;
+    
+      &lt;div data-herman-color-preview&gt;
+        &lt;div data-herman-color-swatch&gt;
+          &lt;div data-herman-transparency-grid&gt;&lt;/div&gt;
+          &lt;div data-herman-color-overlay style=&quot;background-color: #268bd2;&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div data-herman-color-info&gt;
+          &lt;strong data-herman-color-name data-herman-label=&quot;color&quot;&gt;&lt;span data-herman-color-name-option&gt;hljs-blue&lt;/span&gt;&lt;/strong&gt;
+          
+          
+            
+              
+                &lt;code data-herman-code data-herman-color-value&gt;#268bd2&lt;/code&gt;
+              
+            
+              
+            
+              
+                &lt;code data-herman-code data-herman-color-value&gt;hsl(204.77 69.355% 48.627%)&lt;/code&gt;
+              
+            
+          
+        &lt;/div&gt;
+      &lt;/div&gt;
+    
+      &lt;div data-herman-color-preview&gt;
+        &lt;div data-herman-color-swatch&gt;
+          &lt;div data-herman-transparency-grid&gt;&lt;/div&gt;
+          &lt;div data-herman-color-overlay style=&quot;background-color: #b58900;&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div data-herman-color-info&gt;
+          &lt;strong data-herman-color-name data-herman-label=&quot;color&quot;&gt;&lt;span data-herman-color-name-option&gt;hljs-yellow&lt;/span&gt;&lt;/strong&gt;
+          
+          
+            
+              
+                &lt;code data-herman-code data-herman-color-value&gt;#b58900&lt;/code&gt;
+              
+            
+              
+            
+              
+                &lt;code data-herman-code data-herman-color-value&gt;hsl(45.414 100% 35.49%)&lt;/code&gt;
+              
+            
+          
+        &lt;/div&gt;
+      &lt;/div&gt;
+    
+      &lt;div data-herman-color-preview&gt;
+        &lt;div data-herman-color-swatch&gt;
+          &lt;div data-herman-transparency-grid&gt;&lt;/div&gt;
+          &lt;div data-herman-color-overlay style=&quot;background-color: #cb4b16;&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div data-herman-color-info&gt;
+          &lt;strong data-herman-color-name data-herman-label=&quot;color&quot;&gt;&lt;span data-herman-color-name-option&gt;hljs-orange&lt;/span&gt;&lt;/strong&gt;
+          
+          
+            
+              
+                &lt;code data-herman-code data-herman-color-value&gt;#cb4b16&lt;/code&gt;
+              
+            
+              
+            
+              
+                &lt;code data-herman-code data-herman-color-value&gt;hsl(17.569 80.444% 44.118%)&lt;/code&gt;
+              
+            
+          
+        &lt;/div&gt;
+      &lt;/div&gt;
+    
+      &lt;div data-herman-color-preview&gt;
+        &lt;div data-herman-color-swatch&gt;
+          &lt;div data-herman-transparency-grid&gt;&lt;/div&gt;
+          &lt;div data-herman-color-overlay style=&quot;background-color: #dc322f;&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div data-herman-color-info&gt;
+          &lt;strong data-herman-color-name data-herman-label=&quot;color&quot;&gt;&lt;span data-herman-color-name-option&gt;hljs-red&lt;/span&gt;&lt;/strong&gt;
+          
+          
+            
+              
+                &lt;code data-herman-code data-herman-color-value&gt;#dc322f&lt;/code&gt;
+              
+            
+              
+            
+              
+                &lt;code data-herman-code data-herman-color-value&gt;hsl(1.0405 71.193% 52.353%)&lt;/code&gt;
+              
+            
+          
+        &lt;/div&gt;
+      &lt;/div&gt;
+    
+      &lt;div data-herman-color-preview&gt;
+        &lt;div data-herman-color-swatch&gt;
+          &lt;div data-herman-transparency-grid&gt;&lt;/div&gt;
+          &lt;div data-herman-color-overlay style=&quot;background-color: #eee8d5;&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div data-herman-color-info&gt;
+          &lt;strong data-herman-color-name data-herman-label=&quot;color&quot;&gt;&lt;span data-herman-color-name-option&gt;hljs-formula&lt;/span&gt;&lt;/strong&gt;
+          
+          
+            
+              
+                &lt;code data-herman-code data-herman-color-value&gt;#eee8d5&lt;/code&gt;
+              
+            
+              
+            
+              
+                &lt;code data-herman-code data-herman-color-value&gt;hsl(45.6 42.373% 88.431%)&lt;/code&gt;
+              
+            
+          
+        &lt;/div&gt;
+      &lt;/div&gt;
+    
+  &lt;/div&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+" width="100%" height="0"></iframe>
   
   </div>
 
