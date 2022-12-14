@@ -1,5 +1,82 @@
 # Herman Changelog
 
+## 5.0.0: 2022-12-14
+
+_No changes from `v5.0.0-beta.7`. Changes since `v4.0.2`:_
+
+### 🚀 New Features
+
+- Color previews are now rendered in an `<iframe>` which allows them to make use
+  of user-supplied CSS custom properties (and a limited subset of Herman
+  styles). Custom properties are made available via the new `customPreviewCSS`
+  or existing `customCSS` options. To be included, custom properties must be
+  declared on `html`, `body`, or `:root`.
+- Length keywords in `@sizes {ruler}` maps now display as a border
+- Allow `utilities.add()` to merge data, instead of override
+- `utilities.each-value()` will pass each _value_ of a map through a given
+  function (this is the previous behavior of passing args to `add()`)
+- `utilities.each-key()` will pass each _key_ of a map through a given function
+- Add `customSourceMap` option (default: `customCSS` option + `.map`) to allow
+  copying source-map file along with `customCSS` file
+- Font-map variant keys can be comma-separated --
+  [#338](https://github.com/oddbird/sassdoc-theme-herman/issues/338)
+- Add support for non-standard CSS font-weight names --
+  [#250](https://github.com/oddbird/sassdoc-theme-herman/issues/250)
+
+### 💥 Breaking Changes
+
+- Font, ratio, size, and color previews are now rendered without user-provided
+  stylesheets (to avoid style conflicts). CSS custom properties and font-related
+  CSS are made available via the new (🚀) `customPreviewCSS` or existing
+  `customCSS` options. To be included, declarations must be declared on `html`,
+  `body`, or `:root` in the stylesheet set via `customPreviewCSS` or `customCSS`
+  settings. (All `@font-face` at-rules are included.)
+- Require Dart Sass (`^1.45.0`) for `@example scss` annotations, using the
+  updated [Dart Sass JavaScript
+  API](https://sass-lang.com/documentation/js-api/). The `sass.implementation`
+  option is removed, along with support for `node-sass`.
+- Rename `sass.importer` option to `sass.importers`, matching the [Dart Sass
+  option](https://sass-lang.com/documentation/js-api/interfaces/Options#importers).
+- Remove `sass.includePaths` and `sass.outputStyle` options. These are replaced
+  with a new `sass.sassOptions` option, which accepts any options that Dart Sass
+  accepts (e.g. `loadPaths` or `style`). See the [Dart Sass
+  documentation](https://sass-lang.com/documentation/js-api/modules#compileStringAsync)
+  for more details.
+- `utilities.add()`
+  no longer supports map-compilation functions and arguments,
+  since there are two reasonable approaches.
+  Maps that need to be compiled for Herman
+  must now be compiled before they are added.
+  That can still be done using either:
+  - 🚀 NEW: `utilities.each-value()` will pass each _value_ of a map
+    through a given function
+    (this is the previous behavior of passing args to `add()`)
+  - 🚀 NEW: `utilities.each-key()` will pass each _key_ of a map
+    through a given function
+- Disable all `autofill` annotations for comments that Herman treats as "prose"
+  (i.e. separated from documented code by one or more newlines).
+- Drop support for Node < 14
+
+### 🐛 Bug Fixes
+
+- Switch from [tinycolor](https://github.com/bgrins/TinyColor) to
+  [colorjs.io](https://github.com/LeaVerou/color.js) for color conversions, to
+  fix bug displaying colors that use hue angle notation.
+
+### 📝 Documentation
+
+- Add samples for `@use '~/sassdoc-theme-herman/scss/utilities';`
+
+### 🏠 Internal
+
+- Replace [Bluebird](https://github.com/petkaantonov/bluebird/) dependency with
+  native promises.
+- Replace CircleCI, Codecov, and AppVeyor with GitHub Actions
+- Include source-maps with Herman JS & CSS assets
+- Remove documentation static-site from repository and npm package
+- Limit size of NPM package
+- Upgrade dependencies
+
 ## 5.0.0-beta.7: 2022-12-07
 
 - 💥 BREAKING: Rename `customPropertiesCSS` option to `customPreviewCSS`
