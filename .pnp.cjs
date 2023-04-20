@@ -79,7 +79,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["mocha", "npm:10.2.0"],\
             ["mocha-junit-reporter", "virtual:878b150fb95c14b92e1a083a8cdd5b07d75bde54934ebaf95859474dcc5db3d63d39a688ccdf72c7af702ac8d88c00a5b7e8d26a82dab7e202b18226de2a7429#npm:2.2.0"],\
             ["npm-run-all", "npm:4.1.5"],\
-            ["nunjucks", "virtual:52792dd97726a8ac96fccda7b634faa131bd0f56fcc15a206c0c204bed1397175438b7399a7938f9596b13ab7ea75b93a582eff85132ab61b54a00023bf57ea1#npm:3.2.3"],\
+            ["nunjucks", "virtual:52792dd97726a8ac96fccda7b634faa131bd0f56fcc15a206c0c204bed1397175438b7399a7938f9596b13ab7ea75b93a582eff85132ab61b54a00023bf57ea1#npm:3.2.4"],\
             ["nyc", "npm:15.1.0"],\
             ["pinst", "npm:3.0.0"],\
             ["postcss", "npm:8.4.20"],\
@@ -10980,7 +10980,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["jinja-loader", "npm:0.0.8"],\
             ["loader-utils", "npm:1.4.2"],\
-            ["nunjucks", "virtual:52792dd97726a8ac96fccda7b634faa131bd0f56fcc15a206c0c204bed1397175438b7399a7938f9596b13ab7ea75b93a582eff85132ab61b54a00023bf57ea1#npm:3.2.3"]\
+            ["nunjucks", "virtual:52792dd97726a8ac96fccda7b634faa131bd0f56fcc15a206c0c204bed1397175438b7399a7938f9596b13ab7ea75b93a582eff85132ab61b54a00023bf57ea1#npm:3.2.4"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -12853,17 +12853,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["nunjucks", [\
-        ["npm:3.2.3", {\
-          "packageLocation": "./.yarn/cache/nunjucks-npm-3.2.3-ae8b5fd14c-9d0125acf9.zip/node_modules/nunjucks/",\
+        ["npm:3.2.4", {\
+          "packageLocation": "./.yarn/cache/nunjucks-npm-3.2.4-c2cdc53bf5-8b902a9deb.zip/node_modules/nunjucks/",\
           "packageDependencies": [\
-            ["nunjucks", "npm:3.2.3"]\
+            ["nunjucks", "npm:3.2.4"]\
           ],\
           "linkType": "SOFT"\
         }],\
-        ["virtual:52792dd97726a8ac96fccda7b634faa131bd0f56fcc15a206c0c204bed1397175438b7399a7938f9596b13ab7ea75b93a582eff85132ab61b54a00023bf57ea1#npm:3.2.3", {\
-          "packageLocation": "./.yarn/__virtual__/nunjucks-virtual-6de7683450/0/cache/nunjucks-npm-3.2.3-ae8b5fd14c-9d0125acf9.zip/node_modules/nunjucks/",\
+        ["virtual:52792dd97726a8ac96fccda7b634faa131bd0f56fcc15a206c0c204bed1397175438b7399a7938f9596b13ab7ea75b93a582eff85132ab61b54a00023bf57ea1#npm:3.2.4", {\
+          "packageLocation": "./.yarn/__virtual__/nunjucks-virtual-1d92946761/0/cache/nunjucks-npm-3.2.4-c2cdc53bf5-8b902a9deb.zip/node_modules/nunjucks/",\
           "packageDependencies": [\
-            ["nunjucks", "virtual:52792dd97726a8ac96fccda7b634faa131bd0f56fcc15a206c0c204bed1397175438b7399a7938f9596b13ab7ea75b93a582eff85132ab61b54a00023bf57ea1#npm:3.2.3"],\
+            ["nunjucks", "virtual:52792dd97726a8ac96fccda7b634faa131bd0f56fcc15a206c0c204bed1397175438b7399a7938f9596b13ab7ea75b93a582eff85132ab61b54a00023bf57ea1#npm:3.2.4"],\
             ["@types/chokidar", null],\
             ["a-sync-waterfall", "npm:1.0.1"],\
             ["asap", "npm:2.0.6"],\
@@ -15377,7 +15377,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["extend", "npm:3.0.2"],\
             ["fs-extra", "npm:2.1.2"],\
             ["html-minifier", "npm:3.5.21"],\
-            ["nunjucks", "virtual:52792dd97726a8ac96fccda7b634faa131bd0f56fcc15a206c0c204bed1397175438b7399a7938f9596b13ab7ea75b93a582eff85132ab61b54a00023bf57ea1#npm:3.2.3"],\
+            ["nunjucks", "virtual:52792dd97726a8ac96fccda7b634faa131bd0f56fcc15a206c0c204bed1397175438b7399a7938f9596b13ab7ea75b93a582eff85132ab61b54a00023bf57ea1#npm:3.2.4"],\
             ["sassdoc-extras", "npm:2.5.1"]\
           ],\
           "linkType": "HARD"\
@@ -15439,7 +15439,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["mocha", "npm:10.2.0"],\
             ["mocha-junit-reporter", "virtual:878b150fb95c14b92e1a083a8cdd5b07d75bde54934ebaf95859474dcc5db3d63d39a688ccdf72c7af702ac8d88c00a5b7e8d26a82dab7e202b18226de2a7429#npm:2.2.0"],\
             ["npm-run-all", "npm:4.1.5"],\
-            ["nunjucks", "virtual:52792dd97726a8ac96fccda7b634faa131bd0f56fcc15a206c0c204bed1397175438b7399a7938f9596b13ab7ea75b93a582eff85132ab61b54a00023bf57ea1#npm:3.2.3"],\
+            ["nunjucks", "virtual:52792dd97726a8ac96fccda7b634faa131bd0f56fcc15a206c0c204bed1397175438b7399a7938f9596b13ab7ea75b93a582eff85132ab61b54a00023bf57ea1#npm:3.2.4"],\
             ["nyc", "npm:15.1.0"],\
             ["pinst", "npm:3.0.0"],\
             ["postcss", "npm:8.4.20"],\
