@@ -6406,7 +6406,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["cross-spawn", "npm:6.0.5"],\
             ["nice-try", "npm:1.0.5"],\
             ["path-key", "npm:2.0.1"],\
-            ["semver", "npm:5.7.1"],\
+            ["semver", "npm:5.7.2"],\
             ["shebang-command", "npm:1.2.0"],\
             ["which", "npm:1.3.1"]\
           ],\
@@ -7836,7 +7836,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["is-regex", "npm:1.1.4"],\
             ["lodash", "npm:4.17.21"],\
             ["resolve", "patch:resolve@npm%3A1.22.1#~builtin<compat/resolve>::version=1.22.1&hash=c3c19d"],\
-            ["semver", "npm:5.7.1"],\
+            ["semver", "npm:5.7.2"],\
             ["webpack", "virtual:878b150fb95c14b92e1a083a8cdd5b07d75bde54934ebaf95859474dcc5db3d63d39a688ccdf72c7af702ac8d88c00a5b7e8d26a82dab7e202b18226de2a7429#npm:5.76.1"]\
           ],\
           "packagePeers": [\
@@ -12715,7 +12715,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["normalize-package-data", "npm:2.5.0"],\
             ["hosted-git-info", "npm:2.8.9"],\
             ["resolve", "patch:resolve@npm%3A1.22.1#~builtin<compat/resolve>::version=1.22.1&hash=c3c19d"],\
-            ["semver", "npm:5.7.1"],\
+            ["semver", "npm:5.7.2"],\
             ["validate-npm-package-license", "npm:3.0.4"]\
           ],\
           "linkType": "HARD"\
@@ -15240,7 +15240,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["es6-promise", "npm:3.3.1"],\
             ["memoize-decorator", "npm:1.0.2"],\
             ["object-assign", "npm:3.0.0"],\
-            ["semver", "npm:5.7.1"],\
+            ["semver", "npm:5.7.2"],\
             ["semver-regex", "npm:1.0.0"],\
             ["through2", "npm:2.0.5"],\
             ["which", "npm:1.3.1"]\
@@ -15532,10 +15532,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["semver", [\
-        ["npm:5.7.1", {\
-          "packageLocation": "./.yarn/cache/semver-npm-5.7.1-40bcea106b-57fd0acfd0.zip/node_modules/semver/",\
+        ["npm:5.7.2", {\
+          "packageLocation": "./.yarn/cache/semver-npm-5.7.2-938ee91eaa-fb4ab5e0dd.zip/node_modules/semver/",\
           "packageDependencies": [\
-            ["semver", "npm:5.7.1"]\
+            ["semver", "npm:5.7.2"]\
           ],\
           "linkType": "HARD"\
         }],\
