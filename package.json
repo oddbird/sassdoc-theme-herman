@@ -83,7 +83,7 @@
     "@babel/preset-env": "^7.20.2",
     "@testing-library/dom": "^8.19.0",
     "@testing-library/jest-dom": "^5.16.5",
-    "@yarnpkg/sdks": "^3.0.0-rc.33",
+    "@yarnpkg/sdks": "^3.0.0",
     "accoutrement": "^4.0.4",
     "autoprefixer": "^10.4.13",
     "babel-jest": "^29.3.1",
@@ -156,5 +156,5 @@
       "prettier --write"
     ]
   },
-  "packageManager": "yarn@3.3.0"
+  "packageManager": "yarn@3.6.4"
 }
