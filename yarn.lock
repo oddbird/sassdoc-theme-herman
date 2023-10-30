@@ -13025,7 +13025,6 @@ __metadata:
     strip-indent: ^3.0.0
     stylelint: ^15.11.0
     stylelint-config-standard-scss: ^11.0.0
-    stylelint-prettier: ^4.0.2
     svgo: ^3.0.2
     typogr: ^0.6.8
     unixify: ^1.0.0
@@ -13988,18 +13987,6 @@ __metadata:
   peerDependencies:
     stylelint: ^15.10.0
   checksum: 536249800c04b48a9c354067765f042713982e8222be17bb897a27d26546e50adfb87e6f1e4541807d720de3554345da99ab470e13e8d7ab0ab326c73ae3df61
-  languageName: node
-  linkType: hard
-
-"stylelint-prettier@npm:^4.0.2":
-  version: 4.0.2
-  resolution: "stylelint-prettier@npm:4.0.2"
-  dependencies:
-    prettier-linter-helpers: "npm:^1.0.0"
-  peerDependencies:
-    prettier: ">=3.0.0"
-    stylelint: ">=15.8.0"
-  checksum: b60112c10b8f31456211d65b4c17238fdaf46ee9f80ab035621f2eb86b47505a4b9582d99f4334dfe370cc8104de870f7fcc256737d0f2e68f4357239f739054
   languageName: node
   linkType: hard
 
