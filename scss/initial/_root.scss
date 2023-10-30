@@ -85,7 +85,9 @@ mark {
     color: tools.color('action');
     text-decoration-color: tools.color('underline');
     text-decoration-skip: auto;
-    transition: text-decoration-color 250ms, color 200ms;
+    transition:
+      text-decoration-color 250ms,
+      color 200ms;
   }
 
   #{config.$focus} {

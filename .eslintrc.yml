@@ -38,7 +38,6 @@ rules:
   prettier/prettier:
     - 2
     - singleQuote: true
-      trailingComma: all
 
   # Import
   import/order:

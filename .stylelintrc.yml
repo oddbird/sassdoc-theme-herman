@@ -4,8 +4,6 @@
 extends:
   - stylelint-config-standard-scss
   - stylelint-prettier/recommended
-plugins:
-  - stylelint-prettier
 
 ignoreFiles:
   - '**/*.js'
@@ -16,7 +14,6 @@ rules:
   #   - https://github.com/stylelint-scss/stylelint-config-recommended-scss/blob/master/index.js
   #   - https://github.com/stylelint/stylelint-config-standard/blob/main/index.js
   #   - https://github.com/stylelint/stylelint-config-recommended/blob/main/index.js
-  #   - https://github.com/prettier/stylelint-config-prettier/blob/master/src/index.js
 
   # possible errors (these are all on by default)
   no-descending-specificity: null

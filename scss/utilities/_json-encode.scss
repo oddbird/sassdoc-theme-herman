@@ -104,6 +104,7 @@
   $value: '#{$value}';
   $value: escape-backslashes($value);
   $value: escape-quotes($value);
+
   @return '"#{$value}"';
 }
 
