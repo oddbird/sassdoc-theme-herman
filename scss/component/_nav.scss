@@ -86,7 +86,9 @@
     line-height: 1.1;
     padding-bottom: tools.size('quarter-shim');
     text-decoration: none;
-    transition: color 0.4s, background-size 0.4s;
+    transition:
+      color 0.4s,
+      background-size 0.4s;
   }
 
   #{config.$focus} {

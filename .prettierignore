@@ -1,7 +1,6 @@
 !.*
 .git/
 .husky/
-.nyc_output/
 .pnp.cjs
 .pnp.loader.mjs
 .vscode/
@@ -9,8 +8,3 @@
 .yarnrc.yml
 coverage/
 dist/
-docs/
-node_modules/
-
-# @@@ https://github.com/prettier/prettier/issues/10000
-test/sass/utilities/_json-api.scss

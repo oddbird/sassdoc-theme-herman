@@ -43,8 +43,6 @@
   $str: '';
 
   @each $item in $list {
-    // https://github.com/stylelint-scss/stylelint-config-recommended-scss/issues/149
-    /* stylelint-disable-next-line annotation-no-unknown */
     $str: if($str != '', $str + ', ', $str);
     $str: $str + encode($item);
   }
@@ -65,8 +63,6 @@
   $str: '';
 
   @each $key, $value in $map {
-    // https://github.com/stylelint-scss/stylelint-config-recommended-scss/issues/149
-    /* stylelint-disable-next-line annotation-no-unknown */
     $str: if($str != '', $str + ', ', $str);
     $str: $str + quotes($key) + ': ' + encode($value);
   }
@@ -104,6 +100,7 @@
   $value: '#{$value}';
   $value: escape-backslashes($value);
   $value: escape-quotes($value);
+
   @return '"#{$value}"';
 }
 

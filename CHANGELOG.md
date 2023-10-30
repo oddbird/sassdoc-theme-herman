@@ -1,5 +1,9 @@
 # Herman Changelog
 
+## Unreleased
+
+- 🏠 INTERNAL: Upgrade dependencies
+
 ## 5.0.1: 2022-12-14
 
 - 🏠 INTERNAL: Upgrade dependencies

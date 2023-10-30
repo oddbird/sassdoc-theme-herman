@@ -66,7 +66,10 @@
   );
   background-position: 0 100%;
   background-repeat: repeat-x;
-  background-size: 100px 75%, 10px 50%, 5px 25%;
+  background-size:
+    100px 75%,
+    10px 50%,
+    5px 25%;
   border-radius: tools.size('quarter-shim');
   display: block;
   min-height: 1.5em;
