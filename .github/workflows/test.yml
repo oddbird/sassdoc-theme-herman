@@ -87,7 +87,7 @@ jobs:
           cache: yarn
       - run: yarn install
       - name: Download coverage results
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: frontend-coverage
           path: coverage
