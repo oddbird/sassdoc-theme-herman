@@ -1334,6 +1334,63 @@ describe('example annotation', () => {
         .catch(done);
     });
 
+    it('uses custom `sass.implementation` string [sass-embedded]', function (done) {
+      const data = [
+        {
+          example: [
+            {
+              type: 'scss',
+              code: '/* just a placeholder */',
+            },
+          ],
+        },
+      ];
+      const env = Object.assign({}, this.env, {
+        herman: {
+          sass: {
+            implementation: 'sass-embedded',
+          },
+        },
+      });
+      const example = annotations.example(env);
+      example
+        .resolve(data)
+        .then(() => {
+          assert.equal(data[0].example[0].rendered, data[0].example[0].code);
+          done();
+        })
+        .catch(done);
+    });
+
+    it('custom `sass.implementation` instance [sass-embedded]', function (done) {
+      const data = [
+        {
+          example: [
+            {
+              type: 'scss',
+              code: '/* just a placeholder */',
+            },
+          ],
+        },
+      ];
+      const env = Object.assign({}, this.env, {
+        herman: {
+          sass: {
+            // eslint-disable-next-line global-require
+            implementation: require('sass-embedded'),
+          },
+        },
+      });
+      const example = annotations.example(env);
+      example
+        .resolve(data)
+        .then(() => {
+          assert.equal(data[0].example[0].rendered, data[0].example[0].code);
+          done();
+        })
+        .catch(done);
+    });
+
     it('skips non-html, non-njk, non-scss items', function (done) {
       const data = [
         {
