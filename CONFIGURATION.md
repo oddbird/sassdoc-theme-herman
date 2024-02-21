@@ -233,6 +233,20 @@ _Either [`nunjucks.templatePath`](#nunjucks-templatepath) or
 
 Container for the following sass-related options:
 
+### sass.implementation
+
+- Type: `String` or Sass implementation instance
+- Default: `'sass'`
+
+Determines the Sass implementation (defaults to [`sass`][dart-sass]) to use for
+Sass compilation if using [`@example scss` annotation][example-docs-scss]. This
+option expects a string that matches the name of an available Dart Sass
+implementation (e.g. `sass` or `sass-embedded`), or a Dart Sass instance itself.
+
+[dart-sass]: https://www.npmjs.com/package/sass
+[example-docs-scss]: https://www.oddbird.net/herman/docs/demo_examples#compiling-sass-scss
+[sass-embedded]: https://www.npmjs.com/package/sass-embedded
+
 ### sass.jsonFile
 
 - Type: `String`

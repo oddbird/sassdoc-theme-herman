@@ -126,6 +126,7 @@
     "postcss-loader": "^8.1.0",
     "prettier": "^3.2.5",
     "sass": "^1.71.1",
+    "sass-embedded": "^1.71.1",
     "sass-loader": "^14.1.1",
     "sass-true": "^7.0.1",
     "sassdoc": "^2.7.4",
