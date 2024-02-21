@@ -1237,7 +1237,7 @@ describe('example annotation', () => {
       const env = Object.assign({}, this.env, {
         herman: {
           sass: {
-            includes: ['~accoutrement/sass/color', 'import', 'tools'],
+            includes: ['pkg:accoutrement/sass/color', 'import', 'tools'],
             sassOptions: {
               loadPaths: [path.join(__dirname, 'fixtures', 'scss')],
             },
@@ -1272,7 +1272,7 @@ describe('example annotation', () => {
         herman: {
           sass: {
             use: [
-              '~accoutrement/sass/color',
+              'pkg:accoutrement/sass/color',
               'import',
               { file: 'tools', namespace: 'my-tools' },
               {},

@@ -23,3 +23,13 @@ updates:
         update-types:
           - 'minor'
           - 'patch'
+    ignore:
+      - dependency-name: 'chalk'
+        update-types:
+          - 'version-update:semver-major'
+      - dependency-name: 'del'
+        update-types:
+          - 'version-update:semver-major'
+      - dependency-name: 'strip-indent'
+        update-types:
+          - 'version-update:semver-major'

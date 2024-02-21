@@ -1,7 +1,7 @@
 // Examples
 // ========
 
-@use '~accoutrement/sass/tools';
+@use 'pkg:accoutrement/sass/tools';
 
 .example {
   margin-bottom: tools.size('gutter');
