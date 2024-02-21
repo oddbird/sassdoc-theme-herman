@@ -1,8 +1,8 @@
 // Sample Previews
 // ===============
 
-@use '~accoutrement/sass/tools';
-@use 'samples/colors';
+@use 'pkg:accoutrement/sass/tools';
+@use '../samples/colors';
 
 // Add color sample CSS custom properties
 :root {

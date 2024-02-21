@@ -28,7 +28,6 @@ settings:
             sassjson: 'sass-json-loader'
   import/external-module-folders:
     - 'node_modules'
-    - '.yarn'
 extends:
   - eslint:recommended
   - plugin:import/recommended

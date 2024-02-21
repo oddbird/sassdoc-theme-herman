@@ -1,4 +1,4 @@
-import sassConfig from '!json-loader!sassjson!sass-loader!../../scss/json.scss';
+import sassConfig from '../../scss/json.scss';
 
 export const initializeToggles = () => {
   const body = $('body');

@@ -3,7 +3,7 @@
 
 @use 'utilities';
 @use 'config';
-@use '~cssremedy/css/remedy';
+@use 'pkg:cssremedy/css/remedy';
 @use 'initial';
 @use 'layout';
 @use 'patterns';

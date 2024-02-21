@@ -2,11 +2,10 @@
 
 const path = require('path');
 
+const { NodePackageImporter } = require('sass');
 const sassTrue = require('sass-true');
-
-const sassImporter = require('../../lib/utils/sassImporter');
 
 const sassFile = path.join(__dirname, 'test.scss');
 sassTrue.runSass({ describe, it }, sassFile, {
-  importers: [sassImporter],
+  importers: [new NodePackageImporter()],
 });

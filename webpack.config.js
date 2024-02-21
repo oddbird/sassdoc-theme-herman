@@ -8,6 +8,7 @@ const path = require('path');
 
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { NodePackageImporter } = require('sass');
 const webpack = require('webpack');
 
 const SassDocPlugin = require('./sassdoc-webpack-plugin');
@@ -40,10 +41,7 @@ const sassDocOpts = {
     sass: {
       use: ['config', 'samples'],
       sassOptions: {
-        loadPaths: [
-          path.join(__dirname, 'scss'),
-          path.join(__dirname, 'node_modules'),
-        ],
+        loadPaths: [path.join(__dirname, 'scss')],
       },
     },
   },
@@ -112,9 +110,6 @@ module.exports = {
       jquery: 'jquery/dist/jquery.slim',
       nunjucks: 'nunjucks/browser/nunjucks-slim',
     },
-  },
-  resolveLoader: {
-    alias: { sassjson: path.join(__dirname, 'sass-json-loader') },
   },
   optimization: {
     minimizer: ['...', new CssMinimizerPlugin()],
@@ -189,6 +184,7 @@ module.exports = {
       },
       {
         test: /\.scss$/,
+        issuer: { not: /\.js$/ },
         use: [
           MiniCssExtractPlugin.loader,
           {
@@ -206,7 +202,28 @@ module.exports = {
           {
             loader: 'sass-loader',
             options: {
+              api: 'modern',
               sourceMap: true,
+              sassOptions: {
+                importers: [new NodePackageImporter()],
+              },
+            },
+          },
+        ],
+      },
+      {
+        test: /\.scss$/,
+        issuer: /\.js$/,
+        use: [
+          'json-loader',
+          path.join(__dirname, 'sass-json-loader'),
+          {
+            loader: 'sass-loader',
+            options: {
+              api: 'modern',
+              sassOptions: {
+                importers: [new NodePackageImporter()],
+              },
             },
           },
         ],

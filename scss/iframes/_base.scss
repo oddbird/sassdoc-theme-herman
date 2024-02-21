@@ -1,4 +1,4 @@
-@use '~accoutrement/sass/tools';
+@use 'pkg:accoutrement/sass/tools';
 
 :root {
   line-height: tools.ratio('line-height');
