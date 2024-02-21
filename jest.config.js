@@ -80,7 +80,7 @@ module.exports = {
 
   // A map from regular expressions to module names that allow to stub out resources with a single module
   moduleNameMapper: {
-    '^!json-loader!sassjson!(.*)$': '<rootDir>/__mocks__/jsonMock.js',
+    '(.*)json.scss$': '<rootDir>/__mocks__/jsonMock.js',
     '\\.njk$': '<rootDir>/__mocks__/fileMock.js',
     '^jquery$': 'jquery/dist/jquery.slim',
     '^nunjucks$': 'nunjucks/browser/nunjucks-slim',
