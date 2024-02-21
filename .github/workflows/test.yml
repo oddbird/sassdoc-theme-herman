@@ -20,7 +20,7 @@ jobs:
         with:
           node-version-file: .nvmrc
           cache: yarn
-      - run: yarn install --immutable --immutable-cache
+      - run: yarn install --immutable
       - run: yarn build
 
   test-old-node:
