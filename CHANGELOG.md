@@ -211,7 +211,7 @@ _No changes from `v5.0.0-beta.7`. Changes since `v4.0.2`:_
   [`sass.use`](https://www.oddbird.net/herman/docs/configuration#sass-use)
   option
 - 🚀 NEW: Default Sass importer (used by `@example scss`) now supports `~`
-  imports of external modules in [Yarn 2](https://yarnpkg.com/) PnP environments
+  imports of external modules in [Yarn](https://yarnpkg.com/) PnP environments
 - 🚀 NEW: Allow using custom Sass importer with `@example scss` via
   new `sass.importer` option
 - 📝 DOCS: Fix broken links in Changelog
