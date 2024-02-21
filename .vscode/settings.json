@@ -16,8 +16,6 @@
   ],
   "css.validate": false,
   "scss.validate": false,
-  "eslint.nodePath": ".yarn/sdks",
-  "prettier.prettierPath": ".yarn/sdks/prettier/index.js",
   "stylelint.validate": [
     "css",
     "scss"
