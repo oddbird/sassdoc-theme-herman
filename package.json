@@ -28,7 +28,7 @@
     "CHANGELOG.md"
   ],
   "engines": {
-    "node": ">=14"
+    "node": ">=18"
   },
   "scripts": {
     "build": "run-s build:sprites build:webpack",
