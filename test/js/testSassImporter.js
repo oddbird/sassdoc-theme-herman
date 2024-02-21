@@ -10,12 +10,12 @@ describe('sassImporter', () => {
     assert.ok(
       findFileUrl('~sass-true')
         .toString()
-        .startsWith(`file://${path.resolve(process.cwd(), '.yarn/')}`),
+        .startsWith(`file://${path.resolve(process.cwd(), 'node_modules/')}`),
     );
     assert.ok(
       findFileUrl('~@babel/core')
         .toString()
-        .startsWith(`file://${path.resolve(process.cwd(), '.yarn/')}`),
+        .startsWith(`file://${path.resolve(process.cwd(), 'node_modules/')}`),
     );
   });
 });
