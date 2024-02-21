@@ -254,21 +254,6 @@ See [Exporting Styles to JSON][export].
 [export]: https://www.oddbird.net/herman/docs/api_json-export
 [export-mixin]: https://www.oddbird.net/herman/docs/api_json-export#mixin--export
 
-### sass.importers
-
-- Type: `Array`
-- Default: `Array` containing the [Herman Sass importer][sass-importer],
-  which supports `~` imports for external modules installed via npm or Yarn.
-
-Array of importer objects
-used to resolve `@use` and `@import` file paths.
-Passed through to the Dart Sass [importers] option when
-compiling `@example sass/scss` annotations.
-See our [`@example` documentation][example-docs-scss].
-
-[sass-importer]: https://github.com/oddbird/sassdoc-theme-herman/blob/main/lib/utils/sassImporter.js
-[importers]: https://sass-lang.com/documentation/js-api/interfaces/Importer
-
 ### sass.use
 
 - Type: `Array`
@@ -305,36 +290,23 @@ as that output will be displayed in every single Sass example.
 
 [dart-sass-modules]: https://sass-lang.com/blog/the-module-system-is-launched
 
-### sass.includes [deprecated]
-
-- Type: `Array`
-- Default: `[]`
-
-List of files (relative to any
-[`sass.sassOptions.loadPaths`](#sass-sassoptions)) to `@import`
-for all `@example sass/scss` annotations.
-See our [`@example` documentation][example-docs-scss].
-
-This is useful for including any global
-Sass configuration and toolkit files
-that may be used by any example.
-It's best to avoid files with output CSS,
-as that output will be displayed in every single Sass example.
-
-**Note:** Use of `@import` is [discouraged];
-prefer the [`sass.use` option](#sass-use) instead.
-
-[example-docs-scss]: https://www.oddbird.net/herman/docs/demo_examples#compiling-sass-scss
-[discouraged]: https://sass-lang.com/documentation/at-rules/import
-
 ### sass.sassOptions
 
 - Type: `Object`
 - Default: `{}`
 
-Options (e.g. `loadPaths` or `style`) that are passed
+Options (e.g. `importers`, `loadPaths`, or `style`) that are passed
 directly through to Dart Sass
 when compiling `@example sass/scss` annotations.
 See the [Dart Sass documentation][dart-sass-docs] for more info.
 
+By default, `importers` is set to an array
+containing the [Node.js package importer][sass-importer],
+which supports `pkg:` imports to resolve `@use` and `@import`
+for external modules installed via npm or Yarn.
+If `sass.sassOptions.importers` is set
+(even as an empty array `importers: []`),
+it will override the default importer.
+
 [dart-sass-docs]: https://sass-lang.com/documentation/js-api/modules#compileStringAsync
+[sass-importer]: https://sass-lang.com/documentation/js-api/classes/nodepackageimporter/

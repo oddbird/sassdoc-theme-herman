@@ -142,7 +142,7 @@
     "cdocparser": "^0.15.0"
   },
   "lint-staged": {
-    "*.{js,cjs,ts,md}": [
+    "*.{js,cjs,ts}": [
       "eslint --fix",
       "prettier --write --ignore-unknown"
     ],
@@ -150,7 +150,7 @@
       "stylelint --fix --allow-empty-input",
       "prettier --write --ignore-unknown"
     ],
-    "*.{json,yml}": [
+    "*.{json,yml,md}": [
       "prettier --write --ignore-unknown"
     ]
   },
