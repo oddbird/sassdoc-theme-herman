@@ -15,6 +15,8 @@
 
 - Require Dart Sass `^1.71.0` for `@example scss` annotations, using the new
   [Node.js package importer](https://sass-lang.com/documentation/js-api/classes/nodepackageimporter/) in `sass.sassOptions.importers` by default.
+- Remove custom Sass importer that supported `~` imports for external modules.
+  Replace `~` with `pkg:` to use the newer Dart Sass Node.js package importer.
 - Remove `sass.importers` option (use `sass.sassOptions.importers` instead).
 - Remove deprecated `sass.includes` option (use `sass.use` instead).
 - Drop support for Node < 18
