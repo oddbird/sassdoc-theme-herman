@@ -17,7 +17,7 @@
   ],
   "main": "./index.js",
   "exports": {
-    "sass": "./sass/_utilities.scss",
+    "sass": "./scss/_utilities.scss",
     "default": "./index.js"
   },
   "files": [
