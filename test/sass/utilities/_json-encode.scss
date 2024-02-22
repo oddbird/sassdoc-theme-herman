@@ -1,7 +1,7 @@
 // JSON Encoding Tests
 // ===================
 
-@use 'true';
+@use 'pkg:sass-true' as true;
 @use '../../../scss/utilities/json-encode' as *;
 
 // JSON Encode
