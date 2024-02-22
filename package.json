@@ -15,6 +15,11 @@
   "keywords": [
     "sassdoc-theme"
   ],
+  "main": "./index.js",
+  "exports": {
+    "sass": "./sass/_utilities.scss",
+    "default": "./index.js"
+  },
   "files": [
     "index.js",
     "dist/",

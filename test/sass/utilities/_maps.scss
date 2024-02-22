@@ -5,7 +5,7 @@
 @use 'sass:map';
 @use 'sass:meta';
 @use 'true';
-@use 'pkg:accoutrement/sass/tools' with (
+@use 'pkg:accoutrement' as tools with (
   $functions: (
     'darken': meta.get-function('darken'),
     'desaturate': meta.get-function('desaturate'),

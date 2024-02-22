@@ -1,4 +1,4 @@
-@use 'pkg:accoutrement/sass/tools';
+@use 'pkg:accoutrement' as tools;
 
 [data-herman-preview='font'] {
   --herman-label-color: #{tools.color('slight')};

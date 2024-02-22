@@ -42,7 +42,7 @@
 ///   Updated `$herman` map, ready for JSON export
 /// @example scss
 ///   @use 'sass:meta';
-///   @use 'pkg:accoutrement/sass/tools';
+///   @use 'pkg:accoutrement' as tools;
 ///   @use 'utilities';
 ///
 ///   utilities.$herman: ();
@@ -148,7 +148,7 @@
 ///   and converted to json-ready strings
 /// @example scss
 ///   @use 'sass:meta';
-///   @use 'pkg:accoutrement/sass/tools';
+///   @use 'pkg:accoutrement' as tools;
 ///   @use 'utilities';
 ///
 ///   $brand-colors: (

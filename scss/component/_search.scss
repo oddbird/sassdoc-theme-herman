@@ -1,7 +1,7 @@
 // Search
 // ======
 
-@use 'pkg:accoutrement/sass/tools';
+@use 'pkg:accoutrement' as tools;
 
 .search-heading {
   font-size: tools.size('h1');

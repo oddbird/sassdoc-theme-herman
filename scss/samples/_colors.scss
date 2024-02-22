@@ -1,6 +1,6 @@
 @use 'sass:meta';
 @use '../utilities';
-@use 'pkg:accoutrement/sass/tools';
+@use 'pkg:accoutrement' as tools;
 
 // Color Samples
 // =============
@@ -246,7 +246,7 @@ $demo-noncolors: (
 /// @colors demo-noncolors
 /// @example scss
 ///   @use 'sass:meta';
-///   @use 'pkg:accoutrement/sass/tools';
+///   @use 'pkg:accoutrement' as tools;
 ///   @use 'utilities';
 ///
 ///   utilities.$herman: ();

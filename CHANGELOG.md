@@ -10,6 +10,7 @@
 - Use faster Dart Sass
   [`AsyncCompiler` API](https://sass-lang.com/documentation/js-api/classes/asynccompiler/)
   for `@example scss` annotations.
+- Add `exports.sass` in `package.json` for simpler `pkg:` imports.
 
 ### 💥 Breaking Changes
 
