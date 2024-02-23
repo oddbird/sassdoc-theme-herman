@@ -133,7 +133,7 @@
     "sass": "^1.71.1",
     "sass-embedded": "^1.71.1",
     "sass-loader": "^14.1.1",
-    "sass-true": "^7.0.1",
+    "sass-true": "^8.0.0",
     "sassdoc": "^2.7.4",
     "sinon": "^17.0.1",
     "srcdoc-polyfill": "^1.0.0",
