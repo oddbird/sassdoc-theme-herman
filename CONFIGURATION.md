@@ -307,7 +307,7 @@ as that output will be displayed in every single Sass example.
 ### sass.sassOptions
 
 - Type: `Object`
-- Default: `{}`
+- Default: `{ importers: [new sass.NodePackageImporter()] }`
 
 Options (e.g. `importers`, `loadPaths`, or `style`) that are passed
 directly through to Dart Sass
