@@ -43,7 +43,9 @@
 /// @example scss
 ///   @use 'sass:meta';
 ///   @use 'pkg:accoutrement' as tools;
-///   // Replace next line with: `@use 'pkg:sassdoc-theme-herman' as herman;`
+///   // To import from Herman installed via npm,
+///   // replace the following 'utilities' import with:
+///   // @use 'pkg:sassdoc-theme-herman' as herman;
 ///   @use 'utilities' as herman;
 ///
 ///   herman.$herman: ();
@@ -150,7 +152,9 @@
 /// @example scss
 ///   @use 'sass:meta';
 ///   @use 'pkg:accoutrement' as tools;
-///   // Replace next line with: `@use 'pkg:sassdoc-theme-herman' as herman;`
+///   // To import from Herman installed via npm,
+///   // replace the following 'utilities' import with:
+///   // @use 'pkg:sassdoc-theme-herman' as herman;
 ///   @use 'utilities' as herman;
 ///
 ///   $brand-colors: (

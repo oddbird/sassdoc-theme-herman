@@ -28,7 +28,9 @@
 /// @see export
 ///
 /// @example scss
-///   // Replace next line with: `@use 'pkg:sassdoc-theme-herman' as herman;`
+///   // To import from Herman installed via npm,
+///   // replace the following 'utilities' import with:
+///   // @use 'pkg:sassdoc-theme-herman' as herman;
 ///   @use 'utilities' as herman;
 ///
 ///   herman.$herman: (
@@ -167,7 +169,9 @@
 /// @group api_json-export
 ///
 /// @example scss - sample map structure
-///   // Replace next line with: `@use 'pkg:sassdoc-theme-herman' as herman;`
+///   // To import from Herman installed via npm,
+///   // replace the following 'utilities' import with:
+///   // @use 'pkg:sassdoc-theme-herman' as herman;
 ///   @use 'utilities' as herman;
 ///
 ///   herman.$herman: (
@@ -217,7 +221,9 @@ $herman: () !default;
 ///   Map to be encoded for JSON exporting
 ///
 /// @example scss
-///   // Replace next line with: `@use 'pkg:sassdoc-theme-herman' as herman;`
+///   // To import from Herman installed via npm,
+///   // replace the following 'utilities' import with:
+///   // @use 'pkg:sassdoc-theme-herman' as herman;
 ///   @use 'utilities' as herman;
 ///
 ///   // Export to JSON
