@@ -28,9 +28,10 @@
 /// @see export
 ///
 /// @example scss
-///   @use 'utilities';
+///   // Replace next line with: `@use 'pkg:sassdoc-theme-herman' as herman;`
+///   @use 'utilities' as herman;
 ///
-///   utilities.$herman: (
+///   herman.$herman: (
 ///     'colors': (
 ///       'brand-colors': (
 ///         'brand-orange': #c75000,
@@ -39,7 +40,7 @@
 ///     ),
 ///   );
 ///
-///   @include utilities.export(utilities.$herman);
+///   @include herman.export(herman.$herman);
 
 // Herman
 // ------
@@ -166,9 +167,10 @@
 /// @group api_json-export
 ///
 /// @example scss - sample map structure
-///   @use 'utilities';
+///   // Replace next line with: `@use 'pkg:sassdoc-theme-herman' as herman;`
+///   @use 'utilities' as herman;
 ///
-///   utilities.$herman: (
+///   herman.$herman: (
 ///     'colors': (
 ///       'brand-colors': (
 ///         'brand-orange': '#c75000',
@@ -215,10 +217,11 @@ $herman: () !default;
 ///   Map to be encoded for JSON exporting
 ///
 /// @example scss
-///   @use 'utilities';
+///   // Replace next line with: `@use 'pkg:sassdoc-theme-herman' as herman;`
+///   @use 'utilities' as herman;
 ///
 ///   // Export to JSON
-///   @include utilities.export;
+///   @include herman.export;
 @mixin export($map: $herman) {
   /*! json-encode: #{json.encode($map)} */
 }

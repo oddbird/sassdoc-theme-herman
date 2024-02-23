@@ -43,20 +43,21 @@
 /// @example scss
 ///   @use 'sass:meta';
 ///   @use 'pkg:accoutrement' as tools;
-///   @use 'utilities';
+///   // Replace next line with: `@use 'pkg:sassdoc-theme-herman' as herman;`
+///   @use 'utilities' as herman;
 ///
-///   utilities.$herman: ();
+///   herman.$herman: ();
 ///   $brand-colors: (
 ///     'brand-blue': hsl(195, 85%, 35%),
 ///     'light-gray': '#brand-blue' ('tint': 80%, 'desaturate': 80%),
 ///   );
-///   $brand-compiled: utilities.each-key(
+///   $brand-compiled: herman.each-key(
 ///     $brand-colors,
 ///     meta.get-function('color', $module: 'tools'),
 ///   );
-///   @include utilities.add('colors', 'brand-colors', $brand-compiled);
+///   @include herman.add('colors', 'brand-colors', $brand-compiled);
 ///
-///   @each $key, $value in utilities.$herman {
+///   @each $key, $value in herman.$herman {
 ///   /* #{$key}: #{meta.inspect($value)} */
 ///   }
 @mixin add($type, $key, $map) {
@@ -149,14 +150,15 @@
 /// @example scss
 ///   @use 'sass:meta';
 ///   @use 'pkg:accoutrement' as tools;
-///   @use 'utilities';
+///   // Replace next line with: `@use 'pkg:sassdoc-theme-herman' as herman;`
+///   @use 'utilities' as herman;
 ///
 ///   $brand-colors: (
 ///     'brand-orange': hsl(24, 100%, 39%),
 ///     'brand-blue': hsl(195, 85%, 35%),
 ///     'light-gray': 'brand-blue' ('tint': 80%, 'desaturate': 80%),
 ///   );
-///   $compiled: utilities.each-key($brand-colors, meta.get-function('color', $module: 'tools'));
+///   $compiled: herman.each-key($brand-colors, meta.get-function('color', $module: 'tools'));
 ///
 ///   @each $key, $value in $compiled {
 ///   /* #{$key}: #{$value} */
