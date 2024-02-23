@@ -1223,40 +1223,6 @@ describe('example annotation', () => {
         .catch(done);
     });
 
-    it('injects global imports for scss items [import]', function (done) {
-      const data = [
-        {
-          example: [
-            {
-              type: 'scss',
-              code: 'body { @include color; }',
-            },
-          ],
-        },
-      ];
-      const env = Object.assign({}, this.env, {
-        herman: {
-          sass: {
-            includes: ['pkg:accoutrement/sass/color', 'import', 'tools'],
-            sassOptions: {
-              loadPaths: [path.join(__dirname, 'fixtures', 'scss')],
-            },
-          },
-        },
-      });
-      const example = annotations.example(env);
-      example
-        .resolve(data)
-        .then(() => {
-          assert.strictEqual(
-            data[0].example[0].rendered,
-            `body {\n  border: 1px;\n}\n\nbody {\n  color: red;\n}`,
-          );
-          done();
-        })
-        .catch(done);
-    });
-
     it('injects global imports for scss items [use]', function (done) {
       const data = [
         {
@@ -1310,16 +1276,18 @@ describe('example annotation', () => {
       const env = Object.assign({}, this.env, {
         herman: {
           sass: {
-            importers: [
-              {
-                findFileUrl: () =>
-                  new URL(
-                    pathToFileURL(
-                      path.join(__dirname, 'fixtures', 'scss', 'import'),
+            sassOptions: {
+              importers: [
+                {
+                  findFileUrl: () =>
+                    new URL(
+                      pathToFileURL(
+                        path.join(__dirname, 'fixtures', 'scss', 'import'),
+                      ),
                     ),
-                  ),
-              },
-            ],
+                },
+              ],
+            },
           },
         },
       });
@@ -1361,6 +1329,63 @@ describe('example annotation', () => {
         .resolve(data)
         .then(() => {
           assert.strictEqual(data[0].example[0].rendered, '');
+          done();
+        })
+        .catch(done);
+    });
+
+    it('uses custom `sass.implementation` string [sass-embedded]', function (done) {
+      const data = [
+        {
+          example: [
+            {
+              type: 'scss',
+              code: '/* just a placeholder */',
+            },
+          ],
+        },
+      ];
+      const env = Object.assign({}, this.env, {
+        herman: {
+          sass: {
+            implementation: 'sass-embedded',
+          },
+        },
+      });
+      const example = annotations.example(env);
+      example
+        .resolve(data)
+        .then(() => {
+          assert.equal(data[0].example[0].rendered, data[0].example[0].code);
+          done();
+        })
+        .catch(done);
+    });
+
+    it('custom `sass.implementation` instance [sass-embedded]', function (done) {
+      const data = [
+        {
+          example: [
+            {
+              type: 'scss',
+              code: '/* just a placeholder */',
+            },
+          ],
+        },
+      ];
+      const env = Object.assign({}, this.env, {
+        herman: {
+          sass: {
+            // eslint-disable-next-line global-require
+            implementation: require('sass-embedded'),
+          },
+        },
+      });
+      const example = annotations.example(env);
+      example
+        .resolve(data)
+        .then(() => {
+          assert.equal(data[0].example[0].rendered, data[0].example[0].code);
           done();
         })
         .catch(done);

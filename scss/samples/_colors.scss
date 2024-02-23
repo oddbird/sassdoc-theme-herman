@@ -1,6 +1,6 @@
 @use 'sass:meta';
 @use '../utilities';
-@use 'pkg:accoutrement/sass/tools';
+@use 'pkg:accoutrement' as tools;
 
 // Color Samples
 // =============
@@ -246,26 +246,29 @@ $demo-noncolors: (
 /// @colors demo-noncolors
 /// @example scss
 ///   @use 'sass:meta';
-///   @use 'pkg:accoutrement/sass/tools';
-///   @use 'utilities';
+///   @use 'pkg:accoutrement' as tools;
+///   // To import from Herman installed via npm,
+///   // replace the following 'utilities' import with:
+///   // @use 'pkg:sassdoc-theme-herman' as herman;
+///   @use 'utilities' as herman;
 ///
-///   utilities.$herman: ();
+///   herman.$herman: ();
 ///   $demo-noncolors: (
 ///     'light-gray': '#brand-blue' ('tint': 80%, 'desaturate': 80%),
 ///     'gray': '#brand-blue' ('desaturate': 80%),
 ///     'black': '#brand-blue' ('shade': 30%, 'desaturate': 80%),
 ///   );
 ///
-///   $compiled: utilities.each-key(
+///   $compiled: herman.each-key(
 ///     $demo-noncolors,
 ///     meta.get-function('color', $module: 'tools'),
 ///   );
 ///
-///   @include utilities.add(
+///   @include herman.add(
 ///     'colors', 'demo-noncolors', $compiled,
 ///   );
 ///
-///   @each $key, $value in utilities.$herman {
+///   @each $key, $value in herman.$herman {
 ///   /* #{$key}: #{meta.inspect($value)} */
 ///   }
 /// @group demo_colors

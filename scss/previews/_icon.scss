@@ -1,7 +1,7 @@
 // Icon Preview
 // ============
 
-@use 'pkg:accoutrement/sass/tools';
+@use 'pkg:accoutrement' as tools;
 
 [data-sassdoc='icon-preview'] {
   display: grid;

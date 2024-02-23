@@ -1,7 +1,7 @@
 // Item Styles
 // ===========
 
-@use 'pkg:accoutrement/sass/tools';
+@use 'pkg:accoutrement' as tools;
 
 .item {
   margin-bottom: tools.size('spacer');

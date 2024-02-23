@@ -1,8 +1,34 @@
 # Herman Changelog
 
-## Unreleased
+## 6.0.0-beta.0: Unreleased
 
-- 🏠 INTERNAL: Upgrade dependencies
+### 🚀 New Features
+
+- Add `sass.implementation` option (`string` or Dart Sass instance) to specify
+  the Dart Sass implementation to use for `@example scss` annotations. (default:
+  `sass`).
+- Use faster Dart Sass
+  [`AsyncCompiler` API](https://sass-lang.com/documentation/js-api/classes/asynccompiler/)
+  for `@example scss` annotations.
+- Add `exports.sass` in `package.json` for simpler `pkg:` imports.
+
+### 💥 Breaking Changes
+
+- Require Dart Sass `^1.71.0` for `@example scss` annotations, using the new
+  [Node.js package importer](https://sass-lang.com/documentation/js-api/classes/nodepackageimporter/) in `sass.sassOptions.importers` by default.
+- Remove custom Sass importer that supported `~` imports for external modules.
+  Replace `~` with `pkg:` to use the newer Dart Sass Node.js package importer.
+- Remove `sass.importers` option (use `sass.sassOptions.importers` instead).
+- Remove deprecated `sass.includes` option (use `sass.use` instead).
+- Drop support for Node < 18
+
+### 🏠 Internal
+
+- Use [`sass-embedded`](https://www.npmjs.com/package/sass-embedded)
+  instead of [`sass`](https://www.npmjs.com/package/sass) internally
+- Upgrade to Yarn v4 (without PnP)
+- Add Dependabot for dependency updates going forward
+- Upgrade dependencies
 
 ## 5.0.1: 2022-12-14
 

@@ -75,25 +75,9 @@
 ///         - 'node_modules'
 /// ```
 ///
-/// You can also set an array of default `includes` or `use`
+/// You can also set an array of default files
 /// (relative to any `loadPaths`)
-/// to include for all Sass examples:
-///
-/// To `@import` files:
-///
-/// ```yaml
-/// # .sassdocrc (yaml)
-/// herman:
-///   sass:
-///     sassOptions:
-///       loadPaths:
-///         - 'static/sass'
-///     includes:
-///       - 'utilities'
-///       - 'config'
-/// ```
-///
-/// Or to `@use` files:
+/// to `@use` for all Sass examples:
 ///
 /// ```yaml
 /// # .sassdocrc (yaml)

@@ -15,6 +15,11 @@
   "keywords": [
     "sassdoc-theme"
   ],
+  "main": "./index.js",
+  "exports": {
+    "sass": "./scss/_utilities.scss",
+    "default": "./index.js"
+  },
   "files": [
     "index.js",
     "dist/",
@@ -126,8 +131,9 @@
     "postcss-loader": "^8.1.0",
     "prettier": "^3.2.5",
     "sass": "^1.71.1",
+    "sass-embedded": "^1.71.1",
     "sass-loader": "^14.1.1",
-    "sass-true": "^7.0.1",
+    "sass-true": "^8.0.0",
     "sassdoc": "^2.7.4",
     "sinon": "^17.0.1",
     "srcdoc-polyfill": "^1.0.0",
@@ -142,7 +148,7 @@
     "cdocparser": "^0.15.0"
   },
   "lint-staged": {
-    "*.{js,cjs,ts,md}": [
+    "*.{js,cjs,ts}": [
       "eslint --fix",
       "prettier --write --ignore-unknown"
     ],
@@ -150,7 +156,7 @@
       "stylelint --fix --allow-empty-input",
       "prettier --write --ignore-unknown"
     ],
-    "*.{json,yml}": [
+    "*.{json,yml,md}": [
       "prettier --write --ignore-unknown"
     ]
   },

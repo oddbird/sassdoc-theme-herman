@@ -8,7 +8,7 @@ const path = require('path');
 
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const { NodePackageImporter } = require('sass');
+const sass = require('sass-embedded');
 const webpack = require('webpack');
 
 const SassDocPlugin = require('./sassdoc-webpack-plugin');
@@ -39,6 +39,7 @@ const sassDocOpts = {
       templatePath: path.join(__dirname, 'templates'),
     },
     sass: {
+      implementation: sass,
       use: ['config', 'samples'],
       sassOptions: {
         loadPaths: [path.join(__dirname, 'scss')],
@@ -202,10 +203,11 @@ module.exports = {
           {
             loader: 'sass-loader',
             options: {
+              implementation: sass,
               api: 'modern',
               sourceMap: true,
               sassOptions: {
-                importers: [new NodePackageImporter()],
+                importers: [new sass.NodePackageImporter()],
               },
             },
           },
@@ -220,9 +222,10 @@ module.exports = {
           {
             loader: 'sass-loader',
             options: {
+              implementation: sass,
               api: 'modern',
               sassOptions: {
-                importers: [new NodePackageImporter()],
+                importers: [new sass.NodePackageImporter()],
               },
             },
           },
