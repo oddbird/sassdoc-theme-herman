@@ -26,6 +26,7 @@
 
 - Use [`sass-embedded`](https://www.npmjs.com/package/sass-embedded)
   instead of [`sass`](https://www.npmjs.com/package/sass) internally
+- Replace "Source Sans Pro" font with "Source Sans 3"
 - Upgrade to Yarn v4 (without PnP)
 - Add Dependabot for dependency updates going forward
 - Upgrade dependencies
