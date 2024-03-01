@@ -10,7 +10,7 @@
   <title>Configuration | Herman Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
-  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+3:400,400i,700,700i" rel="stylesheet">
 
   <link rel="stylesheet" href="assets/webpack/app_styles.min.css" />
 
@@ -21,10 +21,10 @@
 <body data-herman="body">
   <svg xmlns="http://www.w3.org/2000/svg" hidden>
   <symbol id="icon-logo" viewBox="0 0 16 16">
-    <path d="M.2 8 0 7.8v-.2C.8 6.9 1.9 5.9 2.7 5l.4.3c-.5.8-1.1 1.6-1.8 2.3 1 1.2 1 1.3 1.7 2.4l-.4.3c-.4-.4-.5-.6-1-1C1 8.6 1.1 8.7.2 8zM13 10c.6-1.1.7-1.1 1.7-2.4-.6-.6-1.3-1.5-1.7-2.3l.3-.3c.8.8 1.8 1.8 2.7 2.6v.2l-.8.7c-.3.3-1.2 1.1-1.8 1.7L13 10z"/><path d="M2.6 13.1H3c.9 0 1.1-.2 1.1-1.4V4.2c0-1.1-.2-1.4-1.1-1.4h-.4v-.6h4.5v.7h-.3c-.9 0-1.1.2-1.1 1.4v3.2h4.6V4.2c0-1.1-.2-1.4-1.1-1.4h-.3v-.6h4.5v.7H13c-.9 0-1.1.2-1.1 1.4v7.5c0 1.1.2 1.4 1.1 1.4h.4v.7H8.9v-.7h.3c.9 0 1.1-.2 1.1-1.4V8.2H5.7v3.5c0 1.1.2 1.4 1.1 1.4h.3v.7H2.6v-.7z"/>
+    <path d="M.2 8 0 7.8v-.2C.8 6.9 1.9 5.9 2.7 5l.4.3c-.5.8-1.1 1.6-1.8 2.3 1 1.2 1 1.3 1.7 2.4l-.4.3c-.4-.4-.5-.6-1-1C1 8.6 1.1 8.7.2 8M13 10c.6-1.1.7-1.1 1.7-2.4-.6-.6-1.3-1.5-1.7-2.3l.3-.3c.8.8 1.8 1.8 2.7 2.6v.2l-.8.7c-.3.3-1.2 1.1-1.8 1.7z"/><path d="M2.6 13.1H3c.9 0 1.1-.2 1.1-1.4V4.2c0-1.1-.2-1.4-1.1-1.4h-.4v-.6h4.5v.7h-.3c-.9 0-1.1.2-1.1 1.4v3.2h4.6V4.2c0-1.1-.2-1.4-1.1-1.4h-.3v-.6h4.5v.7H13c-.9 0-1.1.2-1.1 1.4v7.5c0 1.1.2 1.4 1.1 1.4h.4v.7H8.9v-.7h.3c.9 0 1.1-.2 1.1-1.4V8.2H5.7v3.5c0 1.1.2 1.4 1.1 1.4h.3v.7H2.6z"/>
   </symbol>
   <symbol id="icon-menu" viewBox="0 0 24 28">
-    <path d="M24 21v2c0 .547-.453 1-1 1H1c-.547 0-1-.453-1-1v-2c0-.547.453-1 1-1h22c.547 0 1 .453 1 1zm0-8v2c0 .547-.453 1-1 1H1c-.547 0-1-.453-1-1v-2c0-.547.453-1 1-1h22c.547 0 1 .453 1 1zm0-8v2c0 .547-.453 1-1 1H1c-.547 0-1-.453-1-1V5c0-.547.453-1 1-1h22c.547 0 1 .453 1 1z"/>
+    <path d="M24 21v2c0 .547-.453 1-1 1H1c-.547 0-1-.453-1-1v-2c0-.547.453-1 1-1h22c.547 0 1 .453 1 1m0-8v2c0 .547-.453 1-1 1H1c-.547 0-1-.453-1-1v-2c0-.547.453-1 1-1h22c.547 0 1 .453 1 1m0-8v2c0 .547-.453 1-1 1H1c-.547 0-1-.453-1-1V5c0-.547.453-1 1-1h22c.547 0 1 .453 1 1"/>
   </symbol>
 </svg>
 
@@ -42,7 +42,7 @@
       <div class="project-title">
         <a href="index.html" rel="home" class="project-name">Herman</a>
         
-          <span class="project-version">5.0.1</span>
+          <span class="project-version">6.0.0</span>
         
       </div>
     </header>
@@ -464,6 +464,15 @@ See our <a href="https://www.oddbird.net/herman/docs/demo_fonts#displaying-local
 <li>Default: <code>{}</code></li>
 </ul>
 <p>Container for the following sass-related<span class="widont">&nbsp;</span>options:</p>
+<h3 id="sass-implementation" tabindex="-1">sass.implementation</h3>
+<ul>
+<li>Type: <code>String</code> or Sass implementation<span class="widont">&nbsp;</span>instance</li>
+<li>Default: <code>'sass'</code></li>
+</ul>
+<p>Determines the Sass implementation (defaults to <a href="https://www.npmjs.com/package/sass"><code>sass</code></a>) to use for
+Sass compilation if using <a href="https://www.oddbird.net/herman/docs/demo_examples#compiling-sass-scss"><code>@example scss</code> annotation</a>. This
+option expects a string that matches the name of an available Dart Sass
+implementation (e.g. <code>sass</code> or <code>sass-embedded</code>), or a Dart Sass instance<span class="widont">&nbsp;</span>itself.</p>
 <h3 id="sass-jsonfile" tabindex="-1">sass.jsonFile</h3>
 <ul>
 <li>Type: <code>String</code></li>
@@ -477,17 +486,6 @@ The JSON contents will be added under the
 <code>sassjson</code> key of the sassdoc context,
 and used to display colors, fonts, ratios, and sizes.
 See <a href="https://www.oddbird.net/herman/docs/api_json-export">Exporting Styles to<span class="widont">&nbsp;</span>JSON</a>.</p>
-<h3 id="sass-importers" tabindex="-1">sass.importers</h3>
-<ul>
-<li>Type: <code>Array</code></li>
-<li>Default: <code>Array</code> containing the <a href="https://github.com/oddbird/sassdoc-theme-herman/blob/main/lib/utils/sassImporter.js">Herman Sass importer</a>,
-which supports <code>~</code> imports for external modules installed via npm or<span class="widont">&nbsp;</span>Yarn.</li>
-</ul>
-<p>Array of importer objects
-used to resolve <code>@use</code> and <code>@import</code> file paths.
-Passed through to the Dart Sass <a href="https://sass-lang.com/documentation/js-api/interfaces/Importer">importers</a> option when
-compiling <code>@example sass/scss</code> annotations.
-See our <a href="https://www.oddbird.net/herman/docs/demo_examples#compiling-sass-scss"><code>@example</code> documentation</a>.</p>
 <h3 id="sass-use" tabindex="-1">sass.use</h3>
 <ul>
 <li>Type: <code>Array</code></li>
@@ -517,31 +515,22 @@ that may be used by any example,
 using the <a href="https://sass-lang.com/blog/the-module-system-is-launched">Dart Sass module system</a>.
 It’s best to avoid files with output CSS,
 as that output will be displayed in every single Sass<span class="widont">&nbsp;</span>example.</p>
-<h3 id="sass-includes-deprecated-" tabindex="-1">sass.includes [deprecated]</h3>
-<ul>
-<li>Type: <code>Array</code></li>
-<li>Default: <code>[]</code></li>
-</ul>
-<p>List of files (relative to any
-<a href="#sass-sassoptions"><code>sass.sassOptions.loadPaths</code></a>) to <code>@import</code>
-for all <code>@example sass/scss</code> annotations.
-See our <a href="https://www.oddbird.net/herman/docs/demo_examples#compiling-sass-scss"><code>@example</code> documentation</a>.</p>
-<p>This is useful for including any global
-Sass configuration and toolkit files
-that may be used by any example.
-It’s best to avoid files with output CSS,
-as that output will be displayed in every single Sass<span class="widont">&nbsp;</span>example.</p>
-<p><strong>Note:</strong> Use of <code>@import</code> is <a href="https://sass-lang.com/documentation/at-rules/import">discouraged</a>;
-prefer the <a href="#sass-use"><code>sass.use</code> option</a> instead.</p>
 <h3 id="sass-sassoptions" tabindex="-1">sass.sassOptions</h3>
 <ul>
 <li>Type: <code>Object</code></li>
-<li>Default: <code>{}</code></li>
+<li>Default: <code>{ importers: [new sass.NodePackageImporter()] }</code></li>
 </ul>
-<p>Options (e.g. <code>loadPaths</code> or <code>style</code>) that are passed
+<p>Options (e.g. <code>importers</code>, <code>loadPaths</code>, or <code>style</code>) that are passed
 directly through to Dart Sass
 when compiling <code>@example sass/scss</code> annotations.
 See the <a href="https://sass-lang.com/documentation/js-api/modules#compileStringAsync">Dart Sass documentation</a> for more<span class="widont">&nbsp;</span>info.</p>
+<p>By default, <code>importers</code> is set to an array
+containing the <a href="https://sass-lang.com/documentation/js-api/classes/nodepackageimporter/">Node.js package importer</a>,
+which supports <code>pkg:</code> imports to resolve <code>@use</code> and <code>@import</code>
+for external modules installed via npm or Yarn.
+If <code>sass.sassOptions.importers</code> is set
+(even as an empty array <code>importers: []</code>),
+it will override the default<span class="widont">&nbsp;</span>importer.</p>
 
   </div>
 
