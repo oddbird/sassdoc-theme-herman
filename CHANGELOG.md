@@ -1,6 +1,6 @@
 # Herman Changelog
 
-## 6.0.0-beta.0: Unreleased
+## 6.0.0: 2024-03-01
 
 ### 🚀 New Features
 
