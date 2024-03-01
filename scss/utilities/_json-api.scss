@@ -152,15 +152,15 @@
 ///
 /// ```scss
 /// 'body-font': (
-///   'name': 'Source Sans Pro',
+///   'name': 'Source Sans 3',
 ///   'stack': ('Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'),
 ///   'formats': 'woff' 'woff2' 'ttf',
-///   'normal': 'sans/sourcesanspro-regular-webfont',
-///   'italic': 'sans/sourcesanspro-italic-webfont',
+///   'normal': 'sans/sourcesans3-regular-webfont',
+///   'italic': 'sans/sourcesans3-italic-webfont',
 ///   'bold': (
-///     'path': 'sans/sourcesanspro-bold-webfont',
-///     'local': 'source-sans-pro-bold',
-///     'ttf': 'sans-ttf/sourcesanspro-bold-webfont',
+///     'path': 'sans/sourcesans3-bold-webfont',
+///     'local': 'source-sans-3-bold',
+///     'ttf': 'sans-ttf/sourcesans3-bold-webfont',
 ///     'woff': 'data:application/x-font-woff;charset=utf-8;base64...',
 ///   ),
 /// )
@@ -187,15 +187,15 @@
 ///     ),
 ///     'fonts': (
 ///       'body-font': (
-///         'name': 'Source Sans Pro',
+///         'name': 'Source Sans 3',
 ///         'stack': ('Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'),
 ///         'formats': 'woff' 'woff2' 'ttf',
-///         'normal': 'sans/sourcesanspro-regular-webfont',
-///         'italic': 'sans/sourcesanspro-italic-webfont',
+///         'normal': 'sans/sourcesans3-regular-webfont',
+///         'italic': 'sans/sourcesans3-italic-webfont',
 ///         'bold': (
-///           'path': 'sans/sourcesanspro-bold-webfont',
-///           'local': 'source-sans-pro-bold',
-///           'ttf': 'sans-ttf/sourcesanspro-bold-webfont',
+///           'path': 'sans/sourcesans3-bold-webfont',
+///           'local': 'source-sans-3-bold',
+///           'ttf': 'sans-ttf/sourcesans3-bold-webfont',
 ///           'woff': 'data:application/x-font-woff;charset=utf-8;base64...',
 ///         ),
 ///       ),
