@@ -1,5 +1,10 @@
 # Herman Changelog
 
+## 6.0.1: 2024-04-22
+
+- 🐛 BUGFIX: Do not overwrite `ctx.emit` method -
+  [#423](https://github.com/oddbird/sassdoc-theme-herman/issues/423)
+
 ## 6.0.0: 2024-03-01
 
 ### 🚀 New Features
