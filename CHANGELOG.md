@@ -4,6 +4,7 @@
 
 - 🐛 BUGFIX: Do not overwrite `ctx.emit` method -
   [#423](https://github.com/oddbird/sassdoc-theme-herman/issues/423)
+- 🏠 INTERNAL: Upgrade dependencies
 
 ## 6.0.0: 2024-03-01
 
