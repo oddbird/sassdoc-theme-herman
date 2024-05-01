@@ -7,7 +7,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/oddbird/sassdoc-theme-herman.git"
+    "url": "https://github.com/oddbird/sassdoc-theme-herman.git"
   },
   "bugs": {
     "url": "https://github.com/oddbird/sassdoc-theme-herman/issues"
