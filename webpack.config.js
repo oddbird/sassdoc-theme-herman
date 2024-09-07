@@ -204,7 +204,7 @@ module.exports = {
             loader: 'sass-loader',
             options: {
               implementation: sass,
-              api: 'modern',
+              api: 'modern-compiler',
               sourceMap: true,
               sassOptions: {
                 importers: [new sass.NodePackageImporter()],
