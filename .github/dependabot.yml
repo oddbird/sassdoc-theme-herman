@@ -33,3 +33,6 @@ updates:
       - dependency-name: 'strip-indent'
         update-types:
           - 'version-update:semver-major'
+      - dependency-name: 'eslint'
+        update-types:
+          - 'version-update:semver-major'
