@@ -21,12 +21,13 @@
 ///     </div>
 ///   </header>
 [data-region='banner'] {
-  @include config.banner-arrow;
   @include tools.z-index('banner');
 
   align-items: center;
   display: flex;
   padding: tools.size('shim');
+
+  @include config.banner-arrow;
 }
 
 // Project Title
