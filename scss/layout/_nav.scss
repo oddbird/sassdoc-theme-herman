@@ -25,7 +25,6 @@
 ///     </main>
 ///   </div>
 [data-region='nav'] {
-  @include config.invert-colors;
   @include tools.z-index('sidebar');
 
   align-items: stretch;
@@ -34,6 +33,8 @@
   padding: tools.size('gutter');
   white-space: nowrap;
   width: auto;
+
+  @include config.invert-colors;
 
   @include tools.below('nav-break') {
     box-shadow: 0 0 tools.size('half-shim') tools.color('shadow');
