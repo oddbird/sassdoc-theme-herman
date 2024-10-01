@@ -21,10 +21,10 @@ $colors-compiled: (
   'black': #3b4042,
 );
 $darken: (
-  'brand-blue': #063646,
-  'light-gray': #ababab,
-  'gray': #252728,
-  'black': #0b0c0c,
+  'brand-blue': rgb(10.4, 101.6, 132),
+  'light-gray': rgb(177.6, 177.6, 177.6),
+  'gray': rgb(68, 72.8, 75.2),
+  'black': rgb(47.2, 51.2, 52.8),
 );
 tools.$sizes: (
   'root': 20px,
@@ -45,7 +45,11 @@ $sizes-compiled: (
 @include true.describe('each-value [function]') {
   @include true.it('returns a map with values run through a given function') {
     @include true.assert-equal(
-      each-value($colors-compiled, meta.get-function('darken'), 20%),
+      each-value(
+        $colors-compiled,
+        meta.get-function('scale', $module: 'color'),
+        $lightness: -20%
+      ),
       $darken,
       $inspect: true
     );
