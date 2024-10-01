@@ -63,7 +63,7 @@
   "dependencies": {
     "cheerio": "^1.0.0",
     "colorjs.io": "^0.5.2",
-    "css-tree": "^2.3.1",
+    "css-tree": "^3.0.0",
     "gulp-rename": "^2.0.0",
     "gulp-svg-symbols": "^3.2.3",
     "html": "^1.0.0",
@@ -130,7 +130,7 @@
     "sass-loader": "^16.0.1",
     "sass-true": "^8.0.0",
     "sassdoc": "^2.7.4",
-    "sinon": "^18.0.0",
+    "sinon": "^19.0.2",
     "srcdoc-polyfill": "^1.0.0",
     "stylelint": "^16.9.0",
     "stylelint-config-standard-scss": "^13.1.0",
