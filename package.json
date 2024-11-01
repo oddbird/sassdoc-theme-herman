@@ -130,7 +130,7 @@
     "sass-loader": "^16.0.2",
     "sass-true": "^8.0.0",
     "sassdoc": "^2.7.4",
-    "sinon": "^18.0.1",
+    "sinon": "^19.0.2",
     "srcdoc-polyfill": "^1.0.0",
     "stylelint": "^16.9.0",
     "stylelint-config-standard-scss": "^13.1.0",
