@@ -1,4 +1,4 @@
-/* eslint-disable no-sync, no-console */
+/* eslint-disable no-console */
 
 'use strict';
 

@@ -145,6 +145,7 @@ export const getSearchData = () => {
       if (this.status >= 200 && this.status < 400) {
         try {
           data = JSON.parse(this.responseText);
+          // eslint-disable-next-line no-unused-vars
         } catch (e) {
           // swallow error
         }

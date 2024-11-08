@@ -63,7 +63,7 @@
   "dependencies": {
     "cheerio": "^1.0.0",
     "colorjs.io": "^0.5.2",
-    "css-tree": "^3.0.0",
+    "css-tree": "^3.0.1",
     "gulp-rename": "^2.0.0",
     "gulp-svg-symbols": "^3.2.3",
     "html": "^1.0.0",
@@ -83,10 +83,12 @@
   },
   "devDependencies": {
     "@babel/core": "^7.26.0",
+    "@babel/eslint-parser": "^7.25.9",
     "@babel/preset-env": "^7.26.0",
+    "@eslint/js": "^9.14.0",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
-    "accoutrement": "^4.0.4",
+    "accoutrement": "^4.0.5",
     "autoprefixer": "^10.4.20",
     "babel-jest": "^29.7.0",
     "babel-loader": "^9.2.1",
@@ -96,15 +98,15 @@
     "css-minimizer-webpack-plugin": "^7.0.0",
     "cssremedy": "^0.1.0-beta.2",
     "del": "^6.1.1",
-    "eslint": "^8.57.1",
+    "eslint": "^9.14.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-import-resolver-node": "^0.3.9",
     "eslint-import-resolver-webpack": "^0.13.9",
     "eslint-plugin-import": "^2.31.0",
-    "eslint-plugin-jest": "^28.8.3",
+    "eslint-plugin-jest": "^28.9.0",
     "eslint-plugin-jest-dom": "^5.4.0",
-    "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-simple-import-sort": "^12.1.1",
+    "globals": "^15.12.0",
     "highlight.js": "^11.10.0",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
@@ -125,8 +127,8 @@
     "postcss": "^8.4.47",
     "postcss-loader": "^8.1.1",
     "prettier": "^3.3.3",
-    "sass": "^1.80.5",
-    "sass-embedded": "^1.80.5",
+    "sass": "^1.80.6",
+    "sass-embedded": "^1.80.6",
     "sass-loader": "^16.0.3",
     "sass-true": "^8.1.0",
     "sassdoc": "^2.7.4",
@@ -142,5 +144,5 @@
   "resolutions": {
     "cdocparser": "^0.15.0"
   },
-  "packageManager": "yarn@4.5.0"
+  "packageManager": "yarn@4.5.1"
 }

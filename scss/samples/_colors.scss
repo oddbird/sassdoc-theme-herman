@@ -201,16 +201,25 @@ $demo-noncolors: (
   'light-gray': '#brand-blue'
     (
       'tint': 80%,
-      'desaturate': 80%,
+      'adjust': (
+        'saturation': -80%,
+        'space': hsl,
+      ),
     ),
   'gray': '#brand-blue'
     (
-      'desaturate': 80%,
+      'adjust': (
+        'saturation': -80%,
+        'space': hsl,
+      ),
     ),
   'contrast-dark': '#brand-blue'
     (
       'shade': 30% #000,
-      'desaturate': 80%,
+      'adjust': (
+        'saturation': -80%,
+        'space': hsl,
+      ),
     ),
 );
 
@@ -225,9 +234,9 @@ $demo-noncolors: (
 ///
 /// ```scss
 /// $demo-noncolors: (
-///   'light-gray': '#brand-blue' ('tint': 80%, 'desaturate': 80%),
-///   'gray': '#brand-blue' ('desaturate': 80%),
-///   'contrast-dark': '#brand-blue' ('shade': 30% #000, 'desaturate': 80%),
+///   'light-gray': '#brand-blue' ('tint': 80%, 'adjust': ('saturation': -80%, 'space': hsl),),
+///   'gray': '#brand-blue' ('adjust': ('saturation': -80%, 'space': hsl),),
+///   'contrast-dark': '#brand-blue' ('shade': 30% #000, 'adjust': ('saturation': -80%, 'space': hsl),),
 /// );
 /// ```
 ///
@@ -254,9 +263,9 @@ $demo-noncolors: (
 ///
 ///   herman.$herman: ();
 ///   $demo-noncolors: (
-///     'light-gray': '#brand-blue' ('tint': 80%, 'desaturate': 80%),
-///     'gray': '#brand-blue' ('desaturate': 80%),
-///     'black': '#brand-blue' ('shade': 30%, 'desaturate': 80%),
+///     'light-gray': '#brand-blue' ('tint': 80%, 'adjust': ('saturation': -80%, 'space': hsl),),
+///     'gray': '#brand-blue' ('adjust': ('saturation': -80%, 'space': hsl),),
+///     'black': '#brand-blue' ('shade': 30%, 'adjust': ('saturation': -80%, 'space': hsl),),
 ///   );
 ///
 ///   $compiled: herman.each-key(

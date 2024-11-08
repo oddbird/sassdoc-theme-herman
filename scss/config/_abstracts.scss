@@ -1,3 +1,4 @@
+@use 'sass:color';
 @use 'sass:list';
 @use 'sass:meta';
 @use '../utilities';
@@ -26,8 +27,7 @@
 ///   Use `get-function()` to capture a first-class function,
 ///   or use a string to reference existing functions and alias-keys
 $functions: (
-  'darken': meta.get-function('darken'),
-  'desaturate': meta.get-function('desaturate'),
+  'adjust': meta.get-function('adjust', $module: 'color'),
   'rgba': meta.get-function('rgba'),
   'convert': '#convert-units',
 );

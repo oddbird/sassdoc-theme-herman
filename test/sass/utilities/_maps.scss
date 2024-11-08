@@ -7,8 +7,7 @@
 @use 'pkg:sass-true' as true;
 @use 'pkg:accoutrement' as tools with (
   $functions: (
-    'darken': meta.get-function('darken'),
-    'desaturate': meta.get-function('desaturate'),
+    'adjust': meta.get-function('adjust', $module: 'color'),
   )
 );
 @use '../../../scss/utilities/json-api' as *;

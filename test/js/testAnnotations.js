@@ -7,7 +7,6 @@ const { pathToFileURL } = require('url');
 const nunjucks = require('nunjucks');
 const sinon = require('sinon');
 
-/* eslint-disable global-require */
 const annotations = {
   access: require('../../lib/annotations/access'),
   icons: require('../../lib/annotations/icons'),
@@ -18,7 +17,6 @@ const annotations = {
   example: require('../../lib/annotations/example'),
   name: require('../../lib/annotations/name'),
 };
-/* eslint-enable global-require */
 
 describe('access annotation', () => {
   const access = annotations.access({});
@@ -1268,7 +1266,7 @@ describe('example annotation', () => {
           example: [
             {
               type: 'scss',
-              code: '@import "foo"',
+              code: '@use "foo"',
             },
           ],
         },
@@ -1376,7 +1374,6 @@ describe('example annotation', () => {
       const env = Object.assign({}, this.env, {
         herman: {
           sass: {
-            // eslint-disable-next-line global-require
             implementation: require('sass-embedded'),
           },
         },

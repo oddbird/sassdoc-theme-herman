@@ -1,5 +1,3 @@
-/* eslint-disable no-process-env */
-
 'use strict';
 
 process.env.BROWSERSLIST_CONFIG = './.browserslistrc';
