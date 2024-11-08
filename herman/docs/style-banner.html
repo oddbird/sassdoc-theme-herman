@@ -42,7 +42,7 @@
       <div class="project-title">
         <a href="index.html" rel="home" class="project-name">Herman</a>
         
-          <span class="project-version">6.0.1</span>
+          <span class="project-version">6.0.2</span>
         
       </div>
     </header>
@@ -585,7 +585,7 @@ used to make it an arrow-outline rather than a solid<span class="widont">&nbsp;<
       
       <pre class="hljs-pre"><code class="lang-css">[data-region=banner] {
   border-bottom: 8px solid hsl(195, 85%, 35%);
-  box-shadow: 0 2px 2px rgba(85, 91, 94, 0.5);
+  box-shadow: 0 2px 2px rgba(84.7875, 91.48125, 93.7125, 0.5);
   display: block;
   position: relative;
   width: 100%;
@@ -790,12 +790,13 @@ used to make it an arrow-outline rather than a solid<span class="widont">&nbsp;<
       
       
       <pre class="hljs-pre"><code class="lang-scss">[data-region=&#39;banner&#39;] {
-  @include config.banner-arrow;
   @include tools.z-index(&#39;banner&#39;);
 
   align-items: center;
   display: flex;
   padding: tools.size(&#39;shim&#39;);
+
+  @include config.banner-arrow;
 }</code></pre>
     </div>
   

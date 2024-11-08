@@ -42,7 +42,7 @@
       <div class="project-title">
         <a href="index.html" rel="home" class="project-name">Herman</a>
         
-          <span class="project-version">6.0.1</span>
+          <span class="project-version">6.0.2</span>
         
       </div>
     </header>
@@ -691,7 +691,7 @@ followed by an optional map of adjustments
       &lt;div data-herman-color-preview&gt;
         &lt;div data-herman-color-swatch&gt;
           &lt;div data-herman-transparency-grid&gt;&lt;/div&gt;
-          &lt;div data-herman-color-overlay style=&quot;background-color: #aa0e5c;&quot;&gt;&lt;/div&gt;
+          &lt;div data-herman-color-overlay style=&quot;background-color: rgb(169.83, 13.77, 91.8);&quot;&gt;&lt;/div&gt;
         &lt;/div&gt;
         &lt;div data-herman-color-info&gt;
           &lt;strong data-herman-color-name data-herman-label=&quot;color&quot;&gt;&lt;span data-herman-color-name-option&gt;brand-pink&lt;/span&gt;&lt;/strong&gt;
@@ -705,7 +705,7 @@ followed by an optional map of adjustments
               
             
               
-                &lt;code data-herman-code data-herman-color-value&gt;hsl(330 84.783% 36.078%)&lt;/code&gt;
+                &lt;code data-herman-code data-herman-color-value&gt;hsl(330 85% 36%)&lt;/code&gt;
               
             
           
@@ -789,17 +789,26 @@ followed by an optional map of adjustments
   &#39;light-gray&#39;: &#39;#brand-blue&#39;
     (
       &#39;tint&#39;: 80%,
-      &#39;desaturate&#39;: 80%,
+      &#39;adjust&#39;: (
+        &#39;saturation&#39;: -80%,
+        &#39;space&#39;: hsl,
+      ),
     ),
   &#39;gray&#39;: &#39;#brand-blue&#39;
     (
-      &#39;desaturate&#39;: 80%,
+      &#39;adjust&#39;: (
+        &#39;saturation&#39;: -80%,
+        &#39;space&#39;: hsl,
+      ),
     ),
   &#39;contrast-light&#39;: #fff,
   &#39;contrast-dark&#39;: &#39;#brand-blue&#39;
     (
       &#39;shade&#39;: 30% #000,
-      &#39;desaturate&#39;: 80%,
+      &#39;adjust&#39;: (
+        &#39;saturation&#39;: -80%,
+        &#39;space&#39;: hsl,
+      ),
     ),
 );</code></pre>
     </div>
@@ -919,7 +928,7 @@ before they are used in styling patterns and<span class="widont">&nbsp;</span>co
       &lt;div data-herman-color-preview&gt;
         &lt;div data-herman-color-swatch&gt;
           &lt;div data-herman-transparency-grid&gt;&lt;/div&gt;
-          &lt;div data-herman-color-overlay style=&quot;background-color: #dedede;&quot;&gt;&lt;/div&gt;
+          &lt;div data-herman-color-overlay style=&quot;background-color: rgb(221.85, 221.85, 221.85);&quot;&gt;&lt;/div&gt;
         &lt;/div&gt;
         &lt;div data-herman-color-info&gt;
           &lt;strong data-herman-color-name data-herman-label=&quot;color&quot;&gt;&lt;span data-herman-color-name-option&gt;light-gray&lt;/span&gt;&lt;/strong&gt;
@@ -933,7 +942,7 @@ before they are used in styling patterns and<span class="widont">&nbsp;</span>co
               
             
               
-                &lt;code data-herman-code data-herman-color-value&gt;hsl(none 0% 87.059%)&lt;/code&gt;
+                &lt;code data-herman-code data-herman-color-value&gt;hsl(none 0% 87%)&lt;/code&gt;
               
             
           
@@ -943,7 +952,7 @@ before they are used in styling patterns and<span class="widont">&nbsp;</span>co
       &lt;div data-herman-color-preview&gt;
         &lt;div data-herman-color-swatch&gt;
           &lt;div data-herman-transparency-grid&gt;&lt;/div&gt;
-          &lt;div data-herman-color-overlay style=&quot;background-color: #555b5e;&quot;&gt;&lt;/div&gt;
+          &lt;div data-herman-color-overlay style=&quot;background-color: hsl(195, 5%, 35%);&quot;&gt;&lt;/div&gt;
         &lt;/div&gt;
         &lt;div data-herman-color-info&gt;
           &lt;strong data-herman-color-name data-herman-label=&quot;color&quot;&gt;&lt;span data-herman-color-name-option&gt;gray&lt;/span&gt;&lt;/strong&gt;
@@ -957,7 +966,7 @@ before they are used in styling patterns and<span class="widont">&nbsp;</span>co
               
             
               
-                &lt;code data-herman-code data-herman-color-value&gt;hsl(200 5.0279% 35.098%)&lt;/code&gt;
+                &lt;code data-herman-code data-herman-color-value&gt;hsl(195 5% 35%)&lt;/code&gt;
               
             
           
@@ -991,7 +1000,7 @@ before they are used in styling patterns and<span class="widont">&nbsp;</span>co
       &lt;div data-herman-color-preview&gt;
         &lt;div data-herman-color-swatch&gt;
           &lt;div data-herman-transparency-grid&gt;&lt;/div&gt;
-          &lt;div data-herman-color-overlay style=&quot;background-color: #3b4042;&quot;&gt;&lt;/div&gt;
+          &lt;div data-herman-color-overlay style=&quot;background-color: rgb(59.35125, 64.036875, 65.59875);&quot;&gt;&lt;/div&gt;
         &lt;/div&gt;
         &lt;div data-herman-color-info&gt;
           &lt;strong data-herman-color-name data-herman-label=&quot;color&quot;&gt;&lt;span data-herman-color-name-option&gt;contrast-dark&lt;/span&gt;&lt;/strong&gt;
@@ -1005,7 +1014,7 @@ before they are used in styling patterns and<span class="widont">&nbsp;</span>co
               
             
               
-                &lt;code data-herman-code data-herman-color-value&gt;hsl(197.14 5.6% 24.51%)&lt;/code&gt;
+                &lt;code data-herman-code data-herman-color-value&gt;hsl(195 5% 24.5%)&lt;/code&gt;
               
             
           
@@ -1260,7 +1269,7 @@ in our pattern/component<span class="widont">&nbsp;</span>styles.</p>
       &lt;div data-herman-color-preview&gt;
         &lt;div data-herman-color-swatch&gt;
           &lt;div data-herman-transparency-grid&gt;&lt;/div&gt;
-          &lt;div data-herman-color-overlay style=&quot;background-color: #cfe5ed;&quot;&gt;&lt;/div&gt;
+          &lt;div data-herman-color-overlay style=&quot;background-color: rgb(206.6775, 229.43625, 237.0225);&quot;&gt;&lt;/div&gt;
         &lt;/div&gt;
         &lt;div data-herman-color-info&gt;
           &lt;strong data-herman-color-name data-herman-label=&quot;color&quot;&gt;&lt;span data-herman-color-name-option&gt;theme-light,&amp;nbsp;&lt;/span&gt;&lt;span data-herman-color-name-option&gt;callout&lt;/span&gt;&lt;/strong&gt;
@@ -1274,7 +1283,7 @@ in our pattern/component<span class="widont">&nbsp;</span>styles.</p>
               
             
               
-                &lt;code data-herman-code data-herman-color-value&gt;hsl(196 45.455% 87.059%)&lt;/code&gt;
+                &lt;code data-herman-code data-herman-color-value&gt;hsl(195 45.769% 87%)&lt;/code&gt;
               
             
           
@@ -1308,7 +1317,7 @@ in our pattern/component<span class="widont">&nbsp;</span>styles.</p>
       &lt;div data-herman-color-preview&gt;
         &lt;div data-herman-color-swatch&gt;
           &lt;div data-herman-transparency-grid&gt;&lt;/div&gt;
-          &lt;div data-herman-color-overlay style=&quot;background-color: #3b4042;&quot;&gt;&lt;/div&gt;
+          &lt;div data-herman-color-overlay style=&quot;background-color: rgb(59.35125, 64.036875, 65.59875);&quot;&gt;&lt;/div&gt;
         &lt;/div&gt;
         &lt;div data-herman-color-info&gt;
           &lt;strong data-herman-color-name data-herman-label=&quot;color&quot;&gt;&lt;span data-herman-color-name-option&gt;text&lt;/span&gt;&lt;/strong&gt;
@@ -1322,7 +1331,7 @@ in our pattern/component<span class="widont">&nbsp;</span>styles.</p>
               
             
               
-                &lt;code data-herman-code data-herman-color-value&gt;hsl(197.14 5.6% 24.51%)&lt;/code&gt;
+                &lt;code data-herman-code data-herman-color-value&gt;hsl(195 5% 24.5%)&lt;/code&gt;
               
             
           
@@ -1332,7 +1341,7 @@ in our pattern/component<span class="widont">&nbsp;</span>styles.</p>
       &lt;div data-herman-color-preview&gt;
         &lt;div data-herman-color-swatch&gt;
           &lt;div data-herman-transparency-grid&gt;&lt;/div&gt;
-          &lt;div data-herman-color-overlay style=&quot;background-color: #555b5e;&quot;&gt;&lt;/div&gt;
+          &lt;div data-herman-color-overlay style=&quot;background-color: hsl(195, 5%, 35%);&quot;&gt;&lt;/div&gt;
         &lt;/div&gt;
         &lt;div data-herman-color-info&gt;
           &lt;strong data-herman-color-name data-herman-label=&quot;color&quot;&gt;&lt;span data-herman-color-name-option&gt;text-light,&amp;nbsp;&lt;/span&gt;&lt;span data-herman-color-name-option&gt;border&lt;/span&gt;&lt;/strong&gt;
@@ -1346,7 +1355,7 @@ in our pattern/component<span class="widont">&nbsp;</span>styles.</p>
               
             
               
-                &lt;code data-herman-code data-herman-color-value&gt;hsl(200 5.0279% 35.098%)&lt;/code&gt;
+                &lt;code data-herman-code data-herman-color-value&gt;hsl(195 5% 35%)&lt;/code&gt;
               
             
           
@@ -1356,7 +1365,7 @@ in our pattern/component<span class="widont">&nbsp;</span>styles.</p>
       &lt;div data-herman-color-preview&gt;
         &lt;div data-herman-color-swatch&gt;
           &lt;div data-herman-transparency-grid&gt;&lt;/div&gt;
-          &lt;div data-herman-color-overlay style=&quot;background-color: #b81e6c;&quot;&gt;&lt;/div&gt;
+          &lt;div data-herman-color-overlay style=&quot;background-color: rgb(184.6678125, 29.77921875, 108.1996875);&quot;&gt;&lt;/div&gt;
         &lt;/div&gt;
         &lt;div data-herman-color-info&gt;
           &lt;strong data-herman-color-name data-herman-label=&quot;color&quot;&gt;&lt;span data-herman-color-name-option&gt;action&lt;/span&gt;&lt;/strong&gt;
@@ -1364,13 +1373,13 @@ in our pattern/component<span class="widont">&nbsp;</span>styles.</p>
           
             
               
-                &lt;code data-herman-code data-herman-color-value&gt;#b81e6c&lt;/code&gt;
+                &lt;code data-herman-code data-herman-color-value&gt;#b91e6c&lt;/code&gt;
               
             
               
             
               
-                &lt;code data-herman-code data-herman-color-value&gt;hsl(329.61 71.963% 41.961%)&lt;/code&gt;
+                &lt;code data-herman-code data-herman-color-value&gt;hsl(329.62 72.227% 42.048%)&lt;/code&gt;
               
             
           
@@ -1380,7 +1389,7 @@ in our pattern/component<span class="widont">&nbsp;</span>styles.</p>
       &lt;div data-herman-color-preview&gt;
         &lt;div data-herman-color-swatch&gt;
           &lt;div data-herman-transparency-grid&gt;&lt;/div&gt;
-          &lt;div data-herman-color-overlay style=&quot;background-color: #edc7da;&quot;&gt;&lt;/div&gt;
+          &lt;div data-herman-color-overlay style=&quot;background-color: rgb(237.416953125, 198.6948046875, 218.299921875);&quot;&gt;&lt;/div&gt;
         &lt;/div&gt;
         &lt;div data-herman-color-info&gt;
           &lt;strong data-herman-color-name data-herman-label=&quot;color&quot;&gt;&lt;span data-herman-color-name-option&gt;underline&lt;/span&gt;&lt;/strong&gt;
@@ -1394,7 +1403,7 @@ in our pattern/component<span class="widont">&nbsp;</span>styles.</p>
               
             
               
-                &lt;code data-herman-code data-herman-color-value&gt;hsl(330 51.351% 85.49%)&lt;/code&gt;
+                &lt;code data-herman-code data-herman-color-value&gt;hsl(329.62 52.406% 85.512%)&lt;/code&gt;
               
             
           
@@ -1404,7 +1413,7 @@ in our pattern/component<span class="widont">&nbsp;</span>styles.</p>
       &lt;div data-herman-color-preview&gt;
         &lt;div data-herman-color-swatch&gt;
           &lt;div data-herman-transparency-grid&gt;&lt;/div&gt;
-          &lt;div data-herman-color-overlay style=&quot;background-color: #dedede;&quot;&gt;&lt;/div&gt;
+          &lt;div data-herman-color-overlay style=&quot;background-color: rgb(221.85, 221.85, 221.85);&quot;&gt;&lt;/div&gt;
         &lt;/div&gt;
         &lt;div data-herman-color-info&gt;
           &lt;strong data-herman-color-name data-herman-label=&quot;color&quot;&gt;&lt;span data-herman-color-name-option&gt;border-light&lt;/span&gt;&lt;/strong&gt;
@@ -1418,7 +1427,7 @@ in our pattern/component<span class="widont">&nbsp;</span>styles.</p>
               
             
               
-                &lt;code data-herman-code data-herman-color-value&gt;hsl(none 0% 87.059%)&lt;/code&gt;
+                &lt;code data-herman-code data-herman-color-value&gt;hsl(none 0% 87%)&lt;/code&gt;
               
             
           
@@ -1428,7 +1437,7 @@ in our pattern/component<span class="widont">&nbsp;</span>styles.</p>
       &lt;div data-herman-color-preview&gt;
         &lt;div data-herman-color-swatch&gt;
           &lt;div data-herman-transparency-grid&gt;&lt;/div&gt;
-          &lt;div data-herman-color-overlay style=&quot;background-color: rgba(85, 91, 94, 0.5);&quot;&gt;&lt;/div&gt;
+          &lt;div data-herman-color-overlay style=&quot;background-color: rgba(84.7875, 91.48125, 93.7125, 0.5);&quot;&gt;&lt;/div&gt;
         &lt;/div&gt;
         &lt;div data-herman-color-info&gt;
           &lt;strong data-herman-color-name data-herman-label=&quot;color&quot;&gt;&lt;span data-herman-color-name-option&gt;shadow&lt;/span&gt;&lt;/strong&gt;
@@ -1442,7 +1451,7 @@ in our pattern/component<span class="widont">&nbsp;</span>styles.</p>
               
             
               
-                &lt;code data-herman-code data-herman-color-value&gt;hsl(200 5.0279% 35.098% / 0.5)&lt;/code&gt;
+                &lt;code data-herman-code data-herman-color-value&gt;hsl(195 5% 35% / 0.5)&lt;/code&gt;
               
             
           
@@ -1452,7 +1461,7 @@ in our pattern/component<span class="widont">&nbsp;</span>styles.</p>
       &lt;div data-herman-color-preview&gt;
         &lt;div data-herman-color-swatch&gt;
           &lt;div data-herman-transparency-grid&gt;&lt;/div&gt;
-          &lt;div data-herman-color-overlay style=&quot;background-color: #fafcfd;&quot;&gt;&lt;/div&gt;
+          &lt;div data-herman-color-overlay style=&quot;background-color: rgb(250.16775, 252.443625, 253.20225);&quot;&gt;&lt;/div&gt;
         &lt;/div&gt;
         &lt;div data-herman-color-info&gt;
           &lt;strong data-herman-color-name data-herman-label=&quot;color&quot;&gt;&lt;span data-herman-color-name-option&gt;slight&lt;/span&gt;&lt;/strong&gt;
@@ -1466,7 +1475,7 @@ in our pattern/component<span class="widont">&nbsp;</span>styles.</p>
               
             
               
-                &lt;code data-herman-code data-herman-color-value&gt;hsl(200 42.857% 98.627%)&lt;/code&gt;
+                &lt;code data-herman-code data-herman-color-value&gt;hsl(195 45.769% 98.7%)&lt;/code&gt;
               
             
           
@@ -1476,7 +1485,7 @@ in our pattern/component<span class="widont">&nbsp;</span>styles.</p>
       &lt;div data-herman-color-preview&gt;
         &lt;div data-herman-color-swatch&gt;
           &lt;div data-herman-transparency-grid&gt;&lt;/div&gt;
-          &lt;div data-herman-color-overlay style=&quot;background-color: rgba(13, 127, 165, 0.2);&quot;&gt;&lt;/div&gt;
+          &lt;div data-herman-color-overlay style=&quot;background-color: rgba(13.3875, 127.18125, 165.1125, 0.2);&quot;&gt;&lt;/div&gt;
         &lt;/div&gt;
         &lt;div data-herman-color-info&gt;
           &lt;strong data-herman-color-name data-herman-label=&quot;color&quot;&gt;&lt;span data-herman-color-name-option&gt;code-shadow&lt;/span&gt;&lt;/strong&gt;
@@ -1490,7 +1499,7 @@ in our pattern/component<span class="widont">&nbsp;</span>styles.</p>
               
             
               
-                &lt;code data-herman-code data-herman-color-value&gt;hsl(195 85.393% 34.902% / 0.2)&lt;/code&gt;
+                &lt;code data-herman-code data-herman-color-value&gt;hsl(195 85% 35% / 0.2)&lt;/code&gt;
               
             
           
