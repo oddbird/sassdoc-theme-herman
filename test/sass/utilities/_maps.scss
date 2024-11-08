@@ -5,7 +5,11 @@
 @use 'sass:map';
 @use 'sass:meta';
 @use 'pkg:sass-true' as true;
-@use 'pkg:accoutrement' as tools;
+@use 'pkg:accoutrement' as tools with (
+  $functions: (
+    'adjust': meta.get-function('adjust', $module: 'color'),
+  )
+);
 @use '../../../scss/utilities/json-api' as *;
 @use '../../../scss/utilities/maps' as *;
 

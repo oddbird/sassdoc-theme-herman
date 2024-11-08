@@ -62,22 +62,25 @@ $neutral-colors: (
   'light-gray': '#brand-blue'
     (
       'tint': 80%,
-      'color.scale': (
+      'adjust': (
         'saturation': -80%,
+        'space': hsl,
       ),
     ),
   'gray': '#brand-blue'
     (
-      'color.scale': (
+      'adjust': (
         'saturation': -80%,
+        'space': hsl,
       ),
     ),
   'contrast-light': #fff,
   'contrast-dark': '#brand-blue'
     (
       'shade': 30% #000,
-      'color.scale': (
+      'adjust': (
         'saturation': -80%,
+        'space': hsl,
       ),
     ),
 );

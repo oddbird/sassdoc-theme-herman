@@ -51,7 +51,7 @@
 ///   herman.$herman: ();
 ///   $brand-colors: (
 ///     'brand-blue': hsl(195, 85%, 35%),
-///     'light-gray': '#brand-blue' ('tint': 80%, 'color.scale': ('saturation': -80%),),
+///     'light-gray': '#brand-blue' ('tint': 80%, 'adjust': ('saturation': -80%, 'space': hsl),),
 ///   );
 ///   $brand-compiled: herman.each-key(
 ///     $brand-colors,
@@ -160,7 +160,7 @@
 ///   $brand-colors: (
 ///     'brand-orange': hsl(24, 100%, 39%),
 ///     'brand-blue': hsl(195, 85%, 35%),
-///     'light-gray': 'brand-blue' ('tint': 80%, 'color.scale': ('saturation': -80%),),
+///     'light-gray': 'brand-blue' ('tint': 80%, 'adjust': ('saturation': -80%, 'space': hsl),),
 ///   );
 ///   $compiled: herman.each-key($brand-colors, meta.get-function('color', $module: 'tools'));
 ///
