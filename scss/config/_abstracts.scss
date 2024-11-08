@@ -26,8 +26,6 @@
 ///   Use `get-function()` to capture a first-class function,
 ///   or use a string to reference existing functions and alias-keys
 $functions: (
-  'darken': meta.get-function('darken'),
-  'desaturate': meta.get-function('desaturate'),
   'rgba': meta.get-function('rgba'),
   'convert': '#convert-units',
 );
