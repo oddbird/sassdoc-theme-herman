@@ -1,5 +1,12 @@
 # Herman Changelog
 
+## 6.0.2: 2024-11-08
+
+- 🐛 BUGFIX: Address Sass deprecation warnings --
+  [#443](https://github.com/oddbird/sassdoc-theme-herman/issues/443) &
+  [#449](https://github.com/oddbird/sassdoc-theme-herman/issues/449)
+- 🏠 INTERNAL: Upgrade dependencies
+
 ## 6.0.1: 2024-04-22
 
 - 🐛 BUGFIX: Do not overwrite `ctx.emit` method --
