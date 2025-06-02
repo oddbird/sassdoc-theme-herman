@@ -1,5 +1,10 @@
 # Herman Changelog
 
+## UNRELEASED
+
+- 💥 BREAKING: Drop support for Node < 20
+- 🏠 INTERNAL: Upgrade dependencies
+
 ## 6.0.2: 2024-11-08
 
 - 🐛 BUGFIX: Address Sass deprecation warnings --
