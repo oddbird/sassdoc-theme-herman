@@ -106,7 +106,7 @@
     "eslint-plugin-jest": "^29.0.1",
     "eslint-plugin-jest-dom": "^5.5.0",
     "eslint-plugin-simple-import-sort": "^12.1.1",
-    "globals": "^16.2.0",
+    "globals": "^16.3.0",
     "highlight.js": "^11.11.1",
     "jest": "^30.0.3",
     "jest-environment-jsdom": "^30.0.2",
@@ -144,5 +144,5 @@
   "resolutions": {
     "cdocparser": "^0.15.0"
   },
-  "packageManager": "yarn@4.9.1"
+  "packageManager": "yarn@4.9.2"
 }
