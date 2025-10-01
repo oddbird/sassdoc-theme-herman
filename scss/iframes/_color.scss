@@ -18,7 +18,7 @@
   @supports (display: grid) {
     display: grid;
     grid-auto-rows: auto;
-    grid-gap: tools.size('gutter');
+    gap: tools.size('gutter');
     grid-template-columns: repeat(
       auto-fit,
       minmax(tools.size('color-preview'), 1fr)
