@@ -12250,9 +12250,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass-true@npm:^10.0.0-alpha.0":
-  version: 10.0.0-alpha.0
-  resolution: "sass-true@npm:10.0.0-alpha.0"
+"sass-true@npm:^10.0.0-alpha.1":
+  version: 10.0.0-alpha.1
+  resolution: "sass-true@npm:10.0.0-alpha.1"
   dependencies:
     "@prettier/sync": "npm:^0.6.1"
     jest-diff: "npm:^30.2.0"
@@ -12266,7 +12266,7 @@ __metadata:
       optional: true
     sass-embedded:
       optional: true
-  checksum: 10/d99a1719787935e86e3cb95508b453519ad8dc5dfdad0279c51c7bf79c8bc4177f197c6f4fa0b65b17a3dee45c47bbcfa312fe151c1964372dcd74ecd46c9bf8
+  checksum: 10/0b6a35a2f2f5cd95c1b68751b5fe755d357e67079d95056afb24eb2dfa95f3268b70411c2ac9018fa722d24ec376c798cd97dc8dcf19e8cad390ee6998b33f02
   languageName: node
   linkType: hard
 
@@ -12402,7 +12402,7 @@ __metadata:
     sass: "npm:^1.94.0"
     sass-embedded: "npm:^1.93.3"
     sass-loader: "npm:^16.0.6"
-    sass-true: "npm:^10.0.0-alpha.0"
+    sass-true: "npm:^10.0.0-alpha.1"
     sassdoc: "npm:^2.7.4"
     sassdoc-extras: "npm:^3.0.0"
     sinon: "npm:^21.0.0"
