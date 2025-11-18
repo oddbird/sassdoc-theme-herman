@@ -49,8 +49,7 @@ $sizes-compiled: (
         meta.get-function('scale', $module: 'color'),
         $lightness: -20%
       ),
-      $darken,
-      $inspect: true
+      $darken
     );
   }
 }
@@ -61,8 +60,7 @@ $sizes-compiled: (
   @include true.it('returns a map with keys run through a given function') {
     @include true.assert-equal(
       each-key(tools.$sizes, meta.get-function('size', $module: 'tools')),
-      $sizes-compiled,
-      $inspect: true
+      $sizes-compiled
     );
   }
 }
