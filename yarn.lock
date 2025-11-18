@@ -3285,10 +3285,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"accoutrement@npm:^4.0.5":
-  version: 4.0.5
-  resolution: "accoutrement@npm:4.0.5"
-  checksum: 10/1926961667b6757f258d55637b7f52d1304289f4d29801ac172a3b9f3b7dadce002f3e4adb36c845ba8deeff86232eb2e22a6ce7133f9db8fd30afb5d4c5a963
+"accoutrement@npm:^4.0.6":
+  version: 4.0.6
+  resolution: "accoutrement@npm:4.0.6"
+  checksum: 10/2bb990a6b26e8dfd4ff39b5e2d4c68e965102e3a0685b945052f8544a62ccd155355ae15054a23dc82ceb2bb7ebe2b02714d3f2269b445f4b50b25dee59ed4b9
   languageName: node
   linkType: hard
 
@@ -12416,7 +12416,7 @@ __metadata:
     "@eslint/js": "npm:^9.39.1"
     "@testing-library/dom": "npm:^10.4.1"
     "@testing-library/jest-dom": "npm:^6.9.1"
-    accoutrement: "npm:^4.0.5"
+    accoutrement: "npm:^4.0.6"
     autoprefixer: "npm:^10.4.22"
     babel-jest: "npm:^30.2.0"
     babel-loader: "npm:^10.0.0"

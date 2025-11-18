@@ -1,6 +1,6 @@
 # Herman Changelog
 
-## UNRELEASED
+## 7.0.0: 2025-11-18
 
 - 💥 BREAKING: Drop support for Node < 20
 - 🏠 INTERNAL: Upgrade dependencies
