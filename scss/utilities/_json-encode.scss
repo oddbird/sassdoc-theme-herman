@@ -126,8 +126,9 @@
   @if ($string == $old) {
     $return: $new;
   } @else if $i {
-    /* prettier-ignore */
-    $a: if(sass($i > 1): string.slice($string, 1, $i - 1); else: '');
+    $a: if(
+      sass($i > 1): string.slice($string, 1, $i - 1) ; else: '',
+    );
     $z: string.slice($string, $i + $n);
     $z: escape-quotes($z);
 
@@ -157,8 +158,9 @@
   @if ($string == $old) {
     $return: $new;
   } @else if $i {
-    /* prettier-ignore */
-    $a: if(sass($i > 1): string.slice($string, 1, $i - 1); else: '');
+    $a: if(
+      sass($i > 1): string.slice($string, 1, $i - 1) ; else: '',
+    );
     $z: string.slice($string, $i + $n);
     $z: escape-backslashes($z);
 
