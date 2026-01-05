@@ -16,7 +16,9 @@ $private: 'for internal use only';
 /// @group demo_test-sassdoc
 /// @type *
 /// @requires $private
-$basic-value: if(not 'social', $private, 'hello world');
+$basic-value: if(
+  sass(not 'social'): $private; else: 'hello world',
+);
 
 // Map Value
 // ---------
