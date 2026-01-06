@@ -5,8 +5,8 @@
 // Json Encoding
 // =============
 
-// JSON Ecode
-// ----------
+// JSON Encode
+// -----------
 /// Encode any Sass value as a JSON-ready string.
 ///
 /// @group config_api-utilities
@@ -44,7 +44,10 @@
   $str: '';
 
   @each $item in $list {
-    $str: if($str != '', $str + ', ', $str);
+    @if ($str != '') {
+      $str: $str + ', ';
+    }
+
     $str: $str + encode($item);
   }
 
@@ -64,7 +67,10 @@
   $str: '';
 
   @each $key, $value in $map {
-    $str: if($str != '', $str + ', ', $str);
+    @if ($str != '') {
+      $str: $str + ', ';
+    }
+
     $str: $str + quotes($key) + ': ' + encode($value);
   }
 
@@ -124,10 +130,14 @@
   @if ($string == $old) {
     $return: $new;
   } @else if $i {
-    $a: if($i > 1, string.slice($string, 1, $i - 1), '');
+    $a: if(
+      sass($i > 1): string.slice($string, 1, $i - 1) ; else: '',
+    );
     $z: string.slice($string, $i + $n);
     $z: escape-quotes($z);
-    $return: $a + if($new, $new, '') + $z;
+
+    /* prettier-ignore */
+    $return: $a + if(sass($new): $new; else: '') + $z;
   }
 
   @return $return;
@@ -152,10 +162,14 @@
   @if ($string == $old) {
     $return: $new;
   } @else if $i {
-    $a: if($i > 1, string.slice($string, 1, $i - 1), '');
+    $a: if(
+      sass($i > 1): string.slice($string, 1, $i - 1) ; else: '',
+    );
     $z: string.slice($string, $i + $n);
     $z: escape-backslashes($z);
-    $return: $a + if($new, $new, '') + $z;
+
+    /* prettier-ignore */
+    $return: $a + if(sass($new): $new; else: '') + $z;
   }
 
   @return $return;
