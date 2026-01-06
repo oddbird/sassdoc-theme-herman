@@ -44,8 +44,9 @@
   $str: '';
 
   @each $item in $list {
-    /* prettier-ignore */
-    $str: if(sass($str != ''): $str + ', '; else: $str);
+    @if ($str != '') {
+      $str: $str + ', ';
+    }
     $str: $str + encode($item);
   }
 
