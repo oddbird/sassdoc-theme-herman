@@ -47,6 +47,7 @@
     @if ($str != '') {
       $str: $str + ', ';
     }
+
     $str: $str + encode($item);
   }
 
@@ -66,8 +67,10 @@
   $str: '';
 
   @each $key, $value in $map {
-    /* prettier-ignore */
-    $str: if(sass($str != ''): $str + ', '; else: $str);
+    @if ($str != '') {
+      $str: $str + ', ';
+    }
+
     $str: $str + quotes($key) + ': ' + encode($value);
   }
 
