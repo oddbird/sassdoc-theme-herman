@@ -1,5 +1,13 @@
 # Herman Changelog
 
+## 7.0.1: 2026-01-06
+
+- 🐛 BUGFIX: Address Sass `if()` deprecation warnings --
+  [#490](https://github.com/oddbird/sassdoc-theme-herman/pull/490)
+- 🐛 BUGFIX: Fix banner layout regression --
+  [#477](https://github.com/oddbird/sassdoc-theme-herman/issues/477)
+- 🏠 INTERNAL: Upgrade dependencies
+
 ## 7.0.0: 2025-11-18
 
 - 💥 BREAKING: Drop support for Node < 20
