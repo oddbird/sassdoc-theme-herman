@@ -42,7 +42,7 @@
       <div class="project-title">
         <a href="index.html" rel="home" class="project-name">Herman</a>
         
-          <span class="project-version">7.0.0</span>
+          <span class="project-version">7.0.1</span>
         
       </div>
     </header>
@@ -2106,7 +2106,9 @@ in your <a href="http://sassdoc.com/configuration/">SassDoc<span class="widont">
 
       
       
-      <pre class="hljs-pre"><code class="lang-scss">$basic-value: if(not &#39;social&#39;, $private, &#39;hello world&#39;);</code></pre>
+      <pre class="hljs-pre"><code class="lang-scss">$basic-value: if(
+  sass(not &#39;social&#39;): $private; else: &#39;hello world&#39;,
+);</code></pre>
     </div>
   
 
