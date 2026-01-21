@@ -9351,6 +9351,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lodash@npm:^4.17.23":
+  version: 4.17.23
+  resolution: "lodash@npm:4.17.23"
+  checksum: 10/82504c88250f58da7a5a4289f57a4f759c44946c005dd232821c7688b5fcfbf4a6268f6a6cdde4b792c91edd2f3b5398c1d2a0998274432cff76def48735e233
+  languageName: node
+  linkType: hard
+
 "log-symbols@npm:^4.1.0":
   version: 4.1.0
   resolution: "log-symbols@npm:4.1.0"
@@ -12373,7 +12380,7 @@ __metadata:
     jquery-deparam: "npm:^0.5.3"
     js-yaml: "npm:^4.1.1"
     json-loader: "npm:^0.5.7"
-    lodash: "npm:^4.17.21"
+    lodash: "npm:^4.17.23"
     lunr: "npm:^2.3.9"
     mark.js: "npm:^8.11.1"
     markdown-it: "npm:^14.1.0"
