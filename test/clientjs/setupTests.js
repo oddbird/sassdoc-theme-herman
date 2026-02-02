@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom';
 
-import $ from 'jquery/dist/jquery.slim';
+import $ from 'jquery/slim';
 
 beforeAll(() => {
   window.$ = $;

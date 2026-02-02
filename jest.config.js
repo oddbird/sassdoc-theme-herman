@@ -82,7 +82,6 @@ module.exports = {
   moduleNameMapper: {
     '(.*)json.scss$': '<rootDir>/__mocks__/jsonMock.js',
     '\\.njk$': '<rootDir>/__mocks__/fileMock.js',
-    '^jquery$': 'jquery/dist/jquery.slim',
     '^nunjucks$': 'nunjucks/browser/nunjucks-slim',
   },
 
