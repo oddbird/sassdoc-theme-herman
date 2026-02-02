@@ -45,7 +45,6 @@ module.exports = [
             resolve: {
               modules: ['templates/client', 'scss', 'node_modules'],
               alias: {
-                jquery: 'jquery/dist/jquery.slim',
                 nunjucks: 'nunjucks/browser/nunjucks-slim',
               },
             },

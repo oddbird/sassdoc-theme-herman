@@ -1,5 +1,9 @@
 # Herman Changelog
 
+## Unreleased
+
+- 🏠 INTERNAL: Upgrade dependencies
+
 ## 7.0.1: 2026-01-06
 
 - 🐛 BUGFIX: Address Sass `if()` deprecation warnings --

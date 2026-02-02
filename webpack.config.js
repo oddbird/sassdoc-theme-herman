@@ -106,7 +106,10 @@ module.exports = {
     // where to look for "required" modules
     modules: ['templates/client', 'scss', 'node_modules'],
     alias: {
-      jquery: 'jquery/dist/jquery.slim',
+      jquery: path.resolve(
+        __dirname,
+        'node_modules/jquery/dist/jquery.slim.js',
+      ),
       nunjucks: 'nunjucks/browser/nunjucks-slim',
     },
   },
