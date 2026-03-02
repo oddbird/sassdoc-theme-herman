@@ -74,7 +74,7 @@ jobs:
           JEST_JUNIT_OUTPUT_DIR: './coverage/client'
         run: yarn test:js:client:ci
       - name: Upload coverage results
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: frontend-coverage
           path: coverage
