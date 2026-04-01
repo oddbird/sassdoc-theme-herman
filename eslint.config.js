@@ -1,7 +1,6 @@
-const babelParser = require('@babel/eslint-parser');
 const js = require('@eslint/js');
 const prettier = require('eslint-config-prettier');
-const importPlugin = require('eslint-plugin-import');
+const { importX } = require('eslint-plugin-import-x');
 const jest = require('eslint-plugin-jest');
 const jestDOM = require('eslint-plugin-jest-dom');
 const simpleImportSort = require('eslint-plugin-simple-import-sort');
@@ -23,12 +22,11 @@ module.exports = [
     ],
   },
   js.configs.recommended,
-  importPlugin.flatConfigs.recommended,
+  importX.flatConfigs.recommended,
   prettier,
   {
     files: ['**/*.{js,mjs,cjs,ts,cts,mts}'],
     languageOptions: {
-      parser: babelParser,
       globals: {
         ...globals.node,
         ...globals.es2021,
@@ -38,7 +36,7 @@ module.exports = [
       },
     },
     settings: {
-      'import/resolver': {
+      'import-x/resolver': {
         node: {},
         webpack: {
           config: {
@@ -56,19 +54,19 @@ module.exports = [
           },
         },
       },
-      'import/external-module-folders': ['node_modules'],
+      'import-x/external-module-folders': ['node_modules'],
     },
     rules: {
       'no-console': 1,
       'no-warning-comments': ['warn', { terms: ['todo', 'fixme', '@@@'] }],
-      'import/first': 'warn',
-      'import/newline-after-import': 'warn',
-      'import/no-duplicates': ['error', { 'prefer-inline': true }],
-      'import/order': [
+      'import-x/first': 'warn',
+      'import-x/newline-after-import': 'warn',
+      'import-x/no-duplicates': ['error', { 'prefer-inline': true }],
+      'import-x/order': [
         'warn',
         { 'newlines-between': 'always', alphabetize: { order: 'asc' } },
       ],
-      'import/named': 'warn',
+      'import-x/named': 'warn',
     },
   },
   {
@@ -88,7 +86,7 @@ module.exports = [
     rules: {
       'simple-import-sort/imports': 'warn',
       'simple-import-sort/exports': 'warn',
-      'import/order': 'off',
+      'import-x/order': 'off',
     },
   },
   {
@@ -124,7 +122,7 @@ module.exports = [
     rules: {
       'simple-import-sort/imports': 'warn',
       'simple-import-sort/exports': 'warn',
-      'import/order': 'off',
+      'import-x/order': 'off',
     },
   },
 ];

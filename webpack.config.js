@@ -169,11 +169,6 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /(assets\/js\/.*\.js$|test\/clientjs\/.*\.js$)/,
-        exclude: /node_modules/,
-        use: ['babel-loader'],
-      },
-      {
         test: /\.njk$/,
         use: [
           {
