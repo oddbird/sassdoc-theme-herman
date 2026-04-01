@@ -33,7 +33,9 @@ class SassDocPlugin {
         );
       } catch (err) {
         console.warn(err);
-        throw new Error(`Invalid or no .sassdocrc found in: ${process.cwd()}`);
+        throw new Error(`Invalid or no .sassdocrc found in: ${process.cwd()}`, {
+          cause: err,
+        });
       }
     }
 

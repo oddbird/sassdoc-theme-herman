@@ -1,5 +1,6 @@
 import '@testing-library/jest-dom';
 
+// eslint-disable-next-line import-x/no-named-as-default
 import $ from 'jquery/slim';
 
 beforeAll(() => {
