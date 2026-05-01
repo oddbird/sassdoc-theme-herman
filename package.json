@@ -94,7 +94,7 @@
     "css-minimizer-webpack-plugin": "^8.0.0",
     "cssremedy": "^0.1.0-beta.2",
     "del": "^6.1.1",
-    "eslint": "^10.2.1",
+    "eslint": "^10.3.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-import-resolver-node": "^0.3.10",
     "eslint-import-resolver-webpack": "^0.13.11",
