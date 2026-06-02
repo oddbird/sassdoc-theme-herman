@@ -1779,12 +1779,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sinonjs/fake-timers@npm:^15.0.0, @sinonjs/fake-timers@npm:^15.3.2":
+"@sinonjs/fake-timers@npm:^15.0.0":
   version: 15.3.2
   resolution: "@sinonjs/fake-timers@npm:15.3.2"
   dependencies:
     "@sinonjs/commons": "npm:^3.0.1"
   checksum: 10/270a0f440bbcee2ad3fbe50b3c3cf311afd82e3cfcdff9572485fc17948b66c2cdfc5c906d64884ec623eced97ceb23c7639c3066ad4696976acf9f63a93c4c8
+  languageName: node
+  linkType: hard
+
+"@sinonjs/fake-timers@npm:^15.4.0":
+  version: 15.4.0
+  resolution: "@sinonjs/fake-timers@npm:15.4.0"
+  dependencies:
+    "@sinonjs/commons": "npm:^3.0.1"
+  checksum: 10/3960a9fe065f38a4228c66d184eeb101e8a6af9cbfc8454dd5d45ac397201da72134048d4e808a25993494885b172dd6deecdad9949bbf4c1d3a220ef561f6cc
   languageName: node
   linkType: hard
 
@@ -4823,10 +4832,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"diff@npm:^8.0.4":
-  version: 8.0.4
-  resolution: "diff@npm:8.0.4"
-  checksum: 10/b4036ceda0d1e10683a2313079ed52c5e6b09553ae29da87bce81d98714d9725dbf3c0f6f7c3b1f16eec049fe17087e38ee329e732580fa62f6ec1c2487b2435
+"diff@npm:^9.0.0":
+  version: 9.0.0
+  resolution: "diff@npm:9.0.0"
+  checksum: 10/f8b5e38a6a7ec73d1850ccb7ff19cda1d02502dc0f2c562ada0f40d7211bfb3075c2f3742104619a1f8f47ae333d48a6c77bffb080a2df900db36935080ea4fb
   languageName: node
   linkType: hard
 
@@ -11566,21 +11575,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass-loader@npm:^16.0.7":
-  version: 16.0.7
-  resolution: "sass-loader@npm:16.0.7"
-  dependencies:
-    neo-async: "npm:^2.6.2"
+"sass-loader@npm:^17.0.0":
+  version: 17.0.0
+  resolution: "sass-loader@npm:17.0.0"
   peerDependencies:
     "@rspack/core": 0.x || ^1.0.0 || ^2.0.0-0
-    node-sass: ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0
     sass: ^1.3.0
     sass-embedded: "*"
     webpack: ^5.0.0
   peerDependenciesMeta:
     "@rspack/core":
-      optional: true
-    node-sass:
       optional: true
     sass:
       optional: true
@@ -11588,7 +11592,7 @@ __metadata:
       optional: true
     webpack:
       optional: true
-  checksum: 10/074be7eadbbb2e14f581b06e9f1ec010807d76bd5cc5cd9c6a120fa377f1b94a7f8dc4b0eea5b12cf34511e9b00fe056093b7da02e849d3f2513bfe21e9f660f
+  checksum: 10/f740c61f235a31220af1a53f1482f0033714333fbf9ce77896f0fdd75793ce6c0a95e16adf2952e3e390a8157327db70ca4aafe754fce7061b8cecd2e1083173
   languageName: node
   linkType: hard
 
@@ -11722,11 +11726,11 @@ __metadata:
     readable-stream: "npm:^4.7.0"
     sass: "npm:^1.99.0"
     sass-embedded: "npm:^1.99.0"
-    sass-loader: "npm:^16.0.7"
+    sass-loader: "npm:^17.0.0"
     sass-true: "npm:^10.1.0"
     sassdoc: "npm:^2.7.4"
     sassdoc-extras: "npm:^3.0.0"
-    sinon: "npm:^21.1.2"
+    sinon: "npm:^22.0.0"
     srcdoc-polyfill: "npm:^1.0.0"
     strip-indent: "npm:^3.0.0"
     stylelint: "npm:^17.9.1"
@@ -12099,15 +12103,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sinon@npm:^21.1.2":
-  version: 21.1.2
-  resolution: "sinon@npm:21.1.2"
+"sinon@npm:^22.0.0":
+  version: 22.0.0
+  resolution: "sinon@npm:22.0.0"
   dependencies:
     "@sinonjs/commons": "npm:^3.0.1"
-    "@sinonjs/fake-timers": "npm:^15.3.2"
+    "@sinonjs/fake-timers": "npm:^15.4.0"
     "@sinonjs/samsam": "npm:^10.0.2"
-    diff: "npm:^8.0.4"
-  checksum: 10/dccad5c6d1b5e9d6707b2b0349ffc888d2f5a1fd583c0b1383b247232bb897aeca087432f9e2f7043c3860e87bc793476347a511f6bb2777968dd9a75d391cba
+    diff: "npm:^9.0.0"
+  checksum: 10/5d0a692c2f1cc463b86d18a57e8db80e1a7f5829252edfc4d11162a555e4d005bf03698549d7cf9ad65f79b7e77a4f87534b4c76220bb81a1ec5e2b30be19929
   languageName: node
   linkType: hard
 
