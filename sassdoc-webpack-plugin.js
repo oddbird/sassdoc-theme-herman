@@ -5,7 +5,7 @@
 const fs = require('fs/promises');
 const path = require('path');
 
-const yaml = require('js-yaml');
+const { load } = require('js-yaml');
 const set = require('lodash/set');
 const sassdoc = require('sassdoc');
 
@@ -28,7 +28,7 @@ class SassDocPlugin {
     if (!options) {
       try {
         // Load .sassdocrc configuration
-        options = yaml.load(
+        options = load(
           fs.readFileSync(path.join(process.cwd(), '.sassdocrc'), 'utf-8'),
         );
       } catch (err) {
