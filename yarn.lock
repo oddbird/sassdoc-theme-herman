@@ -8170,7 +8170,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"js-yaml@npm:^4.1.0, js-yaml@npm:^4.2.0":
+"js-yaml@npm:^4.1.0":
   version: 4.2.0
   resolution: "js-yaml@npm:4.2.0"
   dependencies:
@@ -11711,7 +11711,6 @@ __metadata:
     jinja-loader: "npm:^0.0.8"
     jquery: "npm:^4.0.0"
     jquery-deparam: "npm:^0.5.3"
-    js-yaml: "npm:^4.2.0"
     json-loader: "npm:^0.5.7"
     lodash: "npm:^4.18.1"
     lunr: "npm:^2.3.9"
