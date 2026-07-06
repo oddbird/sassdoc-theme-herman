@@ -68,7 +68,7 @@
     "gulp-svg-symbols": "^3.2.3",
     "html": "^1.0.0",
     "lunr": "^2.3.9",
-    "markdown-it": "^14.2.0",
+    "markdown-it": "^14.3.0",
     "markdown-it-anchor": "^9.2.0",
     "nunjucks": "^3.2.4",
     "readable-stream": "^4.7.0",
@@ -110,7 +110,7 @@
     "jinja-loader": "^0.0.8",
     "jquery": "^4.0.0",
     "jquery-deparam": "^0.5.3",
-    "js-yaml": "^5.2.0",
+    "js-yaml": "^5.2.1",
     "json-loader": "^0.5.7",
     "lodash": "^4.18.1",
     "mark.js": "^8.11.1",
@@ -133,9 +133,9 @@
     "stylelint": "^17.14.0",
     "stylelint-config-standard-scss": "^17.0.0",
     "svgo": "^4.0.1",
-    "webpack": "^5.108.3",
-    "webpack-cli": "^7.1.0",
-    "webpack-dev-server": "^5.2.5"
+    "webpack": "^5.108.4",
+    "webpack-cli": "^7.2.1",
+    "webpack-dev-server": "^6.0.0"
   },
   "resolutions": {
     "cdocparser": "^0.15.0"
