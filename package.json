@@ -120,7 +120,7 @@
     "mocha-junit-reporter": "^2.2.1",
     "npm-run-all": "^4.1.5",
     "nyc": "^18.0.0",
-    "postcss": "^8.5.16",
+    "postcss": "^8.5.18",
     "postcss-loader": "^8.2.1",
     "prettier": "^3.9.4",
     "sass": "^1.101.0",
