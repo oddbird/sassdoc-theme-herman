@@ -1983,9 +1983,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/jest-dom@npm:^6.9.1":
-  version: 6.9.1
-  resolution: "@testing-library/jest-dom@npm:6.9.1"
+"@testing-library/jest-dom@npm:^7.0.0":
+  version: 7.0.0
+  resolution: "@testing-library/jest-dom@npm:7.0.0"
   dependencies:
     "@adobe/css-tools": "npm:^4.4.0"
     aria-query: "npm:^5.0.0"
@@ -1993,7 +1993,9 @@ __metadata:
     dom-accessibility-api: "npm:^0.6.3"
     picocolors: "npm:^1.1.1"
     redent: "npm:^3.0.0"
-  checksum: 10/409b4f519e4c68f4d31e3b0317338cc19098b9029513fca61aa2af8270086ae3956a1eaedd19bbce2d2c9e2cf9ff27a616c06556be7a26e101c0d529a0062233
+  peerDependencies:
+    "@testing-library/dom": ">=10 <11"
+  checksum: 10/ec6d50550d7ec87f60a19f1719d87e2d73a050fed4938f13d846d30639f85bd903e5aff2eaecbb1a9e67f3c71c98148b46edd4f77b15ca17c91f655f9c54f92b
   languageName: node
   linkType: hard
 
@@ -5322,12 +5324,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-simple-import-sort@npm:^13.0.0":
-  version: 13.0.0
-  resolution: "eslint-plugin-simple-import-sort@npm:13.0.0"
+"eslint-plugin-simple-import-sort@npm:^14.0.0":
+  version: 14.0.0
+  resolution: "eslint-plugin-simple-import-sort@npm:14.0.0"
   peerDependencies:
     eslint: ">=5.0.0"
-  checksum: 10/4ef64b0e13e6c22d929b4d8f4c68dcb001ecc273b0be7ef1318278bafef4942dcb1454f099e506dcf8bcf729311ad3f7c255a688ab06e71265f5dec4111cb71d
+  checksum: 10/82665d1664bb3443a1271a13764b01ceffaa2b8bcb1e887aa464e2e9d2d2910390a94de0e9211133eaf77c368dcbd75890ed92ac889e314726170e644a1f8d5e
   languageName: node
   linkType: hard
 
@@ -11548,7 +11550,7 @@ __metadata:
     "@swc/core": "npm:^1.15.43"
     "@swc/jest": "npm:^0.2.39"
     "@testing-library/dom": "npm:^10.4.1"
-    "@testing-library/jest-dom": "npm:^6.9.1"
+    "@testing-library/jest-dom": "npm:^7.0.0"
     accoutrement: "npm:^4.0.7"
     autoprefixer: "npm:^10.5.2"
     chalk: "npm:^4.1.2"
@@ -11566,7 +11568,7 @@ __metadata:
     eslint-plugin-import-x: "npm:^4.17.1"
     eslint-plugin-jest: "npm:^29.15.4"
     eslint-plugin-jest-dom: "npm:^5.5.0"
-    eslint-plugin-simple-import-sort: "npm:^13.0.0"
+    eslint-plugin-simple-import-sort: "npm:^14.0.0"
     globals: "npm:^17.7.0"
     gulp-rename: "npm:^2.1.0"
     gulp-svg-symbols: "npm:^3.2.3"
