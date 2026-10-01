@@ -69,7 +69,7 @@
     "html": "^1.0.0",
     "lunr": "^2.3.9",
     "markdown-it": "^15.0.2",
-    "markdown-it-anchor": "^9.2.1",
+    "markdown-it-anchor": "^10.0.0",
     "nunjucks": "^3.2.4",
     "readable-stream": "^4.7.0",
     "sassdoc-extras": "^3.0.0",
@@ -83,7 +83,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
-    "@swc/core": "^1.16.2",
+    "@swc/core": "^1.16.13",
     "@swc/jest": "^0.2.39",
     "@testing-library/dom": "^10.4.2",
     "@testing-library/jest-dom": "^7.0.1",
@@ -122,8 +122,8 @@
     "postcss": "^8.5.28",
     "postcss-loader": "^8.2.1",
     "prettier": "^3.9.9",
-    "sass": "^1.105.0",
-    "sass-embedded": "^1.105.0",
+    "sass": "^1.105.1",
+    "sass-embedded": "^1.105.1",
     "sass-loader": "^17.0.1",
     "sass-true": "^10.1.0",
     "sassdoc": "^2.7.4",
@@ -139,5 +139,5 @@
   "resolutions": {
     "cdocparser": "^0.15.0"
   },
-  "packageManager": "yarn@4.18.0"
+  "packageManager": "yarn@4.18.1"
 }
