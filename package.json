@@ -69,7 +69,7 @@
     "html": "^1.0.0",
     "lunr": "^2.3.9",
     "markdown-it": "^15.0.1",
-    "markdown-it-anchor": "^9.2.1",
+    "markdown-it-anchor": "^10.0.0",
     "nunjucks": "^3.2.4",
     "readable-stream": "^4.7.0",
     "sassdoc-extras": "^3.0.0",

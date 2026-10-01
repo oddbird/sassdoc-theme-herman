@@ -8651,13 +8651,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"markdown-it-anchor@npm:^9.2.1":
-  version: 9.2.1
-  resolution: "markdown-it-anchor@npm:9.2.1"
+"markdown-it-anchor@npm:^10.0.0":
+  version: 10.0.0
+  resolution: "markdown-it-anchor@npm:10.0.0"
   peerDependencies:
     "@types/markdown-it": "*"
     markdown-it: "*"
-  checksum: 10/eb3f5667e66702c2be5403d79606e9f4575150d814df8d5f88c4c6a9253e3fc6641dce9159d22929dde980231b0e20a324e8055f15d37f42d0435963fb3af470
+  checksum: 10/557c7e307b02399eb54a6b044c06780d4c67cc14e7e45f9d1f875b95b242c634b5e45e90fdf70785908640c4dc9ce27edd28da3f9e3faa3d0c27a2c5c26900eb
   languageName: node
   linkType: hard
 
@@ -11415,7 +11415,7 @@ __metadata:
     lunr: "npm:^2.3.9"
     mark.js: "npm:^8.11.1"
     markdown-it: "npm:^15.0.1"
-    markdown-it-anchor: "npm:^9.2.1"
+    markdown-it-anchor: "npm:^10.0.0"
     matchmedia-polyfill: "npm:^0.3.2"
     mini-css-extract-plugin: "npm:^2.10.2"
     mocha: "npm:^12.0.0"
