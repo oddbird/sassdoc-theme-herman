@@ -68,7 +68,7 @@
     "gulp-svg-symbols": "^3.2.3",
     "html": "^1.0.0",
     "lunr": "^2.3.9",
-    "markdown-it": "^15.0.2",
+    "markdown-it": "^15.0.3",
     "markdown-it-anchor": "^10.0.0",
     "nunjucks": "^3.2.4",
     "readable-stream": "^4.7.0",
