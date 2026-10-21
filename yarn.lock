@@ -3013,10 +3013,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"argparse@npm:^3.0.0":
-  version: 3.0.2
-  resolution: "argparse@npm:3.0.2"
-  checksum: 10/83731af2299db686e8fc9b161cd73e89ff692b7582f2496da9729afe91b5fe7b9cf40611a713de737cd08f8f3897d3e30c2d0458ab3932ddf43cb76766ab8d16
+"argparse@npm:^3.0.3":
+  version: 3.0.3
+  resolution: "argparse@npm:3.0.3"
+  checksum: 10/6834e247fe8a8d21a0061dc2b7134ae79625d9ab795eca043d8ba9434be3bc1e7d049c9a4aa01bd3d6bfc145b29addfb290d17b8b3f7b11710cc52ab13629f31
   languageName: node
   linkType: hard
 
@@ -4961,7 +4961,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"entities@npm:^8.0.0":
+"entities@npm:^8.1.0":
   version: 8.1.0
   resolution: "entities@npm:8.1.0"
   checksum: 10/bd2fadbcabcf2cbd5de6b8155289acec9394d004fc095b9c7b3fdb4135468d8823a6de12275b07085e5dc077a142ede24e71098ffeb064000312d2a6960330a2
@@ -8195,7 +8195,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"linkify-it@npm:^6.0.0":
+"linkify-it@npm:^6.1.0":
   version: 6.1.0
   resolution: "linkify-it@npm:6.1.0"
   dependencies:
@@ -8642,19 +8642,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"markdown-it@npm:^15.0.2":
-  version: 15.0.2
-  resolution: "markdown-it@npm:15.0.2"
+"markdown-it@npm:^15.0.3":
+  version: 15.0.3
+  resolution: "markdown-it@npm:15.0.3"
   dependencies:
-    argparse: "npm:^3.0.0"
-    entities: "npm:^8.0.0"
-    linkify-it: "npm:^6.0.0"
+    argparse: "npm:^3.0.3"
+    entities: "npm:^8.1.0"
+    linkify-it: "npm:^6.1.0"
     mdurl: "npm:^2.1.0"
     punycode.js: "npm:^2.3.1"
     uc.micro: "npm:^3.0.0"
   bin:
     markdown-it: bin/markdown-it.mjs
-  checksum: 10/55dd86dbcdab89b910e21773c363e492a41f45e5edb095d05029e43125c5250a891c73becf6504a412cf6fdcdd93ac9629949d3932968347ef36dc1d444d776a
+  checksum: 10/a8a9d3305dfced367cffce7cdce25ab44cfe292a7496d7956681f91648e3affe736c36f52008c93cfa9bea9597cf2ffaddee37815390998d0b6b9262639cb0b3
   languageName: node
   linkType: hard
 
@@ -11389,7 +11389,7 @@ __metadata:
     lodash: "npm:^4.18.1"
     lunr: "npm:^2.3.9"
     mark.js: "npm:^8.11.1"
-    markdown-it: "npm:^15.0.2"
+    markdown-it: "npm:^15.0.3"
     markdown-it-anchor: "npm:^10.0.0"
     matchmedia-polyfill: "npm:^0.3.2"
     mini-css-extract-plugin: "npm:^2.10.2"
